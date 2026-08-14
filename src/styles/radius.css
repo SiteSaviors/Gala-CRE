@@ -4705,6 +4705,7 @@ a.fcontact-value:hover{color:#fff}
     font-size:12px;
     line-height:1.72;
     margin-bottom:18px;
+    line-clamp:unset;
     -webkit-line-clamp:unset;
   }
   .platform-card__detail{display:none}
