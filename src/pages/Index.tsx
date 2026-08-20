@@ -1,5 +1,5 @@
 import { ArrowUpRight, Building2, KeyRound, Landmark, MapPin, Search, TrendingUp } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
@@ -22,6 +22,7 @@ const clientPaths = [
 const Index = () => {
   const isMobile = useIsMobile();
   const heroPoster = isMobile ? heroPosterMobile : heroPosterDesktop;
+  const introductionRef = useRef<HTMLElement>(null);
   useSiteCursor();
 
   useEffect(() => {
@@ -38,6 +39,38 @@ const Index = () => {
     }, { threshold: 0.2 });
     observer.observe(hero);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = introductionRef.current;
+    if (!section) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) {
+      section.style.setProperty("--gala-intro-shift", "0px");
+      return;
+    }
+
+    let animationFrame = 0;
+    const updateParallax = () => {
+      const rect = section.getBoundingClientRect();
+      const travel = window.innerHeight + rect.height;
+      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / travel));
+      section.style.setProperty("--gala-intro-shift", `${(progress - 0.5) * 220}px`);
+      animationFrame = 0;
+    };
+    const requestUpdate = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   return (
@@ -61,10 +94,32 @@ const Index = () => {
           <div className="si"><div className="silbl">Scroll</div><div className="sil"></div></div>
         </section>
 
-        <section className="gala-intro gala-section gala-section--light"><div className="gala-shell gala-split">
-          <div><div className="gala-kicker gala-kicker--dark">Commercial Real Estate Without the Friction</div><h2>A clearer way to make consequential property decisions.</h2></div>
-          <div><p className="gala-lead">Gala CRE Group helps commercial owners and private investors approach real estate with the perspective, process, and connected expertise typically associated with larger institutions.</p><Link to="/company" className="gala-text-link">Meet Gala CRE Group <ArrowUpRight size={16} /></Link></div>
-        </div></section>
+        <section className="gala-editorial-intro" ref={introductionRef}>
+          <div className="gala-editorial-intro__wordfield" aria-hidden="true">
+            <div className="gala-editorial-intro__wordrow gala-editorial-intro__wordrow--one">
+              {Array.from({ length: 4 }, (_, index) => <span key={index}>GALA</span>)}
+            </div>
+            <div className="gala-editorial-intro__wordrow gala-editorial-intro__wordrow--two">
+              {Array.from({ length: 4 }, (_, index) => <span key={index}>GALA</span>)}
+            </div>
+          </div>
+          <div className="gala-editorial-intro__body">
+            <div className="gala-editorial-intro__copy">
+              <div className="gala-kicker gala-kicker--dark">Introduction</div>
+              <h2>About Gala CRE Group</h2>
+              <p>Gala CRE Group helps property owners, private investors, and businesses navigate commercial real estate with the strategy and perspective typically associated with larger institutions.</p>
+              <p>From brokerage and investment sales to development services and capital guidance, we bring each opportunity into focus and make the path forward easier to understand.</p>
+              <Link to="/company" className="gala-text-link">Meet Gala CRE Group <ArrowUpRight size={16} /></Link>
+            </div>
+            <figure className="gala-editorial-intro__media">
+              <picture>
+                <source media="(max-width: 768px)" srcSet={heroPosterMobile} />
+                <img src={heroPosterDesktop} alt="Modern multifamily property exterior" />
+              </picture>
+              <figcaption>North Carolina Commercial Real Estate</figcaption>
+            </figure>
+          </div>
+        </section>
 
         <section className="gala-section gala-section--black"><div className="gala-shell">
           <div className="gala-section-head"><div className="gala-kicker">Start With Your Objective</div><h2>Where can we help you move forward?</h2></div>
