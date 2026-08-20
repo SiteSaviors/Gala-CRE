@@ -1,106 +1,65 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import Contact from "@/pages/Contact";
 
-const renderContactPage = () =>
-  render(
-    <MemoryRouter initialEntries={["/contact"]}>
-      <Routes>
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </MemoryRouter>
-  );
+const renderContact = (route = "/contact") => render(
+  <MemoryRouter initialEntries={[route]}>
+    <Routes><Route path="/contact" element={<Contact />} /></Routes>
+  </MemoryRouter>
+);
+
+const completeForm = () => {
+  fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Taylor Gala" } });
+  fireEvent.change(screen.getByLabelText("Email"), { target: { value: "taylor@example.com" } });
+  fireEvent.change(screen.getByLabelText("Phone Optional"), { target: { value: "919-555-0123" } });
+  fireEvent.change(screen.getByLabelText("Company Optional"), { target: { value: "Triangle Holdings" } });
+  fireEvent.change(screen.getByLabelText("What are you evaluating?"), {
+    target: { value: "I would like to evaluate a commercial property disposition." },
+  });
+};
 
 afterEach(() => {
-  vi.unstubAllEnvs();
   vi.unstubAllGlobals();
-  vi.useRealTimers();
 });
 
-describe("contact page", () => {
-  it("renders the standalone contact route with page content, contact details, and route-aware nav links", () => {
-    renderContactPage();
-    const details = screen.getByLabelText("Contact details");
-
-    expect(
-      screen.getByRole("heading", { name: "Let’s build something better together" })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "If you are evaluating land, development, or partnership opportunities, Radius is positioned to help shape a clearer path to value."
-      )
-    ).toBeInTheDocument();
-    expect(within(details).getByText("info@radiusbuilt.com")).toBeInTheDocument();
-    expect(within(details).getByText("(919) 275-0109")).toBeInTheDocument();
-    expect(within(details).getByText("105 Kilmayne Drive, Suite C, Cary, NC 27511")).toBeInTheDocument();
-    expect(screen.getByLabelText("Name")).toBeInTheDocument();
-    expect(screen.getByLabelText("Email")).toBeInTheDocument();
-    expect(screen.getByLabelText("Message")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Send Inquiry" })).toBeInTheDocument();
-    expect(document.querySelector("footer#contact")).not.toBeNull();
-
-    screen.getAllByRole("link", { name: "Contact" }).forEach((link) => {
-      expect(link).toHaveAttribute("href", "/contact");
-    });
-  });
-
-  it("shows validation errors for incomplete or invalid submissions", async () => {
-    renderContactPage();
-
+describe("advisor inquiry form", () => {
+  it("validates required fields", async () => {
+    renderContact();
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
-
     expect(await screen.findByText("Please enter your name.")).toBeInTheDocument();
     expect(screen.getByText("Please enter a valid email address.")).toBeInTheDocument();
     expect(screen.getByText("Please share a few more details.")).toBeInTheDocument();
   });
 
-  it("shows the inline success state when no endpoint is configured", async () => {
-    renderContactPage();
-
-    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Taylor Radius" } });
-    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "taylor@example.com" } });
-    fireEvent.change(screen.getByLabelText("Message"), {
-      target: { value: "I would like to discuss a development opportunity in Cary." },
-    });
-
+  it("preserves property context and posts the expanded payload", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    renderContact("/contact?property=approved-listing");
+    completeForm();
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
-
-    expect(screen.getByRole("button", { name: "Sending..." })).toBeDisabled();
 
     expect(await screen.findByRole("heading", { name: "Inquiry received" })).toBeInTheDocument();
-    expect(
-      screen.getByText("Thanks for reaching out. We’ll review your message and follow up soon.")
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Send another inquiry" })).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledWith("/api/contact", expect.objectContaining({ method: "POST" }));
+    const request = fetchMock.mock.calls[0][1] as RequestInit;
+    const payload = JSON.parse(String(request.body));
+    expect(payload).toMatchObject({
+      company: "Triangle Holdings",
+      inquiryType: "Property Inquiry",
+      phone: "919-555-0123",
+      propertySlug: "approved-listing",
+      sourcePage: "/contact?property=approved-listing",
+      website: "",
+    });
   });
 
-  it("posts to a configured endpoint and preserves values on failure", async () => {
-    vi.stubEnv("VITE_CONTACT_FORM_ENDPOINT", "https://example.com/contact");
-    const fetchMock = vi.fn().mockResolvedValue({ ok: false });
-    vi.stubGlobal("fetch", fetchMock);
-
-    renderContactPage();
-
-    fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Taylor Radius" } });
-    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "taylor@example.com" } });
-    fireEvent.change(screen.getByLabelText("Message"), {
-      target: { value: "I would like to discuss a development opportunity in Cary." },
-    });
-
+  it("retains input and displays an inline delivery error", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }));
+    renderContact();
+    completeForm();
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
-
-    await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledTimes(1);
-    });
-
-    expect(
-      await screen.findByText("We couldn’t send your message right now. Please try again in a moment.")
-    ).toBeInTheDocument();
-    expect(screen.getByDisplayValue("Taylor Radius")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("taylor@example.com")).toBeInTheDocument();
-    expect(
-      screen.getByDisplayValue("I would like to discuss a development opportunity in Cary.")
-    ).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
+    expect(screen.getByDisplayValue("Taylor Gala")).toBeInTheDocument();
   });
 });

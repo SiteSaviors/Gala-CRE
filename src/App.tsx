@@ -1,18 +1,26 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import Projects from "./pages/Projects.tsx";
-import ProjectDetail from "./pages/ProjectDetail.tsx";
 import Company from "./pages/Company.tsx";
-import WhatWeDo from "./pages/WhatWeDo.tsx";
 import Contact from "./pages/Contact.tsx";
+import Properties from "./pages/Properties.tsx";
+import PropertyDetail from "./pages/PropertyDetail.tsx";
+import ServiceDetail from "./pages/ServiceDetail.tsx";
+import Services from "./pages/Services.tsx";
+import { propertyBySlug } from "./content/properties.ts";
 
 const queryClient = new QueryClient();
+
+export const LegacyProjectRedirect = () => {
+  const { slug } = useParams();
+  const destination = slug && propertyBySlug[slug] ? `/properties/${slug}` : "/properties";
+  return <Navigate to={destination} replace />;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -22,12 +30,15 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
           <Route path="/company" element={<Company />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/what-we-do" element={<WhatWeDo />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/what-we-do" element={<Navigate to="/services" replace />} />
+          <Route path="/projects" element={<Navigate to="/properties" replace />} />
+          <Route path="/projects/:slug" element={<LegacyProjectRedirect />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

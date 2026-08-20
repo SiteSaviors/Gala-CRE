@@ -1,69 +1,34 @@
-export type ContactHeroContent = {
-  eyebrow: string;
-  title: string;
-  body: string;
+export const inquiryTypes = [
+  "General Inquiry",
+  "List or Sell a Property",
+  "Landlord Representation",
+  "Tenant Representation",
+  "Investment Sales",
+  "Development Services",
+  "Capital Markets",
+  "Property Management",
+  "Property Inquiry",
+] as const;
+
+export type InquiryType = (typeof inquiryTypes)[number];
+
+export const contactHero = {
+  eyebrow: "Talk to an Advisor",
+  title: "Start with a clear conversation.",
+  body: "Tell us what you are evaluating, what outcome matters, and where you are in the process. A Gala CRE advisor will follow up with the right next step.",
 };
 
-export type ContactDetail = {
-  id: "email" | "phone" | "address";
-  label: string;
-  value: string;
-  href?: string;
-};
+export const contactDetails = [
+  { id: "market", label: "Primary Market", value: "Raleigh-Durham and the Research Triangle" },
+  { id: "response", label: "What to Expect", value: "A direct follow-up from the commercial team" },
+] as const;
 
-export type ContactFormConfig = {
-  title: string;
-  description: string;
-  submitLabel: string;
-  resetLabel: string;
-  successTitle: string;
-  successBody: string;
-  errorBody: string;
-  placeholders: {
-    name: string;
-    email: string;
-    message: string;
-  };
-};
-
-export const contactHero: ContactHeroContent = {
-  eyebrow: "Contact",
-  title: "Let’s build something better together",
-  body:
-    "If you are evaluating land, development, or partnership opportunities, Radius is positioned to help shape a clearer path to value.",
-};
-
-export const contactDetails: ContactDetail[] = [
-  {
-    id: "email",
-    label: "Email Address",
-    value: "info@radiusbuilt.com",
-    href: "mailto:info@radiusbuilt.com",
-  },
-  {
-    id: "phone",
-    label: "Phone Number",
-    value: "(919) 275-0109",
-    href: "tel:+19192750109",
-  },
-  {
-    id: "address",
-    label: "Address",
-    value: "105 Kilmayne Drive, Suite C, Cary, NC 27511",
-  },
-];
-
-export const contactFormConfig: ContactFormConfig = {
-  title: "Send an inquiry",
-  description: "Share a few details and our team will follow up with you directly.",
+export const contactFormConfig = {
+  title: "How can we help?",
+  description: "Share a few details so we can route your inquiry to the right commercial advisor.",
   submitLabel: "Send Inquiry",
   resetLabel: "Send another inquiry",
   successTitle: "Inquiry received",
-  successBody: "Thanks for reaching out. We’ll review your message and follow up soon.",
+  successBody: "Thank you. A Gala CRE advisor will review your message and follow up directly.",
   errorBody: "We couldn’t send your message right now. Please try again in a moment.",
-  placeholders: {
-    name: "Your name",
-    email: "you@example.com",
-    message: "Tell us a little about your project or opportunity",
-  },
 };

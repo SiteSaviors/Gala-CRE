@@ -1,4 +1,9 @@
 {
+  "redirects": [
+    { "source": "/what-we-do", "destination": "/services", "permanent": true },
+    { "source": "/projects", "destination": "/properties", "permanent": true },
+    { "source": "/projects/:slug", "destination": "/properties", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/((?!.*\\.).*)",

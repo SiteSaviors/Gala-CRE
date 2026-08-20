@@ -12,8 +12,8 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
     currentPath === "/" ||
     currentPath === "/company" ||
     currentPath === "/contact" ||
-    currentPath === "/what-we-do" ||
-    currentPath === "/projects";
+    currentPath.startsWith("/services") ||
+    currentPath.startsWith("/properties");
   const [scrolled, setScrolled] = useState(!startsTransparent);
 
   useEffect(() => {
@@ -36,12 +36,12 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <img src={galaLogo} alt="Gala CRE Group" />
       </Link>
       <ul className="nlinks">
-        <li><Link to="/what-we-do">What We Do</Link></li>
-        <li><Link to="/projects">Current Projects</Link></li>
+        <li><Link to="/services">Services</Link></li>
+        <li><Link to="/properties">Properties</Link></li>
         <li><Link to="/company">Company</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
-      <a href="#" className="nbtn">Investor Portal</a>
+      <Link to="/contact" className="nbtn">Talk to an Advisor</Link>
       <button
         type="button"
         className={`mnavt${mobileNavOpen ? " open" : ""}`}
@@ -54,10 +54,11 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <span></span>
       </button>
       <div className={`mnav${mobileNavOpen ? " open" : ""}`}>
-        <Link to="/what-we-do" onClick={() => setMobileNavOpen(false)}>What We Do</Link>
-        <Link to="/projects" onClick={() => setMobileNavOpen(false)}>Current Projects</Link>
+        <Link to="/services" onClick={() => setMobileNavOpen(false)}>Services</Link>
+        <Link to="/properties" onClick={() => setMobileNavOpen(false)}>Properties</Link>
         <Link to="/company" onClick={() => setMobileNavOpen(false)}>Company</Link>
         <Link to="/contact" onClick={() => setMobileNavOpen(false)}>Contact</Link>
+        <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Talk to an Advisor</Link>
       </div>
     </nav>
   );
