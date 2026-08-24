@@ -1,22 +1,63 @@
-import { ArrowUpRight, Building2, KeyRound, Landmark, MapPin, Search, TrendingUp } from "lucide-react";
+import { ArrowUpRight, KeyRound, MapPin } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
 import heroVideo from "@/assets/GALA-CRE-HERO-LOOP.mp4";
-import PropertyCard from "@/components/properties/PropertyCard";
+import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
+import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
+import galaDevelopCapability from "@/assets/gala-develop-capability.webp";
+import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
+import galaSalesCapability from "@/assets/gala-sales-capability.webp";
+import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { featuredProperties } from "@/content/properties";
-import { assetTypes, services } from "@/content/services";
+import { assetTypes } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
-const clientPaths = [
-  { title: "Sell or Lease", body: "Position a commercial property with a strategy shaped around your timing, market, and ownership goals.", href: "/services/brokerage", icon: Building2 },
-  { title: "Find Space", body: "Evaluate locations, compare opportunities, and negotiate from a clearer understanding of the market.", href: "/properties", icon: Search },
-  { title: "Invest", body: "Assess acquisitions, dispositions, development paths, and capital decisions with connected guidance.", href: "/services/investment-sales", icon: TrendingUp },
+const homepageCapabilities = [
+  {
+    name: "GalaBroker",
+    objective: "Lease / Occupy",
+    summary: "Commercial leasing and occupancy representation.",
+    capabilityLabel: "Representation",
+    capabilities: ["Landlord Representation", "Tenant Representation"],
+    href: "/services/brokerage",
+    image: galaBrokerCapability,
+    imagePosition: "center",
+  },
+  {
+    name: "GalaSales",
+    objective: "Buy / Sell",
+    summary: "Commercial property acquisitions, dispositions, and marketing.",
+    capabilityLabel: "Property Types",
+    capabilities: ["Industrial", "Multifamily", "Retail", "Office", "Land"],
+    href: "/services/investment-sales",
+    image: galaSalesCapability,
+    imagePosition: "center",
+  },
+  {
+    name: "GalaDevelop",
+    objective: "Plan / Build",
+    summary: "Commercial development planning and execution.",
+    capabilityLabel: "Development Services",
+    capabilities: ["Site Strategy", "Entitlements", "Infrastructure", "Development Oversight"],
+    href: "/services/development-services",
+    image: galaDevelopCapability,
+    imagePosition: "center",
+  },
+  {
+    name: "GalaCapital",
+    objective: "Fund / Finance",
+    summary: "Debt and equity sourcing for commercial opportunities.",
+    capabilityLabel: "Capital Solutions",
+    capabilities: ["Debt", "Equity", "Capital Strategy", "Transaction Coordination"],
+    href: "/services/capital-markets",
+    image: galaCapitalCapability,
+    imagePosition: "center",
+  },
 ] as const;
 
 const Index = () => {
@@ -75,7 +116,7 @@ const Index = () => {
 
   return (
     <>
-      <PageMeta title="Commercial Real Estate, Simplified" description="Commercial real estate brokerage and advisory for owners, investors, landlords, tenants, and business operators across the Research Triangle." />
+      <PageMeta title="Commercial Real Estate, Simplified" description="Commercial real estate brokerage, sales, development, and capital services for clients across North Carolina." />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/" />
       <main className="gala-home">
@@ -86,9 +127,9 @@ const Index = () => {
             </video>
           </div>
           <div className="hinner"><div className="glass text-left">
-            <div className="ey">Commercial Brokerage · Advisory · Development</div>
-            <h1>CRE,<br />Simplified.</h1>
-            <p className="hsp">Institution-level commercial real estate guidance delivered with clarity, local perspective, and a more personal process.</p>
+            <div className="ey">Brokerage · Sales · Development · Capital</div>
+            <h1>Commercial Real Estate,<br />Simplified</h1>
+            <p className="hsp">Gala CRE Group helps clients buy, sell, lease, develop, and source capital for commercial property across North Carolina.</p>
             <div className="hbtns"><Link to="/contact" className="bp">Talk to an Advisor</Link><Link to="/properties" className="bg">View Properties <ArrowUpRight size={15} /></Link></div>
           </div></div>
           <div className="si"><div className="silbl">Scroll</div><div className="sil"></div></div>
@@ -107,38 +148,44 @@ const Index = () => {
             <div className="gala-editorial-intro__copy">
               <div className="gala-kicker gala-kicker--dark">Introduction</div>
               <h2>About Gala CRE Group</h2>
-              <p>Gala CRE Group helps property owners, private investors, and businesses navigate commercial real estate with the strategy and perspective typically associated with larger institutions.</p>
-              <p>From brokerage and investment sales to development services and capital guidance, we bring each opportunity into focus and make the path forward easier to understand.</p>
+              <div className="gala-editorial-intro__text">
+                <p>Built on more than two decades of experience, Gala CRE Group helps property owners, private investors, and businesses navigate commercial real estate with clarity and confidence.</p>
+                <p>From brokerage and investment sales to development services and capital markets, our connected approach brings the right people, information, and resources together around each client’s goals. The result is a simpler, more coordinated path from opportunity to outcome.</p>
+              </div>
               <Link to="/company" className="gala-text-link">Meet Gala CRE Group <ArrowUpRight size={16} /></Link>
             </div>
             <figure className="gala-editorial-intro__media">
-              <picture>
-                <source media="(max-width: 768px)" srcSet={heroPosterMobile} />
-                <img src={heroPosterDesktop} alt="Modern multifamily property exterior" />
-              </picture>
+              <img src={galaIntroductionPortrait} alt="Gaurang Gala at a commercial development site" />
               <figcaption>North Carolina Commercial Real Estate</figcaption>
             </figure>
           </div>
         </section>
 
         <section className="gala-section gala-section--black"><div className="gala-shell">
-          <div className="gala-section-head"><div className="gala-kicker">Start With Your Objective</div><h2>Where can we help you move forward?</h2></div>
-          <div className="gala-path-grid">{clientPaths.map(({ title, body, href, icon: Icon }, index) => (
-            <Link to={href} className="gala-path-card" key={title}><div className="gala-path-card__top"><span>0{index + 1}</span><Icon aria-hidden="true" /></div><h3>{title}</h3><p>{body}</p><ArrowUpRight className="gala-path-card__arrow" aria-hidden="true" /></Link>
+          <div className="gala-section-head gala-section-head--capabilities">
+            <div className="gala-kicker">Gala CRE Capabilities</div>
+            <h2><span>Built to move commercial</span>{" "}<span>opportunities forward.</span></h2>
+          </div>
+          <div className="gala-capability-grid">{homepageCapabilities.map(({ name, objective, summary, capabilityLabel, capabilities, href, image, imagePosition }, index) => (
+            <Link to={href} className={`gala-capability-card${image ? " gala-capability-card--has-image" : ""}`} key={name}>
+              {image && <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />}
+              <div className="gala-capability-card__top"><span>0{index + 1}</span><span>{objective}</span></div>
+              <div className="gala-capability-card__content">
+                <h3>{name}</h3>
+                <div className="gala-capability-card__details">
+                  <p className="gala-capability-card__summary">{summary}</p>
+                  <div className="gala-capability-card__reveal">
+                    <span>{capabilityLabel}</span>
+                    <ul>{capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul>
+                  </div>
+                </div>
+              </div>
+              <ArrowUpRight className="gala-capability-card__arrow" aria-hidden="true" />
+            </Link>
           ))}</div>
         </div></section>
 
-        <section className="gala-section gala-section--silver"><div className="gala-shell">
-          <div className="gala-section-head gala-section-head--row"><div><div className="gala-kicker gala-kicker--dark">Full-Service Perspective</div><h2>Connected expertise from strategy through execution.</h2></div><Link to="/services" className="gala-text-link">Explore All Services <ArrowUpRight size={16} /></Link></div>
-          <div className="gala-service-list">{services.map((service, index) => (
-            <Link to={`/services/${service.slug}`} key={service.slug}><span>0{index + 1}</span><strong>{service.name}</strong><p>{service.summary}</p><ArrowUpRight size={19} /></Link>
-          ))}</div>
-        </div></section>
-
-        <section className="gala-section gala-section--light"><div className="gala-shell">
-          <div className="gala-section-head gala-section-head--row"><div><div className="gala-kicker gala-kicker--dark">Featured Properties</div><h2>Commercial opportunities in the Triangle.</h2></div><Link to="/properties" className="gala-text-link">View All Properties <ArrowUpRight size={16} /></Link></div>
-          {featuredProperties.length ? <div className="gala-property-grid">{featuredProperties.slice(0, 3).map((property) => <PropertyCard key={property.slug} property={property} />)}</div> : <div className="gala-inline-empty"><Landmark aria-hidden="true" /><div><strong>Property intake is underway.</strong><p>Approved Gala listings will appear here as client PDFs, facts, and photography are finalized.</p></div></div>}
-        </div></section>
+        <FeaturedListingsCarousel />
 
         <section className="gala-section gala-section--black"><div className="gala-shell gala-split gala-asset-section">
           <div><div className="gala-kicker">Asset Expertise</div><h2>Focused across five essential commercial property types.</h2><p>Each opportunity is evaluated through its market, operating profile, physical constraints, and path to value.</p></div>

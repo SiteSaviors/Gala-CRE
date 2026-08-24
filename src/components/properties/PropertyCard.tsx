@@ -24,6 +24,12 @@ const PropertyCard = ({ property }: PropertyCardProps) => (
       <p className="gala-property-card__location">
         {property.address}, {property.city}, {property.state}
       </p>
+      <div className="gala-property-card__facts">
+        {property.priceDisplay ? <strong>{property.priceDisplay}</strong> : null}
+        {(property.acreageDisplay ?? property.sizeDisplay) ? (
+          <span>{property.acreageDisplay ?? property.sizeDisplay}</span>
+        ) : null}
+      </div>
       <p>{property.summary}</p>
       <span className="gala-text-link">View Property <ArrowUpRight size={16} /></span>
     </div>

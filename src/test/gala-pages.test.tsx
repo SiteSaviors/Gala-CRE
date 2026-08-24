@@ -11,12 +11,25 @@ const renderPage = (page: React.ReactNode, route = "/") => render(
 );
 
 describe("Gala CRE public pages", () => {
-  it("positions the homepage around commercial advisory", () => {
+  it("positions the homepage around commercial services", () => {
     const { container } = renderPage(<Index />);
-    expect(screen.getByRole("heading", { name: /CRE, Simplified/i })).toBeInTheDocument();
-    expect(screen.getByText("Sell or Lease")).toBeInTheDocument();
-    expect(screen.getByText("Find Space")).toBeInTheDocument();
-    expect(screen.getByText("Invest")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Commercial Real Estate, Simplified/i })).toBeInTheDocument();
+    expect(screen.getByText("GalaBroker")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Built to move commercial opportunities forward." })).toBeInTheDocument();
+    expect(screen.getByText("GalaSales")).toBeInTheDocument();
+    expect(screen.getByText("Commercial property acquisitions, dispositions, and marketing.")).toBeInTheDocument();
+    expect(screen.getByText("Property Types")).toBeInTheDocument();
+    expect(screen.getByText("GalaDevelop")).toBeInTheDocument();
+    expect(screen.getByText("GalaCapital")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Featured listings" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "For Lease" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: "For Sale" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
+    expect(screen.getByText("$549,000")).toBeInTheDocument();
+    expect(screen.getByText("5047 Yadkin Road")).toBeInTheDocument();
+    expect(screen.getByText("$829,000")).toBeInTheDocument();
+    expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
+    expect(screen.getByText("$1,190,000")).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
   });
 
@@ -29,13 +42,17 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Property Management Partnership")).toBeInTheDocument();
   });
 
-  it("keeps unapproved team and property claims out of the site", () => {
+  it("keeps unapproved team claims out of the site", () => {
     const company = renderPage(<Company />, "/company");
     expect(screen.getByText("Team profiles are awaiting client approval.")).toBeInTheDocument();
     company.unmount();
+  });
 
+  it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
-    expect(screen.getByText("Approved Gala listings are coming soon.")).toBeInTheDocument();
-    expect(screen.getByText("0 properties")).toBeInTheDocument();
+    expect(screen.getByText("3 properties")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
   });
 });

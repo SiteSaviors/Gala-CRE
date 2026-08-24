@@ -13,7 +13,11 @@ const PropertyDetail = () => {
   useSiteCursor();
   if (!property) return <NotFound />;
 
-  const facts = [property.priceDisplay, property.sizeDisplay, property.acreageDisplay].filter(Boolean);
+  const facts = [
+    property.priceDisplay ? { label: "Asking Price", value: property.priceDisplay } : null,
+    property.sizeDisplay ? { label: "Building Size", value: property.sizeDisplay } : null,
+    property.acreageDisplay ? { label: "Site Area", value: property.acreageDisplay } : null,
+  ].filter((fact): fact is { label: string; value: string } => Boolean(fact));
 
   return (
     <>
@@ -43,7 +47,7 @@ const PropertyDetail = () => {
               </div>
             </article>
             <aside className="gala-property-sidebar">
-              {facts.map((fact) => <div key={fact}><span>Property Detail</span><strong>{fact}</strong></div>)}
+              {facts.map((fact) => <div key={fact.label}><span>{fact.label}</span><strong>{fact.value}</strong></div>)}
               {property.brochurePdf ? <a href={property.brochurePdf} className="gala-button" target="_blank" rel="noreferrer"><Download size={16} /> Download Brochure</a> : null}
               <Link to={`/contact?property=${property.slug}`} className="gala-button gala-button--dark"><Mail size={16} /> Contact an Advisor</Link>
               {property.externalLinks.map((item) => <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="gala-external-link">View on {item.label} <ArrowUpRight size={15} /></a>)}

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const DEFAULT_HOVER_SELECTOR = "a,button,input,select,textarea,.gala-property-card,.gala-path-card,.gala-service-card";
+const DEFAULT_HOVER_SELECTOR = "a,button,input,select,textarea,.gala-property-card,.gala-capability-card,.gala-listing-card,.gala-service-card";
 
 const useSiteCursor = (hoverSelector: string = DEFAULT_HOVER_SELECTOR) => {
   useEffect(() => {

@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   filterProperties,
   findPropertyBySlug,
+  properties,
+  propertyBySlug,
   sortProperties,
   type Property,
 } from "@/content/properties";
@@ -34,6 +36,14 @@ const records = [
 ];
 
 describe("property content model", () => {
+  it("includes the three current Gala sale listings", () => {
+    expect(properties).toHaveLength(3);
+    expect(properties.every((item) => item.offeringType === "For Sale")).toBe(true);
+    expect(propertyBySlug["2301-lackey-street"]?.priceDisplay).toBe("$549,000");
+    expect(propertyBySlug["5047-yadkin-road"]?.acreageDisplay).toBe("3.46 acres");
+    expect(propertyBySlug["611-703-church-street"]?.city).toBe("Morrisville");
+  });
+
   it("orders active records before under-contract and closed records", () => {
     expect(sortProperties(records).map((item) => item.slug)).toEqual([
       "active-industrial",
