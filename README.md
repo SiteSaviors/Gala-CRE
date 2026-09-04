@@ -1,3 +1,3 @@
-# Radius Development Group
+# Gala CRE Group
 
-Premium real estate platform website built with Vite, React, and TypeScript.
+Commercial real estate platform website built with Vite, React, and TypeScript.
