@@ -476,6 +476,151 @@ export const properties: Property[] = [
       phone: "910-578-2828",
       license: "NC 283149",
     },
+    listingPage: {
+      headline: "A two-site Morrisville opportunity positioned for childcare development.",
+      lead:
+        "A commercial land offering marketed as two adjacent sites with approximately 1.09 combined acres and approval supporting a licensed childcare facility, subject to review of the parcels, survey, zoning, and underlying approval documents.",
+      overviewEyebrow: "Childcare Opportunity",
+      keyFacts: [
+        { label: "Asking price", value: "$1,190,000" },
+        { label: "Offering", value: "Two sites marketed together" },
+        { label: "Site area", value: "Approx. 1.09 acres" },
+        { label: "Property type", value: "Commercial land" },
+      ],
+      highlights: [
+        "Two Morrisville sites marketed together as one offering",
+        "Licensed daycare approval represented by the public offering",
+        "Base zoning represented as supporting childcare use",
+        "Residential and RTP context cited by the offering; buyer to verify",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Development Position",
+          title: "A use-specific opportunity—not generic land.",
+          body:
+            "The represented childcare approval is the starting point for evaluation. The approval record, parcel schedule, survey, and remaining development requirements should guide underwriting.",
+        },
+        groups: [
+          {
+            eyebrow: "Childcare Use",
+            title: "The represented approval is the center of the opportunity.",
+            body:
+              "The public offering represents approval for a licensed daycare facility and base zoning that supports childcare use. Buyers should review the actual approval, site plan, conditions, capacity, and remaining permitting requirements before relying on that position.",
+            facts: [
+              { label: "Represented use", value: "Licensed daycare facility" },
+              { label: "Base zoning", value: "Childcare support stated by offering" },
+              { label: "Approval materials", value: "Request the advisor package" },
+              { label: "Buyer review", value: "Conditions, capacity, site plan, and permits" },
+            ],
+          },
+          {
+            eyebrow: "Offering Composition",
+            title: "Two marketed sites require one clear parcel schedule.",
+            body:
+              "Public marketing presents two adjacent locations together. Because the published address and acreage fields are not fully consistent, buyers should confirm the legal addresses, parcel identifiers, surveyed area, and combined-sale structure with the listing advisor.",
+            facts: [
+              { label: "Marketed addresses", value: "611 & 703 Church Street" },
+              { label: "Offering structure", value: "Two locations marketed together" },
+              { label: "Combined area", value: "Approx. 1.09 acres in marketing copy" },
+              { label: "Confirm", value: "Parcel IDs, legal addresses, and surveyed acreage" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Buyer Verification",
+        title: "What is represented—and what the diligence package must confirm.",
+        conditions: [
+          { label: "Published offering", value: "Two-site commercial land offering at $1,190,000" },
+          { label: "Sale structure", value: "Confirm whether the two locations must be purchased together" },
+          { label: "Address record", value: "Confirm the legal address of the second site" },
+          { label: "Acreage record", value: "Public fields differ; the survey and parcel records control" },
+          { label: "Approval scope", value: "Verify approval, conditions, capacity, expiration, and remaining permits" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Site & Surroundings",
+          title: "Five distinct aerial views of the offering context.",
+          body:
+            "The aerials show the marketed sites in relation to Church Street and their surroundings. They do not establish legal boundaries; request the survey and approved site plan for parcel-level review.",
+        },
+        items: [
+          {
+            src: churchStreetGallery01,
+            alt: "Aerial overview of the Church Street commercial land offering in Morrisville",
+            caption: "Offering overview",
+          },
+          {
+            src: churchStreetGallery02,
+            alt: "Aerial view of the Church Street approach to the Morrisville offering",
+            caption: "Church Street approach",
+          },
+          {
+            src: churchStreetGallery04,
+            alt: "Aerial view of the neighborhood context around the Church Street offering",
+            caption: "Neighborhood context",
+          },
+          {
+            src: churchStreetGallery06,
+            alt: "Aerial view of nearby uses surrounding the Church Street offering",
+            caption: "Surrounding uses",
+          },
+          {
+            src: churchStreetGallery08,
+            alt: "Wide aerial view of the Morrisville market context around Church Street",
+            caption: "Wider market context",
+          },
+        ],
+      },
+      location: {
+        eyebrow: "Location Context",
+        title: "A Morrisville infill position near regional employment corridors.",
+        body:
+          "The public offering cites surrounding residential neighborhoods and proximity to Research Triangle Park and regional employment corridors. The map centers on 611 Church Street; buyers should confirm the second legal address, parcel boundaries, access, and measured distances during diligence.",
+        points: [
+          "Morrisville, North Carolina",
+          "Wake County",
+          "RTP proximity cited by the public offering",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Documents & Diligence",
+          title: "Review the approval before underwriting the use.",
+          body:
+            "Start with the public offering, then request the approval, site plan, survey, parcel, and zoning materials needed to evaluate the childcare use and combined offering.",
+        },
+        items: [
+          {
+            title: "Public listing and flyer",
+            description: "Review the current Crexi offering and its available public marketing materials.",
+            actionLabel: "Open Crexi Listing",
+            href: "https://www.crexi.com/properties/2335675/north-carolina-611-703-church-st-morrisville-cary-nc-27560",
+            external: true,
+          },
+          {
+            title: "Childcare approval and site plan",
+            description: "Request the represented approval, plan, conditions, and related development materials.",
+            actionLabel: "Request Approval Package",
+            href: "/contact?property=611-703-church-street&topic=childcare-approval",
+          },
+          {
+            title: "Parcel, survey, and zoning records",
+            description: "Confirm the legal addresses, parcel schedule, surveyed area, and zoning basis for the offering.",
+            actionLabel: "Request Parcel Records",
+            href: "/contact?property=611-703-church-street&topic=parcel-zoning",
+          },
+        ],
+      },
+      advisorEyebrow: "Listing Advisor",
+      disclosure:
+        "All information is deemed reliable but is not guaranteed. The marketed addresses and approximately 1.09-acre figure are subject to confirmation. Buyers should independently verify legal addresses, parcels, surveyed acreage, zoning, childcare approval and conditions, utilities, access, and all development requirements.",
+    },
     featured: true,
     sortOrder: 3,
   },

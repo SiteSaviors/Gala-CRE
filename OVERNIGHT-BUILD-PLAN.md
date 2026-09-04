@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 05:17 CDT
+Last updated: 2026-09-04 05:54 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -96,8 +96,8 @@ Status: **In progress**
 
 Objective: Finish each verified active listing with a journey appropriate to its actual asset and buyer.
 
-- [ ] Rebuild 611 & 703 Church Street through the shared listing system.
-- [ ] Make childcare approval and the two-parcel offering the central Church Street differentiators, subject to source verification.
+- [x] Rebuild 611 & 703 Church Street through the shared listing system.
+- [x] Make childcare approval and the two-site offering the central Church Street differentiators, subject to source verification.
 - [ ] Rebuild 5047 Yadkin Road through the shared system.
 - [ ] Make represented shopping-center approval, site planning, access, and development diligence central to Yadkin.
 - [ ] Add Family Farm Road only when authoritative facts and media can be verified.
@@ -105,7 +105,7 @@ Objective: Finish each verified active listing with a journey appropriate to its
 
 Gate: A prospect can understand each verified active offering, material conditions, available diligence, advisor, and next action within two minutes.
 
-Next action: Build Church Street's structured `listingPage` data with its existing approved aerial gallery, keeping the marketed childcare approval central while qualifying the unresolved 703/711 address, 1.00/1.09-acre conflict, and missing underlying approval documents.
+Next action: Build 5047 Yadkin Road's structured `listingPage` data through the shared system, keeping the represented shopping-center approval, site planning, access, and development diligence central while clearly identifying the approved plan and municipal approval record as request items.
 
 ## Phase 3 — Capability route architecture
 
@@ -362,3 +362,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: None for the framework. Church Street's address, surveyed acreage, and underlying approval documents remain client-confirmation items and must stay qualified.
 - Exact next action: Build Church Street's structured `listingPage` data with its approved aerial gallery and a concise childcare-opportunity journey, while preserving every documented qualification.
+
+### Pulse — 2026-09-04 05:54 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `e088ed5` with a clean working tree.
+- Source-of-truth checked: Current heartbeat instructions and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; the current property schema, Church Street data and approved aerial assets; route tests; and the live local route.
+- Phase / checkpoint: Phase 2 — rebuild Church Street as the childcare-specific active-listing journey.
+- Gate: Church Street renders through the shared listing system; a prospect can identify the two-site offering, represented childcare approval, material verification items, available aerial context, documents path, location, advisor, and property-specific inquiry without unsupported claims or public draft language; desktop and mobile layouts have no horizontal overflow.
+- Completed: Added Church Street's structured identity, economics, childcare-use position, offering composition, buyer-verification conditions, five-image aerial gallery, qualified location context, diligence requests, named advisor, inquiry routing, and brokerage disclosure. Kept the marketed 611/703 title and approximate 1.09-acre figure qualified; did not resolve the conflicting public address or acreage fields without client records.
+- Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, `src/test/properties-model.test.ts`, and this ledger; rebuilt `/properties/611-703-church-street`.
+- Verification: 17/17 targeted tests passed; 31/31 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop and 390px mobile browser checks passed with five gallery items, working map/document/advisor/inquiry surfaces, no horizontal overflow, and no page-specific console errors; `git diff --check` passed.
+- Commit: Intended message `feat: rebuild Church Street listing journey`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: The second legal address (703 versus 711), parcel IDs, surveyed combined acreage (1.09 versus 1.000 public figures), combined-sale requirement, approval record, site plan, zoning confirmation, and approval conditions remain client/document inputs. The page identifies these as diligence items without exposing internal draft notices.
+- Exact next action: Build 5047 Yadkin Road's structured `listingPage` data through the shared system, using the verified price/site facts and treating the represented approved shopping-center plan, permit readiness, access, circulation, buffers, and utility connections as document-backed claims that buyers must verify.

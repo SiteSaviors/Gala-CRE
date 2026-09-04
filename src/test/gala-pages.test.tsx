@@ -288,7 +288,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText("Documents & Diligence")).not.toBeInTheDocument();
   });
 
-  it("uses the supplied Church Street photography as a real property gallery", () => {
+  it("renders Church Street as a childcare-specific diligence journey", () => {
     render(
       <MemoryRouter initialEntries={["/properties/611-703-church-street"]}>
         <Routes>
@@ -298,9 +298,24 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A closer look at the site context." })).toBeInTheDocument();
-    expect(screen.getAllByRole("img", { name: /611 & 703 Church Street aerial view/i })).toHaveLength(5);
-    expect(screen.getByText("Approval for a licensed daycare facility stated by the listing")).toBeInTheDocument();
-    expect(screen.queryByText(/addresses require confirmation|documents have not yet been added/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The represented approval is the center of the opportunity." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Two marketed sites require one clear parcel schedule." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Review the approval before underwriting the use." })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: /Church Street property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(screen.getByRole("link", { name: "Request Approval Package" })).toHaveAttribute(
+      "href",
+      "/contact?property=611-703-church-street&topic=childcare-approval"
+    );
+    expect(screen.getByRole("link", { name: "Request Parcel Records" })).toHaveAttribute(
+      "href",
+      "/contact?property=611-703-church-street&topic=parcel-zoning"
+    );
+    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=611-703-church-street"
+    );
+    expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
+    expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
+    expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
   });
 });
