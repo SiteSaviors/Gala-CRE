@@ -210,6 +210,32 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval/i)).not.toBeInTheDocument();
   });
 
+  it("renders a distinct editorial journey for Industrial Investment Sales", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/investment-sales/industrial"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /modern light-industrial distribution property/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A warehouse is more than its square footage." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Match the story to the way the asset creates value." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Build conviction before asking the market to act." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The information buyers need. The process sellers need." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss an Industrial Asset/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=investment-sales&focus=industrial"
+    );
+    expect(screen.getByRole("link", { name: /Capital Strategy/i })).toHaveAttribute(
+      "href",
+      "/services/capital-markets/capital-strategy"
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
     expect(screen.getByText("3 properties")).toBeInTheDocument();

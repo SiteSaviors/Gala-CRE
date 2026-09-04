@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 07:40 CDT
+Last updated: 2026-09-04 08:16 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -128,7 +128,7 @@ Next action: Phase gate passed. Continue with Phase 4 by building Industrial as 
 
 ## Phase 4 — GalaBroker and GalaSales pages
 
-Status: **Pending**
+Status: **In progress**
 
 Objective: Complete the remaining brokerage and investment-sales capability routes.
 
@@ -138,10 +138,13 @@ Objective: Complete the remaining brokerage and investment-sales capability rout
 - [ ] Add related-capability navigation without circular filler.
 - [ ] Keep Landlord and Tenant Representation substantively different.
 - [ ] Ensure Industrial, Multifamily, Retail, Office, and Land do not read as one page with swapped nouns.
+- [x] Build Industrial as a distinct owner/investor sale-advisory journey with contextual imagery, accurate diligence boundaries, metadata, related links, and focused inquiry routing.
+- [ ] Build Multifamily as the next distinct GalaSales route.
+- [ ] Build Retail, Office, and Land as distinct GalaSales routes.
 
 Gate: Every GalaBroker and GalaSales route is persuasive, visually complete, responsive, and materially specific.
 
-Next action: Build pages in the order established by the Phase 3 route matrix.
+Next action: Build Multifamily as a distinct GalaSales editorial route centered on operating performance, rent roll and lease-up context, physical condition, buyer underwriting, sale preparation, and diligence coordination; use route-specific contextual imagery, accurate boundaries, metadata, related links, and a focused inquiry CTA.
 
 ## Phase 5 — GalaDevelop, GalaCapital, and Property Management
 
@@ -418,3 +421,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: No Phase 3 blockers. New capability routes still require their Phase 4 and Phase 5 editorial content and route-specific imagery; Property Management has no dedicated approved image yet.
 - Exact next action: Build `/services/investment-sales/industrial` as a distinct GalaSales editorial page with industrial owner/investor decision criteria, positioning and sale process, concrete deliverables, accurate diligence boundaries, the best suitable approved or clearly generic contextual imagery available, metadata, related capabilities, and an industrial-specific contact CTA.
+
+### Pulse — 2026-09-04 08:16 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `d954683` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; capability content and rendering system; route matrix; current imagery; contact inquiry routing; tests; and the live Industrial and contact routes.
+- Phase / checkpoint: Phase 4 — replace Industrial's concise capability shell with a distinct GalaSales editorial sale-advisory journey.
+- Gate: `/services/investment-sales/industrial` clearly serves industrial owners and investors; explains income, functional-utility, physical-condition, buyer-positioning, sale-process, and diligence decisions without making property-specific claims; includes purposeful contextual imagery, metadata, related capabilities, and a preselected Investment Sales inquiry; passes responsive, route, browser-console, test, build, lint, and diff checks.
+- Completed: Added a dedicated Industrial Investment Sales content journey with four disciplined sections rather than cloning the brokerage pages: industrial value drivers, income/operations versus optionality/risk buyer lenses, a four-stage sale process, and concrete seller deliverables. Added a route-specific generated contextual industrial image with factual alt text, clearly kept separate from listing/property content. Added explicit legal, tax, environmental, and technical diligence boundaries; related Land, Tenant Representation, Development Oversight, and Capital Strategy paths; page metadata; and an Industrial-context contact CTA that correctly preselects Investment Sales.
+- Files and routes changed: `src/assets/industrial-investment-sales.webp`, `src/content/capabilityPages.ts`, `src/test/gala-pages.test.tsx`, and this ledger; rebuilt `/services/investment-sales/industrial` and verified its handoff to `/contact?inquiry=investment-sales&focus=industrial`.
+- Verification: 19/19 targeted tests passed; 37/37 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop browser QA confirmed a 1280px responsive hero, correct metadata, no broken images, and no horizontal overflow; 390px browser QA confirmed full-width layout, no broken images, correct H1 and CTA, and no horizontal overflow; the CTA correctly preselected Investment Sales without submitting the form; a fresh Industrial page console contained no errors; `git diff --check` passed.
+- Commit: Intended message `feat: build industrial investment sales journey`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: No Industrial content blocker. The new image is generic contextual service imagery and must not be represented as a Gala listing or completed project. No approved Industrial-specific client photography has been supplied.
+- Exact next action: Build `/services/investment-sales/multifamily` as a distinct GalaSales editorial route centered on operating performance, rent roll and lease-up context, physical condition, buyer underwriting, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
