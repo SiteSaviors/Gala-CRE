@@ -2,6 +2,7 @@ import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
 import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
+import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
 
 export type CapabilityPageIcon =
   | "positioning"
@@ -797,10 +798,233 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
   },
 };
 
+const multifamilyInvestmentSalesPage: CapabilityPageContent = {
+  path: "/services/investment-sales/multifamily",
+  metadata: {
+    title: "Multifamily Investment Sales",
+    description:
+      "Multifamily sale advisory for owners and investors, connecting property operations, rent-roll performance, physical condition, buyer underwriting, and transaction execution.",
+    image: multifamilyInvestmentSales,
+  },
+  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  hero: {
+    eyebrow: "GalaSales · Multifamily",
+    title: "Multifamily Investment Sales",
+    lead:
+      "Bring the operating story, physical asset, and buyer underwriting into one sale process built to make performance understandable and risk visible.",
+    media: {
+      src: multifamilyInvestmentSales,
+      alt: "Contemporary multifamily community with apartment buildings and a landscaped courtyard",
+      position: "center 54%",
+    },
+    actions: [
+      {
+        label: "Discuss a Multifamily Asset",
+        href: "/contact?inquiry=investment-sales&focus=multifamily",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+      {
+        label: "See the Sale Process",
+        href: "#multifamily-sale-process",
+        variant: "secondary",
+        icon: "arrow-down",
+      },
+    ],
+    signalLabel: "Multifamily sale advisory stages",
+    signals: ["Prepare", "Underwrite", "Market", "Close"],
+  },
+  sections: [
+    {
+      type: "challenge",
+      watermark: "PERFORMANCE",
+      eyebrow: "The Operating Story",
+      headline: "Buyers price the income—and the work behind it.",
+      body: [
+        "A multifamily sale is underwritten unit by unit and line by line. Rent roll, collections, concessions, vacancy, lease expirations, controllable expenses, taxes, insurance, utilities, and recurring capital needs all influence how buyers view current income and future performance.",
+        "The offering must connect those operating realities to the physical property and its market position. Clean preparation helps buyers distinguish durable performance from temporary variance while giving ownership an informed view of the questions likely to affect pricing and certainty.",
+      ],
+      emphasis:
+        "A persuasive multifamily story begins with reconciled operations, not a projected headline.",
+      pressures: [
+        {
+          number: "01",
+          title: "Revenue Quality",
+          body: "Occupancy, collections, concessions, loss-to-lease, and lease timing shape how revenue is credited.",
+        },
+        {
+          number: "02",
+          title: "Expense Reality",
+          body: "Taxes, insurance, utilities, payroll, repairs, and management assumptions can materially change net income.",
+        },
+        {
+          number: "03",
+          title: "Capital + Condition",
+          body: "Deferred maintenance, unit interiors, building systems, and planned improvements affect buyer reserves and execution risk.",
+        },
+      ],
+    },
+    {
+      type: "process",
+      id: "multifamily-sale-process",
+      eyebrow: "The Multifamily Sale Process",
+      headline: "Prepare the asset before the market sets the narrative.",
+      introduction:
+        "Gala organizes the process around decision-useful information, likely buyer questions, and ownership's timing so the market can evaluate the opportunity on a consistent basis.",
+      steps: [
+        {
+          number: "01",
+          title: "Prepare",
+          body: "Clarify the seller's objectives and assemble the rent roll, operating statements, lease information, capital history, and available property records.",
+        },
+        {
+          number: "02",
+          title: "Underwrite",
+          body: "Reconcile current performance, identify normalization questions, frame market context, and distinguish documented results from forward-looking assumptions.",
+        },
+        {
+          number: "03",
+          title: "Market",
+          body: "Build the offering narrative, activate relevant buyers, manage access and questions, and compare interest on economics, timing, and execution strength.",
+        },
+        {
+          number: "04",
+          title: "Close",
+          body: "Coordinate diligence flow and milestones with ownership's legal, tax, accounting, property-management, and technical advisors through closing.",
+        },
+      ],
+    },
+    {
+      type: "strategy",
+      eyebrow: "Buyer Underwriting",
+      headline: "Separate today's performance from tomorrow's plan.",
+      introduction:
+        "Different buyers value stabilized income and operational upside differently. A disciplined process shows what the property is producing now, what has been verified, and what a buyer would need to execute to reach another outcome.",
+      media: {
+        src: multifamilyInvestmentSales,
+        alt: "Wide courtyard view across a mid-rise multifamily community",
+        position: "center 58%",
+      },
+      tracks: [
+        {
+          number: "01",
+          label: "Current Operations",
+          title: "Make the in-place performance legible.",
+          body: "Buyers need a consistent picture of unit status, collections, revenue, expenses, lease exposure, and the physical condition supporting current operations.",
+          points: [
+            "Rent-roll and unit-status review",
+            "Trailing operations and expense context",
+            "Lease expirations, concessions, and collections",
+            "Capital history and known condition items",
+          ],
+        },
+        {
+          number: "02",
+          label: "Future Execution",
+          title: "Define upside without presenting it as certainty.",
+          body: "Renovation, lease-up, expense changes, management transitions, or repositioning may support a buyer's plan, but assumptions must remain separate from documented results.",
+          points: [
+            "Market-rent and comparable context",
+            "Renovation or lease-up assumptions",
+            "Supply, demand, and location considerations",
+            "Execution requirements and buyer diligence",
+          ],
+        },
+      ],
+    },
+    {
+      type: "deliverables",
+      eyebrow: "Services + Deliverables",
+      headline: "A sale process grounded in operating evidence.",
+      introduction:
+        "The assignment connects property preparation, buyer communication, and transaction coordination while leaving legal, tax, accounting, engineering, and environmental conclusions to the appropriate advisors.",
+      items: [
+        {
+          icon: "economics",
+          title: "Operating Review",
+          body: "Rent-roll, trailing-statement, collections, concessions, occupancy, and expense context organized to identify gaps and likely buyer questions.",
+        },
+        {
+          icon: "positioning",
+          title: "Valuation + Buyer Strategy",
+          body: "Relevant sales, income context, market position, and likely buyer profiles considered alongside ownership's timing and priorities.",
+        },
+        {
+          icon: "marketing",
+          title: "Offering Narrative",
+          body: "Coordinated facts, imagery, operating information, and market context that distinguish documented performance from buyer assumptions.",
+        },
+        {
+          icon: "prospects",
+          title: "Qualified Buyer Outreach",
+          body: "Targeted engagement with relevant private investors, operators, and acquisition groups based on asset scale and strategy.",
+        },
+        {
+          icon: "tours",
+          title: "Access + Offer Management",
+          body: "Property tours, information requests, feedback, and offer comparison managed around resident privacy and operating continuity.",
+        },
+        {
+          icon: "execution",
+          title: "Diligence Coordination",
+          body: "An organized path for leases, financial records, contracts, physical reports, and closing milestones across the seller's advisory team.",
+        },
+      ],
+    },
+  ],
+  relatedCapabilities: {
+    eyebrow: "Connected Gala Capabilities",
+    headline: "The transaction may be one part of the ownership plan.",
+    introduction:
+      "Gala can connect the sale conversation to capital, development, and property-management coordination when those decisions affect timing or execution.",
+    links: [
+      {
+        label: "GalaCapital",
+        title: "Capital Strategy",
+        body: "Debt and equity planning aligned with the asset, sponsorship, timing, and investment plan.",
+        href: "/services/capital-markets/capital-strategy",
+      },
+      {
+        label: "GalaCapital",
+        title: "Transaction Coordination",
+        body: "Organized information flow and milestone visibility across ownership, capital sources, advisors, and closing parties.",
+        href: "/services/capital-markets/transaction-coordination",
+      },
+      {
+        label: "GalaDevelop",
+        title: "Development Oversight",
+        body: "Coordination across consultants, approvals, schedule, and ownership decisions for development or repositioning work.",
+        href: "/services/development-services/development-oversight",
+      },
+      {
+        label: "Gala Platform",
+        title: "Property Management Partnership",
+        body: "A coordinated connection to property-management resources when operations and ownership strategy need to stay aligned.",
+        href: "/services/property-management/property-management-partnership",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Start With the Operations",
+    headline: "Let’s understand what the property is producing today.",
+    body:
+      "Share the asset, current occupancy, operating history, ownership objective, and timing. Gala will begin with the information buyers are likely to test first.",
+    actions: [
+      {
+        label: "Discuss a Multifamily Asset",
+        href: "/contact?inquiry=investment-sales&focus=multifamily",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
+  },
+};
+
 export const capabilityPages: CapabilityPageContent[] = [
   landlordRepresentation,
   tenantRepresentation,
   industrialInvestmentSalesPage,
+  multifamilyInvestmentSalesPage,
 ];
 
 export const capabilityPageByPath: Record<string, CapabilityPageContent> = Object.fromEntries(

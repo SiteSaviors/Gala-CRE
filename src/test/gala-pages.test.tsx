@@ -236,6 +236,32 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
+  it("renders a distinct editorial journey for Multifamily Investment Sales", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/investment-sales/multifamily"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Multifamily Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /contemporary multifamily community/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Buyers price the income—and the work behind it." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Prepare the asset before the market sets the narrative." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Separate today's performance from tomorrow's plan." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A sale process grounded in operating evidence." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss a Multifamily Asset/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=investment-sales&focus=multifamily"
+    );
+    expect(screen.getByRole("link", { name: /Property Management Partnership/i })).toHaveAttribute(
+      "href",
+      "/services/property-management/property-management-partnership"
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
     expect(screen.getByText("3 properties")).toBeInTheDocument();

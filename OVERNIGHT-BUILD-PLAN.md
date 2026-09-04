@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 08:16 CDT
+Last updated: 2026-09-04 08:51 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -139,12 +139,12 @@ Objective: Complete the remaining brokerage and investment-sales capability rout
 - [ ] Keep Landlord and Tenant Representation substantively different.
 - [ ] Ensure Industrial, Multifamily, Retail, Office, and Land do not read as one page with swapped nouns.
 - [x] Build Industrial as a distinct owner/investor sale-advisory journey with contextual imagery, accurate diligence boundaries, metadata, related links, and focused inquiry routing.
-- [ ] Build Multifamily as the next distinct GalaSales route.
+- [x] Build Multifamily as a distinct owner/investor sale-advisory journey grounded in rent-roll, operating, physical-condition, and underwriting decisions.
 - [ ] Build Retail, Office, and Land as distinct GalaSales routes.
 
 Gate: Every GalaBroker and GalaSales route is persuasive, visually complete, responsive, and materially specific.
 
-Next action: Build Multifamily as a distinct GalaSales editorial route centered on operating performance, rent roll and lease-up context, physical condition, buyer underwriting, sale preparation, and diligence coordination; use route-specific contextual imagery, accurate boundaries, metadata, related links, and a focused inquiry CTA.
+Next action: Build Retail as a distinct GalaSales editorial route centered on tenancy and lease structure, trade area, access and visibility, site utility, buyer segmentation, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
 
 ## Phase 5 — GalaDevelop, GalaCapital, and Property Management
 
@@ -435,3 +435,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: No Industrial content blocker. The new image is generic contextual service imagery and must not be represented as a Gala listing or completed project. No approved Industrial-specific client photography has been supplied.
 - Exact next action: Build `/services/investment-sales/multifamily` as a distinct GalaSales editorial route centered on operating performance, rent roll and lease-up context, physical condition, buyer underwriting, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
+
+### Pulse — 2026-09-04 08:51 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `b29ad1a` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; the Industrial editorial checkpoint; capability content and renderer; route matrix; contact inquiry mapping; current tests; imagery; and the live Multifamily and contact routes.
+- Phase / checkpoint: Phase 4 — replace Multifamily's concise capability shell with a distinct operating-performance-led GalaSales journey.
+- Gate: `/services/investment-sales/multifamily` clearly serves multifamily owners and investors; separates documented current operations from forward-looking buyer assumptions; covers rent-roll, revenue, expenses, physical condition, sale preparation, underwriting, marketing, access, diligence, and closing without promising outcomes or presenting projections as facts; includes route-specific contextual imagery, metadata, related capabilities, and a preselected Investment Sales inquiry; passes responsive, route, browser-console, test, build, lint, and diff checks.
+- Completed: Built four focused editorial sections around multifamily operating evidence rather than adapting the Industrial copy: an operating-story challenge, a Prepare/Underwrite/Market/Close process, current-operations versus future-execution buyer lenses, and multifamily-specific deliverables. Added explicit distinctions between verified historical results and renovation, lease-up, market-rent, and other buyer assumptions. Added resident-privacy and operating-continuity considerations, appropriate legal/tax/accounting/engineering/environmental boundaries, connected capital/development/property-management paths, route metadata, and a Multifamily-context CTA. Generated and optimized one unbranded, generic multifamily community image solely for service-page context.
+- Files and routes changed: `src/assets/multifamily-investment-sales.webp`, `src/content/capabilityPages.ts`, `src/test/gala-pages.test.tsx`, and this ledger; rebuilt `/services/investment-sales/multifamily` and verified its handoff to `/contact?inquiry=investment-sales&focus=multifamily`.
+- Verification: 20/20 targeted tests passed; 38/38 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop browser QA confirmed correct metadata, headings, hero composition, no broken images, and no horizontal overflow at 1280px; 390px browser QA confirmed the full hero, mobile CTAs and four-stage signal grid fit without overflow; the CTA correctly preselected Investment Sales without submitting the form; no Multifamily or contact page console errors were recorded; `git diff --check` passed.
+- Commit: Intended message `feat: build multifamily investment sales journey`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: No Multifamily content blocker. The image is generated generic service imagery and must not be represented as a Gala listing or completed project. No approved Multifamily client photography, operating case study, or transaction record has been supplied.
+- Exact next action: Build `/services/investment-sales/retail` as a distinct GalaSales editorial route centered on tenancy and lease structure, trade area, access and visibility, site utility, buyer segmentation, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
