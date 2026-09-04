@@ -25,6 +25,8 @@ export type Capability = {
 export type Service = {
   slug: ServiceSlug;
   name: string;
+  brandName: string;
+  homepageSummary?: string;
   eyebrow: string;
   summary: string;
   description: string;
@@ -39,13 +41,15 @@ export const services: Service[] = [
   {
     slug: "brokerage",
     name: "Brokerage",
+    brandName: "GalaBroker",
+    homepageSummary: "Commercial leasing and occupancy representation.",
     eyebrow: "Landlord + Tenant Representation",
     summary: "Commercial representation grounded in clear advice, local knowledge, and disciplined execution.",
     description:
       "Gala CRE Group helps owners position and lease commercial space while helping occupiers evaluate locations, negotiate terms, and move forward with confidence.",
     capabilities: [
       {
-        label: "Landlord representation",
+        label: "Landlord Representation",
         lead: "When commercial space sits vacant, it costs you every day it's empty. We manage the full leasing process on your behalf — from positioning the space to closing the lease — so you can stay focused on ownership, not marketing.",
         included: [
           "Space positioning and marketing strategy",
@@ -57,7 +61,7 @@ export const services: Service[] = [
         route: "landlord-representation",
       },
       {
-        label: "Tenant representation",
+        label: "Tenant Representation",
         lead: "Finding and securing the right space is a business decision, not just a real estate transaction. We represent your interests exclusively — evaluating options, negotiating terms, and advocating for you through the entire process.",
         included: [
           "Site selection and market evaluation",
@@ -99,6 +103,8 @@ export const services: Service[] = [
   {
     slug: "investment-sales",
     name: "Investment Sales",
+    brandName: "GalaSales",
+    homepageSummary: "Commercial property acquisitions, dispositions, and marketing.",
     eyebrow: "Private Capital + Commercial Assets",
     summary: "Sale advisory for commercial owners and private investors across the primary asset classes.",
     description:
@@ -163,6 +169,8 @@ export const services: Service[] = [
   {
     slug: "development-services",
     name: "Development Services",
+    brandName: "GalaDevelop",
+    homepageSummary: "Commercial development planning and execution.",
     eyebrow: "From Site Strategy to Execution",
     summary: "Predevelopment guidance that turns complex land and development questions into a clearer path forward.",
     description:
@@ -217,6 +225,8 @@ export const services: Service[] = [
   {
     slug: "capital-markets",
     name: "Capital Markets",
+    brandName: "GalaCapital",
+    homepageSummary: "Debt and equity sourcing for commercial opportunities.",
     eyebrow: "Debt + Equity Access",
     summary: "Capital guidance designed to align financing strategy with the realities of the opportunity.",
     description:
@@ -271,6 +281,7 @@ export const services: Service[] = [
   {
     slug: "property-management",
     name: "Property Management Partnership",
+    brandName: "Property Management",
     eyebrow: "Partner-Led Operations Support",
     summary: "A partner-led pathway focused on property performance and a more coordinated ownership experience.",
     description:
@@ -328,5 +339,25 @@ export const advertisedCapabilityRoutes: AdvertisedCapabilityRoute[] = services.
       path: `/services/${service.slug}/${capability.route}`,
     })),
 );
+
+export type ServiceNavigationGroup = {
+  name: string;
+  serviceName: string;
+  serviceSlug: ServiceSlug;
+  href: string;
+  summary: string;
+  image?: string;
+  capabilities: AdvertisedCapabilityRoute[];
+};
+
+export const serviceNavigationGroups: ServiceNavigationGroup[] = services.map((service) => ({
+  name: service.brandName,
+  serviceName: service.name,
+  serviceSlug: service.slug,
+  href: `/services/${service.slug}`,
+  summary: service.homepageSummary ?? service.summary,
+  image: service.image,
+  capabilities: advertisedCapabilityRoutes.filter((capability) => capability.serviceSlug === service.slug),
+}));
 
 export const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;

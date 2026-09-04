@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import galaLogo from "@/assets/gala-cre-logo.png";
+import { serviceNavigationGroups } from "@/content/services";
 
 type SiteFooterProps = {
   currentPath: string;
@@ -24,12 +25,20 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
           </p>
         </div>
         <div className="fcol">
-          <div className="fct">Navigation</div>
+          <div className="fct">Explore</div>
           <ul className="flinks">
             <li><Link to="/services">Services</Link></li>
             <li><Link to="/properties">Properties</Link></li>
             <li><Link to="/company">Company</Link></li>
             <li><Link to="/contact">Talk to an Advisor</Link></li>
+          </ul>
+        </div>
+        <div className="fcol">
+          <div className="fct">Capabilities</div>
+          <ul className="flinks">
+            {serviceNavigationGroups.map((service) => (
+              <li key={service.serviceSlug}><Link to={service.href}>{service.name}</Link></li>
+            ))}
           </ul>
         </div>
         <div className="fcol fcontact">

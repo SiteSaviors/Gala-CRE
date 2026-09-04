@@ -2,12 +2,15 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import CapabilityDetail from "@/pages/CapabilityDetail";
+import Services from "@/pages/Services";
+import SiteFooter from "@/components/site/SiteFooter";
+import SiteHeader from "@/components/site/SiteHeader";
 import { capabilityPageByPath } from "@/content/capabilityPages";
-import { advertisedCapabilityRoutes, findCapabilityByRoute } from "@/content/services";
+import { advertisedCapabilityRoutes, findCapabilityByRoute, serviceNavigationGroups } from "@/content/services";
 
 const expectedCapabilities = [
-  "Landlord representation",
-  "Tenant representation",
+  "Landlord Representation",
+  "Tenant Representation",
   "Industrial",
   "Multifamily",
   "Retail",
@@ -60,5 +63,35 @@ describe("advertised capability route matrix", () => {
       expect(view.container).not.toHaveTextContent(/page not found|coming soon|pending client approval/i);
       view.unmount();
     });
+  });
+
+  it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {
+    const header = render(
+      <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
+    );
+    const megaMenu = header.container.querySelector("#services-mega-menu");
+    const megaPaths = Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []).map((link) => link.getAttribute("href"));
+    advertisedCapabilityRoutes.forEach((entry) => expect(megaPaths, `desktop ${entry.path}`).toContain(entry.path));
+
+    const mobileServicePaths = Array.from(header.container.querySelectorAll<HTMLAnchorElement>("#mobile-services-menu a[href]"))
+      .map((link) => link.getAttribute("href"));
+    serviceNavigationGroups.forEach((service) => expect(mobileServicePaths, `mobile ${service.href}`).toContain(service.href));
+    header.unmount();
+
+    const footer = render(
+      <MemoryRouter><SiteFooter currentPath="/" /></MemoryRouter>,
+    );
+    const footerPaths = Array.from(footer.container.querySelectorAll<HTMLAnchorElement>("footer a[href]"))
+      .map((link) => link.getAttribute("href"));
+    serviceNavigationGroups.forEach((service) => expect(footerPaths, `footer ${service.href}`).toContain(service.href));
+    footer.unmount();
+
+    const serviceIndex = render(
+      <MemoryRouter><Services /></MemoryRouter>,
+    );
+    const serviceIndexPaths = Array.from(serviceIndex.container.querySelectorAll<HTMLAnchorElement>(".gala-service-card a[href]"))
+      .map((link) => link.getAttribute("href"));
+    advertisedCapabilityRoutes.forEach((entry) => expect(serviceIndexPaths, `service index ${entry.path}`).toContain(entry.path));
+    serviceIndex.unmount();
   });
 });

@@ -3,53 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import galaLogo from "@/assets/gala-cre-logo.png";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
-import { serviceCapabilityId } from "@/content/services";
+import { serviceNavigationGroups } from "@/content/services";
 
 type SiteHeaderProps = {
   currentPath: string;
 };
-
-const serviceNavigation = [
-  {
-    name: "GalaBroker",
-    href: "/services/brokerage",
-    capabilities: [
-      { label: "Landlord Representation", target: "Landlord representation", route: "landlord-representation" },
-      { label: "Tenant Representation", target: "Tenant representation", route: "tenant-representation" },
-    ],
-  },
-  {
-    name: "GalaSales",
-    href: "/services/investment-sales",
-    capabilities: [
-      { label: "Industrial", target: "Industrial", route: "industrial" },
-      { label: "Multifamily", target: "Multifamily", route: "multifamily" },
-      { label: "Retail", target: "Retail", route: "retail" },
-      { label: "Office", target: "Office", route: "office" },
-      { label: "Land", target: "Land", route: "land" },
-    ],
-  },
-  {
-    name: "GalaDevelop",
-    href: "/services/development-services",
-    capabilities: [
-      { label: "Site Strategy", target: "Site Strategy", route: "site-strategy" },
-      { label: "Entitlements", target: "Entitlements", route: "entitlements" },
-      { label: "Infrastructure", target: "Infrastructure", route: "infrastructure" },
-      { label: "Development Oversight", target: "Development Oversight", route: "development-oversight" },
-    ],
-  },
-  {
-    name: "GalaCapital",
-    href: "/services/capital-markets",
-    capabilities: [
-      { label: "Debt", target: "Debt", route: "debt" },
-      { label: "Equity", target: "Equity", route: "equity" },
-      { label: "Capital Strategy", target: "Capital Strategy", route: "capital-strategy" },
-      { label: "Transaction Coordination", target: "Transaction Coordination", route: "transaction-coordination" },
-    ],
-  },
-] as const;
 
 const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -164,7 +122,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </button>
         <div className={`mnav-services${mobileServicesOpen ? " open" : ""}`} id="mobile-services-menu">
           <Link to="/services" onClick={() => setMobileNavOpen(false)}>All Services</Link>
-          {serviceNavigation.map((service) => (
+          {serviceNavigationGroups.map((service) => (
             <Link to={service.href} onClick={() => setMobileNavOpen(false)} key={service.name}>{service.name}</Link>
           ))}
         </div>
@@ -188,7 +146,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
           <div className="gala-mega-menu__services">
             <div className="gala-mega-menu__eyebrow">Commercial Capabilities</div>
             <div className="gala-mega-menu__groups">
-              {serviceNavigation.map((service) => (
+              {serviceNavigationGroups.map((service) => (
                 <section className="gala-mega-menu__group" key={service.name}>
                   <Link className="gala-mega-menu__title" to={service.href} tabIndex={megaLinkTabIndex}>
                     {service.name}<ArrowUpRight size={18} aria-hidden="true" />
@@ -197,7 +155,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
                     {service.capabilities.map((capability) => (
                       <li key={capability.label}>
                         <Link
-                          to={"route" in capability && capability.route ? `${service.href}/${capability.route}` : `${service.href}#${serviceCapabilityId(capability.target)}`}
+                          to={capability.path}
                           tabIndex={megaLinkTabIndex}
                         >
                           <span>{capability.label}</span><ArrowUpRight size={14} aria-hidden="true" />

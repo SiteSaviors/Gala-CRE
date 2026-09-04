@@ -4,73 +4,19 @@ import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
 import heroVideo from "@/assets/GALA-CRE-HERO-LOOP.mp4";
-import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
-import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
-import galaDevelopCapability from "@/assets/gala-develop-capability.webp";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
-import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import TransactionSpotlight from "@/components/site/TransactionSpotlight";
-import { serviceCapabilityId } from "@/content/services";
+import { serviceNavigationGroups, type ServiceNavigationGroup } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
-const homepageCapabilities = [
-  {
-    name: "GalaBroker",
-    summary: "Commercial leasing and occupancy representation.",
-    capabilities: [
-      { label: "Landlord Representation", target: "Landlord representation", route: "landlord-representation" },
-      { label: "Tenant Representation", target: "Tenant representation", route: "tenant-representation" },
-    ],
-    href: "/services/brokerage",
-    image: galaBrokerCapability,
-    imagePosition: "center",
-  },
-  {
-    name: "GalaSales",
-    summary: "Commercial property acquisitions, dispositions, and marketing.",
-    capabilities: [
-      { label: "Industrial", target: "Industrial", route: "industrial" },
-      { label: "Multifamily", target: "Multifamily", route: "multifamily" },
-      { label: "Retail", target: "Retail", route: "retail" },
-      { label: "Office", target: "Office", route: "office" },
-      { label: "Land", target: "Land", route: "land" },
-    ],
-    href: "/services/investment-sales",
-    image: galaSalesCapability,
-    imagePosition: "center",
-  },
-  {
-    name: "GalaDevelop",
-    summary: "Commercial development planning and execution.",
-    capabilities: [
-      { label: "Site Strategy", target: "Site Strategy", route: "site-strategy" },
-      { label: "Entitlements", target: "Entitlements", route: "entitlements" },
-      { label: "Infrastructure", target: "Infrastructure", route: "infrastructure" },
-      { label: "Development Oversight", target: "Development Oversight", route: "development-oversight" },
-    ],
-    href: "/services/development-services",
-    image: galaDevelopCapability,
-    imagePosition: "center",
-  },
-  {
-    name: "GalaCapital",
-    summary: "Debt and equity sourcing for commercial opportunities.",
-    capabilities: [
-      { label: "Debt", target: "Debt", route: "debt" },
-      { label: "Equity", target: "Equity", route: "equity" },
-      { label: "Capital Strategy", target: "Capital Strategy", route: "capital-strategy" },
-      { label: "Transaction Coordination", target: "Transaction Coordination", route: "transaction-coordination" },
-    ],
-    href: "/services/capital-markets",
-    image: galaCapitalCapability,
-    imagePosition: "center",
-  },
-] as const;
+const homepageCapabilities = serviceNavigationGroups.filter(
+  (service): service is ServiceNavigationGroup & { image: string } => Boolean(service.image),
+);
 
 type HomepageCapability = (typeof homepageCapabilities)[number];
 
@@ -85,7 +31,6 @@ const HomepageCapabilityCard = ({
   capabilities,
   href,
   image,
-  imagePosition,
   isOpen,
   onToggle,
 }: HomepageCapabilityCardProps) => {
@@ -100,7 +45,7 @@ const HomepageCapabilityCard = ({
       className={`gala-capability-card gala-capability-card--has-image${isOpen ? " gala-capability-card--open" : ""}`}
       style={cardStyle}
     >
-      <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />
+      <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" />
       <div className="gala-capability-card__content">
         <h3><Link to={href}>{name}</Link></h3>
         <p className="gala-capability-card__summary">{summary}</p>
@@ -108,7 +53,7 @@ const HomepageCapabilityCard = ({
       <nav className="gala-capability-card__links" aria-label={`${name} capabilities`}>
         {capabilities.map((capability, capabilityIndex) => (
           <Link
-            to={"route" in capability && capability.route ? `${href}/${capability.route}` : `${href}#${serviceCapabilityId(capability.target)}`}
+            to={capability.path}
             className="gala-capability-card__link"
             style={{ "--gala-capability-index": capabilityIndex } as CSSProperties}
             key={capability.label}

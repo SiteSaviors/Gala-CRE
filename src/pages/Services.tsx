@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { assetTypes, services } from "@/content/services";
+import { assetTypes, serviceNavigationGroups } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const Services = () => {
@@ -33,16 +33,25 @@ const Services = () => {
               <h2>Expertise organized around your objective.</h2>
             </div>
             <div className="gala-service-grid">
-              {services.map((service) => (
-                <Link key={service.slug} to={`/services/${service.slug}`} className="gala-service-card">
-                  <span className="gala-service-card__index">0{services.indexOf(service) + 1}</span>
+              {serviceNavigationGroups.map((service, index) => (
+                <article key={service.serviceSlug} className="gala-service-card">
+                  <span className="gala-service-card__index">0{index + 1}</span>
                   <div>
-                    <div className="gala-service-card__eyebrow">{service.eyebrow}</div>
-                    <h3>{service.name}</h3>
+                    <div className="gala-service-card__eyebrow">{service.name}</div>
+                    <h3><Link to={service.href}>{service.serviceName}</Link></h3>
                     <p>{service.summary}</p>
+                    <nav className="gala-service-card__links" aria-label={`${service.serviceName} capabilities`}>
+                      {service.capabilities.map((capability) => (
+                        <Link key={capability.path} to={capability.path}>
+                          {capability.label}<ArrowUpRight size={13} aria-hidden="true" />
+                        </Link>
+                      ))}
+                    </nav>
                   </div>
-                  <ArrowUpRight aria-hidden="true" />
-                </Link>
+                  <Link className="gala-service-card__arrow" to={service.href} aria-label={`View ${service.serviceName}`}>
+                    <ArrowUpRight aria-hidden="true" />
+                  </Link>
+                </article>
               ))}
             </div>
           </div>

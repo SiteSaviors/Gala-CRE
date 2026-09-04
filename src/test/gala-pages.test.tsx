@@ -84,7 +84,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Investment Sales")).toBeInTheDocument();
     expect(screen.getByText("Development Services")).toBeInTheDocument();
     expect(screen.getByText("Capital Markets")).toBeInTheDocument();
-    expect(screen.getByText("Property Management Partnership")).toBeInTheDocument();
+    expect(screen.getAllByText("Property Management Partnership").length).toBeGreaterThan(0);
   });
 
   it("keeps unapproved team claims out of the site", () => {
@@ -258,7 +258,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
     expect(screen.getAllByRole("img", { name: /2301 Lackey Street/i })).toHaveLength(6);
     expect(screen.queryByText("Other current opportunities.")).not.toBeInTheDocument();
-    expect(screen.queryByText("Explore")).not.toBeInTheDocument();
+    expect(document.querySelector(".gala-property-hero__scroll")).not.toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 

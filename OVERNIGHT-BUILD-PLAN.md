@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 07:03 CDT
+Last updated: 2026-09-04 07:40 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -109,11 +109,11 @@ Next action: Phase gate passed for the three verified active offerings. Continue
 
 ## Phase 3 — Capability route architecture
 
-Status: **In progress**
+Status: **Completed**
 
 Objective: Give every advertised capability a deliberate, test-covered destination.
 
-- [ ] Create a route matrix covering all desktop-menu, mobile-menu, footer, service-index, and related-capability links.
+- [x] Create a route matrix covering all desktop-menu, mobile-menu, footer, service-index, homepage, and related-capability links.
 - [x] Cover Landlord Representation and Tenant Representation.
 - [x] Cover Industrial, Multifamily, Retail, Office, and Land investment sales.
 - [x] Cover Site Strategy, Entitlements, Infrastructure, and Development Oversight.
@@ -124,7 +124,7 @@ Objective: Give every advertised capability a deliberate, test-covered destinati
 
 Gate: Every advertised capability resolves to a valid route and no navigation surface promotes a dead end.
 
-Next action: Use the new `advertisedCapabilityRoutes` matrix as the shared source for desktop mega-menu, mobile navigation, footer, service-index, homepage, and related-capability links; include Property Management Partnership wherever the navigation pattern calls for the fifth service; then add surface-consistency tests before closing the Phase 3 gate.
+Next action: Phase gate passed. Continue with Phase 4 by building Industrial as the first distinct GalaSales editorial capability page, using asset-specific decision criteria, a sale process, concrete deliverables, accurate diligence language, purposeful contextual imagery, page metadata, related links, and a concise inquiry CTA.
 
 ## Phase 4 — GalaBroker and GalaSales pages
 
@@ -404,3 +404,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: No route-definition blocker. Most new routes intentionally use the concise shared capability shell and service-level imagery until Phases 4 and 5 provide distinct editorial journeys and purposeful media.
 - Exact next action: Refactor the desktop mega-menu, mobile service navigation, footer service links, service index, homepage capability cards, and related-capability navigation to consume the canonical route matrix instead of maintaining duplicate labels and paths; include Property Management Partnership in the appropriate navigation surfaces and add consistency tests for every rendered capability link.
+
+### Pulse — 2026-09-04 07:40 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `b0b8045` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; the canonical service and capability route data; header, mobile menu, homepage, service index, footer, related navigation, styles, tests, and representative live navigation surfaces.
+- Phase / checkpoint: Phase 3 — connect the canonical capability matrix across every navigation surface and close the route-architecture gate.
+- Gate: Desktop mega-menu, mobile service navigation, homepage capability cards, service index, footer, and related-capability navigation derive destinations from shared service data; all 16 dedicated capability routes remain reachable without duplicated hard-coded paths, hash substitutes, dead ends, or placeholder-only pages; Property Management Partnership appears in the applicable fifth-service surfaces; responsive navigation has no horizontal overflow.
+- Completed: Added canonical service brand names and homepage summaries, generated reusable service navigation groups from the route matrix, removed duplicate header and homepage route definitions, added Property Management to desktop/mobile/footer navigation, surfaced all 16 capability paths on the service index, expanded the footer to include all five service families, and added automated cross-surface destination checks. Preserved the four-card homepage composition while deriving those cards from the same source.
+- Files and routes changed: `src/content/services.ts`, `src/components/site/SiteHeader.tsx`, `src/components/site/SiteFooter.tsx`, `src/pages/Index.tsx`, `src/pages/Services.tsx`, `src/styles/gala.css`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; affected `/`, `/services`, all `/services/*` navigation surfaces, and all 16 capability paths.
+- Verification: 18/18 targeted tests passed; 36/36 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop service index showed five service cards and 16 capability links; the five-column desktop mega-menu rendered cleanly with Property Management; the 390px mobile menu displayed all five service families without horizontal overflow; footer links were present and the full page width remained bounded; no page-specific console errors; `git diff --check` passed.
+- Commit: Intended message `refactor: unify capability navigation surfaces`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: No Phase 3 blockers. New capability routes still require their Phase 4 and Phase 5 editorial content and route-specific imagery; Property Management has no dedicated approved image yet.
+- Exact next action: Build `/services/investment-sales/industrial` as a distinct GalaSales editorial page with industrial owner/investor decision criteria, positioning and sale process, concrete deliverables, accurate diligence boundaries, the best suitable approved or clearly generic contextual imagery available, metadata, related capabilities, and an industrial-specific contact CTA.
