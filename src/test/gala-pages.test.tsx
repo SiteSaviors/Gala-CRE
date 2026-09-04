@@ -288,6 +288,32 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
+  it("renders a distinct editorial journey for Office Investment Sales", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/investment-sales/office"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Office Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /contemporary mid-rise office building/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Office space competes twice: for tenants and for capital." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Frame the office asset around its occupancy path." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Make occupancy risk understandable before buyers price uncertainty." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Preparation for the questions office buyers ask first." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss an Office Asset/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=investment-sales&focus=office"
+    );
+    expect(screen.getByRole("link", { name: /Tenant Representation/i })).toHaveAttribute(
+      "href",
+      "/services/brokerage/tenant-representation"
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
     expect(screen.getByText("3 properties")).toBeInTheDocument();

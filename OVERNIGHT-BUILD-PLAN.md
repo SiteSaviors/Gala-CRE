@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 09:25 CDT
+Last updated: 2026-09-04 10:00 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -141,11 +141,12 @@ Objective: Complete the remaining brokerage and investment-sales capability rout
 - [x] Build Industrial as a distinct owner/investor sale-advisory journey with contextual imagery, accurate diligence boundaries, metadata, related links, and focused inquiry routing.
 - [x] Build Multifamily as a distinct owner/investor sale-advisory journey grounded in rent-roll, operating, physical-condition, and underwriting decisions.
 - [x] Build Retail as a distinct owner/investor sale-advisory journey grounded in lease, tenant, trade-area, access, and site-utility decisions.
-- [ ] Build Office and Land as distinct GalaSales routes.
+- [x] Build Office as a distinct owner/investor sale-advisory journey grounded in occupancy, rollover, leasing-capital, and space-competitiveness decisions.
+- [ ] Build Land as the final distinct GalaSales route.
 
 Gate: Every GalaBroker and GalaSales route is persuasive, visually complete, responsive, and materially specific.
 
-Next action: Build Office as a distinct GalaSales editorial route centered on occupancy, tenant improvements, lease rollover, space quality, location, capital requirements, buyer segmentation, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
+Next action: Build Land as the final distinct GalaSales editorial route centered on use and buyer fit, entitlement and approval status, access, utilities, environmental and physical constraints, timing, pricing strategy, diligence sequencing, and transaction execution; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA, then close the Phase 4 gate if all GalaBroker/GalaSales pages remain complete and responsive.
 
 ## Phase 5 — GalaDevelop, GalaCapital, and Property Management
 
@@ -464,3 +465,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: No Retail content blocker. The image is generated generic service imagery and must not be represented as a Gala listing or completed project. No approved Retail client photography, case study, tenant-sales data, or transaction record has been supplied.
 - Exact next action: Build `/services/investment-sales/office` as a distinct GalaSales editorial route centered on occupancy, tenant improvements, lease rollover, space quality, location, capital requirements, buyer segmentation, sale preparation, and diligence coordination; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA.
+
+### Pulse — 2026-09-04 10:00 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `075b540` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; the Industrial, Multifamily, and Retail editorial checkpoints; capability content and renderer; route matrix; contact inquiry mapping; current tests and imagery; and the live Office and contact routes.
+- Phase / checkpoint: Phase 4 — replace Office's concise capability shell with a distinct occupancy-and-rollover-led GalaSales journey.
+- Gate: `/services/investment-sales/office` clearly serves office owners and investors; covers occupancy, tenant credit and concentration, lease rollover, options, reimbursements, landlord obligations, tenant improvements, commissions, downtime, space condition, building competitiveness, capital requirements, buyer segmentation, sale preparation, diligence, and closing without presenting leasing assumptions as facts; includes route-specific contextual imagery, metadata, related capabilities, and a preselected Investment Sales inquiry; passes responsive, route, browser-console, test, build, lint, and diff checks.
+- Completed: Built four office-specific editorial sections rather than adapting another asset page: the relationship between tenant demand and capital demand, separate stabilized-income and lease-up/repositioning underwriting paths, an Audit/Model/Market/Close sale process, and deliverables focused on rent roll, rollover, space competitiveness, access, and diligence. Added tenant-improvement, commission, free-rent, downtime, suite-condition, medical-office, owner-user, conversion, parking, building-system, estoppel, title, survey, physical, and environmental decision points with clear professional-advisor boundaries. Added connected Landlord Representation, Tenant Representation, Capital Strategy, and Property Management Partnership paths; route metadata; and an Office-context CTA. Generated and optimized one unbranded, generic mid-rise office image solely for service-page context.
+- Files and routes changed: `src/assets/office-investment-sales.webp`, `src/content/capabilityPages.ts`, `src/test/gala-pages.test.tsx`, and this ledger; rebuilt `/services/investment-sales/office` and verified its handoff to `/contact?inquiry=investment-sales&focus=office`.
+- Verification: 22/22 targeted tests passed; 40/40 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop browser QA confirmed correct metadata, headings, settled hero composition, no broken images, and no horizontal overflow at 1280px; 390px browser QA confirmed the full hero, CTA stack, and four-stage signal grid fit without overflow; the CTA correctly preselected Investment Sales without submitting the form; no Office or contact page console errors were recorded; `git diff --check` passed.
+- Commit: Intended message `feat: build office investment sales journey`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: No Office content blocker. The image is generated generic service imagery and must not be represented as a Gala listing or completed project. No approved Office client photography, rent roll, leasing case study, or transaction record has been supplied.
+- Exact next action: Build `/services/investment-sales/land` as the final distinct GalaSales editorial route centered on use and buyer fit, entitlement and approval status, access, utilities, environmental and physical constraints, timing, pricing strategy, diligence sequencing, and transaction execution; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA, then run the full Phase 4 gate across every GalaBroker/GalaSales route.

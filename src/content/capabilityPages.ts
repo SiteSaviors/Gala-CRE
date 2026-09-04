@@ -3,6 +3,7 @@ import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
+import officeInvestmentSales from "@/assets/office-investment-sales.webp";
 import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
 
 export type CapabilityPageIcon =
@@ -1243,12 +1244,235 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
   },
 };
 
+const officeInvestmentSalesPage: CapabilityPageContent = {
+  path: "/services/investment-sales/office",
+  metadata: {
+    title: "Office Investment Sales",
+    description:
+      "Office property sale advisory for owners and investors, connecting occupancy, lease rollover, tenant improvements, space quality, capital exposure, buyer positioning, and diligence.",
+    image: officeInvestmentSales,
+  },
+  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  hero: {
+    eyebrow: "GalaSales · Office",
+    title: "Office Investment Sales",
+    lead:
+      "Build the sale strategy around the property's real occupancy, lease exposure, space competitiveness, and capital requirements—not yesterday's assumptions.",
+    media: {
+      src: officeInvestmentSales,
+      alt: "Contemporary mid-rise office building with an illuminated lobby and landscaped arrival",
+      position: "center 53%",
+    },
+    actions: [
+      {
+        label: "Discuss an Office Asset",
+        href: "/contact?inquiry=investment-sales&focus=office",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+      {
+        label: "See the Sale Process",
+        href: "#office-sale-process",
+        variant: "secondary",
+        icon: "arrow-down",
+      },
+    ],
+    signalLabel: "Office sale advisory stages",
+    signals: ["Audit", "Model", "Market", "Close"],
+  },
+  sections: [
+    {
+      type: "challenge",
+      watermark: "RELEVANCE",
+      eyebrow: "The Office Value Story",
+      headline: "Office space competes twice: for tenants and for capital.",
+      body: [
+        "Buyers test whether the building can retain and attract users as carefully as they test the in-place income. Lease expirations, tenant credit, renewal probability, submarket alternatives, suite condition, amenities, parking, access, and the cost to prepare space can all change how future cash flow is priced.",
+        "A credible sale process makes that exposure visible. It connects the rent roll to the physical asset, separates contracted income from leasing assumptions, and presents the opportunity to buyers whose strategy and capital can address the property's actual occupancy profile.",
+      ],
+      emphasis:
+        "The goal is not to minimize rollover or capital needs. It is to show buyers how the building competes and what execution requires.",
+      pressures: [
+        {
+          number: "01",
+          title: "Rollover",
+          body: "Lease expirations, options, contraction rights, subleases, and tenant concentration shape income durability.",
+        },
+        {
+          number: "02",
+          title: "Leasing Capital",
+          body: "Tenant improvements, commissions, free rent, downtime, and suite work affect the real cost of occupancy changes.",
+        },
+        {
+          number: "03",
+          title: "Competitiveness",
+          body: "Location, parking, access, floor plates, systems, amenities, and space quality influence tenant demand and exit liquidity.",
+        },
+      ],
+    },
+    {
+      type: "strategy",
+      eyebrow: "Buyer Underwriting",
+      headline: "Frame the office asset around its occupancy path.",
+      introduction:
+        "A stabilized single-tenant property, a diversified multi-tenant building, a medical-office asset, and a vacant owner-user opportunity do not carry the same risk or buyer audience. Positioning must follow the documented lease profile and the work needed to sustain or rebuild occupancy.",
+      media: {
+        src: officeInvestmentSales,
+        alt: "Wide view of a modern office property showing floor plates, entrance, and parking access",
+        position: "center 57%",
+      },
+      tracks: [
+        {
+          number: "01",
+          label: "Stabilized Income",
+          title: "Show what is contracted—and what could change.",
+          body: "For leased assets, buyers need a consistent view of tenancy, rent, reimbursements, options, expirations, guarantees, and the obligations that affect net income.",
+          points: [
+            "Tenant roster, credit context, and concentration",
+            "Rent, escalations, and expense recoveries",
+            "Options, expirations, and rollover schedule",
+            "Landlord obligations and near-term capital",
+          ],
+        },
+        {
+          number: "02",
+          label: "Lease-Up + Repositioning",
+          title: "Make the cost of the next lease visible.",
+          body: "When value depends on renewal, backfill, owner occupancy, conversion, or repositioning, the strategy must account for space condition, market competition, time, and capital rather than treating upside as automatic.",
+          points: [
+            "Available suites and delivery condition",
+            "Tenant-improvement and commission assumptions",
+            "Downtime, absorption, and competing inventory",
+            "Alternative-use and approval questions",
+          ],
+        },
+      ],
+    },
+    {
+      type: "process",
+      id: "office-sale-process",
+      eyebrow: "The Office Sale Process",
+      headline: "Make occupancy risk understandable before buyers price uncertainty.",
+      introduction:
+        "The process brings leases, operations, space condition, market position, and ownership objectives together before outreach, then keeps buyer communication and diligence moving against a clear transaction plan.",
+      steps: [
+        {
+          number: "01",
+          title: "Audit",
+          body: "Organize leases, amendments, rent roll, operating history, capital records, suite condition, vendor information, and known property diligence.",
+        },
+        {
+          number: "02",
+          title: "Model",
+          body: "Frame contracted income, rollover, leasing exposure, capital requirements, market context, buyer groups, and the assumptions requiring verification.",
+        },
+        {
+          number: "03",
+          title: "Market",
+          body: "Launch coordinated materials and targeted outreach, manage tenant-sensitive access and questions, and compare offers on economics and certainty.",
+        },
+        {
+          number: "04",
+          title: "Close",
+          body: "Coordinate lease, estoppel, title, survey, physical, environmental, financing, and closing milestones with ownership's legal and technical advisors.",
+        },
+      ],
+    },
+    {
+      type: "deliverables",
+      eyebrow: "Services + Deliverables",
+      headline: "Preparation for the questions office buyers ask first.",
+      introduction:
+        "The assignment connects lease and occupancy analysis to property positioning and buyer execution while legal, tax, engineering, environmental, accessibility, and code conclusions remain with qualified specialists.",
+      items: [
+        {
+          icon: "economics",
+          title: "Lease + Rollover Review",
+          body: "An organized view of tenancy, rent, options, expirations, reimbursements, obligations, concentration, and near-term income exposure.",
+        },
+        {
+          icon: "positioning",
+          title: "Space + Market Positioning",
+          body: "Suite condition, building systems, amenities, parking, access, location, and competing inventory considered against likely user demand.",
+        },
+        {
+          icon: "marketing",
+          title: "Offering Materials",
+          body: "A coordinated property narrative, rent-roll summary, imagery, capital context, and diligence roadmap that distinguishes facts from assumptions.",
+        },
+        {
+          icon: "prospects",
+          title: "Buyer Segmentation",
+          body: "Targeted outreach to income investors, private capital, medical-office buyers, owner-users, or repositioning groups as the asset requires.",
+        },
+        {
+          icon: "tours",
+          title: "Access + Offer Management",
+          body: "Property and suite access, tenant communication, information requests, feedback, and offer comparison managed with appropriate discretion.",
+        },
+        {
+          icon: "execution",
+          title: "Diligence Coordination",
+          body: "A clear path for leases, estoppels, financial records, contracts, physical reports, title, survey, financing, and closing milestones.",
+        },
+      ],
+    },
+  ],
+  relatedCapabilities: {
+    eyebrow: "Connected Gala Capabilities",
+    headline: "Office value is often shaped before the sale launches.",
+    introduction:
+      "Gala can connect the disposition conversation to leasing, occupancy, capital, and property-management coordination when those decisions affect marketability or timing.",
+    links: [
+      {
+        label: "GalaBroker",
+        title: "Landlord Representation",
+        body: "Owner-focused positioning, prospecting, tenant qualification, and lease execution when occupancy is central to the value plan.",
+        href: "/services/brokerage/landlord-representation",
+      },
+      {
+        label: "GalaBroker",
+        title: "Tenant Representation",
+        body: "Business-led site selection and negotiation when an owner-user or tenant needs to renew, relocate, expand, or downsize.",
+        href: "/services/brokerage/tenant-representation",
+      },
+      {
+        label: "GalaCapital",
+        title: "Capital Strategy",
+        body: "Debt and equity planning aligned with occupancy, capital requirements, sponsorship, timing, and the transaction plan.",
+        href: "/services/capital-markets/capital-strategy",
+      },
+      {
+        label: "Gala Platform",
+        title: "Property Management Partnership",
+        body: "A coordinated connection to property-management resources when operations, tenant service, and ownership strategy need alignment.",
+        href: "/services/property-management/property-management-partnership",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Start With the Rent Roll",
+    headline: "Let’s clarify how the office asset competes today.",
+    body:
+      "Share the property, current occupancy, lease profile, known capital needs, ownership objective, and timing. Gala will begin with the issues buyers are likely to underwrite first.",
+    actions: [
+      {
+        label: "Discuss an Office Asset",
+        href: "/contact?inquiry=investment-sales&focus=office",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
+  },
+};
+
 export const capabilityPages: CapabilityPageContent[] = [
   landlordRepresentation,
   tenantRepresentation,
   industrialInvestmentSalesPage,
   multifamilyInvestmentSalesPage,
   retailInvestmentSalesPage,
+  officeInvestmentSalesPage,
 ];
 
 export const capabilityPageByPath: Record<string, CapabilityPageContent> = Object.fromEntries(
