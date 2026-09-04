@@ -1,4 +1,4 @@
-import { ArrowUpRight, KeyRound, MapPin, X } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
@@ -13,7 +13,8 @@ import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCa
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { assetTypes, serviceCapabilityId } from "@/content/services";
+import TransactionSpotlight from "@/components/site/TransactionSpotlight";
+import { serviceCapabilityId } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
@@ -22,8 +23,8 @@ const homepageCapabilities = [
     name: "GalaBroker",
     summary: "Commercial leasing and occupancy representation.",
     capabilities: [
-      { label: "Landlord Representation", target: "Landlord representation" },
-      { label: "Tenant Representation", target: "Tenant representation" },
+      { label: "Landlord Representation", target: "Landlord representation", route: "landlord-representation" },
+      { label: "Tenant Representation", target: "Tenant representation", route: "tenant-representation" },
     ],
     href: "/services/brokerage",
     image: galaBrokerCapability,
@@ -107,7 +108,7 @@ const HomepageCapabilityCard = ({
       <nav className="gala-capability-card__links" aria-label={`${name} capabilities`}>
         {capabilities.map((capability, capabilityIndex) => (
           <Link
-            to={`${href}#${serviceCapabilityId(capability.target)}`}
+            to={"route" in capability && capability.route ? `${href}/${capability.route}` : `${href}#${serviceCapabilityId(capability.target)}`}
             className="gala-capability-card__link"
             style={{ "--gala-capability-index": capabilityIndex } as CSSProperties}
             key={capability.label}
@@ -250,19 +251,22 @@ const Index = () => {
 
         <FeaturedListingsCarousel />
 
-        <section className="gala-section gala-section--black"><div className="gala-shell gala-split gala-asset-section">
-          <div><div className="gala-kicker">Asset Expertise</div><h2>Focused across five essential commercial property types.</h2><p>Each opportunity is evaluated through its market, operating profile, physical constraints, and path to value.</p></div>
-          <div className="gala-asset-list">{assetTypes.map((asset, index) => <span key={asset}><small>0{index + 1}</small>{asset}</span>)}</div>
-        </div></section>
+        <TransactionSpotlight />
 
-        <section className="gala-market-section"><div className="gala-market-section__shade"></div><div className="gala-shell gala-market-section__content"><MapPin aria-hidden="true" /><div className="gala-kicker">Raleigh-Durham + The Research Triangle</div><h2>Local perspective in a market defined by growth.</h2><p>Gala CRE Group is being built around the relationships, context, and practical market knowledge required to navigate commercial opportunity across the Triangle.</p></div></section>
-
-        <section className="gala-section gala-section--light"><div className="gala-shell gala-split">
-          <div><div className="gala-kicker gala-kicker--dark">The Gala Team</div><h2>Experienced guidance. Direct access. Clear communication.</h2></div>
-          <div><p className="gala-lead">Approved commercial team profiles, credentials, and advisor contact details will be added when supplied by Gala.</p><Link to="/company" className="gala-text-link">About the Company <ArrowUpRight size={16} /></Link></div>
-        </div></section>
-
-        <section className="gala-cta-band"><div className="gala-shell"><div><div className="gala-kicker">Your Next Move</div><h2>Tell us what you are working toward.</h2></div><Link to="/contact" className="gala-button">Talk to an Advisor <KeyRound size={16} /></Link></div></section>
+        <section className="gala-home-cta">
+          <div className="gala-home-cta__glow" aria-hidden="true"></div>
+          <div className="gala-shell gala-home-cta__inner">
+            <div>
+              <div className="gala-kicker">Your Next Move</div>
+              <h2>Bring us your next commercial real estate decision.</h2>
+            </div>
+            <div className="gala-home-cta__action">
+              <p>Whether you are evaluating a property, preparing to sell, looking for space, or considering development and capital, start with a focused conversation.</p>
+              <Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link>
+              <span>105 Kilmayne Dr, Suite C · Cary, NC</span>
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter currentPath="/" />
     </>

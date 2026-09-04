@@ -42,6 +42,8 @@ describe("property content model", () => {
     expect(propertyBySlug["2301-lackey-street"]?.priceDisplay).toBe("$549,000");
     expect(propertyBySlug["5047-yadkin-road"]?.acreageDisplay).toBe("3.46 acres");
     expect(propertyBySlug["611-703-church-street"]?.city).toBe("Morrisville");
+    expect(properties.every((item) => item.advisor?.name === "Gaurang Gala")).toBe(true);
+    expect(properties.every((item) => item.advisor?.license === "NC 283149")).toBe(true);
   });
 
   it("orders active records before under-contract and closed records", () => {

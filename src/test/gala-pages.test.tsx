@@ -1,9 +1,13 @@
 import { render, screen, within } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
+import { capabilityPageByPath, capabilityPages } from "@/content/capabilityPages";
+import CapabilityDetail from "@/pages/CapabilityDetail";
 import Company from "@/pages/Company";
 import Index from "@/pages/Index";
 import Properties from "@/pages/Properties";
+import PropertyDetail from "@/pages/PropertyDetail";
+import ServiceDetail from "@/pages/ServiceDetail";
 import Services from "@/pages/Services";
 
 const renderPage = (page: React.ReactNode, route = "/") => render(
@@ -11,6 +15,33 @@ const renderPage = (page: React.ReactNode, route = "/") => render(
 );
 
 describe("Gala CRE public pages", () => {
+  it("defines editorial capability pages through the reusable page system", () => {
+    const landlordPage = capabilityPageByPath["/services/brokerage/landlord-representation"];
+
+    expect(capabilityPages).toContain(landlordPage);
+    expect(landlordPage.metadata).toMatchObject({
+      title: "Landlord Representation",
+      description: expect.stringContaining("Raleigh-Durham"),
+    });
+    expect(landlordPage.hero.media).toMatchObject({
+      src: expect.any(String),
+      alt: expect.any(String),
+    });
+    expect(landlordPage.hero.actions.map((action) => action.variant)).toEqual(["primary", "secondary"]);
+    expect(landlordPage.sections.map((section) => section.type)).toEqual([
+      "challenge",
+      "process",
+      "deliverables",
+      "strategy",
+      "rationale",
+    ]);
+    expect(landlordPage.relatedCapabilities.links).toHaveLength(4);
+    expect(landlordPage.cta.actions[0]).toMatchObject({
+      href: "/contact?inquiry=landlord-representation",
+      variant: "primary",
+    });
+  });
+
   it("positions the homepage around commercial services", () => {
     const { container } = renderPage(<Index />);
     expect(screen.getByRole("heading", { name: /Commercial Real Estate, Simplified/i })).toBeInTheDocument();
@@ -20,17 +51,28 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Commercial property acquisitions, dispositions, and marketing.")).toBeInTheDocument();
     expect(within(screen.getByRole("navigation", { name: "GalaSales capabilities" })).getByRole("link", { name: "Industrial" }))
       .toHaveAttribute("href", "/services/investment-sales#industrial");
+    expect(within(screen.getByRole("navigation", { name: "GalaBroker capabilities" })).getByRole("link", { name: "Landlord Representation" }))
+      .toHaveAttribute("href", "/services/brokerage/landlord-representation");
+    expect(within(screen.getByRole("navigation", { name: "GalaBroker capabilities" })).getByRole("link", { name: "Tenant Representation" }))
+      .toHaveAttribute("href", "/services/brokerage/tenant-representation");
     expect(screen.getByRole("heading", { name: "GalaDevelop" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "GalaCapital" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Featured listings" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "For Lease" })).toHaveAttribute("aria-pressed", "false");
-    expect(screen.getByRole("button", { name: "For Sale" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("region", { name: "Featured commercial properties" })).toHaveAttribute("aria-roledescription", "carousel");
+    expect(screen.getByRole("button", { name: "Previous featured listing" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Next featured listing" })).toBeInTheDocument();
+    expect(screen.getByText("3 active sale opportunities")).toBeInTheDocument();
+    expect(screen.queryByText(/Featured Lease Opportunity/i)).not.toBeInTheDocument();
     expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
     expect(screen.getByText("$549,000")).toBeInTheDocument();
     expect(screen.getByText("5047 Yadkin Road")).toBeInTheDocument();
     expect(screen.getByText("$829,000")).toBeInTheDocument();
     expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
     expect(screen.getByText("$1,190,000")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "10414 & 10416 Chapel Hill Road" })).toBeInTheDocument();
+    expect(screen.getByText("$1.8M")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Bring us your next commercial real estate decision." })).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
   });
 
@@ -45,8 +87,125 @@ describe("Gala CRE public pages", () => {
 
   it("keeps unapproved team claims out of the site", () => {
     const company = renderPage(<Company />, "/company");
-    expect(screen.getByText("Team profiles are awaiting client approval.")).toBeInTheDocument();
+    expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
     company.unmount();
+  });
+
+  it("gives in-page-only capabilities real explanatory detail, not just a label", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/brokerage"]}>
+        <Routes>
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
+    const marketPositioning = screen.getByRole("heading", { name: "Market positioning" }).closest(".gala-capability-section");
+    expect(marketPositioning).not.toBeNull();
+    expect(within(marketPositioning as HTMLElement).getByText(/a space priced or presented incorrectly/i)).toBeInTheDocument();
+    expect(document.getElementById("market-positioning")).toBe(marketPositioning);
+  });
+
+  it("sends Landlord and Tenant Representation to their own dedicated pages instead of an in-page section", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/brokerage"]}>
+        <Routes>
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("link", { name: /Tenant representation/i })).toHaveAttribute(
+      "href",
+      "/services/brokerage/tenant-representation"
+    );
+    expect(screen.queryByRole("heading", { name: "Tenant representation" })).not.toBeInTheDocument();
+  });
+
+  it("renders a full dedicated page for Landlord Representation", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/brokerage/landlord-representation"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("heading", { name: /Landlord representation/i })).toBeInTheDocument();
+    expect(screen.getByText(/when commercial space sits vacant/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A deliberate path from availability to execution." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The work behind a stronger leasing outcome." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Create attention without compromising the asset." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your property deserves an advocate at every point in the deal." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss Your Property/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=landlord-representation"
+    );
+    expect(screen.getByRole("link", { name: /Tenant representation/i })).toHaveAttribute(
+      "href",
+      "/services/brokerage/tenant-representation"
+    );
+    expect(screen.queryByText(/pending client|client approval/i)).not.toBeInTheDocument();
+  });
+
+  it("reveals editorial service content immediately when reduced motion is preferred", () => {
+    const defaultMatchMedia = window.matchMedia;
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: query === "(prefers-reduced-motion: reduce)",
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+
+    try {
+      const { container } = render(
+        <MemoryRouter initialEntries={["/services/brokerage/landlord-representation"]}>
+          <Routes>
+            <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+          </Routes>
+        </MemoryRouter>
+      );
+      const revealItems = Array.from(container.querySelectorAll("[data-capability-reveal]"));
+      expect(revealItems.length).toBeGreaterThan(0);
+      expect(revealItems.every((item) => item.classList.contains("is-visible"))).toBe(true);
+    } finally {
+      Object.defineProperty(window, "matchMedia", {
+        configurable: true,
+        writable: true,
+        value: defaultMatchMedia,
+      });
+    }
+  });
+
+  it("renders a full dedicated page for Tenant Representation", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/brokerage/tenant-representation"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("heading", { name: "Tenant Representation" })).toBeInTheDocument();
+    expect(screen.getByText(/commercial lease affects far more than an address/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "From business requirement to occupied space." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A decision process your team can act on." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The best answer may not be a new address." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your advisor should answer only to your side of the table." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss Your Space/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=tenant-representation"
+    );
+    expect(screen.getByRole("link", { name: /Landlord representation/i })).toHaveAttribute(
+      "href",
+      "/services/brokerage/landlord-representation"
+    );
+    expect(screen.queryByText(/pending client|client approval/i)).not.toBeInTheDocument();
   });
 
   it("renders the current approved property catalog", () => {
@@ -55,5 +214,65 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
+  });
+
+  it("renders Lackey Street as a commercial-property diligence journey", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/2301-lackey-street"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
+    expect(screen.getByText("$549,000")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Existing fuel-and-convenience site near I-95 Exit 19." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Existing improvements create more than a land-only opportunity." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Material diligence belongs in the decision path." })).toBeInTheDocument();
+    expect(screen.getByText("Request confirmed square footage")).toBeInTheDocument();
+    expect(screen.getByText("Confirm the legal parcel schedule with the listing advisor")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=2301-lackey-street"
+    );
+    expect(screen.getByRole("link", { name: /View on Crexi/i })).toHaveAttribute(
+      "href",
+      "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"
+    );
+    expect(screen.getByRole("link", { name: "Open Crexi Listing" })).toHaveAttribute(
+      "href",
+      "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"
+    );
+    expect(screen.getByRole("link", { name: "Request Records" })).toHaveAttribute(
+      "href",
+      "/contact?property=2301-lackey-street&topic=environmental-records"
+    );
+    expect(screen.getByRole("link", { name: "Request Package" })).toHaveAttribute(
+      "href",
+      "/contact?property=2301-lackey-street&topic=diligence-package"
+    );
+    expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
+    expect(screen.getAllByRole("img", { name: /2301 Lackey Street/i })).toHaveLength(6);
+    expect(screen.queryByText("Other current opportunities.")).not.toBeInTheDocument();
+    expect(screen.queryByText("Explore")).not.toBeInTheDocument();
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
+  it("uses the supplied Church Street photography as a real property gallery", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/611-703-church-street"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A closer look at the site context." })).toBeInTheDocument();
+    expect(screen.getAllByRole("img", { name: /611 & 703 Church Street aerial view/i })).toHaveLength(5);
+    expect(screen.getByText("Approval for a licensed daycare facility stated by the listing")).toBeInTheDocument();
+    expect(screen.queryByText(/addresses require confirmation|documents have not yet been added/i)).not.toBeInTheDocument();
   });
 });

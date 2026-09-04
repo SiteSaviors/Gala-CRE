@@ -54,6 +54,21 @@ describe("advisor inquiry form", () => {
     });
   });
 
+  it("prefills a focused landlord representation inquiry", () => {
+    renderContact("/contact?inquiry=landlord-representation");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Landlord Representation");
+  });
+
+  it("prefills a focused investment sales inquiry", () => {
+    renderContact("/contact?inquiry=investment-sales");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
+  });
+
+  it("prefills a focused tenant representation inquiry", () => {
+    renderContact("/contact?inquiry=tenant-representation");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Tenant Representation");
+  });
+
   it("retains input and displays an inline delivery error", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }));
     renderContact();

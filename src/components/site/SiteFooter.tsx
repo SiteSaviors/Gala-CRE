@@ -55,7 +55,6 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
       </footer>
       <div className="fbot">
         <span className="fcp">© {currentYear} Gala CRE Group. All rights reserved.</span>
-        <span className="fcp">Brokerage disclosures pending client confirmation.</span>
       </div>
     </>
   );

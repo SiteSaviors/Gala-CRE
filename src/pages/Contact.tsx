@@ -22,7 +22,9 @@ import {
   contactFormConfig,
   contactHero,
   inquiryTypes,
+  type InquiryType,
 } from "@/content/contact";
+import { propertyBySlug } from "@/content/properties";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import { submitContactForm, type ContactFormValues } from "@/lib/contactForm";
 
@@ -37,12 +39,23 @@ const contactFormSchema = z.object({
   website: z.string(),
 });
 
+const inquiryByQuery: Partial<Record<string, InquiryType>> = {
+  "landlord-representation": "Landlord Representation",
+  "tenant-representation": "Tenant Representation",
+  "investment-sales": "Investment Sales",
+};
+
 const Contact = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const propertySlug = searchParams.get("property") ?? "";
+  const selectedProperty = propertySlug ? propertyBySlug[propertySlug] : undefined;
+  const requestedInquiry = searchParams.get("inquiry");
+  const defaultInquiryType: InquiryType = propertySlug
+    ? "Property Inquiry"
+    : inquiryByQuery[requestedInquiry ?? ""] ?? "General Inquiry";
   useSiteCursor();
 
   const form = useForm<ContactFormValues>({
@@ -52,7 +65,7 @@ const Contact = () => {
       email: "",
       phone: "",
       company: "",
-      inquiryType: propertySlug ? "Property Inquiry" : "General Inquiry",
+      inquiryType: defaultInquiryType,
       message: "",
       propertySlug,
       website: "",
@@ -110,8 +123,14 @@ const Contact = () => {
                 <>
                   <div className="contact-form-head">
                     <div className="contact-form-eyebrow">Advisor Inquiry</div>
-                    <h2 id="contact-form-title" className="contact-form-title">{contactFormConfig.title}</h2>
-                    <p className="contact-form-body">{contactFormConfig.description}</p>
+                    <h2 id="contact-form-title" className="contact-form-title">
+                      {selectedProperty ? `Ask about ${selectedProperty.name}` : contactFormConfig.title}
+                    </h2>
+                    <p className="contact-form-body">
+                      {selectedProperty
+                        ? `Tell us what you would like to evaluate at ${selectedProperty.address}, ${selectedProperty.city}, ${selectedProperty.state}. The property will be included with your inquiry.`
+                        : contactFormConfig.description}
+                    </p>
                   </div>
 
                   <Form {...form}>

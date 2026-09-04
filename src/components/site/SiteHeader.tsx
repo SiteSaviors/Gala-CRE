@@ -14,8 +14,8 @@ const serviceNavigation = [
     name: "GalaBroker",
     href: "/services/brokerage",
     capabilities: [
-      { label: "Landlord Representation", target: "Landlord representation" },
-      { label: "Tenant Representation", target: "Tenant representation" },
+      { label: "Landlord Representation", target: "Landlord representation", route: "landlord-representation" },
+      { label: "Tenant Representation", target: "Tenant representation", route: "tenant-representation" },
     ],
   },
   {
@@ -196,7 +196,10 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
                   <ul>
                     {service.capabilities.map((capability) => (
                       <li key={capability.label}>
-                        <Link to={`${service.href}#${serviceCapabilityId(capability.target)}`} tabIndex={megaLinkTabIndex}>
+                        <Link
+                          to={"route" in capability && capability.route ? `${service.href}/${capability.route}` : `${service.href}#${serviceCapabilityId(capability.target)}`}
+                          tabIndex={megaLinkTabIndex}
+                        >
                           <span>{capability.label}</span><ArrowUpRight size={14} aria-hidden="true" />
                         </Link>
                       </li>

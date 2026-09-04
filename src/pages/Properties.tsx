@@ -39,7 +39,7 @@ const Properties = () => {
     <>
       <PageMeta
         title="Commercial Properties"
-        description="Explore commercial real estate for sale and lease across Raleigh-Durham and the Research Triangle."
+        description="Explore commercial real estate opportunities represented by Gala CRE Group across North Carolina."
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/properties" />
@@ -48,7 +48,7 @@ const Properties = () => {
           <div className="gala-shell">
             <div className="gala-kicker">Properties</div>
             <h1>Find the right commercial opportunity.</h1>
-            <p>Search active listings and explore closed transactions across the Research Triangle.</p>
+            <p>Search current commercial properties represented by Gala CRE Group across North Carolina.</p>
           </div>
         </section>
 
@@ -86,9 +86,9 @@ const Properties = () => {
               <div className="gala-property-grid">{filtered.map((property) => <PropertyCard key={property.slug} property={property} />)}</div>
             ) : (
               <div className="gala-empty-state">
-                <div className="gala-kicker gala-kicker--dark">Property Intake in Progress</div>
-                <h2>{hasFilters ? "No properties match those filters." : "Approved Gala listings are coming soon."}</h2>
-                <p>{hasFilters ? "Reset the filters and explore the full catalog." : "The catalog is ready for the client-supplied PDFs, listing links, facts, and photography."}</p>
+                <div className="gala-kicker gala-kicker--dark">Property Search</div>
+                <h2>{hasFilters ? "No properties match those filters." : "No properties are currently available."}</h2>
+                <p>{hasFilters ? "Reset the filters and explore the full catalog." : "Talk with a Gala CRE advisor about the opportunity you are looking for."}</p>
                 {hasFilters ? <button type="button" className="gala-button" onClick={reset}>Reset Filters</button> : null}
               </div>
             )}

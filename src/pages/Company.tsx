@@ -26,7 +26,7 @@ const Company = () => {
 
         <section className="gala-section gala-section--light"><div className="gala-shell gala-split">
           <div><div className="gala-kicker gala-kicker--dark">Our Purpose</div><h2>Bring institutional perspective within reach.</h2></div>
-          <div><p className="gala-lead">Commercial real estate decisions can become fragmented across brokerage, development, operations, and capital. Gala CRE Group is designed to make that process easier to understand and easier to act on.</p><p className="gala-body-copy">Final company history, credentials, and approved claims will be added from client-supplied copy before launch.</p></div>
+          <div><p className="gala-lead">Commercial real estate decisions can become fragmented across brokerage, development, operations, and capital. Gala CRE Group is designed to make that process easier to understand and easier to act on.</p><p className="gala-body-copy">We bring the right conversations together early, communicate the tradeoffs clearly, and keep each decision connected to the client’s larger objective.</p></div>
         </div></section>
 
         <section className="gala-section gala-section--black"><div className="gala-shell">
@@ -37,11 +37,6 @@ const Company = () => {
         <section className="gala-section gala-section--silver"><div className="gala-shell gala-split">
           <div><MapPin className="gala-large-icon" aria-hidden="true" /><div className="gala-kicker gala-kicker--dark">Research Triangle</div><h2>Rooted in Raleigh-Durham.</h2></div>
           <div><p className="gala-lead">Local context matters. Gala’s commercial platform is focused on helping clients understand opportunity across one of North Carolina’s most dynamic regions.</p></div>
-        </div></section>
-
-        <section className="gala-section gala-section--light" id="team"><div className="gala-shell">
-          <div className="gala-section-head gala-section-head--row"><div><div className="gala-kicker gala-kicker--dark">Commercial Team</div><h2>Meet the people behind the advice.</h2></div><Link to="/contact" className="gala-text-link">Talk to an Advisor <ArrowUpRight size={16} /></Link></div>
-          <div className="gala-empty-state gala-empty-state--compact"><h3>Team profiles are awaiting client approval.</h3><p>Names, titles, bios, headshots, licenses, and direct contact details will be published after Gala supplies the approved commercial roster.</p></div>
         </div></section>
 
         <section className="gala-cta-band"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link></div></section>
