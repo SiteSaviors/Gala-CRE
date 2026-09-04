@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -44,10 +44,6 @@ const Contact = () => {
   const location = useLocation();
   const propertySlug = searchParams.get("property") ?? "";
   useSiteCursor();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),

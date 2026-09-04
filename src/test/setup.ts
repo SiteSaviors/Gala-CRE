@@ -19,6 +19,11 @@ Object.defineProperty(window, "scrollTo", {
   value: () => {},
 });
 
+Object.defineProperty(Element.prototype, "scrollIntoView", {
+  writable: true,
+  value: () => {},
+});
+
 Object.defineProperty(HTMLMediaElement.prototype, "pause", {
   writable: true,
   value: () => {},
