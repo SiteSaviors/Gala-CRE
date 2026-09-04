@@ -52,7 +52,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "GalaSales" })).toBeInTheDocument();
     expect(screen.getByText("Commercial property acquisitions, dispositions, and marketing.")).toBeInTheDocument();
     expect(within(screen.getByRole("navigation", { name: "GalaSales capabilities" })).getByRole("link", { name: "Industrial" }))
-      .toHaveAttribute("href", "/services/investment-sales#industrial");
+      .toHaveAttribute("href", "/services/investment-sales/industrial");
     expect(within(screen.getByRole("navigation", { name: "GalaBroker capabilities" })).getByRole("link", { name: "Landlord Representation" }))
       .toHaveAttribute("href", "/services/brokerage/landlord-representation");
     expect(within(screen.getByRole("navigation", { name: "GalaBroker capabilities" })).getByRole("link", { name: "Tenant Representation" }))

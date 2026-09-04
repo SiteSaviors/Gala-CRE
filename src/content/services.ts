@@ -106,23 +106,53 @@ export const services: Service[] = [
     capabilities: [
       {
         label: "Industrial",
-        detail: "Warehouse, distribution, and flex-industrial dispositions and acquisitions across the Triangle's logistics corridors.",
+        route: "industrial",
+        lead: "Industrial transactions depend on functional real estate, credible operating assumptions, and a buyer story grounded in how the asset actually performs.",
+        included: [
+          "Warehouse, distribution, and flex-industrial positioning",
+          "Occupancy, access, loading, and physical-asset review",
+          "Buyer outreach and transaction coordination",
+        ],
       },
       {
         label: "Multifamily",
-        detail: "Apartment and multifamily investment sales, from garden-style communities to mixed-use residential assets.",
+        route: "multifamily",
+        lead: "Multifamily sale strategy connects operating performance, location, physical condition, and the buyer's view of durable income and execution risk.",
+        included: [
+          "Operating and rent-roll positioning",
+          "Comparable-sales and buyer-demand context",
+          "Marketing, diligence, and closing coordination",
+        ],
       },
       {
         label: "Retail",
-        detail: "Single-tenant, shopping center, and mixed-use retail dispositions and acquisitions for owners and private investors.",
+        route: "retail",
+        lead: "Retail value is shaped by tenancy, trade area, access, visibility, lease structure, and the property's ability to support its current or next use.",
+        included: [
+          "Single-tenant, shopping-center, and mixed-use retail",
+          "Lease, tenancy, access, and site-position review",
+          "Buyer targeting and transaction execution",
+        ],
       },
       {
         label: "Office",
-        detail: "Office building sales and acquisitions across single-tenant, multi-tenant, and medical office assets.",
+        route: "office",
+        lead: "Office transactions require a clear view of tenancy, rollover, space quality, location, and the capital needed to compete for users and buyers.",
+        included: [
+          "Single-tenant, multi-tenant, and medical-office assets",
+          "Lease rollover, occupancy, and capital-needs context",
+          "Positioning, buyer outreach, and diligence coordination",
+        ],
       },
       {
         label: "Land",
-        detail: "Raw and entitled land dispositions and acquisitions for development, investment, and owner-user opportunities.",
+        route: "land",
+        lead: "Land is evaluated through the lens of use, entitlement, access, utilities, timing, and the buyer pool capable of carrying the site through execution.",
+        included: [
+          "Raw, entitled, and owner-user land opportunities",
+          "Use, entitlement, access, and utility positioning",
+          "Developer and investor outreach with diligence coordination",
+        ],
       },
     ],
     capabilitiesHeadline: "Positioned, priced, and marketed for real buyer demand.",
@@ -139,20 +169,44 @@ export const services: Service[] = [
       "Gala coordinates early-stage strategy and the specialist relationships required to move commercial opportunities from initial evaluation toward execution readiness.",
     capabilities: [
       {
-        label: "Feasibility and site strategy",
-        detail: "Early-stage evaluation of a site's development potential, including use, density, and market fit.",
+        label: "Site Strategy",
+        route: "site-strategy",
+        lead: "A development decision starts with whether the site, intended use, market, access, infrastructure, and approval path can support the client's objective.",
+        included: [
+          "Early use, density, access, and market-fit evaluation",
+          "Key constraint and stakeholder identification",
+          "A coordinated next-step and diligence roadmap",
+        ],
       },
       {
         label: "Entitlements",
-        detail: "Coordination through zoning, permitting, and approval processes required to move a site toward development readiness.",
+        route: "entitlements",
+        lead: "Entitlement work aligns the intended program with the jurisdictional process, technical team, public requirements, and decisions needed to advance a site.",
+        included: [
+          "Zoning and approval-path coordination",
+          "Consultant, municipality, and stakeholder alignment",
+          "Milestone tracking and decision support",
+        ],
       },
       {
-        label: "Infrastructure coordination",
-        detail: "Alignment of utility, access, and site infrastructure requirements with civil engineers and municipal stakeholders.",
+        label: "Infrastructure",
+        route: "infrastructure",
+        lead: "Access, utilities, stormwater, and off-site requirements can determine whether a commercial plan is feasible, financeable, and ready to execute.",
+        included: [
+          "Utility, access, and site-infrastructure coordination",
+          "Civil, municipal, and provider alignment",
+          "Dependency, timing, and responsibility tracking",
+        ],
       },
       {
-        label: "Project oversight",
-        detail: "Ongoing coordination across the development team to keep a project on schedule and aligned with its original strategy.",
+        label: "Development Oversight",
+        route: "development-oversight",
+        lead: "Development oversight keeps ownership decisions, consultants, approvals, schedule, and transaction priorities connected as the project advances.",
+        included: [
+          "Cross-team milestone and decision coordination",
+          "Schedule, risk, and open-item visibility",
+          "Ownership reporting through key development stages",
+        ],
       },
     ],
     capabilitiesHeadline: "From feasibility to execution, without the guesswork.",
@@ -169,20 +223,44 @@ export const services: Service[] = [
       "We help clients organize their capital needs, evaluate alternatives, and connect with relevant debt and equity relationships for commercial real estate transactions.",
     capabilities: [
       {
-        label: "Debt placement support",
-        detail: "Coordination with lending relationships to help structure financing aligned with a project's timeline and risk profile.",
+        label: "Debt",
+        route: "debt",
+        lead: "Debt strategy begins with the asset, sponsorship, business plan, timing, and repayment profile—not a one-size-fits-all lender list.",
+        included: [
+          "Financing requirement and lender-fit organization",
+          "Debt-source outreach and term comparison support",
+          "Coordination from lender engagement through closing",
+        ],
       },
       {
-        label: "Equity introductions",
-        detail: "Connections to equity sources for clients seeking partners or additional capital for a commercial opportunity.",
+        label: "Equity",
+        route: "equity",
+        lead: "Equity conversations require a clear investment case, aligned expectations, and relevant relationships for the opportunity's scale and risk profile.",
+        included: [
+          "Investment-case and capital-need organization",
+          "Relevant equity relationship introductions",
+          "Process coordination around fit, structure, and timing",
+        ],
       },
       {
-        label: "Capital strategy",
-        detail: "Guidance on how to sequence and structure debt and equity across a transaction's lifecycle.",
+        label: "Capital Strategy",
+        route: "capital-strategy",
+        lead: "Capital strategy connects debt, equity, timing, risk, and ownership objectives before individual terms are evaluated in isolation.",
+        included: [
+          "Capital-stack and sequencing guidance",
+          "Debt and equity alternative comparison",
+          "Funding-milestone and execution planning",
+        ],
       },
       {
-        label: "Transaction coordination",
-        detail: "Coordination between capital sources, ownership, and other transaction parties from term sheet through closing.",
+        label: "Transaction Coordination",
+        route: "transaction-coordination",
+        lead: "Capital execution depends on organized information, accountable milestones, and communication across ownership, capital sources, advisors, and closing parties.",
+        included: [
+          "Term-sheet and diligence milestone coordination",
+          "Information-flow and open-item management",
+          "Closing-path communication across transaction parties",
+        ],
       },
     ],
     capabilitiesHeadline: "Capital structured around the realities of your deal.",
@@ -198,8 +276,16 @@ export const services: Service[] = [
     description:
       "Gala CRE Group connects commercial property owners with coordinated, partner-led management support designed to protect the continuity between a transaction and day-to-day operations.",
     capabilities: [
-      { label: "Property management partner coordination", detail: "A connected handoff to operational support aligned with the property and ownership plan." },
-      { label: "Ownership continuity", detail: "Communication that keeps brokerage decisions, property priorities, and ongoing operations connected." },
+      {
+        label: "Property Management Partnership",
+        route: "property-management-partnership",
+        lead: "Gala coordinates a partner-led path to day-to-day property operations while keeping the ownership plan and brokerage context connected.",
+        included: [
+          "Property and ownership-priority handoff",
+          "Partner introduction and scope coordination",
+          "Continuity between transactions and ongoing operations",
+        ],
+      },
     ],
     capabilitiesHeadline: "A coordinated path from transaction to operations.",
     audience: "Commercial property owners",
@@ -222,5 +308,25 @@ export const findCapabilityByRoute = (slug: string, route: string) => {
   const capability = service?.capabilities.find((item) => item.route === route);
   return service && capability ? { service, capability } : undefined;
 };
+
+export type AdvertisedCapabilityRoute = {
+  label: string;
+  serviceName: string;
+  serviceSlug: ServiceSlug;
+  capabilityRoute: string;
+  path: string;
+};
+
+export const advertisedCapabilityRoutes: AdvertisedCapabilityRoute[] = services.flatMap((service) =>
+  service.capabilities
+    .filter((capability): capability is Capability & { route: string } => Boolean(capability.route))
+    .map((capability) => ({
+      label: capability.label,
+      serviceName: service.name,
+      serviceSlug: service.slug,
+      capabilityRoute: capability.route,
+      path: `/services/${service.slug}/${capability.route}`,
+    })),
+);
 
 export const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;

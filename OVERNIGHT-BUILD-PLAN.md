@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 06:28 CDT
+Last updated: 2026-09-04 07:03 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -109,22 +109,22 @@ Next action: Phase gate passed for the three verified active offerings. Continue
 
 ## Phase 3 — Capability route architecture
 
-Status: **Pending**
+Status: **In progress**
 
 Objective: Give every advertised capability a deliberate, test-covered destination.
 
 - [ ] Create a route matrix covering all desktop-menu, mobile-menu, footer, service-index, and related-capability links.
-- [ ] Cover Landlord Representation and Tenant Representation.
-- [ ] Cover Industrial, Multifamily, Retail, Office, and Land investment sales.
-- [ ] Cover Site Strategy, Entitlements, Infrastructure, and Development Oversight.
-- [ ] Cover Debt, Equity, Capital Strategy, and Transaction Coordination.
-- [ ] Cover Property Management Partnership.
-- [ ] Remove dead ends, hash-only substitutes, and placeholder-only public routes.
-- [ ] Add automated route coverage for every advertised capability.
+- [x] Cover Landlord Representation and Tenant Representation.
+- [x] Cover Industrial, Multifamily, Retail, Office, and Land investment sales.
+- [x] Cover Site Strategy, Entitlements, Infrastructure, and Development Oversight.
+- [x] Cover Debt, Equity, Capital Strategy, and Transaction Coordination.
+- [x] Cover Property Management Partnership.
+- [x] Remove dead ends, hash-only substitutes, and placeholder-only public routes.
+- [x] Add automated route coverage for every advertised capability.
 
 Gate: Every advertised capability resolves to a valid route and no navigation surface promotes a dead end.
 
-Next action: Generate the route matrix from existing service and navigation data after active listings are stable.
+Next action: Use the new `advertisedCapabilityRoutes` matrix as the shared source for desktop mega-menu, mobile navigation, footer, service-index, homepage, and related-capability links; include Property Management Partnership wherever the navigation pattern calls for the fifth service; then add surface-consistency tests before closing the Phase 3 gate.
 
 ## Phase 4 — GalaBroker and GalaSales pages
 
@@ -390,3 +390,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road remains blocked by the authoritative facts and asset package already listed above.
 - Exact next action: Generate a single advertised-capability route matrix from the desktop menu, mobile menu, footer, service index, and related-capability data; add automated coverage that asserts every promoted path resolves to substantive page content rather than a dead end or placeholder.
+
+### Pulse — 2026-09-04 07:03 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `6eaef65` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; `PROPERTY-DATA-REGISTER.md`; application routes; service, header, homepage, footer, capability-page, and service-detail data; current tests; and representative live capability routes.
+- Phase / checkpoint: Phase 3 — define the authoritative capability route matrix and eliminate promoted hash-only destinations.
+- Gate: All 16 user-specified commercial capabilities have unique dedicated paths; each path resolves through current route lookup to meaningful lead and deliverable content or an approved editorial page; existing homepage and desktop mega-menu capability links target the dedicated routes; automated coverage fails on missing, duplicate, hash-only, or placeholder content.
+- Completed: Added dedicated slugs, audience-specific leads, and at least three concrete inclusions for Industrial, Multifamily, Retail, Office, Land, Site Strategy, Entitlements, Infrastructure, Development Oversight, Debt, Equity, Capital Strategy, Transaction Coordination, and Property Management Partnership. Exported one generated `advertisedCapabilityRoutes` matrix alongside the canonical service data. Updated homepage and desktop mega-menu capability destinations from in-page hashes to dedicated routes. Added route uniqueness, content-depth, and render coverage for all 16 paths.
+- Files and routes changed: `src/content/services.ts`, `src/components/site/SiteHeader.tsx`, `src/pages/Index.tsx`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger. Added or activated routes under `/services/investment-sales/*`, `/services/development-services/*`, `/services/capital-markets/*`, and `/services/property-management/property-management-partnership` while preserving the two existing brokerage routes.
+- Verification: 17/17 targeted tests passed; 35/35 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; representative Industrial route passed desktop and 390px mobile browser checks with three deliverables, related-route navigation, no horizontal overflow, and no page-specific console errors; `git diff --check` passed.
+- Commit: Intended message `feat: define commercial capability route matrix`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: No route-definition blocker. Most new routes intentionally use the concise shared capability shell and service-level imagery until Phases 4 and 5 provide distinct editorial journeys and purposeful media.
+- Exact next action: Refactor the desktop mega-menu, mobile service navigation, footer service links, service index, homepage capability cards, and related-capability navigation to consume the canonical route matrix instead of maintaining duplicate labels and paths; include Property Management Partnership in the appropriate navigation surfaces and add consistency tests for every rendered capability link.
