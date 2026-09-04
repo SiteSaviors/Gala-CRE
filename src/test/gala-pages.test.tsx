@@ -318,4 +318,35 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
   });
+
+  it("renders Yadkin Road as a plan-led development diligence journey", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/5047-yadkin-road"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The offering says the major site-planning elements are addressed." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Permit-ready language still requires document-level review." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Underwrite from the approved record—not the marketing summary." })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: /5047 Yadkin Road property gallery/i })).getAllByRole("img")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "Request Approved Plan" })).toHaveAttribute(
+      "href",
+      "/contact?property=5047-yadkin-road&topic=approved-site-plan"
+    );
+    expect(screen.getByRole("link", { name: "Request Diligence" })).toHaveAttribute(
+      "href",
+      "/contact?property=5047-yadkin-road&topic=development-diligence"
+    );
+    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=5047-yadkin-road"
+    );
+    expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
+    expect(screen.getByTitle("Map of 5047 Yadkin Road")).toBeInTheDocument();
+    expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
+  });
 });

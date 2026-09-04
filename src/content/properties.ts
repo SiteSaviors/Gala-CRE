@@ -408,6 +408,131 @@ export const properties: Property[] = [
       phone: "910-578-2828",
       license: "NC 283149",
     },
+    listingPage: {
+      headline: "A 3.46-acre Fayetteville commercial site marketed with an approved shopping-center plan.",
+      lead:
+        "A Yadkin Road land offering whose public marketing represents the site-planning work as advanced, with access, circulation, parking, buffers, and utility connections addressed in the plan. The actual plan and municipal approval record should control buyer evaluation.",
+      overviewEyebrow: "Commercial Land Opportunity",
+      keyFacts: [
+        { label: "Asking price", value: "$829,000" },
+        { label: "Site area", value: "3.46 acres" },
+        { label: "Property type", value: "Commercial land" },
+        { label: "Planning status", value: "Approval represented" },
+      ],
+      highlights: [
+        "Shopping-center site plan represented as fully approved",
+        "Ingress, egress, parking, circulation, and buffers addressed in the represented plan",
+        "Utility availability and approved connections stated by the public offering",
+        "Permit-ready position stated by the offering; buyer to verify the approval record",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Development Readiness",
+          title: "Evaluate the planning work before pricing the execution risk.",
+          body:
+            "The opportunity is the represented shopping-center approval—not simply the acreage. Buyers should compare the actual approved plan and conditions with their intended program, schedule, and capital plan.",
+        },
+        groups: [
+          {
+            eyebrow: "Represented Site Plan",
+            title: "The offering says the major site-planning elements are addressed.",
+            body:
+              "Public marketing represents a fully approved shopping-center plan that addresses building placement, ingress and egress, traffic flow, parking, circulation, buffers, and utility connections. Those elements should be confirmed directly against the signed plan set and approval record.",
+            facts: [
+              { label: "Planned use", value: "Shopping center per public offering" },
+              { label: "Site planning", value: "Building placement and circulation represented" },
+              { label: "Access", value: "Ingress and egress represented in plan" },
+              { label: "Parking / buffers", value: "Represented as incorporated" },
+            ],
+          },
+          {
+            eyebrow: "Execution Diligence",
+            title: "Permit-ready language still requires document-level review.",
+            body:
+              "The public offering describes the property as permit-ready and states that applicable standards have been satisfied. Before relying on that position, buyers should confirm the approving jurisdiction, case or permit number, approval date, conditions, expiration, remaining permits, zoning, utilities, access, and site constraints.",
+            facts: [
+              { label: "Approval record", value: "Request the signed municipal record" },
+              { label: "Permit status", value: "Permit-ready position stated by offering" },
+              { label: "Zoning", value: "Request current jurisdiction confirmation" },
+              { label: "Utilities", value: "Availability and connections require evidence" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Buyer Verification",
+        title: "What is offered—and what must be confirmed before closing.",
+        conditions: [
+          { label: "Published offering", value: "3.46-acre commercial land opportunity at $829,000" },
+          { label: "Plan status", value: "Shopping-center approval is represented; request the approved plan and record" },
+          { label: "Remaining approvals", value: "Confirm permits, conditions, expiration, and any required plan revisions" },
+          { label: "Site fundamentals", value: "Verify parcel, zoning, frontage, access, utilities, wetlands, and flood conditions" },
+          { label: "Intended program", value: "Buyer should confirm the approved plan supports its use, scale, and schedule" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Site Context",
+          title: "An annotated aerial for orientation—not a substitute for the plan.",
+          body:
+            "The current public aerial provides a useful first look at the marketed site and surrounding roads. It is not a survey or the represented approved shopping-center plan; request those documents for dimension, boundary, access, and layout review.",
+        },
+        items: [
+          {
+            src: yadkinRoadImage,
+            alt: "Annotated aerial of the 5047 Yadkin Road commercial land offering in Fayetteville",
+            caption: "Public offering aerial and site context",
+          },
+        ],
+      },
+      location: {
+        eyebrow: "Location & Access",
+        title: "A Fayetteville commercial site on Yadkin Road.",
+        body:
+          "The property is marketed for its Yadkin Road position and visibility. Buyers should verify legal access, frontage, traffic conditions, planned ingress and egress, and measured distances to surrounding demand drivers before underwriting the location.",
+        points: [
+          "5047 Yadkin Road, Fayetteville, North Carolina",
+          "Cumberland County",
+          "Commercial corridor positioning",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=5047%20Yadkin%20Road%2C%20Fayetteville%2C%20NC%2028303&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=5047%20Yadkin%20Road%2C%20Fayetteville%2C%20NC%2028303",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Documents & Diligence",
+          title: "Underwrite from the approved record—not the marketing summary.",
+          body:
+            "Review the public offering, then request the plan, approval record, and site materials needed to confirm what can be built and what remains before construction.",
+        },
+        items: [
+          {
+            title: "Public listing",
+            description: "Review the current Crexi offering and the public description of the shopping-center plan.",
+            actionLabel: "Open Crexi Listing",
+            href: "https://www.crexi.com/properties/2033921/north-carolina-prime-location---land-with-opportunity-for-shopping-center",
+            external: true,
+          },
+          {
+            title: "Approved site plan and record",
+            description: "Request the represented plan, municipal approval, conditions, and available permit information.",
+            actionLabel: "Request Approved Plan",
+            href: "/contact?property=5047-yadkin-road&topic=approved-site-plan",
+          },
+          {
+            title: "Development diligence package",
+            description: "Request available parcel, zoning, access, utility, survey, and site-constraint materials.",
+            actionLabel: "Request Diligence",
+            href: "/contact?property=5047-yadkin-road&topic=development-diligence",
+          },
+        ],
+      },
+      advisorEyebrow: "Listing Advisor",
+      disclosure:
+        "All information is deemed reliable but is not guaranteed. Statements regarding site-plan approval, permit readiness, access, circulation, buffers, and utility connections are based on the public offering and require review of the underlying records. Buyers should independently verify the parcel, boundaries, zoning, approvals, conditions, access, utilities, environmental constraints, and all development requirements.",
+    },
     featured: true,
     sortOrder: 2,
   },

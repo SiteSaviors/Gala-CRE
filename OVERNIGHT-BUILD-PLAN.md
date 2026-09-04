@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 05:54 CDT
+Last updated: 2026-09-04 06:28 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -92,20 +92,20 @@ Next action: Phase gate passed. Continue with the first Phase 2 action below.
 
 ## Phase 2 — Complete verified active listings
 
-Status: **In progress**
+Status: **Completed**
 
 Objective: Finish each verified active listing with a journey appropriate to its actual asset and buyer.
 
 - [x] Rebuild 611 & 703 Church Street through the shared listing system.
 - [x] Make childcare approval and the two-site offering the central Church Street differentiators, subject to source verification.
-- [ ] Rebuild 5047 Yadkin Road through the shared system.
-- [ ] Make represented shopping-center approval, site planning, access, and development diligence central to Yadkin.
-- [ ] Add Family Farm Road only when authoritative facts and media can be verified.
-- [ ] Confirm each page's property-specific inquiry preselection, documents, map, gallery, advisor, and disclosure.
+- [x] Rebuild 5047 Yadkin Road through the shared system.
+- [x] Make represented shopping-center approval, site planning, access, and development diligence central to Yadkin.
+- [x] Evaluate Family Farm Road for inclusion; defer it because authoritative facts, listing link, flyer, and approved photography have not been supplied.
+- [x] Confirm each currently verified page's property-specific inquiry preselection, documents, map, gallery, advisor, and disclosure.
 
 Gate: A prospect can understand each verified active offering, material conditions, available diligence, advisor, and next action within two minutes.
 
-Next action: Build 5047 Yadkin Road's structured `listingPage` data through the shared system, keeping the represented shopping-center approval, site planning, access, and development diligence central while clearly identifying the approved plan and municipal approval record as request items.
+Next action: Phase gate passed for the three verified active offerings. Continue with Phase 3 by generating one authoritative advertised-capability route matrix from the current navigation and service data, then add automated coverage that fails on any missing or placeholder-only destination.
 
 ## Phase 3 — Capability route architecture
 
@@ -376,3 +376,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: The second legal address (703 versus 711), parcel IDs, surveyed combined acreage (1.09 versus 1.000 public figures), combined-sale requirement, approval record, site plan, zoning confirmation, and approval conditions remain client/document inputs. The page identifies these as diligence items without exposing internal draft notices.
 - Exact next action: Build 5047 Yadkin Road's structured `listingPage` data through the shared system, using the verified price/site facts and treating the represented approved shopping-center plan, permit readiness, access, circulation, buffers, and utility connections as document-backed claims that buyers must verify.
+
+### Pulse — 2026-09-04 06:28 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at `8ffc52c` with a clean working tree.
+- Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; Yadkin's entry in `PROPERTY-DATA-REGISTER.md`; the current listing schema and renderer; the only approved Yadkin aerial asset; existing property tests; and the live local Yadkin route.
+- Phase / checkpoint: Phase 2 — rebuild 5047 Yadkin Road and close the verified-active-listing gate.
+- Gate: Yadkin renders through the shared listing system; a prospect can identify the price, acreage, represented shopping-center plan, site-planning scope, material approval and development checks, aerial context, document path, location, advisor, and property-specific inquiry within two minutes; unsupported approval details are not presented as verified; desktop and mobile layouts have no horizontal overflow.
+- Completed: Added Yadkin's structured identity, economics, planning position, execution-diligence path, transaction conditions, single purposeful annotated-aerial module, qualified location context, plan and development-document requests, named advisor, inquiry routing, and disclosure. Clearly attributed plan approval, permit readiness, access, circulation, buffers, and utility claims to the public offering and directed buyers to the underlying records. Confirmed Family Farm Road cannot be published safely without authoritative property facts and approved media, so Phase 2 closes on the three verified active offerings.
+- Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, `src/test/properties-model.test.ts`, and this ledger; rebuilt `/properties/5047-yadkin-road`.
+- Verification: 18/18 targeted tests passed; 32/32 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop and 390px mobile browser checks passed with one annotated-aerial gallery item, three document paths, map/advisor/inquiry surfaces, no horizontal overflow, and no page-specific console errors; `git diff --check` passed.
+- Commit: Intended message `feat: rebuild Yadkin Road listing journey`; record the resulting hash immediately after commit.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road remains blocked by the authoritative facts and asset package already listed above.
+- Exact next action: Generate a single advertised-capability route matrix from the desktop menu, mobile menu, footer, service index, and related-capability data; add automated coverage that asserts every promoted path resolves to substantive page content rather than a dead end or placeholder.
