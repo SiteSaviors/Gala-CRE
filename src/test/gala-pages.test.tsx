@@ -262,6 +262,32 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
+  it("renders a distinct editorial journey for Retail Investment Sales", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/investment-sales/retail"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Retail Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /contemporary neighborhood retail center/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Retail value lives where the lease meets the site." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Market the asset to the capital that can value its real story." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Read the leases before the market writes the conclusion." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Retail-specific preparation from lease file to closing file." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss a Retail Asset/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=investment-sales&focus=retail"
+    );
+    expect(screen.getByRole("link", { name: /Landlord Representation/i })).toHaveAttribute(
+      "href",
+      "/services/brokerage/landlord-representation"
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
     expect(screen.getByText("3 properties")).toBeInTheDocument();

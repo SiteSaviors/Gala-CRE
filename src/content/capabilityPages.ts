@@ -3,6 +3,7 @@ import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
+import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
 
 export type CapabilityPageIcon =
   | "positioning"
@@ -1020,11 +1021,234 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
   },
 };
 
+const retailInvestmentSalesPage: CapabilityPageContent = {
+  path: "/services/investment-sales/retail",
+  metadata: {
+    title: "Retail Investment Sales",
+    description:
+      "Retail property sale advisory for owners and investors, connecting tenancy, lease structure, trade-area context, access, site utility, buyer positioning, and diligence.",
+    image: retailInvestmentSales,
+  },
+  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  hero: {
+    eyebrow: "GalaSales · Retail",
+    title: "Retail Investment Sales",
+    lead:
+      "Position the income and the real estate together with a sale process built around tenancy, lease structure, customer access, site utility, and buyer fit.",
+    media: {
+      src: retailInvestmentSales,
+      alt: "Contemporary neighborhood retail center with storefronts, parking, and landscaped access",
+      position: "center 55%",
+    },
+    actions: [
+      {
+        label: "Discuss a Retail Asset",
+        href: "/contact?inquiry=investment-sales&focus=retail",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+      {
+        label: "See the Sale Process",
+        href: "#retail-sale-process",
+        variant: "secondary",
+        icon: "arrow-down",
+      },
+    ],
+    signalLabel: "Retail sale advisory stages",
+    signals: ["Read", "Position", "Reach", "Execute"],
+  },
+  sections: [
+    {
+      type: "challenge",
+      watermark: "RELEVANCE",
+      eyebrow: "The Retail Value Story",
+      headline: "Retail value lives where the lease meets the site.",
+      body: [
+        "The tenant and lease can establish income, but the real estate determines how durable and transferable that income may be. Trade-area demand, access, visibility, parking, circulation, co-tenancy, use restrictions, and the building's ability to support another operator all influence buyer conviction.",
+        "A credible offering shows how those pieces relate. It presents in-place economics clearly, identifies lease and site questions before they disrupt the process, and reaches the investors, operators, or developers whose strategy fits the property's current income and future utility.",
+      ],
+      emphasis:
+        "The strongest retail positioning explains both why the tenant belongs there and why the real estate remains useful.",
+      pressures: [
+        {
+          number: "01",
+          title: "Tenancy",
+          body: "Credit, sales context when available, lease term, options, guarantees, and rollover shape the income profile.",
+        },
+        {
+          number: "02",
+          title: "Site",
+          body: "Access, visibility, parking, circulation, signage rights, and physical configuration determine operating utility.",
+        },
+        {
+          number: "03",
+          title: "Durability",
+          body: "Trade area, competition, restrictions, co-tenancy, capital needs, and alternative-use potential affect long-term risk.",
+        },
+      ],
+    },
+    {
+      type: "strategy",
+      eyebrow: "Buyer Segmentation",
+      headline: "Market the asset to the capital that can value its real story.",
+      introduction:
+        "A net-leased property, multi-tenant center, vacant owner-user building, and redevelopment site do not share one buyer pool. Gala frames outreach around the property's verified tenancy, economics, physical utility, and execution requirements.",
+      media: {
+        src: retailInvestmentSales,
+        alt: "Wide view across a retail center showing storefront frontage and parking circulation",
+        position: "center 58%",
+      },
+      tracks: [
+        {
+          number: "01",
+          label: "Income Buyers",
+          title: "Make the lease economics comparable.",
+          body: "For occupied retail, buyers need a coherent view of the tenant, rent, reimbursements, options, responsibilities, and the events that could change future income.",
+          points: [
+            "Lease term, rent, options, and escalations",
+            "Expense reimbursements and ownership obligations",
+            "Tenant-credit and guarantee documentation",
+            "Co-tenancy, exclusives, and use restrictions",
+          ],
+        },
+        {
+          number: "02",
+          label: "Operators + Repositioning",
+          title: "Show what the real estate can support.",
+          body: "When value depends on releasing, owner occupancy, pad utility, or redevelopment, site function and approval questions become central to the decision.",
+          points: [
+            "Access, visibility, parking, and circulation",
+            "Building or suite adaptability",
+            "Zoning, restrictions, and approval questions",
+            "Delivery condition and capital requirements",
+          ],
+        },
+      ],
+    },
+    {
+      type: "process",
+      id: "retail-sale-process",
+      eyebrow: "The Retail Sale Process",
+      headline: "Read the leases before the market writes the conclusion.",
+      introduction:
+        "The process begins with the seller's objective and the documents that govern income and site use, then connects those findings to pricing context, the likely buyer pool, and an organized transaction path.",
+      steps: [
+        {
+          number: "01",
+          title: "Read",
+          body: "Organize leases, amendments, options, reimbursements, restrictions, operating history, site information, and known physical or environmental items.",
+        },
+        {
+          number: "02",
+          title: "Position",
+          body: "Frame the asset's economics, trade-area role, site utility, likely buyer groups, valuation context, and material diligence questions.",
+        },
+        {
+          number: "03",
+          title: "Reach",
+          body: "Launch coordinated materials and targeted outreach, qualify interest, manage property access, and compare offers beyond headline price.",
+        },
+        {
+          number: "04",
+          title: "Execute",
+          body: "Coordinate lease, title, survey, estoppel, physical, environmental, financing, and closing milestones with ownership's appropriate advisors.",
+        },
+      ],
+    },
+    {
+      type: "deliverables",
+      eyebrow: "Services + Deliverables",
+      headline: "Retail-specific preparation from lease file to closing file.",
+      introduction:
+        "The assignment keeps property positioning, buyer engagement, and diligence communication connected while legal, tax, engineering, environmental, and tenant-credit conclusions remain with qualified specialists.",
+      items: [
+        {
+          icon: "economics",
+          title: "Lease + Income Review",
+          body: "An organized view of term, rent, escalations, options, reimbursements, guarantees, rights, and open document questions.",
+        },
+        {
+          icon: "positioning",
+          title: "Trade Area + Site Positioning",
+          body: "Relevant customer, competition, access, visibility, parking, circulation, and physical-utility context tailored to the property.",
+        },
+        {
+          icon: "marketing",
+          title: "Offering Materials",
+          body: "A coordinated narrative, fact set, imagery, lease summary, and diligence pathway that separates verified facts from buyer assumptions.",
+        },
+        {
+          icon: "prospects",
+          title: "Buyer Targeting",
+          body: "Outreach shaped for net-lease investors, private capital, operators, owner-users, or developers as the property's profile requires.",
+        },
+        {
+          icon: "tours",
+          title: "Access + Offer Management",
+          body: "Property access, tenant-sensitive communication, feedback, and offer comparison managed around operating continuity.",
+        },
+        {
+          icon: "execution",
+          title: "Diligence + Closing Coordination",
+          body: "A clear path for leases, estoppels, title, survey, physical records, environmental information, financing, and closing milestones.",
+        },
+      ],
+    },
+  ],
+  relatedCapabilities: {
+    eyebrow: "Connected Gala Capabilities",
+    headline: "Retail strategy can extend beyond a single disposition.",
+    introduction:
+      "Gala can connect the sale conversation to leasing, land, development, and capital decisions when they materially affect the property's timing or buyer story.",
+    links: [
+      {
+        label: "GalaBroker",
+        title: "Landlord Representation",
+        body: "Owner-focused positioning, prospecting, tenant qualification, and lease execution when occupancy is part of the value plan.",
+        href: "/services/brokerage/landlord-representation",
+      },
+      {
+        label: "GalaSales",
+        title: "Land",
+        body: "Sale strategy for commercial sites where access, utilities, approvals, and timing determine buyer fit.",
+        href: "/services/investment-sales/land",
+      },
+      {
+        label: "GalaDevelop",
+        title: "Site Strategy",
+        body: "Early coordination around intended use, access, infrastructure, market fit, and the approval path.",
+        href: "/services/development-services/site-strategy",
+      },
+      {
+        label: "GalaCapital",
+        title: "Capital Strategy",
+        body: "Debt and equity planning aligned with the asset, sponsorship, timing, and transaction strategy.",
+        href: "/services/capital-markets/capital-strategy",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Start With the Lease + Site",
+    headline: "Let’s identify what makes the retail asset durable.",
+    body:
+      "Share the property, tenancy, lease position, ownership objective, and timing. Gala will begin with the income and real-estate questions buyers are likely to test first.",
+    actions: [
+      {
+        label: "Discuss a Retail Asset",
+        href: "/contact?inquiry=investment-sales&focus=retail",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
+  },
+};
+
 export const capabilityPages: CapabilityPageContent[] = [
   landlordRepresentation,
   tenantRepresentation,
   industrialInvestmentSalesPage,
   multifamilyInvestmentSalesPage,
+  retailInvestmentSalesPage,
 ];
 
 export const capabilityPageByPath: Record<string, CapabilityPageContent> = Object.fromEntries(
