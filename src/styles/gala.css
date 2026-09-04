@@ -804,6 +804,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(280px,1.5fr) 
 .gala-commercial-listing__factbar strong{font:600 clamp(18px,1.8vw,26px)/1.2 'Poppins',sans-serif;letter-spacing:-.025em}
 
 .gala-commercial-listing__overview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(370px,.72fr);gap:clamp(65px,9vw,135px);align-items:start}
+.gala-commercial-listing__overview-grid--single{grid-template-columns:minmax(0,860px)}
 .gala-commercial-listing__overview h2{max-width:15ch;font-size:clamp(42px,5.2vw,74px)}
 .gala-commercial-listing__overview .gala-lead{max-width:720px;margin-top:26px;color:#555;font-size:clamp(17px,1.55vw,22px);line-height:1.7}
 .gala-commercial-listing__highlights{border-top:1px solid #c7c6bf}
@@ -848,7 +849,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(280px,1.5fr) 
 .gala-commercial-listing__location-copy ul{width:100%;margin:30px 0 28px;border-top:1px solid rgba(255,255,255,.16);list-style:none}
 .gala-commercial-listing__location-copy li{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.84);font-size:12px;line-height:1.5}
 
-.gala-commercial-listing__documents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid #cfcec7;background:#cfcec7}
+.gala-commercial-listing__documents{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1px;border:1px solid #cfcec7;background:#cfcec7}
 .gala-commercial-listing__documents article{min-height:300px;display:flex;align-items:flex-start;flex-direction:column;padding:34px;background:#fafaf7}
 .gala-commercial-listing__documents article>svg{margin-bottom:46px;color:#956e18;stroke-width:1.5}
 .gala-commercial-listing__documents h3{margin:0 0 14px;font:600 22px/1.15 'Poppins',sans-serif;letter-spacing:-.03em}

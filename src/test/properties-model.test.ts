@@ -44,6 +44,8 @@ describe("property content model", () => {
     expect(propertyBySlug["611-703-church-street"]?.city).toBe("Morrisville");
     expect(properties.every((item) => item.advisor?.name === "Gaurang Gala")).toBe(true);
     expect(properties.every((item) => item.advisor?.license === "NC 283149")).toBe(true);
+    expect(propertyBySlug["2301-lackey-street"]?.listingPage?.gallery?.items).toHaveLength(5);
+    expect(propertyBySlug["2301-lackey-street"]?.listingPage?.information?.groups).toHaveLength(2);
   });
 
   it("orders active records before under-contract and closed records", () => {

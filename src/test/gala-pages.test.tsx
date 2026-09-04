@@ -2,6 +2,8 @@ import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { capabilityPageByPath, capabilityPages } from "@/content/capabilityPages";
+import { propertyBySlug } from "@/content/properties";
+import CommercialListingPage from "@/components/properties/CommercialListingPage";
 import CapabilityDetail from "@/pages/CapabilityDetail";
 import Company from "@/pages/Company";
 import Index from "@/pages/Index";
@@ -258,6 +260,32 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText("Other current opportunities.")).not.toBeInTheDocument();
     expect(screen.queryByText("Explore")).not.toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
+  it("removes unsupported commercial-listing modules without leaving placeholders", () => {
+    const lackey = propertyBySlug["2301-lackey-street"];
+    const minimalProperty = {
+      ...lackey,
+      advisor: undefined,
+      externalLinks: [],
+      listingPage: {
+        headline: "A concise commercial opportunity.",
+        lead: "Only verified property information is shown.",
+      },
+    };
+
+    renderPage(
+      <CommercialListingPage property={minimalProperty} />,
+      "/properties/2301-lackey-street"
+    );
+
+    expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A concise commercial opportunity." })).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Primary property facts" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
+    expect(screen.queryByTitle("Map of 2301 Lackey Street")).not.toBeInTheDocument();
+    expect(screen.queryByText("Listing Advisor")).not.toBeInTheDocument();
+    expect(screen.queryByText("Documents & Diligence")).not.toBeInTheDocument();
   });
 
   it("uses the supplied Church Street photography as a real property gallery", () => {

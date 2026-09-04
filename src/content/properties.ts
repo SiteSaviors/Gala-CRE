@@ -66,24 +66,46 @@ export type PropertyDocument = {
   external?: boolean;
 };
 
+export type PropertySectionIntro = {
+  eyebrow: string;
+  title: string;
+  body?: string;
+};
+
 export type PropertyListingPage = {
   headline: string;
   lead: string;
-  keyFacts: PropertyFact[];
-  highlights: string[];
-  informationGroups: PropertyInformationGroup[];
-  transactionConditions: PropertyFact[];
-  gallery: PropertyListingMedia[];
-  galleryNote?: string;
-  location: {
+  overviewEyebrow?: string;
+  keyFacts?: PropertyFact[];
+  highlights?: string[];
+  information?: {
+    intro: PropertySectionIntro;
+    groups: PropertyInformationGroup[];
+  };
+  transaction?: {
+    eyebrow: string;
+    title: string;
+    conditions: PropertyFact[];
+  };
+  gallery?: {
+    intro: PropertySectionIntro;
+    items: PropertyListingMedia[];
+    note?: string;
+  };
+  location?: {
+    eyebrow: string;
     title: string;
     body: string;
     points: string[];
     mapEmbedUrl: string;
     mapHref: string;
   };
-  documents: PropertyDocument[];
-  disclosure: string;
+  documents?: {
+    intro: PropertySectionIntro;
+    items: PropertyDocument[];
+  };
+  advisorEyebrow?: string;
+  disclosure?: string;
 };
 
 export type Property = {
@@ -181,6 +203,7 @@ export const properties: Property[] = [
       headline: "Existing fuel-and-convenience site near I-95 Exit 19.",
       lead:
         "An approximately 0.70-acre retail offering with an existing convenience-store building, fueling canopy, pumps, and highway-oriented positioning in Lumberton.",
+      overviewEyebrow: "The Opportunity",
       keyFacts: [
         { label: "Asking price", value: "$549,000" },
         { label: "Site area", value: "Approx. 0.70 acres" },
@@ -193,71 +216,90 @@ export const properties: Property[] = [
         "Positioned near I-95 Exit 19 in Lumberton",
         "Public offering identifies C-store, QSR, and travel-oriented evaluation paths",
       ],
-      informationGroups: [
-        {
-          eyebrow: "Operating Property",
-          title: "Existing improvements create more than a land-only opportunity.",
+      information: {
+        intro: {
+          eyebrow: "Property Information",
+          title: "Understand the asset before choosing the path.",
           body:
-            "The offering includes an existing convenience-store and fueling-site configuration. Public marketing describes the property as currently closed and gives a buyer the ability to evaluate reuse, rebranding, or redevelopment subject to physical, operational, zoning, and environmental diligence.",
-          facts: [
-            { label: "Existing use", value: "Convenience store / gas station" },
-            { label: "Operating status", value: "Closed / vacant per offering" },
-            { label: "Building size", value: "Request confirmed square footage" },
-            { label: "Site size", value: "Approx. 0.70 acres" },
-            { label: "Fuel agreement", value: "None stated in public listing" },
-            { label: "Improvements", value: "Store, canopy, pumps, paved site" },
-          ],
+            "Existing operations, physical improvements, and material diligence are presented separately so buyers can evaluate reuse and redevelopment on their own terms.",
         },
-        {
-          eyebrow: "Fuel & Environmental",
-          title: "Material diligence belongs in the decision path.",
+        groups: [
+          {
+            eyebrow: "Operating Property",
+            title: "Existing improvements create more than a land-only opportunity.",
+            body:
+              "The offering includes an existing convenience-store and fueling-site configuration. Public marketing describes the property as currently closed and gives a buyer the ability to evaluate reuse, rebranding, or redevelopment subject to physical, operational, zoning, and environmental diligence.",
+            facts: [
+              { label: "Existing use", value: "Convenience store / gas station" },
+              { label: "Operating status", value: "Closed / vacant per offering" },
+              { label: "Building size", value: "Request confirmed square footage" },
+              { label: "Site size", value: "Approx. 0.70 acres" },
+              { label: "Fuel agreement", value: "None stated in public listing" },
+              { label: "Improvements", value: "Store, canopy, pumps, paved site" },
+            ],
+          },
+          {
+            eyebrow: "Fuel & Environmental",
+            title: "Material diligence belongs in the decision path.",
+            body:
+              "The public offering represents the fuel tanks and piping as having been installed in 2001 using double-wall fiberglass construction. It also states that the tanks can be removed by the seller with a clean bill from NCDEQ before sale. Buyers should confirm the exact equipment condition, environmental record, removal scope, documentation, and contractual obligations in writing.",
+            facts: [
+              { label: "Tank / piping date", value: "2001 per public offering" },
+              { label: "Construction", value: "Double-wall fiberglass per offering" },
+              { label: "Seller statement", value: "Removal and NCDEQ path described" },
+              { label: "Required review", value: "Tank and environmental records" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Transaction Conditions",
+        title: "What the offering says—and what still requires confirmation.",
+        conditions: [
+          { label: "Published offering", value: "Approx. 0.70-acre retail property at $549,000" },
+          { label: "Included parcels", value: "Confirm the legal parcel schedule with the listing advisor" },
+          { label: "Additional land", value: "Land behind and west is described as available; inclusion and pricing require confirmation" },
+          { label: "Potential uses", value: "C-store, QSR with drive-through, travel-oriented, or alternative retail concepts are cited by the offering" },
+          { label: "Approvals", value: "All zoning, access, redevelopment, and operating requirements remain subject to buyer verification" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Property Gallery",
+          title: "The existing asset, shown with purpose.",
           body:
-            "The public offering represents the fuel tanks and piping as having been installed in 2001 using double-wall fiberglass construction. It also states that the tanks can be removed by the seller with a clean bill from NCDEQ before sale. Buyers should confirm the exact equipment condition, environmental record, removal scope, documentation, and contractual obligations in writing.",
-          facts: [
-            { label: "Tank / piping date", value: "2001 per public offering" },
-            { label: "Construction", value: "Double-wall fiberglass per offering" },
-            { label: "Seller statement", value: "Removal and NCDEQ path described" },
-            { label: "Required review", value: "Tank and environmental records" },
-          ],
+            "Branding and merchandise visible in listing photography reflect the photographed condition and do not imply a current fuel, supplier, or operating agreement.",
         },
-      ],
-      transactionConditions: [
-        { label: "Published offering", value: "Approx. 0.70-acre retail property at $549,000" },
-        { label: "Included parcels", value: "Confirm the legal parcel schedule with the listing advisor" },
-        { label: "Additional land", value: "Land behind and west is described as available; inclusion and pricing require confirmation" },
-        { label: "Potential uses", value: "C-store, QSR with drive-through, travel-oriented, or alternative retail concepts are cited by the offering" },
-        { label: "Approvals", value: "All zoning, access, redevelopment, and operating requirements remain subject to buyer verification" },
-      ],
-      gallery: [
-        {
-          src: lackeyFuelingCanopy,
-          alt: "Fueling canopy and pump area at 2301 Lackey Street",
-          caption: "Fueling canopy and pump area",
-        },
-        {
-          src: lackeyStoreInterior,
-          alt: "Convenience-store interior at 2301 Lackey Street",
-          caption: "Convenience-store interior",
-        },
-        {
-          src: lackeyCoolerWall,
-          alt: "Cooler wall and merchandising area inside 2301 Lackey Street",
-          caption: "Cooler wall and merchandising area",
-        },
-        {
-          src: lackeyRoadApproach,
-          alt: "Road approach and site context for 2301 Lackey Street",
-          caption: "Road approach and site context",
-        },
-        {
-          src: lackeyBuildingSide,
-          alt: "Side elevation and service area at 2301 Lackey Street",
-          caption: "Side elevation and service area",
-        },
-      ],
-      galleryNote:
-        "Branding and merchandise visible in listing photography reflect the photographed condition and do not imply a current fuel, supplier, or operating agreement.",
+        items: [
+          {
+            src: lackeyFuelingCanopy,
+            alt: "Fueling canopy and pump area at 2301 Lackey Street",
+            caption: "Fueling canopy and pump area",
+          },
+          {
+            src: lackeyStoreInterior,
+            alt: "Convenience-store interior at 2301 Lackey Street",
+            caption: "Convenience-store interior",
+          },
+          {
+            src: lackeyCoolerWall,
+            alt: "Cooler wall and merchandising area inside 2301 Lackey Street",
+            caption: "Cooler wall and merchandising area",
+          },
+          {
+            src: lackeyRoadApproach,
+            alt: "Road approach and site context for 2301 Lackey Street",
+            caption: "Road approach and site context",
+          },
+          {
+            src: lackeyBuildingSide,
+            alt: "Side elevation and service area at 2301 Lackey Street",
+            caption: "Side elevation and service area",
+          },
+        ],
+      },
       location: {
+        eyebrow: "Location & Access",
         title: "A Lumberton retail site positioned near the I-95 corridor.",
         body:
           "The public offering identifies the property as being near Exit 19 on I-95. Buyers should independently confirm current access, roadway construction conditions, traffic patterns, and suitability for the intended use.",
@@ -271,27 +313,36 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=2301%20Lackey%20Street%2C%20Lumberton%2C%20NC%2028360",
       },
-      documents: [
-        {
-          title: "Public listing and flyer",
-          description: "Review the current Crexi listing and access its available marketing flyer.",
-          actionLabel: "Open Crexi Listing",
-          href: "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st",
-          external: true,
+      documents: {
+        intro: {
+          eyebrow: "Documents & Diligence",
+          title: "Move from first look to informed review.",
+          body:
+            "Start with the public offering, then request the records and transaction materials relevant to your proposed use.",
         },
-        {
-          title: "Fuel-system and environmental records",
-          description: "Request available tank, piping, removal, and NCDEQ-related information from the listing advisor.",
-          actionLabel: "Request Records",
-          href: "/contact?property=2301-lackey-street&topic=environmental-records",
-        },
-        {
-          title: "Complete diligence package",
-          description: "Confirm included parcels and request the materials available for buyer review.",
-          actionLabel: "Request Package",
-          href: "/contact?property=2301-lackey-street&topic=diligence-package",
-        },
-      ],
+        items: [
+          {
+            title: "Public listing and flyer",
+            description: "Review the current Crexi listing and access its available marketing flyer.",
+            actionLabel: "Open Crexi Listing",
+            href: "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st",
+            external: true,
+          },
+          {
+            title: "Fuel-system and environmental records",
+            description: "Request available tank, piping, removal, and NCDEQ-related information from the listing advisor.",
+            actionLabel: "Request Records",
+            href: "/contact?property=2301-lackey-street&topic=environmental-records",
+          },
+          {
+            title: "Complete diligence package",
+            description: "Confirm included parcels and request the materials available for buyer review.",
+            actionLabel: "Request Package",
+            href: "/contact?property=2301-lackey-street&topic=diligence-package",
+          },
+        ],
+      },
+      advisorEyebrow: "Listing Advisor",
       disclosure:
         "All information is deemed reliable but is not guaranteed. Buyers should independently verify property condition, boundaries, included improvements, environmental matters, approvals, access, and all other material information.",
     },

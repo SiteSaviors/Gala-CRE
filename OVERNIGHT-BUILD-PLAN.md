@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 05:13 CDT
+Last updated: 2026-09-04 05:17 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -75,24 +75,24 @@ This baseline is the first concrete checkpoint. Do not mix new Phase 1 refactori
 
 ## Phase 1 — Commercial listing framework
 
-Status: **In progress**
+Status: **Completed**
 
 Objective: Convert the completed Lackey experience into a reusable, schema-driven system without weakening its commercial-property focus.
 
-- [ ] Audit `CommercialListingPage` for Lackey-specific presentation text that belongs in property data.
-- [ ] Define conditional modules for identity, economics, physical facts, operating status, occupancy, improvements, fuel/environmental diligence, entitlement or redevelopment considerations, availability, maps, documents, gallery, advisor, inquiry routing, and disclosure.
-- [ ] Ensure missing modules disappear cleanly without empty space or public placeholder language.
-- [ ] Preserve flexible page lengths; properties do not need matching section counts.
-- [ ] Add model and rendering tests for conditional module behavior.
-- [ ] Confirm the existing catalog and Lackey route have no regression.
+- [x] Audit `CommercialListingPage` for Lackey-specific presentation text that belongs in property data.
+- [x] Define conditional modules for identity, economics, physical facts, operating status, occupancy, improvements, fuel/environmental diligence, entitlement or redevelopment considerations, availability, maps, documents, gallery, advisor, inquiry routing, and disclosure.
+- [x] Ensure missing modules disappear cleanly without empty space or public placeholder language.
+- [x] Preserve flexible page lengths; properties do not need matching section counts.
+- [x] Add model and rendering tests for conditional module behavior.
+- [x] Confirm the existing catalog and Lackey route have no regression.
 
 Gate: Lackey renders entirely through reusable property data, unsupported sections disappear cleanly, and targeted tests pass.
 
-Next action: Inspect `src/components/properties/CommercialListingPage.tsx` against `src/content/properties.ts`, identify hard-coded Lackey language, and move the first shared/asset-specific section content into the structured listing schema.
+Next action: Phase gate passed. Continue with the first Phase 2 action below.
 
 ## Phase 2 — Complete verified active listings
 
-Status: **Pending**
+Status: **In progress**
 
 Objective: Finish each verified active listing with a journey appropriate to its actual asset and buyer.
 
@@ -105,7 +105,7 @@ Objective: Finish each verified active listing with a journey appropriate to its
 
 Gate: A prospect can understand each verified active offering, material conditions, available diligence, advisor, and next action within two minutes.
 
-Next action: Begin Church Street only after Phase 1 passes.
+Next action: Build Church Street's structured `listingPage` data with its existing approved aerial gallery, keeping the marketed childcare approval central while qualifying the unresolved 703/711 address, 1.00/1.09-acre conflict, and missing underlying approval documents.
 
 ## Phase 3 — Capability route architecture
 
@@ -348,3 +348,17 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the baseline commit; confirm immediately after committing.
 - Blockers: Existing client-input blockers remain recorded above; none prevent Phase 1.
 - Exact next action: On the verified baseline, audit `src/components/properties/CommercialListingPage.tsx` against `src/content/properties.ts`, identify hard-coded Lackey language, and move the first shared and asset-specific section content into the structured listing schema.
+
+### Immediate checkpoint — 2026-09-04 05:17 CDT
+
+- Starting branch / HEAD: `codex/phase-0-stabilization` at verified baseline `994bc58` with a clean working tree.
+- Source-of-truth checked: Current user instruction, branch/status/log, this ledger, `PROPERTY-DATA-REGISTER.md`, the Lackey listing schema, shared renderer, and property tests.
+- Phase / checkpoint: Phase 1 — make the commercial listing renderer data-driven and conditionally composable.
+- Gate: Lackey preserves its approved content and appearance; asset-specific section copy lives in structured property data; unsupported modules disappear without placeholders; shared tests/build/lint/browser QA pass.
+- Completed: Added structured information, transaction, gallery, location, document, advisor, overview, and fact modules; made every non-core module optional; conditionally removed empty sections; made document grids adapt to their item count; added minimal-record rendering coverage.
+- Files and routes changed: `src/content/properties.ts`, `src/components/properties/CommercialListingPage.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, and `src/test/properties-model.test.ts`; verified `/properties/2301-lackey-street`.
+- Verification: 31/31 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop browser check preserved five gallery images, three document cards, one map, metadata, and no console errors; mobile check confirmed 390px layout with no horizontal overflow; `git diff --check` passed.
+- Commit: This checkpoint commit; intended message `refactor: make commercial listing modules data driven`. Resolve the hash with `git log -1 --oneline` at the next continuation.
+- Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
+- Blockers: None for the framework. Church Street's address, surveyed acreage, and underlying approval documents remain client-confirmation items and must stay qualified.
+- Exact next action: Build Church Street's structured `listingPage` data with its approved aerial gallery and a concise childcare-opportunity journey, while preserving every documented qualification.
