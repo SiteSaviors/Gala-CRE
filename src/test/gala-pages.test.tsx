@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import Company from "@/pages/Company";
@@ -14,13 +14,14 @@ describe("Gala CRE public pages", () => {
   it("positions the homepage around commercial services", () => {
     const { container } = renderPage(<Index />);
     expect(screen.getByRole("heading", { name: /Commercial Real Estate, Simplified/i })).toBeInTheDocument();
-    expect(screen.getByText("GalaBroker")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "GalaBroker" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Built to move commercial opportunities forward." })).toBeInTheDocument();
-    expect(screen.getByText("GalaSales")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "GalaSales" })).toBeInTheDocument();
     expect(screen.getByText("Commercial property acquisitions, dispositions, and marketing.")).toBeInTheDocument();
-    expect(screen.getByText("Property Types")).toBeInTheDocument();
-    expect(screen.getByText("GalaDevelop")).toBeInTheDocument();
-    expect(screen.getByText("GalaCapital")).toBeInTheDocument();
+    expect(within(screen.getByRole("navigation", { name: "GalaSales capabilities" })).getByRole("link", { name: "Industrial" }))
+      .toHaveAttribute("href", "/services/investment-sales#industrial");
+    expect(screen.getByRole("heading", { name: "GalaDevelop" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "GalaCapital" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Featured listings" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "For Lease" })).toHaveAttribute("aria-pressed", "false");
     expect(screen.getByRole("button", { name: "For Sale" })).toHaveAttribute("aria-pressed", "true");

@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { serviceBySlug, services, type ServiceSlug } from "@/content/services";
+import { serviceBySlug, serviceCapabilityId, services, type ServiceSlug } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import NotFound from "./NotFound";
 
@@ -43,7 +43,7 @@ const ServiceDetail = () => {
             </div>
             <div className="gala-capability-list">
               {service.capabilities.map((capability) => (
-                <div key={capability}><Check size={18} /> <span>{capability}</span></div>
+                <div id={serviceCapabilityId(capability)} key={capability}><Check size={18} /> <span>{capability}</span></div>
               ))}
               <div className="gala-service-audience"><strong>Built for</strong><span>{service.audience}</span></div>
             </div>

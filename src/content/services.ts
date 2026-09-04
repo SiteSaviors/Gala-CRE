@@ -78,4 +78,10 @@ export const serviceBySlug = Object.fromEntries(
   services.map((service) => [service.slug, service])
 ) as Record<ServiceSlug, Service>;
 
+export const serviceCapabilityId = (capability: string) =>
+  capability
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 export const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;

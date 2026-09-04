@@ -1,5 +1,5 @@
-import { ArrowUpRight, KeyRound, MapPin } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { ArrowUpRight, KeyRound, MapPin, X } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
@@ -13,57 +13,129 @@ import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCa
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { assetTypes } from "@/content/services";
+import { assetTypes, serviceCapabilityId } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const homepageCapabilities = [
   {
     name: "GalaBroker",
-    objective: "Lease / Occupy",
     summary: "Commercial leasing and occupancy representation.",
-    capabilityLabel: "Representation",
-    capabilities: ["Landlord Representation", "Tenant Representation"],
+    capabilities: [
+      { label: "Landlord Representation", target: "Landlord representation" },
+      { label: "Tenant Representation", target: "Tenant representation" },
+    ],
     href: "/services/brokerage",
     image: galaBrokerCapability,
     imagePosition: "center",
   },
   {
     name: "GalaSales",
-    objective: "Buy / Sell",
     summary: "Commercial property acquisitions, dispositions, and marketing.",
-    capabilityLabel: "Property Types",
-    capabilities: ["Industrial", "Multifamily", "Retail", "Office", "Land"],
+    capabilities: [
+      { label: "Industrial", target: "Industrial" },
+      { label: "Multifamily", target: "Multifamily" },
+      { label: "Retail", target: "Retail" },
+      { label: "Office", target: "Office" },
+      { label: "Land", target: "Land" },
+    ],
     href: "/services/investment-sales",
     image: galaSalesCapability,
     imagePosition: "center",
   },
   {
     name: "GalaDevelop",
-    objective: "Plan / Build",
     summary: "Commercial development planning and execution.",
-    capabilityLabel: "Development Services",
-    capabilities: ["Site Strategy", "Entitlements", "Infrastructure", "Development Oversight"],
+    capabilities: [
+      { label: "Site Strategy", target: "Feasibility and site strategy" },
+      { label: "Entitlements", target: "Entitlements" },
+      { label: "Infrastructure", target: "Infrastructure coordination" },
+      { label: "Development Oversight", target: "Project oversight" },
+    ],
     href: "/services/development-services",
     image: galaDevelopCapability,
     imagePosition: "center",
   },
   {
     name: "GalaCapital",
-    objective: "Fund / Finance",
     summary: "Debt and equity sourcing for commercial opportunities.",
-    capabilityLabel: "Capital Solutions",
-    capabilities: ["Debt", "Equity", "Capital Strategy", "Transaction Coordination"],
+    capabilities: [
+      { label: "Debt", target: "Debt placement support" },
+      { label: "Equity", target: "Equity introductions" },
+      { label: "Capital Strategy", target: "Capital strategy" },
+      { label: "Transaction Coordination", target: "Transaction coordination" },
+    ],
     href: "/services/capital-markets",
     image: galaCapitalCapability,
     imagePosition: "center",
   },
 ] as const;
 
+type HomepageCapability = (typeof homepageCapabilities)[number];
+
+type HomepageCapabilityCardProps = HomepageCapability & {
+  isOpen: boolean;
+  onToggle: () => void;
+};
+
+const HomepageCapabilityCard = ({
+  name,
+  summary,
+  capabilities,
+  href,
+  image,
+  imagePosition,
+  isOpen,
+  onToggle,
+}: HomepageCapabilityCardProps) => {
+  const rows = Math.ceil(capabilities.length / 2);
+  const cardStyle = {
+    "--gala-capability-panel-height": `${rows * 56 + Math.max(0, rows - 1) * 10}px`,
+    "--gala-capability-panel-height-mobile": `${rows * 48 + Math.max(0, rows - 1) * 8}px`,
+  } as CSSProperties;
+
+  return (
+    <article
+      className={`gala-capability-card gala-capability-card--has-image${isOpen ? " gala-capability-card--open" : ""}`}
+      style={cardStyle}
+    >
+      <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />
+      <div className="gala-capability-card__content">
+        <h3><Link to={href}>{name}</Link></h3>
+        <p className="gala-capability-card__summary">{summary}</p>
+      </div>
+      <nav className="gala-capability-card__links" aria-label={`${name} capabilities`}>
+        {capabilities.map((capability, capabilityIndex) => (
+          <Link
+            to={`${href}#${serviceCapabilityId(capability.target)}`}
+            className="gala-capability-card__link"
+            style={{ "--gala-capability-index": capabilityIndex } as CSSProperties}
+            key={capability.label}
+          >
+            <span>{capability.label}</span>
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+        ))}
+      </nav>
+      <ArrowUpRight className="gala-capability-card__arrow" aria-hidden="true" />
+      <button
+        type="button"
+        className="gala-capability-card__toggle"
+        aria-expanded={isOpen}
+        aria-label={`${isOpen ? "Hide" : "Show"} ${name} capabilities`}
+        onClick={onToggle}
+      >
+        {isOpen ? <X aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
+      </button>
+    </article>
+  );
+};
+
 const Index = () => {
   const isMobile = useIsMobile();
   const heroPoster = isMobile ? heroPosterMobile : heroPosterDesktop;
   const introductionRef = useRef<HTMLElement>(null);
+  const [openCapability, setOpenCapability] = useState<string | null>(null);
   useSiteCursor();
 
   useEffect(() => {
@@ -166,22 +238,13 @@ const Index = () => {
             <div className="gala-kicker">Gala CRE Capabilities</div>
             <h2><span>Built to move commercial</span>{" "}<span>opportunities forward.</span></h2>
           </div>
-          <div className="gala-capability-grid">{homepageCapabilities.map(({ name, objective, summary, capabilityLabel, capabilities, href, image, imagePosition }, index) => (
-            <Link to={href} className={`gala-capability-card${image ? " gala-capability-card--has-image" : ""}`} key={name}>
-              {image && <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" style={{ objectPosition: imagePosition }} />}
-              <div className="gala-capability-card__top"><span>0{index + 1}</span><span>{objective}</span></div>
-              <div className="gala-capability-card__content">
-                <h3>{name}</h3>
-                <div className="gala-capability-card__details">
-                  <p className="gala-capability-card__summary">{summary}</p>
-                  <div className="gala-capability-card__reveal">
-                    <span>{capabilityLabel}</span>
-                    <ul>{capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul>
-                  </div>
-                </div>
-              </div>
-              <ArrowUpRight className="gala-capability-card__arrow" aria-hidden="true" />
-            </Link>
+          <div className="gala-capability-grid">{homepageCapabilities.map((capability) => (
+            <HomepageCapabilityCard
+              {...capability}
+              isOpen={openCapability === capability.name}
+              onToggle={() => setOpenCapability((current) => current === capability.name ? null : capability.name)}
+              key={capability.name}
+            />
           ))}</div>
         </div></section>
 
