@@ -17,7 +17,7 @@ const Services = () => {
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/services" />
-      <main className="gala-page">
+      <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-inner-hero">
           <div className="gala-shell">
             <div className="gala-kicker">Full-Service Commercial Real Estate</div>

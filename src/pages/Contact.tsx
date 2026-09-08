@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -43,6 +43,22 @@ const inquiryByQuery: Partial<Record<string, InquiryType>> = {
   "landlord-representation": "Landlord Representation",
   "tenant-representation": "Tenant Representation",
   "investment-sales": "Investment Sales",
+  "capital-markets": "Capital Markets",
+  careers: "Commercial Agent Careers",
+  "1031-exchange": "1031 / Replacement Property Search",
+};
+
+const dedicatedPathways: Partial<Record<InquiryType, { message: string; label: string; href: string }>> = {
+  "Commercial Agent Careers": {
+    message: "Commercial agents can share licensing, market, and transaction experience through the dedicated application.",
+    label: "Continue to Agent Application",
+    href: "/careers?source=contact",
+  },
+  "1031 / Replacement Property Search": {
+    message: "Investors can share exchange dates, capital readiness, and acquisition criteria through the dedicated brief.",
+    label: "Continue to Acquisition Brief",
+    href: "/investors/1031-exchange?source=contact",
+  },
 };
 
 const Contact = () => {
@@ -71,6 +87,7 @@ const Contact = () => {
       website: "",
     },
   });
+  const dedicatedPathway = dedicatedPathways[form.watch("inquiryType")];
 
   const onSubmit = async (values: ContactFormValues) => {
     setSubmitError(null);
@@ -92,7 +109,7 @@ const Contact = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/contact" />
 
-      <main className="contact-page">
+      <main className="contact-page" id="main-content" tabIndex={-1}>
         <section className="contact-hero">
           <div className="contact-shell">
             <div className="contact-copy">
@@ -180,6 +197,13 @@ const Contact = () => {
                           <FormMessage className="contact-form-message" />
                         </FormItem>
                       )} />
+
+                      {dedicatedPathway ? (
+                        <aside className="contact-form-pathway" aria-label="Recommended inquiry form">
+                          <p>{dedicatedPathway.message}</p>
+                          <Link to={dedicatedPathway.href}>{dedicatedPathway.label}</Link>
+                        </aside>
+                      ) : null}
 
                       <FormField control={form.control} name="message" render={({ field }) => (
                         <FormItem className="contact-form-item">

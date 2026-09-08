@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
-import heroVideo from "@/assets/GALA-CRE-HERO-LOOP.mp4";
+import heroVideo from "@/assets/GALA-CRE-HERO-LOOP-720.mp4";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
 import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
 import PageMeta from "@/components/site/PageMeta";
@@ -82,14 +82,25 @@ const Index = () => {
   const heroPoster = isMobile ? heroPosterMobile : heroPosterDesktop;
   const introductionRef = useRef<HTMLElement>(null);
   const [openCapability, setOpenCapability] = useState<string | null>(null);
+  const [canPlayHeroVideo, setCanPlayHeroVideo] = useState(() => (
+    typeof window !== "undefined"
+    && window.matchMedia("(min-width: 769px) and (prefers-reduced-motion: no-preference)").matches
+  ));
   useSiteCursor();
+
+  useEffect(() => {
+    const videoPreference = window.matchMedia("(min-width: 769px) and (prefers-reduced-motion: no-preference)");
+    const updateVideoPreference = () => setCanPlayHeroVideo(videoPreference.matches);
+    updateVideoPreference();
+    videoPreference.addEventListener("change", updateVideoPreference);
+    return () => videoPreference.removeEventListener("change", updateVideoPreference);
+  }, []);
 
   useEffect(() => {
     const hero = document.getElementById("hero");
     const video = document.getElementById("hvideo") as HTMLVideoElement | null;
-    if (!hero || !video) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      video.pause();
+    if (!hero || !video || !canPlayHeroVideo) {
+      video?.pause();
       return;
     }
     const observer = new IntersectionObserver(([entry]) => {
@@ -98,7 +109,7 @@ const Index = () => {
     }, { threshold: 0.2 });
     observer.observe(hero);
     return () => observer.disconnect();
-  }, []);
+  }, [canPlayHeroVideo]);
 
   useEffect(() => {
     const section = introductionRef.current;
@@ -137,11 +148,11 @@ const Index = () => {
       <PageMeta title="Commercial Real Estate, Simplified" description="Commercial real estate brokerage, sales, development, and capital services for clients across North Carolina." />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/" />
-      <main className="gala-home">
+      <main className="gala-home" id="main-content" tabIndex={-1}>
         <section className="hero gala-hero" id="hero">
           <div className="hbg" style={{ backgroundImage: `url(${heroPoster})` }}>
-            <video className="hbgv" id="hvideo" muted loop playsInline preload="metadata" poster={heroPoster} aria-hidden="true" disablePictureInPicture>
-              <source src={heroVideo} type="video/mp4" />
+            <video className="hbgv" id="hvideo" muted loop playsInline preload={canPlayHeroVideo ? "metadata" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
+              {canPlayHeroVideo ? <source src={heroVideo} type="video/mp4" /> : null}
             </video>
           </div>
           <div className="hinner"><div className="glass text-left">

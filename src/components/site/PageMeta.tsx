@@ -20,7 +20,8 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    const siteUrl = "https://gala-cre.vercel.app";
+    const configuredSiteUrl = import.meta.env.VITE_SITE_URL?.trim().replace(/\/$/, "");
+    const siteUrl = configuredSiteUrl || "https://gala-cre.vercel.app";
     const pageUrl = `${siteUrl}${location.pathname}`;
     const shareImage = image
       ? new URL(image, siteUrl).toString()
@@ -33,6 +34,11 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: pageUrl });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: shareImage });
+    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "Gala CRE Group" });
+    upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+    upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: fullTitle });
+    upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: description });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: shareImage });
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {

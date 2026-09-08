@@ -19,7 +19,9 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const startsTransparent =
     currentPath === "/" ||
     currentPath === "/company" ||
+    currentPath === "/careers" ||
     currentPath === "/contact" ||
+    currentPath.startsWith("/investors") ||
     currentPath.startsWith("/services") ||
     currentPath.startsWith("/properties");
   const [scrolled, setScrolled] = useState(!startsTransparent);
@@ -73,6 +75,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
 
   return (
     <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}`}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <Link to="/" className="nlogo" aria-label="Gala CRE Group home">
         <img src={galaLogo} alt="Gala CRE Group" />
       </Link>
@@ -93,6 +96,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </li>
         <li><Link to="/properties">Properties</Link></li>
         <li><Link to="/company">Company</Link></li>
+        <li><Link to="/careers">Careers</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
       <Link to="/contact" className="nbtn">Talk to an Advisor</Link>
@@ -128,6 +132,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </div>
         <Link to="/properties" onClick={() => setMobileNavOpen(false)}>Properties</Link>
         <Link to="/company" onClick={() => setMobileNavOpen(false)}>Company</Link>
+        <Link to="/careers" onClick={() => setMobileNavOpen(false)}>Careers</Link>
         <Link to="/contact" onClick={() => setMobileNavOpen(false)}>Contact</Link>
         <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Talk to an Advisor</Link>
       </div>

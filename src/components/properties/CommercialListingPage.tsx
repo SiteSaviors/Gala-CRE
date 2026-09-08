@@ -64,7 +64,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={`/properties/${property.slug}`} />
 
-      <main className="gala-page gala-commercial-listing">
+      <main className="gala-page gala-commercial-listing" id="main-content" tabIndex={-1}>
         <section className="gala-commercial-listing__hero">
           <img
             src={property.heroImage}
@@ -134,6 +134,18 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
             ) : null}
           </div>
         </section>
+
+        <aside className="gala-listing-sourcing" aria-labelledby="property-sourcing-title">
+          <div className="gala-shell">
+            <div>
+              <span>Still evaluating the market?</span>
+              <h2 id="property-sourcing-title">If this opportunity is not the right fit, define the one that is.</h2>
+            </div>
+            <Link to={`/investors/1031-exchange?source=property-detail&property=${property.slug}`} className="gala-text-link">
+              Share Your Acquisition Criteria <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
+        </aside>
 
         {hasAssetContent ? (
           <section className="gala-section gala-section--silver gala-commercial-listing__asset">

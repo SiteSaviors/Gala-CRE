@@ -57,7 +57,7 @@ const CapabilityDetail = () => {
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={path} />
-      <main className="gala-page">
+      <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-inner-hero gala-inner-hero--service gala-inner-hero--capability">
           {service.image ? (
             <>

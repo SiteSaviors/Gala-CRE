@@ -49,13 +49,15 @@ const ServiceDetail = () => {
   if (!service) return <NotFound />;
 
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
+  const supportsInvestorSourcing = service.slug === "investment-sales";
+  const supportsExchangeFinancing = service.slug === "capital-markets";
 
   return (
     <>
       <PageMeta title={service.name} description={service.summary} />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={`/services/${service.slug}`} />
-      <main className="gala-page">
+      <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-inner-hero gala-inner-hero--service">
           {service.image ? (
             <>
@@ -149,6 +151,36 @@ const ServiceDetail = () => {
             </div>
           </div>
         </section>
+
+        {supportsInvestorSourcing ? (
+          <section className="gala-investor-pathway">
+            <div className="gala-shell">
+              <div>
+                <span>Investor Property Sourcing</span>
+                <h2>Working against an acquisition or exchange timeline?</h2>
+                <p>Organize your commercial property criteria, capital position, and timing before the search begins.</p>
+              </div>
+              <Link to="/investors/1031-exchange?source=gala-sales" className="gala-button gala-button--dark">
+                Find a Replacement Property <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </section>
+        ) : null}
+
+        {supportsExchangeFinancing ? (
+          <section className="gala-investor-pathway">
+            <div className="gala-shell">
+              <div>
+                <span>Exchange Financing Coordination</span>
+                <h2>Need a capital plan aligned with an exchange acquisition?</h2>
+                <p>Discuss the debt, equity, timing, and transaction requirements that may shape the replacement-property search.</p>
+              </div>
+              <Link to="/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital" className="gala-button gala-button--dark">
+                Discuss Exchange Financing <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </section>
+        ) : null}
 
         <section className="gala-section gala-section--black">
           <div className="gala-shell">

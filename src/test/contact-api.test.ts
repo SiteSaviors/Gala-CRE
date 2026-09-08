@@ -61,6 +61,16 @@ describe("contact API", () => {
     expect(fetchMock).toHaveBeenCalledWith("https://api.resend.com/emails", expect.objectContaining({ method: "POST" }));
   });
 
+  it.each(["Commercial Agent Careers", "1031 / Replacement Property Search"])("accepts the contextual %s inquiry category", async (inquiryType) => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "advisor@example.com");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
+    const { response, result } = createResponse();
+    await contactHandler({ method: "POST", body: { ...validBody, inquiryType } }, response);
+    expect(result.statusCode).toBe(200);
+  });
+
   it("returns a gateway error when email delivery fails", async () => {
     vi.stubEnv("RESEND_API_KEY", "re_test");
     vi.stubEnv("CONTACT_TO_EMAIL", "advisor@example.com");

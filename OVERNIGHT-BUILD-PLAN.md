@@ -1,6 +1,6 @@
 # Gala CRE Overnight Build Plan
 
-Last updated: 2026-09-04 10:00 CDT
+Last updated: 2026-09-08 01:00 CDT
 
 Branch: `codex/phase-0-stabilization`
 Working rule: Preserve all existing work. Complete, verify, and locally commit one concrete checkpoint per pulse, then leave an explicit handoff for the next pulse.
@@ -128,7 +128,7 @@ Next action: Phase gate passed. Continue with Phase 4 by building Industrial as 
 
 ## Phase 4 — GalaBroker and GalaSales pages
 
-Status: **In progress**
+Status: **In progress; current Careers and 1031 conversion paths verified**
 
 Objective: Complete the remaining brokerage and investment-sales capability routes.
 
@@ -172,39 +172,42 @@ Next action: Start with the highest-intent GalaDevelop route after Phase 4 passe
 
 ## Phase 6 — Careers and agent recruiting
 
-Status: **Pending**
+Status: **Complete within the approved implementation scope; recipient configuration deferred**
 
 Objective: Build a credible recruiting journey for experienced commercial real-estate agents.
 
-- [ ] Add Careers to desktop navigation, mobile navigation, and footer.
-- [ ] Explain commercial development listings, sales-team support, and commercial listing opportunities.
-- [ ] Capture experience, specialties, license information, past sales, production context, geography, and contact details.
-- [ ] Add accessible validation, success and error states, spam protection, and keyboard behavior.
-- [ ] Build a production-safe submission adapter intended to route to `beth@galacregroup.com`.
-- [ ] Do not send test submissions.
-- [ ] If the approved Google Form or endpoint is missing, complete the UX and integration boundary and record the single configuration requirement privately.
-- [ ] Do not expose a broken submit button publicly.
+- [x] Add Careers to desktop navigation, mobile navigation, and footer.
+- [x] Create `/careers` and explain commercial development listings, sales-team support, and commercial listing opportunities.
+- [x] Capture experience, specialties, license information, past sales, production context, geography, and contact details.
+- [x] Add accessible validation, success and error states, spam protection, and keyboard behavior.
+- [x] Build a production-safe shared submission adapter with private Careers recipient routing intended for `beth@galacregroup.com` once approved.
+- [x] Do not send test submissions.
+- [x] Complete the UX and private integration boundary without hard-coding an endpoint, recipient, or provider credential in browser code.
+- [x] Fail safely with an inline error if server delivery is unavailable while retaining the applicant's entered information.
 
 Gate: Careers is a finished recruiting experience that becomes live when the approved submission endpoint is configured.
 
-Next action: Audit the existing contact API and form patterns before choosing the smallest reusable integration.
+Next action: Configure and verify the approved careers delivery endpoint only after the user supplies recipient and storage requirements; until then, proceed with the 1031 acquisition-criteria experience.
 
 ## Phase 7 — Time-sensitive 1031 and investor sourcing
 
-Status: **Pending**
+Status: **Complete within the approved implementation scope; recipient configuration deferred**
 
 Objective: Create a focused replacement-property sourcing inquiry for time-sensitive investors.
 
-- [ ] Create a distinct route and CTA entry point.
-- [ ] Capture exchange deadline, target geography, asset type, budget or equity range, financing status, risk profile, contact details, and timing.
-- [ ] Preserve relevant property and referral query parameters.
-- [ ] Include appropriate tax and legal-advice boundaries without overwhelming the page.
-- [ ] Reuse the secure form foundation from Careers/contact where appropriate.
-- [ ] Do not send test submissions.
+- [x] Create `/investors/1031-exchange` and surface it from Properties, property detail pages, GalaSales, GalaCapital, and the footer without adding another top-level navigation item.
+- [x] Capture contact details, exchange status, relinquished closing, identification and completion deadlines, target geography, asset type, pricing, equity, financing, occupancy, tenant, return/risk, market-interest, intermediary, and response preferences.
+- [x] Preserve relevant property and referral query parameters in the eventual submission payload.
+- [x] Use supplied identification dates to calculate internal routing priority without publishing response-time or closing promises.
+- [x] Include appropriate tax, legal, accounting, and qualified-intermediary boundaries without overwhelming the page.
+- [x] Reuse the secure form foundation from Careers/contact with accessible validation, consent, spam protection, and success/error states.
+- [x] Fail safely at the private handler until an approved recipient is configured; no external email or Google record is created when delivery configuration is missing.
+- [x] Route through the shared server-side handler with independent validation, rate limiting, private email routing, and optional Google record synchronization.
+- [x] Do not send test submissions.
 
 Gate: The journey is concise, appropriately urgent, accessible, and safely routed once approved backend configuration is present.
 
-Next action: Define the minimum decision-useful form fields after the Careers integration pattern is settled.
+Next action: Configure and verify the approved investor-inquiry endpoint only after the user supplies recipient and storage requirements; until then, proceed to transaction and inventory verification.
 
 ## Phase 8 — Transactions and property inventory
 
@@ -227,40 +230,40 @@ Next action: Cross-reference `PROPERTY-DATA-REGISTER.md`, client materials, and 
 
 ## Phase 9 — Brand, social, navigation, and conversion integration
 
-Status: **Pending**
+Status: **In progress; current Careers and 1031 conversion paths verified**
 
 Objective: Make the entire site navigable, credible, and conversion-ready.
 
 - [ ] Add Gaurang Gala's Instagram only after confirming the authoritative profile URL.
 - [ ] Add Leigh Gala's Instagram only after confirming the authoritative profile URL.
-- [ ] Audit desktop navigation, mega-menu, mobile navigation, and footer.
-- [ ] Audit service cross-links, property filters, CTA hierarchy, contact preselection, and inquiry routing.
-- [ ] Confirm every primary journey works by keyboard and touch.
-- [ ] Confirm query parameters survive through the intended inquiry path.
+- [x] Audit desktop navigation, mega-menu, mobile navigation, and footer across the current public route matrix.
+- [x] Audit service cross-links, property filters, CTA hierarchy, contact preselection, and inquiry routing for the current public route matrix.
+- [x] Confirm current primary journeys work by keyboard and touch, including the new main-content skip link and mobile Careers navigation.
+- [x] Confirm Careers, property-sourcing, property-detail, GalaSales, GalaCapital, and Contact query parameters survive through the intended inquiry path.
 
 Gate: Every primary user journey reaches the correct context without dead links, guessed profiles, or navigation traps.
 
-Next action: Run a route-and-CTA crawl after the new pages exist.
+Next action: Add the authoritative Gaurang and Leigh Instagram URLs only after the client supplies or confirms them; do not guess profile destinations.
 
 ## Phase 10 — Sitewide quality pass
 
-Status: **Pending**
+Status: **Current route and form scope passed; production configuration and later content additions require a final rerun**
 
 Objective: Remove presentation risks before the meeting.
 
-- [ ] Test desktop, tablet, and mobile layouts.
-- [ ] Test reduced motion and keyboard focus.
-- [ ] Check semantic headings, alt text, form labels, errors, and status messages.
-- [ ] Check maps, filters, canonical links, metadata, and social previews.
-- [ ] Review console errors and loading failures.
-- [ ] Review image weight, lazy loading, and major performance problems.
-- [ ] Run targeted tests, the full suite, production build, and lint.
-- [ ] Fix errors and meaningful project-introduced warnings.
-- [ ] Do not rewrite stable third-party UI files solely to eliminate pre-existing non-blocking warnings.
+- [x] Test the current 31-route matrix at desktop, tablet, and mobile widths (93 combinations).
+- [x] Test reduced motion, keyboard focus, first-error focus, and a visible main-content skip link.
+- [x] Check primary headings, main landmarks, form labels, grouped-field error associations, errors, and status messages.
+- [x] Check property filters, canonical links, runtime Open Graph/Twitter metadata, and sitemap inclusion for Careers and 1031. Map rendering remains subject to the property data supplied for each listing.
+- [x] Review console errors, broken images, and loading failures across the current route matrix.
+- [x] Review image weight and lazy loading; replace the active 23.8 MB hero video with a 15.7 MB 720p derivative and prevent the full video binary from loading on mobile or under reduced motion.
+- [x] Run targeted tests, the full 74-test suite, production build, and lint.
+- [x] Fix the discovered tablet Brokerage overflow and current project-introduced accessibility/metadata defects.
+- [x] Leave the seven stable shared-UI Fast Refresh warnings unchanged.
 
 Gate: Production build and tests pass with no horizontal overflow, broken navigation, page-specific console errors, or obvious unfinished public content.
 
-Next action: Perform the full route matrix across three representative viewport widths.
+Next action: Re-run this gate after later capability, transaction, social, or production-form configuration changes; before public launch, create a sub-5 MB hero encode, set the final canonical domain, verify deployed social previews, approve a full privacy policy, and test production delivery only with explicit recipient approval.
 
 ## Phase 11 — Meeting package
 
@@ -308,8 +311,8 @@ These blockers must not stop unrelated work:
 - 802 Bragg Boulevard: exact address/spelling, transaction facts, date, asset type, and approved media.
 - 10414 and 10416 Chapel Hill Road: closing details, transaction date, asset classification, and approved media beyond the verified combined $1.8M reference.
 - Pittard Sears: exact property identity, address, contract status, pricing context, approved media, and substantiation for the record-breaking claim.
-- Careers: approved Google Form ID or production submission endpoint and confirmation of required recipient routing.
-- 1031 sourcing: approved recipient routing and any required compliance language.
+- Careers: recipient and Google/email storage configuration intentionally deferred by the user until after the recruiting form is built.
+- 1031 sourcing: recipient and Google/email storage configuration intentionally deferred by the user until after the investor form is built; baseline tax/legal boundary copy is now present for client review.
 - Social: authoritative Instagram profile URLs for Gaurang and Leigh Gala.
 - Services: additional client photography where generic contextual imagery would be insufficient.
 

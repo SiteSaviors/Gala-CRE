@@ -41,7 +41,7 @@ const PropertyDetail = () => {
       <PageMeta title={`${property.name} | ${property.city}, ${property.state}`} description={property.summary} image={property.heroImage} />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={`/properties/${property.slug}`} />
-      <main className="gala-page gala-property-page">
+      <main className="gala-page gala-property-page" id="main-content" tabIndex={-1}>
         <section className="gala-property-hero">
           <img
             src={property.heroImage}

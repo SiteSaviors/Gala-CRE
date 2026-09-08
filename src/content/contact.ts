@@ -8,6 +8,8 @@ export const inquiryTypes = [
   "Capital Markets",
   "Property Management",
   "Property Inquiry",
+  "Commercial Agent Careers",
+  "1031 / Replacement Property Search",
 ] as const;
 
 export type InquiryType = (typeof inquiryTypes)[number];

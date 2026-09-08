@@ -1,11 +1,13 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { capabilityPageByPath, capabilityPages } from "@/content/capabilityPages";
 import { propertyBySlug } from "@/content/properties";
 import CommercialListingPage from "@/components/properties/CommercialListingPage";
 import CapabilityDetail from "@/pages/CapabilityDetail";
+import Careers from "@/pages/Careers";
 import Company from "@/pages/Company";
+import ExchangeSourcing from "@/pages/ExchangeSourcing";
 import Index from "@/pages/Index";
 import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
@@ -63,6 +65,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("region", { name: "Featured commercial properties" })).toHaveAttribute("aria-roledescription", "carousel");
     expect(screen.getByRole("button", { name: "Previous featured listing" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next featured listing" })).toBeInTheDocument();
+    expect(screen.getByText("Drag or trackpad swipe to explore")).toBeInTheDocument();
     expect(screen.getByText("3 active sale opportunities")).toBeInTheDocument();
     expect(screen.queryByText(/Featured Lease Opportunity/i)).not.toBeInTheDocument();
     expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
@@ -71,6 +74,17 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("$829,000")).toBeInTheDocument();
     expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
     expect(screen.getByText("$1,190,000")).toBeInTheDocument();
+
+    const lackeySlide = screen.getByRole("group", { name: "1 of 3" });
+    expect(within(lackeySlide).getByRole("img", { name: "2301 Lackey Street in Lumberton, NC" })).toBeInTheDocument();
+    expect(within(lackeySlide).getByText("Active")).toBeInTheDocument();
+    expect(within(lackeySlide).getByText("For Sale · Retail")).toBeInTheDocument();
+    expect(within(lackeySlide).getByText("2301 Lackey Street, Lumberton, NC")).toBeInTheDocument();
+    expect(within(lackeySlide).getByText(/Vacant gas-station and convenience-store opportunity/i)).toBeInTheDocument();
+    fireEvent.click(within(lackeySlide).getByRole("button", { name: "Next image for 2301 Lackey Street" }));
+    expect(within(lackeySlide).getByRole("img", { name: "Fueling canopy and pump area at 2301 Lackey Street" })).toBeInTheDocument();
+    expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
+
     expect(screen.getByRole("heading", { name: "10414 & 10416 Chapel Hill Road" })).toBeInTheDocument();
     expect(screen.getByText("$1.8M")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
@@ -90,7 +104,70 @@ describe("Gala CRE public pages", () => {
   it("keeps unapproved team claims out of the site", () => {
     const company = renderPage(<Company />, "/company");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Explore Careers/i })).toHaveAttribute("href", "/careers?source=company");
+    expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers?source=footer")).toBe(true);
     company.unmount();
+  });
+
+  it("creates a discoverable commercial-agent careers route", () => {
+    renderPage(<Careers />, "/careers");
+    expect(screen.getByRole("heading", { name: /Build your commercial real estate career with intention/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Development opportunities" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Commercial assignments" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A connected team" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "More than a list of properties." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Support built around moving the assignment forward/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Commercial professionals who care how the work gets done/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Tell us about your commercial experience/i })).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("License number or status")).toBeInTheDocument();
+    expect(
+      screen.getByRole("group", { name: "Commercial specialties" }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText("Why Gala CRE?")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Submit Application" })).toBeEnabled();
+    expect(screen.getByText(/without regard to any status protected by applicable law/i)).toBeInTheDocument();
+    expect(screen.getByText(/does not create an employment or agency relationship/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers")).toBe(true);
+  });
+
+  it("creates a distinct 1031 replacement-property sourcing route", () => {
+    renderPage(<ExchangeSourcing />, "/investors/1031-exchange");
+    expect(screen.getByRole("heading", { name: /Move quickly with a clearer acquisition brief/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /A focused search—not a promise of an outcome/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Establish the clock" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Define the buy box" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Screen the field" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Coordinate next steps" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Share your acquisition brief/i })).toBeInTheDocument();
+    expect(screen.getByLabelText("Is this a 1031 exchange?")).toBeInTheDocument();
+    expect(screen.getByLabelText("Identification deadline")).toHaveAttribute("type", "date");
+    expect(screen.getByRole("group", { name: "Asset types" })).toBeInTheDocument();
+    expect(screen.getByLabelText("Financing status")).toBeInTheDocument();
+    expect(screen.getByLabelText("Qualified intermediary status")).toBeInTheDocument();
+    expect(screen.getByLabelText("Preferred response method")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Share Acquisition Criteria/i })).toBeEnabled();
+    expect(screen.getByText(/not tax, legal, accounting, or qualified-intermediary services/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Share Your Criteria/i })).toHaveAttribute("href", "#investor-inquiry");
+  });
+
+  it("routes GalaSales to sourcing and GalaCapital to exchange-financing coordination", () => {
+    const sales = render(
+      <MemoryRouter initialEntries={["/services/investment-sales"]}>
+        <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("link", { name: /Find a Replacement Property/i })).toHaveAttribute("href", "/investors/1031-exchange?source=gala-sales");
+    sales.unmount();
+
+    render(
+      <MemoryRouter initialEntries={["/services/capital-markets"]}>
+        <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("link", { name: /Discuss Exchange Financing/i })).toHaveAttribute("href", "/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital");
+    expect(screen.queryByRole("link", { name: /Find a Replacement Property/i })).not.toBeInTheDocument();
   });
 
   it("gives in-page-only capabilities real explanatory detail, not just a label", () => {
@@ -320,6 +397,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Start a 1031 Property Search/i })).toHaveAttribute("href", "/investors/1031-exchange?source=property-catalog");
   });
 
   it("renders Lackey Street as a commercial-property diligence journey", () => {
@@ -342,6 +420,7 @@ describe("Gala CRE public pages", () => {
       "href",
       "/contact?property=2301-lackey-street"
     );
+    expect(screen.getByRole("link", { name: /Share Your Acquisition Criteria/i })).toHaveAttribute("href", "/investors/1031-exchange?source=property-detail&property=2301-lackey-street");
     expect(screen.getByRole("link", { name: /View on Crexi/i })).toHaveAttribute(
       "href",
       "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"

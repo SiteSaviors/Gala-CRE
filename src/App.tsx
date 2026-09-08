@@ -8,8 +8,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import CapabilityDetail from "./pages/CapabilityDetail.tsx";
+import Careers from "./pages/Careers.tsx";
 import Company from "./pages/Company.tsx";
 import Contact from "./pages/Contact.tsx";
+import ExchangeSourcing from "./pages/ExchangeSourcing.tsx";
 import Properties from "./pages/Properties.tsx";
 import PropertyDetail from "./pages/PropertyDetail.tsx";
 import ServiceDetail from "./pages/ServiceDetail.tsx";
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/properties" element={<Properties />} />
           <Route path="/properties/:slug" element={<PropertyDetail />} />
           <Route path="/company" element={<Company />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/investors/1031-exchange" element={<ExchangeSourcing />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/what-we-do" element={<Navigate to="/services" replace />} />
           <Route path="/projects" element={<Navigate to="/properties" replace />} />

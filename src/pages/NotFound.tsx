@@ -15,7 +15,7 @@ const NotFound = () => {
     <>
       <PageMeta title="Page Not Found" description="The requested Gala CRE Group page could not be found." />
       <SiteHeader currentPath={location.pathname} />
-      <main className="gala-page">
+      <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-inner-hero gala-not-found">
           <div className="gala-shell">
             <div className="gala-kicker">404</div>

@@ -19,6 +19,8 @@ const allowedInquiryTypes = new Set([
   "Capital Markets",
   "Property Management",
   "Property Inquiry",
+  "Commercial Agent Careers",
+  "1031 / Replacement Property Search",
 ]);
 
 const asString = (value: unknown) => (typeof value === "string" ? value.trim() : "");

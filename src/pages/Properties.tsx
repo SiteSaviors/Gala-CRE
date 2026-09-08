@@ -1,5 +1,6 @@
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowUpRight, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import PropertyCard from "@/components/properties/PropertyCard";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -43,7 +44,7 @@ const Properties = () => {
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/properties" />
-      <main className="gala-page">
+      <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-inner-hero">
           <div className="gala-shell">
             <div className="gala-kicker">Properties</div>
@@ -81,6 +82,17 @@ const Properties = () => {
               <span>{filtered.length} {filtered.length === 1 ? "property" : "properties"}</span>
               <span>Active listings appear first</span>
             </div>
+
+            <aside className="gala-resource-callout" aria-labelledby="replacement-property-title">
+              <div>
+                <span>Time-sensitive acquisition</span>
+                <h2 id="replacement-property-title">Need a replacement property beyond the current listings?</h2>
+                <p>Share your acquisition criteria and timeline for a more focused commercial property search.</p>
+              </div>
+              <Link to="/investors/1031-exchange?source=property-catalog" className="gala-text-link">
+                Start a 1031 Property Search <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </aside>
 
             {filtered.length ? (
               <div className="gala-property-grid">{filtered.map((property) => <PropertyCard key={property.slug} property={property} />)}</div>

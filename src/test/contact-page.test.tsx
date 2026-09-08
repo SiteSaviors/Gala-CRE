@@ -64,9 +64,26 @@ describe("advisor inquiry form", () => {
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
   });
 
+  it("preserves GalaCapital exchange-financing context", () => {
+    renderContact("/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Capital Markets");
+  });
+
   it("prefills a focused tenant representation inquiry", () => {
     renderContact("/contact?inquiry=tenant-representation");
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Tenant Representation");
+  });
+
+  it("preselects Careers and reveals the dedicated recruiting journey", () => {
+    renderContact("/contact?inquiry=careers");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Commercial Agent Careers");
+    expect(screen.getByRole("link", { name: "Continue to Agent Application" })).toHaveAttribute("href", "/careers?source=contact");
+  });
+
+  it("preselects 1031 sourcing and reveals the dedicated acquisition brief", () => {
+    renderContact("/contact?inquiry=1031-exchange");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("1031 / Replacement Property Search");
+    expect(screen.getByRole("link", { name: "Continue to Acquisition Brief" })).toHaveAttribute("href", "/investors/1031-exchange?source=contact");
   });
 
   it("retains input and displays an inline delivery error", async () => {
