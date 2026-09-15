@@ -121,7 +121,7 @@ Status: **In progress**
 
 Active listings:
 
-- [ ] 5047 Yadkin Road
+- [x] 5047 Yadkin Road
 - [ ] 611 & 703 Church Street
 - [ ] 5911 Family Farm Road
 - [ ] Lexington Townhome Site (`/properties/1111-brown-street`)
@@ -275,3 +275,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: none for the shared listing standard. Existing property-data and media blockers remain listed above.
 - Exact next action: Audit and tighten `/properties/5047-yadkin-road` within the compact system: remove any remaining repeated marketing prose, keep represented approvals explicitly qualified, make the one-image treatment intentional, and verify facts, documents, map, advisor, related links, and inquiry context at desktop and mobile sizes.
+
+### 2026-09-15 — Phase 2 Yadkin compact listing
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `a711e2e`, clean.
+- Source of truth checked: this ledger, Yadkin's record in `PROPERTY-DATA-REGISTER.md`, current listing data, the shared compact renderer, its sole approved annotated aerial, and property/page tests.
+- Gate: make Yadkin concise and purposeful with one approved image while clearly separating the offering's represented plan/permit claims from the records a buyer must verify.
+- Completed: tightened the headline, lead, highlights, readiness copy, and buyer-verification table; combined overlapping plan/permit conditions; changed the summary panel to use each property's short catalog summary rather than repeat the opportunity headline; preserved price, acreage, land classification, plan positioning, advisor, map, document requests, disclosure, and inquiry context. The single annotated aerial now functions as an intentional primary media panel without empty thumbnail slots.
+- Files and routes changed: `src/content/properties.ts`, `src/components/properties/CommercialListingPage.tsx`, and this ledger; `/properties/5047-yadkin-road` plus the short-summary treatment shared by property routes.
+- Verification: 36/36 targeted page/property tests passed. Desktop height reduced from 7,437px baseline to 5,110px; mobile from 9,638px to 7,678px, both including the global footer. The 1440px and 390px routes show the approved aerial without cropping its central boundary context, expose `$829,000`, Gaurang Gala, documents, map, and inquiry context, and have no overflow or console errors.
+- Commit: this checkpoint's local implementation commit; resolve the hash from `git log -1` before continuing.
+- Remaining working tree: expected clean after commit.
+- Blockers: underlying approved plan, approval record, zoning, parcel, access, utility, and physical-condition records remain client inputs and are not represented as verified facts.
+- Exact next action: Audit and tighten `/properties/611-703-church-street` within the compact system, preserving the childcare thesis and two-site context while removing repeated claims, keeping the 703/711 and acreage conflicts qualified, and verifying the six-image selector, video, map, documents, advisor, and inquiry context at desktop and mobile sizes.

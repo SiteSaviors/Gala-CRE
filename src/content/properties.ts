@@ -422,9 +422,9 @@ export const properties: Property[] = [
     ],
     advisorId: "gaurang-gala",
     listingPage: {
-      headline: "A 3.46-acre Fayetteville commercial site marketed with an approved shopping-center plan.",
+      headline: "A 3.46-acre commercial site with an advanced shopping-center plan.",
       lead:
-        "A Yadkin Road land offering whose public marketing represents the site-planning work as advanced, with access, circulation, parking, buffers, and utility connections addressed in the plan. The actual plan and municipal approval record should control buyer evaluation.",
+        "The public offering represents the site plan as approved and permit-ready, with access, circulation, parking, buffers, and utility connections addressed. Buyers should evaluate those claims against the actual plan and municipal record.",
       overviewEyebrow: "Commercial Land Opportunity",
       keyFacts: [
         { label: "Asking price", value: "$829,000" },
@@ -433,17 +433,16 @@ export const properties: Property[] = [
         { label: "Planning status", value: "Approval represented" },
       ],
       highlights: [
-        "Shopping-center site plan represented as fully approved",
-        "Ingress, egress, parking, circulation, and buffers addressed in the represented plan",
-        "Utility availability and approved connections stated by the public offering",
-        "Permit-ready position stated by the offering; buyer to verify the approval record",
+        "Shopping-center plan represented as approved and permit-ready",
+        "Access, parking, circulation, buffers, and utility connections addressed in the offering",
+        "Approval scope, conditions, currency, and remaining permits require document review",
       ],
       information: {
         intro: {
           eyebrow: "Development Readiness",
           title: "Evaluate the planning work before pricing the execution risk.",
           body:
-            "The opportunity is the represented shopping-center approval—not simply the acreage. Buyers should compare the actual approved plan and conditions with their intended program, schedule, and capital plan.",
+            "The represented shopping-center plan—not acreage alone—is central to the offering. The signed plan, approval conditions, and remaining permits should guide underwriting.",
         },
         groups: [
           {
@@ -477,8 +476,7 @@ export const properties: Property[] = [
         title: "What is offered—and what must be confirmed before closing.",
         conditions: [
           { label: "Published offering", value: "3.46-acre commercial land opportunity at $829,000" },
-          { label: "Plan status", value: "Shopping-center approval is represented; request the approved plan and record" },
-          { label: "Remaining approvals", value: "Confirm permits, conditions, expiration, and any required plan revisions" },
+          { label: "Plan and permits", value: "Request the signed approval record; confirm conditions, currency, remaining permits, and revisions" },
           { label: "Site fundamentals", value: "Verify parcel, zoning, frontage, access, utilities, wetlands, and flood conditions" },
           { label: "Intended program", value: "Buyer should confirm the approved plan supports its use, scale, and schedule" },
         ],

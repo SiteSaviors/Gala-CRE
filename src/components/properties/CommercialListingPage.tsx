@@ -163,7 +163,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 {isClosedTransaction ? "Transaction record" : `${property.offeringType} opportunity`}
               </span>
               <strong className="gala-listing-compact__price">{priceOrStatus}</strong>
-              <p>{page.headline}</p>
+              <p>{property.summary}</p>
 
               {summaryFacts.length ? (
                 <dl className="gala-listing-compact__facts">
