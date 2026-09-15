@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:45 CDT
+Last updated: 2026-09-15 03:48 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -128,7 +128,7 @@ Active listings:
 
 Closed transaction variants:
 
-- [ ] 802 Bragg Boulevard
+- [x] 802 Bragg Boulevard
 - [ ] 202 North Main Street
 - [ ] 10416 Chapel Hill Road
 
@@ -327,3 +327,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: current asking price, gross surveyed acreage, current or transferable status of the historical approvals, work completed under the 2023 records, controlling land-use approval, and publication rights for third-party documents/artwork remain client inputs and stay omitted or qualified.
 - Exact next action: Audit and tighten the closed-record variant at `/properties/802-bragg-boulevard`, leading with completed-transaction status and verified physical facts while keeping closing date, consideration, current operating status, and preferred Gala transaction credit unpublished; verify its three-image selector, historical-use language, source records, map, and similar-property inquiry path at desktop and mobile sizes.
+
+### 2026-09-15 — Phase 2 802 Bragg Boulevard closed record
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `733e67a`, clean.
+- Source of truth checked: the goal objective, `AGENTS.md`, this ledger, the 802 Bragg record in `PROPERTY-DATA-REGISTER.md`, the client-confirmed recently sold status, public Crexi/LoopNet facts, three optimized former-listing images, Gaurang Gala's public listing record, shared renderer, and property/page tests.
+- Gate: make the closed status and verified physical profile immediately clear while keeping sale consideration, closing date, confidential terms, and post-closing occupancy or operating conditions unpublished.
+- Completed: tightened the completed-transaction thesis, highlights, physical and former-offering tables, transaction conditions, gallery and location copy, and public-record descriptions; combined frontage/parking and building-profile facts; separated historical occupancy/fuel conditions from current representations; removed the redundant similar-property document card while retaining the primary and closing conversion actions.
+- Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, and this ledger; `/properties/802-bragg-boulevard`.
+- Verification: 36/36 targeted page/property tests passed, including an explicit assertion that sale consideration and closing date remain unpublished. Desktop height reduced from 7,100px baseline to 5,163px; mobile from 9,329px to 7,627px, including the global footer. The three-image selector changes the primary image; Closed and Sale Transaction labels, verified physical facts, Crexi and LoopNet records, live map, and `/contact?property=802-bragg-boulevard` similar-property inquiry remain present; former asking prices are absent; the map loads after entering its lazy viewport; no horizontal overflow or page-specific console errors appear at 1440px or 390px.
+- Commit: `refactor: tighten Bragg Boulevard transaction record` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: final consideration, closing date, preferred Gala transaction credit, approved closing announcement details, and current ownership/operating information remain client inputs and stay unpublished.
+- Exact next action: Audit and tighten `/properties/202-north-main-street` as a compact non-photographic closed record, preserving the July 30, 2026 date and verified physical facts while keeping the displayed MLS amount, Gala's exact transaction role, advisor credit, and restricted MLS photography unpublished; verify the completed-transaction artwork, map, disclosure, and similar-property inquiry at desktop and mobile sizes.

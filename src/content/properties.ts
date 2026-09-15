@@ -1251,7 +1251,7 @@ export const properties: Property[] = [
     listingPage: {
       headline: "Recently sold retail property on Bragg Boulevard.",
       lead:
-        "A completed Fayetteville transaction involving a 2,529-square-foot convenience-store and automotive-service property on approximately 1.15 acres.",
+        "A completed Fayetteville transaction involving a 2,529-square-foot retail and service building on approximately 1.15 acres, with Gala's listing representation documented in the public record.",
       overviewEyebrow: "Recently Sold",
       keyFacts: [
         { label: "Transaction status", value: "Recently sold" },
@@ -1260,9 +1260,8 @@ export const properties: Property[] = [
         { label: "Asset type", value: "Retail / service" },
       ],
       highlights: [
-        "One-story retail and service building",
-        "Convenience-store, automotive-service, and car-wash components represented in the former offering",
-        "Bragg Boulevard frontage with pylon signage",
+        "Convenience-store, automotive-service, car-wash, and fuel components represented in the former offering",
+        "99 feet of Bragg Boulevard frontage and 10 parking spaces reported by LoopNet",
         "Gala CRE listing representation documented by the public Crexi record",
       ],
       information: {
@@ -1270,19 +1269,18 @@ export const properties: Property[] = [
           eyebrow: "Property at Closing",
           title: "A multi-component commercial property with operating flexibility.",
           body:
-            "The public marketing record describes the asset as it was offered. Tenant, lease, fuel, occupancy, and operating conditions may have changed as part of or after the transaction.",
+            "These facts describe the former offering. Occupancy, fuel, lease, and operating conditions are not represented as current.",
         },
         groups: [
           {
             eyebrow: "Physical Profile",
             title: "Retail and service improvements on a 1.15-acre site.",
             body:
-              "The former offering combined a convenience-store building, automotive bays, car-wash improvements, fuel pumps, and supporting site area along Bragg Boulevard.",
+              "The former offering combined convenience-store, automotive, car-wash, and fuel improvements.",
             facts: [
               { label: "Building area", value: "2,529 SF" },
               { label: "Site area", value: "1.15 acres" },
-              { label: "Buildings", value: "One" },
-              { label: "Stories", value: "One" },
+              { label: "Building profile", value: "One building / one story" },
               { label: "Year built", value: "1987 per LoopNet" },
               { label: "Zoning", value: "C3 reported by public listings" },
             ],
@@ -1291,13 +1289,12 @@ export const properties: Property[] = [
             eyebrow: "Former Offering",
             title: "The sale followed a flexible owner-user and investor position.",
             body:
-              "Crexi's former marketing described three operating components and month-to-month occupancy, along with an expired fuel agreement. Those details explain the original brokerage thesis but are not presented as current post-closing conditions.",
+              "Former marketing described three operating components, month-to-month occupancy, and an expired fuel agreement.",
             facts: [
-              { label: "Former subtype", value: "Convenience store" },
               { label: "Operating components", value: "C-store, automotive service, and car wash" },
+              { label: "Former occupancy", value: "Three month-to-month components per former marketing" },
               { label: "Fuel agreement", value: "Reported expired at time of offering" },
-              { label: "Frontage", value: "99 feet on Bragg Boulevard per LoopNet" },
-              { label: "Parking", value: "10 spaces reported by LoopNet" },
+              { label: "Frontage / parking", value: "99 feet / 10 spaces reported by LoopNet" },
               { label: "Opportunity zone", value: "Reported by Crexi and LoopNet" },
             ],
           },
@@ -1307,10 +1304,9 @@ export const properties: Property[] = [
         eyebrow: "Transaction Record",
         title: "What this page confirms—and what remains private.",
         conditions: [
-          { label: "Status", value: "Recently sold, as confirmed by Gala CRE and the current Crexi sold flag" },
-          { label: "Public availability", value: "The property is no longer advertised on LoopNet" },
-          { label: "Sale price", value: "Not published; former asking prices are not presented as closing consideration" },
-          { label: "Closing date", value: "Not published" },
+          { label: "Status", value: "Recently sold; Crexi marks the record sold and LoopNet no longer advertises it" },
+          { label: "Closing terms", value: "Sale consideration and closing date are not published" },
+          { label: "Gala role", value: "Listing representation documented by the public Crexi record" },
           { label: "Operating details", value: "Listing-period facts only; not represented as current ownership or tenancy conditions" },
         ],
       },
@@ -1319,7 +1315,7 @@ export const properties: Property[] = [
           eyebrow: "Transaction Gallery",
           title: "The property as presented during the sale process.",
           body:
-            "These images come from the former Crexi listing and document the property's exterior, Bragg Boulevard setting, and convenience-store interior at the time of marketing.",
+            "Three former-listing images document the exterior, Bragg Boulevard setting, and convenience-store interior during marketing.",
         },
         items: [
           {
@@ -1343,10 +1339,9 @@ export const properties: Property[] = [
         eyebrow: "Location & Context",
         title: "A commercial site on Bragg Boulevard in Fayetteville.",
         body:
-          "The property is located in Cumberland County along Bragg Boulevard. Public marketing identified proximity to central Fayetteville and the downtown corridor. The map is provided as historical property context, not current availability.",
+          "The map records the Fayetteville property location for transaction context; it does not indicate current availability.",
         points: [
           "802 Bragg Boulevard, Fayetteville, North Carolina 28301",
-          "Cumberland County",
           "Bragg Boulevard frontage",
         ],
         mapEmbedUrl:
@@ -1359,28 +1354,22 @@ export const properties: Property[] = [
           eyebrow: "Public Transaction Record",
           title: "Review the former marketing record or discuss a similar assignment.",
           body:
-            "The linked marketplace pages preserve the public property record. Confidential closing terms and post-closing operating details are not published here.",
+            "The linked marketplace pages preserve the public record. Confidential closing and post-closing information remains unpublished.",
         },
         items: [
           {
             title: "Crexi transaction record",
-            description: "Review the former Gala CRE listing, property facts, and current sold designation.",
+            description: "Review the former Gala listing, property facts, and current sold designation.",
             actionLabel: "Open Crexi Record",
             href: "https://www.crexi.com/properties/1810031/north-carolina-valero",
             external: true,
           },
           {
             title: "LoopNet property record",
-            description: "Review the archived public property facts and off-market availability notice.",
+            description: "Review archived property facts and the off-market notice.",
             actionLabel: "Open LoopNet Record",
             href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
             external: true,
-          },
-          {
-            title: "Similar-property conversation",
-            description: "Speak with Gala CRE about selling, acquiring, or repositioning a comparable retail property.",
-            actionLabel: "Discuss a Similar Property",
-            href: "/contact?property=802-bragg-boulevard&topic=similar-property",
           },
         ],
       },

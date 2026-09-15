@@ -781,6 +781,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Recently sold retail property on Bragg Boulevard." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A multi-component commercial property with operating flexibility." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "What this page confirms—and what remains private." })).toBeInTheDocument();
+    expect(screen.getByText("Sale consideration and closing date are not published")).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(3);
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
