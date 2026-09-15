@@ -84,12 +84,12 @@ const Index = () => {
   const [openCapability, setOpenCapability] = useState<string | null>(null);
   const [canPlayHeroVideo, setCanPlayHeroVideo] = useState(() => (
     typeof window !== "undefined"
-    && window.matchMedia("(min-width: 769px) and (prefers-reduced-motion: no-preference)").matches
+    && window.matchMedia("(prefers-reduced-motion: no-preference)").matches
   ));
   useSiteCursor();
 
   useEffect(() => {
-    const videoPreference = window.matchMedia("(min-width: 769px) and (prefers-reduced-motion: no-preference)");
+    const videoPreference = window.matchMedia("(prefers-reduced-motion: no-preference)");
     const updateVideoPreference = () => setCanPlayHeroVideo(videoPreference.matches);
     updateVideoPreference();
     videoPreference.addEventListener("change", updateVideoPreference);
@@ -151,7 +151,7 @@ const Index = () => {
       <main className="gala-home" id="main-content" tabIndex={-1}>
         <section className="hero gala-hero" id="hero">
           <div className="hbg" style={{ backgroundImage: `url(${heroPoster})` }}>
-            <video className="hbgv" id="hvideo" muted loop playsInline preload={canPlayHeroVideo ? "metadata" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
+            <video className="hbgv" id="hvideo" autoPlay={canPlayHeroVideo} muted loop playsInline preload={canPlayHeroVideo ? "metadata" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
               {canPlayHeroVideo ? <source src={heroVideo} type="video/mp4" /> : null}
             </video>
           </div>
@@ -159,7 +159,7 @@ const Index = () => {
             <div className="ey">Brokerage · Sales · Development · Capital</div>
             <h1>Commercial Real Estate,<br />Simplified</h1>
             <p className="hsp">Gala CRE Group helps clients buy, sell, lease, develop, and source capital for commercial property across North Carolina.</p>
-            <div className="hbtns"><Link to="/contact" className="bp">Talk to an Advisor</Link><Link to="/properties" className="bg">View Properties <ArrowUpRight size={15} /></Link></div>
+            <div className="hbtns"><Link to="/contact" className="bp">Let's Connect</Link><Link to="/properties" className="bg">View Properties <ArrowUpRight size={15} /></Link></div>
           </div></div>
           <div className="si"><div className="silbl">Scroll</div><div className="sil"></div></div>
         </section>

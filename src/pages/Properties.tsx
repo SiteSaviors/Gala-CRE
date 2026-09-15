@@ -40,7 +40,7 @@ const Properties = () => {
     <>
       <PageMeta
         title="Commercial Properties"
-        description="Explore commercial real estate opportunities represented by Gala CRE Group across North Carolina."
+        description="Explore current commercial real estate opportunities and selected completed transactions represented by Gala CRE Group across North Carolina."
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/properties" />
@@ -49,7 +49,7 @@ const Properties = () => {
           <div className="gala-shell">
             <div className="gala-kicker">Properties</div>
             <h1>Find the right commercial opportunity.</h1>
-            <p>Search current commercial properties represented by Gala CRE Group across North Carolina.</p>
+            <p>Explore current opportunities and selected completed transactions represented by Gala CRE Group across North Carolina.</p>
           </div>
         </section>
 
@@ -83,17 +83,6 @@ const Properties = () => {
               <span>Active listings appear first</span>
             </div>
 
-            <aside className="gala-resource-callout" aria-labelledby="replacement-property-title">
-              <div>
-                <span>Time-sensitive acquisition</span>
-                <h2 id="replacement-property-title">Need a replacement property beyond the current listings?</h2>
-                <p>Share your acquisition criteria and timeline for a more focused commercial property search.</p>
-              </div>
-              <Link to="/investors/1031-exchange?source=property-catalog" className="gala-text-link">
-                Start a 1031 Property Search <ArrowUpRight size={16} aria-hidden="true" />
-              </Link>
-            </aside>
-
             {filtered.length ? (
               <div className="gala-property-grid">{filtered.map((property) => <PropertyCard key={property.slug} property={property} />)}</div>
             ) : (
@@ -104,6 +93,17 @@ const Properties = () => {
                 {hasFilters ? <button type="button" className="gala-button" onClick={reset}>Reset Filters</button> : null}
               </div>
             )}
+
+            <aside className="gala-resource-callout" aria-labelledby="replacement-property-title">
+              <div>
+                <span>Time-sensitive acquisition</span>
+                <h2 id="replacement-property-title">Need a replacement property beyond the current listings?</h2>
+                <p>Share your acquisition criteria and timeline for a more focused commercial property search.</p>
+              </div>
+              <Link to="/investors/1031-exchange?source=property-catalog" className="gala-text-link">
+                Start a 1031 Property Search <ArrowUpRight size={16} aria-hidden="true" />
+              </Link>
+            </aside>
           </div>
         </section>
       </main>

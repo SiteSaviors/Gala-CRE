@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   filterProperties,
+  featuredProperties,
   findPropertyBySlug,
   properties,
   propertyBySlug,
@@ -36,20 +37,40 @@ const records = [
 ];
 
 describe("property content model", () => {
-  it("includes the three current Gala sale listings", () => {
-    expect(properties).toHaveLength(3);
+  it("includes four active listings and one completed transaction", () => {
+    expect(properties).toHaveLength(5);
     expect(properties.every((item) => item.offeringType === "For Sale")).toBe(true);
+    expect(properties.filter((item) => item.status === "Active")).toHaveLength(4);
+    expect(featuredProperties).toHaveLength(4);
     expect(propertyBySlug["2301-lackey-street"]?.priceDisplay).toBe("$549,000");
     expect(propertyBySlug["5047-yadkin-road"]?.acreageDisplay).toBe("3.46 acres");
     expect(propertyBySlug["611-703-church-street"]?.city).toBe("Morrisville");
-    expect(properties.every((item) => item.advisor?.name === "Gaurang Gala")).toBe(true);
-    expect(properties.every((item) => item.advisor?.license === "NC 283149")).toBe(true);
+    expect(propertyBySlug["5911-family-farm-road"]).toMatchObject({
+      priceDisplay: "$995,000",
+      acreageDisplay: "2.10 acres",
+      assetType: "Land",
+      status: "Active",
+    });
+    expect(propertyBySlug["802-bragg-boulevard"]).toMatchObject({
+      sizeDisplay: "2,529 SF",
+      acreageDisplay: "1.15 acres",
+      assetType: "Retail",
+      status: "Closed",
+      featured: false,
+    });
+    expect(featuredProperties.some((item) => item.slug === "802-bragg-boulevard")).toBe(false);
+    expect(properties.filter((item) => item.advisor).every((item) => item.advisor?.name === "Gaurang Gala")).toBe(true);
+    expect(properties.filter((item) => item.advisor).every((item) => item.advisor?.license === "NC 283149")).toBe(true);
     expect(propertyBySlug["2301-lackey-street"]?.listingPage?.gallery?.items).toHaveLength(5);
     expect(propertyBySlug["2301-lackey-street"]?.listingPage?.information?.groups).toHaveLength(2);
     expect(propertyBySlug["611-703-church-street"]?.listingPage?.gallery?.items).toHaveLength(5);
     expect(propertyBySlug["611-703-church-street"]?.listingPage?.information?.groups).toHaveLength(2);
     expect(propertyBySlug["5047-yadkin-road"]?.listingPage?.gallery?.items).toHaveLength(1);
     expect(propertyBySlug["5047-yadkin-road"]?.listingPage?.information?.groups).toHaveLength(2);
+    expect(propertyBySlug["5911-family-farm-road"]?.listingPage?.gallery?.items).toHaveLength(5);
+    expect(propertyBySlug["5911-family-farm-road"]?.listingPage?.information?.groups).toHaveLength(2);
+    expect(propertyBySlug["802-bragg-boulevard"]?.listingPage?.gallery?.items).toHaveLength(3);
+    expect(propertyBySlug["802-bragg-boulevard"]?.listingPage?.information?.groups).toHaveLength(2);
   });
 
   it("orders active records before under-contract and closed records", () => {

@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { z } from "zod";
-import { getExchangeTimelineIssues } from "../src/lib/exchangeTimeline";
-import { getInvestorInquiryPriority } from "../src/lib/inquiryPriority";
+import { getExchangeTimelineIssues } from "../src/lib/exchangeTimeline.js";
+import { getInvestorInquiryPriority } from "../src/lib/inquiryPriority.js";
 
 type ApiRequest = {
   method?: string;
@@ -76,7 +76,12 @@ const investorPayloadSchema = z.object({
   consent: z.literal(true),
   website: z.string().max(500),
 }).superRefine((values, context) => {
-  getExchangeTimelineIssues(values).forEach(({ field, message }) => {
+  getExchangeTimelineIssues({
+    exchangeStatus: values.exchangeStatus ?? "",
+    relinquishedClosingDate: values.relinquishedClosingDate ?? "",
+    identificationDeadline: values.identificationDeadline ?? "",
+    completionDeadline: values.completionDeadline ?? "",
+  }).forEach(({ field, message }) => {
     context.addIssue({ code: z.ZodIssueCode.custom, path: [field], message });
   });
 });

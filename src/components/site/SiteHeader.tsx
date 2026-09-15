@@ -99,7 +99,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <li><Link to="/careers">Careers</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
-      <Link to="/contact" className="nbtn">Talk to an Advisor</Link>
+      <Link to="/contact" className="nbtn">Let's Connect</Link>
       <button
         type="button"
         className={`mnavt${mobileNavOpen ? " open" : ""}`}
@@ -134,7 +134,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <Link to="/company" onClick={() => setMobileNavOpen(false)}>Company</Link>
         <Link to="/careers" onClick={() => setMobileNavOpen(false)}>Careers</Link>
         <Link to="/contact" onClick={() => setMobileNavOpen(false)}>Contact</Link>
-        <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Talk to an Advisor</Link>
+        <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Let's Connect</Link>
       </div>
 
       <div
@@ -181,7 +181,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             <span className="gala-mega-menu__advisor-content">
               <small>Have a commercial opportunity?</small>
               <strong>Let's discuss what comes next.</strong>
-              <span>Talk to an Advisor <ArrowUpRight size={16} aria-hidden="true" /></span>
+              <span>Let's Connect <ArrowUpRight size={16} aria-hidden="true" /></span>
             </span>
           </Link>
         </div>

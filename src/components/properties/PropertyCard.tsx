@@ -18,7 +18,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => (
     </div>
     <div className="gala-property-card__body">
       <div className="gala-property-card__meta">
-        {property.offeringType} · {property.assetType}
+        {property.status === "Closed" ? "Recently Sold" : property.offeringType} · {property.assetType}
       </div>
       <h2>{property.name}</h2>
       <p className="gala-property-card__location">

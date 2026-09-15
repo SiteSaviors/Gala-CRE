@@ -10,10 +10,10 @@ The broader public route matrix also passed responsive browser QA at desktop, ta
 
 ## Verified
 
-- 74 automated tests pass across page rendering, route coverage, contact/form behavior, server routing, property data, and scroll behavior.
+- 76 automated tests pass across page rendering, route coverage, contact/form behavior, server routing, property data, and scroll behavior.
 - Production build passes.
 - Lint passes with zero errors and seven pre-existing Fast Refresh warnings in shared UI primitives.
-- 31 public routes pass at 1440 × 900, 820 × 1180, and 390 × 844: 93 responsive checks total.
+- 33 public routes pass at 1440 × 900, 820 × 1180, and 390 × 844: 99 responsive checks total. The Family Farm and 802 Bragg Boulevard routes were each checked at all three sizes after the prior 31-route matrix passed.
 - Keyboard focus begins with a visible “Skip to main content” link and moves to the first invalid form field after submit.
 - Checkbox groups and consent controls expose their error messages through `aria-describedby` and `aria-invalid`.
 - Careers and investor forms expose loading, success, and failure states and retain data after failed delivery.

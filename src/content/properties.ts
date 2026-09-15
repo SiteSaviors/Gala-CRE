@@ -11,6 +11,14 @@ import churchStreetGallery02 from "@/assets/properties/church-street/church-stre
 import churchStreetGallery04 from "@/assets/properties/church-street/church-street-04.jpg";
 import churchStreetGallery06 from "@/assets/properties/church-street/church-street-06.jpg";
 import churchStreetGallery08 from "@/assets/properties/church-street/church-street-08.jpg";
+import familyFarm01 from "@/assets/properties/family-farm-road/family-farm-01.webp";
+import familyFarm02 from "@/assets/properties/family-farm-road/family-farm-02.webp";
+import familyFarm03 from "@/assets/properties/family-farm-road/family-farm-03.webp";
+import familyFarm04 from "@/assets/properties/family-farm-road/family-farm-04.webp";
+import familyFarm05 from "@/assets/properties/family-farm-road/family-farm-05.webp";
+import braggBoulevardExterior from "@/assets/properties/802-bragg-boulevard/bragg-03.webp";
+import braggBoulevardApproach from "@/assets/properties/802-bragg-boulevard/bragg-01.webp";
+import braggBoulevardInterior from "@/assets/properties/802-bragg-boulevard/bragg-02.webp";
 
 export const propertyAssetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;
 export const propertyOfferingTypes = ["For Sale", "For Lease"] as const;
@@ -748,6 +756,427 @@ export const properties: Property[] = [
     },
     featured: true,
     sortOrder: 3,
+  },
+  {
+    slug: "5911-family-farm-road",
+    name: "5911 Family Farm Road",
+    address: "5911 Family Farm Road",
+    city: "Morrisville",
+    state: "NC",
+    assetType: "Land",
+    offeringType: "For Sale",
+    status: "Active",
+    priceDisplay: "$995,000",
+    acreageDisplay: "2.10 acres",
+    heroImage: familyFarm01,
+    gallery: [],
+    imagePosition: "center 48%",
+    summary: "Two-lot residential land offering in Morrisville with VLDR zoning and an existing tear-down structure.",
+    overview:
+      "The public MLS and commercial offering market approximately 2.10 acres in Morrisville for a custom estate, builder, investor, or potential residential development path, subject to buyer verification and Town of Morrisville approval.",
+    highlights: [
+      "Approximately 2.10 acres in Morrisville",
+      "Two lots represented by the public MLS marketing",
+      "VLDR zoning reported by the public listing",
+      "Existing well and septic system reported by the offering",
+    ],
+    details: [
+      { label: "Property type", value: "Land" },
+      { label: "Zoning", value: "VLDR per public MLS" },
+      { label: "Offering composition", value: "Two lots per public MLS marketing" },
+      { label: "Existing structure", value: "Tear-down; do not enter" },
+    ],
+    opportunity: {
+      eyebrow: "Offering Position",
+      title: "A residential land opportunity within an established Morrisville setting.",
+      body:
+        "The offering presents the property for evaluation as a custom estate, builder, investor, or future residential development opportunity. Any subdivision, development, buildability, or intended use remains subject to independent review and Town of Morrisville and Wake County requirements.",
+      points: [
+        "Approximately 2.10 acres marketed across two lots",
+        "VLDR zoning reported by the current MLS record",
+        "Existing residence conveys at no value and is not safe to enter",
+      ],
+    },
+    location: {
+      eyebrow: "Location Context",
+      title: "An infill residential land position in Morrisville.",
+      body:
+        "The MLS directions place the property off McCrimmon Parkway via Liberty Rose Drive and Family Farm Road. Buyers should confirm legal access, road maintenance, parcel configuration, and measured proximity to regional destinations.",
+      points: [
+        "Morrisville, North Carolina",
+        "Wake County",
+        "Near the Research Triangle employment corridor",
+      ],
+    },
+    externalLinks: [
+      {
+        label: "LoopNet",
+        href: "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/",
+      },
+      {
+        label: "Listing Website",
+        href: "https://doorifymls.com/properties/NC/Morrisville/27560/10277/5911-family-farm-road-morrisville-nc-27560/775842597",
+      },
+    ],
+    listingPage: {
+      headline: "Approximately 2.10 acres for residential use and development evaluation.",
+      lead:
+        "A Morrisville land offering marketed across two lots with reported VLDR zoning, an existing well and septic system, and multiple residential evaluation paths subject to local approval.",
+      overviewEyebrow: "The Opportunity",
+      keyFacts: [
+        { label: "Asking price", value: "$995,000" },
+        { label: "Site area", value: "Approx. 2.10 acres" },
+        { label: "Property type", value: "Residential land" },
+        { label: "Existing improvement", value: "Tear-down / do not enter" },
+      ],
+      highlights: [
+        "Two-lot composition represented by the current MLS marketing",
+        "VLDR zoning reported by the public MLS record",
+        "Existing well and septic system reported by the offering",
+        "Custom estate, builder, investor, and residential development paths cited for evaluation",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Property Information",
+          title: "Separate the current record from future potential.",
+          body:
+            "The marketed facts describe the property today. Buildability, subdivision, utility capacity, and development potential require direct confirmation with the governing authorities and buyer advisers.",
+        },
+        groups: [
+          {
+            eyebrow: "Current Property",
+            title: "An acreage offering with an existing residential structure.",
+            body:
+              "The public offering describes approximately 2.10 acres, an existing residence that conveys at no value, and an existing well and septic system. The residence is represented as unsafe and must not be entered.",
+            facts: [
+              { label: "Published area", value: "Approx. 2.10 acres" },
+              { label: "Offering composition", value: "Two lots per MLS marketing" },
+              { label: "Existing residence", value: "Tear-down; conveys at no value" },
+              { label: "Site access", value: "Shown by appointment only" },
+              { label: "Water", value: "Existing well reported by offering" },
+              { label: "Sewer", value: "Existing septic system reported by offering" },
+            ],
+          },
+          {
+            eyebrow: "Planning Review",
+            title: "Potential is conditional on the verified land record.",
+            body:
+              "Public marketing cites custom-estate, builder, investor, and residential development possibilities. Buyers should confirm the legal parcel schedule, VLDR requirements, setbacks, access, utility options, subdivision standards, environmental conditions, and intended use before relying on a development concept.",
+            facts: [
+              { label: "Reported zoning", value: "VLDR" },
+              { label: "Jurisdiction", value: "Town of Morrisville / Wake County review" },
+              { label: "Road frontage", value: "Private-road context reported by MLS" },
+              { label: "Road surface", value: "Dirt / gravel reported by MLS" },
+              { label: "Subdivision", value: "Subject to municipal verification and approval" },
+              { label: "Utility capacity", value: "Buyer to verify existing and future service" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Buyer Verification",
+        title: "Confirm the property record before defining the program.",
+        conditions: [
+          { label: "Published offering", value: "Approximately 2.10 acres offered at $995,000" },
+          { label: "Lot record", value: "MLS marketing references two lots; confirm the legal parcel schedule" },
+          { label: "Existing improvements", value: "Residence conveys at no value and is represented as unsafe to enter" },
+          { label: "Sale condition", value: "Marketed as-is, where-is on the public commercial offering" },
+          { label: "Future use", value: "Buildability, subdivision, development, and utilities remain subject to buyer and authority review" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Site & Surroundings",
+          title: "Aerial context with the marketed property clearly identified.",
+          body:
+            "The supplied aerials provide orientation to the property and surrounding residential context. Boundary lines are approximate marketing graphics and are not a survey.",
+        },
+        items: [
+          {
+            src: familyFarm01,
+            alt: "Annotated aerial overview of 5911 Family Farm Road in Morrisville",
+            caption: "Approximate marketed property outline",
+          },
+          {
+            src: familyFarm02,
+            alt: "Closer annotated aerial of the two marketed areas at 5911 Family Farm Road",
+            caption: "Two-lot offering context",
+          },
+          {
+            src: familyFarm03,
+            alt: "Wide aerial view of 5911 Family Farm Road and surrounding Morrisville neighborhoods",
+            caption: "Wider neighborhood context",
+          },
+          {
+            src: familyFarm04,
+            alt: "Top-down aerial view of the Family Farm Road land and existing improvements",
+            caption: "Site and existing improvements",
+          },
+          {
+            src: familyFarm05,
+            alt: "Aerial view of the existing residence and wooded setting at 5911 Family Farm Road",
+            caption: "Existing residence and site condition",
+          },
+        ],
+        note: "Approximate marketing outlines are for orientation only and do not replace a boundary survey.",
+      },
+      location: {
+        eyebrow: "Location & Access",
+        title: "A Morrisville location near the Research Triangle employment corridor.",
+        body:
+          "The public offering cites convenient access to Research Triangle Park, RDU Airport, I-540, shopping, and dining. Buyers should verify legal access, private-road obligations, parcel configuration, traffic routes, and all measured distances independently.",
+        points: [
+          "5911 Family Farm Road, Morrisville, North Carolina",
+          "Wake County",
+          "Accessed from McCrimmon Parkway via Liberty Rose Drive according to MLS directions",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=5911%20Family%20Farm%20Road%2C%20Morrisville%2C%20NC%2027560&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=5911%20Family%20Farm%20Road%2C%20Morrisville%2C%20NC%2027560",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Documents & Diligence",
+          title: "Start with the offering, then verify the land record.",
+          body:
+            "Review the current public marketing and supplied aerials, then request the parcel, zoning, utility, access, and property-condition materials relevant to the intended use.",
+        },
+        items: [
+          {
+            title: "Current commercial offering",
+            description: "Review the active LoopNet marketing, asking price, acreage, and published sale conditions.",
+            actionLabel: "Open LoopNet Listing",
+            href: "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/",
+            external: true,
+          },
+          {
+            title: "Property media package",
+            description: "View the supplied NestVisions photography and available property-marketing media.",
+            actionLabel: "Open Media Package",
+            href: "https://media.nestvisions.com/listings/019f6824-ff78-7307-b536-803ab910a9ca/download-center",
+            external: true,
+          },
+          {
+            title: "Land and authority records",
+            description: "Request the legal parcel schedule and available zoning, survey, access, utility, septic, well, and condition information.",
+            actionLabel: "Request Diligence",
+            href: "/contact?property=5911-family-farm-road&topic=land-diligence",
+          },
+        ],
+      },
+      disclosure:
+        "All information is deemed reliable but is not guaranteed. Acreage, lot composition, zoning, access, existing utilities, property condition, boundaries, buildability, subdivision, development potential, and intended uses require independent verification. The existing residence is represented as unsafe; do not enter it. Approximate aerial outlines are marketing graphics and are not a survey.",
+    },
+    featured: true,
+    sortOrder: 4,
+  },
+  {
+    slug: "802-bragg-boulevard",
+    name: "802 Bragg Boulevard",
+    address: "802 Bragg Boulevard",
+    city: "Fayetteville",
+    state: "NC",
+    coordinates: { latitude: 35.0631094, longitude: -78.891209 },
+    assetType: "Retail",
+    offeringType: "For Sale",
+    status: "Closed",
+    sizeDisplay: "2,529 SF",
+    acreageDisplay: "1.15 acres",
+    heroImage: braggBoulevardExterior,
+    gallery: [braggBoulevardApproach, braggBoulevardInterior],
+    imagePosition: "center",
+    summary: "Recently sold retail property with convenience-store, automotive-service, and car-wash improvements.",
+    overview:
+      "A recently completed Gala CRE transaction involving a 2,529-square-foot retail property on approximately 1.15 acres along Bragg Boulevard in Fayetteville.",
+    highlights: [
+      "Recently sold retail transaction",
+      "2,529-square-foot building",
+      "Approximately 1.15-acre site",
+      "Convenience-store, automotive-service, and car-wash improvements represented at the time of offering",
+    ],
+    details: [
+      { label: "Transaction status", value: "Recently sold" },
+      { label: "Property type", value: "Retail" },
+      { label: "Building area", value: "2,529 SF" },
+      { label: "Site area", value: "1.15 acres" },
+    ],
+    opportunity: {
+      eyebrow: "Completed Transaction",
+      title: "A flexible retail and service property on Bragg Boulevard.",
+      body:
+        "At the time of offering, the property combined a convenience store, automotive-service space, car-wash improvements, and fuel infrastructure. The completed transaction is presented as a record of Gala CRE's retail brokerage work, not as current availability.",
+      points: [
+        "Multiple operating components represented in the former offering",
+        "Bragg Boulevard frontage and established commercial positioning",
+        "Prior asking terms are not represented as the final sale terms",
+      ],
+    },
+    location: {
+      eyebrow: "Property Context",
+      title: "A Bragg Boulevard retail position near central Fayetteville.",
+      body:
+        "The property sits along Bragg Boulevard in Fayetteville. The former offering cited proximity to the downtown corridor; all location details shown here describe the property context and do not imply that it remains available.",
+      points: ["Fayetteville, North Carolina", "Cumberland County", "Bragg Boulevard frontage"],
+    },
+    externalLinks: [
+      {
+        label: "Crexi",
+        href: "https://www.crexi.com/properties/1810031/north-carolina-valero",
+      },
+      {
+        label: "LoopNet",
+        href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
+      },
+    ],
+    advisor: {
+      name: "Gaurang Gala",
+      title: "Broker-In-Charge",
+      phone: "910-578-2828",
+      license: "NC 283149",
+    },
+    listingPage: {
+      headline: "Recently sold retail property on Bragg Boulevard.",
+      lead:
+        "A completed Fayetteville transaction involving a 2,529-square-foot convenience-store and automotive-service property on approximately 1.15 acres.",
+      overviewEyebrow: "Recently Sold",
+      keyFacts: [
+        { label: "Transaction status", value: "Recently sold" },
+        { label: "Building area", value: "2,529 SF" },
+        { label: "Site area", value: "1.15 acres" },
+        { label: "Asset type", value: "Retail / service" },
+      ],
+      highlights: [
+        "One-story retail and service building",
+        "Convenience-store, automotive-service, and car-wash components represented in the former offering",
+        "Bragg Boulevard frontage with pylon signage",
+        "Gala CRE listing representation documented by the public Crexi record",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Property at Closing",
+          title: "A multi-component commercial property with operating flexibility.",
+          body:
+            "The public marketing record describes the asset as it was offered. Tenant, lease, fuel, occupancy, and operating conditions may have changed as part of or after the transaction.",
+        },
+        groups: [
+          {
+            eyebrow: "Physical Profile",
+            title: "Retail and service improvements on a 1.15-acre site.",
+            body:
+              "The former offering combined a convenience-store building, automotive bays, car-wash improvements, fuel pumps, and supporting site area along Bragg Boulevard.",
+            facts: [
+              { label: "Building area", value: "2,529 SF" },
+              { label: "Site area", value: "1.15 acres" },
+              { label: "Buildings", value: "One" },
+              { label: "Stories", value: "One" },
+              { label: "Year built", value: "1987 per LoopNet" },
+              { label: "Zoning", value: "C3 reported by public listings" },
+            ],
+          },
+          {
+            eyebrow: "Former Offering",
+            title: "The sale followed a flexible owner-user and investor position.",
+            body:
+              "Crexi's former marketing described three operating components and month-to-month occupancy, along with an expired fuel agreement. Those details explain the original brokerage thesis but are not presented as current post-closing conditions.",
+            facts: [
+              { label: "Former subtype", value: "Convenience store" },
+              { label: "Operating components", value: "C-store, automotive service, and car wash" },
+              { label: "Fuel agreement", value: "Reported expired at time of offering" },
+              { label: "Frontage", value: "99 feet on Bragg Boulevard per LoopNet" },
+              { label: "Parking", value: "10 spaces reported by LoopNet" },
+              { label: "Opportunity zone", value: "Reported by Crexi and LoopNet" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Transaction Record",
+        title: "What this page confirms—and what remains private.",
+        conditions: [
+          { label: "Status", value: "Recently sold, as confirmed by Gala CRE and the current Crexi sold flag" },
+          { label: "Public availability", value: "The property is no longer advertised on LoopNet" },
+          { label: "Sale price", value: "Not published; former asking prices are not presented as closing consideration" },
+          { label: "Closing date", value: "Not published" },
+          { label: "Operating details", value: "Listing-period facts only; not represented as current ownership or tenancy conditions" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Transaction Gallery",
+          title: "The property as presented during the sale process.",
+          body:
+            "These images come from the former Crexi listing and document the property's exterior, Bragg Boulevard setting, and convenience-store interior at the time of marketing.",
+        },
+        items: [
+          {
+            src: braggBoulevardExterior,
+            alt: "Front exterior of the retail and automotive property at 802 Bragg Boulevard",
+            caption: "Retail, automotive-service, and car-wash improvements",
+          },
+          {
+            src: braggBoulevardApproach,
+            alt: "Bragg Boulevard street view of the retail and automotive property",
+            caption: "Bragg Boulevard frontage and pylon signage",
+          },
+          {
+            src: braggBoulevardInterior,
+            alt: "Convenience-store interior at 802 Bragg Boulevard during the former offering",
+            caption: "Convenience-store interior during marketing",
+          },
+        ],
+      },
+      location: {
+        eyebrow: "Location & Context",
+        title: "A commercial site on Bragg Boulevard in Fayetteville.",
+        body:
+          "The property is located in Cumberland County along Bragg Boulevard. Public marketing identified proximity to central Fayetteville and the downtown corridor. The map is provided as historical property context, not current availability.",
+        points: [
+          "802 Bragg Boulevard, Fayetteville, North Carolina 28301",
+          "Cumberland County",
+          "Bragg Boulevard frontage",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=802%20Bragg%20Boulevard%2C%20Fayetteville%2C%20NC%2028301&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=802%20Bragg%20Boulevard%2C%20Fayetteville%2C%20NC%2028301",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Public Transaction Record",
+          title: "Review the former marketing record or discuss a similar assignment.",
+          body:
+            "The linked marketplace pages preserve the public property record. Confidential closing terms and post-closing operating details are not published here.",
+        },
+        items: [
+          {
+            title: "Crexi transaction record",
+            description: "Review the former Gala CRE listing, property facts, and current sold designation.",
+            actionLabel: "Open Crexi Record",
+            href: "https://www.crexi.com/properties/1810031/north-carolina-valero",
+            external: true,
+          },
+          {
+            title: "LoopNet property record",
+            description: "Review the archived public property facts and off-market availability notice.",
+            actionLabel: "Open LoopNet Record",
+            href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
+            external: true,
+          },
+          {
+            title: "Similar-property conversation",
+            description: "Speak with Gala CRE about selling, acquiring, or repositioning a comparable retail property.",
+            actionLabel: "Discuss a Similar Property",
+            href: "/contact?property=802-bragg-boulevard&topic=similar-property",
+          },
+        ],
+      },
+      advisorEyebrow: "Transaction Advisor",
+      disclosure:
+        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical, operating, tenant, lease, fuel, zoning, parking, frontage, and opportunity-zone details reflect the former public marketing record and are not represented as current. Sale price, closing date, and confidential transaction terms have not been published.",
+    },
+    featured: false,
+    sortOrder: 1,
   },
 ];
 

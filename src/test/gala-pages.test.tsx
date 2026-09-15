@@ -66,7 +66,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("button", { name: "Previous featured listing" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next featured listing" })).toBeInTheDocument();
     expect(screen.getByText("Drag or trackpad swipe to explore")).toBeInTheDocument();
-    expect(screen.getByText("3 active sale opportunities")).toBeInTheDocument();
+    expect(screen.getByText("4 active sale opportunities")).toBeInTheDocument();
     expect(screen.queryByText(/Featured Lease Opportunity/i)).not.toBeInTheDocument();
     expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
     expect(screen.getByText("$549,000")).toBeInTheDocument();
@@ -74,8 +74,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("$829,000")).toBeInTheDocument();
     expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
     expect(screen.getByText("$1,190,000")).toBeInTheDocument();
+    expect(screen.getByText("5911 Family Farm Road")).toBeInTheDocument();
+    expect(screen.getByText("$995,000")).toBeInTheDocument();
 
-    const lackeySlide = screen.getByRole("group", { name: "1 of 3" });
+    const lackeySlide = screen.getByRole("group", { name: "1 of 4" });
     expect(within(lackeySlide).getByRole("img", { name: "2301 Lackey Street in Lumberton, NC" })).toBeInTheDocument();
     expect(within(lackeySlide).getByText("Active")).toBeInTheDocument();
     expect(within(lackeySlide).getByText("For Sale · Retail")).toBeInTheDocument();
@@ -90,6 +92,43 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Bring us your next commercial real estate decision." })).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
+  });
+
+  it("loads the muted inline hero video on mobile when motion is allowed", () => {
+    const defaultMatchMedia = window.matchMedia;
+    const defaultInnerWidth = window.innerWidth;
+    Object.defineProperty(window, "innerWidth", { configurable: true, value: 390 });
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: query === "(prefers-reduced-motion: no-preference)" || query === "(max-width: 767px)",
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      })),
+    });
+
+    try {
+      const { container, unmount } = renderPage(<Index />);
+      const video = container.querySelector<HTMLVideoElement>("#hvideo");
+      expect(video).toHaveAttribute("autoplay");
+      expect(video?.muted).toBe(true);
+      expect(video).toHaveAttribute("playsinline");
+      expect(video?.querySelector("source")).toBeInTheDocument();
+      unmount();
+    } finally {
+      Object.defineProperty(window, "innerWidth", { configurable: true, value: defaultInnerWidth });
+      Object.defineProperty(window, "matchMedia", {
+        configurable: true,
+        writable: true,
+        value: defaultMatchMedia,
+      });
+    }
   });
 
   it("renders the five approved service structures", () => {
@@ -393,11 +432,19 @@ describe("Gala CRE public pages", () => {
 
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
-    expect(screen.getByText("3 properties")).toBeInTheDocument();
+    expect(screen.getByText("5 properties")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Start a 1031 Property Search/i })).toHaveAttribute("href", "/investors/1031-exchange?source=property-catalog");
+    expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
+    const braggCard = screen.getByRole("heading", { name: "802 Bragg Boulevard" }).closest("a");
+    expect(braggCard).not.toBeNull();
+    expect(within(braggCard as HTMLElement).getByText("Closed")).toBeInTheDocument();
+    expect(within(braggCard as HTMLElement).getByText("Recently Sold · Retail")).toBeInTheDocument();
+    expect(within(braggCard as HTMLElement).queryByText("$800,000")).not.toBeInTheDocument();
+    const sourcingLink = screen.getByRole("link", { name: /Start a 1031 Property Search/i });
+    expect(sourcingLink).toHaveAttribute("href", "/investors/1031-exchange?source=property-catalog");
+    expect(braggCard?.compareDocumentPosition(sourcingLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it("renders Lackey Street as a commercial-property diligence journey", () => {
@@ -531,5 +578,74 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 5047 Yadkin Road")).toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
+  });
+
+  it("renders Family Farm Road as a residential-land diligence journey", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/5911-family-farm-road"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
+    expect(screen.getByText("$995,000")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Separate the current record from future potential." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Potential is conditional on the verified land record." })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: /5911 Family Farm Road property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(screen.getByRole("link", { name: "Open LoopNet Listing" })).toHaveAttribute(
+      "href",
+      "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/"
+    );
+    expect(screen.getByRole("link", { name: "Open Media Package" })).toHaveAttribute(
+      "href",
+      "https://media.nestvisions.com/listings/019f6824-ff78-7307-b536-803ab910a9ca/download-center"
+    );
+    expect(screen.getByRole("link", { name: "Request Diligence" })).toHaveAttribute(
+      "href",
+      "/contact?property=5911-family-farm-road&topic=land-diligence"
+    );
+    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=5911-family-farm-road"
+    );
+    expect(screen.getByTitle("Map of 5911 Family Farm Road")).toBeInTheDocument();
+    expect(screen.queryByText("Listing Advisor")).not.toBeInTheDocument();
+    expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
+  });
+
+  it("renders 802 Bragg Boulevard as a completed retail transaction", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/802-bragg-boulevard"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "802 Bragg Boulevard" })).toBeInTheDocument();
+    expect(screen.getByText("Closed")).toBeInTheDocument();
+    expect(screen.getByText("Sale Transaction")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Recently sold retail property on Bragg Boulevard." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A multi-component commercial property with operating flexibility." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What this page confirms—and what remains private." })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("img")).toHaveLength(3);
+    expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=802-bragg-boulevard"
+    );
+    expect(screen.getByRole("link", { name: "Open Crexi Record" })).toHaveAttribute(
+      "href",
+      "https://www.crexi.com/properties/1810031/north-carolina-valero"
+    );
+    expect(screen.getByRole("link", { name: "Open LoopNet Record" })).toHaveAttribute(
+      "href",
+      "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/"
+    );
+    expect(screen.getByTitle("Map of 802 Bragg Boulevard")).toBeInTheDocument();
+    expect(screen.queryByText("$800,000")).not.toBeInTheDocument();
+    expect(screen.queryByText("$850,000")).not.toBeInTheDocument();
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 });

@@ -41,6 +41,8 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   if (!page) return null;
 
   const inquiryHref = `/contact?property=${property.slug}`;
+  const isClosedTransaction = property.status === "Closed";
+  const inquiryLabel = isClosedTransaction ? "Discuss a Similar Property" : "Request Information";
   const publicListing = property.externalLinks[0];
   const keyFacts = page.keyFacts ?? [];
   const highlights = page.highlights ?? [];
@@ -78,7 +80,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
             </Link>
             <div className="gala-commercial-listing__badges" aria-label="Listing classification">
               <span>{property.status}</span>
-              <span>{property.offeringType}</span>
+              <span>{isClosedTransaction ? "Sale Transaction" : property.offeringType}</span>
               <span>{property.assetType}</span>
             </div>
             <h1>{property.name}</h1>
@@ -90,7 +92,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
               <p>{page.headline}</p>
               <div className="gala-commercial-listing__hero-actions">
                 <Link to={inquiryHref} className="gala-button">
-                  <Mail size={16} aria-hidden="true" /> Request Information
+                  <Mail size={16} aria-hidden="true" /> {inquiryLabel}
                 </Link>
                 {publicListing ? (
                   <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
@@ -138,8 +140,12 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
         <aside className="gala-listing-sourcing" aria-labelledby="property-sourcing-title">
           <div className="gala-shell">
             <div>
-              <span>Still evaluating the market?</span>
-              <h2 id="property-sourcing-title">If this opportunity is not the right fit, define the one that is.</h2>
+              <span>{isClosedTransaction ? "Looking for a similar opportunity?" : "Still evaluating the market?"}</span>
+              <h2 id="property-sourcing-title">
+                {isClosedTransaction
+                  ? "Use this completed transaction as a starting point for your next search."
+                  : "If this opportunity is not the right fit, define the one that is."}
+              </h2>
             </div>
             <Link to={`/investors/1031-exchange?source=property-detail&property=${property.slug}`} className="gala-text-link">
               Share Your Acquisition Criteria <ArrowUpRight size={16} aria-hidden="true" />
@@ -296,7 +302,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                       </a>
                     ) : null}
                     <Link to={inquiryHref} className="gala-button">
-                      <Mail size={16} aria-hidden="true" /> Inquire About This Property
+                      <Mail size={16} aria-hidden="true" /> {inquiryLabel}
                     </Link>
                   </div>
                 </div>

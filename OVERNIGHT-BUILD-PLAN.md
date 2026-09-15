@@ -100,12 +100,12 @@ Objective: Finish each verified active listing with a journey appropriate to its
 - [x] Make childcare approval and the two-site offering the central Church Street differentiators, subject to source verification.
 - [x] Rebuild 5047 Yadkin Road through the shared system.
 - [x] Make represented shopping-center approval, site planning, access, and development diligence central to Yadkin.
-- [x] Evaluate Family Farm Road for inclusion; defer it because authoritative facts, listing link, flyer, and approved photography have not been supplied.
+- [x] Evaluate Family Farm Road for inclusion; initially deferred, then added September 8 after the client supplied current Zillow, Doorify MLS, LoopNet, and NestVisions sources.
 - [x] Confirm each currently verified page's property-specific inquiry preselection, documents, map, gallery, advisor, and disclosure.
 
 Gate: A prospect can understand each verified active offering, material conditions, available diligence, advisor, and next action within two minutes.
 
-Next action: Phase gate passed for the three verified active offerings. Continue with Phase 3 by generating one authoritative advertised-capability route matrix from the current navigation and service data, then add automated coverage that fails on any missing or placeholder-only destination.
+Next action: Phase gate passed for the four verified active offerings. Continue with Phase 3 by generating one authoritative advertised-capability route matrix from the current navigation and service data, then add automated coverage that fails on any missing or placeholder-only destination.
 
 ## Phase 3 — Capability route architecture
 
@@ -150,7 +150,7 @@ Next action: Build Land as the final distinct GalaSales editorial route centered
 
 ## Phase 5 — GalaDevelop, GalaCapital, and Property Management
 
-Status: **Pending**
+Status: **In progress**
 
 Objective: Complete the remaining service ecosystem without overstating Gala's role.
 
@@ -215,18 +215,18 @@ Status: **Pending**
 
 Objective: Correctly classify and present Gala's active, under-contract, and completed work.
 
-- [ ] Verify the correct spelling, address, status, facts, and media for 802 Bragg Boulevard.
+- [x] Verify and add 802 Bragg Boulevard as a recently sold retail transaction using the client-supplied status, Crexi sold designation and three listing images, and LoopNet's off-market record. Do not publish former asking prices as closing consideration.
 - [ ] Verify 10414 and 10416 Chapel Hill Road transaction details and combined $1.8M presentation.
 - [ ] Verify Pittard Sears address, status, transaction facts, and the basis for any record-breaking claim.
-- [ ] Verify Family Farm Road facts, active status, listing links, flyer, and photography.
-- [ ] Keep closed transactions out of active Listings.
+- [x] Add Family Farm Road from the supplied MLS, LoopNet, Zillow, and NestVisions sources with verified public facts, five distinct images, careful diligence language, and property-specific inquiry routing. Advisor identity and underlying land records remain client inputs.
+- [x] Keep closed transactions out of the active homepage carousel and visually distinguish them from active inventory in the Properties catalog.
 - [ ] Label under-contract opportunities accurately.
 - [ ] Strengthen the Chapel Hill Road homepage spotlight using only verified facts.
 - [ ] Build the transaction display system even if some client records remain blocked.
 
 Gate: Active listings, under-contract opportunities, and completed transactions are never conflated.
 
-Next action: Cross-reference `PROPERTY-DATA-REGISTER.md`, client materials, and authoritative public sources.
+Next action: Verify 10414 and 10416 Chapel Hill Road transaction details and approved media without changing the existing homepage spotlight until those facts are confirmed.
 
 ## Phase 9 — Brand, social, navigation, and conversion integration
 
@@ -251,13 +251,13 @@ Status: **Current route and form scope passed; production configuration and late
 
 Objective: Remove presentation risks before the meeting.
 
-- [x] Test the current 31-route matrix at desktop, tablet, and mobile widths (93 combinations).
+- [x] Test the current 33-route matrix at desktop, tablet, and mobile widths (99 combinations), including the later-added Family Farm and 802 Bragg Boulevard routes at all three sizes.
 - [x] Test reduced motion, keyboard focus, first-error focus, and a visible main-content skip link.
 - [x] Check primary headings, main landmarks, form labels, grouped-field error associations, errors, and status messages.
 - [x] Check property filters, canonical links, runtime Open Graph/Twitter metadata, and sitemap inclusion for Careers and 1031. Map rendering remains subject to the property data supplied for each listing.
 - [x] Review console errors, broken images, and loading failures across the current route matrix.
 - [x] Review image weight and lazy loading; replace the active 23.8 MB hero video with a 15.7 MB 720p derivative and prevent the full video binary from loading on mobile or under reduced motion.
-- [x] Run targeted tests, the full 74-test suite, production build, and lint.
+- [x] Run targeted tests, the full 76-test suite, production build, and lint.
 - [x] Fix the discovered tablet Brokerage overflow and current project-introduced accessibility/metadata defects.
 - [x] Leave the seven stable shared-UI Fast Refresh warnings unchanged.
 
@@ -307,8 +307,8 @@ Next action: Begin only after Phases 1–11 have passed.
 
 These blockers must not stop unrelated work:
 
-- Family Farm Road: authoritative property facts, flyer, listing link, and approved photography.
-- 802 Bragg Boulevard: exact address/spelling, transaction facts, date, asset type, and approved media.
+- Family Farm Road: legal parcel schedule, survey, advisor/brokerage confirmation, zoning record, and available well, septic, access, private-road, and property-condition documents. Current facts and five selected images are sourced from the supplied active listing and NestVisions package.
+- 802 Bragg Boulevard: final sale price and closing date remain unpublished client inputs. The address, retail classification, physical facts, Crexi sold designation, LoopNet off-market status, Gala advisor, and three former-listing images are verified.
 - 10414 and 10416 Chapel Hill Road: closing details, transaction date, asset classification, and approved media beyond the verified combined $1.8M reference.
 - Pittard Sears: exact property identity, address, contract status, pricing context, approved media, and substantiation for the record-breaking claim.
 - Careers: recipient and Google/email storage configuration intentionally deferred by the user until after the recruiting form is built.
@@ -391,12 +391,12 @@ Every new entry must use this handoff shape:
 - Source-of-truth checked: Current heartbeat and recent task context; branch, status, and local history; this ledger; Yadkin's entry in `PROPERTY-DATA-REGISTER.md`; the current listing schema and renderer; the only approved Yadkin aerial asset; existing property tests; and the live local Yadkin route.
 - Phase / checkpoint: Phase 2 — rebuild 5047 Yadkin Road and close the verified-active-listing gate.
 - Gate: Yadkin renders through the shared listing system; a prospect can identify the price, acreage, represented shopping-center plan, site-planning scope, material approval and development checks, aerial context, document path, location, advisor, and property-specific inquiry within two minutes; unsupported approval details are not presented as verified; desktop and mobile layouts have no horizontal overflow.
-- Completed: Added Yadkin's structured identity, economics, planning position, execution-diligence path, transaction conditions, single purposeful annotated-aerial module, qualified location context, plan and development-document requests, named advisor, inquiry routing, and disclosure. Clearly attributed plan approval, permit readiness, access, circulation, buffers, and utility claims to the public offering and directed buyers to the underlying records. Confirmed Family Farm Road cannot be published safely without authoritative property facts and approved media, so Phase 2 closes on the three verified active offerings.
+- Completed: Added Yadkin's structured identity, economics, planning position, execution-diligence path, transaction conditions, single purposeful annotated-aerial module, qualified location context, plan and development-document requests, named advisor, inquiry routing, and disclosure. Clearly attributed plan approval, permit readiness, access, circulation, buffers, and utility claims to the public offering and directed buyers to the underlying records. Family Farm Road was subsequently added from the client-supplied current listing sources and media package, bringing Phase 2 to four verified active offerings.
 - Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, `src/test/properties-model.test.ts`, and this ledger; rebuilt `/properties/5047-yadkin-road`.
 - Verification: 18/18 targeted tests passed; 32/32 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop and 390px mobile browser checks passed with one annotated-aerial gallery item, three document paths, map/advisor/inquiry surfaces, no horizontal overflow, and no page-specific console errors; `git diff --check` passed.
 - Commit: Intended message `feat: rebuild Yadkin Road listing journey`; record the resulting hash immediately after commit.
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
-- Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road remains blocked by the authoritative facts and asset package already listed above.
+- Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road still requires its legal parcel schedule, survey, advisor/brokerage confirmation, zoning record, and available well, septic, access, private-road, and property-condition documents.
 - Exact next action: Generate a single advertised-capability route matrix from the desktop menu, mobile menu, footer, service index, and related-capability data; add automated coverage that asserts every promoted path resolves to substantive page content rather than a dead end or placeholder.
 
 ### Pulse — 2026-09-04 07:03 CDT
