@@ -2,6 +2,7 @@
 :root{
   --cta-gold:linear-gradient(135deg,#fff2b8 0%,#d7ad3f 46%,#9f741f 100%);
   --cta-gold-hover:linear-gradient(135deg,#fff7cc 0%,#e7c057 46%,#b98728 100%);
+  --section-gold:linear-gradient(135deg,#c99b30 0%,#f1d986 100%);
   --hl:rgba(255,255,255,.08);
 }
 html{scroll-behavior:smooth;scroll-padding-top:108px;cursor:none}
@@ -262,7 +263,7 @@ footer.site-footer{display:grid;grid-template-columns:minmax(260px,1.35fr) minma
 }
 .gala-button:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(159,116,31,.3);filter:brightness(1.06)}
 .gala-button--dark{background:#161616;color:#fff;box-shadow:none}
-.gala-cta-band{padding:78px 0;background:linear-gradient(135deg,#c99b30,#f1d986);color:#171717}
+.gala-cta-band{padding:78px 0;background:var(--section-gold);color:#171717}
 .gala-cta-band>.gala-shell{display:flex;align-items:center;justify-content:space-between;gap:48px}
 .gala-cta-band h2{max-width:13ch;font-size:clamp(38px,4.4vw,64px);line-height:1.02}
 .gala-cta-band .gala-kicker{color:rgba(23,23,23,.62)}
@@ -557,11 +558,12 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-transaction-spotlight__statement{max-width:25ch;margin:30px 0 0;font:500 clamp(19px,2vw,27px)/1.4 'Poppins',sans-serif;letter-spacing:-.025em;color:#fff}
 .gala-transaction-spotlight__summary{max-width:46ch;margin:18px 0 0;font-size:14px;line-height:1.75;color:rgba(255,255,255,.58)}
 .gala-transaction-spotlight .gala-text-link{align-self:flex-start;margin-top:34px}
-.gala-news-preview{padding:96px 0 104px;background:#090909;color:#fff}
+.gala-news-preview{padding:96px 0 104px;background:#f1ead8;color:var(--gala-ink)}
+.gala-news-preview .gala-kicker{color:#666}
 .gala-news-preview__header{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.55fr);gap:64px;align-items:end;margin-bottom:42px}
 .gala-news-preview__header h2{margin:0;font:600 clamp(42px,5vw,68px)/1 'Poppins',sans-serif;letter-spacing:-.05em}
 .gala-news-preview__header>div:last-child{display:grid;justify-items:start;gap:20px;padding-bottom:4px}
-.gala-news-preview__header p{max-width:34rem;margin:0;color:rgba(255,255,255,.58);font-size:14px;line-height:1.7}
+.gala-news-preview__header p{max-width:34rem;margin:0;color:rgba(23,23,23,.66);font-size:14px;line-height:1.7}
 .gala-news-preview__grid{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(420px,.86fr);gap:18px}
 .gala-news-preview__supporting{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:18px}
 .gala-news-card{min-width:0;display:flex;flex-direction:column;color:#111}
@@ -591,13 +593,14 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-news-archive__intro{margin-bottom:38px}
 .gala-news-archive__intro h2{margin:0;font:600 clamp(38px,4.5vw,58px)/1.04 'Poppins',sans-serif;letter-spacing:-.045em}
 .gala-news-archive__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 28px}
-.gala-home-cta{position:relative;overflow:hidden;padding:92px 0 96px;background:#211806;color:#fff;border-top:1px solid rgba(207,170,70,.3)}
-.gala-home-cta__glow{position:absolute;top:-330px;right:-160px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(245,222,147,.2),rgba(207,170,70,.05) 42%,transparent 70%)}
+.gala-home-cta{position:relative;overflow:hidden;padding:92px 0 96px;background:var(--section-gold);color:#171717}
 .gala-home-cta__inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.58fr);gap:clamp(60px,8vw,124px);align-items:end}
 .gala-home-cta h2{max-width:13ch;margin:0;font:600 clamp(46px,5.15vw,74px)/1 'Poppins',sans-serif;letter-spacing:-.052em}
-.gala-home-cta__action>p{max-width:41rem;margin:0;color:rgba(255,255,255,.68);font-size:15px;line-height:1.82}
-.gala-home-cta__action .gala-button{margin-top:30px}
-.gala-home-cta__action>span{display:block;margin-top:28px;color:rgba(255,255,255,.42);font:700 8px/1.5 'Syne',sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.gala-home-cta .gala-kicker{color:rgba(23,23,23,.62)}
+.gala-home-cta .gala-kicker::before{background:#171717}
+.gala-home-cta__action>p{max-width:41rem;margin:0;color:rgba(23,23,23,.72);font-size:15px;line-height:1.82}
+.gala-home-cta__action .gala-button{margin-top:30px;background:#171717;color:#fff;box-shadow:0 12px 30px rgba(54,39,7,.22)}
+.gala-home-cta__action>span{display:block;margin-top:28px;color:rgba(23,23,23,.55);font:700 8px/1.5 'Syne',sans-serif;letter-spacing:.16em;text-transform:uppercase}
 
 /* Services */
 .gala-services-index{padding-top:92px;padding-bottom:110px}

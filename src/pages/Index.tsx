@@ -210,7 +210,6 @@ const Index = () => {
         <HomeNews />
 
         <section className="gala-home-cta">
-          <div className="gala-home-cta__glow" aria-hidden="true"></div>
           <div className="gala-shell gala-home-cta__inner">
             <div>
               <div className="gala-kicker">Your Next Move</div>
