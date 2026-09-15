@@ -120,6 +120,34 @@ describe("advertised capability route matrix", () => {
       .toBe(developmentPages.length);
   });
 
+  it("keeps every Capital Markets journey compact and distinct", () => {
+    const capitalPages = [
+      capabilityPageByPath["/services/capital-markets/debt"],
+      capabilityPageByPath["/services/capital-markets/equity"],
+      capabilityPageByPath["/services/capital-markets/capital-strategy"],
+      capabilityPageByPath["/services/capital-markets/transaction-coordination"],
+    ];
+
+    capitalPages.forEach((page) => {
+      expect(page.compact, page.path).toBe(true);
+      expect(page.hero.signals, page.path).toEqual([]);
+      expect(page.hero.actions, page.path).toHaveLength(1);
+      expect(page.sections.map((section) => section.type), page.path).toEqual([
+        "strategy",
+        "process",
+        "deliverables",
+      ]);
+      expect(page.sections.find((section) => section.type === "strategy")?.tracks, page.path).toHaveLength(3);
+      expect(page.sections.find((section) => section.type === "process")?.steps, page.path).toHaveLength(4);
+      expect(page.sections.find((section) => section.type === "deliverables")?.items, page.path).toHaveLength(4);
+      expect(page.relatedCapabilities.links, page.path).toHaveLength(4);
+    });
+
+    expect(new Set(capitalPages.map((page) => page.hero.media.src)).size).toBe(capitalPages.length);
+    expect(new Set(capitalPages.map((page) => page.sections.find((section) => section.type === "strategy")?.media.src)).size)
+      .toBe(capitalPages.length);
+  });
+
   it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {
     const header = render(
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,

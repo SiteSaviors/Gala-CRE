@@ -9,10 +9,8 @@ import officeOccupancyContext from "@/assets/office-occupancy-context.webp";
 import officeInvestmentSales from "@/assets/office-investment-sales.webp";
 import retailAccessContext from "@/assets/retail-access-context.webp";
 import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
-import {
-  capitalCapabilityPages,
-  propertyManagementCapabilityPage,
-} from "@/content/capitalCapabilityPages";
+import { propertyManagementCapabilityPage } from "@/content/capitalCapabilityPages";
+import { capitalCapabilityPages } from "@/content/capitalMarketsCapabilityPages";
 import { developmentCapabilityPages } from "@/content/developmentCapabilityPages";
 import { landCapabilityPage } from "@/content/landCapabilityPage";
 

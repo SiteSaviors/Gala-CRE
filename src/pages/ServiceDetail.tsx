@@ -50,7 +50,6 @@ const ServiceDetail = () => {
 
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
   const supportsInvestorSourcing = service.slug === "investment-sales";
-  const supportsExchangeFinancing = service.slug === "capital-markets";
 
   return (
     <>
@@ -162,21 +161,6 @@ const ServiceDetail = () => {
               </div>
               <Link to="/investors/1031-exchange?source=gala-sales" className="gala-button gala-button--dark">
                 Find a Replacement Property <ArrowUpRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-          </section>
-        ) : null}
-
-        {supportsExchangeFinancing ? (
-          <section className="gala-investor-pathway">
-            <div className="gala-shell">
-              <div>
-                <span>Exchange Financing Coordination</span>
-                <h2>Need a capital plan aligned with an exchange acquisition?</h2>
-                <p>Discuss the debt, equity, timing, and transaction requirements that may shape the replacement-property search.</p>
-              </div>
-              <Link to="/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital" className="gala-button gala-button--dark">
-                Discuss Exchange Financing <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
             </div>
           </section>

@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 04:35 CDT
+Last updated: 2026-09-15 04:51 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -179,11 +179,11 @@ Development:
 
 Capital Markets:
 
-- [ ] Capital Markets overview
-- [ ] Debt
-- [ ] Equity
-- [ ] Capital Strategy
-- [ ] Transaction Coordination
+- [x] Capital Markets overview
+- [x] Debt
+- [x] Equity
+- [x] Capital Strategy
+- [x] Transaction Coordination
 
 Property Management:
 
@@ -408,3 +408,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no client case studies, quantified outcomes, testimonials, project-specific development photography, or direct specialist credentials have been supplied; none blocks these routes because the copy stays within coordination and decision-support boundaries.
 - Exact next action: Rebuild `/services/capital-markets`, `/services/capital-markets/debt`, `/services/capital-markets/equity`, `/services/capital-markets/capital-strategy`, and `/services/capital-markets/transaction-coordination` through the compact visual system; distinguish lender fit and term execution, sponsor/investor alignment, capital-stack sequencing, and document/milestone coordination; remove the overview's duplicated 1031 interruption if it repeats the surrounding conversion path; generate distinct generic Equity and capital-decision imagery only where current assets repeat.
+
+### 2026-09-15 — Phase 4 compact Capital Markets group
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `b583861`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Capital Markets overview and four capability records, shared capability renderer/styles, current capital imagery, relevant tests, and all five live routes.
+- Gate: make all five Capital Markets routes concise, visually complete, and commercially distinct by separating lender fit and term execution, sponsor/investor alignment, capital-stack sequencing, and document/milestone control; remove the overview's repeated 1031 interruption without removing the dedicated investor journey elsewhere.
+- Completed: audited the already-compact Capital Markets overview and removed its duplicate exchange-financing interruption; rebuilt Debt around lender fit, full-term comparison, and closing certainty; rebuilt Equity around the investment case, partner mandate, and alignment; rebuilt Capital Strategy around sources and uses, risk and control, and execution sequencing; rebuilt Transaction Coordination around information, accountability, and the closing calendar. Each capability now uses one decision section, a four-step process, four deliverables, compact related links, and one contextual inquiry action. No page implies a capital commitment, investment outcome, specialist conclusion, or guaranteed financing.
+- Imagery: retained the strongest existing Debt and Transaction Coordination hero assets, then generated six distinct generic service-context images for debt underwriting, equity conversations and alignment, capital planning and scenario comparison, and transaction control. All are optimized WebP assets with no Gala branding, readable financial information, property identities, or representations of Gala transactions.
+- Files and routes changed: `src/assets/debt-underwriting-context.webp`, `src/assets/equity-advisory-hero.webp`, `src/assets/equity-alignment-context.webp`, `src/assets/capital-strategy-hero.webp`, `src/assets/capital-strategy-context.webp`, `src/assets/transaction-control-context.webp`, `src/content/capitalMarketsCapabilityPages.ts`, `src/content/capabilityPages.ts`, `src/pages/ServiceDetail.tsx`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/capital-markets`, `/services/capital-markets/debt`, `/services/capital-markets/equity`, `/services/capital-markets/capital-strategy`, and `/services/capital-markets/transaction-coordination`.
+- Verification: the overview measured 3,371px desktop. Debt reduced from 6,620px to 4,143px desktop and measured 6,341px mobile; Equity from 6,752px to 4,116px desktop and measured 6,385px mobile; Capital Strategy from 6,676px to 4,143px desktop and measured 6,408px mobile; Transaction Coordination from 6,641px to 4,106px desktop and measured 6,377px mobile. Tablet heights were 3,696px for the overview and 5,114–5,163px for the capability pages. All five routes render at 1440px, 834px, and 390px with distinct loaded imagery, correct H1s and inquiry routes, no duplicate exchange-financing band, zero horizontal overflow, and zero current browser-console errors. Targeted suite: 40/40 passed. Full suite: 104/104 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Intended commit: `refactor: compact Capital Markets service group`.
+- Remaining working tree: expected clean after commit.
+- Blockers: no client case studies, quantified outcomes, testimonials, capital commitments, specialist credentials, or approved transaction-specific capital imagery have been supplied; none blocks these routes because the copy stays within advisory, access, coordination, and decision-support boundaries.
+- Exact next action: Rebuild `/services/brokerage`, `/services/brokerage/landlord-representation`, and `/services/brokerage/tenant-representation` through the compact system; preserve the owner-versus-occupier distinction, cut both long editorial essays to strategy/process/deliverables, generate distinct generic occupier imagery only where current media repeats, and keep inquiry routing correct.

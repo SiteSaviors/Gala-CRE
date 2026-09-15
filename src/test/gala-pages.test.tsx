@@ -258,7 +258,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByRole("link", { name: "News & Media" }).some((link) => link.getAttribute("href") === "/news")).toBe(true);
   });
 
-  it("routes Investment Sales to sourcing and Capital Markets to exchange-financing coordination", () => {
+  it("keeps investor sourcing on Investment Sales without interrupting Capital Markets", () => {
     const sales = render(
       <MemoryRouter initialEntries={["/services/investment-sales"]}>
         <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
@@ -272,7 +272,9 @@ describe("Gala CRE public pages", () => {
         <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("link", { name: /Discuss Exchange Financing/i })).toHaveAttribute("href", "/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital");
+    expect(screen.getByRole("link", { name: /^Debt Debt strategy/i })).toHaveAttribute("href", "/services/capital-markets/debt");
+    expect(screen.getByRole("link", { name: /^Equity Equity conversations/i })).toHaveAttribute("href", "/services/capital-markets/equity");
+    expect(screen.queryByRole("link", { name: /Discuss Exchange Financing/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Find a Replacement Property/i })).not.toBeInTheDocument();
   });
 
