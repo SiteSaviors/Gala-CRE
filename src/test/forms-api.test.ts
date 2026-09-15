@@ -15,7 +15,6 @@ const careersSubmission = () => ({
     currentBrokerage: "Triangle Commercial",
     cityAndMarkets: "Raleigh-Durham",
     licenseState: "North Carolina",
-    licenseNumber: "NC 123456",
     yearsExperience: "6–10 years",
     specialties: ["Industrial", "Land"],
     salesLeasingExperience: "Commercial sales and leasing representation across the Triangle.",
@@ -80,8 +79,8 @@ const request = (body: unknown, ip: string, origin = "https://galacre.example") 
 const configureDelivery = () => {
   vi.stubEnv("RESEND_API_KEY", "re_test");
   vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
-  vi.stubEnv("CAREERS_TO_EMAIL", "talent@example.com");
-  vi.stubEnv("INVESTOR_TO_EMAIL", "investments@example.com");
+  vi.stubEnv("CAREERS_TO_EMAIL", "beth@galacregroup.com, gaurang@galacregroup.com");
+  vi.stubEnv("INVESTOR_TO_EMAIL", "beth@galacregroup.com, gaurang@galacregroup.com");
 };
 
 afterEach(() => {
@@ -137,7 +136,7 @@ describe("shared forms API", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("routes Careers privately to its configured recipient", async () => {
+  it("routes Careers privately to its configured recipients", async () => {
     configureDelivery();
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
@@ -145,7 +144,7 @@ describe("shared forms API", () => {
     await formsHandler(request(careersSubmission(), "10.0.0.3"), response);
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(emailBody.to).toEqual(["talent@example.com"]);
+    expect(emailBody.to).toEqual(["beth@galacregroup.com", "gaurang@galacregroup.com"]);
     expect(emailBody.reply_to).toBe("jordan@example.com");
     expect(result.body).toEqual({ ok: true });
   });
@@ -161,7 +160,7 @@ describe("shared forms API", () => {
 
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(emailBody.to).toEqual(["investments@example.com"]);
+    expect(emailBody.to).toEqual(["beth@galacregroup.com", "gaurang@galacregroup.com"]);
     expect(fetchMock).toHaveBeenNthCalledWith(2, "https://script.google.example/forms", expect.objectContaining({
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer private-sync-token" },

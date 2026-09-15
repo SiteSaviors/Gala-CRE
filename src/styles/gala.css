@@ -24,7 +24,10 @@ main[tabindex="-1"]:focus{outline:none}
 nav{position:fixed;z-index:500;top:0;right:0;left:0;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid transparent;background:transparent;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease}
 nav.scrolled{border-bottom-color:rgba(255,255,255,.08);background:rgba(0,0,0,.92);backdrop-filter:blur(22px)}
 .nlogo{display:flex;align-items:center;width:178px;height:78px;text-decoration:none}
-.nlogo img{display:block;width:100%;height:100%;object-fit:contain}
+.brand-logo{display:flex;width:100%;flex-direction:column;color:#fff;line-height:1}
+.brand-logo__mark{display:block;width:100%;aspect-ratio:900/318;overflow:hidden}
+.brand-logo__mark img{display:block;width:100%;height:auto}
+.brand-logo__tagline{margin-top:4px;color:rgba(255,255,255,.9);font:600 6px/1.15 'Montserrat',sans-serif;letter-spacing:.16em;text-align:right;text-transform:uppercase;white-space:nowrap}
 .nlinks{display:flex;gap:38px;align-items:center;list-style:none}
 .nlinks a{position:relative;color:#fff;font:700 10px/1.3 'Syne',sans-serif;letter-spacing:.2em;text-decoration:none;text-transform:uppercase}
 .nlinks a::after{content:'';position:absolute;right:0;bottom:-8px;left:0;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
@@ -153,7 +156,7 @@ nav.services-open .nservices-trigger svg{transform:rotate(180deg)}
 
 /* Footer */
 footer.site-footer{display:grid;grid-template-columns:minmax(260px,1.35fr) minmax(130px,.5fr) minmax(180px,.7fr) minmax(220px,.8fr);gap:44px;padding:78px 48px 50px;border-top:1px solid var(--hl);background:#080808;color:#fff}
-.fbrand{max-width:420px}.flogo{display:block;width:220px;margin-bottom:24px;text-decoration:none}.flogo img{display:block;width:100%;height:auto}
+.fbrand{max-width:420px}.flogo{display:block;width:220px;margin-bottom:24px;text-decoration:none}.flogo .brand-logo__tagline{font-size:7.5px}
 .ftag,.fmeta,.flinks a,.fcontact-value{color:rgba(255,255,255,.55);font-size:12px;line-height:1.78;text-decoration:none}
 .fmeta{margin-top:14px;color:rgba(255,255,255,.38)}
 .fct,.fcontact-label{margin-bottom:20px;color:rgba(255,255,255,.32);font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.25em;text-transform:uppercase}
@@ -273,7 +276,6 @@ nav{padding:18px 48px}
 .mnav-primary{border-radius:999px!important}
 footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr) minmax(130px,.5fr) minmax(180px,.7fr) minmax(220px,.8fr)}
 .flogo{width:220px;height:auto;margin-bottom:24px}
-.flogo img{display:block;width:100%;height:auto}
 .ftag{max-width:32rem}
 .fmeta{margin-top:14px;color:rgba(255,255,255,.42);font-size:12px;line-height:1.7}
 .fbot{justify-content:space-between}
@@ -843,6 +845,8 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-select-wrap select{padding-left:44px}
 .gala-filter-reset{height:52px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 16px;border:1px solid #bfbfbc;border-radius:4px;background:#f4f4f1;color:#2a2a2a;font:700 9px/1 'Syne',sans-serif;letter-spacing:.16em;text-transform:uppercase}
 .gala-results-head{display:flex;justify-content:space-between;margin-bottom:38px;padding-bottom:15px;border-bottom:1px solid #d7d7d4;font:700 9px/1.4 'Syne',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#777}
+.gala-advisor-filter{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:20px;padding:18px 20px;border-left:3px solid var(--gala-gold);background:#f2f0e9;color:#222}
+.gala-advisor-filter>div{display:grid;gap:5px}.gala-advisor-filter span{color:#8f681c;font:700 8px/1.3 'Syne',sans-serif;letter-spacing:.18em;text-transform:uppercase}.gala-advisor-filter strong{font:600 15px/1.4 'Poppins',sans-serif}.gala-advisor-filter button{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;color:#34332f;font:700 8px/1.3 'Syne',sans-serif;letter-spacing:.14em;text-transform:uppercase}
 .gala-property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .gala-property-card{display:block;border:1px solid #d2d2ce;border-radius:6px;overflow:hidden;background:#fff;color:var(--gala-ink);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
 .gala-property-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(0,0,0,.1)}
@@ -857,7 +861,8 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-property-card__location{margin-bottom:14px!important;color:#393939!important}
 .gala-property-card__facts{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-family:'Poppins',sans-serif;color:var(--gala-ink)}
 .gala-property-card__facts strong{font-size:16px;font-weight:600}
-.gala-property-card__facts span{padding-left:12px;border-left:1px solid #c8c5bd;font-size:12px;color:#686868}
+.gala-property-card__facts span{font-size:12px;color:#686868}
+.gala-property-card__facts span:not(:first-child){padding-left:12px;border-left:1px solid #c8c5bd}
 .gala-property-card .gala-text-link{margin-top:22px}
 .gala-empty-state{padding:64px;border:1px solid #d2d2cf;border-radius:6px;background:#f5f5f2;text-align:center}
 .gala-empty-state h2{max-width:18ch;margin:0 auto 18px;font-size:clamp(34px,4vw,58px)}
@@ -1004,6 +1009,9 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-commercial-listing__gallery figure:hover img{transform:scale(1.025)}
 .gala-commercial-listing__gallery figcaption{position:absolute;right:0;bottom:0;left:0;display:flex;align-items:center;gap:13px;padding:28px 18px 15px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.76));color:#fff;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.14em;text-transform:uppercase}
 .gala-commercial-listing__gallery figcaption span{color:var(--gala-gold-light)}
+.gala-commercial-listing__video-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid #cfcec7;background:#111;box-shadow:0 30px 70px rgba(26,24,19,.12)}
+.gala-commercial-listing__video-frame[data-orientation="portrait"]{width:min(430px,100%);aspect-ratio:9/16;margin-inline:auto}
+.gala-commercial-listing__video-frame video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#0b0b0b;object-fit:contain}
 
 .gala-commercial-listing__location{border-top:1px solid rgba(207,170,70,.26)}
 .gala-commercial-listing__location-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(370px,.72fr);gap:clamp(54px,7vw,100px);align-items:stretch}
@@ -1027,6 +1035,28 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-commercial-listing__advisor-actions{display:flex;align-items:center;gap:28px}
 .gala-commercial-listing__phone{display:inline-flex;align-items:center;gap:9px;color:#fff;font:700 9px/1.4 'Syne',sans-serif;letter-spacing:.12em;text-decoration:none}
 .gala-commercial-listing__disclosure{max-width:1030px;margin:24px auto 0;color:#77766f;font-size:9px;line-height:1.7;text-align:center}
+
+/* Team */
+.gala-team-hero{min-height:640px;padding-bottom:88px}
+.gala-team-hero h1{max-width:8ch}
+.gala-team-roster__intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr);gap:70px;align-items:end;margin-bottom:60px}
+.gala-team-roster__intro h2{max-width:13ch}
+.gala-team-roster__intro>p{max-width:520px;color:#676760;font-size:14px;line-height:1.8}
+.gala-team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.gala-team-card{overflow:hidden;border:1px solid #d3d2cc;background:#f7f7f4}
+.gala-team-card__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#101010}
+.gala-team-card__media img{width:100%;height:100%;display:block;object-fit:cover}
+.gala-team-card:first-child .gala-team-card__media img{object-position:center}
+.gala-team-card__monogram{height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#34312a 0%,#181714 45%,#0a0a0a 100%);color:rgba(245,222,147,.8);font:500 clamp(54px,7vw,92px)/1 'Poppins',sans-serif;letter-spacing:-.04em}
+.gala-team-card__content{display:flex;min-height:500px;flex-direction:column;padding:30px}
+.gala-team-card__title{color:#946e1d;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.gala-team-card__content h2{margin:12px 0 0;font-size:clamp(31px,3vw,43px);letter-spacing:-.045em}
+.gala-team-card__license{margin-top:9px;color:#85827a;font-size:10px;line-height:1.5}
+.gala-team-card__bio{display:grid;gap:14px;margin-top:24px;color:#5d5c56;font-size:12px;line-height:1.75}
+.gala-team-card__contact{width:max-content;max-width:100%;display:inline-flex;align-items:center;gap:8px;margin-top:24px;color:#2d2c28;font:600 11px/1.4 'Montserrat',sans-serif;text-decoration:none;overflow-wrap:anywhere}
+.gala-team-card__actions{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:auto;padding-top:32px}
+.gala-team-card__actions .gala-button{min-height:46px;padding:14px 18px;font-size:8px;white-space:nowrap}
+.gala-team-card__actions .gala-text-link{font-size:7px;white-space:nowrap}
 
 /* Company and contact */
 .gala-principle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.17);border-left:1px solid rgba(255,255,255,.17)}
@@ -1090,6 +1120,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-exchange-process__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-property-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gala-team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-property-detail{gap:54px}
   .gala-property-hero__scroll{display:none}
   .gala-property-factbar>.gala-shell>div{padding:22px}
@@ -1263,9 +1294,15 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-service-grid,.gala-related-services{grid-template-columns:1fr}
   .gala-service-card{min-height:280px}
   .gala-property-toolbar{grid-template-columns:1fr}
+  .gala-advisor-filter{align-items:flex-start;flex-direction:column}.gala-advisor-filter button{min-height:34px}
   .gala-results-head{align-items:flex-start;flex-direction:column;gap:8px}
   .gala-property-grid{grid-template-columns:1fr}
   .gala-empty-state{padding:36px 20px}
+  .gala-team-hero{min-height:540px;padding-bottom:60px}
+  .gala-team-roster__intro{grid-template-columns:1fr;gap:24px;margin-bottom:38px}
+  .gala-team-grid{grid-template-columns:1fr}
+  .gala-team-card__content{min-height:0}
+  .gala-team-card__actions{align-items:flex-start;flex-direction:column}
   .gala-property-hero{min-height:760px}
   .gala-property-hero__copy{padding-bottom:52px}
   .gala-property-hero .gala-back-link{margin-bottom:32px}

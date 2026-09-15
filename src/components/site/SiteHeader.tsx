@@ -1,8 +1,8 @@
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import galaLogo from "@/assets/gala-cre-logo.png";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
+import BrandLogo from "@/components/site/BrandLogo";
 import { serviceNavigationGroups } from "@/content/services";
 
 type SiteHeaderProps = {
@@ -19,6 +19,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const startsTransparent =
     currentPath === "/" ||
     currentPath === "/company" ||
+    currentPath === "/team" ||
     currentPath === "/careers" ||
     currentPath === "/contact" ||
     currentPath.startsWith("/investors") ||
@@ -77,7 +78,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
     <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Link to="/" className="nlogo" aria-label="Gala CRE Group home">
-        <img src={galaLogo} alt="Gala CRE Group" />
+        <BrandLogo />
       </Link>
       <ul className="nlinks">
         <li className="nservices" onMouseEnter={openServicesMega} onMouseLeave={scheduleServicesClose}>
@@ -96,6 +97,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </li>
         <li><Link to="/properties">Properties</Link></li>
         <li><Link to="/company">Company</Link></li>
+        <li><Link to="/team">Team</Link></li>
         <li><Link to="/careers">Careers</Link></li>
         <li><Link to="/contact">Contact</Link></li>
       </ul>
@@ -132,6 +134,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </div>
         <Link to="/properties" onClick={() => setMobileNavOpen(false)}>Properties</Link>
         <Link to="/company" onClick={() => setMobileNavOpen(false)}>Company</Link>
+        <Link to="/team" onClick={() => setMobileNavOpen(false)}>Team</Link>
         <Link to="/careers" onClick={() => setMobileNavOpen(false)}>Careers</Link>
         <Link to="/contact" onClick={() => setMobileNavOpen(false)}>Contact</Link>
         <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Let's Connect</Link>

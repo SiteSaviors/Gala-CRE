@@ -22,6 +22,7 @@ const allowedInquiryTypes = new Set([
   "Commercial Agent Careers",
   "1031 / Replacement Property Search",
 ]);
+const allowedAdvisorIds = new Set(["gaurang-gala", "leigh-roach", "goverdhan-vavilala"]);
 
 const asString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
@@ -69,6 +70,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const inquiryType = asString(body.inquiryType);
   const message = asString(body.message);
   const propertySlug = asString(body.propertySlug);
+  const advisorId = asString(body.advisorId);
   const sourcePage = asString(body.sourcePage) || "/contact";
   const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -77,7 +79,8 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     !emailIsValid || email.length > 254 ||
     !allowedInquiryTypes.has(inquiryType) ||
     message.length < 10 || message.length > 5000 ||
-    phone.length > 50 || company.length > 160 || propertySlug.length > 180 || sourcePage.length > 500
+    phone.length > 50 || company.length > 160 || propertySlug.length > 180 ||
+    (advisorId && !allowedAdvisorIds.has(advisorId)) || sourcePage.length > 500
   ) {
     response.status(400).json({ error: "Please review the submitted fields." });
     return;
@@ -98,6 +101,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     ["Company", company || "Not provided"],
     ["Inquiry", inquiryType],
     ["Property", propertySlug || "Not specified"],
+    ["Requested advisor", advisorId || "Not specified"],
     ["Source", sourcePage],
   ];
   const rows = fields.map(([label, value]) => `<tr><th align="left" style="padding:6px 12px 6px 0">${escapeHtml(label)}</th><td style="padding:6px 0">${escapeHtml(value)}</td></tr>`).join("");

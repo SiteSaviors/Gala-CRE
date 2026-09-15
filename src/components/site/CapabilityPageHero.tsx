@@ -43,11 +43,13 @@ const CapabilityPageHero = ({ hero, parent }: CapabilityPageHeroProps) => (
           {hero.actions.map((action) => <CapabilityActionLink action={action} key={`${action.label}-${action.href}`} />)}
         </div>
       </div>
-      <div className="gala-cap-hero__signals" aria-label={hero.signalLabel}>
-        {hero.signals.map((signal, index) => (
-          <span key={signal}><small>{String(index + 1).padStart(2, "0")}</small>{signal}</span>
-        ))}
-      </div>
+      {hero.signals.length > 0 && (
+        <div className="gala-cap-hero__signals" aria-label={hero.signalLabel}>
+          {hero.signals.map((signal, index) => (
+            <span key={signal}><small>{String(index + 1).padStart(2, "0")}</small>{signal}</span>
+          ))}
+        </div>
+      )}
     </div>
   </section>
 );

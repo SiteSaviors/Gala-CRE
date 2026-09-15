@@ -8,8 +8,8 @@ Configure these only in the server/deployment environment. None should use the `
 
 - `RESEND_API_KEY`: Resend server API key.
 - `CONTACT_FROM_EMAIL`: verified sender used for form notifications.
-- `CAREERS_TO_EMAIL`: private recipient for commercial-agent applications.
-- `INVESTOR_TO_EMAIL`: private recipient for acquisition and 1031 inquiries.
+- `CAREERS_TO_EMAIL`: comma-separated private recipients for commercial-agent applications. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
+- `INVESTOR_TO_EMAIL`: comma-separated private recipients for acquisition and 1031 inquiries. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
 - `FORM_ALLOWED_ORIGINS`: optional comma-separated list of permitted production origins.
 - `FORM_RATE_LIMIT_MAX`: optional submissions per window; defaults to `5`.
 - `FORM_RATE_LIMIT_WINDOW_MS`: optional window length; defaults to `900000`.
@@ -22,7 +22,7 @@ Configure these only in the server/deployment environment. None should use the `
 
 1. The browser validates the journey-specific schema and sends a shared envelope containing `formType`, `inquiryType`, `sourcePage`, `startedAt`, and the form payload.
 2. The server checks the request method, optional origin allowlist, honeypot, rate limit, completion timing, and the full journey-specific schema.
-3. The server chooses the recipient from private environment configuration. A recipient cannot be supplied or overridden by the browser.
+3. The server chooses and validates the recipient list from private environment configuration. Recipients cannot be supplied or overridden by the browser.
 4. Resend sends the notification with the applicant or investor email as `reply_to`.
 5. If configured, the validated record is also posted to the private Google synchronization webhook. Email remains the primary delivery path if optional synchronization is unavailable.
 6. Public responses contain only a success flag or a generic error; private configuration is never returned.

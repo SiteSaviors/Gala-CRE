@@ -101,7 +101,7 @@ Objective: Finish each verified active listing with a journey appropriate to its
 - [x] Rebuild 5047 Yadkin Road through the shared system.
 - [x] Make represented shopping-center approval, site planning, access, and development diligence central to Yadkin.
 - [x] Evaluate Family Farm Road for inclusion; initially deferred, then added September 8 after the client supplied current Zillow, Doorify MLS, LoopNet, and NestVisions sources.
-- [x] Confirm each currently verified page's property-specific inquiry preselection, documents, map, gallery, advisor, and disclosure.
+- [x] Confirm each currently verified page's property-specific inquiry preselection, documents, map, gallery, advisor, and disclosure. Family Farm Road was assigned to Leigh Roach by the client on September 14.
 
 Gate: A prospect can understand each verified active offering, material conditions, available diligence, advisor, and next action within two minutes.
 
@@ -128,47 +128,47 @@ Next action: Phase gate passed. Continue with Phase 4 by building Industrial as 
 
 ## Phase 4 — GalaBroker and GalaSales pages
 
-Status: **In progress; current Careers and 1031 conversion paths verified**
+Status: **Completed**
 
 Objective: Complete the remaining brokerage and investment-sales capability routes.
 
-- [ ] Give every page a distinct client, commercial problem, advisory process, deliverables, and outcome.
-- [ ] Add purposeful imagery and accurate alt text to every route.
-- [ ] Add page-specific metadata and concise inquiry CTAs.
-- [ ] Add related-capability navigation without circular filler.
-- [ ] Keep Landlord and Tenant Representation substantively different.
-- [ ] Ensure Industrial, Multifamily, Retail, Office, and Land do not read as one page with swapped nouns.
+- [x] Give every page a distinct client, commercial problem, advisory process, deliverables, and outcome.
+- [x] Add purposeful imagery and accurate alt text to every route.
+- [x] Add page-specific metadata and concise inquiry CTAs.
+- [x] Add related-capability navigation without circular filler.
+- [x] Keep Landlord and Tenant Representation substantively different.
+- [x] Ensure Industrial, Multifamily, Retail, Office, and Land do not read as one page with swapped nouns.
 - [x] Build Industrial as a distinct owner/investor sale-advisory journey with contextual imagery, accurate diligence boundaries, metadata, related links, and focused inquiry routing.
 - [x] Build Multifamily as a distinct owner/investor sale-advisory journey grounded in rent-roll, operating, physical-condition, and underwriting decisions.
 - [x] Build Retail as a distinct owner/investor sale-advisory journey grounded in lease, tenant, trade-area, access, and site-utility decisions.
 - [x] Build Office as a distinct owner/investor sale-advisory journey grounded in occupancy, rollover, leasing-capital, and space-competitiveness decisions.
-- [ ] Build Land as the final distinct GalaSales route.
+- [x] Build Land as the final distinct GalaSales route, centered on verified use paths, access, infrastructure, physical constraints, buyer fit, diligence, transaction conditions, and execution.
 
 Gate: Every GalaBroker and GalaSales route is persuasive, visually complete, responsive, and materially specific.
 
-Next action: Build Land as the final distinct GalaSales editorial route centered on use and buyer fit, entitlement and approval status, access, utilities, environmental and physical constraints, timing, pricing strategy, diligence sequencing, and transaction execution; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA, then close the Phase 4 gate if all GalaBroker/GalaSales pages remain complete and responsive.
+Next action: Phase gate passed. All GalaBroker and GalaSales capabilities now use the editorial system and retain distinct audiences, decision criteria, processes, deliverables, imagery, metadata, cross-links, and inquiry context.
 
 ## Phase 5 — GalaDevelop, GalaCapital, and Property Management
 
-Status: **In progress**
+Status: **Completed**
 
 Objective: Complete the remaining service ecosystem without overstating Gala's role.
 
-- [ ] Build Site Strategy.
-- [ ] Build Entitlements.
-- [ ] Build Infrastructure.
-- [ ] Build Development Oversight.
-- [ ] Build Debt.
-- [ ] Build Equity.
-- [ ] Build Capital Strategy.
-- [ ] Build Transaction Coordination.
-- [ ] Build Property Management Partnership.
-- [ ] Clearly distinguish direct Gala services, coordination, capital access, and partner-delivered work.
-- [ ] Add appropriate imagery, metadata, cross-links, and CTAs.
+- [x] Build Site Strategy.
+- [x] Build Entitlements.
+- [x] Build Infrastructure.
+- [x] Build Development Oversight.
+- [x] Build Debt.
+- [x] Build Equity.
+- [x] Build Capital Strategy.
+- [x] Build Transaction Coordination.
+- [x] Build Property Management Partnership.
+- [x] Clearly distinguish direct Gala services, coordination, capital access, and partner-delivered work.
+- [x] Add appropriate imagery, metadata, cross-links, and CTAs.
 
 Gate: Every remaining capability route is complete, accurately scoped, cross-linked, responsive, and free of unsupported promises.
 
-Next action: Start with the highest-intent GalaDevelop route after Phase 4 passes.
+Next action: Phase gate passed. Hold the unresolved property, social, profile, and form-delivery inputs for the user's later return; the next user-directed work can begin the planned refinement and audit pass.
 
 ## Phase 6 — Careers and agent recruiting
 
@@ -211,22 +211,31 @@ Next action: Configure and verify the approved investor-inquiry endpoint only af
 
 ## Phase 8 — Transactions and property inventory
 
-Status: **Pending**
+Status: **In progress; verified listing, video, and transaction-record updates implemented**
 
 Objective: Correctly classify and present Gala's active, under-contract, and completed work.
 
 - [x] Verify and add 802 Bragg Boulevard as a recently sold retail transaction using the client-supplied status, Crexi sold designation and three listing images, and LoopNet's off-market record. Do not publish former asking prices as closing consideration.
-- [ ] Verify 10414 and 10416 Chapel Hill Road transaction details and combined $1.8M presentation.
+- [x] Audit the supplied HMS record for 10416 Chapel Hill Road. It verifies a July 29, 2026 closed status, Gala listing involvement, two parcels, and approximately 3.3 acres, but does not resolve the 10414/10416 combined-address structure or whether its displayed $2.5M is list or closing price.
+- [ ] Verify 10414 and 10416 Chapel Hill Road transaction details and combined $1.8M presentation with client/closing records.
+- [x] Audit HMS record 10119823 for 202 North Main Street. It verifies the July 30, 2026 closed status and property facts, but the record attributes the listing to Century 21 and does not establish Gala's transaction role or label the displayed $825,000 as closing consideration.
+- [x] Add a qualified closed-transaction card and detail route for 202 North Main Street using its verified address, closing date, and physical facts. Keep the ambiguous $825,000 display and all MLS photography unpublished; use the shared Gala completed-transaction graphic and omit unconfirmed advisor credit.
+- [x] Add a qualified closed-transaction card and detail route for 10416 Chapel Hill Road using its verified address, closing date, approximate acreage, parcel count, and Gala listing involvement. Keep the conflicting $2.5M/$1.8M economics and all MLS photography unpublished; limit the record to 10416 until the combined-address structure is confirmed.
+- [x] Audit the Lexington Townhomes Drive folders. The materials verify 1111 Brown Street, three parcels, a proposed 58-townhome program, Gaurang Gala's listing assignment, eight drone images, one video, and multiple 2023 approvals; price, current approval status, and publication rights remain unresolved.
+- [x] Audit the Family Farm and Church Street NestVisions packages. Each contains one hosted/downloadable video plus its existing image package; use the hosted player or a web-optimized derivative instead of the 421 MB and 508 MB source files.
+- [x] Replace the hosted-player embeds with a shared native-video module and locally packaged low-bandwidth derivatives for Family Farm Road and Church Street; add the client-supplied Lexington video as a compressed portrait derivative. All three use poster images, controls, `playsinline`, `preload="none"`, viewport-proximity source loading, and no autoplay.
+- [x] Audit the only Watkins material found locally. The 2025 news article describes a proposed Alta Watkins development but does not substantiate a Gala transaction, transaction status/value, advisor assignment, or reusable media.
 - [ ] Verify Pittard Sears address, status, transaction facts, and the basis for any record-breaking claim.
-- [x] Add Family Farm Road from the supplied MLS, LoopNet, Zillow, and NestVisions sources with verified public facts, five distinct images, careful diligence language, and property-specific inquiry routing. Advisor identity and underlying land records remain client inputs.
+- [x] Add Family Farm Road from the supplied MLS, LoopNet, Zillow, and NestVisions sources with verified public facts, five distinct images, careful diligence language, and property-specific inquiry routing. Leigh Roach's listing assignment was subsequently client-confirmed; underlying land records remain client inputs.
+- [x] Add Lexington Townhome Site at `/properties/1111-brown-street` through the shared listing system using “Contact for pricing,” proposed 58-townhome positioning, qualified historical-approval language, Gaurang Gala as advisor, five client-supplied aerials, and inquiry-only diligence materials. Keep it out of the homepage carousel pending review.
 - [x] Keep closed transactions out of the active homepage carousel and visually distinguish them from active inventory in the Properties catalog.
 - [ ] Label under-contract opportunities accurately.
-- [ ] Strengthen the Chapel Hill Road homepage spotlight using only verified facts.
-- [ ] Build the transaction display system even if some client records remain blocked.
+- [x] Strengthen the Chapel Hill Road homepage spotlight using only verified facts and remove the unconfirmed combined price from public display.
+- [x] Build the transaction display system even if some client records remain blocked.
 
 Gate: Active listings, under-contract opportunities, and completed transactions are never conflated.
 
-Next action: Verify 10414 and 10416 Chapel Hill Road transaction details and approved media without changing the existing homepage spotlight until those facts are confirmed.
+Next action: Obtain authoritative Pittard Sears property identity, contract status, approved media, and substantiation for the record-breaking claim before preparing its under-contract record.
 
 ## Phase 9 — Brand, social, navigation, and conversion integration
 
@@ -307,9 +316,13 @@ Next action: Begin only after Phases 1–11 have passed.
 
 These blockers must not stop unrelated work:
 
-- Family Farm Road: legal parcel schedule, survey, advisor/brokerage confirmation, zoning record, and available well, septic, access, private-road, and property-condition documents. Current facts and five selected images are sourced from the supplied active listing and NestVisions package.
+- Family Farm Road: legal parcel schedule, survey, brokerage disclosure language, zoning record, and available well, septic, access, private-road, and property-condition documents. Leigh Roach's listing assignment is client-confirmed; current facts and five selected images are sourced from the supplied active listing and NestVisions package.
 - 802 Bragg Boulevard: final sale price and closing date remain unpublished client inputs. The address, retail classification, physical facts, Crexi sold designation, LoopNet off-market status, Gala advisor, and three former-listing images are verified.
-- 10414 and 10416 Chapel Hill Road: closing details, transaction date, asset classification, and approved media beyond the verified combined $1.8M reference.
+- 10414 and 10416 Chapel Hill Road: confirm the combined-address structure, closing economics, preferred transaction credit, and approved non-MLS imagery. The existing homepage and 10416 record intentionally publish no price.
+- Lexington Townhomes / 1111 Brown Street: current asking price ($990,000 agreement versus $1,000,000 flyer), current status of the time-conditioned 2023 approvals, controlling land-use approval, survey/gross acreage, and media/document publication rights.
+- 202 North Main Street: Gala's exact transaction role, whether the displayed $825,000 is closing consideration, preferred advisor credit, and approved non-MLS imagery; the qualified closed record is live locally without those claims.
+- 10416 Chapel Hill Road HMS record: whether the displayed $2.5M is list or closing price, how the two MLS parcels map to 10414/10416, the approved combined-address presentation, preferred advisor credit, and reusable transaction imagery; the qualified 10416-only record is live locally without price or MLS photography.
+- Watkins: exact deal/property identity, Gala's role, transaction status and economics, advisor assignment, and approved imagery; the saved 2025 article alone is insufficient.
 - Pittard Sears: exact property identity, address, contract status, pricing context, approved media, and substantiation for the record-breaking claim.
 - Careers: recipient and Google/email storage configuration intentionally deferred by the user until after the recruiting form is built.
 - 1031 sourcing: recipient and Google/email storage configuration intentionally deferred by the user until after the investor form is built; baseline tax/legal boundary copy is now present for client review.
@@ -396,7 +409,7 @@ Every new entry must use this handoff shape:
 - Verification: 18/18 targeted tests passed; 32/32 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; desktop and 390px mobile browser checks passed with one annotated-aerial gallery item, three document paths, map/advisor/inquiry surfaces, no horizontal overflow, and no page-specific console errors; `git diff --check` passed.
 - Commit: Intended message `feat: rebuild Yadkin Road listing journey`; record the resulting hash immediately after commit.
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
-- Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road still requires its legal parcel schedule, survey, advisor/brokerage confirmation, zoning record, and available well, septic, access, private-road, and property-condition documents.
+- Blockers: The approved shopping-center plan, municipal approval record, case or permit number, approval date and conditions, remaining permits, parcel ID, zoning, frontage, access details, utility evidence, wetland/flood information, and additional approved site media remain client/document inputs. Family Farm Road still requires its legal parcel schedule, survey, brokerage disclosure language, zoning record, and available well, septic, access, private-road, and property-condition documents; Leigh Roach's listing assignment is confirmed.
 - Exact next action: Generate a single advertised-capability route matrix from the desktop menu, mobile menu, footer, service index, and related-capability data; add automated coverage that asserts every promoted path resolves to substantive page content rather than a dead end or placeholder.
 
 ### Pulse — 2026-09-04 07:03 CDT
@@ -482,3 +495,55 @@ Every new entry must use this handoff shape:
 - Remaining working-tree state: Expected clean after the checkpoint commit; confirm immediately after committing.
 - Blockers: No Office content blocker. The image is generated generic service imagery and must not be represented as a Gala listing or completed project. No approved Office client photography, rent roll, leasing case study, or transaction record has been supplied.
 - Exact next action: Build `/services/investment-sales/land` as the final distinct GalaSales editorial route centered on use and buyer fit, entitlement and approval status, access, utilities, environmental and physical constraints, timing, pricing strategy, diligence sequencing, and transaction execution; add route-specific contextual imagery, accurate boundaries, metadata, related links, tests, and a focused Investment Sales inquiry CTA, then run the full Phase 4 gate across every GalaBroker/GalaSales route.
+
+### Manual checkpoint — 2026-09-14 Phase 4 property updates
+
+- Starting branch / HEAD: `codex/site-refinement` at `e77153b`, with the existing Phase 1/2 working tree preserved.
+- Source-of-truth checked: Current user instructions; branch, status, and history; this ledger; `PROPERTY-DATA-REGISTER.md`; shared property data and renderer; supplied NestVisions video players; client-supplied Lexington Drive files and selected aerials; property tests; and live local routes.
+- Phase / checkpoint: Implement verified property updates for Family Farm Road, Church Street, and Lexington Townhome Site.
+- Gate: Family Farm and Church Street display their stable hosted videos; Lexington is discoverable in the Properties catalog and renders through the shared property system using contact pricing, proposed-program language, historical-approval qualifications, Gaurang as advisor, and only selected client-supplied media; the reviewed homepage carousel remains unchanged.
+- Completed: Added an optional schema-driven video section and embedded the two NestVisions players; optimized five Lexington aerials; added `/properties/1111-brown-street` with a complete identity, facts, opportunity, approval-record, transaction-condition, gallery, map, diligence, advisor, inquiry, disclosure, and metadata journey; added sitemap and automated coverage.
+- Files and routes changed: `src/content/properties.ts`, `src/components/properties/CommercialListingPage.tsx`, `src/styles/gala.css`, `src/assets/properties/lexington-townhomes/*`, `src/test/properties-model.test.ts`, `src/test/gala-pages.test.tsx`, `public/sitemap.xml`, `PROPERTY-DATA-REGISTER.md`, and this ledger; affected `/properties`, `/properties/5911-family-farm-road`, `/properties/611-703-church-street`, and `/properties/1111-brown-street`.
+- Verification: 32/32 targeted tests passed; 86/86 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings. Desktop browser QA confirmed the Lexington route, five-image gallery, map, property-context inquiry, correct metadata, no horizontal overflow, and no page-specific console errors; Family Farm and Church Street showed the correct hosted video URLs, no overflow, and no page-specific console errors; both hosted player URLs returned HTTP 200.
+- Commit: Not requested; changes remain uncommitted with the existing approved Phase 1/2 work.
+- Blockers: Lexington's fixed asking price remains conflicted, so the site correctly uses “Contact for pricing.” The supplied 2023 approvals require current-status and transferability confirmation. HMS transactions, Watkins, Pittard Sears, social URLs, Goverdhan's completed profile, and final form delivery credentials remain separately blocked. The client's later instruction to add the supplied Lexington video supersedes the earlier media-publication hold; the original 109.6 MB source remains private.
+- Exact next action: Obtain the HMS transaction roles, economics, and approved imagery needed for the two closed-deal cards.
+
+### Manual checkpoint — 2026-09-14 closed-transaction records
+
+- Starting branch / HEAD: `codex/site-refinement` at `e77153b`, with the existing approved Phase 1–4 working tree preserved.
+- Source-of-truth checked: Current user direction; branch, status, and history; this ledger; `PROPERTY-DATA-REGISTER.md`; the supplied HMS transaction records already audited in the register; shared property and transaction models; catalog/detail renderers; sitemap; automated tests; and the live homepage, property catalog, and both transaction routes.
+- Phase / checkpoint: Phase 8 — prepare closed-transaction cards and detail records for 202 North Main Street and 10416 Chapel Hill Road without unconfirmed economics or MLS photography.
+- Gate: Both transactions appear only as Closed in the Properties catalog, have focused detail routes using verified facts, omit disputed prices and MLS imagery, preserve property-specific inquiry context, remain off the active homepage carousel, and render without layout or console regressions; the homepage must not continue publishing the unconfirmed combined Chapel Hill price.
+- Completed: Added reusable non-photographic completed-transaction art; added qualified schema-driven records at `/properties/202-north-main-street` and `/properties/10416-chapel-hill-road`; omitted price, gallery, and unconfirmed advisor fields; added map, transaction-condition, inquiry, disclosure, alt-text, sitemap, and automated coverage; corrected fact-card separators when price is absent; and replaced the homepage's unconfirmed `$1.8M` metric with a status-led transaction snapshot.
+- Files and routes changed: `src/assets/properties/transaction-record.svg`, `src/content/properties.ts`, `src/content/transactions.ts`, `src/content/featuredListings.ts`, `src/components/properties/PropertyCard.tsx`, `src/components/properties/CommercialListingPage.tsx`, `src/components/site/TransactionSpotlight.tsx`, `src/pages/PropertyDetail.tsx`, `src/styles/gala.css`, `src/test/properties-model.test.ts`, `src/test/gala-pages.test.tsx`, `public/sitemap.xml`, `PROPERTY-DATA-REGISTER.md`, and this ledger; affected `/`, `/properties`, `/properties/202-north-main-street`, and `/properties/10416-chapel-hill-road`.
+- Verification: 34/34 targeted property/page tests passed; 88/88 full tests passed; production build passed; lint completed with zero errors and seven unchanged Fast Refresh warnings; `git diff --check` passed; desktop browser QA confirmed both catalog cards crop cleanly, both detail routes omit galleries and disputed prices, the homepage no longer contains `$1.8M`, all three routes have no horizontal overflow or page-specific console errors, and both property CTAs retain the correct slug.
+- Commit: Not requested; changes remain uncommitted with the existing approved Phase 1–4 work.
+- Blockers: Approved property photography, public closing consideration, the exact Gala role/advisor credit for 202 North Main, and the combined 10414/10416 address structure and preferred transaction credit remain unconfirmed. The cards intentionally use the shared Gala transaction graphic until approved non-MLS media is supplied.
+- Exact next action: Obtain authoritative Pittard Sears property identity, contract status, approved media, and substantiation for the record-breaking claim before preparing its under-contract record.
+
+### Manual checkpoint — 2026-09-14 property video delivery
+
+- Starting branch / HEAD: `codex/site-refinement` at `e77153b`, with the existing approved Phase 1–4 and transaction work preserved.
+- Source-of-truth checked: Current user direction; branch, status, and history; this ledger; `PROPERTY-DATA-REGISTER.md`; shared property data and renderer; the client-supplied Family Farm and Church Street NestVisions packages; the client-supplied Lexington Drive video; current property tests; production output; and live desktop/mobile routes.
+- Phase / checkpoint: Phase 6 — add inline, mobile-friendly video modules for Family Farm Road, Church Street, and Lexington Townhomes.
+- Gate: Every requested property displays a poster-backed native video outside the image gallery; controls and inline playback work without autoplay; the media source is deferred until the player nears the viewport; compressed files decode on desktop and a 390×844 mobile viewport without horizontal overflow; production media weight remains bounded.
+- Completed: Replaced the two hosted-player iframes with a reusable native-video component; packaged 6.1 MB Family Farm and 7.0 MB Church Street H.264/AAC derivatives from their supplied hosted packages; compressed the 109.6 MB Lexington QuickTime source to a 2.7 MB portrait H.264/AAC derivative with a 67 KB poster; added Lexington's separate property-film section; and preserved each route's image gallery as an independent module. The component uses native controls, `playsinline`, `preload="none"`, no autoplay, and one-time IntersectionObserver source activation within 320 pixels of the viewport.
+- Files and routes changed: `src/components/properties/PropertyVideo.tsx`, `src/components/properties/CommercialListingPage.tsx`, `src/content/properties.ts`, `src/styles/gala.css`, `src/assets/properties/videos/*`, `src/test/property-video.test.tsx`, `src/test/properties-model.test.ts`, `src/test/gala-pages.test.tsx`, `PROPERTY-DATA-REGISTER.md`, and this ledger; affected `/properties/5911-family-farm-road`, `/properties/611-703-church-street`, and `/properties/1111-brown-street`.
+- Verification: 35/35 targeted property/video/page tests passed; 89/89 full tests passed; production build passed; lint passed with zero errors and seven unchanged Fast Refresh warnings; `git diff --check` passed. Browser QA confirmed real playback and decoding for all three files, working controls, no autoplay, inline playback, `preload="none"`, poster images, deferred source attachment, and no overflow. At 390×844, Family Farm and Church Street render in 350×196.875 landscape frames; Lexington renders in a centered 350×622.219 portrait frame. Production outputs are 6.43 MB, 7.38 MB, and 2.86 MB respectively and are not part of the initial JavaScript payload.
+- Commit: Not requested; changes remain uncommitted with the existing approved work.
+- Blockers: No implementation blocker. Caption or transcript files were not supplied; add them later if the videos contain decision-relevant spoken information. Lexington's fixed asking price and current approval status remain separate property-data blockers.
+- Exact next action: Obtain authoritative Pittard Sears property identity, contract status, approved media, and substantiation for the record-breaking claim before preparing its under-contract record.
+
+### Manual checkpoint — 2026-09-14 capability completion
+
+- Starting branch / HEAD: `codex/site-refinement` at `e77153b`, with all existing approved and uncommitted Gala CRE work preserved.
+- Source-of-truth checked: Current user direction; branch, status, and history; this ledger; the shared service and capability route matrices; all existing editorial capability content; the generic capability fallback; Contact inquiry mapping; current image assets; automated tests; production output; and live desktop/mobile routes.
+- Phase / checkpoint: Close Phase 4 and Phase 5 by finishing Land, all GalaDevelop routes, all GalaCapital routes, and Property Management Partnership at the established editorial standard.
+- Gate: All 16 advertised capabilities resolve to substantive editorial pages with distinct audiences, commercial problems, processes, deliverables, metadata, imagery, related links, and focused inquiry context; none uses the thin generic fallback; direct, coordinated, capital-access, specialist, and partner-delivered roles remain accurately distinguished; all routes render without overflow on desktop or a 390×844 mobile viewport.
+- Completed: Built Land Investment Sales, Site Strategy, Entitlements, Infrastructure Coordination, Development Oversight, Debt Advisory, Equity Advisory, Capital Strategy, Transaction Coordination, and Property Management Partnership through the shared editorial system. Added a compact blueprint builder for the demonstrated repeated page structure while keeping every route's substantive content distinct. Added six optimized, unbranded generic contextual images; none is represented as a Gala listing, client property, or completed project. Corrected Contact inquiry mapping so Development Services and Property Management CTAs preserve their intended categories alongside Investment Sales and Capital Markets.
+- Files and routes changed: `src/content/capabilityPageBlueprint.ts`, `src/content/landCapabilityPage.ts`, `src/content/developmentCapabilityPages.ts`, `src/content/capitalCapabilityPages.ts`, `src/content/capabilityPages.ts`, `src/pages/Contact.tsx`, `src/assets/land-investment-sales.webp`, `src/assets/site-strategy-entitlements.webp`, `src/assets/development-infrastructure.webp`, `src/assets/capital-markets-strategy.webp`, `src/assets/transaction-coordination.webp`, `src/assets/property-management-partnership.webp`, `src/test/capability-routes.test.tsx`, `src/test/contact-page.test.tsx`, and this ledger; affected all ten previously generic capability routes and their Contact handoffs.
+- Verification: 33/33 initial targeted capability/page tests passed; the capability registry contains editorial records for all 16 advertised routes with unique titles and opening problem statements. Desktop browser QA confirmed all ten new routes use the editorial renderer, load their hero image, expose four main sections, preserve the expected CTA, and have no horizontal overflow. Visual review confirmed the settled Land, Site Strategy, Capital Strategy, and Property Management hero compositions. At 390×844, all ten routes loaded their imagery, kept long headings and both stacked CTAs within a 350px content width, and had no overflow. Browser QA caught and then confirmed the fix for Development Services and Property Management Contact preselection; 16/16 focused capability/contact tests passed after the correction. Final verification: 91/91 full tests passed; production build passed; TypeScript and `git diff --check` passed; lint completed with zero errors and the same seven Fast Refresh warnings in existing shared UI files.
+- Commit: Not requested; this checkpoint remains uncommitted with the existing approved work.
+- Blockers: No capability-page implementation blocker. The new images are generated generic context and must never be captioned or represented as Gala properties or completed work. Client case studies, quantified outcomes, project photography, and testimonials were not supplied, so no such claims were added.
+- Exact next action: Hold the separately deferred property, social, profile, and production-form inputs. When the user returns, begin the planned sitewide refinement and audit pass from this now-complete capability baseline.

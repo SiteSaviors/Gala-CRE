@@ -25,6 +25,7 @@ import {
   type InquiryType,
 } from "@/content/contact";
 import { propertyBySlug } from "@/content/properties";
+import { teamMemberById, teamMemberIds, type TeamMemberId } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import { submitContactForm, type ContactFormValues } from "@/lib/contactForm";
 
@@ -36,6 +37,7 @@ const contactFormSchema = z.object({
   inquiryType: z.enum(inquiryTypes),
   message: z.string().trim().min(10, "Please share a few more details."),
   propertySlug: z.string(),
+  advisorId: z.string(),
   website: z.string(),
 });
 
@@ -43,7 +45,9 @@ const inquiryByQuery: Partial<Record<string, InquiryType>> = {
   "landlord-representation": "Landlord Representation",
   "tenant-representation": "Tenant Representation",
   "investment-sales": "Investment Sales",
+  "development-services": "Development Services",
   "capital-markets": "Capital Markets",
+  "property-management": "Property Management",
   careers: "Commercial Agent Careers",
   "1031-exchange": "1031 / Replacement Property Search",
 };
@@ -68,6 +72,11 @@ const Contact = () => {
   const location = useLocation();
   const propertySlug = searchParams.get("property") ?? "";
   const selectedProperty = propertySlug ? propertyBySlug[propertySlug] : undefined;
+  const requestedAdvisorId = searchParams.get("advisor");
+  const advisorId = teamMemberIds.includes(requestedAdvisorId as TeamMemberId)
+    ? requestedAdvisorId as TeamMemberId
+    : "";
+  const selectedAdvisor = advisorId ? teamMemberById[advisorId] : undefined;
   const requestedInquiry = searchParams.get("inquiry");
   const defaultInquiryType: InquiryType = propertySlug
     ? "Property Inquiry"
@@ -84,6 +93,7 @@ const Contact = () => {
       inquiryType: defaultInquiryType,
       message: "",
       propertySlug,
+      advisorId,
       website: "",
     },
   });
@@ -141,12 +151,18 @@ const Contact = () => {
                   <div className="contact-form-head">
                     <div className="contact-form-eyebrow">Advisor Inquiry</div>
                     <h2 id="contact-form-title" className="contact-form-title">
-                      {selectedProperty ? `Ask about ${selectedProperty.name}` : contactFormConfig.title}
+                      {selectedProperty
+                        ? `Ask about ${selectedProperty.name}`
+                        : selectedAdvisor
+                          ? `Contact ${selectedAdvisor.name}`
+                          : contactFormConfig.title}
                     </h2>
                     <p className="contact-form-body">
                       {selectedProperty
                         ? `Tell us what you would like to evaluate at ${selectedProperty.address}, ${selectedProperty.city}, ${selectedProperty.state}. The property will be included with your inquiry.`
-                        : contactFormConfig.description}
+                        : selectedAdvisor
+                          ? `Share a little about your commercial real estate needs. ${selectedAdvisor.name} will be included with your inquiry.`
+                          : contactFormConfig.description}
                     </p>
                   </div>
 
@@ -220,6 +236,7 @@ const Contact = () => {
                         </FormItem>
                       )} />
                       <input type="hidden" {...form.register("propertySlug")} />
+                      <input type="hidden" {...form.register("advisorId")} />
 
                       {submitError ? <div className="contact-error" role="alert">{submitError}</div> : null}
                       <Button type="submit" className="contact-form-submit" disabled={form.formState.isSubmitting}>

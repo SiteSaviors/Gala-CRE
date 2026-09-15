@@ -42,7 +42,6 @@ const agentApplicationSchema = z.object({
   currentBrokerage: z.string().trim(),
   cityAndMarkets: z.string().trim().min(2, "Tell us where you currently work."),
   licenseState: z.string().trim().min(2, "Enter your license state."),
-  licenseNumber: z.string().trim().min(2, "Enter your license number or status."),
   yearsExperience: z.enum(experienceRanges),
   specialties: z.array(z.enum(commercialSpecialties)).min(1, "Select at least one commercial specialty."),
   salesLeasingExperience: z.string().trim().min(20, "Briefly describe your sales and leasing experience."),
@@ -69,7 +68,6 @@ const AgentApplicationForm = () => {
       currentBrokerage: "",
       cityAndMarkets: "",
       licenseState: "",
-      licenseNumber: "",
       yearsExperience: experienceRanges[0],
       specialties: [],
       salesLeasingExperience: "",
@@ -113,7 +111,7 @@ const AgentApplicationForm = () => {
   return (
     <div className="career-form-card">
       <FormCardHeader
-        eyebrow="Agent application"
+        eyebrow="Join Our Team"
         title="Tell us about your commercial experience."
         description="All fields are required unless marked optional. The details help Gala understand your market, experience, and potential fit. No résumé upload is required."
       />
@@ -162,17 +160,10 @@ const AgentApplicationForm = () => {
             </FormItem>
           )} />
 
-          <div className="career-form-row career-form-row--three">
+          <div className="career-form-row">
             <FormField control={form.control} name="licenseState" render={({ field }) => (
               <FormItem className="contact-form-item">
                 <FormLabel className="contact-form-label">License state</FormLabel>
-                <FormControl><Input {...field} className="contact-form-input" autoComplete="off" /></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="licenseNumber" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">License number or status</FormLabel>
                 <FormControl><Input {...field} className="contact-form-input" autoComplete="off" /></FormControl>
                 <FormMessage className="contact-form-message" />
               </FormItem>

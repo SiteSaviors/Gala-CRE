@@ -11,9 +11,11 @@ import {
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import type { Property } from "@/content/properties";
+import PropertyVideo from "@/components/properties/PropertyVideo";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
+import { teamMemberById } from "@/content/team";
 
 type CommercialListingPageProps = {
   property: Property;
@@ -50,11 +52,13 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const transactionConditions = page.transaction?.conditions ?? [];
   const galleryItems = page.gallery?.items ?? [];
   const documentItems = page.documents?.items ?? [];
+  const advisor = property.advisorId ? teamMemberById[property.advisorId] : undefined;
   const hasAssetContent = informationGroups.length > 0 || transactionConditions.length > 0;
-  const hasDiligenceContent = documentItems.length > 0 || Boolean(property.advisor) || Boolean(page.disclosure);
-  const telephoneHref = property.advisor?.phone
-    ? `tel:+1${property.advisor.phone.replace(/\D/g, "")}`
+  const hasDiligenceContent = documentItems.length > 0 || Boolean(advisor) || Boolean(page.disclosure);
+  const telephoneHref = advisor?.phone
+    ? `tel:+1${advisor.phone.replace(/\D/g, "")}`
     : undefined;
+  const emailHref = advisor?.email ? `mailto:${advisor.email}` : undefined;
 
   return (
     <>
@@ -70,7 +74,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
         <section className="gala-commercial-listing__hero">
           <img
             src={property.heroImage}
-            alt={`${property.name} commercial property in ${property.city}, ${property.state}`}
+            alt={property.imageAlt ?? `${property.name} commercial property in ${property.city}, ${property.state}`}
             style={{ objectPosition: property.imagePosition }}
           />
           <div className="gala-commercial-listing__hero-shade"></div>
@@ -233,6 +237,26 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
           </section>
         ) : null}
 
+        {page.video ? (
+          <section className="gala-section gala-section--silver gala-commercial-listing__video-section">
+            <div className="gala-shell">
+              <div className="gala-commercial-listing__section-head">
+                <div>
+                  <div className="gala-kicker gala-kicker--dark">{page.video.eyebrow}</div>
+                  <h2>{page.video.title}</h2>
+                </div>
+                {page.video.body ? <p>{page.video.body}</p> : null}
+              </div>
+              <PropertyVideo
+                sourceUrl={page.video.sourceUrl}
+                posterImage={page.video.posterImage}
+                ariaLabel={page.video.ariaLabel}
+                orientation={page.video.orientation}
+              />
+            </div>
+          </section>
+        ) : null}
+
         {page.location ? (
           <section className="gala-section gala-section--black gala-commercial-listing__location">
             <div className="gala-shell gala-commercial-listing__location-grid">
@@ -288,17 +312,22 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 </>
               ) : null}
 
-              {property.advisor ? (
+              {advisor ? (
                 <div className="gala-commercial-listing__advisor">
                   <div>
                     <span className="gala-commercial-listing__eyebrow">{page.advisorEyebrow ?? "Listing Advisor"}</span>
-                    <h2>{property.advisor.name}</h2>
-                    <p>{property.advisor.title}{property.advisor.license ? ` · ${property.advisor.license}` : ""}</p>
+                    <h2>{advisor.name}</h2>
+                    <p>{advisor.title}{advisor.license ? ` · ${advisor.license}` : ""}</p>
                   </div>
                   <div className="gala-commercial-listing__advisor-actions">
                     {telephoneHref ? (
                       <a href={telephoneHref} className="gala-commercial-listing__phone">
-                        <Phone size={17} aria-hidden="true" /> {property.advisor.phone}
+                        <Phone size={17} aria-hidden="true" /> {advisor.phone}
+                      </a>
+                    ) : null}
+                    {emailHref ? (
+                      <a href={emailHref} className="gala-commercial-listing__phone">
+                        <Mail size={17} aria-hidden="true" /> {advisor.email}
                       </a>
                     ) : null}
                     <Link to={inquiryHref} className="gala-button">

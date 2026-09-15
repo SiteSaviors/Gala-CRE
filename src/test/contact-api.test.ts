@@ -9,6 +9,7 @@ const validBody = {
   inquiryType: "Investment Sales",
   message: "I would like to discuss a commercial property disposition.",
   propertySlug: "",
+  advisorId: "",
   sourcePage: "/contact",
   website: "",
 };
@@ -59,6 +60,25 @@ describe("contact API", () => {
     await contactHandler({ method: "POST", body: validBody }, response);
     expect(result.statusCode).toBe(200);
     expect(fetchMock).toHaveBeenCalledWith("https://api.resend.com/emails", expect.objectContaining({ method: "POST" }));
+  });
+
+  it("preserves an approved advisor request in the private notification", async () => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "advisor@example.com");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    const { response, result } = createResponse();
+    await contactHandler({ method: "POST", body: { ...validBody, advisorId: "leigh-roach" } }, response);
+    expect(result.statusCode).toBe(200);
+    const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(emailBody.text).toContain("Requested advisor: leigh-roach");
+  });
+
+  it("rejects an unrecognized advisor id", async () => {
+    const { response, result } = createResponse();
+    await contactHandler({ method: "POST", body: { ...validBody, advisorId: "unknown-agent" } }, response);
+    expect(result.statusCode).toBe(400);
   });
 
   it.each(["Commercial Agent Careers", "1031 / Replacement Property Search"])("accepts the contextual %s inquiry category", async (inquiryType) => {

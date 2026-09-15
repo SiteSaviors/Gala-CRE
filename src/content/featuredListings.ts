@@ -25,7 +25,7 @@ const saleListings: FeaturedListingPreview[] = featuredProperties
     const images = [
       {
         src: property.heroImage,
-        alt: `${property.name} in ${property.city}, ${property.state}`,
+        alt: property.imageAlt ?? `${property.name} in ${property.city}, ${property.state}`,
       },
       ...(property.listingPage?.gallery?.items.map(({ src, alt }) => ({ src, alt })) ?? []),
       ...property.gallery.map((src, index) => ({

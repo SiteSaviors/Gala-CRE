@@ -69,9 +69,32 @@ describe("advisor inquiry form", () => {
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Capital Markets");
   });
 
+  it.each([
+    ["/contact?inquiry=development-services&focus=site-strategy", "Development Services"],
+    ["/contact?inquiry=property-management", "Property Management"],
+  ])("preserves capability inquiry context for %s", (path, expectedInquiry) => {
+    renderContact(path);
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue(expectedInquiry);
+  });
+
   it("prefills a focused tenant representation inquiry", () => {
     renderContact("/contact?inquiry=tenant-representation");
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Tenant Representation");
+  });
+
+  it("preserves a team-member contact request", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    renderContact("/contact?advisor=goverdhan-vavilala&source=team");
+    expect(screen.getByRole("heading", { name: "Contact Goverdhan Vavilala" })).toBeInTheDocument();
+    completeForm();
+    fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
+    await screen.findByRole("heading", { name: "Inquiry received" });
+    const request = fetchMock.mock.calls[0][1] as RequestInit;
+    expect(JSON.parse(String(request.body))).toMatchObject({
+      advisorId: "goverdhan-vavilala",
+      sourcePage: "/contact?advisor=goverdhan-vavilala&source=team",
+    });
   });
 
   it("preselects Careers and reveals the dedicated recruiting journey", () => {

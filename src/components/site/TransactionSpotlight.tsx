@@ -28,8 +28,8 @@ const TransactionSpotlight = () => (
             <span>Transaction Snapshot</span>
           </div>
           <div className="gala-transaction-spotlight__price">
-            <strong>{featuredTransaction.priceDisplay}</strong>
-            <span>{featuredTransaction.priceLabel}</span>
+            <strong>{featuredTransaction.metricDisplay}</strong>
+            <span>{featuredTransaction.metricLabel}</span>
           </div>
           <div className="gala-transaction-spotlight__facts">
             <span><small>Properties</small><strong>Two adjacent parcels</strong></span>

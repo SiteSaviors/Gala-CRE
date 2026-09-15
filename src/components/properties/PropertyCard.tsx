@@ -11,7 +11,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => (
     <div className="gala-property-card__media">
       <img
         src={property.heroImage}
-        alt={`${property.name} in ${property.city}, ${property.state}`}
+        alt={property.imageAlt ?? `${property.name} in ${property.city}, ${property.state}`}
         style={{ objectPosition: property.imagePosition }}
       />
       <span className="gala-property-card__status">{property.status}</span>

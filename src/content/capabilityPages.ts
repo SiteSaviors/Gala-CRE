@@ -5,6 +5,12 @@ import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
 import officeInvestmentSales from "@/assets/office-investment-sales.webp";
 import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
+import {
+  capitalCapabilityPages,
+  propertyManagementCapabilityPage,
+} from "@/content/capitalCapabilityPages";
+import { developmentCapabilityPages } from "@/content/developmentCapabilityPages";
+import { landCapabilityPage } from "@/content/landCapabilityPage";
 
 export type CapabilityPageIcon =
   | "positioning"
@@ -74,6 +80,7 @@ export type CapabilityPageSection =
 
 export type CapabilityPageContent = {
   path: string;
+  compact?: boolean;
   metadata: {
     title: string;
     description: string;
@@ -580,6 +587,7 @@ const tenantRepresentation: CapabilityPageContent = {
 
 const industrialInvestmentSalesPage: CapabilityPageContent = {
   path: "/services/investment-sales/industrial",
+  compact: true,
   metadata: {
     title: "Industrial Investment Sales",
     description:
@@ -604,52 +612,17 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See the Sale Process",
-        href: "#industrial-sale-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Industrial sale advisory stages",
-    signals: ["Diagnose", "Position", "Market", "Execute"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-      watermark: "UTILITY",
+      type: "strategy",
       eyebrow: "The Industrial Value Story",
       headline: "A warehouse is more than its square footage.",
-      body: [
-        "Industrial buyers test the relationship between the lease, the user, and the building itself. Loading, clear height, access, power, yard configuration, expansion potential, and capital needs can change who should pursue an asset and how they value it.",
-        "A credible sale process makes those relationships understandable early. It separates verified property facts from assumptions, identifies the questions that will surface in diligence, and presents the asset to the buyers whose strategy fits its income and physical profile.",
-      ],
-      emphasis:
-        "The strongest positioning does not hide complexity. It organizes the facts so qualified buyers can price it with confidence.",
-      pressures: [
-        {
-          number: "01",
-          title: "Income",
-          body: "Lease structure, credit, rollover, expenses, and vacancy shape the durability of cash flow.",
-        },
-        {
-          number: "02",
-          title: "Function",
-          body: "Clear height, loading, circulation, power, yard depth, and configuration determine operational fit.",
-        },
-        {
-          number: "03",
-          title: "Execution",
-          body: "Condition, environmental records, title, access, and timing influence diligence and closing risk.",
-        },
-      ],
-    },
-    {
-      type: "strategy",
-      eyebrow: "Buyer Lens",
-      headline: "Match the story to the way the asset creates value.",
       introduction:
-        "Industrial assets can serve different buyers for different reasons. Gala organizes the positioning around the property's verified operating and physical realities rather than forcing every opportunity into the same investment narrative.",
+        "Gala organizes the sale around the property's verified income, operating utility, physical condition, and the risks buyers will test in diligence.",
       media: {
         src: industrialInvestmentSales,
         alt: "Wide view of a contemporary industrial facility, loading area, and circulation",
@@ -659,26 +632,23 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
         {
           number: "01",
           label: "Income + Operations",
-          title: "Explain how the property performs today.",
-          body: "For occupied assets, the lease and the real estate must be read together. For owner-user opportunities, operational fit and availability move to the foreground.",
-          points: [
-            "Occupancy, lease, and rollover context",
-            "Building function and user compatibility",
-            "Operating expenses and capital needs",
-            "Current availability and delivery conditions",
-          ],
+          title: "Show how the property performs today.",
+          body: "Lease structure, occupancy, rollover, expenses, capital needs, and availability shape the durability of income and the likely buyer pool.",
+          points: [],
         },
         {
           number: "02",
+          label: "Physical Function",
+          title: "Make operational utility legible.",
+          body: "Clear height, loading, circulation, power, yard depth, access, and configuration determine which users and investors can execute with confidence.",
+          points: [],
+        },
+        {
+          number: "03",
           label: "Optionality + Risk",
-          title: "Show what could change—and what must be verified.",
-          body: "Re-tenanting, expansion, repositioning, or redevelopment may broaden the buyer pool, but only when the relevant constraints and diligence requirements are stated clearly.",
-          points: [
-            "Alternative-use and re-tenanting considerations",
-            "Access, loading, yard, and site constraints",
-            "Environmental and physical-diligence pathway",
-            "Entitlement or redevelopment questions",
-          ],
+          title: "Separate opportunity from assumption.",
+          body: "Condition, environmental records, title, expansion, re-tenanting, and redevelopment questions are framed clearly so buyers can price both potential and execution risk.",
+          points: [],
         },
       ],
     },
@@ -687,28 +657,27 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
       id: "industrial-sale-process",
       eyebrow: "The Industrial Sale Process",
       headline: "Build conviction before asking the market to act.",
-      introduction:
-        "The process connects seller objectives, property-level evidence, buyer strategy, and transaction management so momentum is supported by useful information—not avoidable surprises.",
+      introduction: "Connect the seller's objectives, property-level evidence, buyer strategy, and transaction execution.",
       steps: [
         {
           number: "01",
           title: "Diagnose",
-          body: "Clarify ownership objectives, timing, property operations, lease position, physical attributes, and known diligence items.",
+          body: "Clarify ownership objectives, timing, operations, lease position, physical attributes, and known diligence items.",
         },
         {
           number: "02",
           title: "Position",
-          body: "Frame the likely buyer profiles, valuation context, differentiators, constraints, and the evidence needed to support the offering.",
+          body: "Define the likely buyers, valuation context, differentiators, constraints, and evidence supporting the offering.",
         },
         {
           number: "03",
           title: "Market",
-          body: "Launch coordinated materials and targeted outreach, qualify interest, manage access, and keep ownership informed by market feedback.",
+          body: "Launch coordinated materials and targeted outreach, qualify interest, manage access, and report market feedback.",
         },
         {
           number: "04",
           title: "Execute",
-          body: "Compare offers beyond headline price, manage diligence communication, and coordinate the path with ownership's legal, tax, and technical advisors through closing.",
+          body: "Compare offers beyond price and coordinate diligence with ownership's legal, tax, and technical advisors through closing.",
         },
       ],
     },
@@ -717,69 +686,59 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
       eyebrow: "Services + Deliverables",
       headline: "The information buyers need. The process sellers need.",
       introduction:
-        "Each assignment is scoped around the asset, but the work stays focused on disciplined positioning, informed market engagement, and accountable execution.",
+        "A focused assignment connects market positioning, buyer engagement, and accountable execution.",
       items: [
         {
           icon: "positioning",
-          title: "Asset + Buyer Positioning",
-          body: "A sale thesis grounded in verified income, tenancy, physical utility, location, and the buyer groups most likely to value them.",
-        },
-        {
-          icon: "economics",
-          title: "Valuation Context",
-          body: "Relevant sale, income, replacement-cost, and market context organized around the asset and the seller's timing and priorities.",
+          title: "Asset + Valuation Positioning",
+          body: "A sale thesis grounded in verified income, tenancy, physical utility, location, market context, and the buyers most likely to value them.",
         },
         {
           icon: "marketing",
           title: "Offering Materials",
-          body: "A coordinated property narrative, fact set, imagery, and diligence roadmap that distinguishes known information from items requiring verification.",
+          body: "A coordinated property narrative, fact set, imagery, and diligence roadmap that separates verified information from buyer assumptions.",
         },
         {
           icon: "prospects",
-          title: "Targeted Buyer Outreach",
-          body: "Direct engagement with relevant private investors, operators, owner-users, and developers based on the property's profile.",
-        },
-        {
-          icon: "tours",
-          title: "Access + Interest Management",
-          body: "Qualification, property access, feedback, and offer coordination handled with appropriate discretion and consistency.",
+          title: "Buyer Outreach + Access",
+          body: "Direct engagement with relevant investors, operators, owner-users, and developers, with qualification, property access, and feedback managed consistently.",
         },
         {
           icon: "execution",
-          title: "Diligence + Closing Coordination",
-          body: "Organized communication and milestone management across the buyer, seller, counsel, lenders, and technical specialists; legal, tax, and technical conclusions remain with the appropriate advisors.",
+          title: "Negotiation + Execution",
+          body: "Offer comparison, diligence communication, and milestone coordination through closing, with specialist conclusions left to the appropriate advisors.",
         },
       ],
     },
   ],
   relatedCapabilities: {
     eyebrow: "Connected Gala Capabilities",
-    headline: "Industrial decisions often extend beyond the sale itself.",
+    headline: "Connected expertise when the asset requires it.",
     introduction:
-      "Gala can connect the disposition conversation to occupancy, land, development, and capital questions when the assignment requires a broader commercial view.",
+      "Move directly into the occupancy, land, development, or capital questions surrounding the sale.",
     links: [
       {
         label: "GalaSales",
         title: "Land",
-        body: "Sale strategy for raw, entitled, and owner-user sites where access, utilities, approvals, and timing shape value.",
+        body: "Sale strategy for sites where access, utilities, approvals, and timing shape value.",
         href: "/services/investment-sales/land",
       },
       {
         label: "GalaBroker",
         title: "Tenant Representation",
-        body: "Occupier-side search and negotiation when an owner-user sale creates a relocation or expansion requirement.",
+        body: "Occupier-side search and negotiation when a sale creates a relocation requirement.",
         href: "/services/brokerage/tenant-representation",
       },
       {
         label: "GalaDevelop",
         title: "Development Oversight",
-        body: "Coordination across consultants, approvals, schedules, and ownership decisions for industrial repositioning or development work.",
+        body: "Coordination for industrial repositioning or development work.",
         href: "/services/development-services/development-oversight",
       },
       {
         label: "GalaCapital",
         title: "Capital Strategy",
-        body: "Debt and equity planning aligned with the asset, sponsorship, timing, and execution plan.",
+        body: "Debt and equity planning aligned with the asset and execution plan.",
         href: "/services/capital-markets/capital-strategy",
       },
     ],
@@ -788,7 +747,7 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
     eyebrow: "Start With the Asset",
     headline: "Let’s identify what the market should understand first.",
     body:
-      "Share the property, current occupancy, timing, and the decision ownership is evaluating. Gala will begin with the asset facts and the sale objectives that matter most.",
+      "Share the property, current occupancy, timing, and ownership objective. Gala will begin with the asset facts buyers are most likely to test.",
     actions: [
       {
         label: "Discuss an Industrial Asset",
@@ -1473,6 +1432,10 @@ export const capabilityPages: CapabilityPageContent[] = [
   multifamilyInvestmentSalesPage,
   retailInvestmentSalesPage,
   officeInvestmentSalesPage,
+  landCapabilityPage,
+  ...developmentCapabilityPages,
+  ...capitalCapabilityPages,
+  propertyManagementCapabilityPage,
 ];
 
 export const capabilityPageByPath: Record<string, CapabilityPageContent> = Object.fromEntries(

@@ -45,7 +45,7 @@ const PropertyDetail = () => {
         <section className="gala-property-hero">
           <img
             src={property.heroImage}
-            alt={`${property.name} commercial property in ${property.city}, ${property.state}`}
+            alt={property.imageAlt ?? `${property.name} commercial property in ${property.city}, ${property.state}`}
             style={{ objectPosition: property.imagePosition }}
           />
           <div className="gala-property-hero__shade"></div>

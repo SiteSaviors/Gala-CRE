@@ -16,7 +16,7 @@ describe("careers application form", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Please enter your name.")).toBeInTheDocument();
-      expect(screen.getByText("Enter your license number or status.")).toBeInTheDocument();
+      expect(screen.getByText("Enter your license state.")).toBeInTheDocument();
       expect(screen.getByText("Select at least one commercial specialty.")).toBeInTheDocument();
     });
     expect(fetchMock).not.toHaveBeenCalled();
@@ -31,7 +31,6 @@ describe("careers application form", () => {
     fireEvent.change(screen.getByLabelText("Phone"), { target: { value: "919-555-0100" } });
     fireEvent.change(screen.getByLabelText("City and markets served"), { target: { value: "Raleigh-Durham" } });
     fireEvent.change(screen.getByLabelText("License state"), { target: { value: "North Carolina" } });
-    fireEvent.change(screen.getByLabelText("License number or status"), { target: { value: "NC 123456" } });
     fireEvent.click(screen.getByLabelText("Industrial"));
     fireEvent.change(screen.getByLabelText("Sales and leasing experience"), { target: { value: "Commercial sales and leasing across the Triangle market." } });
     fireEvent.change(screen.getByLabelText("Representative past transactions"), { target: { value: "An industrial owner-user sale and commercial land disposition." } });

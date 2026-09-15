@@ -1,6 +1,6 @@
 import { ArrowUpRight, Search, SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import PropertyCard from "@/components/properties/PropertyCard";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -15,21 +15,29 @@ import {
   type PropertyOfferingType,
   type PropertyStatus,
 } from "@/content/properties";
+import { teamMemberById, teamMemberIds, type TeamMemberId } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const Properties = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedAdvisorId = searchParams.get("advisor");
+  const advisorId = teamMemberIds.includes(requestedAdvisorId as TeamMemberId)
+    ? requestedAdvisorId as TeamMemberId
+    : undefined;
+  const selectedAdvisor = advisorId ? teamMemberById[advisorId] : undefined;
   const [query, setQuery] = useState("");
   const [assetType, setAssetType] = useState<"All" | PropertyAssetType>("All");
   const [offeringType, setOfferingType] = useState<"All" | PropertyOfferingType>("All");
-  const [status, setStatus] = useState<"All" | PropertyStatus>("All");
+  const [status, setStatus] = useState<"All" | PropertyStatus>(() => selectedAdvisor ? "Active" : "All");
   useSiteCursor();
 
   const filtered = useMemo(
-    () => filterProperties(sortedProperties, { query, assetType, offeringType, status }),
-    [assetType, offeringType, query, status]
+    () => filterProperties(sortedProperties, { query, assetType, offeringType, status, advisorId }),
+    [advisorId, assetType, offeringType, query, status]
   );
-  const hasFilters = query || assetType !== "All" || offeringType !== "All" || status !== "All";
+  const hasFilters = Boolean(query || advisorId || assetType !== "All" || offeringType !== "All" || status !== "All");
   const reset = () => {
+    setSearchParams({}, { replace: true });
     setQuery("");
     setAssetType("All");
     setOfferingType("All");
@@ -55,6 +63,15 @@ const Properties = () => {
 
         <section className="gala-section gala-section--light gala-properties-section">
           <div className="gala-shell">
+            {selectedAdvisor ? (
+              <div className="gala-advisor-filter" role="status">
+                <div>
+                  <span>Advisor portfolio</span>
+                  <strong>Active listings represented by {selectedAdvisor.name}</strong>
+                </div>
+                <button type="button" onClick={reset}><X size={15} aria-hidden="true" /> View all properties</button>
+              </div>
+            ) : null}
             <div className="gala-property-toolbar" aria-label="Property filters">
               <label className="gala-search">
                 <Search size={18} aria-hidden="true" />
@@ -88,8 +105,8 @@ const Properties = () => {
             ) : (
               <div className="gala-empty-state">
                 <div className="gala-kicker gala-kicker--dark">Property Search</div>
-                <h2>{hasFilters ? "No properties match those filters." : "No properties are currently available."}</h2>
-                <p>{hasFilters ? "Reset the filters and explore the full catalog." : "Talk with a Gala CRE advisor about the opportunity you are looking for."}</p>
+                <h2>{selectedAdvisor ? `No active listings are currently displayed for ${selectedAdvisor.name}.` : hasFilters ? "No properties match those filters." : "No properties are currently available."}</h2>
+                <p>{hasFilters ? "View all properties or adjust the filters to continue exploring." : "Talk with a Gala CRE advisor about the opportunity you are looking for."}</p>
                 {hasFilters ? <button type="button" className="gala-button" onClick={reset}>Reset Filters</button> : null}
               </div>
             )}

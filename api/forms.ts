@@ -38,7 +38,6 @@ const careersPayloadSchema = z.object({
   currentBrokerage: optionalString(160),
   cityAndMarkets: requiredString(2, 500),
   licenseState: requiredString(2, 80),
-  licenseNumber: requiredString(2, 120),
   yearsExperience: z.enum(experienceRanges),
   specialties: z.array(z.enum(specialties)).min(1).max(specialties.length),
   salesLeasingExperience: requiredString(20, 5000),
@@ -131,6 +130,13 @@ const getClientKey = (request: ApiRequest) => {
 const positiveInteger = (value: string | undefined, fallback: number) => {
   const parsed = Number.parseInt(value ?? "", 10);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const getConfiguredRecipients = (value: string | undefined) => {
+  if (!value) return [];
+  const recipients = value.split(",").map((recipient) => recipient.trim()).filter(Boolean);
+  if (recipients.some((recipient) => !z.string().email().safeParse(recipient).success)) return [];
+  return [...new Set(recipients)];
 };
 
 const checkMemoryRateLimit = (key: string, now: number, maximum: number, windowMs: number) => {
@@ -268,8 +274,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
-  const to = parsed.data.formType === "careers" ? process.env.CAREERS_TO_EMAIL : process.env.INVESTOR_TO_EMAIL;
-  if (!apiKey || !from || !to) {
+  const recipients = getConfiguredRecipients(
+    parsed.data.formType === "careers" ? process.env.CAREERS_TO_EMAIL : process.env.INVESTOR_TO_EMAIL,
+  );
+  if (!apiKey || !from || recipients.length === 0) {
     response.status(503).json({ error: "Unable to accept this submission right now." });
     return;
   }
@@ -289,7 +297,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
-        to: [to],
+        to: recipients,
         reply_to: parsed.data.payload.email,
         subject,
         text: email.text,

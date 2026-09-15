@@ -134,7 +134,7 @@ const Careers = () => {
         <section className="gala-section gala-section--silver gala-career-application" id="agent-application">
           <div className="gala-shell gala-career-application__grid">
             <div className="gala-career-application__intro">
-              <div className="gala-kicker gala-kicker--dark">Agent Application</div>
+              <div className="gala-kicker gala-kicker--dark">Join Our Team</div>
               <h2>Introduce your experience and the business you want to build.</h2>
               <p>Gala CRE is looking for enough context to have a serious first conversation—not a generic résumé drop.</p>
               <div className="gala-career-application__note">

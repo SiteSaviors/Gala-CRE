@@ -42,11 +42,20 @@ describe("advertised capability route matrix", () => {
 
       expect(match.capability.lead?.length ?? 0, `${entry.path} lead`).toBeGreaterThan(80);
       expect(match.capability.included?.length ?? 0, `${entry.path} deliverables`).toBeGreaterThanOrEqual(3);
-      expect(
-        Boolean(capabilityPageByPath[entry.path]) || Boolean(match.capability.lead && match.capability.included?.length),
-        `${entry.path} content`,
-      ).toBe(true);
+      const editorialPage = capabilityPageByPath[entry.path];
+      expect(editorialPage, `${entry.path} editorial content`).toBeDefined();
+      expect(editorialPage?.metadata.image, `${entry.path} metadata image`).toBeTruthy();
+      expect(editorialPage?.hero.media.src, `${entry.path} hero image`).toBeTruthy();
+      expect(editorialPage?.hero.media.alt.length ?? 0, `${entry.path} hero alt`).toBeGreaterThan(30);
+      expect(editorialPage?.sections.length ?? 0, `${entry.path} sections`).toBeGreaterThanOrEqual(3);
+      expect(editorialPage?.relatedCapabilities.links.length ?? 0, `${entry.path} related links`).toBeGreaterThanOrEqual(4);
+      expect(editorialPage?.hero.actions[0]?.href, `${entry.path} primary CTA`).toMatch(/^\/contact\?inquiry=/);
     });
+
+    expect(Object.keys(capabilityPageByPath)).toHaveLength(expectedCapabilities.length);
+    expect(new Set(Object.values(capabilityPageByPath).map((page) => page.hero.title)).size).toBe(expectedCapabilities.length);
+    expect(new Set(Object.values(capabilityPageByPath).map((page) => page.sections[0]?.headline)).size)
+      .toBe(expectedCapabilities.length);
   });
 
   it("renders every advertised path without falling through to a missing or placeholder page", () => {
@@ -63,6 +72,22 @@ describe("advertised capability route matrix", () => {
       expect(view.container).not.toHaveTextContent(/page not found|coming soon|pending client approval/i);
       view.unmount();
     });
+  });
+
+  it("keeps the Industrial journey concise without losing the core sale path", () => {
+    const industrial = capabilityPageByPath["/services/investment-sales/industrial"];
+
+    expect(industrial.compact).toBe(true);
+    expect(industrial.hero.signals).toEqual([]);
+    expect(industrial.sections.map((section) => section.type)).toEqual([
+      "strategy",
+      "process",
+      "deliverables",
+    ]);
+    expect(industrial.sections.find((section) => section.type === "strategy")?.tracks).toHaveLength(3);
+    expect(industrial.sections.find((section) => section.type === "process")?.steps).toHaveLength(4);
+    expect(industrial.sections.find((section) => section.type === "deliverables")?.items).toHaveLength(4);
+    expect(industrial.relatedCapabilities.links).toHaveLength(4);
   });
 
   it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {

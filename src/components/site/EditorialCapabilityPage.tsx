@@ -41,7 +41,12 @@ const EditorialCapabilityPage = ({ content }: EditorialCapabilityPageProps) => {
   }, [content.path]);
 
   return (
-    <main className="gala-cap-page" id="main-content" tabIndex={-1} ref={pageRef}>
+    <main
+      className={`gala-cap-page${content.compact ? " gala-cap-page--compact" : ""}`}
+      id="main-content"
+      tabIndex={-1}
+      ref={pageRef}
+    >
       <CapabilityPageHero hero={content.hero} parent={content.parent} />
       {content.sections.map((section, index) => (
         <CapabilitySectionRenderer

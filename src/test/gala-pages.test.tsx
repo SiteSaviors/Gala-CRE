@@ -13,6 +13,7 @@ import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
 import ServiceDetail from "@/pages/ServiceDetail";
 import Services from "@/pages/Services";
+import Team from "@/pages/Team";
 
 const renderPage = (page: React.ReactNode, route = "/") => render(
   <MemoryRouter initialEntries={[route]}>{page}</MemoryRouter>
@@ -88,7 +89,8 @@ describe("Gala CRE public pages", () => {
     expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
 
     expect(screen.getByRole("heading", { name: "10414 & 10416 Chapel Hill Road" })).toBeInTheDocument();
-    expect(screen.getByText("$1.8M")).toBeInTheDocument();
+    expect(screen.getByText("Transaction Status")).toBeInTheDocument();
+    expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Bring us your next commercial real estate decision." })).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
@@ -140,12 +142,44 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Property Management Partnership").length).toBeGreaterThan(0);
   });
 
-  it("keeps unapproved team claims out of the site", () => {
+  it("connects the Company page to the approved Team route", () => {
     const company = renderPage(<Company />, "/company");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Meet Our Team/i })).toHaveAttribute("href", "/team");
     expect(screen.getByRole("link", { name: /Explore Careers/i })).toHaveAttribute("href", "/careers?source=company");
     expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers?source=footer")).toBe(true);
     company.unmount();
+  });
+
+  it("renders the Team route from one structured roster", () => {
+    renderPage(<Team />, "/team");
+    expect(screen.getByRole("heading", { name: "Our Team" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Leigh Roach" })).toBeInTheDocument();
+
+    const leighCard = screen.getByRole("heading", { name: "Leigh Roach" }).closest("article");
+    expect(leighCard).not.toBeNull();
+    expect(within(leighCard!).getByRole("link", { name: "Leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
+    expect(within(leighCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
+    expect(within(leighCard!).getByRole("link", { name: /View Active Listings/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
+
+    const goverdhanCard = screen.getByRole("heading", { name: "Goverdhan Vavilala" }).closest("article");
+    expect(goverdhanCard).not.toBeNull();
+    expect(within(goverdhanCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute(
+      "href",
+      "/contact?advisor=goverdhan-vavilala&source=team",
+    );
+    expect(screen.getAllByRole("link", { name: "Team" }).some((link) => link.getAttribute("href") === "/team")).toBe(true);
+  });
+
+  it("filters the property catalog to an advisor's active listings", () => {
+    renderPage(<Properties />, "/properties?advisor=leigh-roach");
+    expect(screen.getByText("Active listings represented by Leigh Roach")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "2301 Lackey Street" })).not.toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property status" })).toHaveValue("Active");
   });
 
   it("creates a discoverable commercial-agent careers route", () => {
@@ -158,9 +192,11 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: /Support built around moving the assignment forward/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Commercial professionals who care how the work gets done/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Tell us about your commercial experience/i })).toBeInTheDocument();
+    expect(screen.getAllByText("Join Our Team")).toHaveLength(2);
+    expect(screen.getByRole("heading", { name: /Introduce your experience and the business you want to build/i })).toBeInTheDocument();
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
-    expect(screen.getByLabelText("License number or status")).toBeInTheDocument();
+    expect(screen.queryByLabelText("License number or status")).not.toBeInTheDocument();
     expect(
       screen.getByRole("group", { name: "Commercial specialties" }),
     ).toBeInTheDocument();
@@ -338,9 +374,12 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /modern light-industrial distribution property/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A warehouse is more than its square footage." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Match the story to the way the asset creates value." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Show how the property performs today." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Make operational utility legible." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Separate opportunity from assumption." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Build conviction before asking the market to act." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The information buyers need. The process sellers need." })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss an Industrial Asset/i })[0]).toHaveAttribute(
       "href",
       "/contact?inquiry=investment-sales&focus=industrial"
@@ -432,11 +471,20 @@ describe("Gala CRE public pages", () => {
 
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
-    expect(screen.getByText("5 properties")).toBeInTheDocument();
+    expect(screen.getByText("8 properties")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Lexington Townhome Site" })).toBeInTheDocument();
+    const northMainCard = screen.getByRole("heading", { name: "202 North Main Street" }).closest("a");
+    expect(northMainCard).not.toBeNull();
+    expect(within(northMainCard as HTMLElement).getByText("Closed")).toBeInTheDocument();
+    expect(within(northMainCard as HTMLElement).queryByText("$825,000")).not.toBeInTheDocument();
+    const chapelHillCard = screen.getByRole("heading", { name: "10416 Chapel Hill Road" }).closest("a");
+    expect(chapelHillCard).not.toBeNull();
+    expect(within(chapelHillCard as HTMLElement).getByText("Closed")).toBeInTheDocument();
+    expect(within(chapelHillCard as HTMLElement).queryByText("$2,500,000")).not.toBeInTheDocument();
     const braggCard = screen.getByRole("heading", { name: "802 Bragg Boulevard" }).closest("a");
     expect(braggCard).not.toBeNull();
     expect(within(braggCard as HTMLElement).getByText("Closed")).toBeInTheDocument();
@@ -496,7 +544,7 @@ describe("Gala CRE public pages", () => {
     const lackey = propertyBySlug["2301-lackey-street"];
     const minimalProperty = {
       ...lackey,
-      advisor: undefined,
+      advisorId: undefined,
       externalLinks: [],
       listingPage: {
         headline: "A concise commercial opportunity.",
@@ -546,6 +594,12 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
+    const churchVideo = screen.getByLabelText("Play the aerial property video for 611 and 703 Church Street");
+    expect(churchVideo).toHaveAttribute("controls");
+    expect(churchVideo).toHaveAttribute("preload", "none");
+    expect(churchVideo).toHaveAttribute("playsinline");
+    expect(churchVideo).not.toHaveAttribute("autoplay");
+    expect(churchVideo).not.toHaveAttribute("src");
     expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
   });
 
@@ -610,9 +664,51 @@ describe("Gala CRE public pages", () => {
       "href",
       "/contact?property=5911-family-farm-road"
     );
+    expect(screen.getByText("Leigh Roach")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
     expect(screen.getByTitle("Map of 5911 Family Farm Road")).toBeInTheDocument();
-    expect(screen.queryByText("Listing Advisor")).not.toBeInTheDocument();
+    const familyFarmVideo = screen.getByLabelText("Play the aerial property video for 5911 Family Farm Road");
+    expect(familyFarmVideo).toHaveAttribute("controls");
+    expect(familyFarmVideo).toHaveAttribute("preload", "none");
+    expect(familyFarmVideo).toHaveAttribute("playsinline");
+    expect(familyFarmVideo).not.toHaveAttribute("autoplay");
+    expect(familyFarmVideo).not.toHaveAttribute("src");
+    expect(screen.getByText("Listing Advisor")).toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
+  });
+
+  it("renders Lexington as a qualified townhome-development opportunity", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/1111-brown-street"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("heading", { name: "Lexington Townhome Site" })).toBeInTheDocument();
+    expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
+    expect(screen.getAllByText("Proposed 58-townhome opportunity").length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: "Useful diligence exists, but currency and transferability matter." })).toBeInTheDocument();
+    expect(within(screen.getByRole("region", { name: /Lexington Townhome Site property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(screen.getByRole("link", { name: "Request Approval Record" })).toHaveAttribute(
+      "href",
+      "/contact?property=1111-brown-street&topic=approval-record",
+    );
+    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=1111-brown-street",
+    );
+    expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
+    expect(screen.getByTitle("Map of 1111 Brown Street")).toBeInTheDocument();
+    const lexingtonVideo = screen.getByLabelText("Play the vertical property video for the Lexington Townhome Site");
+    expect(lexingtonVideo).toHaveAttribute("controls");
+    expect(lexingtonVideo).toHaveAttribute("preload", "none");
+    expect(lexingtonVideo).toHaveAttribute("playsinline");
+    expect(lexingtonVideo).toHaveAttribute("poster", expect.stringMatching(/lexington-townhomes-poster\.webp$/));
+    expect(lexingtonVideo).not.toHaveAttribute("autoplay");
+    expect(lexingtonVideo).not.toHaveAttribute("src");
+    expect(screen.queryByText(/fully entitled$|permit-ready$/i)).not.toBeInTheDocument();
   });
 
   it("renders 802 Bragg Boulevard as a completed retail transaction", () => {
@@ -647,5 +743,51 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText("$800,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$850,000")).not.toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
+  it("renders 202 North Main Street without unconfirmed economics or MLS photography", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/202-north-main-street"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("heading", { name: "202 North Main Street" })).toBeInTheDocument();
+    expect(screen.getByText("July 30, 2026")).toBeInTheDocument();
+    expect(screen.getAllByText("3,333 SF").length).toBeGreaterThan(0);
+    expect(screen.getByText("Transaction price", { exact: true })).toBeInTheDocument();
+    expect(screen.getByText("Not published pending confirmation")).toBeInTheDocument();
+    expect(screen.queryByText("$825,000")).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=202-north-main-street",
+    );
+  });
+
+  it("renders 10416 Chapel Hill Road without disputed pricing or MLS photography", () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/10416-chapel-hill-road"]}>
+        <Routes>
+          <Route path="/properties/:slug" element={<PropertyDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
+    expect(screen.getByText("July 29, 2026")).toBeInTheDocument();
+    expect(screen.getAllByText("Approx. 3.3 acres").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Gala Real Estate Advisors listing involvement documented/i)).toBeInTheDocument();
+    expect(screen.queryByText("$2,500,000")).not.toBeInTheDocument();
+    expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?property=10416-chapel-hill-road",
+    );
   });
 });

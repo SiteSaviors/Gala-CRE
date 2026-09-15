@@ -8,6 +8,7 @@ export type ContactFormValues = {
   inquiryType: InquiryType;
   message: string;
   propertySlug: string;
+  advisorId: string;
   website: string;
 };
 

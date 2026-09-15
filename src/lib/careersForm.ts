@@ -11,7 +11,6 @@ export type AgentApplicationValues = {
   currentBrokerage: string;
   cityAndMarkets: string;
   licenseState: string;
-  licenseNumber: string;
   yearsExperience: (typeof experienceRanges)[number];
   specialties: string[];
   salesLeasingExperience: string;

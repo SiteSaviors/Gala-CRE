@@ -126,7 +126,9 @@ const StrategySection = ({ section }: { section: Extract<CapabilityPageSection, 
             <div className="gala-cap-strategy__track-head"><span>{track.number}</span><small>{track.label}</small></div>
             <h3>{track.title}</h3>
             <p>{track.body}</p>
-            <ul>{track.points.map((point) => <li key={point}><Check size={14} aria-hidden="true" />{point}</li>)}</ul>
+            {track.points.length > 0 && (
+              <ul>{track.points.map((point) => <li key={point}><Check size={14} aria-hidden="true" />{point}</li>)}</ul>
+            )}
           </article>
         ))}
       </div>

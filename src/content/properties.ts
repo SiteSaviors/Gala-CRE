@@ -16,9 +16,20 @@ import familyFarm02 from "@/assets/properties/family-farm-road/family-farm-02.we
 import familyFarm03 from "@/assets/properties/family-farm-road/family-farm-03.webp";
 import familyFarm04 from "@/assets/properties/family-farm-road/family-farm-04.webp";
 import familyFarm05 from "@/assets/properties/family-farm-road/family-farm-05.webp";
+import lexington01 from "@/assets/properties/lexington-townhomes/lexington-01.webp";
+import lexington02 from "@/assets/properties/lexington-townhomes/lexington-02.webp";
+import lexington03 from "@/assets/properties/lexington-townhomes/lexington-03.webp";
+import lexington04 from "@/assets/properties/lexington-townhomes/lexington-04.webp";
+import lexington05 from "@/assets/properties/lexington-townhomes/lexington-05.webp";
+import churchStreetTour from "@/assets/properties/videos/church-street-tour.mp4";
+import familyFarmTour from "@/assets/properties/videos/family-farm-tour.mp4";
+import lexingtonTourPoster from "@/assets/properties/videos/lexington-townhomes-poster.webp";
+import lexingtonTour from "@/assets/properties/videos/lexington-townhomes-tour.mp4";
 import braggBoulevardExterior from "@/assets/properties/802-bragg-boulevard/bragg-03.webp";
 import braggBoulevardApproach from "@/assets/properties/802-bragg-boulevard/bragg-01.webp";
 import braggBoulevardInterior from "@/assets/properties/802-bragg-boulevard/bragg-02.webp";
+import transactionRecordGraphic from "@/assets/properties/transaction-record.svg";
+import type { TeamMemberId } from "@/content/team";
 
 export const propertyAssetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;
 export const propertyOfferingTypes = ["For Sale", "For Lease"] as const;
@@ -31,14 +42,6 @@ export type PropertyStatus = (typeof propertyStatuses)[number];
 export type PropertyLink = {
   label: "Crexi" | "LoopNet" | "CoStar" | "Listing Website";
   href: string;
-};
-
-export type PropertyAdvisor = {
-  name: string;
-  title: string;
-  email?: string;
-  phone?: string;
-  license?: string;
 };
 
 export type PropertyFact = {
@@ -100,6 +103,15 @@ export type PropertyListingPage = {
     items: PropertyListingMedia[];
     note?: string;
   };
+  video?: {
+    eyebrow: string;
+    title: string;
+    body?: string;
+    sourceUrl: string;
+    posterImage: string;
+    ariaLabel: string;
+    orientation?: "landscape" | "portrait";
+  };
   location?: {
     eyebrow: string;
     title: string;
@@ -130,6 +142,7 @@ export type Property = {
   sizeDisplay?: string;
   acreageDisplay?: string;
   heroImage: string;
+  imageAlt?: string;
   gallery: string[];
   imagePosition?: string;
   summary: string;
@@ -141,7 +154,7 @@ export type Property = {
   listingPage?: PropertyListingPage;
   brochurePdf?: string;
   externalLinks: PropertyLink[];
-  advisor?: PropertyAdvisor;
+  advisorId?: TeamMemberId;
   featured: boolean;
   sortOrder: number;
 };
@@ -201,12 +214,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st",
       },
     ],
-    advisor: {
-      name: "Gaurang Gala",
-      title: "Broker-In-Charge",
-      phone: "910-578-2828",
-      license: "NC 283149",
-    },
+    advisorId: "gaurang-gala",
     listingPage: {
       headline: "Existing fuel-and-convenience site near I-95 Exit 19.",
       lead:
@@ -410,12 +418,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2033921/north-carolina-prime-location---land-with-opportunity-for-shopping-center",
       },
     ],
-    advisor: {
-      name: "Gaurang Gala",
-      title: "Broker-In-Charge",
-      phone: "910-578-2828",
-      license: "NC 283149",
-    },
+    advisorId: "gaurang-gala",
     listingPage: {
       headline: "A 3.46-acre Fayetteville commercial site marketed with an approved shopping-center plan.",
       lead:
@@ -603,12 +606,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2335675/north-carolina-611-703-church-st-morrisville-cary-nc-27560",
       },
     ],
-    advisor: {
-      name: "Gaurang Gala",
-      title: "Broker-In-Charge",
-      phone: "910-578-2828",
-      license: "NC 283149",
-    },
+    advisorId: "gaurang-gala",
     listingPage: {
       headline: "A two-site Morrisville opportunity positioned for childcare development.",
       lead:
@@ -705,6 +703,15 @@ export const properties: Property[] = [
             caption: "Wider market context",
           },
         ],
+      },
+      video: {
+        eyebrow: "Property Film",
+        title: "See the Church Street opportunity in context.",
+        body:
+          "A web-optimized aerial overview provides additional orientation to the sites and surrounding Morrisville context. Marketing imagery does not establish legal boundaries.",
+        sourceUrl: churchStreetTour,
+        posterImage: churchStreetImage,
+        ariaLabel: "Play the aerial property video for 611 and 703 Church Street",
       },
       location: {
         eyebrow: "Location Context",
@@ -818,6 +825,7 @@ export const properties: Property[] = [
         href: "https://doorifymls.com/properties/NC/Morrisville/27560/10277/5911-family-farm-road-morrisville-nc-27560/775842597",
       },
     ],
+    advisorId: "leigh-roach",
     listingPage: {
       headline: "Approximately 2.10 acres for residential use and development evaluation.",
       lead:
@@ -920,6 +928,15 @@ export const properties: Property[] = [
         ],
         note: "Approximate marketing outlines are for orientation only and do not replace a boundary survey.",
       },
+      video: {
+        eyebrow: "Property Film",
+        title: "See the Family Farm Road setting from above.",
+        body:
+          "A web-optimized aerial overview provides additional orientation to the property and surrounding Morrisville setting. Approximate marketing outlines are not a survey.",
+        sourceUrl: familyFarmTour,
+        posterImage: familyFarm01,
+        ariaLabel: "Play the aerial property video for 5911 Family Farm Road",
+      },
       location: {
         eyebrow: "Location & Access",
         title: "A Morrisville location near the Research Triangle employment corridor.",
@@ -970,6 +987,217 @@ export const properties: Property[] = [
     },
     featured: true,
     sortOrder: 4,
+  },
+  {
+    slug: "1111-brown-street",
+    name: "Lexington Townhome Site",
+    address: "1111 Brown Street",
+    city: "Lexington",
+    state: "NC",
+    assetType: "Land",
+    offeringType: "For Sale",
+    status: "Active",
+    priceDisplay: "Contact for pricing",
+    acreageDisplay: "Approx. 6.6 acres",
+    heroImage: lexington01,
+    gallery: [lexington02, lexington03, lexington04, lexington05],
+    imagePosition: "center 52%",
+    summary: "Proposed 58-townhome opportunity in Lexington with a historical planning and utility approval record.",
+    overview:
+      "A three-parcel development opportunity at 1111 Brown Street marketed for a proposed 58-townhome program. Client-supplied records include historical 2023 erosion-control, driveway, water-main, and wastewater approvals; their current status, transferability, conditions, and remaining requirements must be independently confirmed.",
+    highlights: [
+      "Proposed 58-townhome development program",
+      "Approximately 6.6 acres represented in marketing materials",
+      "Three-parcel assemblage identified in the supplied property record",
+      "Historical 2023 approval and utility records available for diligence",
+    ],
+    details: [
+      { label: "Property type", value: "Residential development land" },
+      { label: "Proposed program", value: "58 townhomes" },
+      { label: "Offering composition", value: "Three parcels" },
+      { label: "Approval record", value: "Historical approvals; current status to verify" },
+    ],
+    opportunity: {
+      eyebrow: "Development Opportunity",
+      title: "A proposed townhome site with an established diligence record.",
+      body:
+        "The opportunity pairs a defined 58-townhome concept with a package of historical planning, access, water, and wastewater records. Those materials provide a useful starting point—not a representation that the site is currently fully entitled or permit-ready.",
+      points: [
+        "Wastewater permit record references service for 58 three-bedroom townhomes",
+        "2023 driveway and water-main approvals are included in the supplied file",
+        "Current approvals and development requirements remain subject to verification",
+      ],
+    },
+    location: {
+      eyebrow: "Location Context",
+      title: "A residential development site in Lexington, North Carolina.",
+      body:
+        "The property is identified at 1111 Brown Street in Lexington. Buyers should confirm the legal parcel schedule, access, municipal requirements, utility service, and measured proximity to surrounding destinations during diligence.",
+      points: ["Lexington, North Carolina", "Davidson County", "Brown Street address"],
+    },
+    externalLinks: [],
+    advisorId: "gaurang-gala",
+    listingPage: {
+      headline: "A proposed 58-townhome opportunity supported by a historical approval record.",
+      lead:
+        "A three-parcel Lexington development site marketed at approximately 6.6 acres, with a proposed 58-townhome program and client-supplied 2023 planning, access, and utility records available for buyer review.",
+      overviewEyebrow: "The Opportunity",
+      keyFacts: [
+        { label: "Offering", value: "Contact for pricing" },
+        { label: "Site area", value: "Approx. 6.6 acres" },
+        { label: "Proposed program", value: "58 townhomes" },
+        { label: "Approval record", value: "Historical; verify current status" },
+      ],
+      highlights: [
+        "Three-parcel assemblage identified in the supplied property materials",
+        "Wastewater permit record references 58 three-bedroom townhomes",
+        "Historical 2023 driveway, water-main, and erosion-control records supplied",
+        "Current status, transferability, conditions, and remaining approvals require verification",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Property Information",
+          title: "Separate the proposed program from the current approval record.",
+          body:
+            "The supplied materials establish a documented planning history. Buyers should review each record against the current site plan, ownership, schedule, and intended development program.",
+        },
+        groups: [
+          {
+            eyebrow: "Site & Program",
+            title: "A defined townhome concept across three identified parcels.",
+            body:
+              "Marketing materials describe an approximately 6.6-acre site at 1111 Brown Street for a proposed 58-townhome community. Surveyed acreage, boundaries, parcel ownership, density, and the final program should be confirmed from the current legal and municipal record.",
+            facts: [
+              { label: "Street address", value: "1111 Brown Street" },
+              { label: "Marketed area", value: "Approx. 6.6 acres" },
+              { label: "Parcel count", value: "Three identified parcels" },
+              { label: "Proposed homes", value: "58 townhomes" },
+              { label: "Site plan", value: "Request current plan and revision history" },
+              { label: "Survey", value: "Buyer to confirm boundaries and acreage" },
+            ],
+          },
+          {
+            eyebrow: "Historical Approval Record",
+            title: "Useful diligence exists, but currency and transferability matter.",
+            body:
+              "Client-supplied records include 2023 erosion-control, driveway, water-main, and wastewater approvals. Several contain completion, expiration, transfer, certification, or other conditions. They should be reviewed with the issuing authorities and buyer advisers before reliance.",
+            facts: [
+              { label: "Erosion control", value: "2023 approval with modifications; verify current status" },
+              { label: "Driveway connection", value: "2023 NCDOT record; verify completion and validity" },
+              { label: "Water main", value: "2023 encroachment record; verify completion and validity" },
+              { label: "Wastewater", value: "2023 permit record for proposed 58-home service" },
+              { label: "Transferability", value: "Confirm with each issuing authority" },
+              { label: "Remaining permits", value: "Buyer and authorities to determine" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Buyer Verification",
+        title: "What is offered—and what the diligence package must establish.",
+        conditions: [
+          { label: "Pricing", value: "Contact the listing advisor for current pricing" },
+          { label: "Program", value: "Proposed 58-townhome opportunity" },
+          { label: "Site area", value: "Approximately 6.6 acres in marketing; survey controls" },
+          { label: "Approval position", value: "Historical records available; no current fully entitled representation" },
+          { label: "Buyer review", value: "Confirm ownership, boundaries, approvals, conditions, utilities, and remaining development requirements" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Site & Surroundings",
+          title: "Aerial context for the proposed Lexington townhome site.",
+          body:
+            "Client-supplied drone photography shows the property setting and surrounding context. These unannotated images do not establish parcel boundaries or the limits of the offering.",
+        },
+        items: [
+          {
+            src: lexington01,
+            alt: "Aerial view toward the proposed townhome site at 1111 Brown Street in Lexington",
+            caption: "Brown Street and site context",
+          },
+          {
+            src: lexington02,
+            alt: "Top-down aerial context of the proposed Lexington townhome site",
+            caption: "Site and surrounding context",
+          },
+          {
+            src: lexington03,
+            alt: "Angled aerial view of the Brown Street site and nearby neighborhood",
+            caption: "Neighborhood context",
+          },
+          {
+            src: lexington04,
+            alt: "Wide aerial view of the area surrounding 1111 Brown Street in Lexington",
+            caption: "Wider Lexington context",
+          },
+          {
+            src: lexington05,
+            alt: "Aerial view of the wooded site setting near Brown Street",
+            caption: "Existing site setting",
+          },
+        ],
+        note: "Photography is for orientation only and does not establish legal boundaries.",
+      },
+      video: {
+        eyebrow: "Property Film",
+        title: "Explore the Lexington opportunity in motion.",
+        body:
+          "This vertical property film introduces the Lexington market and proposed townhome opportunity. The video is marketing context only; current approvals, boundaries, acreage, and development feasibility require independent verification.",
+        sourceUrl: lexingtonTour,
+        posterImage: lexingtonTourPoster,
+        ariaLabel: "Play the vertical property video for the Lexington Townhome Site",
+        orientation: "portrait",
+      },
+      location: {
+        eyebrow: "Location & Access",
+        title: "A Lexington site with a documented Brown Street address.",
+        body:
+          "The property is identified at 1111 Brown Street in Lexington, Davidson County. Buyers should independently verify legal access, roadway conditions, parcel boundaries, municipal jurisdiction, utility availability, and distances to surrounding destinations.",
+        points: [
+          "1111 Brown Street, Lexington, North Carolina",
+          "Davidson County",
+          "Three-parcel assemblage identified in supplied materials",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=1111%20Brown%20Street%2C%20Lexington%2C%20NC%2027292&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=1111%20Brown%20Street%2C%20Lexington%2C%20NC%2027292",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Documents & Diligence",
+          title: "Review the record before underwriting the program.",
+          body:
+            "Request the current property package and evaluate the historical approvals with the issuing authorities and appropriate legal, engineering, and development advisers.",
+        },
+        items: [
+          {
+            title: "Historical approval record",
+            description: "Request the supplied erosion-control, NCDOT, water-main, and wastewater records for review.",
+            actionLabel: "Request Approval Record",
+            href: "/contact?property=1111-brown-street&topic=approval-record",
+          },
+          {
+            title: "Survey and parcel package",
+            description: "Request the available parcel schedule, survey, ownership, and site-plan materials.",
+            actionLabel: "Request Property Record",
+            href: "/contact?property=1111-brown-street&topic=property-record",
+          },
+          {
+            title: "Development diligence package",
+            description: "Request the available materials needed to evaluate access, utilities, approvals, and remaining development work.",
+            actionLabel: "Request Diligence",
+            href: "/contact?property=1111-brown-street&topic=development-diligence",
+          },
+        ],
+      },
+      advisorEyebrow: "Listing Advisor",
+      disclosure:
+        "All information is deemed reliable but is not guaranteed. The proposed 58-townhome program, approximately 6.6-acre figure, parcel composition, and historical approval record require independent verification. Historical records may contain expiration, completion, transfer, certification, or other conditions and do not establish current entitlement or permit readiness. Buyers should independently verify ownership, boundaries, acreage, access, utilities, approvals, conditions, and all development requirements.",
+    },
+    featured: false,
+    sortOrder: 5,
   },
   {
     slug: "802-bragg-boulevard",
@@ -1029,12 +1257,7 @@ export const properties: Property[] = [
         href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
       },
     ],
-    advisor: {
-      name: "Gaurang Gala",
-      title: "Broker-In-Charge",
-      phone: "910-578-2828",
-      license: "NC 283149",
-    },
+    advisorId: "gaurang-gala",
     listingPage: {
       headline: "Recently sold retail property on Bragg Boulevard.",
       lead:
@@ -1178,6 +1401,281 @@ export const properties: Property[] = [
     featured: false,
     sortOrder: 1,
   },
+  {
+    slug: "202-north-main-street",
+    name: "202 North Main Street",
+    address: "202 North Main Street",
+    city: "Fuquay-Varina",
+    state: "NC",
+    assetType: "Retail",
+    offeringType: "For Sale",
+    status: "Closed",
+    sizeDisplay: "3,333 SF",
+    acreageDisplay: "0.23 acres",
+    heroImage: transactionRecordGraphic,
+    imageAlt: "Gala CRE completed transaction graphic; property photography is not published",
+    imagePosition: "center",
+    summary: "Completed commercial transaction involving a 3,333-square-foot property on approximately 0.23 acres.",
+    overview:
+      "The client-directed transaction record identifies a commercial property at 202 North Main Street that closed on July 30, 2026. Physical facts shown here come from the supplied MLS record; transaction pricing and MLS photography remain unpublished.",
+    highlights: [
+      "Closed July 30, 2026",
+      "3,333-square-foot commercial building",
+      "Approximately 0.23-acre site",
+      "Two-story property built in 1958 per the supplied record",
+    ],
+    details: [
+      { label: "Transaction status", value: "Closed" },
+      { label: "Closing date", value: "July 30, 2026" },
+      { label: "Building area", value: "3,333 SF" },
+      { label: "Site area", value: "Approx. 0.23 acres" },
+    ],
+    opportunity: {
+      eyebrow: "Completed Transaction",
+      title: "A commercial property transaction in Fuquay-Varina.",
+      body:
+        "The supplied record describes a two-story commercial property with a retail classification. This page documents the completed transaction without publishing unconfirmed economics or restricted MLS media.",
+      points: [
+        "Commercial / retail classification in the supplied MLS record",
+        "DC-2 zoning reported by the supplied record",
+        "Former marketing referenced two parcels; the legal parcel schedule is not represented here",
+      ],
+    },
+    location: {
+      eyebrow: "Property Context",
+      title: "A North Main Street property in Fuquay-Varina.",
+      body:
+        "The completed transaction is identified at 202 North Main Street in Fuquay-Varina, Wake County. Location details are provided as historical transaction context and do not imply current availability.",
+      points: ["Fuquay-Varina, North Carolina", "Wake County", "North Main Street"],
+    },
+    externalLinks: [],
+    gallery: [],
+    listingPage: {
+      headline: "A completed 3,333-square-foot commercial transaction in Fuquay-Varina.",
+      lead:
+        "Closed July 30, 2026, this transaction involved a two-story commercial property on approximately 0.23 acres. Pricing and MLS photography are intentionally not published.",
+      overviewEyebrow: "Completed Transaction",
+      keyFacts: [
+        { label: "Transaction status", value: "Closed" },
+        { label: "Closing date", value: "July 30, 2026" },
+        { label: "Building area", value: "3,333 SF" },
+        { label: "Site area", value: "Approx. 0.23 acres" },
+      ],
+      highlights: [
+        "Commercial / retail property classification",
+        "Two-story building constructed in 1958 per the supplied record",
+        "DC-2 zoning reported by the supplied MLS record",
+        "No transaction price or MLS photography published",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Property Record",
+          title: "Verified physical facts, separated from confidential terms.",
+          body:
+            "The supplied MLS display supports a concise property profile. It does not clearly identify the displayed price as closing consideration, so no price is represented here.",
+        },
+        groups: [
+          {
+            eyebrow: "Physical Profile",
+            title: "A two-story commercial building on North Main Street.",
+            body:
+              "The property record identifies a 3,333-square-foot building on approximately 0.23 acres. All facts describe the property at the time of the supplied record and are not a statement of current condition or availability.",
+            facts: [
+              { label: "Building area", value: "3,333 SF" },
+              { label: "Site area", value: "Approx. 0.23 acres" },
+              { label: "Stories", value: "Two" },
+              { label: "Year built", value: "1958 per supplied record" },
+              { label: "Reported zoning", value: "DC-2" },
+              { label: "Parcel presentation", value: "Former marketing referenced two parcels" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Transaction Record",
+        title: "What is confirmed—and what remains unpublished.",
+        conditions: [
+          { label: "Status", value: "Closed July 30, 2026" },
+          { label: "Transaction price", value: "Not published pending confirmation" },
+          { label: "Photography", value: "MLS imagery not republished" },
+          { label: "Property facts", value: "Based on the client-supplied MLS display" },
+          { label: "Current availability", value: "Not available; completed transaction" },
+        ],
+      },
+      location: {
+        eyebrow: "Location & Context",
+        title: "A completed transaction in Fuquay-Varina, North Carolina.",
+        body:
+          "The map identifies the recorded street address for historical context. It does not represent current availability, ownership, tenancy, or operating conditions.",
+        points: [
+          "202 North Main Street, Fuquay-Varina, North Carolina 27526",
+          "Wake County",
+          "Closed July 30, 2026",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=202%20North%20Main%20Street%2C%20Fuquay-Varina%2C%20NC%2027526&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=202%20North%20Main%20Street%2C%20Fuquay-Varina%2C%20NC%2027526",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Work With Gala CRE",
+          title: "Discuss a comparable commercial assignment.",
+          body:
+            "Confidential transaction terms are not published. Connect with Gala CRE to discuss a similar property, disposition, or acquisition requirement.",
+        },
+        items: [
+          {
+            title: "Similar-property conversation",
+            description: "Discuss selling, acquiring, or evaluating a comparable commercial property with Gala CRE.",
+            actionLabel: "Discuss a Similar Property",
+            href: "/contact?property=202-north-main-street&topic=similar-property",
+          },
+        ],
+      },
+      disclosure:
+        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and zoning details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and operating information are not published.",
+    },
+    featured: false,
+    sortOrder: 2,
+  },
+  {
+    slug: "10416-chapel-hill-road",
+    name: "10416 Chapel Hill Road",
+    address: "10416 Chapel Hill Road",
+    city: "Morrisville",
+    state: "NC",
+    assetType: "Land",
+    offeringType: "For Sale",
+    status: "Closed",
+    acreageDisplay: "Approx. 3.3 acres",
+    heroImage: transactionRecordGraphic,
+    imageAlt: "Gala CRE completed transaction graphic; property photography is not published",
+    imagePosition: "center",
+    summary: "Completed commercial land transaction involving approximately 3.3 acres in Morrisville.",
+    overview:
+      "The supplied MLS record identifies a commercial transaction at 10416 Chapel Hill Road that closed on July 29, 2026 and involved two parcels totaling approximately 3.3 acres. Transaction pricing and MLS photography remain unpublished.",
+    highlights: [
+      "Closed July 29, 2026",
+      "Approximately 3.3 acres",
+      "Two parcels identified in the supplied transaction record",
+      "Gala listing involvement documented by the supplied MLS display",
+    ],
+    details: [
+      { label: "Transaction status", value: "Closed" },
+      { label: "Closing date", value: "July 29, 2026" },
+      { label: "Site area", value: "Approx. 3.3 acres" },
+      { label: "Parcel count", value: "Two per supplied record" },
+    ],
+    opportunity: {
+      eyebrow: "Completed Transaction",
+      title: "A commercial land transaction in Morrisville.",
+      body:
+        "The supplied record describes a commercial sale involving land marketed for commercial use, two parcels, and an existing one-story improvement. This page documents the completed transaction without publishing disputed economics or restricted MLS media.",
+      points: [
+        "Approximately 3.3 acres in the supplied record",
+        "Two parcels identified by the transaction record",
+        "Gala Real Estate Advisors listing involvement documented by the supplied MLS display",
+      ],
+    },
+    location: {
+      eyebrow: "Property Context",
+      title: "A Chapel Hill Road transaction in Morrisville.",
+      body:
+        "The completed transaction is identified at 10416 Chapel Hill Road in Morrisville, Wake County. Location details are provided as historical transaction context and do not imply current availability.",
+      points: ["Morrisville, North Carolina", "Wake County", "Chapel Hill Road"],
+    },
+    externalLinks: [],
+    gallery: [],
+    listingPage: {
+      headline: "A completed commercial land transaction on Chapel Hill Road.",
+      lead:
+        "Closed July 29, 2026, the supplied record describes approximately 3.3 acres across two parcels in Morrisville. Pricing and MLS photography are intentionally not published.",
+      overviewEyebrow: "Completed Transaction",
+      keyFacts: [
+        { label: "Transaction status", value: "Closed" },
+        { label: "Closing date", value: "July 29, 2026" },
+        { label: "Site area", value: "Approx. 3.3 acres" },
+        { label: "Parcel count", value: "Two per supplied record" },
+      ],
+      highlights: [
+        "Gala Real Estate Advisors listing involvement documented by the supplied MLS display",
+        "Two parcels identified by the supplied MLS display",
+        "One-story improvement built in 1920 reported by the supplied record",
+        "No transaction price or MLS photography published",
+      ],
+      information: {
+        intro: {
+          eyebrow: "Property Record",
+          title: "A concise record of the completed assignment.",
+          body:
+            "The supplied MLS display supports the address, closing date, approximate acreage, parcel count, and Gala listing involvement. Conflicting price and combined-address information remain outside the public presentation.",
+        },
+        groups: [
+          {
+            eyebrow: "Physical Profile",
+            title: "Two commercial parcels totaling approximately 3.3 acres.",
+            body:
+              "The transaction record identifies two parcels and a one-story improvement at the marketed address. Facts shown here reflect the supplied record and are not a statement of current condition or availability.",
+            facts: [
+              { label: "Site area", value: "Approx. 3.3 acres" },
+              { label: "Parcel count", value: "Two" },
+              { label: "Improvement", value: "One-story structure per supplied record" },
+              { label: "Year built", value: "1920 per supplied record" },
+              { label: "Property position", value: "Commercial use cited in former marketing" },
+              { label: "Building area", value: "Not published" },
+            ],
+          },
+        ],
+      },
+      transaction: {
+        eyebrow: "Transaction Record",
+        title: "What is confirmed—and what remains unpublished.",
+        conditions: [
+          { label: "Status", value: "Closed July 29, 2026" },
+          { label: "Off-market record", value: "July 31, 2026 in the supplied MLS display" },
+          { label: "Transaction price", value: "Not published pending confirmation" },
+          { label: "Photography", value: "MLS imagery not republished" },
+          { label: "Address presentation", value: "This record is limited to 10416 Chapel Hill Road" },
+        ],
+      },
+      location: {
+        eyebrow: "Location & Context",
+        title: "A completed transaction in Morrisville, North Carolina.",
+        body:
+          "The map identifies the recorded street address for historical context. It does not represent current availability, ownership, tenancy, or development status.",
+        points: [
+          "10416 Chapel Hill Road, Morrisville, North Carolina 27560",
+          "Wake County",
+          "Closed July 29, 2026",
+        ],
+        mapEmbedUrl:
+          "https://www.google.com/maps?q=10416%20Chapel%20Hill%20Road%2C%20Morrisville%2C%20NC%2027560&output=embed",
+        mapHref:
+          "https://www.google.com/maps/search/?api=1&query=10416%20Chapel%20Hill%20Road%2C%20Morrisville%2C%20NC%2027560",
+      },
+      documents: {
+        intro: {
+          eyebrow: "Work With Gala CRE",
+          title: "Discuss a comparable commercial assignment.",
+          body:
+            "Confidential transaction terms are not published. Connect with Gala CRE to discuss a similar land, disposition, or acquisition requirement.",
+        },
+        items: [
+          {
+            title: "Similar-property conversation",
+            description: "Discuss selling, acquiring, or evaluating a comparable commercial property with Gala CRE.",
+            actionLabel: "Discuss a Similar Property",
+            href: "/contact?property=10416-chapel-hill-road&topic=similar-property",
+          },
+        ],
+      },
+      disclosure:
+        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and property-use details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and development information are not published. This page is limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction.",
+    },
+    featured: false,
+    sortOrder: 3,
+  },
 ];
 
 const statusPriority: Record<PropertyStatus, number> = {
@@ -1211,6 +1709,7 @@ export type PropertyFilters = {
   assetType: "All" | PropertyAssetType;
   offeringType: "All" | PropertyOfferingType;
   status: "All" | PropertyStatus;
+  advisorId?: TeamMemberId;
 };
 
 export const filterProperties = (items: Property[], filters: PropertyFilters) => {
@@ -1231,6 +1730,7 @@ export const filterProperties = (items: Property[], filters: PropertyFilters) =>
 
     return (
       (!query || searchable.includes(query)) &&
+      (!filters.advisorId || property.advisorId === filters.advisorId) &&
       (filters.assetType === "All" || property.assetType === filters.assetType) &&
       (filters.offeringType === "All" || property.offeringType === filters.offeringType) &&
       (filters.status === "All" || property.status === filters.status)

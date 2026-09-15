@@ -12,7 +12,6 @@ const validApplication: AgentApplicationValues = {
   currentBrokerage: "Triangle Commercial",
   cityAndMarkets: "Raleigh-Durham",
   licenseState: "North Carolina",
-  licenseNumber: "NC 123456",
   yearsExperience: "6–10 years",
   specialties: ["Industrial", "Land"],
   salesLeasingExperience: "Commercial sales and leasing representation across the Triangle.",
@@ -53,8 +52,9 @@ describe("careers submission boundary", () => {
     expect(fetchMock).toHaveBeenCalledWith("/api/forms", expect.objectContaining({
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: expect.stringContaining('"licenseNumber":"NC 123456"'),
+      body: expect.stringContaining('"licenseState":"North Carolina"'),
     }));
+    expect(fetchMock.mock.calls[0][1]?.body).not.toContain("licenseNumber");
   });
 
   it("rejects cleanly when the shared endpoint cannot deliver", async () => {
