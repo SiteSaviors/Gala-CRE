@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 04:20 CDT
+Last updated: 2026-09-15 04:35 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -171,11 +171,11 @@ Investment Sales:
 
 Development:
 
-- [ ] Development overview
-- [ ] Site Strategy
-- [ ] Entitlements
-- [ ] Infrastructure
-- [ ] Development Oversight
+- [x] Development overview
+- [x] Site Strategy
+- [x] Entitlements
+- [x] Infrastructure
+- [x] Development Oversight
 
 Capital Markets:
 
@@ -394,3 +394,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no client case studies, quantified outcomes, testimonials, or additional approved project photography have been supplied; none blocks these concise service routes because no unsupported proof is fabricated.
 - Exact next action: Rebuild `/services/development-services`, `/services/development-services/site-strategy`, `/services/development-services/entitlements`, `/services/development-services/infrastructure`, and `/services/development-services/development-oversight` through the compact visual system; distinguish early feasibility, approvals, civil/infrastructure coordination, and execution oversight; use the existing development imagery first and generate only distinct generic service-context imagery needed to avoid repetition.
+
+### 2026-09-15 — Phase 4 compact Development group
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `b7e1fe9`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Development overview and four capability records, shared capability renderer/styles, current development imagery, relevant tests, and all five live routes.
+- Gate: make all five Development routes concise and visually complete while clearly separating early feasibility, jurisdictional approvals, infrastructure dependencies, and owner-side execution oversight; preserve specialist and public-authority boundaries and avoid presenting coordination as guaranteed approval or construction delivery.
+- Completed: audited and retained the already-compact Development overview; rebuilt Site Strategy around program fit, site reality, and the stop-or-proceed sequence; rebuilt Entitlements around jurisdictional path, technical review, and ownership decisions; rebuilt Infrastructure around capacity, responsibility, and critical-path dependencies; rebuilt Development Oversight around the ownership baseline, cross-team visibility, and material decisions. Each capability now uses one value section, a four-step process, four deliverables, compact related links, and one contextual inquiry action. Removed duplicate process-preview actions, hero signal strips, long challenge essays, and overlapping six-card responsibility lists. Added a shared compact-mobile title rule after live QA exposed clipping on “Development Oversight.”
+- Imagery: retained the strongest existing Site Strategy and Infrastructure hero assets, then generated six distinct generic service-context images for site evaluation, entitlement planning and revision review, infrastructure field coordination, and owner-side project oversight. All are optimized WebP assets with no Gala branding, legible plans, parcel boundaries, approval claims, property claims, or representation as Gala projects.
+- Files and routes changed: `src/assets/site-strategy-field-context.webp`, `src/assets/entitlements-coordination-hero.webp`, `src/assets/entitlements-review-context.webp`, `src/assets/infrastructure-field-context.webp`, `src/assets/development-oversight-hero.webp`, `src/assets/development-oversight-context.webp`, `src/content/developmentCapabilityPages.ts`, `src/styles/capability-page.css`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/development-services`, `/services/development-services/site-strategy`, `/services/development-services/entitlements`, `/services/development-services/infrastructure`, and `/services/development-services/development-oversight`.
+- Verification: the overview remains 3,434px desktop and 4,410px mobile. Site Strategy reduced from 6,592px to 4,026px desktop and from 9,195px to 6,191px mobile; Entitlements from 6,701px to 4,346px desktop and from 9,371px to 6,456px mobile; Infrastructure from 6,503px to 4,181px desktop and from 9,250px to 6,475px mobile; Development Oversight from 6,587px to 4,182px desktop and from 9,334px to 6,332px mobile. All five routes render at 1440px, 834px, and 390px with unique loaded imagery, correct H1s and contextual inquiry routes, zero horizontal overflow, and zero current browser-console errors. Targeted suite: 39/39 passed. Full suite: 103/103 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Commit: `refactor: compact Development service group` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: no client case studies, quantified outcomes, testimonials, project-specific development photography, or direct specialist credentials have been supplied; none blocks these routes because the copy stays within coordination and decision-support boundaries.
+- Exact next action: Rebuild `/services/capital-markets`, `/services/capital-markets/debt`, `/services/capital-markets/equity`, `/services/capital-markets/capital-strategy`, and `/services/capital-markets/transaction-coordination` through the compact visual system; distinguish lender fit and term execution, sponsor/investor alignment, capital-stack sequencing, and document/milestone coordination; remove the overview's duplicated 1031 interruption if it repeats the surrounding conversion path; generate distinct generic Equity and capital-decision imagery only where current assets repeat.

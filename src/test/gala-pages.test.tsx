@@ -536,6 +536,33 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
+  it("renders Development Oversight as a concise owner-side coordination journey", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/development-services/development-oversight"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Development Oversight", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /owner representative and project professional/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /owner-side team reviewing a generic development schedule/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Complex projects lose time in the gaps between teams." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Create one decision rhythm across the project." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Owner-side clarity without replacing the project team." })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /See the Oversight Process/i })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss a Development/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=development-services&focus=development-oversight"
+    );
+    expect(screen.getByRole("link", { name: /Transaction Coordination/i })).toHaveAttribute(
+      "href",
+      "/services/capital-markets/transaction-coordination"
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
+
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
     expect(screen.getByRole("heading", { name: "Properties", level: 1 })).toBeInTheDocument();

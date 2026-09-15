@@ -282,6 +282,7 @@
   .gala-cap-cta__action .gala-cap-button{width:100%}
   .gala-cap-page--compact .gala-cap-hero,.gala-cap-page--compact .gala-cap-hero__inner{min-height:610px}
   .gala-cap-page--compact .gala-cap-hero__copy{padding-bottom:40px}
+  .gala-cap-page--compact .gala-cap-hero__copy h1{font-size:clamp(36px,9.8vw,48px)}
   .gala-cap-page--compact .gala-cap-section{padding:60px 0}
   .gala-cap-page--compact .gala-cap-strategy__media{height:62vw;min-height:240px}
   .gala-cap-page--compact .gala-cap-strategy__content{padding:46px 20px 50px}

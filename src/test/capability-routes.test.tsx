@@ -92,6 +92,34 @@ describe("advertised capability route matrix", () => {
     });
   });
 
+  it("keeps every Development journey compact, distinct, and action-oriented", () => {
+    const developmentPages = [
+      capabilityPageByPath["/services/development-services/site-strategy"],
+      capabilityPageByPath["/services/development-services/entitlements"],
+      capabilityPageByPath["/services/development-services/infrastructure"],
+      capabilityPageByPath["/services/development-services/development-oversight"],
+    ];
+
+    developmentPages.forEach((page) => {
+      expect(page.compact, page.path).toBe(true);
+      expect(page.hero.signals, page.path).toEqual([]);
+      expect(page.hero.actions, page.path).toHaveLength(1);
+      expect(page.sections.map((section) => section.type), page.path).toEqual([
+        "strategy",
+        "process",
+        "deliverables",
+      ]);
+      expect(page.sections.find((section) => section.type === "strategy")?.tracks, page.path).toHaveLength(3);
+      expect(page.sections.find((section) => section.type === "process")?.steps, page.path).toHaveLength(4);
+      expect(page.sections.find((section) => section.type === "deliverables")?.items, page.path).toHaveLength(4);
+      expect(page.relatedCapabilities.links, page.path).toHaveLength(4);
+    });
+
+    expect(new Set(developmentPages.map((page) => page.hero.media.src)).size).toBe(developmentPages.length);
+    expect(new Set(developmentPages.map((page) => page.sections.find((section) => section.type === "strategy")?.media.src)).size)
+      .toBe(developmentPages.length);
+  });
+
   it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {
     const header = render(
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
