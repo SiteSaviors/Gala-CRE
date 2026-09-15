@@ -20,6 +20,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
     currentPath === "/" ||
     currentPath === "/company" ||
     currentPath === "/team" ||
+    currentPath === "/news" ||
     currentPath === "/careers" ||
     currentPath === "/contact" ||
     currentPath.startsWith("/investors") ||

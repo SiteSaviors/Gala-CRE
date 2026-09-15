@@ -9,6 +9,7 @@ import Careers from "@/pages/Careers";
 import Company from "@/pages/Company";
 import ExchangeSourcing from "@/pages/ExchangeSourcing";
 import Index from "@/pages/Index";
+import News from "@/pages/News";
 import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
 import ServiceDetail from "@/pages/ServiceDetail";
@@ -88,10 +89,13 @@ describe("Gala CRE public pages", () => {
     expect(within(lackeySlide).getByRole("img", { name: "Fueling canopy and pump area at 2301 Lackey Street" })).toBeInTheDocument();
     expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
 
-    expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
-    expect(screen.getByText("Transaction Status")).toBeInTheDocument();
-    expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Ideas, projects, and perspective shaping the market." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Gaurang Gala on land, capital, and opportunity/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Cary firm plans luxury homes/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /downtown Cary's tallest building/i })).toBeInTheDocument();
+    expect(screen.getByText("Gala Investments · Radius Capital Development")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /View All News & Media/i })).toHaveAttribute("href", "/news");
+    expect(screen.queryByRole("heading", { name: "A recent transaction, at a glance." })).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Bring us your next commercial real estate decision." })).toBeInTheDocument();
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
   });
@@ -225,6 +229,18 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("button", { name: /Share Acquisition Criteria/i })).toBeEnabled();
     expect(screen.getByText(/not tax, legal, accounting, or qualified-intermediary services/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Share Your Criteria/i })).toHaveAttribute("href", "#investor-inquiry");
+  });
+
+  it("presents attributed news and media without calling it Gala CRE coverage", () => {
+    renderPage(<News />, "/news");
+
+    expect(screen.getByRole("heading", { name: /Ideas, projects, and perspective from across the Gala network/i })).toBeInTheDocument();
+    expect(screen.getAllByRole("article")).toHaveLength(4);
+    expect(screen.getByText("Legacy Carolina Development")).toBeInTheDocument();
+    expect(screen.getAllByText("Gala Investments")).toHaveLength(2);
+    expect(screen.getByText(/Coverage of an affiliated company is not presented as coverage of Gala CRE Group/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /opens in a new tab/i })).toHaveLength(4);
+    expect(screen.getAllByRole("link", { name: "News & Media" }).some((link) => link.getAttribute("href") === "/news")).toBe(true);
   });
 
   it("routes Investment Sales to sourcing and Capital Markets to exchange-financing coordination", () => {

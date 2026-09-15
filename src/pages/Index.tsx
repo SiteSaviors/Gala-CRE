@@ -6,10 +6,10 @@ import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
 import heroVideo from "@/assets/GALA-CRE-HERO-WEB.mp4";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
 import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
+import HomeNews from "@/components/site/HomeNews";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import TransactionSpotlight from "@/components/site/TransactionSpotlight";
 import { serviceNavigationGroups, type ServiceNavigationGroup } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
@@ -207,7 +207,7 @@ const Index = () => {
 
         <FeaturedListingsCarousel />
 
-        <TransactionSpotlight />
+        <HomeNews />
 
         <section className="gala-home-cta">
           <div className="gala-home-cta__glow" aria-hidden="true"></div>

@@ -12,6 +12,7 @@ import Careers from "./pages/Careers.tsx";
 import Company from "./pages/Company.tsx";
 import Contact from "./pages/Contact.tsx";
 import ExchangeSourcing from "./pages/ExchangeSourcing.tsx";
+import News from "./pages/News.tsx";
 import Properties from "./pages/Properties.tsx";
 import PropertyDetail from "./pages/PropertyDetail.tsx";
 import ServiceDetail from "./pages/ServiceDetail.tsx";
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/team" element={<Team />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/investors/1031-exchange" element={<ExchangeSourcing />} />
+          <Route path="/news" element={<News />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/what-we-do" element={<Navigate to="/services" replace />} />
           <Route path="/projects" element={<Navigate to="/properties" replace />} />
