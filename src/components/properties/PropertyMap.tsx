@@ -1,8 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CircleMarker, MapContainer, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
-import type { LatLngBoundsExpression } from "leaflet";
+import { MapContainer, Marker, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
+import { divIcon, type LatLngBoundsExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Property } from "@/content/properties";
 
@@ -13,6 +13,15 @@ type MappedProperty = Property & {
 type PropertyMapProps = {
   properties: Property[];
 };
+
+const propertyPin = (isClosed: boolean) => divIcon({
+  className: `gala-map-pin${isClosed ? " gala-map-pin--closed" : ""}`,
+  html: '<svg viewBox="0 0 36 48" aria-hidden="true"><path class="gala-map-pin__body" d="M18 1C8.61 1 1 8.61 1 18c0 12.85 17 29 17 29s17-16.15 17-29C35 8.61 27.39 1 18 1Z"/><circle class="gala-map-pin__center" cx="18" cy="18" r="7"/></svg>',
+  iconSize: [36, 48],
+  iconAnchor: [18, 47],
+  popupAnchor: [0, -42],
+  tooltipAnchor: [0, -40],
+});
 
 const MapViewport = ({ properties }: { properties: MappedProperty[] }) => {
   const map = useMap();
@@ -69,19 +78,12 @@ const PropertyMap = ({ properties }: PropertyMapProps) => {
           const isClosed = property.status === "Closed";
 
           return (
-            <CircleMarker
+            <Marker
               key={property.slug}
-              center={[property.coordinates.latitude, property.coordinates.longitude]}
-              radius={isClosed ? 8 : 10}
-              pathOptions={{
-                color: isClosed ? "#ffffff" : "#171713",
-                fillColor: isClosed ? "#6f706b" : "#cbaa46",
-                fillOpacity: 1,
-                opacity: 0.95,
-                weight: isClosed ? 2 : 3,
-              }}
+              position={[property.coordinates.latitude, property.coordinates.longitude]}
+              icon={propertyPin(isClosed)}
             >
-              <Tooltip direction="top" offset={[0, -8]} opacity={1}>
+              <Tooltip direction="top" opacity={1}>
                 {property.name}
               </Tooltip>
               <Popup minWidth={270} maxWidth={310}>
@@ -107,7 +109,7 @@ const PropertyMap = ({ properties }: PropertyMapProps) => {
                   </div>
                 </article>
               </Popup>
-            </CircleMarker>
+            </Marker>
           );
         })}
       </MapContainer>

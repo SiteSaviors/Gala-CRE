@@ -20,7 +20,7 @@ vi.mock("react-leaflet", () => ({
     <div className={className}>{children}</div>
   ),
   TileLayer: () => null,
-  CircleMarker: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
+  Marker: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
   Popup: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
   Tooltip: () => null,
   useMap: () => ({
