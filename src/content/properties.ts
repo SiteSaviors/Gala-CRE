@@ -1033,9 +1033,9 @@ export const properties: Property[] = [
     externalLinks: [],
     advisorId: "gaurang-gala",
     listingPage: {
-      headline: "A proposed 58-townhome opportunity supported by a historical approval record.",
+      headline: "A proposed 58-townhome site with a documented diligence history.",
       lead:
-        "A three-parcel Lexington development site marketed at approximately 6.6 acres, with a proposed 58-townhome program and client-supplied 2023 planning, access, and utility records available for buyer review.",
+        "Three identified parcels at 1111 Brown Street with 2023 planning, access, and utility records available for review; current price, acreage, approval status, and remaining requirements require confirmation.",
       overviewEyebrow: "The Opportunity",
       keyFacts: [
         { label: "Offering", value: "Contact for pricing" },
@@ -1047,41 +1047,38 @@ export const properties: Property[] = [
         "Three-parcel assemblage identified in the supplied property materials",
         "Wastewater permit record references 58 three-bedroom townhomes",
         "Historical 2023 driveway, water-main, and erosion-control records supplied",
-        "Current status, transferability, conditions, and remaining approvals require verification",
       ],
       information: {
         intro: {
           eyebrow: "Property Information",
           title: "Separate the proposed program from the current approval record.",
           body:
-            "The supplied materials establish a documented planning history. Buyers should review each record against the current site plan, ownership, schedule, and intended development program.",
+            "The supplied materials establish a planning history. Each record must be checked against the current site, ownership, schedule, and intended program.",
         },
         groups: [
           {
             eyebrow: "Site & Program",
-            title: "A defined townhome concept across three identified parcels.",
+            title: "The marketed site and proposed program.",
             body:
-              "Marketing materials describe an approximately 6.6-acre site at 1111 Brown Street for a proposed 58-townhome community. Surveyed acreage, boundaries, parcel ownership, density, and the final program should be confirmed from the current legal and municipal record.",
+              "Marketing materials describe approximately 6.6 acres at 1111 Brown Street for a proposed 58-townhome community.",
             facts: [
               { label: "Street address", value: "1111 Brown Street" },
               { label: "Marketed area", value: "Approx. 6.6 acres" },
-              { label: "Parcel count", value: "Three identified parcels" },
-              { label: "Proposed homes", value: "58 townhomes" },
-              { label: "Site plan", value: "Request current plan and revision history" },
-              { label: "Survey", value: "Buyer to confirm boundaries and acreage" },
+              { label: "Land record", value: "Three identified parcels; survey and title control" },
+              { label: "Proposed program", value: "58 townhomes" },
+              { label: "Current plan", value: "Request the plan, survey, and revision history" },
             ],
           },
           {
             eyebrow: "Historical Approval Record",
             title: "Useful diligence exists, but currency and transferability matter.",
             body:
-              "Client-supplied records include 2023 erosion-control, driveway, water-main, and wastewater approvals. Several contain completion, expiration, transfer, certification, or other conditions. They should be reviewed with the issuing authorities and buyer advisers before reliance.",
+              "The 2023 records include completion, expiration, transfer, certification, and other conditions that require authority review.",
             facts: [
               { label: "Erosion control", value: "2023 approval with modifications; verify current status" },
-              { label: "Driveway connection", value: "2023 NCDOT record; verify completion and validity" },
-              { label: "Water main", value: "2023 encroachment record; verify completion and validity" },
+              { label: "NCDOT records", value: "2023 driveway and water-main records; verify completion and validity" },
               { label: "Wastewater", value: "2023 permit record for proposed 58-home service" },
-              { label: "Transferability", value: "Confirm with each issuing authority" },
+              { label: "Currency / transfer", value: "Confirm with each issuing authority" },
               { label: "Remaining permits", value: "Buyer and authorities to determine" },
             ],
           },
@@ -1091,11 +1088,10 @@ export const properties: Property[] = [
         eyebrow: "Buyer Verification",
         title: "What is offered—and what the diligence package must establish.",
         conditions: [
-          { label: "Pricing", value: "Contact the listing advisor for current pricing" },
+          { label: "Offering", value: "Contact the listing advisor for current pricing" },
           { label: "Program", value: "Proposed 58-townhome opportunity" },
-          { label: "Site area", value: "Approximately 6.6 acres in marketing; survey controls" },
-          { label: "Approval position", value: "Historical records available; no current fully entitled representation" },
-          { label: "Buyer review", value: "Confirm ownership, boundaries, approvals, conditions, utilities, and remaining development requirements" },
+          { label: "Land record", value: "Approximately 6.6 marketed acres across three identified parcels; survey and title control" },
+          { label: "Approval & scope", value: "Historical records only; confirm currency, transferability, access, utilities, conditions, and remaining requirements" },
         ],
       },
       gallery: {
@@ -1103,7 +1099,7 @@ export const properties: Property[] = [
           eyebrow: "Site & Surroundings",
           title: "Aerial context for the proposed Lexington townhome site.",
           body:
-            "Client-supplied drone photography shows the property setting and surrounding context. These unannotated images do not establish parcel boundaries or the limits of the offering.",
+            "Five client-supplied aerials show the property setting. The unannotated images do not establish boundaries.",
         },
         items: [
           {
@@ -1138,7 +1134,7 @@ export const properties: Property[] = [
         eyebrow: "Property Film",
         title: "Explore the Lexington opportunity in motion.",
         body:
-          "This vertical property film introduces the Lexington market and proposed townhome opportunity. The video is marketing context only; current approvals, boundaries, acreage, and development feasibility require independent verification.",
+          "This vertical film provides site and market context; it does not establish boundaries, approvals, acreage, or feasibility.",
         sourceUrl: lexingtonTour,
         posterImage: lexingtonTourPoster,
         ariaLabel: "Play the vertical property video for the Lexington Townhome Site",
@@ -1148,10 +1144,9 @@ export const properties: Property[] = [
         eyebrow: "Location & Access",
         title: "A Lexington site with a documented Brown Street address.",
         body:
-          "The property is identified at 1111 Brown Street in Lexington, Davidson County. Buyers should independently verify legal access, roadway conditions, parcel boundaries, municipal jurisdiction, utility availability, and distances to surrounding destinations.",
+          "The property is identified at 1111 Brown Street. Legal access, roadway conditions, jurisdiction, utilities, and measured distances require verification.",
         points: [
           "1111 Brown Street, Lexington, North Carolina",
-          "Davidson County",
           "Three-parcel assemblage identified in supplied materials",
         ],
         mapEmbedUrl:
@@ -1164,24 +1159,24 @@ export const properties: Property[] = [
           eyebrow: "Documents & Diligence",
           title: "Review the record before underwriting the program.",
           body:
-            "Request the current property package and evaluate the historical approvals with the issuing authorities and appropriate legal, engineering, and development advisers.",
+            "Request the available property package, then confirm every controlling record with the issuing authorities and buyer advisers.",
         },
         items: [
           {
             title: "Historical approval record",
-            description: "Request the supplied erosion-control, NCDOT, water-main, and wastewater records for review.",
+            description: "Request the supplied erosion-control, NCDOT, water-main, and wastewater records.",
             actionLabel: "Request Approval Record",
             href: "/contact?property=1111-brown-street&topic=approval-record",
           },
           {
             title: "Survey and parcel package",
-            description: "Request the available parcel schedule, survey, ownership, and site-plan materials.",
+            description: "Request the available parcel, survey, ownership, and site-plan materials.",
             actionLabel: "Request Property Record",
             href: "/contact?property=1111-brown-street&topic=property-record",
           },
           {
             title: "Development diligence package",
-            description: "Request the available materials needed to evaluate access, utilities, approvals, and remaining development work.",
+            description: "Request available access, utility, approval, and remaining-work materials.",
             actionLabel: "Request Diligence",
             href: "/contact?property=1111-brown-street&topic=development-diligence",
           },

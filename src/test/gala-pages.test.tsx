@@ -741,6 +741,8 @@ describe("Gala CRE public pages", () => {
 
     expect(screen.getByRole("heading", { name: "Lexington Townhome Site" })).toBeInTheDocument();
     expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
+    expect(screen.queryByText("$990,000")).not.toBeInTheDocument();
+    expect(screen.queryByText("$1,000,000")).not.toBeInTheDocument();
     expect(screen.getAllByText("Proposed 58-townhome opportunity").length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Useful diligence exists, but currency and transferability matter." })).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /Lexington Townhome Site property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(5);

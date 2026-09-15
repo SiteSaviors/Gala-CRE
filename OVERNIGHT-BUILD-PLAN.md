@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:42 CDT
+Last updated: 2026-09-15 03:45 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -124,7 +124,7 @@ Active listings:
 - [x] 5047 Yadkin Road
 - [x] 611 & 703 Church Street
 - [x] 5911 Family Farm Road
-- [ ] Lexington Townhome Site (`/properties/1111-brown-street`)
+- [x] Lexington Townhome Site (`/properties/1111-brown-street`)
 
 Closed transaction variants:
 
@@ -313,4 +313,17 @@ These do not stop unrelated implementation:
 - Commit: `refactor: tighten Family Farm listing journey` after the verified diff is staged.
 - Remaining working tree: expected clean after commit.
 - Blockers: legal parcel IDs, survey, municipal zoning confirmation, private-road rights and maintenance obligations, existing residence/well/septic condition, and additional document-publication choices remain client inputs and stay qualified.
-- Exact next action: Audit and tighten `/properties/1111-brown-street` within the compact system, preserving the proposed 58-townhome thesis and historical-approval context while keeping price, gross acreage, approval currency/transferability, and third-party document rights unresolved; verify the six-image selector, portrait video, map, documents, Gaurang Gala, and inquiry context at desktop and mobile sizes.
+- Exact next action: Audit and tighten `/properties/1111-brown-street` within the compact system, preserving the proposed 58-townhome thesis and historical-approval context while keeping price, gross acreage, approval currency/transferability, and third-party document rights unresolved; verify the five-image selector, portrait video, map, documents, Gaurang Gala, and inquiry context at desktop and mobile sizes.
+
+### 2026-09-15 — Phase 2 Lexington compact listing
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `1c80e44`, clean.
+- Source of truth checked: the goal objective, `AGENTS.md`, this ledger, Lexington's record in `PROPERTY-DATA-REGISTER.md`, current property data, five client-supplied aerials, local portrait video/poster, Gaurang Gala's verified assignment, shared renderer, and property/video/page tests.
+- Gate: make the proposed 58-townhome program, three-parcel context, and available historical records immediately understandable without publishing either conflicting price, treating approximately 6.6 acres as surveyed acreage, or implying the approvals remain current or transferable.
+- Completed: tightened the opportunity headline, lead, highlights, property tables, buyer-verification conditions, media copy, location copy, and document descriptions; concentrated the approval caveats in the diligence and decision areas; combined overlapping parcel, survey, NCDOT, access, utility, and remaining-requirement statements. The page retains five distinct selectable aerials, the vertical property video, live map, “Contact for pricing,” Gaurang Gala, three inquiry-only document paths, and related listings.
+- Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, and this ledger; `/properties/1111-brown-street`.
+- Verification: 37/37 targeted property/video/page tests passed, including explicit protection against publishing the conflicting `$990,000` and `$1,000,000` figures. Desktop height reduced from 8,738px baseline to 5,698px; mobile from 10,861px to 8,651px, including the global footer. The five-image selector changes the primary image; the portrait MP4 remains unloaded until near the viewport; the live map, Gaurang Gala, approval-record request, and `/contact?property=1111-brown-street` inquiry route are present; no standalone “fully entitled” or “permit-ready” claim, horizontal overflow, or page-specific console error appears at 1440px or 390px.
+- Commit: `refactor: tighten Lexington listing journey` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: current asking price, gross surveyed acreage, current or transferable status of the historical approvals, work completed under the 2023 records, controlling land-use approval, and publication rights for third-party documents/artwork remain client inputs and stay omitted or qualified.
+- Exact next action: Audit and tighten the closed-record variant at `/properties/802-bragg-boulevard`, leading with completed-transaction status and verified physical facts while keeping closing date, consideration, current operating status, and preferred Gala transaction credit unpublished; verify its three-image selector, historical-use language, source records, map, and similar-property inquiry path at desktop and mobile sizes.
