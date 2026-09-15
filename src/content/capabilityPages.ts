@@ -1,14 +1,15 @@
 import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
-import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
-import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import industrialInteriorOperations from "@/assets/industrial-interior-operations.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
+import landlordLeasingContext from "@/assets/landlord-leasing-context.webp";
 import multifamilyOperationsContext from "@/assets/multifamily-operations-context.webp";
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
 import officeOccupancyContext from "@/assets/office-occupancy-context.webp";
 import officeInvestmentSales from "@/assets/office-investment-sales.webp";
 import retailAccessContext from "@/assets/retail-access-context.webp";
 import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
+import tenantRepresentationHero from "@/assets/tenant-representation-hero.webp";
+import tenantSiteEvaluationContext from "@/assets/tenant-site-evaluation-context.webp";
 import { propertyManagementCapabilityPage } from "@/content/capitalCapabilityPages";
 import { capitalCapabilityPages } from "@/content/capitalMarketsCapabilityPages";
 import { developmentCapabilityPages } from "@/content/developmentCapabilityPages";
@@ -115,6 +116,7 @@ export type CapabilityPageContent = {
 
 const landlordRepresentation: CapabilityPageContent = {
   path: "/services/brokerage/landlord-representation",
+  compact: true,
   metadata: {
     title: "Landlord Representation",
     description:
@@ -138,169 +140,111 @@ const landlordRepresentation: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See Our Process",
-        href: "#leasing-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Landlord representation stages",
-    signals: ["Position", "Market", "Qualify", "Negotiate"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-    watermark: "OWNER",
-    eyebrow: "The Ownership Challenge",
-    headline: "Vacancy has a cost. So does the wrong tenant.",
-    body: [
-      "When commercial space sits vacant, the impact reaches beyond lost rent. Carrying costs continue, momentum slows, and a property can lose leverage in the market.",
-      "Filling the space quickly is only part of the assignment. The right strategy must also protect the asset’s positioning, attract credible prospects, and produce terms that support the owner’s broader plan.",
-    ],
-    emphasis:
-      "The goal is not simply an occupied space. It is a lease that strengthens the property.",
-    pressures: [
-      {
-        number: "01",
-        title: "Time",
-        body: "Every day on market affects carrying costs and negotiating leverage.",
+      type: "strategy",
+      eyebrow: "The Leasing Decision",
+      headline: "Position the space around the owner’s real objective.",
+      introduction:
+        "Gala connects the ownership plan, market position, and prospect quality so lease-up decisions account for income, risk, flexibility, and long-term asset value—not occupancy alone.",
+      media: {
+        src: landlordLeasingContext,
+        alt: "Anonymous owner and leasing advisor evaluating a vacant commercial suite",
+        position: "center",
       },
-      {
-        number: "02",
-        title: "Terms",
-        body: "Rate is only one part of the economics; concessions, timing, and obligations matter too.",
-      },
-      {
-        number: "03",
-        title: "Tenant Fit",
-        body: "Use, financial readiness, and operating compatibility shape long-term performance.",
-      },
-    ],
-  },
+      tracks: [
+        {
+          number: "01",
+          label: "Ownership Plan",
+          title: "Define what the lease must accomplish.",
+          body: "Hold period, cash-flow priorities, future sale or repositioning plans, acceptable uses, delivery scope, and flexibility shape the assignment.",
+          points: [],
+        },
+        {
+          number: "02",
+          label: "Market Position",
+          title: "Compete on more than asking rent.",
+          body: "Availability, demand, physical readiness, use, access, timing, concessions, and competing inventory determine how the space should enter the market.",
+          points: [],
+        },
+        {
+          number: "03",
+          label: "Tenant Quality",
+          title: "Evaluate the prospect behind the proposal.",
+          body: "Use compatibility, financial readiness, delivery needs, timing, obligations, and the complete economics help ownership compare fit and execution risk.",
+          points: [],
+        },
+      ],
+    },
     {
       type: "process",
       id: "leasing-process",
-    eyebrow: "The Gala Leasing Process",
-    headline: "A deliberate path from availability to execution.",
-    introduction:
-      "Each engagement begins with the asset and the owner’s objectives. From there, we build and manage a leasing process with clear decisions, consistent communication, and accountable next steps.",
-    steps: [
-      {
-        number: "01",
-        title: "Position",
-        body: "Evaluate the property, competing inventory, likely users, pricing, and deal parameters before the space reaches the market.",
-      },
-      {
-        number: "02",
-        title: "Launch",
-        body: "Create the leasing narrative, prepare the marketing package, and activate the channels most likely to reach qualified prospects and brokers.",
-      },
-      {
-        number: "03",
-        title: "Engage",
-        body: "Manage inquiries, tours, follow-up, and market feedback while keeping ownership informed about activity and necessary adjustments.",
-      },
-      {
-        number: "04",
-        title: "Structure + Close",
-        body: "Compare proposals, qualify prospective tenants, negotiate the full economics, and coordinate the path through lease execution.",
-      },
-    ],
-  },
+      eyebrow: "The Leasing Process",
+      headline: "Move from availability to an informed lease decision.",
+      introduction:
+        "One accountable process carries the owner’s priorities from initial positioning through market response, proposal comparison, and execution.",
+      steps: [
+        {
+          number: "01",
+          title: "Diagnose",
+          body: "Clarify the asset, ownership objective, target users, physical readiness, timing, and acceptable deal parameters.",
+        },
+        {
+          number: "02",
+          title: "Position + Launch",
+          body: "Set the pricing and leasing story, prepare the materials, and activate the channels most relevant to likely prospects and brokers.",
+        },
+        {
+          number: "03",
+          title: "Qualify + Tour",
+          body: "Manage inquiries, use and readiness checks, property access, follow-up, and market feedback with clear ownership visibility.",
+        },
+        {
+          number: "04",
+          title: "Negotiate + Execute",
+          body: "Compare complete proposals, negotiate business terms, and coordinate the LOI and lease path with ownership and counsel.",
+        },
+      ],
+    },
     {
       type: "deliverables",
-    eyebrow: "Services + Deliverables",
-    headline: "The work behind a stronger leasing outcome.",
-    introduction:
-      "Gala combines strategy, marketing, market engagement, and deal coordination into one owner-focused assignment.",
-    items: [
-      {
-        icon: "positioning",
-        title: "Market Positioning",
-        body: "Competitive-set review, pricing context, use considerations, and a clear go-to-market recommendation.",
-      },
-      {
-        icon: "marketing",
-        title: "Leasing Narrative + Materials",
-        body: "A concise property story and coordinated marketing package designed around how prospects evaluate the opportunity.",
-      },
-      {
-        icon: "prospects",
-        title: "Targeted Prospecting",
-        body: "Broker outreach, direct prospect engagement, and relevant listing-channel exposure guided by the likely tenant profile.",
-      },
-      {
-        icon: "tours",
-        title: "Inquiry + Tour Management",
-        body: "Responsive qualification, property tours, follow-up, and feedback capture throughout the campaign.",
-      },
-      {
-        icon: "economics",
-        title: "Proposal Comparison",
-        body: "Side-by-side review of economics, concessions, timing, use, and other terms that affect the ownership decision.",
-      },
-      {
-        icon: "execution",
-        title: "Negotiation + Execution",
-        body: "Deal structuring, letter-of-intent coordination, and communication with the owner’s legal and project teams through lease execution.",
-      },
-    ],
-  },
-    {
-      type: "strategy",
-    eyebrow: "Market Reach + Tenant Quality",
-    headline: "Create attention without compromising the asset.",
-    introduction:
-      "Exposure and qualification are not separate tasks. The campaign must reach the market effectively while giving ownership the information needed to choose the right path.",
-    media: {
-      src: galaSalesCapability,
-      alt: "Active mixed-use commercial destination at dusk",
-    },
-    tracks: [
-      {
-        number: "01",
-        label: "Property Marketing",
-        title: "Build the right market story.",
-        body: "We translate the property’s location, physical attributes, use potential, and ownership priorities into a clear leasing proposition.",
-        points: ["Positioning and pricing narrative", "Broker and direct-prospect outreach", "Listing-platform strategy", "Campaign feedback and refinement"],
-      },
-      {
-        number: "02",
-        label: "Tenant Qualification",
-        title: "Know who is across the table.",
-        body: "Before momentum becomes commitment, we help ownership evaluate the prospect’s use, readiness, timing, and proposed economics.",
-        points: ["Use and operational fit", "Financial-readiness coordination", "Timing and delivery requirements", "Proposal and risk comparison"],
-      },
-    ],
-  },
-    {
-      type: "rationale",
-    eyebrow: "Why Dedicated Representation",
-    headline: "Your property deserves an advocate at every point in the deal.",
-    body:
-      "A dedicated landlord representative protects continuity. The person shaping the market strategy also interprets feedback, manages the prospect relationship, and carries the owner’s priorities into negotiation.",
-    reasons: [
-      {
-        title: "One accountable strategy",
-        body: "Positioning, outreach, tours, and negotiation stay connected to the same ownership objective.",
-      },
-      {
-        title: "Better decision context",
-        body: "Ownership receives more than activity reports—Gala translates market response into practical next decisions.",
-      },
-      {
-        title: "The full economics protected",
-        body: "We evaluate the complete proposal, not only face rent, so tradeoffs remain visible throughout negotiation.",
-      },
-    ],
+      eyebrow: "Services + Deliverables",
+      headline: "One owner-side assignment from strategy through execution.",
+      introduction:
+        "Dedicated representation keeps positioning, market response, tenant qualification, proposal economics, and negotiation connected to the same ownership objective.",
+      items: [
+        {
+          icon: "positioning",
+          title: "Leasing Strategy",
+          body: "Competitive context, target users, pricing and concession parameters, physical readiness, and a clear launch recommendation.",
+        },
+        {
+          icon: "marketing",
+          title: "Marketing + Outreach",
+          body: "A concise leasing story, coordinated materials, listing-channel exposure, broker engagement, and direct prospecting where relevant.",
+        },
+        {
+          icon: "prospects",
+          title: "Prospect + Proposal Management",
+          body: "Qualification, tours, follow-up, feedback, and side-by-side comparison of use, readiness, timing, obligations, and economics.",
+        },
+        {
+          icon: "execution",
+          title: "Negotiation + Execution",
+          body: "Business-term strategy, LOI coordination, and an organized path through lease documentation with ownership and counsel.",
+        },
+      ],
     },
   ],
   relatedCapabilities: {
     eyebrow: "Connected Gala Capabilities",
-    headline: "Leasing decisions rarely exist in isolation.",
+    headline: "Connect leasing to the ownership plan.",
     introduction:
-      "When an assignment reaches beyond leasing, Gala can connect the conversation across the broader commercial platform.",
+      "Move into investment sales, development, capital, or property operations when those decisions shape the leasing assignment.",
     links: [
       {
         label: "Brokerage",
@@ -316,7 +260,7 @@ const landlordRepresentation: CapabilityPageContent = {
       },
       {
         label: "Development",
-        title: "Development Services",
+        title: "Development",
         body: "Early-stage strategy and coordination for properties with development or repositioning potential.",
         href: "/services/development-services",
       },
@@ -330,9 +274,9 @@ const landlordRepresentation: CapabilityPageContent = {
   },
   cta: {
     eyebrow: "Start With the Property",
-    headline: "Let’s build the leasing strategy around your asset.",
+    headline: "Build the leasing strategy around the asset and ownership plan.",
     body:
-      "Tell us what is available, what ownership is working toward, and where the property stands today. We’ll begin with a focused conversation about the next best move.",
+      "Share what is available, where the property stands today, what ownership needs the lease to accomplish, and the timing behind the decision.",
     actions: [
       {
         label: "Discuss Your Property",
@@ -346,11 +290,12 @@ const landlordRepresentation: CapabilityPageContent = {
 
 const tenantRepresentation: CapabilityPageContent = {
   path: "/services/brokerage/tenant-representation",
+  compact: true,
   metadata: {
     title: "Tenant Representation",
     description:
       "Business-led tenant representation across Raleigh-Durham and the Research Triangle, from occupancy requirements and site selection through lease execution.",
-    image: galaCapitalCapability,
+    image: tenantRepresentationHero,
   },
   parent: { label: "Brokerage", href: "/services/brokerage" },
   hero: {
@@ -359,9 +304,9 @@ const tenantRepresentation: CapabilityPageContent = {
     lead:
       "Turn real estate into a business decision with a search, comparison, and negotiation process built around how your company operates.",
     media: {
-      src: galaCapitalCapability,
-      alt: "Business leaders reviewing commercial occupancy requirements and costs",
-      position: "44% center",
+      src: tenantRepresentationHero,
+      alt: "Anonymous business leaders and a commercial real estate advisor touring a vacant commercial space",
+      position: "center",
     },
     actions: [
       {
@@ -370,53 +315,53 @@ const tenantRepresentation: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See the Search Process",
-        href: "#tenant-search-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Tenant representation stages",
-    signals: ["Define", "Search", "Compare", "Negotiate"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-      watermark: "OCCUPIER",
-      eyebrow: "The Business Challenge",
-      headline: "The wrong space keeps costing you after the lease is signed.",
-      body: [
-        "A commercial lease affects far more than an address. It shapes customer access, employee experience, operating efficiency, future flexibility, and the cost structure of the business.",
-        "The right decision begins before the property search. Requirements, timing, financial priorities, and alternatives must be clear enough to guide the market process and keep attractive spaces from becoming expensive distractions.",
-      ],
-      emphasis:
-        "The goal is not simply to find available space. It is to secure space that supports the business.",
-      pressures: [
+      type: "strategy",
+      eyebrow: "The Occupancy Decision",
+      headline: "Choose space through the lens of the business.",
+      introduction:
+        "Gala represents the tenant’s interests exclusively, turning operating requirements, market alternatives, total occupancy cost, and timing into one comparable decision.",
+      media: {
+        src: tenantSiteEvaluationContext,
+        alt: "Anonymous business decision-makers comparing commercial occupancy options with an advisor",
+        position: "center",
+      },
+      tracks: [
         {
           number: "01",
-          title: "Operations",
-          body: "Location, access, layout, infrastructure, and use must work for the way the business operates.",
+          label: "Operational Fit",
+          title: "Start with how the business must function.",
+          body: "Geography, access, layout, infrastructure, customer and employee needs, approvals, and delivery conditions define the real requirement.",
+          points: [],
         },
         {
           number: "02",
-          title: "Economics",
-          body: "Base rent alone does not reveal the full occupancy cost or the tradeoffs between alternatives.",
+          label: "Occupancy Economics",
+          title: "Compare the complete cost—not rent alone.",
+          body: "Base rent, escalations, operating expenses, concessions, improvements, downtime, move costs, and obligations shape the financial decision.",
+          points: [],
         },
         {
           number: "03",
-          title: "Timing",
-          body: "Renewal dates, construction, approvals, and move coordination can narrow the window for a sound decision.",
+          label: "Alternatives + Timing",
+          title: "Test staying against moving.",
+          body: "Renewal, relocation, expansion, contraction, and ownership alternatives should be evaluated before the current lease or market dictates the answer.",
+          points: [],
         },
       ],
     },
     {
       type: "process",
       id: "tenant-search-process",
-      eyebrow: "The Gala Occupancy Process",
-      headline: "From business requirement to occupied space.",
+      eyebrow: "The Occupancy Process",
+      headline: "Move from requirement to an executable occupancy plan.",
       introduction:
-        "Gala organizes the decision around the business first, then manages the market work, comparisons, negotiation, and coordination needed to move from strategy to occupancy.",
+        "The search begins with a business brief, not an availability list, then advances through disciplined comparison, tenant-side negotiation, and occupancy coordination.",
       steps: [
         {
           number: "01",
@@ -430,120 +375,51 @@ const tenantRepresentation: CapabilityPageContent = {
         },
         {
           number: "03",
-          title: "Compare",
-          body: "Review market context and occupancy economics so decision-makers can see costs, constraints, and tradeoffs side by side.",
+          title: "Compare + Negotiate",
+          body: "Test property fit and total occupancy economics, structure the LOI, and negotiate business terms from the tenant’s side of the table.",
         },
         {
           number: "04",
-          title: "Negotiate + Occupy",
-          body: "Structure the LOI, negotiate business terms, and coordinate the lease path and key milestones through occupancy.",
+          title: "Coordinate Occupancy",
+          body: "Track lease, delivery, construction, approvals, move timing, and other dependencies with the tenant and its specialist teams.",
         },
       ],
     },
     {
       type: "deliverables",
       eyebrow: "Services + Deliverables",
-      headline: "A decision process your team can act on.",
+      headline: "A tenant-side record your team can act on.",
       introduction:
-        "Each assignment connects business requirements with practical market intelligence and a disciplined path to commitment.",
+        "Requirements, options, economics, negotiations, and occupancy milestones stay connected to the same business objective.",
       items: [
         {
           icon: "positioning",
-          title: "Requirement Strategy",
-          body: "A working brief covering use, location, physical needs, timing, economics, and future flexibility.",
+          title: "Requirements + Market Brief",
+          body: "A practical definition of use, geography, physical needs, timing, budget, future flexibility, and relevant market context.",
         },
         {
           icon: "prospects",
-          title: "Site Selection",
-          body: "A focused search of relevant market options rather than an undifferentiated list of available spaces.",
-        },
-        {
-          icon: "tours",
-          title: "Tours + Evaluation",
-          body: "Coordinated tours, property-level observations, and follow-up organized around the approved requirement.",
+          title: "Site Search + Tour Plan",
+          body: "A focused field of viable options, organized property information, coordinated tours, observations, and follow-up against the brief.",
         },
         {
           icon: "economics",
-          title: "Occupancy-Cost Comparison",
-          body: "Side-by-side analysis of rent, concessions, operating costs, timing, and other meaningful economic differences.",
-        },
-        {
-          icon: "marketing",
-          title: "LOI + Lease Negotiation",
-          body: "Business-term strategy and negotiation aligned with the tenant’s objectives and coordinated with legal review.",
+          title: "Option + Cost Comparison",
+          body: "Side-by-side evaluation of operational fit, rent, operating expenses, concessions, improvements, timing, obligations, and transition costs.",
         },
         {
           icon: "execution",
-          title: "Occupancy Coordination",
-          body: "Continued communication around delivery, construction, move timing, and other milestones that affect occupancy.",
-        },
-      ],
-    },
-    {
-      type: "strategy",
-      eyebrow: "Stay, Move, or Reshape",
-      headline: "The best answer may not be a new address.",
-      introduction:
-        "Tenant representation should compare the real alternatives available to the business, including the option to remain in place under better-aligned terms.",
-      media: {
-        src: galaBrokerCapability,
-        alt: "Commercial real estate advisor evaluating occupancy alternatives",
-        position: "53% center",
-      },
-      tracks: [
-        {
-          number: "01",
-          label: "Stay",
-          title: "Renew with market context.",
-          body: "A renewal deserves the same preparation as a relocation. We evaluate the existing space, market alternatives, timing, and business terms before commitment.",
-          points: [
-            "Renewal and restructure strategy",
-            "Market benchmark comparison",
-            "Expansion within the property",
-            "Timing and leverage planning",
-          ],
-        },
-        {
-          number: "02",
-          label: "Move",
-          title: "Change space with purpose.",
-          body: "When the business needs a different footprint or location, the search is shaped around the operational reason for moving—not availability alone.",
-          points: [
-            "Relocation and expansion",
-            "Downsizing and consolidation",
-            "Site and property comparison",
-            "Transition through occupancy",
-          ],
-        },
-      ],
-    },
-    {
-      type: "rationale",
-      eyebrow: "Why Dedicated Representation",
-      headline: "Your advisor should answer only to your side of the table.",
-      body:
-        "Gala represents the tenant’s interests throughout the assignment. That focus keeps the requirement, market search, comparisons, and negotiations connected to the business decision the client actually needs to make.",
-      reasons: [
-        {
-          title: "Undivided advocacy",
-          body: "The process is organized around the tenant’s priorities, alternatives, economics, and desired outcome.",
-        },
-        {
-          title: "Comparable decisions",
-          body: "Options are evaluated against the same requirement so tradeoffs remain clear and defensible.",
-        },
-        {
-          title: "Continuity through occupancy",
-          body: "The advisory relationship continues beyond site selection and negotiation into the milestones that make the space usable.",
+          title: "Tenant-Side Negotiation + Coordination",
+          body: "LOI and business-term strategy plus an organized path through lease review, delivery, construction, approvals, and occupancy with counsel and specialists.",
         },
       ],
     },
   ],
   relatedCapabilities: {
     eyebrow: "Connected Gala Capabilities",
-    headline: "Occupancy decisions can connect to a larger strategy.",
+    headline: "Connect occupancy to the larger business decision.",
     introduction:
-      "When the requirement touches ownership, development, or capital questions, Gala can connect the conversation across its broader commercial platform.",
+      "Move into ownership, development, or capital workstreams when the requirement extends beyond a conventional lease.",
     links: [
       {
         label: "Brokerage",
@@ -559,23 +435,23 @@ const tenantRepresentation: CapabilityPageContent = {
       },
       {
         label: "Development",
-        title: "Development Services",
+        title: "Site Strategy",
         body: "Site strategy and coordination when an occupancy need involves development or repositioning.",
-        href: "/services/development-services",
+        href: "/services/development-services/site-strategy",
       },
       {
         label: "Capital Markets",
-        title: "Capital Markets",
-        body: "Debt and equity guidance for commercial opportunities and transactions.",
-        href: "/services/capital-markets",
+        title: "Debt Advisory",
+        body: "Financing strategy when acquisition or owner occupancy becomes part of the comparison.",
+        href: "/services/capital-markets/debt",
       },
     ],
   },
   cta: {
     eyebrow: "Start With the Requirement",
-    headline: "Let’s clarify what the business needs from its next space.",
+    headline: "Clarify what the business needs before the market shapes the answer.",
     body:
-      "Tell us what is changing, what the space must support, and when a decision needs to be made. We’ll begin with the business requirement and build the real estate process around it.",
+      "Share what is changing, what the space must support, the current lease timeline, target geography, budget, and the alternatives already under consideration.",
     actions: [
       {
         label: "Discuss Your Space",

@@ -48,13 +48,13 @@ describe("Gala CRE public pages", () => {
       src: expect.any(String),
       alt: expect.any(String),
     });
-    expect(landlordPage.hero.actions.map((action) => action.variant)).toEqual(["primary", "secondary"]);
+    expect(landlordPage.compact).toBe(true);
+    expect(landlordPage.hero.actions.map((action) => action.variant)).toEqual(["primary"]);
+    expect(landlordPage.hero.signals).toEqual([]);
     expect(landlordPage.sections.map((section) => section.type)).toEqual([
-      "challenge",
+      "strategy",
       "process",
       "deliverables",
-      "strategy",
-      "rationale",
     ]);
     expect(landlordPage.relatedCapabilities.links).toHaveLength(4);
     expect(landlordPage.cta.actions[0]).toMatchObject({
@@ -278,8 +278,8 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByRole("link", { name: /Find a Replacement Property/i })).not.toBeInTheDocument();
   });
 
-  it("gives in-page-only capabilities real explanatory detail, not just a label", () => {
-    render(
+  it("keeps the Brokerage overview focused on its two representation paths", () => {
+    const view = render(
       <MemoryRouter initialEntries={["/services/brokerage"]}>
         <Routes>
           <Route path="/services/:slug" element={<ServiceDetail />} />
@@ -287,10 +287,10 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
     expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
-    const marketPositioning = screen.getByRole("heading", { name: "Market positioning" }).closest(".gala-capability-section");
-    expect(marketPositioning).not.toBeNull();
-    expect(within(marketPositioning as HTMLElement).getByText(/a space priced or presented incorrectly/i)).toBeInTheDocument();
-    expect(document.getElementById("market-positioning")).toBe(marketPositioning);
+    expect(screen.getByRole("heading", { name: "Two sides of the market. One clear point of advocacy." })).toBeInTheDocument();
+    expect(view.container.querySelectorAll(".gala-capability-teaser")).toHaveLength(2);
+    expect(view.container.querySelectorAll(".gala-capability-section")).toHaveLength(0);
+    expect(screen.queryByText(/market positioning/i)).not.toBeInTheDocument();
   });
 
   it("sends Landlord and Tenant Representation to their own dedicated pages instead of an in-page section", () => {
@@ -317,11 +317,11 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
     expect(screen.getByRole("heading", { name: /Landlord representation/i })).toBeInTheDocument();
-    expect(screen.getByText(/when commercial space sits vacant/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A deliberate path from availability to execution." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The work behind a stronger leasing outcome." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Create attention without compromising the asset." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your property deserves an advocate at every point in the deal." })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /owner and leasing advisor evaluating a vacant commercial suite/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Position the space around the owner’s real objective." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Move from availability to an informed lease decision." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "One owner-side assignment from strategy through execution." })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Your property deserves an advocate/i })).not.toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss Your Property/i })[0]).toHaveAttribute(
       "href",
       "/contact?inquiry=landlord-representation"
@@ -379,11 +379,13 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
     expect(screen.getByRole("heading", { name: "Tenant Representation" })).toBeInTheDocument();
-    expect(screen.getByText(/commercial lease affects far more than an address/i)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "From business requirement to occupied space." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A decision process your team can act on." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The best answer may not be a new address." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Your advisor should answer only to your side of the table." })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /business leaders and a commercial real estate advisor touring/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /business decision-makers comparing commercial occupancy options/i })).toBeInTheDocument();
+    expect(screen.getByText(/represents the tenant’s interests exclusively/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Choose space through the lens of the business." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Move from requirement to an executable occupancy plan." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A tenant-side record your team can act on." })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /The best answer may not be a new address/i })).not.toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss Your Space/i })[0]).toHaveAttribute(
       "href",
       "/contact?inquiry=tenant-representation"

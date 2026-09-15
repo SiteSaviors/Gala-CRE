@@ -44,9 +44,9 @@ export const services: Service[] = [
     brandName: "Brokerage",
     homepageSummary: "Commercial leasing and occupancy representation.",
     eyebrow: "Landlord + Tenant Representation",
-    summary: "Commercial representation grounded in clear advice, local knowledge, and disciplined execution.",
+    summary: "Owner-side leasing and occupier-side advisory built around clear decisions and disciplined execution.",
     description:
-      "Gala CRE Group helps owners position and lease commercial space while helping occupiers evaluate locations, negotiate terms, and move forward with confidence.",
+      "Gala CRE Group serves two distinct sides of the leasing decision: helping owners position space, qualify prospects, and negotiate leases, and helping occupiers define requirements, compare alternatives, and secure space around the needs of the business.",
     capabilities: [
       {
         label: "Landlord Representation",
@@ -72,30 +72,8 @@ export const services: Service[] = [
         icon: "handshake",
         route: "tenant-representation",
       },
-      {
-        label: "Market positioning",
-        lead: "A space priced or presented incorrectly sits empty. We evaluate comparable properties, current demand, and market conditions to position your property competitively from day one.",
-        included: [
-          "Comparable market analysis",
-          "Pricing and terms strategy",
-          "Marketing material and positioning",
-          "Ongoing adjustment as market conditions shift",
-        ],
-        icon: "trending-up",
-      },
-      {
-        label: "Lease strategy and negotiation",
-        lead: "Lease terms shape how your business operates for years. We structure and negotiate terms, renewal options, and concessions around what actually matters to your operation.",
-        included: [
-          "Lease term and structure guidance",
-          "Renewal option strategy",
-          "Concession and allowance negotiation",
-          "Risk and liability review coordination",
-        ],
-        icon: "file-signature",
-      },
     ],
-    capabilitiesHeadline: "Representation shaped around how space actually gets used.",
+    capabilitiesHeadline: "Two sides of the market. One clear point of advocacy.",
     image: galaBrokerCapability,
     audience: "Property owners, landlords, tenants, and business operators",
     approvalStatus: "draft",

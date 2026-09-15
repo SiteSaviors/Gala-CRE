@@ -74,6 +74,33 @@ describe("advertised capability route matrix", () => {
     });
   });
 
+  it("keeps the two Brokerage journeys compact and audience-specific", () => {
+    const brokeragePages = [
+      capabilityPageByPath["/services/brokerage/landlord-representation"],
+      capabilityPageByPath["/services/brokerage/tenant-representation"],
+    ];
+
+    brokeragePages.forEach((page) => {
+      expect(page.compact, page.path).toBe(true);
+      expect(page.hero.signals, page.path).toEqual([]);
+      expect(page.hero.actions, page.path).toHaveLength(1);
+      expect(page.sections.map((section) => section.type), page.path).toEqual([
+        "strategy",
+        "process",
+        "deliverables",
+      ]);
+      expect(page.sections.find((section) => section.type === "strategy")?.tracks, page.path).toHaveLength(3);
+      expect(page.sections.find((section) => section.type === "process")?.steps, page.path).toHaveLength(4);
+      expect(page.sections.find((section) => section.type === "deliverables")?.items, page.path).toHaveLength(4);
+      expect(page.relatedCapabilities.links, page.path).toHaveLength(4);
+    });
+
+    expect(brokeragePages[0].hero.media.src).not.toBe(brokeragePages[1].hero.media.src);
+    expect(brokeragePages[0].sections[0].headline).not.toBe(brokeragePages[1].sections[0].headline);
+    expect(brokeragePages[0].hero.actions[0].href).toBe("/contact?inquiry=landlord-representation");
+    expect(brokeragePages[1].hero.actions[0].href).toBe("/contact?inquiry=tenant-representation");
+  });
+
   it("keeps every Investment Sales asset journey concise without losing its core sale path", () => {
     ["industrial", "multifamily", "retail", "office", "land"].forEach((assetType) => {
       const page = capabilityPageByPath[`/services/investment-sales/${assetType}`];

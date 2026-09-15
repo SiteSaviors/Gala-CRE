@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 04:51 CDT
+Last updated: 2026-09-15 05:08 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -157,9 +157,9 @@ Status: **In progress**
 
 Brokerage:
 
-- [ ] Brokerage overview
-- [ ] Landlord Representation
-- [ ] Tenant Representation
+- [x] Brokerage overview
+- [x] Landlord Representation
+- [x] Tenant Representation
 
 Investment Sales:
 
@@ -422,3 +422,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no client case studies, quantified outcomes, testimonials, capital commitments, specialist credentials, or approved transaction-specific capital imagery have been supplied; none blocks these routes because the copy stays within advisory, access, coordination, and decision-support boundaries.
 - Exact next action: Rebuild `/services/brokerage`, `/services/brokerage/landlord-representation`, and `/services/brokerage/tenant-representation` through the compact system; preserve the owner-versus-occupier distinction, cut both long editorial essays to strategy/process/deliverables, generate distinct generic occupier imagery only where current media repeats, and keep inquiry routing correct.
+
+### 2026-09-15 — Phase 4 compact Brokerage group
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `e7d263c`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Brokerage overview and both representation records, shared capability renderer/styles, current brokerage imagery, relevant tests, and all three live routes.
+- Gate: reduce the Brokerage overview to its two client paths and rebuild Landlord and Tenant Representation through the compact hero → strategy → process → deliverables → related capabilities → CTA system, while keeping owner economics and tenant occupancy decisions unmistakably different and preserving correct inquiry routing.
+- Completed: tightened the Brokerage overview around only Landlord and Tenant Representation; rebuilt Landlord around ownership plan, market position, tenant quality, property marketing, prospect qualification, proposal economics, negotiation, and execution; rebuilt Tenant around operational requirements, site selection, full occupancy-cost comparison, tours, LOI and lease negotiation, renew/relocate/expand/downsize decisions, coordination through occupancy, and exclusive tenant-side advocacy. Each representation page now has one primary action, no signal strip, one focused decision section, four process steps, four deliverables, compact related links, and a concise close.
+- Imagery: retained the existing generic Brokerage hero for Landlord, then generated three restrained generic service-context images for an owner-side leasing review, a tenant site tour, and tenant option evaluation. All are optimized WebP assets with no Gala branding, readable documents, property identities, or representations of Gala listings or client assignments.
+- Files and routes changed: `src/assets/landlord-leasing-context.webp`, `src/assets/tenant-representation-hero.webp`, `src/assets/tenant-site-evaluation-context.webp`, `src/content/capabilityPages.ts`, `src/content/services.ts`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/brokerage`, `/services/brokerage/landlord-representation`, and `/services/brokerage/tenant-representation`.
+- Verification: Brokerage reduced from 4,101px to 3,195px desktop; Landlord from 8,725px to 4,194px desktop; Tenant from 8,830px to 4,129px desktop. At 834px, the three routes measure 3,495px, 5,062px, and 5,114px; at 390px, 4,237px, 6,429px, and 6,339px. All routes render with loaded imagery, contained headings, correct inquiry links, zero horizontal overflow, and zero current browser-console errors. Targeted suite: 41/41 passed. Full suite: 105/105 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Intended commit: `refactor: compact Brokerage service group`.
+- Remaining working tree: expected clean after commit.
+- Blockers: no client case studies, quantified outcomes, testimonials, representation results, or approved assignment-specific imagery have been supplied; none blocks these routes because the copy stays within advisory, marketing, qualification, negotiation, and coordination boundaries.
+- Exact next action: Rebuild `/services/property-management` and `/services/property-management/property-management-partnership` through the compact system; add a distinct restrained generic overview hero, keep the partner-delivered boundary explicit, clarify ownership scope, manager selection, transition, and ongoing coordination, and verify that no copy implies in-house property management or guaranteed partner performance.
