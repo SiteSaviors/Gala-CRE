@@ -1,8 +1,8 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 06:02 CDT
+Last updated: 2026-09-15 09:49 CDT
 
-Authoritative branch: `codex/compact-listings-services`
+Authoritative branch: `main`
 
 Baseline: `d7b6204726cc04422c09b37c42d33e34e23e7afd` (`main`/`origin/main` at branch creation)
 
@@ -476,3 +476,13 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the Phase 6 commit.
 - Blockers: client property facts/media and service proof listed above remain pending but are safely omitted or qualified; production form secrets/origin/KV and final disclosure approval remain configuration inputs; client-rendered route-specific crawler previews require future prerendering/SSR; the 752KB minified JavaScript chunk and 8.1MB hero video are future performance opportunities; merge, push, and deployment require explicit authorization and are outside this checkpoint.
 - Exact next action: User reviews the release candidate locally. After explicit approval, merge `codex/compact-listings-services` into `main`, push, deploy to Vercel, and smoke-test the production routes and form configuration.
+
+### 2026-09-15 — Production promotion and live smoke test
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `4b177d1`, clean; `origin/main` remained at the `d7b6204` baseline and was a direct ancestor with no divergence.
+- Gate: fast-forward the verified release into `main`, push the exact history, deploy the linked `gala-cre` Vercel project to production, and validate the live public routes without submitting forms.
+- Completed: fast-forwarded local `main` through all 17 verified rebuild commits; pushed `main` to GitHub; deployed the linked Vercel project; confirmed deployment `dpl_G3E3pNcs3MKBfN5aR3Zi6FjkNMqd` reached `Ready` and received the `https://gala-cre.vercel.app` alias.
+- Verification: production root, `/properties`, `/properties/2301-lackey-street`, `/services`, and `/services/investment-sales/industrial` returned HTTP 200. The production Playwright suite exercised the same 31 routes at desktop, tablet, and mobile plus catalog, map, gallery, video, contextual inquiry, keyboard, and reduced-motion journeys. Desktop and tablet passed immediately; mobile passed on rerun after one non-reproducible `google is not defined` exception inside Google's hosted Maps embed script. No application defect was reproduced and no form was submitted.
+- Release state: application release commit `4b177d1` is on `main`, `origin/main`, and production. This deployment record is the only follow-up documentation change.
+- Remaining blockers: production form delivery still requires verification of Vercel secrets, allowed origins, durable rate limiting, and approved disclosure/privacy configuration before real submissions are promoted; client-content gaps remain listed above.
+- Exact next action: Review `https://gala-cre.vercel.app` before the client meeting, then continue only with specifically approved content refinements or production-form configuration.

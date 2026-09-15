@@ -4,7 +4,7 @@ Updated: September 15, 2026
 
 ## Current result
 
-The compact property and service rebuild is complete on `codex/compact-listings-services`. Every current property record now uses one concise evaluation system, and every advertised service capability uses the shorter visual service system. The branch is locally verified and ready for client review; it has not been merged, pushed, or deployed.
+The compact property and service rebuild is complete, merged into `main`, pushed to GitHub, and deployed to Vercel. Every current property record now uses one concise evaluation system, and every advertised service capability uses the shorter visual service system. The live production site has passed the post-deployment route and interaction smoke test.
 
 No form was submitted and no external message was sent during QA.
 
@@ -104,8 +104,10 @@ Until the private delivery variables are configured, forms fail safely without e
 ## Review and deployment state
 
 - Local review: `http://localhost:8080/`
-- Current production: `https://gala-cre.vercel.app` — responding, but still represents the previously deployed `main` branch.
-- Release candidate: `codex/compact-listings-services` — locally complete and verified, awaiting explicit approval to merge, push, and deploy.
+- Current production: `https://gala-cre.vercel.app` — live on the compact property and service release.
+- Application release commit: `4b177d1` on `main`.
+- Vercel production deployment: `dpl_G3E3pNcs3MKBfN5aR3Zi6FjkNMqd` (`Ready`).
+- Post-deployment verification: desktop and tablet route matrices passed on the first run; the mobile matrix passed on rerun after one transient error inside Google's embedded Maps script. All catalog, gallery, video, inquiry, keyboard, and reduced-motion journeys passed against production.
 
 Local server command:
 
