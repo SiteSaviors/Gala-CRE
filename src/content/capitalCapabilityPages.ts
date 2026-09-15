@@ -1,7 +1,9 @@
 import capitalMarketsStrategy from "@/assets/capital-markets-strategy.webp";
 import propertyManagementPartnership from "@/assets/property-management-partnership.webp";
+import propertyManagementTransitionContext from "@/assets/property-management-transition-context.webp";
 import transactionCoordination from "@/assets/transaction-coordination.webp";
 import { buildCapabilityPage } from "@/content/capabilityPageBlueprint";
+import type { CapabilityPageContent } from "@/content/capabilityPages";
 
 const debt = buildCapabilityPage({
   path: "/services/capital-markets/debt",
@@ -334,83 +336,125 @@ export const capitalCapabilityPages = [
   transactionCoordinationPage,
 ];
 
-export const propertyManagementCapabilityPage = buildCapabilityPage({
+export const propertyManagementCapabilityPage: CapabilityPageContent = {
   path: "/services/property-management/property-management-partnership",
+  compact: true,
+  metadata: {
+    title: "Property Management Partnership",
+    description:
+      "Partner-led commercial property management coordination focused on ownership requirements, manager fit, scope, transition, and strategic continuity.",
+    image: propertyManagementPartnership,
+  },
   parent: { label: "Property Management", href: "/services/property-management" },
-  image: propertyManagementPartnership,
-  metadataDescription:
-    "Partner-led commercial property management coordination connecting ownership priorities, operating scope, property information, manager selection, transition, and ongoing brokerage context.",
   hero: {
     eyebrow: "Property Management · Partner-Led",
     title: "Property Management Partnership",
     lead:
-      "Connect ownership with an operating partner whose scope fits the property—while preserving continuity with the broader commercial plan.",
-    alt: "Generic commercial property operations professional reviewing building mechanical systems",
-    position: "center 51%",
-    primaryLabel: "Discuss Property Operations",
-    inquiryHref: "/contact?inquiry=property-management",
-    processLabel: "See the Partnership Process",
-    processId: "property-management-process",
+      "Define the operating requirement, select an appropriate management partner, and transition the property with ownership priorities and responsibilities clear.",
+    media: {
+      src: propertyManagementPartnership,
+      alt: "Generic commercial property operations professional reviewing building mechanical systems",
+      position: "center 51%",
+    },
+    actions: [
+      {
+        label: "Discuss Property Operations",
+        href: "/contact?inquiry=property-management",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
     signalLabel: "Property management partnership stages",
-    signals: ["Define", "Match", "Transition", "Connect"],
+    signals: [],
   },
-  challenge: {
-    watermark: "OPERATE",
-    eyebrow: "The Ownership Need",
-    headline: "A transaction plan is only as durable as the operations behind it.",
-    body: [
-      "Tenant communication, rent administration, vendor oversight, maintenance, reporting, budgeting, compliance coordination, and capital planning affect both day-to-day performance and future leasing or sale decisions.",
-      "Gala does not present property management as a direct in-house service. We help ownership define the need, connect with an appropriate management partner, coordinate the handoff, and retain continuity where brokerage, capital, or development context remains relevant.",
-    ],
-    emphasis:
-      "The selected management partner controls and is responsible for the contracted management services; Gala's role is connection and coordination.",
-    pressures: [
-      { number: "01", title: "Scope Fit", body: "Asset type, tenancy, systems, staffing, reporting, geography, and ownership expectations determine the appropriate operating scope." },
-      { number: "02", title: "Transition", body: "Leases, contacts, vendors, balances, records, access, open work, and tenant communication need a disciplined handoff." },
-      { number: "03", title: "Continuity", body: "Operating information should inform leasing, capital, development, and future transaction decisions without creating role confusion." },
-    ],
-  },
-  process: {
-    eyebrow: "The Partnership Process",
-    headline: "Move from ownership priorities to a clear operating handoff.",
-    introduction:
-      "Gala helps frame the requirement, identify a relevant partner, coordinate scope and transition discussions, and preserve the appropriate link to the commercial strategy.",
-    steps: [
-      { number: "01", title: "Define", body: "Clarify the property, tenancy, systems, current operations, ownership priorities, reporting needs, open issues, and desired management scope." },
-      { number: "02", title: "Match", body: "Identify and introduce a partner whose experience, geography, staffing model, systems, and service scope may fit the assignment." },
-      { number: "03", title: "Transition", body: "Support clear discussion of responsibilities, records, vendors, tenant communication, access, open work, timing, and onboarding." },
-      { number: "04", title: "Connect", body: "Maintain the agreed interface between property operations and Gala's brokerage, capital, development, or ownership-strategy work." },
-    ],
-  },
-  deliverables: {
-    eyebrow: "Coordination + Handoff",
-    headline: "A management pathway with roles made explicit.",
-    introduction:
-      "Management agreements, fees, staffing, accounting controls, vendor authority, insurance, compliance, and performance obligations are established directly between ownership and the selected partner.",
-    items: [
-      { icon: "positioning", title: "Ownership Requirements Brief", body: "A concise summary of the property, current operating context, priorities, reporting needs, open issues, and desired service scope." },
-      { icon: "prospects", title: "Partner Introduction", body: "A focused connection to a potential management partner based on known asset, market, and scope requirements." },
-      { icon: "economics", title: "Scope Comparison Support", body: "Commercial coordination around proposed responsibilities, exclusions, staffing, reporting, fees, transition, and decision points." },
-      { icon: "marketing", title: "Information Handoff", body: "Organization of available leases, contacts, vendors, operating records, property information, access, and open-item context." },
-      { icon: "tours", title: "Transition Coordination", body: "Working communication among ownership, the outgoing team when applicable, the selected partner, tenants, and relevant vendors." },
-      { icon: "execution", title: "Strategic Continuity", body: "An agreed connection between operating information and active Gala leasing, sale, capital, or development assignments." },
-    ],
-  },
-  related: {
+  sections: [
+    {
+      type: "strategy",
+      eyebrow: "The Operating Decision",
+      headline: "Start with the owner’s requirements—not a generic management package.",
+      introduction:
+        "Gala does not provide day-to-day property management in house. We help ownership frame the need, evaluate the fit and scope of a potential partner, and coordinate the transition. The selected partner contracts directly with ownership and remains responsible for the management services it performs.",
+      media: {
+        src: propertyManagementTransitionContext,
+        alt: "Anonymous property owner and operations partner organizing a commercial property management transition",
+        position: "center",
+      },
+      tracks: [
+        {
+          number: "01",
+          label: "Ownership Scope",
+          title: "Define what the property and owner require.",
+          body: "Asset type, tenancy, systems, geography, service expectations, reporting, budgeting, vendor authority, and open issues shape the operating brief.",
+          points: [],
+        },
+        {
+          number: "02",
+          label: "Partner Fit",
+          title: "Compare the team behind the proposal.",
+          body: "Relevant experience, coverage, staffing, systems, response model, scope boundaries, fees, and accountability determine whether a partner fits the assignment.",
+          points: [],
+        },
+        {
+          number: "03",
+          label: "Transition Record",
+          title: "Make the handoff operationally complete.",
+          body: "Leases, contacts, balances, vendors, access, property records, open work, and tenant communication need an organized transfer with responsibilities clear.",
+          points: [],
+        },
+      ],
+    },
+    {
+      type: "process",
+      id: "property-management-process",
+      eyebrow: "The Partnership Process",
+      headline: "Move from an operating need to a responsible handoff.",
+      introduction:
+        "Gala supports the commercial selection and transition process without taking over the management partner’s contracted responsibilities.",
+      steps: [
+        { number: "01", title: "Define", body: "Clarify the property, current arrangement, ownership priorities, service scope, reporting needs, open issues, and timing." },
+        { number: "02", title: "Evaluate", body: "Identify a potential partner and compare relevant experience, coverage, team, systems, responsibilities, exclusions, and fees." },
+        { number: "03", title: "Select + Transition", body: "Support ownership’s selection and organize records, access, vendors, tenant communication, open work, and onboarding milestones." },
+        { number: "04", title: "Stay Connected", body: "Maintain the agreed interface between operations and active Gala leasing, sale, capital, development, or ownership-strategy work." },
+      ],
+    },
+    {
+      type: "deliverables",
+      eyebrow: "Coordination + Handoff",
+      headline: "The information and decisions needed for a clear transition.",
+      introduction:
+        "The management agreement, staffing, accounting controls, vendor authority, compliance, and performance obligations are established directly between ownership and the selected partner.",
+      items: [
+        { icon: "positioning", title: "Ownership Requirements Brief", body: "The property, operating context, priorities, reporting needs, desired services, open issues, and timing in one concise brief." },
+        { icon: "economics", title: "Partner + Scope Comparison", body: "A commercial view of fit, team, responsibilities, exclusions, systems, reporting, fees, transition, and decision points." },
+        { icon: "marketing", title: "Transition + Information Plan", body: "A structured handoff of available leases, contacts, vendors, operating records, access, communications, and open items." },
+        { icon: "execution", title: "Strategic Interface", body: "A defined connection between property operations and active Gala brokerage, capital, development, or ownership work." },
+      ],
+    },
+  ],
+  relatedCapabilities: {
+    eyebrow: "Connected Gala Capabilities",
     headline: "Operations support the decisions ownership makes next.",
     introduction:
-      "Gala can connect the operating conversation to leasing, investment sales, capital, and development work when those decisions require shared context.",
+      "Connect the operating record to leasing, a future sale, capital planning, or development work when those decisions require shared context.",
     links: [
-      { label: "Brokerage", title: "Landlord Representation", body: "Connect leasing strategy and prospect activity to current property operations.", href: "/services/brokerage/landlord-representation" },
-      { label: "Investment Sales", title: "Investment Sales", body: "Prepare an ownership and operating record that supports a future disposition process.", href: "/services/investment-sales" },
-      { label: "Capital Markets", title: "Capital Strategy", body: "Align operating needs, reserves, capital work, and financing decisions.", href: "/services/capital-markets/capital-strategy" },
-      { label: "Development", title: "Development Oversight", body: "Coordinate ownership decisions when renovation, repositioning, or development work changes operations.", href: "/services/development-services/development-oversight" },
+      { label: "Brokerage", title: "Landlord Representation", body: "Connect leasing strategy and prospect activity to current operations.", href: "/services/brokerage/landlord-representation" },
+      { label: "Investment Sales", title: "Investment Sales", body: "Prepare an operating record for a future disposition process.", href: "/services/investment-sales" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Align operating needs, reserves, and capital decisions.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Development", title: "Development Oversight", body: "Coordinate ownership decisions when project work changes operations.", href: "/services/development-services/development-oversight" },
     ],
   },
   cta: {
     eyebrow: "Start With the Operating Need",
-    headline: "Let’s define the management scope before making the introduction.",
+    headline: "Define the management scope before choosing the partner.",
     body:
-      "Share the property, tenancy, current arrangement, operating priorities, reporting expectations, open issues, and timing. Gala will help frame the partner conversation and handoff.",
+      "Share the property, tenancy, current arrangement, operating priorities, reporting expectations, open issues, and timing. Gala will help frame the selection and transition conversation.",
+    actions: [
+      {
+        label: "Discuss Property Operations",
+        href: "/contact?inquiry=property-management",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
   },
-});
+};

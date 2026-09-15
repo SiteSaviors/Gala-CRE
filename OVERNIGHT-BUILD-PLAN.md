@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 05:08 CDT
+Last updated: 2026-09-15 05:17 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -153,7 +153,7 @@ Gate: Industrial retains its commercial substance at roughly half the original l
 
 ## Phase 4 — Rebuild every service and capability backpage
 
-Status: **In progress**
+Status: **Complete**
 
 Brokerage:
 
@@ -187,12 +187,12 @@ Capital Markets:
 
 Property Management:
 
-- [ ] Property Management overview
-- [ ] Property Management Partnership
+- [x] Property Management overview
+- [x] Property Management Partnership
 
 Each route must retain distinct clients, problems, decisions, and deliverables. Do not create pages by merely swapping nouns.
 
-Gate: Every advertised service route is concise, differentiated, visually complete, and free of unnecessary repetition.
+Gate: Every advertised service route is concise, differentiated, visually complete, and free of unnecessary repetition. **Passed.**
 
 ### Service imagery direction
 
@@ -436,3 +436,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no client case studies, quantified outcomes, testimonials, representation results, or approved assignment-specific imagery have been supplied; none blocks these routes because the copy stays within advisory, marketing, qualification, negotiation, and coordination boundaries.
 - Exact next action: Rebuild `/services/property-management` and `/services/property-management/property-management-partnership` through the compact system; add a distinct restrained generic overview hero, keep the partner-delivered boundary explicit, clarify ownership scope, manager selection, transition, and ongoing coordination, and verify that no copy implies in-house property management or guaranteed partner performance.
+
+### 2026-09-15 — Phase 4 compact Property Management group and phase gate
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `afce837`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Property Management overview and partnership content, shared service and capability renderers/styles, current operations imagery, relevant tests, and both live routes.
+- Gate: give the Property Management overview a distinct visual identity and rebuild the partnership route through the compact system while making ownership requirements, manager fit, scope comparison, transition, and ongoing coordination clear; state explicitly that Gala does not provide day-to-day management in house and does not assume the selected partner’s contracted responsibilities.
+- Completed: renamed the overview from “Property Management Partnership” to the clearer service-level “Property Management” while retaining the partnership as its dedicated capability; added a service-level hero and tightened the overview narrative; rebuilt the capability around three operating decisions, a four-step selection and transition process, four concrete coordination deliverables, related ownership workstreams, and one inquiry action. Removed the process-preview CTA, signal strip, repeated ownership essay, and overlapping six-item handoff list. The selected partner’s direct contract and responsibility are stated in both the decision and deliverables sections.
+- Imagery: retained the existing generic mechanical-systems operations image for the capability hero; generated a distinct commercial-property site-review hero for the overview and an owner/operations-partner transition context image for the capability. Both new images are optimized WebP assets and are not represented as Gala properties, clients, completed work, or a named management partner.
+- Files and routes changed: `src/assets/property-management-overview.webp`, `src/assets/property-management-transition-context.webp`, `src/content/capitalCapabilityPages.ts`, `src/content/services.ts`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/property-management` and `/services/property-management/property-management-partnership`.
+- Verification: the overview changed from a 3,343px image-less route to a 3,151px desktop visual route; the partnership page reduced from 6,937px to 4,514px desktop. At 834px the routes measure 3,281px and 5,273px; at 390px they measure 3,965px and 6,874px. Both routes render with loaded imagery, contained headings, the correct `/contact?inquiry=property-management` action, zero horizontal overflow, and zero current browser-console errors. Targeted suite: 44/44 passed. Full suite: 108/108 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings. With Property Management complete, every Phase 4 service overview and advertised capability route now uses the concise system or an already-approved compact overview.
+- Intended commit: `refactor: compact Property Management service group`.
+- Remaining working tree: expected clean after commit.
+- Blockers: no approved management-partner identity, executed partnership terms, direct service territory, operating standards, case studies, quantified outcomes, testimonials, or assignment-specific imagery have been supplied. None blocks this partner-led route because no named partner, direct-management claim, performance promise, or client outcome is published.
+- Exact next action: Start Phase 5 by auditing `/services`, the desktop mega-menu, mobile service navigation, footer service links, related-capability links, and service inquiry CTAs against the shared route matrix; then implement one consistent service-index and conversion-path checkpoint without altering the locked homepage or unrelated pages.

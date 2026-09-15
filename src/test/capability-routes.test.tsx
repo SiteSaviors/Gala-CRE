@@ -175,6 +175,27 @@ describe("advertised capability route matrix", () => {
       .toBe(capitalPages.length);
   });
 
+  it("keeps the Property Management partnership compact and explicitly partner-led", () => {
+    const page = capabilityPageByPath["/services/property-management/property-management-partnership"];
+    const strategy = page.sections.find((section) => section.type === "strategy");
+
+    expect(page.compact).toBe(true);
+    expect(page.hero.signals).toEqual([]);
+    expect(page.hero.actions).toHaveLength(1);
+    expect(page.hero.actions[0].href).toBe("/contact?inquiry=property-management");
+    expect(page.sections.map((section) => section.type)).toEqual([
+      "strategy",
+      "process",
+      "deliverables",
+    ]);
+    expect(strategy?.tracks).toHaveLength(3);
+    expect(page.sections.find((section) => section.type === "process")?.steps).toHaveLength(4);
+    expect(page.sections.find((section) => section.type === "deliverables")?.items).toHaveLength(4);
+    expect(page.relatedCapabilities.links).toHaveLength(4);
+    expect(strategy?.introduction).toMatch(/does not provide day-to-day property management in house/i);
+    expect(strategy?.introduction).toMatch(/selected partner contracts directly with ownership/i);
+  });
+
   it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {
     const header = render(
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,

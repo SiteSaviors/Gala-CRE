@@ -163,6 +163,27 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Property Management Partnership").length).toBeGreaterThan(0);
   });
 
+  it("presents Property Management as a partner-led service overview", () => {
+    const { container } = render(
+      <MemoryRouter initialEntries={["/services/property-management"]}>
+        <Routes>
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Property Management", level: 1 })).toBeInTheDocument();
+    expect(screen.getAllByText(/partner-led/i).length).toBeGreaterThan(0);
+    expect(container.querySelector(".gala-inner-hero__bg")).toHaveAttribute(
+      "src",
+      expect.stringMatching(/property-management-overview\.webp$/),
+    );
+    expect(screen.getByRole("link", { name: /Property Management Partnership/i })).toHaveAttribute(
+      "href",
+      "/services/property-management/property-management-partnership",
+    );
+  });
+
   it("connects the Company page to the approved Team route", () => {
     const company = renderPage(<Company />, "/company");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
@@ -395,6 +416,31 @@ describe("Gala CRE public pages", () => {
       "/services/brokerage/landlord-representation"
     );
     expect(screen.queryByText(/pending client|client approval/i)).not.toBeInTheDocument();
+  });
+
+  it("renders a concise partner-led Property Management journey", () => {
+    render(
+      <MemoryRouter initialEntries={["/services/property-management/property-management-partnership"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Property Management Partnership", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /operations professional reviewing building mechanical systems/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /owner and operations partner organizing/i })).toBeInTheDocument();
+    expect(screen.getByText(/does not provide day-to-day property management in house/i)).toBeInTheDocument();
+    expect(screen.getByText(/selected partner contracts directly with ownership/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Start with the owner’s requirements—not a generic management package." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Move from an operating need to a responsible handoff." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The information and decisions needed for a clear transition." })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /See the Partnership Process/i })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Discuss Property Operations/i })[0]).toHaveAttribute(
+      "href",
+      "/contact?inquiry=property-management",
+    );
+    expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
   it("renders a distinct editorial journey for Industrial Investment Sales", () => {

@@ -2,6 +2,7 @@ import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
 import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaDevelopCapability from "@/assets/gala-develop-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
+import propertyManagementOverview from "@/assets/property-management-overview.webp";
 
 export type ServiceSlug =
   | "brokerage"
@@ -258,12 +259,12 @@ export const services: Service[] = [
   },
   {
     slug: "property-management",
-    name: "Property Management Partnership",
+    name: "Property Management",
     brandName: "Property Management",
     eyebrow: "Partner-Led Operations Support",
-    summary: "A partner-led pathway focused on property performance and a more coordinated ownership experience.",
+    summary: "A partner-led path from ownership requirements to coordinated day-to-day operations.",
     description:
-      "Gala CRE Group connects commercial property owners with coordinated, partner-led management support designed to protect the continuity between a transaction and day-to-day operations.",
+      "Gala helps commercial property owners define the operating requirement, evaluate an appropriate management partner, coordinate the transition, and keep property operations connected to broader leasing, capital, and ownership decisions.",
     capabilities: [
       {
         label: "Property Management Partnership",
@@ -276,7 +277,8 @@ export const services: Service[] = [
         ],
       },
     ],
-    capabilitiesHeadline: "A coordinated path from transaction to operations.",
+    capabilitiesHeadline: "Define the need. Select the partner. Preserve the ownership context.",
+    image: propertyManagementOverview,
     audience: "Commercial property owners",
     approvalStatus: "draft",
   },
