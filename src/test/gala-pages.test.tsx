@@ -837,7 +837,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
     expect(screen.getByText("July 29, 2026")).toBeInTheDocument();
     expect(screen.getAllByText("Approx. 3.3 acres").length).toBeGreaterThan(0);
-    expect(screen.getByText(/Gala Real Estate Advisors listing involvement documented/i)).toBeInTheDocument();
+    expect(screen.getByText(/Gala Real Estate Advisors.*listing involvement/i)).toBeInTheDocument();
+    expect(screen.getByText(/individual advisor credit remains unassigned/i)).toBeInTheDocument();
+    expect(screen.getByText(/relationship to 10414 remains unconfirmed/i)).toBeInTheDocument();
     expect(screen.queryByText("$2,500,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
     expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();

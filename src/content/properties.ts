@@ -1554,9 +1554,9 @@ export const properties: Property[] = [
     externalLinks: [],
     gallery: [],
     listingPage: {
-      headline: "A completed commercial land transaction on Chapel Hill Road.",
+      headline: "A completed commercial land transaction in Morrisville.",
       lead:
-        "Closed July 29, 2026, the supplied record describes approximately 3.3 acres across two parcels in Morrisville. Pricing and MLS photography are intentionally not published.",
+        "Closed July 29, 2026, the supplied record identifies approximately 3.3 acres across two commercial parcels on Chapel Hill Road.",
       overviewEyebrow: "Completed Transaction",
       keyFacts: [
         { label: "Transaction status", value: "Closed" },
@@ -1564,30 +1564,24 @@ export const properties: Property[] = [
         { label: "Site area", value: "Approx. 3.3 acres" },
         { label: "Parcel count", value: "Two per supplied record" },
       ],
-      highlights: [
-        "Gala Real Estate Advisors listing involvement documented by the supplied MLS display",
-        "Two parcels identified by the supplied MLS display",
-        "One-story improvement built in 1920 reported by the supplied record",
-        "No transaction price or MLS photography published",
-      ],
+      highlights: [],
       information: {
         intro: {
           eyebrow: "Property Record",
-          title: "A concise record of the completed assignment.",
+          title: "Verified property facts, separated from unresolved terms.",
           body:
-            "The supplied MLS display supports the address, closing date, approximate acreage, parcel count, and Gala listing involvement. Conflicting price and combined-address information remain outside the public presentation.",
+            "The supplied MLS display supports the profile below and documents Gala Real Estate Advisors' listing involvement.",
         },
         groups: [
           {
             eyebrow: "Physical Profile",
-            title: "Two commercial parcels totaling approximately 3.3 acres.",
+            title: "A two-parcel commercial land record.",
             body:
-              "The transaction record identifies two parcels and a one-story improvement at the marketed address. Facts shown here reflect the supplied record and are not a statement of current condition or availability.",
+              "The record identifies approximately 3.3 acres and an existing one-story improvement at the marketed address.",
             facts: [
               { label: "Site area", value: "Approx. 3.3 acres" },
               { label: "Parcel count", value: "Two" },
-              { label: "Improvement", value: "One-story structure per supplied record" },
-              { label: "Year built", value: "1920 per supplied record" },
+              { label: "Improvement", value: "One story / built 1920 per supplied record" },
               { label: "Property position", value: "Commercial use cited in former marketing" },
               { label: "Building area", value: "Not published" },
             ],
@@ -1598,21 +1592,20 @@ export const properties: Property[] = [
         eyebrow: "Transaction Record",
         title: "What is confirmed—and what remains unpublished.",
         conditions: [
-          { label: "Status", value: "Closed July 29, 2026" },
-          { label: "Off-market record", value: "July 31, 2026 in the supplied MLS display" },
+          { label: "Status", value: "Closed July 29, 2026; off market July 31, 2026" },
           { label: "Transaction price", value: "Not published pending confirmation" },
+          { label: "Representation", value: "Gala listing involvement is documented; individual advisor credit remains unassigned" },
+          { label: "Record scope", value: "Limited to 10416; any relationship to 10414 remains unconfirmed" },
           { label: "Photography", value: "MLS imagery not republished" },
-          { label: "Address presentation", value: "This record is limited to 10416 Chapel Hill Road" },
         ],
       },
       location: {
         eyebrow: "Location & Context",
         title: "A completed transaction in Morrisville, North Carolina.",
         body:
-          "The map identifies the recorded street address for historical context. It does not represent current availability, ownership, tenancy, or development status.",
+          "The map records the street address for transaction context; it does not represent current availability or development status.",
         points: [
           "10416 Chapel Hill Road, Morrisville, North Carolina 27560",
-          "Wake County",
           "Closed July 29, 2026",
         ],
         mapEmbedUrl:
@@ -1625,16 +1618,9 @@ export const properties: Property[] = [
           eyebrow: "Work With Gala CRE",
           title: "Discuss a comparable commercial assignment.",
           body:
-            "Confidential transaction terms are not published. Connect with Gala CRE to discuss a similar land, disposition, or acquisition requirement.",
+            "Connect with Gala CRE about a similar land, disposition, or acquisition requirement.",
         },
-        items: [
-          {
-            title: "Similar-property conversation",
-            description: "Discuss selling, acquiring, or evaluating a comparable commercial property with Gala CRE.",
-            actionLabel: "Discuss a Similar Property",
-            href: "/contact?property=10416-chapel-hill-road&topic=similar-property",
-          },
-        ],
+        items: [],
       },
       disclosure:
         "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and property-use details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and development information are not published. This page is limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction.",

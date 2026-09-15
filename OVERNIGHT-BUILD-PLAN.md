@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:51 CDT
+Last updated: 2026-09-15 03:58 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -117,7 +117,7 @@ Gate: Lackey feels like a premium brokerage listing and can be evaluated within 
 
 ## Phase 2 — Convert every property page
 
-Status: **In progress**
+Status: **Complete**
 
 Active listings:
 
@@ -130,9 +130,9 @@ Closed transaction variants:
 
 - [x] 802 Bragg Boulevard
 - [x] 202 North Main Street
-- [ ] 10416 Chapel Hill Road
+- [x] 10416 Chapel Hill Road
 
-Gate: Every property route is concise, property-specific, media-rich where approved media exists, and connected to the correct advisor and inquiry context. Unknown facts remain hidden or qualified, and closed records cannot be confused with active inventory.
+Gate: Every property route is concise, property-specific, media-rich where approved media exists, and connected to the correct advisor and inquiry context. Unknown facts remain hidden or qualified, and closed records cannot be confused with active inventory. **Passed.**
 
 ## Phase 3 — Establish the premium service-page standard
 
@@ -353,3 +353,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: Gala's exact transaction role, advisor credit, price classification or closing consideration, legal parcel schedule, and approved non-MLS photography remain client inputs and stay unpublished.
 - Exact next action: Audit and tighten `/properties/10416-chapel-hill-road` as the final compact non-photographic closed record, preserving the July 29, 2026 closing, approximately 3.3 acres, two-parcel record, and documented Gala listing involvement while keeping disputed economics, the separate 10414 relationship, advisor credit, building area, and restricted MLS photography unresolved; verify the transaction artwork, map, disclosure, and similar-property inquiry at desktop and mobile sizes, then run the Phase 2 full gate across all property routes.
+
+### 2026-09-15 — Phase 2 10416 Chapel Hill Road and property-system gate
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `c31e972`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, the 10416 Chapel Hill record in `PROPERTY-DATA-REGISTER.md`, current property data, shared completed-transaction artwork, compact renderer/styles, all property routes, and property/page/video tests.
+- Gate: complete a concise non-photographic 10416 transaction record that preserves the July 29, 2026 closing, approximately 3.3 acres, two-parcel profile, and documented Gala listing involvement while isolating disputed economics, the unresolved 10414 relationship, individual advisor credit, building area, and restricted MLS photography; then prove all eight property routes remain responsive and functional.
+- Completed: shortened the transaction thesis; removed the repetitive highlight list; combined improvement stories/year and closing/off-market dates; clarified that Gala listing involvement is documented while individual advisor credit remains unassigned; explicitly limited the record to 10416 while the 10414 relationship remains unconfirmed; shortened the map and closing copy; and removed the duplicate similar-property document card so the page ends with one focused conversion action.
+- Files and routes changed: `src/content/properties.ts`, `src/test/gala-pages.test.tsx`, and this ledger; `/properties/10416-chapel-hill-road`.
+- Verification: 37/37 targeted page/property/video tests passed. At 1440px, 10416 reduced from 5,716px baseline to 4,843px; at 390px, from 6,981px to 6,113px, including the global footer. The transaction graphic, closing date, approximate acreage, parcel count, Gala listing involvement, live map, disclosure, and `/contact?property=10416-chapel-hill-road` inquiry route are present; `$2,500,000` and `$1.8M` remain absent; no gallery is implied. The Phase 2 browser gate rendered all eight property routes at 1440px, 834px, and 390px with correct titles, H1s, primary media, property-specific inquiry links, live map modules, zero horizontal overflow, and zero page errors. Gallery selectors expose 6 Lackey views, 6 Church views, 5 Family Farm views, 5 Lexington views, and 3 Bragg views; the three property-video routes remain present. Full suite: 100/100 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Commit: `refactor: complete compact property transaction system` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: the combined 10414/10416 structure, transaction economics, preferred individual credit, building area, and approved non-MLS photography remain client inputs. All earlier property-specific blockers remain listed above and continue to be omitted or qualified.
+- Exact next action: Start Phase 3 by live-auditing `/services/investment-sales/industrial` against the 3,200–4,200px target, then rebuild it through the short image-led hero → focused industrial value → compact process → four deliverables → related capabilities → concise CTA spine without changing the locked homepage or inventing case-study claims.
