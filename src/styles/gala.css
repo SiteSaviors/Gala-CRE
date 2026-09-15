@@ -1604,6 +1604,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-listing-compact__video .gala-commercial-listing__video-frame{box-shadow:none}
 .gala-listing-compact__close{scroll-margin-top:108px;padding:82px 0 44px;background:#f7f6f1}
 .gala-listing-compact__close-grid{display:grid;grid-template-columns:minmax(300px,.62fr) minmax(0,1fr);gap:clamp(44px,7vw,96px);align-items:start}
+.gala-listing-compact__close-grid--single{grid-template-columns:minmax(0,760px)}
 .gala-listing-compact__close h2{max-width:14ch;font-size:clamp(36px,4.1vw,56px)}
 .gala-listing-compact__close-grid>div:first-child>p{max-width:56ch;margin:18px 0 26px;color:#65645e;font-size:12px;line-height:1.7}
 .gala-listing-compact__documents{border-top:1px solid #cfcec7}

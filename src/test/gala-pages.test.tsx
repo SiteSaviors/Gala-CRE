@@ -815,6 +815,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("3,333 SF").length).toBeGreaterThan(0);
     expect(screen.getByText("Transaction price", { exact: true })).toBeInTheDocument();
     expect(screen.getByText("Not published pending confirmation")).toBeInTheDocument();
+    expect(screen.getByText("Gala's exact transaction role and advisor credit are not yet published")).toBeInTheDocument();
     expect(screen.queryByText("$825,000")).not.toBeInTheDocument();
     expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();

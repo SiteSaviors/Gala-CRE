@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:48 CDT
+Last updated: 2026-09-15 03:51 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -129,7 +129,7 @@ Active listings:
 Closed transaction variants:
 
 - [x] 802 Bragg Boulevard
-- [ ] 202 North Main Street
+- [x] 202 North Main Street
 - [ ] 10416 Chapel Hill Road
 
 Gate: Every property route is concise, property-specific, media-rich where approved media exists, and connected to the correct advisor and inquiry context. Unknown facts remain hidden or qualified, and closed records cannot be confused with active inventory.
@@ -340,3 +340,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: final consideration, closing date, preferred Gala transaction credit, approved closing announcement details, and current ownership/operating information remain client inputs and stay unpublished.
 - Exact next action: Audit and tighten `/properties/202-north-main-street` as a compact non-photographic closed record, preserving the July 30, 2026 date and verified physical facts while keeping the displayed MLS amount, Gala's exact transaction role, advisor credit, and restricted MLS photography unpublished; verify the completed-transaction artwork, map, disclosure, and similar-property inquiry at desktop and mobile sizes.
+
+### 2026-09-15 — Phase 2 202 North Main Street closed record
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `bfc24d0`, clean.
+- Source of truth checked: the goal objective, `AGENTS.md`, this ledger, the 202 North Main record in `PROPERTY-DATA-REGISTER.md`, the client-supplied MLS facts and restrictions, shared completed-transaction artwork, compact renderer/styles, and property/page tests.
+- Gate: make the July 30, 2026 closing and verified physical profile feel complete without approved photography, while withholding the ambiguous `$825,000` MLS display, Gala's exact role, advisor credit, and restricted MLS media.
+- Completed: shortened the transaction thesis and physical profile; removed the repetitive highlight list; combined building stories/year; concentrated economics, representation, and photography limitations in the transaction table; shortened the location copy; removed the duplicate similar-property document card; and added a reusable single-column close state so records without public documents end with one intentional CTA rather than an empty second column.
+- Files and routes changed: `src/content/properties.ts`, `src/components/properties/CommercialListingPage.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, and this ledger; `/properties/202-north-main-street` plus the no-document close layout shared by partial records.
+- Verification: 36/36 targeted page/property tests passed, including explicit protection for the unpublished transaction amount and unassigned Gala role/advisor. Desktop height reduced from 5,783px baseline to 4,776px; mobile from 6,958px to 6,049px, including the global footer. The branded completed-transaction graphic is announced accurately and no gallery is implied; the July 30, 2026 date, physical facts, live map, disclosure, and `/contact?property=202-north-main-street` inquiry route are present; `$825,000` remains absent; the single-column close renders cleanly; no horizontal overflow or page-specific console errors appear at 1440px or 390px.
+- Commit: `refactor: tighten North Main transaction record` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: Gala's exact transaction role, advisor credit, price classification or closing consideration, legal parcel schedule, and approved non-MLS photography remain client inputs and stay unpublished.
+- Exact next action: Audit and tighten `/properties/10416-chapel-hill-road` as the final compact non-photographic closed record, preserving the July 29, 2026 closing, approximately 3.3 acres, two-parcel record, and documented Gala listing involvement while keeping disputed economics, the separate 10414 relationship, advisor credit, building area, and restricted MLS photography unresolved; verify the transaction artwork, map, disclosure, and similar-property inquiry at desktop and mobile sizes, then run the Phase 2 full gate across all property routes.

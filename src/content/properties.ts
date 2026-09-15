@@ -1431,9 +1431,9 @@ export const properties: Property[] = [
     externalLinks: [],
     gallery: [],
     listingPage: {
-      headline: "A completed 3,333-square-foot commercial transaction in Fuquay-Varina.",
+      headline: "A completed commercial transaction in Fuquay-Varina.",
       lead:
-        "Closed July 30, 2026, this transaction involved a two-story commercial property on approximately 0.23 acres. Pricing and MLS photography are intentionally not published.",
+        "Closed July 30, 2026, the supplied record identifies a 3,333-square-foot, two-story commercial property on approximately 0.23 acres.",
       overviewEyebrow: "Completed Transaction",
       keyFacts: [
         { label: "Transaction status", value: "Closed" },
@@ -1441,30 +1441,24 @@ export const properties: Property[] = [
         { label: "Building area", value: "3,333 SF" },
         { label: "Site area", value: "Approx. 0.23 acres" },
       ],
-      highlights: [
-        "Commercial / retail property classification",
-        "Two-story building constructed in 1958 per the supplied record",
-        "DC-2 zoning reported by the supplied MLS record",
-        "No transaction price or MLS photography published",
-      ],
+      highlights: [],
       information: {
         intro: {
           eyebrow: "Property Record",
-          title: "Verified physical facts, separated from confidential terms.",
+          title: "Verified physical facts, separated from unconfirmed terms.",
           body:
-            "The supplied MLS display supports a concise property profile. It does not clearly identify the displayed price as closing consideration, so no price is represented here.",
+            "The supplied MLS display supports the profile below, but does not establish its displayed amount as closing consideration.",
         },
         groups: [
           {
             eyebrow: "Physical Profile",
-            title: "A two-story commercial building on North Main Street.",
+            title: "A North Main Street commercial property.",
             body:
-              "The property record identifies a 3,333-square-foot building on approximately 0.23 acres. All facts describe the property at the time of the supplied record and are not a statement of current condition or availability.",
+              "The record identifies a 3,333-square-foot building on approximately 0.23 acres.",
             facts: [
               { label: "Building area", value: "3,333 SF" },
               { label: "Site area", value: "Approx. 0.23 acres" },
-              { label: "Stories", value: "Two" },
-              { label: "Year built", value: "1958 per supplied record" },
+              { label: "Building profile", value: "Two stories / built 1958 per supplied record" },
               { label: "Reported zoning", value: "DC-2" },
               { label: "Parcel presentation", value: "Former marketing referenced two parcels" },
             ],
@@ -1477,19 +1471,17 @@ export const properties: Property[] = [
         conditions: [
           { label: "Status", value: "Closed July 30, 2026" },
           { label: "Transaction price", value: "Not published pending confirmation" },
+          { label: "Representation", value: "Gala's exact transaction role and advisor credit are not yet published" },
           { label: "Photography", value: "MLS imagery not republished" },
-          { label: "Property facts", value: "Based on the client-supplied MLS display" },
-          { label: "Current availability", value: "Not available; completed transaction" },
         ],
       },
       location: {
         eyebrow: "Location & Context",
         title: "A completed transaction in Fuquay-Varina, North Carolina.",
         body:
-          "The map identifies the recorded street address for historical context. It does not represent current availability, ownership, tenancy, or operating conditions.",
+          "The map records the street address for transaction context; it does not represent current availability or operating conditions.",
         points: [
           "202 North Main Street, Fuquay-Varina, North Carolina 27526",
-          "Wake County",
           "Closed July 30, 2026",
         ],
         mapEmbedUrl:
@@ -1502,16 +1494,9 @@ export const properties: Property[] = [
           eyebrow: "Work With Gala CRE",
           title: "Discuss a comparable commercial assignment.",
           body:
-            "Confidential transaction terms are not published. Connect with Gala CRE to discuss a similar property, disposition, or acquisition requirement.",
+            "Connect with Gala CRE about a similar property, disposition, or acquisition requirement.",
         },
-        items: [
-          {
-            title: "Similar-property conversation",
-            description: "Discuss selling, acquiring, or evaluating a comparable commercial property with Gala CRE.",
-            actionLabel: "Discuss a Similar Property",
-            href: "/contact?property=202-north-main-street&topic=similar-property",
-          },
-        ],
+        items: [],
       },
       disclosure:
         "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and zoning details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and operating information are not published.",

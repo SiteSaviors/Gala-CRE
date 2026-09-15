@@ -341,7 +341,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
 
         {hasClosingContent ? (
           <section className="gala-listing-compact__close" id="listing-documents">
-            <div className="gala-shell gala-listing-compact__close-grid">
+            <div className={`gala-shell gala-listing-compact__close-grid${documentItems.length ? "" : " gala-listing-compact__close-grid--single"}`}>
               <div>
                 <div className="gala-kicker gala-kicker--dark">
                   {page.documents?.intro.eyebrow ?? (isClosedTransaction ? "Completed Transaction" : "Property Inquiry")}
