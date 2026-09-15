@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
-import heroVideo from "@/assets/GALA-CRE-HERO-LOOP-720.mp4";
+import heroVideo from "@/assets/GALA-CRE-HERO-WEB.mp4";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
 import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
 import PageMeta from "@/components/site/PageMeta";
