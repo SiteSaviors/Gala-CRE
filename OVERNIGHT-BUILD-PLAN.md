@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:25 CDT
+Last updated: 2026-09-15 03:42 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -123,7 +123,7 @@ Active listings:
 
 - [x] 5047 Yadkin Road
 - [x] 611 & 703 Church Street
-- [ ] 5911 Family Farm Road
+- [x] 5911 Family Farm Road
 - [ ] Lexington Townhome Site (`/properties/1111-brown-street`)
 
 Closed transaction variants:
@@ -301,3 +301,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: the second legal address (703 versus 711), parcel IDs, surveyed acreage, combined-sale requirement, approval/site-plan record, zoning confirmation, and conditions remain client inputs and stay qualified.
 - Exact next action: Audit and tighten `/properties/5911-family-farm-road` within the compact system, prioritizing Leigh Roach's advisor assignment, the residential-land thesis, property-condition/private-road diligence, five-image selector, video/map integration, document paths, and mobile scan length without adding unsupported parcel or utility claims.
+
+### 2026-09-15 — Phase 2 Family Farm Road compact listing
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `9c7b3cc`, clean.
+- Source of truth checked: the goal objective, `AGENTS.md`, this ledger, Family Farm's record in `PROPERTY-DATA-REGISTER.md`, current listing data, five approved aerials, local web video, Leigh Roach's client-confirmed assignment, shared renderer, and property/video/page tests.
+- Gate: present the approximately 2.10-acre residential opportunity and Leigh Roach immediately, while keeping the parcel, private-road, existing residence, well/septic, zoning, and future-use questions explicit and easy to scan.
+- Completed: tightened the summary, opportunity thesis, highlights, information tables, buyer-verification conditions, media copy, location copy, and document descriptions; reduced overlapping acreage, zoning, utility, and potential-use statements; combined related facts without weakening the unsafe-residence or as-is warnings. The compact page retains five distinct selectable media views, the property video, live map, current price, Leigh's email, source links, diligence request, inquiry context, and related listings.
+- Files and routes changed: `src/content/properties.ts` and this ledger; `/properties/5911-family-farm-road`.
+- Verification: 37/37 targeted property/video/page tests passed. Desktop height reduced from 8,626px baseline to 5,361px; mobile from 10,273px to 8,180px, including the global footer. All five selector buttons change the primary image in place; the MP4 source remains absent until the player nears the viewport; the live map, `$995,000`, Leigh Roach, `Leigh@galacregroup.com`, documents, and `/contact?property=5911-family-farm-road` inquiry path are present; no horizontal overflow or page-specific console errors at 1440px or 390px.
+- Commit: `refactor: tighten Family Farm listing journey` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: legal parcel IDs, survey, municipal zoning confirmation, private-road rights and maintenance obligations, existing residence/well/septic condition, and additional document-publication choices remain client inputs and stay qualified.
+- Exact next action: Audit and tighten `/properties/1111-brown-street` within the compact system, preserving the proposed 58-townhome thesis and historical-approval context while keeping price, gross acreage, approval currency/transferability, and third-party document rights unresolved; verify the six-image selector, portrait video, map, documents, Gaurang Gala, and inquiry context at desktop and mobile sizes.

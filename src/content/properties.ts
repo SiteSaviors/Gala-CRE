@@ -777,9 +777,9 @@ export const properties: Property[] = [
     heroImage: familyFarm01,
     gallery: [],
     imagePosition: "center 48%",
-    summary: "Two-lot residential land offering in Morrisville with VLDR zoning and an existing tear-down structure.",
+    summary: "Approximately 2.10 acres marketed as a two-lot residential land offering in Morrisville, with an existing residence conveying at no value.",
     overview:
-      "The public MLS and commercial offering market approximately 2.10 acres in Morrisville for a custom estate, builder, investor, or potential residential development path, subject to buyer verification and Town of Morrisville approval.",
+      "The public offering positions approximately 2.10 acres for estate, builder, investor, or residential development evaluation, subject to a verified land record and local approval.",
     highlights: [
       "Approximately 2.10 acres in Morrisville",
       "Two lots represented by the public MLS marketing",
@@ -826,9 +826,9 @@ export const properties: Property[] = [
     ],
     advisorId: "leigh-roach",
     listingPage: {
-      headline: "Approximately 2.10 acres for residential use and development evaluation.",
+      headline: "Approximately 2.10 acres in an established Morrisville setting.",
       lead:
-        "A Morrisville land offering marketed across two lots with reported VLDR zoning, an existing well and septic system, and multiple residential evaluation paths subject to local approval.",
+        "Marketed across two lots for estate, builder, or residential development consideration; legal parcels, access, utilities, site condition, and intended use require verification.",
       overviewEyebrow: "The Opportunity",
       keyFacts: [
         { label: "Asking price", value: "$995,000" },
@@ -837,45 +837,42 @@ export const properties: Property[] = [
         { label: "Existing improvement", value: "Tear-down / do not enter" },
       ],
       highlights: [
-        "Two-lot composition represented by the current MLS marketing",
-        "VLDR zoning reported by the public MLS record",
-        "Existing well and septic system reported by the offering",
-        "Custom estate, builder, investor, and residential development paths cited for evaluation",
+        "Two-lot composition represented by the current MLS marketing; legal parcels require confirmation",
+        "Reported VLDR zoning frames a low-density residential evaluation",
+        "Private-road access, existing well and septic, and the unsafe residence require property-specific diligence",
       ],
       information: {
         intro: {
           eyebrow: "Property Information",
           title: "Separate the current record from future potential.",
           body:
-            "The marketed facts describe the property today. Buildability, subdivision, utility capacity, and development potential require direct confirmation with the governing authorities and buyer advisers.",
+            "The offering describes the property today. Buildability, subdivision, utility capacity, and future use require direct confirmation.",
         },
         groups: [
           {
             eyebrow: "Current Property",
-            title: "An acreage offering with an existing residential structure.",
+            title: "Land and existing conditions.",
             body:
-              "The public offering describes approximately 2.10 acres, an existing residence that conveys at no value, and an existing well and septic system. The residence is represented as unsafe and must not be entered.",
+              "The public offering describes approximately 2.10 acres with a residence conveying at no value and reported well and septic systems.",
             facts: [
               { label: "Published area", value: "Approx. 2.10 acres" },
               { label: "Offering composition", value: "Two lots per MLS marketing" },
               { label: "Existing residence", value: "Tear-down; conveys at no value" },
-              { label: "Site access", value: "Shown by appointment only" },
-              { label: "Water", value: "Existing well reported by offering" },
-              { label: "Sewer", value: "Existing septic system reported by offering" },
+              { label: "Property access", value: "By appointment; residence must not be entered" },
+              { label: "Water / sewer", value: "Existing well and septic reported; condition unverified" },
             ],
           },
           {
             eyebrow: "Planning Review",
             title: "Potential is conditional on the verified land record.",
             body:
-              "Public marketing cites custom-estate, builder, investor, and residential development possibilities. Buyers should confirm the legal parcel schedule, VLDR requirements, setbacks, access, utility options, subdivision standards, environmental conditions, and intended use before relying on a development concept.",
+              "Public marketing cites residential possibilities. Any program depends on confirmed parcels, access, utilities, site conditions, and approval requirements.",
             facts: [
               { label: "Reported zoning", value: "VLDR" },
               { label: "Jurisdiction", value: "Town of Morrisville / Wake County review" },
-              { label: "Road frontage", value: "Private-road context reported by MLS" },
-              { label: "Road surface", value: "Dirt / gravel reported by MLS" },
-              { label: "Subdivision", value: "Subject to municipal verification and approval" },
-              { label: "Utility capacity", value: "Buyer to verify existing and future service" },
+              { label: "Road context", value: "Private dirt / gravel road reported by MLS" },
+              { label: "Access obligations", value: "Rights and maintenance responsibilities require confirmation" },
+              { label: "Future program", value: "Subject to municipal verification and approval" },
             ],
           },
         ],
@@ -884,11 +881,10 @@ export const properties: Property[] = [
         eyebrow: "Buyer Verification",
         title: "Confirm the property record before defining the program.",
         conditions: [
-          { label: "Published offering", value: "Approximately 2.10 acres offered at $995,000" },
-          { label: "Lot record", value: "MLS marketing references two lots; confirm the legal parcel schedule" },
-          { label: "Existing improvements", value: "Residence conveys at no value and is represented as unsafe to enter" },
-          { label: "Sale condition", value: "Marketed as-is, where-is on the public commercial offering" },
-          { label: "Future use", value: "Buildability, subdivision, development, and utilities remain subject to buyer and authority review" },
+          { label: "Offering", value: "$995,000 for approximately 2.10 marketed acres" },
+          { label: "Land record", value: "Confirm the two-lot representation with a legal parcel schedule and survey" },
+          { label: "Physical condition", value: "Residence conveys at no value; well, septic, and site conditions remain unverified" },
+          { label: "Access & use", value: "As-is offering; confirm private-road rights, maintenance, utilities, and all approvals" },
         ],
       },
       gallery: {
@@ -896,7 +892,7 @@ export const properties: Property[] = [
           eyebrow: "Site & Surroundings",
           title: "Aerial context with the marketed property clearly identified.",
           body:
-            "The supplied aerials provide orientation to the property and surrounding residential context. Boundary lines are approximate marketing graphics and are not a survey.",
+            "Five supplied aerials show the property and surrounding residential context. Approximate outlines are not a survey.",
         },
         items: [
           {
@@ -931,7 +927,7 @@ export const properties: Property[] = [
         eyebrow: "Property Film",
         title: "See the Family Farm Road setting from above.",
         body:
-          "A web-optimized aerial overview provides additional orientation to the property and surrounding Morrisville setting. Approximate marketing outlines are not a survey.",
+          "A web-optimized aerial provides additional site and neighborhood context; approximate outlines are not a survey.",
         sourceUrl: familyFarmTour,
         posterImage: familyFarm01,
         ariaLabel: "Play the aerial property video for 5911 Family Farm Road",
@@ -940,10 +936,9 @@ export const properties: Property[] = [
         eyebrow: "Location & Access",
         title: "A Morrisville location near the Research Triangle employment corridor.",
         body:
-          "The public offering cites convenient access to Research Triangle Park, RDU Airport, I-540, shopping, and dining. Buyers should verify legal access, private-road obligations, parcel configuration, traffic routes, and all measured distances independently.",
+          "MLS directions route access from McCrimmon Parkway through Liberty Rose Drive. Legal access, private-road obligations, and measured distances require independent confirmation.",
         points: [
           "5911 Family Farm Road, Morrisville, North Carolina",
-          "Wake County",
           "Accessed from McCrimmon Parkway via Liberty Rose Drive according to MLS directions",
         ],
         mapEmbedUrl:
@@ -956,26 +951,26 @@ export const properties: Property[] = [
           eyebrow: "Documents & Diligence",
           title: "Start with the offering, then verify the land record.",
           body:
-            "Review the current public marketing and supplied aerials, then request the parcel, zoning, utility, access, and property-condition materials relevant to the intended use.",
+            "Review the public offering and media, then request the records needed to evaluate the intended use.",
         },
         items: [
           {
             title: "Current commercial offering",
-            description: "Review the active LoopNet marketing, asking price, acreage, and published sale conditions.",
+            description: "Review the active LoopNet marketing and published sale conditions.",
             actionLabel: "Open LoopNet Listing",
             href: "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/",
             external: true,
           },
           {
             title: "Property media package",
-            description: "View the supplied NestVisions photography and available property-marketing media.",
+            description: "View the supplied photography and property-marketing media.",
             actionLabel: "Open Media Package",
             href: "https://media.nestvisions.com/listings/019f6824-ff78-7307-b536-803ab910a9ca/download-center",
             external: true,
           },
           {
             title: "Land and authority records",
-            description: "Request the legal parcel schedule and available zoning, survey, access, utility, septic, well, and condition information.",
+            description: "Request available parcel, survey, zoning, access, utility, and condition records.",
             actionLabel: "Request Diligence",
             href: "/contact?property=5911-family-farm-road&topic=land-diligence",
           },
