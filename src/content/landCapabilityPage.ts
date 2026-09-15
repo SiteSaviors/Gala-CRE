@@ -1,121 +1,135 @@
+import landInfrastructureContext from "@/assets/land-infrastructure-context.webp";
 import landInvestmentSales from "@/assets/land-investment-sales.webp";
-import { buildCapabilityPage } from "@/content/capabilityPageBlueprint";
+import type { CapabilityPageContent } from "@/content/capabilityPages";
 
-export const landCapabilityPage = buildCapabilityPage({
+export const landCapabilityPage: CapabilityPageContent = {
   path: "/services/investment-sales/land",
+  compact: true,
+  metadata: {
+    title: "Land Investment Sales",
+    description:
+      "Commercial land sale advisory connecting use, entitlement position, access, utilities, physical constraints, buyer fit, diligence, and transaction execution.",
+    image: landInvestmentSales,
+  },
   parent: { label: "Investment Sales", href: "/services/investment-sales" },
-  image: landInvestmentSales,
-  metadataDescription:
-    "Commercial land sale advisory connecting use, entitlement position, access, utilities, physical constraints, buyer fit, diligence, and transaction execution.",
   hero: {
     eyebrow: "Investment Sales · Land",
     title: "Land Investment Sales",
     lead:
       "Position the site around what a qualified buyer can verify, approve, finance, and execute—not acreage alone.",
-    alt: "Generic aerial view of a commercial land parcel near regional roads and surrounding development",
-    position: "center 55%",
-    primaryLabel: "Discuss a Land Opportunity",
-    inquiryHref: "/contact?inquiry=investment-sales&focus=land",
-    processLabel: "See the Sale Process",
-    processId: "land-sale-process",
+    media: {
+      src: landInvestmentSales,
+      alt: "Generic aerial view of a commercial land parcel near regional roads and surrounding development",
+      position: "center 55%",
+    },
+    actions: [
+      {
+        label: "Discuss a Land Opportunity",
+        href: "/contact?inquiry=investment-sales&focus=land",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
     signalLabel: "Land sale advisory stages",
-    signals: ["Verify", "Position", "Reach", "Execute"],
+    signals: [],
   },
-  challenge: {
-    watermark: "SITE",
-    eyebrow: "The Land Value Story",
-    headline: "Potential only matters when the path to use is credible.",
-    body: [
-      "Land buyers underwrite the distance between the site as it exists and the project they intend to deliver. Zoning, approvals, access, utilities, topography, environmental conditions, off-site work, timing, and jurisdictional requirements can materially change that distance.",
-      "A disciplined sale process separates verified conditions from proposed outcomes, organizes the available record, and brings the opportunity to buyers whose use, experience, capital, and timeline fit the site.",
-    ],
-    emphasis:
-      "The goal is not to market every possible use. It is to make the most credible buyer paths understandable.",
-    pressures: [
-      {
-        number: "01",
-        title: "Use + Approvals",
-        body: "Current zoning, adopted plans, entitlements, conditions, and remaining approvals define what is verified versus conceptual.",
+  sections: [
+    {
+      type: "strategy",
+      eyebrow: "The Land Value Story",
+      headline: "Potential only matters when the path to use is credible.",
+      introduction:
+        "Gala separates the site's verified position from proposed outcomes, organizes the available record, and brings the opportunity to buyers whose use, experience, capital, and timeline fit the work ahead.",
+      media: {
+        src: landInfrastructureContext,
+        alt: "Generic commercial land site shown with road access, nearby infrastructure, and surrounding development",
+        position: "center",
       },
-      {
-        number: "02",
-        title: "Access + Infrastructure",
-        body: "Frontage, access control, utilities, stormwater, grading, and off-site obligations affect feasibility and cost.",
-      },
-      {
-        number: "03",
-        title: "Buyer Fit + Timing",
-        body: "Owner-users, builders, developers, and land investors value the same site through different programs and execution horizons.",
-      },
-    ],
-  },
-  process: {
-    eyebrow: "The Land Sale Process",
-    headline: "Organize the record before buyers price the unknowns.",
-    introduction:
-      "Gala begins with ownership's objective and the controlling site information, then builds a qualified market process around buyer fit, information access, and transaction certainty.",
-    steps: [
-      {
-        number: "01",
-        title: "Verify",
-        body: "Assemble the parcel, survey, title, zoning, approval, access, utility, environmental, and physical information available for the site.",
-      },
-      {
-        number: "02",
-        title: "Position",
-        body: "Frame the current land position, credible use paths, material constraints, pricing context, and likely buyer groups without overstating future outcomes.",
-      },
-      {
-        number: "03",
-        title: "Reach",
-        body: "Launch clear materials, target relevant developers, investors, builders, and owner-users, and manage questions through an organized diligence path.",
-      },
-      {
-        number: "04",
-        title: "Execute",
-        body: "Compare price, contingencies, approval periods, deposits, financing, extension rights, and closing certainty while coordinating the transaction calendar.",
-      },
-    ],
-  },
-  deliverables: {
-    eyebrow: "Services + Deliverables",
-    headline: "A land offering built for real underwriting.",
-    introduction:
-      "Gala coordinates the sale narrative and buyer process while survey, engineering, environmental, legal, tax, and entitlement conclusions remain with qualified specialists and governing authorities.",
-    items: [
-      {
-        icon: "positioning",
-        title: "Site Record Organization",
-        body: "A working view of parcels, acreage, zoning, plans, approvals, access, utilities, physical conditions, and unresolved diligence items.",
-      },
-      {
-        icon: "economics",
-        title: "Pricing + Buyer Strategy",
-        body: "Pricing context and buyer segmentation aligned with the site's verified position, credible uses, timing, and execution burden.",
-      },
-      {
-        icon: "marketing",
-        title: "Offering Materials",
-        body: "A focused property story, imagery, site facts, approval context, and document pathway that distinguishes records from concepts.",
-      },
-      {
-        icon: "prospects",
-        title: "Targeted Market Outreach",
-        body: "Direct and broker engagement with the buyer groups most capable of evaluating and carrying the opportunity forward.",
-      },
-      {
-        icon: "tours",
-        title: "Site Access + Feedback",
-        body: "Coordinated property access, inquiry qualification, specialist questions, and market feedback throughout the campaign.",
-      },
-      {
-        icon: "execution",
-        title: "Offer + Diligence Coordination",
-        body: "Side-by-side offer review and milestone communication through inspections, approvals, financing, title, and closing.",
-      },
-    ],
-  },
-  related: {
+      tracks: [
+        {
+          number: "01",
+          label: "Use + Approvals",
+          title: "Define what is allowed, proposed, and unresolved.",
+          body: "Zoning, adopted plans, entitlements, conditions, and remaining approvals establish the distance between the site today and a buyer's intended program.",
+          points: [],
+        },
+        {
+          number: "02",
+          label: "Access + Infrastructure",
+          title: "Make the execution dependencies visible.",
+          body: "Frontage, access control, utilities, stormwater, grading, environmental conditions, and off-site obligations shape feasibility, timing, and cost.",
+          points: [],
+        },
+        {
+          number: "03",
+          label: "Buyer Fit + Timing",
+          title: "Reach the groups equipped for the actual site.",
+          body: "Owner-users, builders, developers, and land investors value the same acreage through different programs, approval paths, capital requirements, and hold periods.",
+          points: [],
+        },
+      ],
+    },
+    {
+      type: "process",
+      id: "land-sale-process",
+      eyebrow: "The Land Sale Process",
+      headline: "Organize the record before buyers price the unknowns.",
+      introduction: "Build the market process around verified site information, buyer fit, information access, and transaction certainty.",
+      steps: [
+        {
+          number: "01",
+          title: "Verify",
+          body: "Assemble the parcel, survey, title, zoning, approval, access, utility, environmental, and physical information available.",
+        },
+        {
+          number: "02",
+          title: "Position",
+          body: "Frame the current land position, credible use paths, material constraints, pricing context, and likely buyer groups.",
+        },
+        {
+          number: "03",
+          title: "Reach",
+          body: "Target relevant developers, investors, builders, and owner-users through a clear, organized diligence path.",
+        },
+        {
+          number: "04",
+          title: "Execute",
+          body: "Compare price, contingencies, approval periods, deposits, financing, extension rights, and closing certainty.",
+        },
+      ],
+    },
+    {
+      type: "deliverables",
+      eyebrow: "Services + Deliverables",
+      headline: "A land offering built for real underwriting.",
+      introduction:
+        "Gala coordinates the sale narrative and buyer process while survey, engineering, environmental, legal, tax, and entitlement conclusions remain with qualified specialists and governing authorities.",
+      items: [
+        {
+          icon: "positioning",
+          title: "Site Record + Positioning",
+          body: "Parcels, acreage, zoning, plans, approvals, access, utilities, physical conditions, pricing context, and unresolved items organized clearly.",
+        },
+        {
+          icon: "marketing",
+          title: "Offering Materials",
+          body: "A focused property story, imagery, site facts, approval context, and document pathway that distinguishes records from concepts.",
+        },
+        {
+          icon: "prospects",
+          title: "Buyer Outreach + Access",
+          body: "Direct engagement, qualification, site access, specialist questions, and feedback across the buyer groups best equipped for the opportunity.",
+        },
+        {
+          icon: "execution",
+          title: "Offers + Diligence",
+          body: "Side-by-side offer review and milestone communication through inspections, approvals, financing, title, and closing.",
+        },
+      ],
+    },
+  ],
+  relatedCapabilities: {
+    eyebrow: "Connected Gala Capabilities",
     headline: "Land decisions connect across the Gala platform.",
     introduction:
       "When value depends on planning, infrastructure, or capital, Gala can connect the sale conversation to the next commercial decision without blurring specialist responsibilities.",
@@ -141,7 +155,7 @@ export const landCapabilityPage = buildCapabilityPage({
       {
         label: "Investment Sales",
         title: "Retail",
-        body: "Sale advisory for income, owner-user, or redevelopment-oriented retail properties where leases and site utility both matter.",
+        body: "Sale advisory for retail property where leases, access, site utility, and future use all shape value.",
         href: "/services/investment-sales/retail",
       },
     ],
@@ -151,5 +165,13 @@ export const landCapabilityPage = buildCapabilityPage({
     headline: "Let’s clarify what the land can credibly offer the market.",
     body:
       "Share the address, parcel information, current use or approval position, ownership objective, and timing. Gala will begin with the questions qualified buyers are likely to test first.",
+    actions: [
+      {
+        label: "Discuss a Land Opportunity",
+        href: "/contact?inquiry=investment-sales&focus=land",
+        variant: "primary",
+        icon: "arrow-up-right",
+      },
+    ],
   },
-});
+};

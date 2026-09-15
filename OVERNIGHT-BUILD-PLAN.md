@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 04:19 CDT
+Last updated: 2026-09-15 04:20 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -153,7 +153,7 @@ Gate: Industrial retains its commercial substance at roughly half the original l
 
 ## Phase 4 — Rebuild every service and capability backpage
 
-Status: **Not started**
+Status: **In progress**
 
 Brokerage:
 
@@ -163,11 +163,11 @@ Brokerage:
 
 Investment Sales:
 
-- [ ] Investment Sales overview
-- [ ] Multifamily
-- [ ] Retail
-- [ ] Office
-- [ ] Land
+- [x] Investment Sales overview
+- [x] Multifamily
+- [x] Retail
+- [x] Office
+- [x] Land
 
 Development:
 
@@ -380,3 +380,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no client case studies, quantified outcomes, testimonials, or additional approved project photography have been supplied; none blocks the compact standard because no such proof is fabricated.
 - Exact next action: Start Phase 4 with `/services/investment-sales`, `/services/investment-sales/multifamily`, `/services/investment-sales/retail`, `/services/investment-sales/office`, and `/services/investment-sales/land`; apply the Industrial compact standard while preserving each route's distinct underwriting thesis and existing unique imagery, prioritize Land's access/utilities/entitlement/diligence journey, and do not clone Industrial by swapping nouns.
+
+### 2026-09-15 — Phase 4 compact Investment Sales group
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `cc3548f`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Investment Sales overview and five asset-class records, shared capability renderer/styles, current service imagery, relevant tests, and all five live routes.
+- Gate: make the Investment Sales overview and Multifamily, Retail, Office, and Land routes concise, visually complete, and asset-specific through the compact Industrial standard, while preserving the strongest underwriting and diligence guidance and avoiding noun-swapped duplicates.
+- Completed: audited and retained the already-compact Investment Sales overview as the asset-class gateway; rebuilt Multifamily, Retail, and Office around one distinct value section, a four-step sale process, four concrete deliverables, compact related capabilities, and one focused CTA; rebuilt Land directly around use and approvals, access and infrastructure, buyer fit and timing, a four-step execution path, and four land-specific deliverables. Removed duplicate process-preview actions, hero signal strips, repeated strategy chapters, and overlapping six-card responsibility lists.
+- Imagery: generated four distinct generic service-context images for multifamily operations, retail access and circulation, office occupancy, and land infrastructure; optimized them to WebP in `src/assets`. They contain no Gala branding, parcel boundaries, property labels, or representations of Gala listings or completed projects.
+- Files and routes changed: `src/assets/multifamily-operations-context.webp`, `src/assets/retail-access-context.webp`, `src/assets/office-occupancy-context.webp`, `src/assets/land-infrastructure-context.webp`, `src/content/capabilityPages.ts`, `src/content/landCapabilityPage.ts`, `src/test/capability-routes.test.tsx`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/investment-sales`, `/services/investment-sales/multifamily`, `/services/investment-sales/retail`, `/services/investment-sales/office`, and `/services/investment-sales/land`.
+- Verification: the overview remains 3,950px at 1440px. Multifamily reduced from 8,432px baseline to 4,185px desktop and 6,357px mobile; Retail from 8,246px to 4,177px desktop and 6,346px mobile; Office from 8,467px to 4,355px desktop and 6,505px mobile; Land from 6,717px to 4,088px desktop and 6,371px mobile. All five routes render at 1440px, 834px, and 390px with loaded imagery, correct H1s and contextual inquiry routes, zero horizontal overflow, and zero browser-console errors. Targeted suite: 37/37 passed. Full suite: 101/101 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Commit: `refactor: compact Investment Sales service group` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: no client case studies, quantified outcomes, testimonials, or additional approved project photography have been supplied; none blocks these concise service routes because no unsupported proof is fabricated.
+- Exact next action: Rebuild `/services/development-services`, `/services/development-services/site-strategy`, `/services/development-services/entitlements`, `/services/development-services/infrastructure`, and `/services/development-services/development-oversight` through the compact visual system; distinguish early feasibility, approvals, civil/infrastructure coordination, and execution oversight; use the existing development imagery first and generate only distinct generic service-context imagery needed to avoid repetition.

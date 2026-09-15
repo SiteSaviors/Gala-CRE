@@ -74,20 +74,22 @@ describe("advertised capability route matrix", () => {
     });
   });
 
-  it("keeps the Industrial journey concise without losing the core sale path", () => {
-    const industrial = capabilityPageByPath["/services/investment-sales/industrial"];
+  it("keeps every Investment Sales asset journey concise without losing its core sale path", () => {
+    ["industrial", "multifamily", "retail", "office", "land"].forEach((assetType) => {
+      const page = capabilityPageByPath[`/services/investment-sales/${assetType}`];
 
-    expect(industrial.compact).toBe(true);
-    expect(industrial.hero.signals).toEqual([]);
-    expect(industrial.sections.map((section) => section.type)).toEqual([
-      "strategy",
-      "process",
-      "deliverables",
-    ]);
-    expect(industrial.sections.find((section) => section.type === "strategy")?.tracks).toHaveLength(3);
-    expect(industrial.sections.find((section) => section.type === "process")?.steps).toHaveLength(4);
-    expect(industrial.sections.find((section) => section.type === "deliverables")?.items).toHaveLength(4);
-    expect(industrial.relatedCapabilities.links).toHaveLength(4);
+      expect(page.compact, assetType).toBe(true);
+      expect(page.hero.signals, assetType).toEqual([]);
+      expect(page.sections.map((section) => section.type), assetType).toEqual([
+        "strategy",
+        "process",
+        "deliverables",
+      ]);
+      expect(page.sections.find((section) => section.type === "strategy")?.tracks, assetType).toHaveLength(3);
+      expect(page.sections.find((section) => section.type === "process")?.steps, assetType).toHaveLength(4);
+      expect(page.sections.find((section) => section.type === "deliverables")?.items, assetType).toHaveLength(4);
+      expect(page.relatedCapabilities.links, assetType).toHaveLength(4);
+    });
   });
 
   it("keeps header, mobile, footer, and service-index destinations aligned with the shared matrix", () => {

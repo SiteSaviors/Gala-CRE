@@ -3,8 +3,11 @@ import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import industrialInteriorOperations from "@/assets/industrial-interior-operations.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
+import multifamilyOperationsContext from "@/assets/multifamily-operations-context.webp";
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
+import officeOccupancyContext from "@/assets/office-occupancy-context.webp";
 import officeInvestmentSales from "@/assets/office-investment-sales.webp";
+import retailAccessContext from "@/assets/retail-access-context.webp";
 import retailInvestmentSales from "@/assets/retail-investment-sales.webp";
 import {
   capitalCapabilityPages,
@@ -762,6 +765,7 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
 
 const multifamilyInvestmentSalesPage: CapabilityPageContent = {
   path: "/services/investment-sales/multifamily",
+  compact: true,
   metadata: {
     title: "Multifamily Investment Sales",
     description:
@@ -786,43 +790,43 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See the Sale Process",
-        href: "#multifamily-sale-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Multifamily sale advisory stages",
-    signals: ["Prepare", "Underwrite", "Market", "Close"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-      watermark: "PERFORMANCE",
+      type: "strategy",
       eyebrow: "The Operating Story",
       headline: "Buyers price the income—and the work behind it.",
-      body: [
-        "A multifamily sale is underwritten unit by unit and line by line. Rent roll, collections, concessions, vacancy, lease expirations, controllable expenses, taxes, insurance, utilities, and recurring capital needs all influence how buyers view current income and future performance.",
-        "The offering must connect those operating realities to the physical property and its market position. Clean preparation helps buyers distinguish durable performance from temporary variance while giving ownership an informed view of the questions likely to affect pricing and certainty.",
-      ],
-      emphasis:
-        "A persuasive multifamily story begins with reconciled operations, not a projected headline.",
-      pressures: [
+      introduction:
+        "Gala connects the rent roll, expense history, physical asset, and market position so buyers can distinguish current performance from the work required to reach another outcome.",
+      media: {
+        src: multifamilyOperationsContext,
+        alt: "Multifamily advisor reviewing a landscaped apartment community and its building condition",
+        position: "center",
+      },
+      tracks: [
         {
           number: "01",
-          title: "Revenue Quality",
-          body: "Occupancy, collections, concessions, loss-to-lease, and lease timing shape how revenue is credited.",
+          label: "Income Quality",
+          title: "Reconcile what the property earns today.",
+          body: "Occupancy, collections, concessions, lease expirations, revenue, and controllable expenses establish the operating baseline buyers can test.",
+          points: [],
         },
         {
           number: "02",
-          title: "Expense Reality",
-          body: "Taxes, insurance, utilities, payroll, repairs, and management assumptions can materially change net income.",
+          label: "Physical Asset",
+          title: "Connect operations to property condition.",
+          body: "Unit interiors, building systems, deferred maintenance, capital history, and resident access shape reserves, disruption, and execution risk.",
+          points: [],
         },
         {
           number: "03",
-          title: "Capital + Condition",
-          body: "Deferred maintenance, unit interiors, building systems, and planned improvements affect buyer reserves and execution risk.",
+          label: "Future Execution",
+          title: "Keep opportunity separate from assumption.",
+          body: "Market-rent, renovation, lease-up, expense, or management opportunities are framed with the time, capital, and diligence required to pursue them.",
+          points: [],
         },
       ],
     },
@@ -831,66 +835,27 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
       id: "multifamily-sale-process",
       eyebrow: "The Multifamily Sale Process",
       headline: "Prepare the asset before the market sets the narrative.",
-      introduction:
-        "Gala organizes the process around decision-useful information, likely buyer questions, and ownership's timing so the market can evaluate the opportunity on a consistent basis.",
+      introduction: "Organize the operating evidence, buyer strategy, access, and diligence around ownership's timing.",
       steps: [
         {
           number: "01",
           title: "Prepare",
-          body: "Clarify the seller's objectives and assemble the rent roll, operating statements, lease information, capital history, and available property records.",
+          body: "Clarify objectives and assemble the rent roll, operating statements, capital history, and available property records.",
         },
         {
           number: "02",
           title: "Underwrite",
-          body: "Reconcile current performance, identify normalization questions, frame market context, and distinguish documented results from forward-looking assumptions.",
+          body: "Reconcile performance, frame market context, and separate documented results from forward-looking assumptions.",
         },
         {
           number: "03",
           title: "Market",
-          body: "Build the offering narrative, activate relevant buyers, manage access and questions, and compare interest on economics, timing, and execution strength.",
+          body: "Activate relevant buyers, manage resident-sensitive access and questions, and compare offers beyond headline price.",
         },
         {
           number: "04",
           title: "Close",
-          body: "Coordinate diligence flow and milestones with ownership's legal, tax, accounting, property-management, and technical advisors through closing.",
-        },
-      ],
-    },
-    {
-      type: "strategy",
-      eyebrow: "Buyer Underwriting",
-      headline: "Separate today's performance from tomorrow's plan.",
-      introduction:
-        "Different buyers value stabilized income and operational upside differently. A disciplined process shows what the property is producing now, what has been verified, and what a buyer would need to execute to reach another outcome.",
-      media: {
-        src: multifamilyInvestmentSales,
-        alt: "Wide courtyard view across a mid-rise multifamily community",
-        position: "center 58%",
-      },
-      tracks: [
-        {
-          number: "01",
-          label: "Current Operations",
-          title: "Make the in-place performance legible.",
-          body: "Buyers need a consistent picture of unit status, collections, revenue, expenses, lease exposure, and the physical condition supporting current operations.",
-          points: [
-            "Rent-roll and unit-status review",
-            "Trailing operations and expense context",
-            "Lease expirations, concessions, and collections",
-            "Capital history and known condition items",
-          ],
-        },
-        {
-          number: "02",
-          label: "Future Execution",
-          title: "Define upside without presenting it as certainty.",
-          body: "Renovation, lease-up, expense changes, management transitions, or repositioning may support a buyer's plan, but assumptions must remain separate from documented results.",
-          points: [
-            "Market-rent and comparable context",
-            "Renovation or lease-up assumptions",
-            "Supply, demand, and location considerations",
-            "Execution requirements and buyer diligence",
-          ],
+          body: "Coordinate financial, lease, physical, and closing milestones with ownership's specialist advisors.",
         },
       ],
     },
@@ -899,37 +864,27 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
       eyebrow: "Services + Deliverables",
       headline: "A sale process grounded in operating evidence.",
       introduction:
-        "The assignment connects property preparation, buyer communication, and transaction coordination while leaving legal, tax, accounting, engineering, and environmental conclusions to the appropriate advisors.",
+        "The assignment connects property preparation, buyer communication, and transaction coordination while specialist conclusions remain with the appropriate advisors.",
       items: [
         {
           icon: "economics",
-          title: "Operating Review",
-          body: "Rent-roll, trailing-statement, collections, concessions, occupancy, and expense context organized to identify gaps and likely buyer questions.",
-        },
-        {
-          icon: "positioning",
-          title: "Valuation + Buyer Strategy",
-          body: "Relevant sales, income context, market position, and likely buyer profiles considered alongside ownership's timing and priorities.",
+          title: "Operations + Valuation",
+          body: "Rent-roll, trailing-statement, occupancy, expense, market, and likely buyer context organized into one credible sale position.",
         },
         {
           icon: "marketing",
-          title: "Offering Narrative",
-          body: "Coordinated facts, imagery, operating information, and market context that distinguish documented performance from buyer assumptions.",
+          title: "Offering Materials",
+          body: "Coordinated facts, imagery, operating information, capital context, and a diligence roadmap that distinguish evidence from projections.",
         },
         {
           icon: "prospects",
-          title: "Qualified Buyer Outreach",
-          body: "Targeted engagement with relevant private investors, operators, and acquisition groups based on asset scale and strategy.",
-        },
-        {
-          icon: "tours",
-          title: "Access + Offer Management",
-          body: "Property tours, information requests, feedback, and offer comparison managed around resident privacy and operating continuity.",
+          title: "Buyer Outreach + Access",
+          body: "Targeted engagement, qualification, tours, information requests, and feedback managed around resident privacy and operating continuity.",
         },
         {
           icon: "execution",
-          title: "Diligence Coordination",
-          body: "An organized path for leases, financial records, contracts, physical reports, and closing milestones across the seller's advisory team.",
+          title: "Offers + Execution",
+          body: "Offer comparison and an organized path for financial, lease, contract, physical, financing, and closing diligence.",
         },
       ],
     },
@@ -984,6 +939,7 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
 
 const retailInvestmentSalesPage: CapabilityPageContent = {
   path: "/services/investment-sales/retail",
+  compact: true,
   metadata: {
     title: "Retail Investment Sales",
     description:
@@ -1008,81 +964,43 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See the Sale Process",
-        href: "#retail-sale-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Retail sale advisory stages",
-    signals: ["Read", "Position", "Reach", "Execute"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-      watermark: "RELEVANCE",
+      type: "strategy",
       eyebrow: "The Retail Value Story",
       headline: "Retail value lives where the lease meets the site.",
-      body: [
-        "The tenant and lease can establish income, but the real estate determines how durable and transferable that income may be. Trade-area demand, access, visibility, parking, circulation, co-tenancy, use restrictions, and the building's ability to support another operator all influence buyer conviction.",
-        "A credible offering shows how those pieces relate. It presents in-place economics clearly, identifies lease and site questions before they disrupt the process, and reaches the investors, operators, or developers whose strategy fits the property's current income and future utility.",
-      ],
-      emphasis:
-        "The strongest retail positioning explains both why the tenant belongs there and why the real estate remains useful.",
-      pressures: [
-        {
-          number: "01",
-          title: "Tenancy",
-          body: "Credit, sales context when available, lease term, options, guarantees, and rollover shape the income profile.",
-        },
-        {
-          number: "02",
-          title: "Site",
-          body: "Access, visibility, parking, circulation, signage rights, and physical configuration determine operating utility.",
-        },
-        {
-          number: "03",
-          title: "Durability",
-          body: "Trade area, competition, restrictions, co-tenancy, capital needs, and alternative-use potential affect long-term risk.",
-        },
-      ],
-    },
-    {
-      type: "strategy",
-      eyebrow: "Buyer Segmentation",
-      headline: "Market the asset to the capital that can value its real story.",
       introduction:
-        "A net-leased property, multi-tenant center, vacant owner-user building, and redevelopment site do not share one buyer pool. Gala frames outreach around the property's verified tenancy, economics, physical utility, and execution requirements.",
+        "Gala presents the in-place economics, customer access, physical utility, and long-term durability together so the market can understand both the tenant and the real estate.",
       media: {
-        src: retailInvestmentSales,
-        alt: "Wide view across a retail center showing storefront frontage and parking circulation",
-        position: "center 58%",
+        src: retailAccessContext,
+        alt: "Active neighborhood retail center showing storefronts, customer access, and parking circulation",
+        position: "center",
       },
       tracks: [
         {
           number: "01",
-          label: "Income Buyers",
+          label: "Tenancy + Income",
           title: "Make the lease economics comparable.",
-          body: "For occupied retail, buyers need a coherent view of the tenant, rent, reimbursements, options, responsibilities, and the events that could change future income.",
-          points: [
-            "Lease term, rent, options, and escalations",
-            "Expense reimbursements and ownership obligations",
-            "Tenant-credit and guarantee documentation",
-            "Co-tenancy, exclusives, and use restrictions",
-          ],
+          body: "Tenant credit, rent, reimbursements, guarantees, term, options, co-tenancy, and use restrictions define the income buyers can underwrite.",
+          points: [],
         },
         {
           number: "02",
-          label: "Operators + Repositioning",
-          title: "Show what the real estate can support.",
-          body: "When value depends on releasing, owner occupancy, pad utility, or redevelopment, site function and approval questions become central to the decision.",
-          points: [
-            "Access, visibility, parking, and circulation",
-            "Building or suite adaptability",
-            "Zoning, restrictions, and approval questions",
-            "Delivery condition and capital requirements",
-          ],
+          label: "Site Utility",
+          title: "Show how customers and operators use the property.",
+          body: "Trade-area position, access, visibility, parking, circulation, signage rights, and configuration determine day-to-day operating utility.",
+          points: [],
+        },
+        {
+          number: "03",
+          label: "Durability + Next Use",
+          title: "Match the buyer to the actual value path.",
+          body: "Net-lease investors, operators, owner-users, and developers weigh rollover, capital needs, adaptability, restrictions, and redevelopment questions differently.",
+          points: [],
         },
       ],
     },
@@ -1091,28 +1009,27 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
       id: "retail-sale-process",
       eyebrow: "The Retail Sale Process",
       headline: "Read the leases before the market writes the conclusion.",
-      introduction:
-        "The process begins with the seller's objective and the documents that govern income and site use, then connects those findings to pricing context, the likely buyer pool, and an organized transaction path.",
+      introduction: "Connect the documents governing income and site use to the right pricing, buyer, and transaction strategy.",
       steps: [
         {
           number: "01",
           title: "Read",
-          body: "Organize leases, amendments, options, reimbursements, restrictions, operating history, site information, and known physical or environmental items.",
+          body: "Organize leases, options, reimbursements, restrictions, operating history, site information, and known diligence items.",
         },
         {
           number: "02",
           title: "Position",
-          body: "Frame the asset's economics, trade-area role, site utility, likely buyer groups, valuation context, and material diligence questions.",
+          body: "Frame the economics, trade-area role, site utility, buyer groups, valuation context, and material questions.",
         },
         {
           number: "03",
           title: "Reach",
-          body: "Launch coordinated materials and targeted outreach, qualify interest, manage property access, and compare offers beyond headline price.",
+          body: "Launch coordinated materials, qualify interest, manage property access, and compare offers beyond headline price.",
         },
         {
           number: "04",
           title: "Execute",
-          body: "Coordinate lease, title, survey, estoppel, physical, environmental, financing, and closing milestones with ownership's appropriate advisors.",
+          body: "Coordinate lease, title, survey, estoppel, physical, environmental, financing, and closing milestones.",
         },
       ],
     },
@@ -1121,17 +1038,12 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
       eyebrow: "Services + Deliverables",
       headline: "Retail-specific preparation from lease file to closing file.",
       introduction:
-        "The assignment keeps property positioning, buyer engagement, and diligence communication connected while legal, tax, engineering, environmental, and tenant-credit conclusions remain with qualified specialists.",
+        "The assignment keeps property positioning, buyer engagement, and diligence communication connected while specialist conclusions remain with qualified advisors.",
       items: [
         {
           icon: "economics",
-          title: "Lease + Income Review",
-          body: "An organized view of term, rent, escalations, options, reimbursements, guarantees, rights, and open document questions.",
-        },
-        {
-          icon: "positioning",
-          title: "Trade Area + Site Positioning",
-          body: "Relevant customer, competition, access, visibility, parking, circulation, and physical-utility context tailored to the property.",
+          title: "Lease + Site Positioning",
+          body: "A coherent view of term, rent, options, responsibilities, trade area, access, visibility, and physical utility.",
         },
         {
           icon: "marketing",
@@ -1140,18 +1052,13 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
         },
         {
           icon: "prospects",
-          title: "Buyer Targeting",
-          body: "Outreach shaped for net-lease investors, private capital, operators, owner-users, or developers as the property's profile requires.",
-        },
-        {
-          icon: "tours",
-          title: "Access + Offer Management",
-          body: "Property access, tenant-sensitive communication, feedback, and offer comparison managed around operating continuity.",
+          title: "Buyer Outreach + Access",
+          body: "Targeted outreach, qualification, tours, tenant-sensitive communication, and feedback managed around operating continuity.",
         },
         {
           icon: "execution",
-          title: "Diligence + Closing Coordination",
-          body: "A clear path for leases, estoppels, title, survey, physical records, environmental information, financing, and closing milestones.",
+          title: "Offers + Execution",
+          body: "Offer comparison and a clear path for leases, estoppels, title, survey, physical records, financing, and closing milestones.",
         },
       ],
     },
@@ -1206,6 +1113,7 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
 
 const officeInvestmentSalesPage: CapabilityPageContent = {
   path: "/services/investment-sales/office",
+  compact: true,
   metadata: {
     title: "Office Investment Sales",
     description:
@@ -1230,81 +1138,43 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
         variant: "primary",
         icon: "arrow-up-right",
       },
-      {
-        label: "See the Sale Process",
-        href: "#office-sale-process",
-        variant: "secondary",
-        icon: "arrow-down",
-      },
     ],
     signalLabel: "Office sale advisory stages",
-    signals: ["Audit", "Model", "Market", "Close"],
+    signals: [],
   },
   sections: [
     {
-      type: "challenge",
-      watermark: "RELEVANCE",
+      type: "strategy",
       eyebrow: "The Office Value Story",
       headline: "Office space competes twice: for tenants and for capital.",
-      body: [
-        "Buyers test whether the building can retain and attract users as carefully as they test the in-place income. Lease expirations, tenant credit, renewal probability, submarket alternatives, suite condition, amenities, parking, access, and the cost to prepare space can all change how future cash flow is priced.",
-        "A credible sale process makes that exposure visible. It connects the rent roll to the physical asset, separates contracted income from leasing assumptions, and presents the opportunity to buyers whose strategy and capital can address the property's actual occupancy profile.",
-      ],
-      emphasis:
-        "The goal is not to minimize rollover or capital needs. It is to show buyers how the building competes and what execution requires.",
-      pressures: [
-        {
-          number: "01",
-          title: "Rollover",
-          body: "Lease expirations, options, contraction rights, subleases, and tenant concentration shape income durability.",
-        },
-        {
-          number: "02",
-          title: "Leasing Capital",
-          body: "Tenant improvements, commissions, free rent, downtime, and suite work affect the real cost of occupancy changes.",
-        },
-        {
-          number: "03",
-          title: "Competitiveness",
-          body: "Location, parking, access, floor plates, systems, amenities, and space quality influence tenant demand and exit liquidity.",
-        },
-      ],
-    },
-    {
-      type: "strategy",
-      eyebrow: "Buyer Underwriting",
-      headline: "Frame the office asset around its occupancy path.",
       introduction:
-        "A stabilized single-tenant property, a diversified multi-tenant building, a medical-office asset, and a vacant owner-user opportunity do not carry the same risk or buyer audience. Positioning must follow the documented lease profile and the work needed to sustain or rebuild occupancy.",
+        "Gala connects the rent roll, rollover exposure, leasing capital, space quality, and buyer strategy so the market can see how the building performs and what comes next.",
       media: {
-        src: officeInvestmentSales,
-        alt: "Wide view of a modern office property showing floor plates, entrance, and parking access",
-        position: "center 57%",
+        src: officeOccupancyContext,
+        alt: "Contemporary office interior showing common areas, glass-fronted suites, and active occupancy",
+        position: "center",
       },
       tracks: [
         {
           number: "01",
-          label: "Stabilized Income",
+          label: "Income + Rollover",
           title: "Show what is contracted—and what could change.",
-          body: "For leased assets, buyers need a consistent view of tenancy, rent, reimbursements, options, expirations, guarantees, and the obligations that affect net income.",
-          points: [
-            "Tenant roster, credit context, and concentration",
-            "Rent, escalations, and expense recoveries",
-            "Options, expirations, and rollover schedule",
-            "Landlord obligations and near-term capital",
-          ],
+          body: "Tenant credit, rent, recoveries, options, expirations, concentration, and landlord obligations establish the durability of in-place income.",
+          points: [],
         },
         {
           number: "02",
-          label: "Lease-Up + Repositioning",
+          label: "Space + Capital",
           title: "Make the cost of the next lease visible.",
-          body: "When value depends on renewal, backfill, owner occupancy, conversion, or repositioning, the strategy must account for space condition, market competition, time, and capital rather than treating upside as automatic.",
-          points: [
-            "Available suites and delivery condition",
-            "Tenant-improvement and commission assumptions",
-            "Downtime, absorption, and competing inventory",
-            "Alternative-use and approval questions",
-          ],
+          body: "Suite condition, tenant improvements, commissions, free rent, downtime, building systems, parking, and amenities define the capital path.",
+          points: [],
+        },
+        {
+          number: "03",
+          label: "Occupancy Path",
+          title: "Match the buyer to the building's real plan.",
+          body: "Income investors, medical-office buyers, owner-users, and repositioning groups weigh retention, lease-up, competition, alternative use, and timing differently.",
+          points: [],
         },
       ],
     },
@@ -1313,28 +1183,27 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
       id: "office-sale-process",
       eyebrow: "The Office Sale Process",
       headline: "Make occupancy risk understandable before buyers price uncertainty.",
-      introduction:
-        "The process brings leases, operations, space condition, market position, and ownership objectives together before outreach, then keeps buyer communication and diligence moving against a clear transaction plan.",
+      introduction: "Bring leases, space condition, market position, buyer outreach, and diligence into one clear transaction plan.",
       steps: [
         {
           number: "01",
           title: "Audit",
-          body: "Organize leases, amendments, rent roll, operating history, capital records, suite condition, vendor information, and known property diligence.",
+          body: "Organize leases, rent roll, operating history, capital records, suite condition, vendor information, and known diligence.",
         },
         {
           number: "02",
           title: "Model",
-          body: "Frame contracted income, rollover, leasing exposure, capital requirements, market context, buyer groups, and the assumptions requiring verification.",
+          body: "Frame contracted income, rollover, leasing exposure, capital requirements, market context, and likely buyer groups.",
         },
         {
           number: "03",
           title: "Market",
-          body: "Launch coordinated materials and targeted outreach, manage tenant-sensitive access and questions, and compare offers on economics and certainty.",
+          body: "Launch coordinated materials, manage tenant-sensitive access and questions, and compare offers on economics and certainty.",
         },
         {
           number: "04",
           title: "Close",
-          body: "Coordinate lease, estoppel, title, survey, physical, environmental, financing, and closing milestones with ownership's legal and technical advisors.",
+          body: "Coordinate lease, estoppel, title, survey, physical, environmental, financing, and closing milestones.",
         },
       ],
     },
@@ -1343,17 +1212,12 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
       eyebrow: "Services + Deliverables",
       headline: "Preparation for the questions office buyers ask first.",
       introduction:
-        "The assignment connects lease and occupancy analysis to property positioning and buyer execution while legal, tax, engineering, environmental, accessibility, and code conclusions remain with qualified specialists.",
+        "The assignment connects occupancy analysis to property positioning and buyer execution while specialist conclusions remain with qualified advisors.",
       items: [
         {
           icon: "economics",
-          title: "Lease + Rollover Review",
-          body: "An organized view of tenancy, rent, options, expirations, reimbursements, obligations, concentration, and near-term income exposure.",
-        },
-        {
-          icon: "positioning",
-          title: "Space + Market Positioning",
-          body: "Suite condition, building systems, amenities, parking, access, location, and competing inventory considered against likely user demand.",
+          title: "Occupancy + Valuation",
+          body: "Tenancy, rent, options, expirations, recoveries, concentration, leasing capital, and market context organized into one sale position.",
         },
         {
           icon: "marketing",
@@ -1362,18 +1226,13 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
         },
         {
           icon: "prospects",
-          title: "Buyer Segmentation",
-          body: "Targeted outreach to income investors, private capital, medical-office buyers, owner-users, or repositioning groups as the asset requires.",
-        },
-        {
-          icon: "tours",
-          title: "Access + Offer Management",
-          body: "Property and suite access, tenant communication, information requests, feedback, and offer comparison managed with appropriate discretion.",
+          title: "Buyer Outreach + Access",
+          body: "Targeted engagement with the right capital, with property access, tenant communication, questions, and feedback managed discreetly.",
         },
         {
           icon: "execution",
-          title: "Diligence Coordination",
-          body: "A clear path for leases, estoppels, financial records, contracts, physical reports, title, survey, financing, and closing milestones.",
+          title: "Offers + Execution",
+          body: "Offer comparison and a clear path for leases, estoppels, financial records, physical reports, title, financing, and closing milestones.",
         },
       ],
     },
