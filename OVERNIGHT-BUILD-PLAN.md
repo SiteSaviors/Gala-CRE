@@ -122,7 +122,7 @@ Status: **In progress**
 Active listings:
 
 - [x] 5047 Yadkin Road
-- [ ] 611 & 703 Church Street
+- [x] 611 & 703 Church Street
 - [ ] 5911 Family Farm Road
 - [ ] Lexington Townhome Site (`/properties/1111-brown-street`)
 
@@ -288,3 +288,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: underlying approved plan, approval record, zoning, parcel, access, utility, and physical-condition records remain client inputs and are not represented as verified facts.
 - Exact next action: Audit and tighten `/properties/611-703-church-street` within the compact system, preserving the childcare thesis and two-site context while removing repeated claims, keeping the 703/711 and acreage conflicts qualified, and verifying the six-image selector, video, map, documents, advisor, and inquiry context at desktop and mobile sizes.
+
+### 2026-09-15 — Phase 2 Church Street compact listing
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `4a64c56`, clean.
+- Source of truth checked: this ledger, Church Street's record in `PROPERTY-DATA-REGISTER.md`, the current offering data, five approved aerials, local web video, advisor assignment, shared renderer, and property/video/page tests.
+- Gate: make the represented childcare approval and two-site composition immediately understandable without resolving the documented address, acreage, or approval-record conflicts by assumption.
+- Completed: tightened the opportunity headline, lead, highlights, diligence close, and transaction conditions; combined overlapping address/acreage/sale-structure checks; retained the represented childcare approval and zoning language with explicit document-review boundaries. The compact page presents six deduplicated media views (hero plus five aerials), property video, map, price, site composition, Gaurang Gala, documents, inquiry context, and related listings without the former full-page gallery and video chapters.
+- Files and routes changed: `src/content/properties.ts` and this ledger; `/properties/611-703-church-street`.
+- Verification: 37/37 targeted property/video/page tests passed. Desktop height reduced from 8,401px baseline to 5,289px; mobile from 10,094px to 8,110px, including the global footer. The six-image selector changes the primary image; the deferred MP4 source attaches near the video viewport; the video and live map form one integrated media band; price, advisor, documents, and inquiry context remain present; no overflow or page-specific console errors at 1440px or 390px.
+- Commit: this checkpoint's local implementation commit; resolve the hash from `git log -1` before continuing.
+- Remaining working tree: expected clean after commit.
+- Blockers: the second legal address (703 versus 711), parcel IDs, surveyed acreage, combined-sale requirement, approval/site-plan record, zoning confirmation, and conditions remain client inputs and stay qualified.
+- Exact next action: Audit and tighten `/properties/5911-family-farm-road` within the compact system, prioritizing Leigh Roach's advisor assignment, the residential-land thesis, property-condition/private-road diligence, five-image selector, video/map integration, document paths, and mobile scan length without adding unsupported parcel or utility claims.

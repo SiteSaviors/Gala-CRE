@@ -609,9 +609,9 @@ export const properties: Property[] = [
     ],
     advisorId: "gaurang-gala",
     listingPage: {
-      headline: "A two-site Morrisville opportunity positioned for childcare development.",
+      headline: "A two-site Morrisville opportunity centered on childcare use.",
       lead:
-        "A commercial land offering marketed as two adjacent sites with approximately 1.09 combined acres and approval supporting a licensed childcare facility, subject to review of the parcels, survey, zoning, and underlying approval documents.",
+        "The public offering represents approval for a licensed childcare facility across two marketed sites totaling approximately 1.09 acres. The parcel, survey, zoning, and approval records should control buyer evaluation.",
       overviewEyebrow: "Childcare Opportunity",
       keyFacts: [
         { label: "Asking price", value: "$1,190,000" },
@@ -620,10 +620,9 @@ export const properties: Property[] = [
         { label: "Property type", value: "Commercial land" },
       ],
       highlights: [
-        "Two Morrisville sites marketed together as one offering",
-        "Licensed daycare approval represented by the public offering",
-        "Base zoning represented as supporting childcare use",
-        "Residential and RTP context cited by the offering; buyer to verify",
+        "Licensed daycare approval and childcare-supportive zoning represented by the offering",
+        "Two Morrisville sites marketed together as one opportunity",
+        "Legal addresses, surveyed acreage, approval scope, and remaining permits require document review",
       ],
       information: {
         intro: {
@@ -664,9 +663,7 @@ export const properties: Property[] = [
         title: "What is represented—and what the diligence package must confirm.",
         conditions: [
           { label: "Published offering", value: "Two-site commercial land offering at $1,190,000" },
-          { label: "Sale structure", value: "Confirm whether the two locations must be purchased together" },
-          { label: "Address record", value: "Confirm the legal address of the second site" },
-          { label: "Acreage record", value: "Public fields differ; the survey and parcel records control" },
+          { label: "Offering composition", value: "Confirm combined-sale requirements, legal addresses, parcel IDs, and surveyed acreage" },
           { label: "Approval scope", value: "Verify approval, conditions, capacity, expiration, and remaining permits" },
         ],
       },
@@ -734,7 +731,7 @@ export const properties: Property[] = [
           eyebrow: "Documents & Diligence",
           title: "Review the approval before underwriting the use.",
           body:
-            "Start with the public offering, then request the approval, site plan, survey, parcel, and zoning materials needed to evaluate the childcare use and combined offering.",
+            "Request the approval, site plan, survey, parcel, and zoning records needed to evaluate the childcare use and combined offering.",
         },
         items: [
           {
