@@ -1,6 +1,7 @@
 import galaBrokerCapability from "@/assets/gala-broker-capability.avif";
 import galaCapitalCapability from "@/assets/gala-capital-capability.webp";
 import galaSalesCapability from "@/assets/gala-sales-capability.webp";
+import industrialInteriorOperations from "@/assets/industrial-interior-operations.webp";
 import industrialInvestmentSales from "@/assets/industrial-investment-sales.webp";
 import multifamilyInvestmentSales from "@/assets/multifamily-investment-sales.webp";
 import officeInvestmentSales from "@/assets/office-investment-sales.webp";
@@ -624,9 +625,9 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
       introduction:
         "Gala organizes the sale around the property's verified income, operating utility, physical condition, and the risks buyers will test in diligence.",
       media: {
-        src: industrialInvestmentSales,
-        alt: "Wide view of a contemporary industrial facility, loading area, and circulation",
-        position: "center 62%",
+        src: industrialInteriorOperations,
+        alt: "Clear-span industrial interior with loading doors, structural bays, and operational floor space",
+        position: "center",
       },
       tracks: [
         {

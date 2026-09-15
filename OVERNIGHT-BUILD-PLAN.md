@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 03:58 CDT
+Last updated: 2026-09-15 04:19 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -136,7 +136,7 @@ Gate: Every property route is concise, property-specific, media-rich where appro
 
 ## Phase 3 — Establish the premium service-page standard
 
-Status: **Not started**
+Status: **Complete**
 
 Use Industrial as the first redesigned service backpage with this spine:
 
@@ -149,7 +149,7 @@ Use Industrial as the first redesigned service backpage with this spine:
 
 Target 3,200–4,200px desktop. Remove repeated explanations, duplicate process previews, oversized headings, long essays, decorative filler, excessive padding, and generic closing language.
 
-Gate: Industrial retains its commercial substance at roughly half the original long-form standard and feels premium through clarity, imagery, and restraint.
+Gate: Industrial retains its commercial substance at roughly half the original long-form standard and feels premium through clarity, imagery, and restraint. **Passed.**
 
 ## Phase 4 — Rebuild every service and capability backpage
 
@@ -366,3 +366,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: the combined 10414/10416 structure, transaction economics, preferred individual credit, building area, and approved non-MLS photography remain client inputs. All earlier property-specific blockers remain listed above and continue to be omitted or qualified.
 - Exact next action: Start Phase 3 by live-auditing `/services/investment-sales/industrial` against the 3,200–4,200px target, then rebuild it through the short image-led hero → focused industrial value → compact process → four deliverables → related capabilities → concise CTA spine without changing the locked homepage or inventing case-study claims.
+
+### 2026-09-15 — Phase 3 compact Industrial service standard
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `8ef8f30`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the Industrial capability record, shared capability renderer/styles, existing service imagery, relevant tests, and the live Industrial route.
+- Gate: retain the route's industrial underwriting substance while reducing it to the short image-led hero → focused value → compact process → four deliverables → related capabilities → concise CTA spine, within the 3,200–4,200px desktop target and without unsupported performance claims.
+- Completed: preserved the already-sound six-part content structure; tightened hero, section, process, deliverable, related-link, and CTA spacing only for compact capability pages; replaced the repeated exterior photo in the value section with a distinct generic clear-span warehouse interior; and retained the asset-specific discussion of income, operations, clear height, loading, power, yards, access, condition, environmental diligence, positioning, buyer outreach, negotiation, and closing.
+- Imagery: generated a generic service-context warehouse interior with no people, signage, logos, or property claims; optimized it to `src/assets/industrial-interior-operations.webp`. It is not represented as a Gala listing or completed project.
+- Files and routes changed: `src/assets/industrial-interior-operations.webp`, `src/content/capabilityPages.ts`, `src/styles/capability-page.css`, `src/test/gala-pages.test.tsx`, and this ledger; `/services/investment-sales/industrial`.
+- Verification: 36/36 targeted page/capability tests passed. Desktop height reduced from the live compact baseline of 4,353px to 4,095px at 1440×900; mobile reduced from 6,543px to 6,373px at 390×844; tablet measured 5,054px at 834×1112. Both contextual images load at full intrinsic width, the property-specific CTA route is correct, and no horizontal overflow or page-specific console errors appear at desktop, tablet, or mobile sizes. Full suite: 100/100 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Commit: `refactor: establish compact service page standard` after the verified diff is staged.
+- Remaining working tree: expected clean after commit.
+- Blockers: no client case studies, quantified outcomes, testimonials, or additional approved project photography have been supplied; none blocks the compact standard because no such proof is fabricated.
+- Exact next action: Start Phase 4 with `/services/investment-sales`, `/services/investment-sales/multifamily`, `/services/investment-sales/retail`, `/services/investment-sales/office`, and `/services/investment-sales/land`; apply the Industrial compact standard while preserving each route's distinct underwriting thesis and existing unique imagery, prioritize Land's access/utilities/entitlement/diligence journey, and do not clone Industrial by swapping nouns.

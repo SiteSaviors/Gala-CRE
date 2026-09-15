@@ -404,6 +404,7 @@ describe("Gala CRE public pages", () => {
 
     expect(screen.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /modern light-industrial distribution property/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /clear-span industrial interior/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A warehouse is more than its square footage." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Show how the property performs today." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Make operational utility legible." })).toBeInTheDocument();

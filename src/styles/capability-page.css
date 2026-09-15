@@ -156,30 +156,30 @@
 .gala-cap-cta__buttons{display:flex;flex-wrap:wrap;gap:14px}
 
 /* A more direct capability journey for focused, high-intent audiences. */
-.gala-cap-page--compact .gala-cap-hero,.gala-cap-page--compact .gala-cap-hero__inner{min-height:700px}
-.gala-cap-page--compact .gala-cap-hero__inner{padding-top:154px}
-.gala-cap-page--compact .gala-cap-hero__back{top:124px}
-.gala-cap-page--compact .gala-cap-hero__copy{padding-bottom:42px}
+.gala-cap-page--compact .gala-cap-hero,.gala-cap-page--compact .gala-cap-hero__inner{min-height:650px}
+.gala-cap-page--compact .gala-cap-hero__inner{padding-top:146px}
+.gala-cap-page--compact .gala-cap-hero__back{top:118px}
+.gala-cap-page--compact .gala-cap-hero__copy{padding-bottom:36px}
 .gala-cap-page--compact .gala-cap-hero__copy h1{font-size:clamp(64px,6.8vw,98px)}
-.gala-cap-page--compact .gala-cap-hero__copy>p{margin-top:25px}
-.gala-cap-page--compact .gala-cap-hero__actions{margin-top:28px}
-.gala-cap-page--compact .gala-cap-section{padding:82px 0}
+.gala-cap-page--compact .gala-cap-hero__copy>p{margin-top:22px}
+.gala-cap-page--compact .gala-cap-hero__actions{margin-top:24px}
+.gala-cap-page--compact .gala-cap-section{padding:72px 0}
 .gala-cap-page--compact .gala-cap-strategy{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);padding:0}
-.gala-cap-page--compact .gala-cap-strategy__media{min-height:820px}
-.gala-cap-page--compact .gala-cap-strategy__content{padding:64px clamp(42px,6vw,88px)}
-.gala-cap-page--compact .gala-cap-strategy__content h2{font-size:clamp(44px,4.7vw,68px)}
-.gala-cap-page--compact .gala-cap-strategy__intro{margin-top:22px}
-.gala-cap-page--compact .gala-cap-strategy__tracks{margin-top:32px}
-.gala-cap-page--compact .gala-cap-strategy__tracks article{padding:20px 0}
+.gala-cap-page--compact .gala-cap-strategy__media{min-height:760px}
+.gala-cap-page--compact .gala-cap-strategy__content{padding:50px clamp(42px,6vw,88px)}
+.gala-cap-page--compact .gala-cap-strategy__content h2{max-width:13ch;font-size:clamp(42px,4.4vw,64px)}
+.gala-cap-page--compact .gala-cap-strategy__intro{margin-top:18px}
+.gala-cap-page--compact .gala-cap-strategy__tracks{margin-top:24px}
+.gala-cap-page--compact .gala-cap-strategy__tracks article{padding:17px 0}
 .gala-cap-page--compact .gala-cap-strategy__track-head{margin-bottom:13px}
-.gala-cap-page--compact .gala-cap-strategy__tracks h3{font-size:25px}
+.gala-cap-page--compact .gala-cap-strategy__tracks h3{font-size:24px}
 .gala-cap-page--compact .gala-cap-strategy__tracks article>p{margin-top:10px;line-height:1.62}
 .gala-cap-page--compact .gala-cap-strategy__tracks ul{margin-top:14px}
 .gala-cap-page--compact .gala-cap-process__header{grid-template-columns:minmax(0,1fr) minmax(300px,.52fr);gap:54px}
 .gala-cap-page--compact .gala-cap-process__header h2{max-width:12ch;font-size:clamp(44px,4.7vw,68px)}
-.gala-cap-page--compact .gala-cap-process{padding-top:66px;padding-bottom:66px}
-.gala-cap-page--compact .gala-cap-process__steps{margin-top:34px}
-.gala-cap-page--compact .gala-cap-process__steps article{min-height:215px;padding-top:22px;padding-bottom:22px}
+.gala-cap-page--compact .gala-cap-process{padding-top:58px;padding-bottom:58px}
+.gala-cap-page--compact .gala-cap-process__steps{margin-top:30px}
+.gala-cap-page--compact .gala-cap-process__steps article{min-height:195px;padding-top:20px;padding-bottom:20px}
 .gala-cap-page--compact .gala-cap-process__steps h3{font-size:27px}
 .gala-cap-page--compact .gala-cap-process__steps p{line-height:1.65}
 .gala-cap-page--compact .gala-cap-deliverables__layout{grid-template-columns:minmax(290px,.7fr) minmax(0,1.3fr);gap:72px}
@@ -188,15 +188,15 @@
 .gala-cap-page--compact .gala-cap-deliverables__list article{min-height:210px;padding:24px}
 .gala-cap-page--compact .gala-cap-deliverables__list h3{font-size:21px}
 .gala-cap-page--compact .gala-cap-deliverables__list p{line-height:1.62}
-.gala-cap-page--compact .gala-cap-connected{padding:48px 0}
+.gala-cap-page--compact .gala-cap-connected{padding:42px 0}
 .gala-cap-page--compact .gala-cap-connected__header{grid-template-columns:minmax(0,1fr) minmax(320px,.7fr);gap:52px}
 .gala-cap-page--compact .gala-cap-connected__header h2{max-width:17ch;font-size:clamp(36px,3.7vw,52px)}
-.gala-cap-page--compact .gala-cap-connected__links{margin-top:30px}
-.gala-cap-page--compact .gala-cap-connected__links>a{min-height:140px;padding:20px}
+.gala-cap-page--compact .gala-cap-connected__links{margin-top:26px}
+.gala-cap-page--compact .gala-cap-connected__links>a{min-height:132px;padding:18px}
 .gala-cap-page--compact .gala-cap-connected__links h3{margin-top:17px;font-size:20px}
 .gala-cap-page--compact .gala-cap-connected__links p{display:none}
 .gala-cap-page--compact .gala-cap-connected__links>a>span{padding-top:16px}
-.gala-cap-page--compact .gala-cap-cta{padding:58px 0}
+.gala-cap-page--compact .gala-cap-cta{padding:52px 0}
 .gala-cap-page--compact .gala-cap-cta h2{max-width:12ch;font-size:clamp(42px,4.4vw,62px)}
 
 @media(max-width:1100px){
@@ -280,11 +280,11 @@
   .gala-cap-connected__links h3{margin-top:54px}
   .gala-cap-cta{padding:82px 0}
   .gala-cap-cta__action .gala-cap-button{width:100%}
-  .gala-cap-page--compact .gala-cap-hero,.gala-cap-page--compact .gala-cap-hero__inner{min-height:650px}
-  .gala-cap-page--compact .gala-cap-hero__copy{padding-bottom:48px}
-  .gala-cap-page--compact .gala-cap-section{padding:66px 0}
-  .gala-cap-page--compact .gala-cap-strategy__media{height:66vw;min-height:260px}
-  .gala-cap-page--compact .gala-cap-strategy__content{padding:52px 20px 56px}
+  .gala-cap-page--compact .gala-cap-hero,.gala-cap-page--compact .gala-cap-hero__inner{min-height:610px}
+  .gala-cap-page--compact .gala-cap-hero__copy{padding-bottom:40px}
+  .gala-cap-page--compact .gala-cap-section{padding:60px 0}
+  .gala-cap-page--compact .gala-cap-strategy__media{height:62vw;min-height:240px}
+  .gala-cap-page--compact .gala-cap-strategy__content{padding:46px 20px 50px}
   .gala-cap-page--compact .gala-cap-strategy__content h2{font-size:clamp(38px,10.5vw,48px)}
   .gala-cap-page--compact .gala-cap-strategy__intro{font-size:14px;line-height:1.65}
   .gala-cap-page--compact .gala-cap-strategy__tracks{margin-top:24px}
@@ -305,12 +305,12 @@
   .gala-cap-page--compact .gala-cap-deliverables__list article svg{width:25px;height:25px}
   .gala-cap-page--compact .gala-cap-deliverables__list h3{font-size:19px}
   .gala-cap-page--compact .gala-cap-deliverables__list p{margin-top:9px;font-size:13px;line-height:1.55}
-  .gala-cap-page--compact .gala-cap-connected{padding:60px 0}
+  .gala-cap-page--compact .gala-cap-connected{padding:50px 0}
   .gala-cap-page--compact .gala-cap-connected__header{grid-template-columns:1fr;gap:20px}
   .gala-cap-page--compact .gala-cap-connected__links{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:34px}
   .gala-cap-page--compact .gala-cap-connected__links>a{min-height:150px;padding:20px}
   .gala-cap-page--compact .gala-cap-connected__links h3{margin-top:18px;font-size:19px}
-  .gala-cap-page--compact .gala-cap-cta{padding:54px 0}
+  .gala-cap-page--compact .gala-cap-cta{padding:48px 0}
   .gala-cap-page--compact .gala-cap-cta h2{font-size:clamp(38px,10.5vw,48px)}
 }
 
