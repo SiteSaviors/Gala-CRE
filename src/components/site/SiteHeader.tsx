@@ -25,7 +25,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
     currentPath === "/contact" ||
     currentPath.startsWith("/investors") ||
     currentPath.startsWith("/services") ||
-    currentPath.startsWith("/properties");
+    currentPath.startsWith("/properties/");
   const [scrolled, setScrolled] = useState(!startsTransparent);
 
   useEffect(() => {

@@ -502,6 +502,9 @@ describe("Gala CRE public pages", () => {
 
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
+    expect(screen.getByRole("heading", { name: "Properties", level: 1 })).toBeInTheDocument();
+    expect(document.querySelector(".gala-inner-hero")).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Search properties" })).toBeInTheDocument();
     expect(screen.getByText("8 properties")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();

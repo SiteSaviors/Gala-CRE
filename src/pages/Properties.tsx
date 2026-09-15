@@ -64,16 +64,15 @@ const Properties = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/properties" />
       <main className="gala-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero">
+        <section className="gala-property-catalog">
           <div className="gala-shell">
-            <div className="gala-kicker">Properties</div>
-            <h1>Find the right commercial opportunity.</h1>
-            <p>Explore current opportunities and selected completed transactions represented by Gala CRE Group across North Carolina.</p>
-          </div>
-        </section>
-
-        <section className="gala-section gala-section--light gala-properties-section">
-          <div className="gala-shell">
+            <header className="gala-property-catalog__header">
+              <div>
+                <div className="gala-kicker gala-kicker--dark">Property Catalog</div>
+                <h1>Properties</h1>
+              </div>
+              <p>Search current commercial opportunities and selected completed transactions represented by Gala CRE Group.</p>
+            </header>
             {selectedAdvisor ? (
               <div className="gala-advisor-filter" role="status">
                 <div>
@@ -83,41 +82,43 @@ const Properties = () => {
                 <button type="button" onClick={reset}><X size={15} aria-hidden="true" /> View all properties</button>
               </div>
             ) : null}
-            <div className="gala-property-toolbar" aria-label="Property filters">
-              <label className="gala-search">
-                <Search size={18} aria-hidden="true" />
-                <span className="sr-only">Search properties</span>
-                <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by property, city, or address" />
-              </label>
-              <div className="gala-select-wrap"><SlidersHorizontal size={16} aria-hidden="true" />
-                <select aria-label="Asset type" value={assetType} onChange={(event) => setAssetType(event.target.value as "All" | PropertyAssetType)}>
-                  <option value="All">All asset types</option>
-                  {propertyAssetTypes.map((item) => <option key={item}>{item}</option>)}
+            <div className="gala-property-controls">
+              <div className="gala-property-toolbar" aria-label="Property filters">
+                <label className="gala-search">
+                  <Search size={18} aria-hidden="true" />
+                  <span className="sr-only">Search properties</span>
+                  <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by property, city, or address" />
+                </label>
+                <div className="gala-select-wrap"><SlidersHorizontal size={16} aria-hidden="true" />
+                  <select aria-label="Asset type" value={assetType} onChange={(event) => setAssetType(event.target.value as "All" | PropertyAssetType)}>
+                    <option value="All">All asset types</option>
+                    {propertyAssetTypes.map((item) => <option key={item}>{item}</option>)}
+                  </select>
+                </div>
+                <select aria-label="Offering type" value={offeringType} onChange={(event) => setOfferingType(event.target.value as "All" | PropertyOfferingType)}>
+                  <option value="All">Sale or lease</option>
+                  {propertyOfferingTypes.map((item) => <option key={item}>{item}</option>)}
                 </select>
+                <select aria-label="Property status" value={status} onChange={(event) => setStatus(event.target.value as "All" | PropertyStatus)}>
+                  <option value="All">All statuses</option>
+                  {propertyStatuses.map((item) => <option key={item}>{item}</option>)}
+                </select>
+                {hasFilters ? <button type="button" className="gala-filter-reset" onClick={reset}><X size={16} /> Reset</button> : null}
               </div>
-              <select aria-label="Offering type" value={offeringType} onChange={(event) => setOfferingType(event.target.value as "All" | PropertyOfferingType)}>
-                <option value="All">Sale or lease</option>
-                {propertyOfferingTypes.map((item) => <option key={item}>{item}</option>)}
-              </select>
-              <select aria-label="Property status" value={status} onChange={(event) => setStatus(event.target.value as "All" | PropertyStatus)}>
-                <option value="All">All statuses</option>
-                {propertyStatuses.map((item) => <option key={item}>{item}</option>)}
-              </select>
-              {hasFilters ? <button type="button" className="gala-filter-reset" onClick={reset}><X size={16} /> Reset</button> : null}
-            </div>
 
-            <div className="gala-results-head">
-              <div className="gala-results-head__summary">
-                <span>{filtered.length} {filtered.length === 1 ? "property" : "properties"}</span>
-                <span>Active listings appear first</span>
-              </div>
-              <div className="gala-property-view-toggle" aria-label="Property view">
-                <button type="button" className={view === "grid" ? "active" : ""} aria-pressed={view === "grid"} onClick={() => selectView("grid")}>
-                  <Grid3X3 size={15} aria-hidden="true" /> Grid
-                </button>
-                <button type="button" className={view === "map" ? "active" : ""} aria-pressed={view === "map"} onClick={() => selectView("map")}>
-                  <Map size={15} aria-hidden="true" /> Map
-                </button>
+              <div className="gala-results-head">
+                <div className="gala-results-head__summary">
+                  <span>{filtered.length} {filtered.length === 1 ? "property" : "properties"}</span>
+                  <span>Active listings appear first</span>
+                </div>
+                <div className="gala-property-view-toggle" aria-label="Property view">
+                  <button type="button" className={view === "grid" ? "active" : ""} aria-pressed={view === "grid"} onClick={() => selectView("grid")}>
+                    <Grid3X3 size={15} aria-hidden="true" /> Grid
+                  </button>
+                  <button type="button" className={view === "map" ? "active" : ""} aria-pressed={view === "map"} onClick={() => selectView("map")}>
+                    <Map size={15} aria-hidden="true" /> Map
+                  </button>
+                </div>
               </div>
             </div>
 
