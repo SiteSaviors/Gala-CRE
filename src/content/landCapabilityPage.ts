@@ -3,12 +3,12 @@ import { buildCapabilityPage } from "@/content/capabilityPageBlueprint";
 
 export const landCapabilityPage = buildCapabilityPage({
   path: "/services/investment-sales/land",
-  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  parent: { label: "Investment Sales", href: "/services/investment-sales" },
   image: landInvestmentSales,
   metadataDescription:
     "Commercial land sale advisory connecting use, entitlement position, access, utilities, physical constraints, buyer fit, diligence, and transaction execution.",
   hero: {
-    eyebrow: "GalaSales · Land",
+    eyebrow: "Investment Sales · Land",
     title: "Land Investment Sales",
     lead:
       "Position the site around what a qualified buyer can verify, approve, finance, and execute—not acreage alone.",
@@ -121,25 +121,25 @@ export const landCapabilityPage = buildCapabilityPage({
       "When value depends on planning, infrastructure, or capital, Gala can connect the sale conversation to the next commercial decision without blurring specialist responsibilities.",
     links: [
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Site Strategy",
         body: "Clarify intended use, constraints, stakeholders, and the most useful next diligence steps before committing to a path.",
         href: "/services/development-services/site-strategy",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Entitlements",
         body: "Coordinate the approval path, consultant team, jurisdictional milestones, and ownership decisions required to advance a site.",
         href: "/services/development-services/entitlements",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Strategy",
         body: "Organize debt, equity, timing, and funding dependencies around the opportunity's actual execution plan.",
         href: "/services/capital-markets/capital-strategy",
       },
       {
-        label: "GalaSales",
+        label: "Investment Sales",
         title: "Retail",
         body: "Sale advisory for income, owner-user, or redevelopment-oriented retail properties where leases and site utility both matter.",
         href: "/services/investment-sales/retail",

@@ -119,9 +119,9 @@ const landlordRepresentation: CapabilityPageContent = {
       "Strategic landlord representation for commercial property owners across Raleigh-Durham and the Research Triangle, from market positioning through lease execution.",
     image: galaBrokerCapability,
   },
-  parent: { label: "GalaBroker", href: "/services/brokerage" },
+  parent: { label: "Brokerage", href: "/services/brokerage" },
   hero: {
-    eyebrow: "GalaBroker · Landlord Representation",
+    eyebrow: "Brokerage · Landlord Representation",
     title: "Landlord Representation",
     lead:
       "Protect the income, positioning, and long-term value of your property with a leasing strategy built around ownership outcomes.",
@@ -301,25 +301,25 @@ const landlordRepresentation: CapabilityPageContent = {
       "When an assignment reaches beyond leasing, Gala can connect the conversation across the broader commercial platform.",
     links: [
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Tenant Representation",
         body: "A disciplined occupier-side process for businesses evaluating and securing commercial space.",
         href: "/services/brokerage/tenant-representation",
       },
       {
-        label: "GalaSales",
+        label: "Investment Sales",
         title: "Investment Sales",
         body: "Disposition and acquisition strategy for commercial owners and private investors.",
         href: "/services/investment-sales",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Development Services",
         body: "Early-stage strategy and coordination for properties with development or repositioning potential.",
         href: "/services/development-services",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Markets",
         body: "Debt and equity guidance aligned with the realities of the asset and transaction.",
         href: "/services/capital-markets",
@@ -350,9 +350,9 @@ const tenantRepresentation: CapabilityPageContent = {
       "Business-led tenant representation across Raleigh-Durham and the Research Triangle, from occupancy requirements and site selection through lease execution.",
     image: galaCapitalCapability,
   },
-  parent: { label: "GalaBroker", href: "/services/brokerage" },
+  parent: { label: "Brokerage", href: "/services/brokerage" },
   hero: {
-    eyebrow: "GalaBroker · Tenant Representation",
+    eyebrow: "Brokerage · Tenant Representation",
     title: "Tenant Representation",
     lead:
       "Turn real estate into a business decision with a search, comparison, and negotiation process built around how your company operates.",
@@ -544,25 +544,25 @@ const tenantRepresentation: CapabilityPageContent = {
       "When the requirement touches ownership, development, or capital questions, Gala can connect the conversation across its broader commercial platform.",
     links: [
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Landlord Representation",
         body: "Owner-focused positioning, marketing, tenant qualification, and lease execution.",
         href: "/services/brokerage/landlord-representation",
       },
       {
-        label: "GalaSales",
+        label: "Investment Sales",
         title: "Investment Sales",
         body: "Commercial acquisition and disposition strategy for owners and private investors.",
         href: "/services/investment-sales",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Development Services",
         body: "Site strategy and coordination when an occupancy need involves development or repositioning.",
         href: "/services/development-services",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Markets",
         body: "Debt and equity guidance for commercial opportunities and transactions.",
         href: "/services/capital-markets",
@@ -594,9 +594,9 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
       "Industrial property sale advisory for owners and investors, connecting functional real estate, operating context, buyer positioning, diligence, and transaction execution.",
     image: industrialInvestmentSales,
   },
-  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  parent: { label: "Investment Sales", href: "/services/investment-sales" },
   hero: {
-    eyebrow: "GalaSales · Industrial",
+    eyebrow: "Investment Sales · Industrial",
     title: "Industrial Investment Sales",
     lead:
       "Position the building around what industrial buyers actually underwrite: durable income, functional utility, physical condition, and a credible path through diligence.",
@@ -718,25 +718,25 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
       "Move directly into the occupancy, land, development, or capital questions surrounding the sale.",
     links: [
       {
-        label: "GalaSales",
+        label: "Investment Sales",
         title: "Land",
         body: "Sale strategy for sites where access, utilities, approvals, and timing shape value.",
         href: "/services/investment-sales/land",
       },
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Tenant Representation",
         body: "Occupier-side search and negotiation when a sale creates a relocation requirement.",
         href: "/services/brokerage/tenant-representation",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Development Oversight",
         body: "Coordination for industrial repositioning or development work.",
         href: "/services/development-services/development-oversight",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Strategy",
         body: "Debt and equity planning aligned with the asset and execution plan.",
         href: "/services/capital-markets/capital-strategy",
@@ -767,9 +767,9 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
       "Multifamily sale advisory for owners and investors, connecting property operations, rent-roll performance, physical condition, buyer underwriting, and transaction execution.",
     image: multifamilyInvestmentSales,
   },
-  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  parent: { label: "Investment Sales", href: "/services/investment-sales" },
   hero: {
-    eyebrow: "GalaSales · Multifamily",
+    eyebrow: "Investment Sales · Multifamily",
     title: "Multifamily Investment Sales",
     lead:
       "Bring the operating story, physical asset, and buyer underwriting into one sale process built to make performance understandable and risk visible.",
@@ -940,19 +940,19 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
       "Gala can connect the sale conversation to capital, development, and property-management coordination when those decisions affect timing or execution.",
     links: [
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Strategy",
         body: "Debt and equity planning aligned with the asset, sponsorship, timing, and investment plan.",
         href: "/services/capital-markets/capital-strategy",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Transaction Coordination",
         body: "Organized information flow and milestone visibility across ownership, capital sources, advisors, and closing parties.",
         href: "/services/capital-markets/transaction-coordination",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Development Oversight",
         body: "Coordination across consultants, approvals, schedule, and ownership decisions for development or repositioning work.",
         href: "/services/development-services/development-oversight",
@@ -989,9 +989,9 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
       "Retail property sale advisory for owners and investors, connecting tenancy, lease structure, trade-area context, access, site utility, buyer positioning, and diligence.",
     image: retailInvestmentSales,
   },
-  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  parent: { label: "Investment Sales", href: "/services/investment-sales" },
   hero: {
-    eyebrow: "GalaSales · Retail",
+    eyebrow: "Investment Sales · Retail",
     title: "Retail Investment Sales",
     lead:
       "Position the income and the real estate together with a sale process built around tenancy, lease structure, customer access, site utility, and buyer fit.",
@@ -1162,25 +1162,25 @@ const retailInvestmentSalesPage: CapabilityPageContent = {
       "Gala can connect the sale conversation to leasing, land, development, and capital decisions when they materially affect the property's timing or buyer story.",
     links: [
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Landlord Representation",
         body: "Owner-focused positioning, prospecting, tenant qualification, and lease execution when occupancy is part of the value plan.",
         href: "/services/brokerage/landlord-representation",
       },
       {
-        label: "GalaSales",
+        label: "Investment Sales",
         title: "Land",
         body: "Sale strategy for commercial sites where access, utilities, approvals, and timing determine buyer fit.",
         href: "/services/investment-sales/land",
       },
       {
-        label: "GalaDevelop",
+        label: "Development",
         title: "Site Strategy",
         body: "Early coordination around intended use, access, infrastructure, market fit, and the approval path.",
         href: "/services/development-services/site-strategy",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Strategy",
         body: "Debt and equity planning aligned with the asset, sponsorship, timing, and transaction strategy.",
         href: "/services/capital-markets/capital-strategy",
@@ -1211,9 +1211,9 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
       "Office property sale advisory for owners and investors, connecting occupancy, lease rollover, tenant improvements, space quality, capital exposure, buyer positioning, and diligence.",
     image: officeInvestmentSales,
   },
-  parent: { label: "GalaSales", href: "/services/investment-sales" },
+  parent: { label: "Investment Sales", href: "/services/investment-sales" },
   hero: {
-    eyebrow: "GalaSales · Office",
+    eyebrow: "Investment Sales · Office",
     title: "Office Investment Sales",
     lead:
       "Build the sale strategy around the property's real occupancy, lease exposure, space competitiveness, and capital requirements—not yesterday's assumptions.",
@@ -1384,19 +1384,19 @@ const officeInvestmentSalesPage: CapabilityPageContent = {
       "Gala can connect the disposition conversation to leasing, occupancy, capital, and property-management coordination when those decisions affect marketability or timing.",
     links: [
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Landlord Representation",
         body: "Owner-focused positioning, prospecting, tenant qualification, and lease execution when occupancy is central to the value plan.",
         href: "/services/brokerage/landlord-representation",
       },
       {
-        label: "GalaBroker",
+        label: "Brokerage",
         title: "Tenant Representation",
         body: "Business-led site selection and negotiation when an owner-user or tenant needs to renew, relocate, expand, or downsize.",
         href: "/services/brokerage/tenant-representation",
       },
       {
-        label: "GalaCapital",
+        label: "Capital Markets",
         title: "Capital Strategy",
         body: "Debt and equity planning aligned with occupancy, capital requirements, sponsorship, timing, and the transaction plan.",
         href: "/services/capital-markets/capital-strategy",

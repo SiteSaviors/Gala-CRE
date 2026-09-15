@@ -4,12 +4,12 @@ import { buildCapabilityPage } from "@/content/capabilityPageBlueprint";
 
 const siteStrategy = buildCapabilityPage({
   path: "/services/development-services/site-strategy",
-  parent: { label: "GalaDevelop", href: "/services/development-services" },
+  parent: { label: "Development", href: "/services/development-services" },
   image: siteStrategyEntitlements,
   metadataDescription:
     "Commercial site strategy connecting intended use, market fit, physical constraints, access, infrastructure, approvals, and a disciplined diligence roadmap.",
   hero: {
-    eyebrow: "GalaDevelop · Site Strategy",
+    eyebrow: "Development · Site Strategy",
     title: "Site Strategy",
     lead:
       "Test the site against the business plan early—before assumptions become expensive commitments.",
@@ -69,10 +69,10 @@ const siteStrategy = buildCapabilityPage({
     introduction:
       "Gala connects early evaluation to the approval, infrastructure, sale, and capital work that may follow once the opportunity is sufficiently understood.",
     links: [
-      { label: "GalaDevelop", title: "Entitlements", body: "Coordinate the jurisdictional path and the team required to advance a defined program.", href: "/services/development-services/entitlements" },
-      { label: "GalaDevelop", title: "Infrastructure", body: "Clarify access, utility, stormwater, and off-site dependencies affecting execution.", href: "/services/development-services/infrastructure" },
-      { label: "GalaSales", title: "Land", body: "Position a site for buyers based on verified use paths, constraints, and timing.", href: "/services/investment-sales/land" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Align funding structure and timing with the development plan and its dependencies.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Development", title: "Entitlements", body: "Coordinate the jurisdictional path and the team required to advance a defined program.", href: "/services/development-services/entitlements" },
+      { label: "Development", title: "Infrastructure", body: "Clarify access, utility, stormwater, and off-site dependencies affecting execution.", href: "/services/development-services/infrastructure" },
+      { label: "Investment Sales", title: "Land", body: "Position a site for buyers based on verified use paths, constraints, and timing.", href: "/services/investment-sales/land" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Align funding structure and timing with the development plan and its dependencies.", href: "/services/capital-markets/capital-strategy" },
     ],
   },
   cta: {
@@ -85,12 +85,12 @@ const siteStrategy = buildCapabilityPage({
 
 const entitlements = buildCapabilityPage({
   path: "/services/development-services/entitlements",
-  parent: { label: "GalaDevelop", href: "/services/development-services" },
+  parent: { label: "Development", href: "/services/development-services" },
   image: siteStrategyEntitlements,
   metadataDescription:
     "Commercial entitlement coordination aligning the proposed program, jurisdictional process, consultant team, public requirements, milestones, and ownership decisions.",
   hero: {
-    eyebrow: "GalaDevelop · Entitlements",
+    eyebrow: "Development · Entitlements",
     title: "Entitlements",
     lead:
       "Turn an intended program into an organized approval path with the right team, decisions, and dependencies visible.",
@@ -150,10 +150,10 @@ const entitlements = buildCapabilityPage({
     introduction:
       "Gala can coordinate the surrounding infrastructure, oversight, capital, and transaction conversations when they are material to the approval path.",
     links: [
-      { label: "GalaDevelop", title: "Site Strategy", body: "Clarify program fit and decision-driving unknowns before committing to the entitlement path.", href: "/services/development-services/site-strategy" },
-      { label: "GalaDevelop", title: "Infrastructure", body: "Coordinate access, utility, stormwater, and off-site dependencies alongside approvals.", href: "/services/development-services/infrastructure" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Keep ownership decisions, consultants, schedule, and execution priorities aligned as the project advances.", href: "/services/development-services/development-oversight" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Sequence funding decisions around approval risk, timing, and development milestones.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Development", title: "Site Strategy", body: "Clarify program fit and decision-driving unknowns before committing to the entitlement path.", href: "/services/development-services/site-strategy" },
+      { label: "Development", title: "Infrastructure", body: "Coordinate access, utility, stormwater, and off-site dependencies alongside approvals.", href: "/services/development-services/infrastructure" },
+      { label: "Development", title: "Development Oversight", body: "Keep ownership decisions, consultants, schedule, and execution priorities aligned as the project advances.", href: "/services/development-services/development-oversight" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Sequence funding decisions around approval risk, timing, and development milestones.", href: "/services/capital-markets/capital-strategy" },
     ],
   },
   cta: {
@@ -166,12 +166,12 @@ const entitlements = buildCapabilityPage({
 
 const infrastructure = buildCapabilityPage({
   path: "/services/development-services/infrastructure",
-  parent: { label: "GalaDevelop", href: "/services/development-services" },
+  parent: { label: "Development", href: "/services/development-services" },
   image: developmentInfrastructure,
   metadataDescription:
     "Commercial development infrastructure coordination covering access, utilities, stormwater, off-site obligations, specialist responsibilities, timing, and execution dependencies.",
   hero: {
-    eyebrow: "GalaDevelop · Infrastructure",
+    eyebrow: "Development · Infrastructure",
     title: "Infrastructure Coordination",
     lead:
       "Make access, utilities, stormwater, and off-site work visible before they control the project from the shadows.",
@@ -231,10 +231,10 @@ const infrastructure = buildCapabilityPage({
     introduction:
       "The same findings can affect entitlements, development sequencing, capital needs, buyer interest, and transaction conditions across the opportunity.",
     links: [
-      { label: "GalaDevelop", title: "Site Strategy", body: "Evaluate infrastructure as part of early program and site fit.", href: "/services/development-services/site-strategy" },
-      { label: "GalaDevelop", title: "Entitlements", body: "Coordinate infrastructure findings with jurisdictional review and approval milestones.", href: "/services/development-services/entitlements" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Track infrastructure decisions and dependencies across the broader project plan.", href: "/services/development-services/development-oversight" },
-      { label: "GalaCapital", title: "Debt", body: "Organize financing requirements around verified scope, budget, schedule, and delivery risk.", href: "/services/capital-markets/debt" },
+      { label: "Development", title: "Site Strategy", body: "Evaluate infrastructure as part of early program and site fit.", href: "/services/development-services/site-strategy" },
+      { label: "Development", title: "Entitlements", body: "Coordinate infrastructure findings with jurisdictional review and approval milestones.", href: "/services/development-services/entitlements" },
+      { label: "Development", title: "Development Oversight", body: "Track infrastructure decisions and dependencies across the broader project plan.", href: "/services/development-services/development-oversight" },
+      { label: "Capital Markets", title: "Debt", body: "Organize financing requirements around verified scope, budget, schedule, and delivery risk.", href: "/services/capital-markets/debt" },
     ],
   },
   cta: {
@@ -247,12 +247,12 @@ const infrastructure = buildCapabilityPage({
 
 const developmentOversight = buildCapabilityPage({
   path: "/services/development-services/development-oversight",
-  parent: { label: "GalaDevelop", href: "/services/development-services" },
+  parent: { label: "Development", href: "/services/development-services" },
   image: developmentInfrastructure,
   metadataDescription:
     "Owner-side commercial development oversight connecting decisions, consultants, approvals, budget inputs, schedule, risks, reporting, and transaction priorities.",
   hero: {
-    eyebrow: "GalaDevelop · Development Oversight",
+    eyebrow: "Development · Development Oversight",
     title: "Development Oversight",
     lead:
       "Keep ownership decisions, specialists, approvals, schedule, and commercial priorities moving as one coordinated project.",
@@ -312,10 +312,10 @@ const developmentOversight = buildCapabilityPage({
     introduction:
       "Gala can coordinate the surrounding site, approval, infrastructure, capital, and market conversations when those workstreams affect development decisions.",
     links: [
-      { label: "GalaDevelop", title: "Site Strategy", body: "Clarify the development brief, site fit, and decision-driving unknowns.", href: "/services/development-services/site-strategy" },
-      { label: "GalaDevelop", title: "Entitlements", body: "Organize jurisdictional milestones and the specialist-led approval path.", href: "/services/development-services/entitlements" },
-      { label: "GalaDevelop", title: "Infrastructure", body: "Track access, utilities, stormwater, off-site work, and provider dependencies.", href: "/services/development-services/infrastructure" },
-      { label: "GalaCapital", title: "Transaction Coordination", body: "Keep capital-source diligence and closing milestones connected to the development record.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Development", title: "Site Strategy", body: "Clarify the development brief, site fit, and decision-driving unknowns.", href: "/services/development-services/site-strategy" },
+      { label: "Development", title: "Entitlements", body: "Organize jurisdictional milestones and the specialist-led approval path.", href: "/services/development-services/entitlements" },
+      { label: "Development", title: "Infrastructure", body: "Track access, utilities, stormwater, off-site work, and provider dependencies.", href: "/services/development-services/infrastructure" },
+      { label: "Capital Markets", title: "Transaction Coordination", body: "Keep capital-source diligence and closing milestones connected to the development record.", href: "/services/capital-markets/transaction-coordination" },
     ],
   },
   cta: {

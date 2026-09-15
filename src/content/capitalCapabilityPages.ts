@@ -5,12 +5,12 @@ import { buildCapabilityPage } from "@/content/capabilityPageBlueprint";
 
 const debt = buildCapabilityPage({
   path: "/services/capital-markets/debt",
-  parent: { label: "GalaCapital", href: "/services/capital-markets" },
+  parent: { label: "Capital Markets", href: "/services/capital-markets" },
   image: capitalMarketsStrategy,
   metadataDescription:
     "Commercial real estate debt advisory organizing the financing request, lender fit, term comparison, diligence, and closing coordination around the asset and business plan.",
   hero: {
-    eyebrow: "GalaCapital · Debt",
+    eyebrow: "Capital Markets · Debt",
     title: "Debt Advisory",
     lead:
       "Build a financing process around the asset, sponsorship, business plan, repayment profile, and timing—not a generic lender list.",
@@ -70,10 +70,10 @@ const debt = buildCapabilityPage({
     introduction:
       "Gala can connect financing to the equity, development, acquisition, disposition, and transaction work that shapes the capital requirement.",
     links: [
-      { label: "GalaCapital", title: "Equity", body: "Organize the investment case and evaluate whether outside equity fits the opportunity.", href: "/services/capital-markets/equity" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Compare debt, equity, timing, and funding dependencies before choosing a structure.", href: "/services/capital-markets/capital-strategy" },
-      { label: "GalaCapital", title: "Transaction Coordination", body: "Keep lender diligence, documentation, conditions, and closing milestones visible.", href: "/services/capital-markets/transaction-coordination" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Connect development scope, decisions, schedule, and reporting to the capital plan.", href: "/services/development-services/development-oversight" },
+      { label: "Capital Markets", title: "Equity", body: "Organize the investment case and evaluate whether outside equity fits the opportunity.", href: "/services/capital-markets/equity" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Compare debt, equity, timing, and funding dependencies before choosing a structure.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Capital Markets", title: "Transaction Coordination", body: "Keep lender diligence, documentation, conditions, and closing milestones visible.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Development", title: "Development Oversight", body: "Connect development scope, decisions, schedule, and reporting to the capital plan.", href: "/services/development-services/development-oversight" },
     ],
   },
   cta: {
@@ -86,12 +86,12 @@ const debt = buildCapabilityPage({
 
 const equity = buildCapabilityPage({
   path: "/services/capital-markets/equity",
-  parent: { label: "GalaCapital", href: "/services/capital-markets" },
+  parent: { label: "Capital Markets", href: "/services/capital-markets" },
   image: capitalMarketsStrategy,
   metadataDescription:
     "Commercial real estate equity advisory organizing the investment case, sponsor objectives, structure, investor fit, diligence, and process coordination.",
   hero: {
-    eyebrow: "GalaCapital · Equity",
+    eyebrow: "Capital Markets · Equity",
     title: "Equity Advisory",
     lead:
       "Present the opportunity, sponsorship, risk, economics, and execution plan clearly enough to test real alignment.",
@@ -151,10 +151,10 @@ const equity = buildCapabilityPage({
     introduction:
       "Gala can connect the partnership discussion to debt, development, transaction, and investment-sales decisions when they materially affect structure or timing.",
     links: [
-      { label: "GalaCapital", title: "Debt", body: "Evaluate lender fit and debt terms alongside the proposed equity structure.", href: "/services/capital-markets/debt" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Sequence debt and equity decisions around the business plan and funding milestones.", href: "/services/capital-markets/capital-strategy" },
-      { label: "GalaCapital", title: "Transaction Coordination", body: "Organize cross-party diligence, conditions, documentation, and closing milestones.", href: "/services/capital-markets/transaction-coordination" },
-      { label: "GalaSales", title: "Investment Sales", body: "Connect acquisition or disposition strategy to the investment thesis and capital plan.", href: "/services/investment-sales" },
+      { label: "Capital Markets", title: "Debt", body: "Evaluate lender fit and debt terms alongside the proposed equity structure.", href: "/services/capital-markets/debt" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Sequence debt and equity decisions around the business plan and funding milestones.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Capital Markets", title: "Transaction Coordination", body: "Organize cross-party diligence, conditions, documentation, and closing milestones.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Investment Sales", title: "Investment Sales", body: "Connect acquisition or disposition strategy to the investment thesis and capital plan.", href: "/services/investment-sales" },
     ],
   },
   cta: {
@@ -167,12 +167,12 @@ const equity = buildCapabilityPage({
 
 const capitalStrategy = buildCapabilityPage({
   path: "/services/capital-markets/capital-strategy",
-  parent: { label: "GalaCapital", href: "/services/capital-markets" },
+  parent: { label: "Capital Markets", href: "/services/capital-markets" },
   image: capitalMarketsStrategy,
   metadataDescription:
     "Commercial real estate capital strategy aligning debt, equity, timing, risk, ownership objectives, funding milestones, and execution alternatives.",
   hero: {
-    eyebrow: "GalaCapital · Capital Strategy",
+    eyebrow: "Capital Markets · Capital Strategy",
     title: "Capital Strategy",
     lead:
       "Make the debt, equity, timing, and ownership tradeoffs visible before individual terms dictate the plan.",
@@ -232,10 +232,10 @@ const capitalStrategy = buildCapabilityPage({
     introduction:
       "Gala can carry the framework into focused debt, equity, transaction, and development conversations as the client selects a path.",
     links: [
-      { label: "GalaCapital", title: "Debt", body: "Prepare and run a focused lender process around the selected financing requirement.", href: "/services/capital-markets/debt" },
-      { label: "GalaCapital", title: "Equity", body: "Organize the investment case and test fit with relevant equity relationships.", href: "/services/capital-markets/equity" },
-      { label: "GalaCapital", title: "Transaction Coordination", body: "Keep diligence, documentation, conditions, and funding milestones moving across parties.", href: "/services/capital-markets/transaction-coordination" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Connect capital milestones to approvals, infrastructure, schedule, and ownership decisions.", href: "/services/development-services/development-oversight" },
+      { label: "Capital Markets", title: "Debt", body: "Prepare and run a focused lender process around the selected financing requirement.", href: "/services/capital-markets/debt" },
+      { label: "Capital Markets", title: "Equity", body: "Organize the investment case and test fit with relevant equity relationships.", href: "/services/capital-markets/equity" },
+      { label: "Capital Markets", title: "Transaction Coordination", body: "Keep diligence, documentation, conditions, and funding milestones moving across parties.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Development", title: "Development Oversight", body: "Connect capital milestones to approvals, infrastructure, schedule, and ownership decisions.", href: "/services/development-services/development-oversight" },
     ],
   },
   cta: {
@@ -248,12 +248,12 @@ const capitalStrategy = buildCapabilityPage({
 
 const transactionCoordinationPage = buildCapabilityPage({
   path: "/services/capital-markets/transaction-coordination",
-  parent: { label: "GalaCapital", href: "/services/capital-markets" },
+  parent: { label: "Capital Markets", href: "/services/capital-markets" },
   image: transactionCoordination,
   metadataDescription:
     "Commercial real estate capital transaction coordination connecting diligence, third-party reports, documentation, conditions, funding, parties, and closing milestones.",
   hero: {
-    eyebrow: "GalaCapital · Transaction Coordination",
+    eyebrow: "Capital Markets · Transaction Coordination",
     title: "Transaction Coordination",
     lead:
       "Keep information, decisions, diligence, conditions, and closing milestones visible across every party in the capital process.",
@@ -313,10 +313,10 @@ const transactionCoordinationPage = buildCapabilityPage({
     introduction:
       "Gala can connect transaction control to the debt, equity, capital-strategy, and development decisions that create the closing requirements.",
     links: [
-      { label: "GalaCapital", title: "Debt", body: "Prepare the lender request and compare financing alternatives before execution begins.", href: "/services/capital-markets/debt" },
-      { label: "GalaCapital", title: "Equity", body: "Organize investor fit, structure, diligence, and partnership milestones.", href: "/services/capital-markets/equity" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Define the selected capital path, dependencies, and funding sequence.", href: "/services/capital-markets/capital-strategy" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Keep project milestones and ownership decisions connected to capital conditions and timing.", href: "/services/development-services/development-oversight" },
+      { label: "Capital Markets", title: "Debt", body: "Prepare the lender request and compare financing alternatives before execution begins.", href: "/services/capital-markets/debt" },
+      { label: "Capital Markets", title: "Equity", body: "Organize investor fit, structure, diligence, and partnership milestones.", href: "/services/capital-markets/equity" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Define the selected capital path, dependencies, and funding sequence.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Development", title: "Development Oversight", body: "Keep project milestones and ownership decisions connected to capital conditions and timing.", href: "/services/development-services/development-oversight" },
     ],
   },
   cta: {
@@ -401,10 +401,10 @@ export const propertyManagementCapabilityPage = buildCapabilityPage({
     introduction:
       "Gala can connect the operating conversation to leasing, investment sales, capital, and development work when those decisions require shared context.",
     links: [
-      { label: "GalaBroker", title: "Landlord Representation", body: "Connect leasing strategy and prospect activity to current property operations.", href: "/services/brokerage/landlord-representation" },
-      { label: "GalaSales", title: "Investment Sales", body: "Prepare an ownership and operating record that supports a future disposition process.", href: "/services/investment-sales" },
-      { label: "GalaCapital", title: "Capital Strategy", body: "Align operating needs, reserves, capital work, and financing decisions.", href: "/services/capital-markets/capital-strategy" },
-      { label: "GalaDevelop", title: "Development Oversight", body: "Coordinate ownership decisions when renovation, repositioning, or development work changes operations.", href: "/services/development-services/development-oversight" },
+      { label: "Brokerage", title: "Landlord Representation", body: "Connect leasing strategy and prospect activity to current property operations.", href: "/services/brokerage/landlord-representation" },
+      { label: "Investment Sales", title: "Investment Sales", body: "Prepare an ownership and operating record that supports a future disposition process.", href: "/services/investment-sales" },
+      { label: "Capital Markets", title: "Capital Strategy", body: "Align operating needs, reserves, capital work, and financing decisions.", href: "/services/capital-markets/capital-strategy" },
+      { label: "Development", title: "Development Oversight", body: "Coordinate ownership decisions when renovation, repositioning, or development work changes operations.", href: "/services/development-services/development-oversight" },
     ],
   },
   cta: {

@@ -41,7 +41,7 @@ export const services: Service[] = [
   {
     slug: "brokerage",
     name: "Brokerage",
-    brandName: "GalaBroker",
+    brandName: "Brokerage",
     homepageSummary: "Commercial leasing and occupancy representation.",
     eyebrow: "Landlord + Tenant Representation",
     summary: "Commercial representation grounded in clear advice, local knowledge, and disciplined execution.",
@@ -103,7 +103,7 @@ export const services: Service[] = [
   {
     slug: "investment-sales",
     name: "Investment Sales",
-    brandName: "GalaSales",
+    brandName: "Investment Sales",
     homepageSummary: "Commercial property acquisitions, dispositions, and marketing.",
     eyebrow: "Private Capital + Commercial Assets",
     summary: "Sale advisory for commercial owners and private investors across the primary asset classes.",
@@ -169,7 +169,7 @@ export const services: Service[] = [
   {
     slug: "development-services",
     name: "Development Services",
-    brandName: "GalaDevelop",
+    brandName: "Development",
     homepageSummary: "Commercial development planning and execution.",
     eyebrow: "From Site Strategy to Execution",
     summary: "Predevelopment guidance that turns complex land and development questions into a clearer path forward.",
@@ -225,7 +225,7 @@ export const services: Service[] = [
   {
     slug: "capital-markets",
     name: "Capital Markets",
-    brandName: "GalaCapital",
+    brandName: "Capital Markets",
     homepageSummary: "Debt and equity sourcing for commercial opportunities.",
     eyebrow: "Debt + Equity Access",
     summary: "Capital guidance designed to align financing strategy with the realities of the opportunity.",
