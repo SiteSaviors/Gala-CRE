@@ -1,3 +1,8 @@
+import podcastImage from "@/assets/news/gaurang-gala-podcast.webp";
+import pittardSearsImage from "@/assets/news/pittard-sears-coverage.webp";
+import franklinImage from "@/assets/news/the-franklin-coverage.webp";
+import westCaryImage from "@/assets/news/west-cary-townhomes-coverage.webp";
+
 export type NewsFormat = "Podcast" | "News Coverage";
 
 export type NewsItem = {
@@ -9,6 +14,8 @@ export type NewsItem = {
   format: NewsFormat;
   summary: string;
   associatedEntity: string;
+  image: string;
+  imageAlt: string;
   url: string;
   homepage: boolean;
   featured: boolean;
@@ -28,6 +35,8 @@ export const newsItems: NewsItem[] = [
     summary:
       "A conversation about zoning, entitlements, capital readiness, land value, and the infrastructure shaping the Southeast's next phase of growth.",
     associatedEntity: "Gala Investments · Radius Capital Development",
+    image: podcastImage,
+    imageAlt: "The Investor podcast artwork featuring Gaurang Gala",
     url: "https://pod.wave.co/podcast/the-investor-with-joel-palathinkal/gaurang-galla-founder-of-gala-investments-llc-and-principal-at-radius-capital-development",
     homepage: true,
     featured: true,
@@ -42,6 +51,8 @@ export const newsItems: NewsItem[] = [
     summary:
       "Triangle Business Journal reported on a proposed Chatham County community near Research Triangle Park and the Apple campus site.",
     associatedEntity: "Legacy Carolina Development",
+    image: pittardSearsImage,
+    imageAlt: "Conceptual site plan for the Pittard Sears Road community",
     url: "https://www.bizjournals.com/triangle/news/2025/07/25/chatham-cary-annexation-homes-cali-transplants-rtp.html",
     homepage: true,
     featured: false,
@@ -56,6 +67,8 @@ export const newsItems: NewsItem[] = [
     summary:
       "The News & Observer covered plans for The Franklin, a proposed mixed-use condominium project opposite Downtown Cary Park.",
     associatedEntity: "Gala Investments",
+    image: franklinImage,
+    imageAlt: "Architectural rendering of The Franklin in downtown Cary",
     url: "https://www.newsobserver.com/news/local/counties/wake-county/article290132709.html",
     homepage: true,
     featured: false,
@@ -70,6 +83,8 @@ export const newsItems: NewsItem[] = [
     summary:
       "Coverage of a planned 55-townhome community along the Highway 55 corridor in west Cary.",
     associatedEntity: "Gala Investments",
+    image: westCaryImage,
+    imageAlt: "Rendering of the Terraces at West Cary",
     url: "https://www.bizjournals.com/triangle/news/2023/05/16/cary-new-townhomes-development-new-homes.html",
     homepage: false,
     featured: false,

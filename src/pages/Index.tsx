@@ -214,11 +214,11 @@ const Index = () => {
           <div className="gala-shell gala-home-cta__inner">
             <div>
               <div className="gala-kicker">Your Next Move</div>
-              <h2>Bring us your next commercial real estate decision.</h2>
+              <h2>Let’s move your next opportunity forward.</h2>
             </div>
             <div className="gala-home-cta__action">
-              <p>Whether you are evaluating a property, preparing to sell, looking for space, or considering development and capital, start with a focused conversation.</p>
-              <Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link>
+              <p>Whether you’re evaluating a property, preparing a sale, searching for space, or planning what comes next, start with a focused conversation.</p>
+              <Link to="/contact" className="gala-button">Let’s Connect <ArrowUpRight size={16} /></Link>
               <span>105 Kilmayne Dr, Suite C · Cary, NC</span>
             </div>
           </div>

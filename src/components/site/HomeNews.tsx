@@ -11,13 +11,13 @@ const HomeNews = () => {
       <div className="gala-shell">
         <div className="gala-news-preview__header">
           <div>
-            <div className="gala-kicker">In the News</div>
-            <h2 id="news-preview-title">Ideas, projects, and perspective shaping the market.</h2>
+            <div className="gala-kicker">Media &amp; Perspective</div>
+            <h2 id="news-preview-title">In the News</h2>
           </div>
           <div>
             <p>Coverage and conversations involving Gala leadership and affiliated real estate ventures.</p>
             <Link to="/news" className="gala-text-link">
-              View All News &amp; Media <ArrowUpRight size={16} aria-hidden="true" />
+              View All <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </div>
         </div>

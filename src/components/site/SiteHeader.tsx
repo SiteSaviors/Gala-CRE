@@ -79,7 +79,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
     <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Link to="/" className="nlogo" aria-label="Gala CRE Group home">
-        <BrandLogo />
+        <BrandLogo variant="navigation" />
       </Link>
       <ul className="nlinks">
         <li className="nservices" onMouseEnter={openServicesMega} onMouseLeave={scheduleServicesClose}>

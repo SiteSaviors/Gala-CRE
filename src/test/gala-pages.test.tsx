@@ -68,7 +68,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("button", { name: "Previous featured listing" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next featured listing" })).toBeInTheDocument();
     expect(screen.getByText("Drag or trackpad swipe to explore")).toBeInTheDocument();
-    expect(screen.getByText("4 active sale opportunities")).toBeInTheDocument();
+    expect(screen.getByText("5 active sale opportunities")).toBeInTheDocument();
     expect(screen.queryByText(/Featured Lease Opportunity/i)).not.toBeInTheDocument();
     expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
     expect(screen.getByText("$549,000")).toBeInTheDocument();
@@ -78,8 +78,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("$1,190,000")).toBeInTheDocument();
     expect(screen.getByText("5911 Family Farm Road")).toBeInTheDocument();
     expect(screen.getByText("$995,000")).toBeInTheDocument();
+    expect(screen.getByText("Lexington Townhome Site")).toBeInTheDocument();
+    expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
 
-    const lackeySlide = screen.getByRole("group", { name: "1 of 4" });
+    const lackeySlide = screen.getByRole("group", { name: "1 of 5" });
     expect(within(lackeySlide).getByRole("img", { name: "2301 Lackey Street in Lumberton, NC" })).toBeInTheDocument();
     expect(within(lackeySlide).getByText("Active")).toBeInTheDocument();
     expect(within(lackeySlide).getByText("For Sale · Retail")).toBeInTheDocument();
@@ -89,14 +91,14 @@ describe("Gala CRE public pages", () => {
     expect(within(lackeySlide).getByRole("img", { name: "Fueling canopy and pump area at 2301 Lackey Street" })).toBeInTheDocument();
     expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
 
-    expect(screen.getByRole("heading", { name: "Ideas, projects, and perspective shaping the market." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "In the News" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Gaurang Gala on land, capital, and opportunity/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Cary firm plans luxury homes/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /downtown Cary's tallest building/i })).toBeInTheDocument();
-    expect(screen.getByText("Gala Investments · Radius Capital Development")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /View All News & Media/i })).toHaveAttribute("href", "/news");
+    expect(screen.getByRole("link", { name: "View All" })).toHaveAttribute("href", "/news");
     expect(screen.queryByRole("heading", { name: "A recent transaction, at a glance." })).not.toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Bring us your next commercial real estate decision." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Let’s move your next opportunity forward." })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Let’s Connect" })).not.toHaveLength(0);
     expect(container).not.toHaveTextContent(/radiusbuilt\.com/i);
   });
 
@@ -234,11 +236,9 @@ describe("Gala CRE public pages", () => {
   it("presents attributed news and media without calling it Gala CRE coverage", () => {
     renderPage(<News />, "/news");
 
-    expect(screen.getByRole("heading", { name: /Ideas, projects, and perspective from across the Gala network/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "In the News" })).toBeInTheDocument();
     expect(screen.getAllByRole("article")).toHaveLength(4);
-    expect(screen.getByText("Legacy Carolina Development")).toBeInTheDocument();
-    expect(screen.getAllByText("Gala Investments")).toHaveLength(2);
-    expect(screen.getByText(/Coverage of an affiliated company is not presented as coverage of Gala CRE Group/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Latest coverage" })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /opens in a new tab/i })).toHaveLength(4);
     expect(screen.getAllByRole("link", { name: "News & Media" }).some((link) => link.getAttribute("href") === "/news")).toBe(true);
   });

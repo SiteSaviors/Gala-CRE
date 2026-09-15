@@ -18,6 +18,8 @@ describe("news and media source of truth", () => {
       expect(item.associatedEntity).not.toBe("Gala CRE Group");
       expect(item.url).toMatch(/^https:\/\//);
       expect(item.summary).toBeTruthy();
+      expect(item.image).toBeTruthy();
+      expect(item.imageAlt).toBeTruthy();
       expect(item.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     });
   });

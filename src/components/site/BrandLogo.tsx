@@ -1,11 +1,18 @@
 import galaLogo from "@/assets/gala-cre-logo.png";
+import galaNavLogo from "@/assets/gala-cre-nav-logo.avif";
 
-const BrandLogo = () => (
-  <span className="brand-logo" aria-hidden="true">
-    <span className="brand-logo__mark">
-      <img src={galaLogo} alt="" />
+type BrandLogoProps = {
+  variant?: "default" | "navigation";
+};
+
+const BrandLogo = ({ variant = "default" }: BrandLogoProps) => (
+  <span className={`brand-logo brand-logo--${variant}`} aria-hidden="true">
+    <span className={variant === "navigation" ? "brand-logo__nav-lockup" : "brand-logo__mark"}>
+      <img src={variant === "navigation" ? galaNavLogo : galaLogo} alt="" />
     </span>
-    <span className="brand-logo__tagline">The Developer’s Brokerage</span>
+    {variant === "default" ? (
+      <span className="brand-logo__tagline">The Developer’s Brokerage</span>
+    ) : null}
   </span>
 );
 

@@ -42,7 +42,7 @@ describe("property content model", () => {
     expect(properties.every((item) => item.offeringType === "For Sale")).toBe(true);
     expect(properties.filter((item) => item.status === "Active")).toHaveLength(5);
     expect(properties.filter((item) => item.status === "Closed")).toHaveLength(3);
-    expect(featuredProperties).toHaveLength(4);
+    expect(featuredProperties).toHaveLength(5);
     expect(propertyBySlug["2301-lackey-street"]?.priceDisplay).toBe("$549,000");
     expect(propertyBySlug["5047-yadkin-road"]?.acreageDisplay).toBe("3.46 acres");
     expect(propertyBySlug["611-703-church-street"]?.city).toBe("Morrisville");
@@ -58,7 +58,7 @@ describe("property content model", () => {
       assetType: "Land",
       status: "Active",
       advisorId: "gaurang-gala",
-      featured: false,
+      featured: true,
     });
     expect(propertyBySlug["802-bragg-boulevard"]).toMatchObject({
       sizeDisplay: "2,529 SF",

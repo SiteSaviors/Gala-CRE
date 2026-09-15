@@ -1196,7 +1196,7 @@ export const properties: Property[] = [
       disclosure:
         "All information is deemed reliable but is not guaranteed. The proposed 58-townhome program, approximately 6.6-acre figure, parcel composition, and historical approval record require independent verification. Historical records may contain expiration, completion, transfer, certification, or other conditions and do not establish current entitlement or permit readiness. Buyers should independently verify ownership, boundaries, acreage, access, utilities, approvals, conditions, and all development requirements.",
     },
-    featured: false,
+    featured: true,
     sortOrder: 5,
   },
   {

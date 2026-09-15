@@ -20,19 +20,15 @@ const News = () => {
         <section className="gala-inner-hero gala-news-hero">
           <div className="gala-shell">
             <div className="gala-kicker">News &amp; Media</div>
-            <h1>Ideas, projects, and perspective from across the Gala network.</h1>
-            <p>Third-party coverage and conversations involving Gala leadership and affiliated real estate ventures.</p>
+            <h1>In the News</h1>
+            <p>Coverage featuring Gala leadership and affiliated real estate projects.</p>
           </div>
         </section>
 
         <section className="gala-section gala-section--light gala-news-archive">
           <div className="gala-shell">
             <div className="gala-news-archive__intro">
-              <div>
-                <div className="gala-kicker gala-kicker--dark">Coverage &amp; Conversations</div>
-                <h2>Reporting and discussions from the Triangle and beyond.</h2>
-              </div>
-              <p>Each item identifies the venture discussed in the original source. Coverage of an affiliated company is not presented as coverage of Gala CRE Group.</p>
+              <h2>Latest coverage</h2>
             </div>
             <div className="gala-news-archive__grid">
               {newsItems.map((item) => <NewsCard item={item} featured={item.featured} key={item.id} />)}

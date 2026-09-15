@@ -99,6 +99,7 @@ const FeaturedListingsCarousel = () => {
     containScroll: "trimSnaps",
     dragFree: false,
     dragThreshold: 4,
+    loop: true,
   });
 
   const updateControls = useCallback(() => {

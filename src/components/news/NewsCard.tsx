@@ -1,4 +1,4 @@
-import { ArrowUpRight, Headphones, Newspaper } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { NewsItem } from "@/content/news";
 
 type NewsCardProps = {
@@ -7,23 +7,20 @@ type NewsCardProps = {
 };
 
 const NewsCard = ({ item, featured = false }: NewsCardProps) => {
-  const FormatIcon = item.format === "Podcast" ? Headphones : Newspaper;
-
   return (
     <article className={`gala-news-card${featured ? " gala-news-card--featured" : ""}`}>
-      <div className="gala-news-card__topline">
-        <span><FormatIcon size={15} aria-hidden="true" /> {item.format}</span>
-        <time dateTime={item.publishedAt}>{item.dateDisplay}</time>
+      <div className="gala-news-card__image-link">
+        <img src={item.image} alt={item.imageAlt} loading="lazy" />
       </div>
       <div className="gala-news-card__content">
-        <p className="gala-news-card__outlet">{item.outlet}</p>
-        <h3>{item.headline}</h3>
-        <p className="gala-news-card__summary">{item.summary}</p>
-      </div>
-      <div className="gala-news-card__footer">
-        <p><span>Associated entity</span>{item.associatedEntity}</p>
+        <p className="gala-news-card__meta">
+          <span>{item.outlet}</span>
+          <time dateTime={item.publishedAt}>{item.dateDisplay}</time>
+        </p>
+        <h3><a href={item.url} target="_blank" rel="noreferrer">{item.headline}</a></h3>
+        {featured && <p className="gala-news-card__summary">{item.summary}</p>}
         <a href={item.url} target="_blank" rel="noreferrer" className="gala-text-link">
-          {item.format === "Podcast" ? "Listen to Episode" : "Read Coverage"}
+          {item.format === "Podcast" ? "Listen" : "Read Article"}
           <ArrowUpRight size={16} aria-hidden="true" />
           <span className="sr-only"> on {item.outlet} (opens in a new tab)</span>
         </a>
