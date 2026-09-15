@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 05:17 CDT
+Last updated: 2026-09-15 05:28 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -208,16 +208,16 @@ Gate: Imagery strengthens comprehension and atmosphere without fabricating Gala 
 
 ## Phase 5 — Reconcile indexes, navigation, and conversion
 
-Status: **Not started**
+Status: **Complete**
 
-- [ ] Refine `/services` to introduce the shorter service system.
-- [ ] Verify every mega-menu and mobile-navigation route.
-- [ ] Standardize related-capability links and service CTA language/parameters.
-- [ ] Verify property catalog/detail connections and inquiry context.
-- [ ] Do not alter locked homepage design.
-- [ ] Preserve Team, Careers, Company, Contact, News, and footer except necessary broken-link corrections.
+- [x] Refine `/services` to introduce the shorter service system.
+- [x] Verify every mega-menu and mobile-navigation route.
+- [x] Standardize related-capability links and service CTA language/parameters.
+- [x] Verify property catalog/detail connections and inquiry context.
+- [x] Do not alter locked homepage design.
+- [x] Preserve Team, Careers, Company, Contact, News, and footer except necessary broken-link corrections.
 
-Gate: Every catalog, listing, and service pathway reaches the correct next action without dead ends or conflicting language.
+Gate: Every catalog, listing, and service pathway reaches the correct next action without dead ends or conflicting language. **Passed.**
 
 ## Phase 6 — Full QA, commit, and morning package
 
@@ -450,3 +450,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no approved management-partner identity, executed partnership terms, direct service territory, operating standards, case studies, quantified outcomes, testimonials, or assignment-specific imagery have been supplied. None blocks this partner-led route because no named partner, direct-management claim, performance promise, or client outcome is published.
 - Exact next action: Start Phase 5 by auditing `/services`, the desktop mega-menu, mobile service navigation, footer service links, related-capability links, and service inquiry CTAs against the shared route matrix; then implement one consistent service-index and conversion-path checkpoint without altering the locked homepage or unrelated pages.
+
+### 2026-09-15 — Phase 5 service discovery and conversion reconciliation
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `9cdec9f`, clean.
+- Source of truth checked: the goal objective and referenced plan, `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, the shared service route matrix, Services index, desktop mega-menu, mobile navigation, footer, service overview renderer, Contact query mapping, property catalog/detail inquiry paths, and the relevant tests and live routes.
+- Gate: make `/services` a concise visual gateway; keep every desktop, mobile, footer, and related-capability destination valid; preserve service inquiry context; and leave the locked homepage and unrelated pages unchanged.
+- Completed: shortened the Services hero; converted the five text-only directory entries into a responsive image-led two-row system; removed the redundant asset-label chapter already represented by Investment Sales; added direct overview and capability actions; standardized service and footer conversion language to “Let's Connect”; centralized overview inquiry URLs with service and optional focus context; taught Contact to preserve general service-index inquiries; clarified mobile service groups with capability counts; and corrected the mobile primary CTA’s visual treatment. The desktop mega-menu remains the direct capability navigator while mobile stays concise by routing through complete service overviews.
+- Files and routes changed: `src/pages/Services.tsx`, `src/pages/ServiceDetail.tsx`, `src/pages/Contact.tsx`, `src/components/site/SiteHeader.tsx`, `src/components/site/SiteFooter.tsx`, `src/content/services.ts`, `src/styles/gala.css`, `src/test/capability-routes.test.tsx`, `src/test/contact-page.test.tsx`, and this ledger; `/services`, all five `/services/:slug` overviews, the shared desktop/mobile service navigation, footer contact pathways, and `/contact` preselection.
+- Verification: `/services` measures 3,075px at 1280px, 3,698px at 834px, and 4,882px at 390px; all five card images load; the desktop grid resolves to 2+3 cards, the tablet grid to 2+2+1, and mobile to one column with zero horizontal overflow. Desktop keyboard focus opens the full capability menu and Escape closes it; the mobile navigation and service submenu open cleanly; the mobile primary CTA is visible; live Investment Sales navigation reaches `/contact?inquiry=investment-sales&source=investment-sales` with Investment Sales selected. Browser QA found no page-specific errors, only the existing React Router future warnings. Full suite: 110/110 passed. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings.
+- Intended commit: `refactor: reconcile service discovery and inquiry paths`.
+- Remaining working tree: expected clean after commit.
+- Blockers: no new blockers. The existing property-data, approved-media, case-study, and quantified-proof inputs listed above remain outside this shared-path checkpoint.
+- Exact next action: Start Phase 6 with one automated route-by-route desktop/tablet/mobile audit of every property and service URL, capturing page height, horizontal overflow, missing media, broken internal destinations, console errors, CTA inquiry context, metadata, and interactive module presence; fix only verified defects found, then prepare the final meeting-readiness package and commit/deployment record.

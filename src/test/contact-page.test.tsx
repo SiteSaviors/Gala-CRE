@@ -64,6 +64,11 @@ describe("advisor inquiry form", () => {
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
   });
 
+  it("preserves a general service-index inquiry source", () => {
+    renderContact("/contact?inquiry=general&source=services");
+    expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("General Inquiry");
+  });
+
   it("preserves Capital Markets exchange-financing context", () => {
     renderContact("/contact?inquiry=capital-markets&focus=1031-financing&source=gala-capital");
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Capital Markets");

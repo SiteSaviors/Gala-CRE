@@ -6,7 +6,7 @@ import Services from "@/pages/Services";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { capabilityPageByPath } from "@/content/capabilityPages";
-import { advertisedCapabilityRoutes, findCapabilityByRoute, serviceNavigationGroups } from "@/content/services";
+import { advertisedCapabilityRoutes, findCapabilityByRoute, getServiceInquiryHref, serviceNavigationGroups } from "@/content/services";
 
 const expectedCapabilities = [
   "Landlord Representation",
@@ -223,6 +223,29 @@ describe("advertised capability route matrix", () => {
     const serviceIndexPaths = Array.from(serviceIndex.container.querySelectorAll<HTMLAnchorElement>(".gala-service-card a[href]"))
       .map((link) => link.getAttribute("href"));
     advertisedCapabilityRoutes.forEach((entry) => expect(serviceIndexPaths, `service index ${entry.path}`).toContain(entry.path));
+    expect(serviceIndex.container.querySelectorAll(".gala-service-card__media img")).toHaveLength(serviceNavigationGroups.length);
+    expect(serviceIndex.container.querySelector(".gala-asset-list")).not.toBeInTheDocument();
+    expect(serviceIndex.container.querySelector(".gala-cta-band .gala-button")).toHaveAttribute(
+      "href",
+      "/contact?inquiry=general&source=services",
+    );
     serviceIndex.unmount();
+  });
+
+  it("keeps service-level inquiries and related capability links contextual and valid", () => {
+    expect(getServiceInquiryHref("brokerage")).toBe("/contact?inquiry=general&source=brokerage");
+    expect(getServiceInquiryHref("investment-sales", "industrial")).toBe(
+      "/contact?inquiry=investment-sales&focus=industrial&source=investment-sales",
+    );
+
+    const allowedDestinations = new Set([
+      ...serviceNavigationGroups.map((service) => service.href),
+      ...advertisedCapabilityRoutes.map((entry) => entry.path),
+    ]);
+    Object.values(capabilityPageByPath).forEach((page) => {
+      page.relatedCapabilities.links.forEach((link) => {
+        expect(allowedDestinations.has(link.href), `${page.path} → ${link.href}`).toBe(true);
+      });
+    });
   });
 });

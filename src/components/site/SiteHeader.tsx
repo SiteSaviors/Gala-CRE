@@ -130,7 +130,14 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <div className={`mnav-services${mobileServicesOpen ? " open" : ""}`} id="mobile-services-menu">
           <Link to="/services" onClick={() => setMobileNavOpen(false)}>All Services</Link>
           {serviceNavigationGroups.map((service) => (
-            <Link to={service.href} onClick={() => setMobileNavOpen(false)} key={service.name}>{service.name}</Link>
+            <Link
+              to={service.href}
+              onClick={() => setMobileNavOpen(false)}
+              key={service.name}
+            >
+              <span>{service.name}</span>
+              <small>{service.capabilities.length} {service.capabilities.length === 1 ? "capability" : "capabilities"}</small>
+            </Link>
           ))}
         </div>
         <Link to="/properties" onClick={() => setMobileNavOpen(false)}>Properties</Link>
@@ -179,7 +186,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
               View All Services <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </div>
-          <Link className="gala-mega-menu__advisor" to="/contact" tabIndex={megaLinkTabIndex}>
+          <Link className="gala-mega-menu__advisor" to="/contact?inquiry=general&source=services-menu" tabIndex={megaLinkTabIndex}>
             <img src={galaSalesCapability} alt="Commercial property in North Carolina" />
             <span className="gala-mega-menu__advisor-shade" aria-hidden="true"></span>
             <span className="gala-mega-menu__advisor-content">

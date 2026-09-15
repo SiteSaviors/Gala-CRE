@@ -42,6 +42,7 @@ const contactFormSchema = z.object({
 });
 
 const inquiryByQuery: Partial<Record<string, InquiryType>> = {
+  general: "General Inquiry",
   "landlord-representation": "Landlord Representation",
   "tenant-representation": "Tenant Representation",
   "investment-sales": "Investment Sales",

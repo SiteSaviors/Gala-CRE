@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { assetTypes, serviceNavigationGroups } from "@/content/services";
+import { serviceNavigationGroups } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const Services = () => {
@@ -18,7 +18,7 @@ const Services = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/services" />
       <main className="gala-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero">
+        <section className="gala-inner-hero gala-inner-hero--services-index">
           <div className="gala-shell">
             <div className="gala-kicker">Full-Service Commercial Real Estate</div>
             <h1>Clear advice across the commercial real estate lifecycle.</h1>
@@ -26,7 +26,7 @@ const Services = () => {
           </div>
         </section>
 
-        <section className="gala-section gala-section--light">
+        <section className="gala-section gala-section--light gala-services-index">
           <div className="gala-shell">
             <div className="gala-section-head">
               <div className="gala-kicker gala-kicker--dark">Services</div>
@@ -35,8 +35,18 @@ const Services = () => {
             <div className="gala-service-grid">
               {serviceNavigationGroups.map((service, index) => (
                 <article key={service.serviceSlug} className="gala-service-card">
-                  <span className="gala-service-card__index">0{index + 1}</span>
-                  <div>
+                  {service.image ? (
+                    <Link
+                      className="gala-service-card__media"
+                      to={service.href}
+                      aria-label={`Explore ${service.serviceName}`}
+                    >
+                      <img src={service.image} alt="" aria-hidden="true" loading="lazy" />
+                      <span className="gala-service-card__index">0{index + 1}</span>
+                      <ArrowUpRight className="gala-service-card__media-arrow" aria-hidden="true" />
+                    </Link>
+                  ) : null}
+                  <div className="gala-service-card__body">
                     <div className="gala-service-card__eyebrow">{service.name}</div>
                     <h3><Link to={service.href}>{service.serviceName}</Link></h3>
                     <p>{service.summary}</p>
@@ -47,24 +57,12 @@ const Services = () => {
                         </Link>
                       ))}
                     </nav>
+                    <Link className="gala-service-card__overview" to={service.href}>
+                      Explore {service.serviceName}<ArrowUpRight size={14} aria-hidden="true" />
+                    </Link>
                   </div>
-                  <Link className="gala-service-card__arrow" to={service.href} aria-label={`View ${service.serviceName}`}>
-                    <ArrowUpRight aria-hidden="true" />
-                  </Link>
                 </article>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="gala-section gala-section--black">
-          <div className="gala-shell gala-split">
-            <div>
-              <div className="gala-kicker">Asset Expertise</div>
-              <h2>Commercial perspective across the primary asset classes.</h2>
-            </div>
-            <div className="gala-asset-list">
-              {assetTypes.map((asset) => <span key={asset}>{asset}</span>)}
             </div>
           </div>
         </section>
@@ -75,7 +73,7 @@ const Services = () => {
               <div className="gala-kicker">Start a Conversation</div>
               <h2>What are you trying to accomplish?</h2>
             </div>
-            <Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link>
+            <Link to="/contact?inquiry=general&source=services" className="gala-button">Let's Connect <ArrowUpRight size={16} /></Link>
           </div>
         </section>
       </main>

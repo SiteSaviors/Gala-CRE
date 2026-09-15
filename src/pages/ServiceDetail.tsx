@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { serviceBySlug, serviceCapabilityId, services, type CapabilityIconKey, type ServiceSlug } from "@/content/services";
+import { getServiceInquiryHref, serviceBySlug, serviceCapabilityId, services, type CapabilityIconKey, type ServiceSlug } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import NotFound from "./NotFound";
 
@@ -126,8 +126,8 @@ const ServiceDetail = () => {
                               <li key={item}><Check size={16} aria-hidden="true" /><span>{item}</span></li>
                             ))}
                           </ul>
-                          <Link to="/contact" className="gala-text-link">
-                            Talk to an Advisor about {capability.label.toLowerCase()} <ArrowUpRight size={16} />
+                          <Link to={getServiceInquiryHref(service.slug, anchorId)} className="gala-text-link">
+                            Let's Connect about {capability.label.toLowerCase()} <ArrowUpRight size={16} />
                           </Link>
                         </div>
                       </div>
@@ -170,7 +170,7 @@ const ServiceDetail = () => {
           <div className="gala-shell">
             <div className="gala-section-head gala-section-head--row">
               <div><div className="gala-kicker">Related Expertise</div><h2>One connected commercial platform.</h2></div>
-              <Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link>
+              <Link to={getServiceInquiryHref(service.slug)} className="gala-button">Let's Connect <ArrowUpRight size={16} /></Link>
             </div>
             <div className="gala-related-services">
               {related.map((item) => (

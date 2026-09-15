@@ -288,6 +288,19 @@ export const serviceBySlug = Object.fromEntries(
   services.map((service) => [service.slug, service])
 ) as Record<ServiceSlug, Service>;
 
+const serviceInquiryKeys: Record<ServiceSlug, string> = {
+  brokerage: "general",
+  "investment-sales": "investment-sales",
+  "development-services": "development-services",
+  "capital-markets": "capital-markets",
+  "property-management": "property-management",
+};
+
+export const getServiceInquiryHref = (slug: ServiceSlug, focus?: string) => {
+  const focusQuery = focus ? `&focus=${encodeURIComponent(focus)}` : "";
+  return `/contact?inquiry=${serviceInquiryKeys[slug]}${focusQuery}&source=${slug}`;
+};
+
 export const serviceCapabilityId = (capability: string) =>
   capability
     .toLowerCase()
@@ -339,5 +352,3 @@ export const serviceNavigationGroups: ServiceNavigationGroup[] = services.map((s
   image: service.image,
   capabilities: advertisedCapabilityRoutes.filter((capability) => capability.serviceSlug === service.slug),
 }));
-
-export const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;

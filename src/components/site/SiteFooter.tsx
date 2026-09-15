@@ -34,7 +34,7 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
             <li><Link to="/news">News &amp; Media</Link></li>
             <li><Link to="/careers?source=footer">Careers</Link></li>
             <li><Link to="/investors/1031-exchange?source=footer">1031 Property Search</Link></li>
-            <li><Link to="/contact">Talk to an Advisor</Link></li>
+            <li><Link to="/contact?inquiry=general&source=footer">Let's Connect</Link></li>
           </ul>
         </div>
         <div className="fcol">
@@ -61,7 +61,7 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
             </div>
             <div className="fcontact-item">
               <div className="fcontact-label">Commercial Inquiries</div>
-              <Link className="fcontact-value" to="/contact">Talk to an Advisor</Link>
+              <Link className="fcontact-value" to="/contact?inquiry=general&source=footer">Let's Connect</Link>
             </div>
           </div>
         </div>
