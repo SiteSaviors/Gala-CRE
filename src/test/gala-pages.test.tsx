@@ -15,6 +15,21 @@ import ServiceDetail from "@/pages/ServiceDetail";
 import Services from "@/pages/Services";
 import Team from "@/pages/Team";
 
+vi.mock("react-leaflet", () => ({
+  MapContainer: ({ children, className }: { children?: React.ReactNode; className?: string }) => (
+    <div className={className}>{children}</div>
+  ),
+  TileLayer: () => null,
+  CircleMarker: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
+  Popup: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
+  Tooltip: () => null,
+  useMap: () => ({
+    invalidateSize: vi.fn(),
+    setView: vi.fn(),
+    fitBounds: vi.fn(),
+  }),
+}));
+
 const renderPage = (page: React.ReactNode, route = "/") => render(
   <MemoryRouter initialEntries={[route]}>{page}</MemoryRouter>
 );
@@ -493,6 +508,22 @@ describe("Gala CRE public pages", () => {
     const sourcingLink = screen.getByRole("link", { name: /Start a 1031 Property Search/i });
     expect(sourcingLink).toHaveAttribute("href", "/investors/1031-exchange?source=property-catalog");
     expect(braggCard?.compareDocumentPosition(sourcingLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it("switches the filtered property catalog between grid and map views", async () => {
+    renderPage(<Properties />, "/properties");
+
+    const gridButton = screen.getByRole("button", { name: "Grid" });
+    const mapButton = screen.getByRole("button", { name: "Map" });
+    expect(gridButton).toHaveAttribute("aria-pressed", "true");
+    expect(mapButton).toHaveAttribute("aria-pressed", "false");
+
+    fireEvent.click(mapButton);
+
+    expect(mapButton).toHaveAttribute("aria-pressed", "true");
+    expect(gridButton).toHaveAttribute("aria-pressed", "false");
+    expect(await screen.findByRole("region", { name: "Map of filtered properties" })).toBeInTheDocument();
+    expect(screen.getByText("Use the map controls to zoom. Select a marker to preview a property.")).toBeInTheDocument();
   });
 
   it("renders Lackey Street as a commercial-property diligence journey", () => {
