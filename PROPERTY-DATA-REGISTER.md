@@ -1,6 +1,6 @@
 # Gala CRE property data register
 
-Last reviewed: September 14, 2026
+Last reviewed: September 15, 2026
 Purpose: Control which listing facts are safe to publish and identify the client material still required.
 
 ## Publishing rules
@@ -21,6 +21,32 @@ Purpose: Control which listing facts are safe to publish and identify the client
 | Gaurang Gala | CEO \| BIC; 910-578-2828; NC 283149 | Name and title client-confirmed; phone and license verified in public listing records; existing approved site photograph used |
 | Leigh Roach | Agent; Leigh@galacregroup.com | Client-confirmed biography, email, and portrait supplied September 2026 |
 | Goverdhan Vavilala | Agent | Name and role client-confirmed; portrait, full biography, and direct contact still required |
+
+## Homepage track record and selected transactions
+
+This table controls which completed transactions may feed the future homepage proof section. Detailed property notes and source links remain in the individual records below. A transaction is not homepage-ready merely because a marketplace or article mentions the property.
+
+| Property | Status / closing date | Asset and location | Gala role | Publishable price | Approved homepage photography | Advisor | Detail route | Homepage posture |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 10416 Chapel Hill Road | Closed July 29, 2026 | Commercial land; Morrisville, NC | Gala listing involvement documented | None confirmed | None; supplied MLS photography is not cleared | Not confirmed for transaction credit | `/properties/10416-chapel-hill-road` | Publishable in qualified form. The supplied record supports 10416 only; do not combine it with 10414 until the client confirms the relationship and preferred presentation. |
+| 802 Bragg Boulevard | Closed; date not supplied | Retail / convenience store and automotive service; Fayetteville, NC | Listing representation documented | None confirmed | Three former-listing images are already in use under the client's direction; separate rights documentation is not recorded | Gaurang Gala | `/properties/802-bragg-boulevard` | Best current visual candidate, with closing date and economics omitted. |
+| 202 North Main Street | Closed July 30, 2026 | Commercial / retail; Fuquay-Varina, NC | Not confirmed | None confirmed | None; supplied MLS photography is not cleared | Not confirmed | `/properties/202-north-main-street` | Publishable in qualified, non-photographic form; not yet suitable for a visual homepage card. |
+| Watkins / Alta Watkins | Transaction status not established | Proposed multifamily development; Watkins Road, Morrisville, NC | Not established | None | None; saved article imagery is not project-specific or cleared | Not established | None | Blocked. The saved article documents a 2025 proposal, not a Gala transaction or closing. |
+
+No additional completed transactions are currently represented in the structured property catalog. The older note connecting 10414 Chapel Hill Road to the 10416 closing is retained as a client follow-up item, not a separate publishable transaction record.
+
+### Nullable track-record metrics
+
+All homepage values are intentionally null. A metric may be populated only after Gala confirms the value, measurement basis, and applicable reporting period.
+
+| Metric | Current value | Required definition before publication |
+| --- | --- | --- |
+| Closed transaction volume | Null | Career-wide or firm-wide; sale consideration or another defined basis; start and end dates |
+| Transactions completed | Null | Career-wide or firm-wide; sales only or sales and leases; start and end dates |
+| Acreage or square footage represented | Null | Which unit and transaction types are included; whether active listings are excluded; start and end dates |
+| Years of experience | Null | Individual, combined team, or firm operating history; verified start year |
+
+The application exposes these through `trackRecordMetrics` and filters public output through `publishedTrackRecordMetrics`; null values must never render as zeroes, blanks, or placeholders.
 
 ## 2301 Lackey Street
 

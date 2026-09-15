@@ -32,14 +32,14 @@ const TransactionSpotlight = () => (
             <span>{featuredTransaction.metricLabel}</span>
           </div>
           <div className="gala-transaction-spotlight__facts">
-            <span><small>Properties</small><strong>Two adjacent parcels</strong></span>
+            <span><small>{featuredTransaction.factLabel}</small><strong>{featuredTransaction.factDisplay}</strong></span>
             <span><small>Market</small><strong>{featuredTransaction.location}</strong></span>
           </div>
         </div>
         <div className="gala-transaction-spotlight__detail">
           <div className="gala-transaction-spotlight__index">01 / Selected Closing</div>
           <h3>{featuredTransaction.headline}</h3>
-          <p className="gala-transaction-spotlight__statement">Two adjacent commercial parcels, closed together.</p>
+          <p className="gala-transaction-spotlight__statement">{featuredTransaction.statement}</p>
           <p className="gala-transaction-spotlight__summary">{featuredTransaction.summary}</p>
           <Link to="/contact?inquiry=investment-sales" className="gala-text-link">Discuss a Sale <ArrowUpRight size={16} /></Link>
         </div>

@@ -88,7 +88,7 @@ describe("Gala CRE public pages", () => {
     expect(within(lackeySlide).getByRole("img", { name: "Fueling canopy and pump area at 2301 Lackey Street" })).toBeInTheDocument();
     expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
 
-    expect(screen.getByRole("heading", { name: "10414 & 10416 Chapel Hill Road" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
     expect(screen.getByText("Transaction Status")).toBeInTheDocument();
     expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A recent transaction, at a glance." })).toBeInTheDocument();
