@@ -8,13 +8,17 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import type { Property } from "@/content/properties";
 import PropertyVideo from "@/components/properties/PropertyVideo";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
+import {
+  getRelatedProperties,
+  type Property,
+  type PropertyListingMedia,
+} from "@/content/properties";
 import { teamMemberById } from "@/content/team";
 
 type CommercialListingPageProps = {
@@ -40,6 +44,27 @@ const DocumentAction = ({ href, external, children }: { href: string; external?:
 
 const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const page = property.listingPage;
+  const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
+
+  const mediaItems = useMemo<PropertyListingMedia[]>(() => {
+    if (!page) return [];
+
+    const items: PropertyListingMedia[] = [
+      {
+        src: property.heroImage,
+        alt: property.imageAlt ?? `${property.name} commercial property in ${property.city}, ${property.state}`,
+        caption: `${property.name} · ${property.city}, ${property.state}`,
+      },
+      ...(page.gallery?.items ?? []),
+    ];
+
+    return items.filter((item, index) => items.findIndex((candidate) => candidate.src === item.src) === index);
+  }, [page, property]);
+
+  useEffect(() => {
+    setSelectedMediaIndex(0);
+  }, [property.slug]);
+
   if (!page) return null;
 
   const inquiryHref = `/contact?property=${property.slug}`;
@@ -50,11 +75,14 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const highlights = page.highlights ?? [];
   const informationGroups = page.information?.groups ?? [];
   const transactionConditions = page.transaction?.conditions ?? [];
-  const galleryItems = page.gallery?.items ?? [];
   const documentItems = page.documents?.items ?? [];
   const advisor = property.advisorId ? teamMemberById[property.advisorId] : undefined;
+  const relatedProperties = getRelatedProperties(property.slug, 2);
+  const selectedMedia = mediaItems[selectedMediaIndex] ?? mediaItems[0];
+  const priceOrStatus = property.priceDisplay ?? (isClosedTransaction ? "Completed transaction" : "Contact for pricing");
+  const summaryFacts = keyFacts.filter((fact) => fact.value !== priceOrStatus);
   const hasAssetContent = informationGroups.length > 0 || transactionConditions.length > 0;
-  const hasDiligenceContent = documentItems.length > 0 || Boolean(advisor) || Boolean(page.disclosure);
+  const hasClosingContent = documentItems.length > 0 || Boolean(advisor) || Boolean(page.disclosure);
   const telephoneHref = advisor?.phone
     ? `tel:+1${advisor.phone.replace(/\D/g, "")}`
     : undefined;
@@ -70,15 +98,9 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={`/properties/${property.slug}`} />
 
-      <main className="gala-page gala-commercial-listing" id="main-content" tabIndex={-1}>
-        <section className="gala-commercial-listing__hero">
-          <img
-            src={property.heroImage}
-            alt={property.imageAlt ?? `${property.name} commercial property in ${property.city}, ${property.state}`}
-            style={{ objectPosition: property.imagePosition }}
-          />
-          <div className="gala-commercial-listing__hero-shade"></div>
-          <div className="gala-shell gala-commercial-listing__hero-content">
+      <main className="gala-page gala-commercial-listing gala-listing-compact" id="main-content" tabIndex={-1}>
+        <section className="gala-listing-compact__identity">
+          <div className="gala-shell">
             <Link to="/properties" className="gala-back-link">
               <ArrowLeft size={16} aria-hidden="true" /> All Properties
             </Link>
@@ -87,42 +109,122 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
               <span>{isClosedTransaction ? "Sale Transaction" : property.offeringType}</span>
               <span>{property.assetType}</span>
             </div>
-            <h1>{property.name}</h1>
-            <p className="gala-commercial-listing__address">
-              <MapPin size={17} aria-hidden="true" />
-              {property.address}, {property.city}, {property.state}
-            </p>
-            <div className="gala-commercial-listing__hero-summary">
-              <p>{page.headline}</p>
-              <div className="gala-commercial-listing__hero-actions">
-                <Link to={inquiryHref} className="gala-button">
-                  <Mail size={16} aria-hidden="true" /> {inquiryLabel}
-                </Link>
-                {publicListing ? (
-                  <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
-                    View on {publicListing.label} <ArrowUpRight size={16} aria-hidden="true" />
-                  </a>
-                ) : null}
-              </div>
+            <div className="gala-listing-compact__identity-grid">
+              <h1>{property.name}</h1>
+              <p className="gala-commercial-listing__address">
+                <MapPin size={17} aria-hidden="true" />
+                {property.address}, {property.city}, {property.state}
+              </p>
             </div>
           </div>
         </section>
 
-        {keyFacts.length ? (
-          <section className="gala-commercial-listing__factbar" aria-label="Primary property facts">
-            <div className="gala-shell">
-              {keyFacts.map((fact) => (
-                <div key={fact.label}>
-                  <span>{fact.label}</span>
-                  <strong>{fact.value}</strong>
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <section className="gala-listing-compact__workspace" aria-label="Property overview">
+          <div className="gala-shell gala-listing-compact__workspace-grid">
+            <div
+              className="gala-listing-compact__media"
+              role="region"
+              aria-label={page.gallery?.items.length ? `${property.name} property gallery` : `${property.name} property media`}
+            >
+              {selectedMedia ? (
+                <figure className="gala-listing-compact__primary-image">
+                  <img
+                    src={selectedMedia.src}
+                    alt={selectedMedia.alt}
+                    style={{ objectPosition: selectedMediaIndex === 0 ? property.imagePosition : undefined }}
+                  />
+                  <figcaption>
+                    <span>{String(selectedMediaIndex + 1).padStart(2, "0")} / {String(mediaItems.length).padStart(2, "0")}</span>
+                    {selectedMedia.caption}
+                  </figcaption>
+                </figure>
+              ) : null}
 
-        <section className="gala-section gala-section--light gala-commercial-listing__overview">
-          <div className={`gala-shell gala-commercial-listing__overview-grid${highlights.length ? "" : " gala-commercial-listing__overview-grid--single"}`}>
+              {mediaItems.length > 1 ? (
+                <div className="gala-listing-compact__thumbnails" aria-label="Select a property image">
+                  {mediaItems.map((item, index) => (
+                    <button
+                      type="button"
+                      key={item.src}
+                      className={selectedMediaIndex === index ? "is-active" : undefined}
+                      aria-label={`View image ${index + 1} of ${mediaItems.length}: ${item.caption}`}
+                      aria-pressed={selectedMediaIndex === index}
+                      onClick={() => setSelectedMediaIndex(index)}
+                    >
+                      <img src={item.src} alt="" loading={index > 3 ? "lazy" : "eager"} />
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+
+            <aside className="gala-listing-compact__summary-card" aria-label="Listing summary">
+              <span className="gala-listing-compact__summary-label">
+                {isClosedTransaction ? "Transaction record" : `${property.offeringType} opportunity`}
+              </span>
+              <strong className="gala-listing-compact__price">{priceOrStatus}</strong>
+              <p>{page.headline}</p>
+
+              {summaryFacts.length ? (
+                <dl className="gala-listing-compact__facts">
+                  {summaryFacts.map((fact) => (
+                    <div key={fact.label}>
+                      <dt>{fact.label}</dt>
+                      <dd>{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+
+              <div className="gala-listing-compact__actions">
+                <Link to={inquiryHref} className="gala-button">
+                  <Mail size={16} aria-hidden="true" /> {inquiryLabel}
+                </Link>
+                {documentItems.length ? (
+                  <a href="#listing-documents" className="gala-button gala-button--outline-dark">
+                    <FileText size={16} aria-hidden="true" /> View Documents
+                  </a>
+                ) : publicListing ? (
+                  <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-button gala-button--outline-dark">
+                    View Listing <ArrowUpRight size={16} aria-hidden="true" />
+                  </a>
+                ) : null}
+              </div>
+
+              {publicListing && documentItems.length ? (
+                <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
+                  View on {publicListing.label} <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              ) : null}
+
+              {advisor ? (
+                <div className="gala-listing-compact__advisor">
+                  {advisor.image ? <img src={advisor.image} alt="" aria-hidden="true" /> : null}
+                  <div>
+                    <span>{page.advisorEyebrow ?? "Listing Advisor"}</span>
+                    <strong>{advisor.name}</strong>
+                    <small>{advisor.title}{advisor.license ? ` · ${advisor.license}` : ""}</small>
+                  </div>
+                  <div className="gala-listing-compact__advisor-links">
+                    {telephoneHref ? (
+                      <a href={telephoneHref}>
+                        <Phone size={16} aria-hidden="true" /> {advisor.phone}
+                      </a>
+                    ) : null}
+                    {emailHref ? (
+                      <a href={emailHref}>
+                        <Mail size={16} aria-hidden="true" /> {advisor.email}
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              ) : null}
+            </aside>
+          </div>
+        </section>
+
+        <section className="gala-listing-compact__opportunity">
+          <div className={`gala-shell gala-listing-compact__opportunity-grid${highlights.length ? "" : " gala-listing-compact__opportunity-grid--single"}`}>
             <div>
               <div className="gala-kicker gala-kicker--dark">{page.overviewEyebrow ?? "The Opportunity"}</div>
               <h2>{page.headline}</h2>
@@ -141,203 +243,162 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
           </div>
         </section>
 
-        <aside className="gala-listing-sourcing" aria-labelledby="property-sourcing-title">
-          <div className="gala-shell">
-            <div>
-              <span>{isClosedTransaction ? "Looking for a similar opportunity?" : "Still evaluating the market?"}</span>
-              <h2 id="property-sourcing-title">
-                {isClosedTransaction
-                  ? "Use this completed transaction as a starting point for your next search."
-                  : "If this opportunity is not the right fit, define the one that is."}
-              </h2>
-            </div>
-            <Link to={`/investors/1031-exchange?source=property-detail&property=${property.slug}`} className="gala-text-link">
-              Share Your Acquisition Criteria <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
-          </div>
-        </aside>
-
         {hasAssetContent ? (
-          <section className="gala-section gala-section--silver gala-commercial-listing__asset">
+          <section className="gala-listing-compact__details" aria-labelledby="property-details-title">
             <div className="gala-shell">
-              {informationGroups.length && page.information ? (
-                <>
-                  <div className="gala-commercial-listing__section-head">
-                    <div>
-                      <div className="gala-kicker gala-kicker--dark">{page.information.intro.eyebrow}</div>
-                      <h2>{page.information.intro.title}</h2>
-                    </div>
-                    {page.information.intro.body ? <p>{page.information.intro.body}</p> : null}
-                  </div>
+              <div className="gala-listing-compact__section-heading">
+                <div>
+                  <div className="gala-kicker gala-kicker--dark">{page.information?.intro.eyebrow ?? "Property Details"}</div>
+                  <h2 id="property-details-title">{page.information?.intro.title ?? "The information that shapes the decision."}</h2>
+                </div>
+                {page.information?.intro.body ? <p>{page.information.intro.body}</p> : null}
+              </div>
 
-                  <div className="gala-commercial-listing__information-grid">
-                    {informationGroups.map((group) => (
-                      <article key={group.eyebrow}>
-                        <span className="gala-commercial-listing__eyebrow">{group.eyebrow}</span>
-                        <h3>{group.title}</h3>
-                        <p>{group.body}</p>
-                        {group.facts.length ? (
-                          <dl>
-                            {group.facts.map((fact) => (
-                              <div key={fact.label}>
-                                <dt>{fact.label}</dt>
-                                <dd>{fact.value}</dd>
-                              </div>
-                            ))}
-                          </dl>
-                        ) : null}
-                      </article>
-                    ))}
-                  </div>
-                </>
-              ) : null}
+              <div className="gala-listing-compact__detail-grid">
+                {informationGroups.map((group) => (
+                  <article className="gala-listing-compact__detail-card" key={group.eyebrow}>
+                    <span className="gala-commercial-listing__eyebrow">{group.eyebrow}</span>
+                    <h3>{group.title}</h3>
+                    {group.facts.length ? (
+                      <dl>
+                        {group.facts.map((fact) => (
+                          <div key={fact.label}>
+                            <dt>{fact.label}</dt>
+                            <dd>{fact.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    ) : <p>{group.body}</p>}
+                  </article>
+                ))}
 
-              {transactionConditions.length && page.transaction ? (
-                <div className="gala-commercial-listing__conditions">
-                  <div className="gala-commercial-listing__conditions-heading">
+                {transactionConditions.length && page.transaction ? (
+                  <article className="gala-listing-compact__detail-card gala-listing-compact__detail-card--dark">
                     <span className="gala-commercial-listing__eyebrow">{page.transaction.eyebrow}</span>
                     <h3>{page.transaction.title}</h3>
+                    <dl>
+                      {transactionConditions.map((condition) => (
+                        <div key={condition.label}>
+                          <dt>{condition.label}</dt>
+                          <dd>{condition.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </article>
+                ) : null}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {page.video || page.location ? (
+          <section className="gala-listing-compact__location-media">
+            <div className={`gala-shell gala-listing-compact__location-media-grid${page.video && page.location ? "" : " gala-listing-compact__location-media-grid--single"}`}>
+              {page.video ? (
+                <div className="gala-listing-compact__video">
+                  <div className="gala-listing-compact__media-heading">
+                    <span>{page.video.eyebrow}</span>
+                    <h2>{page.video.title}</h2>
+                    {page.video.body ? <p>{page.video.body}</p> : null}
                   </div>
-                  <dl>
-                    {transactionConditions.map((condition) => (
-                      <div key={condition.label}>
-                        <dt>{condition.label}</dt>
-                        <dd>{condition.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
+                  <PropertyVideo
+                    sourceUrl={page.video.sourceUrl}
+                    posterImage={page.video.posterImage}
+                    ariaLabel={page.video.ariaLabel}
+                    orientation={page.video.orientation}
+                  />
+                </div>
+              ) : null}
+
+              {page.location ? (
+                <div className="gala-listing-compact__location">
+                  <div className="gala-listing-compact__map">
+                    <iframe
+                      title={`Map of ${property.address}`}
+                      src={page.location.mapEmbedUrl}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                  <div className="gala-listing-compact__location-copy">
+                    <div>
+                      <span>{page.location.eyebrow}</span>
+                      <h2>{page.location.title}</h2>
+                    </div>
+                    <p>{page.location.body}</p>
+                    {page.location.points.length ? (
+                      <ul>{page.location.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                    ) : null}
+                    <a href={page.location.mapHref} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
+                      Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
               ) : null}
             </div>
           </section>
         ) : null}
 
-        {galleryItems.length && page.gallery ? (
-          <section className="gala-section gala-section--light gala-commercial-listing__gallery-section">
-            <div className="gala-shell">
-              <div className="gala-commercial-listing__section-head">
-                <div>
-                  <div className="gala-kicker gala-kicker--dark">{page.gallery.intro.eyebrow}</div>
-                  <h2>{page.gallery.intro.title}</h2>
+        {hasClosingContent ? (
+          <section className="gala-listing-compact__close" id="listing-documents">
+            <div className="gala-shell gala-listing-compact__close-grid">
+              <div>
+                <div className="gala-kicker gala-kicker--dark">
+                  {page.documents?.intro.eyebrow ?? (isClosedTransaction ? "Completed Transaction" : "Property Inquiry")}
                 </div>
-                {page.gallery.intro.body ? <p>{page.gallery.intro.body}</p> : null}
+                <h2>{page.documents?.intro.title ?? `Discuss ${property.name}.`}</h2>
+                {page.documents?.intro.body ? <p>{page.documents.intro.body}</p> : null}
+                <Link to={inquiryHref} className="gala-button gala-button--dark">
+                  <Mail size={16} aria-hidden="true" /> {inquiryLabel}
+                </Link>
               </div>
-              <div className="gala-commercial-listing__gallery" role="region" aria-label={`${property.name} property gallery`} tabIndex={0}>
-                {galleryItems.map((item, index) => (
-                  <figure key={item.src} className={index === 0 ? "gala-commercial-listing__gallery-feature" : undefined}>
-                    <img src={item.src} alt={item.alt} loading={index > 2 ? "lazy" : "eager"} />
-                    <figcaption>
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                      {item.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : null}
 
-        {page.video ? (
-          <section className="gala-section gala-section--silver gala-commercial-listing__video-section">
-            <div className="gala-shell">
-              <div className="gala-commercial-listing__section-head">
-                <div>
-                  <div className="gala-kicker gala-kicker--dark">{page.video.eyebrow}</div>
-                  <h2>{page.video.title}</h2>
-                </div>
-                {page.video.body ? <p>{page.video.body}</p> : null}
-              </div>
-              <PropertyVideo
-                sourceUrl={page.video.sourceUrl}
-                posterImage={page.video.posterImage}
-                ariaLabel={page.video.ariaLabel}
-                orientation={page.video.orientation}
-              />
-            </div>
-          </section>
-        ) : null}
-
-        {page.location ? (
-          <section className="gala-section gala-section--black gala-commercial-listing__location">
-            <div className="gala-shell gala-commercial-listing__location-grid">
-              <div className="gala-commercial-listing__map">
-                <iframe
-                  title={`Map of ${property.address}`}
-                  src={page.location.mapEmbedUrl}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-              <div className="gala-commercial-listing__location-copy">
-                <div className="gala-kicker">{page.location.eyebrow}</div>
-                <h2>{page.location.title}</h2>
-                <p>{page.location.body}</p>
-                {page.location.points.length ? (
-                  <ul>
-                    {page.location.points.map((point) => <li key={point}>{point}</li>)}
-                  </ul>
-                ) : null}
-                <a href={page.location.mapHref} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
-                  Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {hasDiligenceContent ? (
-          <section className="gala-section gala-section--silver gala-commercial-listing__diligence">
-            <div className="gala-shell">
-              {documentItems.length && page.documents ? (
-                <>
-                  <div className="gala-commercial-listing__section-head">
-                    <div>
-                      <div className="gala-kicker gala-kicker--dark">{page.documents.intro.eyebrow}</div>
-                      <h2>{page.documents.intro.title}</h2>
-                    </div>
-                    {page.documents.intro.body ? <p>{page.documents.intro.body}</p> : null}
-                  </div>
-                  <div className="gala-commercial-listing__documents">
-                    {documentItems.map((document) => (
-                      <article key={document.title}>
-                        <FileText size={24} aria-hidden="true" />
+              {documentItems.length ? (
+                <div className="gala-listing-compact__documents" aria-label="Property documents and records">
+                  {documentItems.map((document) => (
+                    <article key={document.title}>
+                      <FileText size={20} aria-hidden="true" />
+                      <div>
                         <h3>{document.title}</h3>
                         <p>{document.description}</p>
                         <DocumentAction href={document.href} external={document.external}>
                           {document.actionLabel}
                         </DocumentAction>
-                      </article>
-                    ))}
-                  </div>
-                </>
-              ) : null}
-
-              {advisor ? (
-                <div className="gala-commercial-listing__advisor">
-                  <div>
-                    <span className="gala-commercial-listing__eyebrow">{page.advisorEyebrow ?? "Listing Advisor"}</span>
-                    <h2>{advisor.name}</h2>
-                    <p>{advisor.title}{advisor.license ? ` · ${advisor.license}` : ""}</p>
-                  </div>
-                  <div className="gala-commercial-listing__advisor-actions">
-                    {telephoneHref ? (
-                      <a href={telephoneHref} className="gala-commercial-listing__phone">
-                        <Phone size={17} aria-hidden="true" /> {advisor.phone}
-                      </a>
-                    ) : null}
-                    {emailHref ? (
-                      <a href={emailHref} className="gala-commercial-listing__phone">
-                        <Mail size={17} aria-hidden="true" /> {advisor.email}
-                      </a>
-                    ) : null}
-                    <Link to={inquiryHref} className="gala-button">
-                      <Mail size={16} aria-hidden="true" /> {inquiryLabel}
-                    </Link>
-                  </div>
+                      </div>
+                    </article>
+                  ))}
                 </div>
               ) : null}
+            </div>
+            {page.disclosure ? <p className="gala-shell gala-commercial-listing__disclosure">{page.disclosure}</p> : null}
+          </section>
+        ) : null}
 
-              {page.disclosure ? <p className="gala-commercial-listing__disclosure">{page.disclosure}</p> : null}
+        {relatedProperties.length ? (
+          <section className="gala-listing-compact__related" aria-labelledby="related-properties-title">
+            <div className="gala-shell">
+              <div className="gala-listing-compact__related-heading">
+                <div>
+                  <span>Explore More</span>
+                  <h2 id="related-properties-title">Other current opportunities.</h2>
+                </div>
+                <Link to="/properties" className="gala-text-link">
+                  View All Properties <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="gala-listing-compact__related-grid">
+                {relatedProperties.map((related) => (
+                  <Link to={`/properties/${related.slug}`} key={related.slug}>
+                    <img src={related.heroImage} alt="" aria-hidden="true" loading="lazy" />
+                    <div>
+                      <span>{related.status} · {related.assetType}</span>
+                      <h3>{related.name}</h3>
+                      <p>{related.city}, {related.state}</p>
+                    </div>
+                    <ArrowUpRight size={19} aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         ) : null}

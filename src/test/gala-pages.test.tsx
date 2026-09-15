@@ -565,7 +565,7 @@ describe("Gala CRE public pages", () => {
       "href",
       "/contact?property=2301-lackey-street"
     );
-    expect(screen.getByRole("link", { name: /Share Your Acquisition Criteria/i })).toHaveAttribute("href", "/investors/1031-exchange?source=property-detail&property=2301-lackey-street");
+    expect(screen.queryByRole("link", { name: /Share Your Acquisition Criteria/i })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /View on Crexi/i })).toHaveAttribute(
       "href",
       "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"
@@ -584,8 +584,11 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
-    expect(screen.getAllByRole("img", { name: /2301 Lackey Street/i })).toHaveLength(6);
-    expect(screen.queryByText("Other current opportunities.")).not.toBeInTheDocument();
+    const lackeyGallery = screen.getByRole("region", { name: /2301 Lackey Street property gallery/i });
+    expect(within(lackeyGallery).getAllByRole("button", { name: /View image/i })).toHaveLength(6);
+    fireEvent.click(within(lackeyGallery).getByRole("button", { name: /View image 2 of 6/i }));
+    expect(within(lackeyGallery).getByRole("img", { name: /Fueling canopy and pump area/i })).toBeInTheDocument();
+    expect(screen.getByText("Other current opportunities.")).toBeInTheDocument();
     expect(document.querySelector(".gala-property-hero__scroll")).not.toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
@@ -629,7 +632,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "The represented approval is the center of the opportunity." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Two marketed sites require one clear parcel schedule." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Review the approval before underwriting the use." })).toBeInTheDocument();
-    expect(within(screen.getByRole("region", { name: /Church Street property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(within(screen.getByRole("region", { name: /Church Street property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(6);
     expect(screen.getByRole("link", { name: "Request Approval Package" })).toHaveAttribute(
       "href",
       "/contact?property=611-703-church-street&topic=childcare-approval"
@@ -697,7 +700,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("$995,000")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Separate the current record from future potential." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Potential is conditional on the verified land record." })).toBeInTheDocument();
-    expect(within(screen.getByRole("region", { name: /5911 Family Farm Road property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(within(screen.getByRole("region", { name: /5911 Family Farm Road property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(5);
     expect(screen.getByRole("link", { name: "Open LoopNet Listing" })).toHaveAttribute(
       "href",
       "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/"
@@ -740,7 +743,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
     expect(screen.getAllByText("Proposed 58-townhome opportunity").length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Useful diligence exists, but currency and transferability matter." })).toBeInTheDocument();
-    expect(within(screen.getByRole("region", { name: /Lexington Townhome Site property gallery/i })).getAllByRole("img")).toHaveLength(5);
+    expect(within(screen.getByRole("region", { name: /Lexington Townhome Site property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(5);
     expect(screen.getByRole("link", { name: "Request Approval Record" })).toHaveAttribute(
       "href",
       "/contact?property=1111-brown-street&topic=approval-record",
@@ -776,7 +779,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Recently sold retail property on Bragg Boulevard." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A multi-component commercial property with operating flexibility." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "What this page confirms—and what remains private." })).toBeInTheDocument();
-    expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("img")).toHaveLength(3);
+    expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(3);
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
       "/contact?property=802-bragg-boulevard"

@@ -100,24 +100,24 @@ All routes render and have metadata. Their central issue is excessive copy, repe
 
 ## Phase 1 — Establish the compact listing standard
 
-Status: **In progress**
+Status: **Complete**
 
 Rebuild `/properties/2301-lackey-street` as the shared commercial listing standard:
 
-- [ ] Compact identity and classification header.
-- [ ] Inline gallery with a primary image and selectable thumbnails; no lightbox.
-- [ ] Price, acreage, status, use, documents, advisor, and inquiry action immediately visible.
-- [ ] Concise overview and non-repeating investment/occupancy highlights.
-- [ ] Scannable property-information tables and property-specific diligence.
-- [ ] Integrate map, optional video/media, documents, related listings, and closing contact without full-page chapters.
-- [ ] Remove the early 1031 interruption and long-form editorial repetition.
-- [ ] Preserve conditional rendering for partial property data and the distinct closed-record path.
+- [x] Compact identity and classification header.
+- [x] Inline gallery with a primary image and selectable thumbnails; no lightbox.
+- [x] Price, acreage, status, use, documents, advisor, and inquiry action immediately visible.
+- [x] Concise overview and non-repeating investment/occupancy highlights.
+- [x] Scannable property-information tables and property-specific diligence.
+- [x] Integrate map, optional video/media, documents, related listings, and closing contact without full-page chapters.
+- [x] Remove the early 1031 interruption and long-form editorial repetition.
+- [x] Preserve conditional rendering for partial property data and the distinct closed-record path.
 
-Gate: Lackey feels like a premium brokerage listing and can be evaluated within two minutes on desktop and mobile.
+Gate: Lackey feels like a premium brokerage listing and can be evaluated within two minutes on desktop and mobile. **Passed.**
 
 ## Phase 2 — Convert every property page
 
-Status: **Not started**
+Status: **In progress**
 
 Active listings:
 
@@ -262,3 +262,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected to contain only the two continuity files before the Phase 0 commit.
 - Blockers: none for Phase 1.
 - Exact next action: Recompose `CommercialListingPage.tsx` and its CSS into the compact Lackey evaluation workspace while preserving the current property schema and conditional data; add focused tests for inline gallery selection, first-screen facts/advisor/actions, removal of the early 1031 strip, and optional sections.
+
+### 2026-09-15 — Phase 1 compact Lackey listing standard
+
+- Starting branch / HEAD: `codex/compact-listings-services` at Phase 0 commit `103a8bc`, clean.
+- Source of truth checked: this ledger, `PROPERTY-DATA-REGISTER.md`, shared property schema and renderer, all eight property records, advisor data, current property media, existing tests, and live Lackey route.
+- Gate: make Lackey a premium, two-minute commercial listing with first-screen media, economics, facts, advisor, documents, and inquiry actions; remove the early 1031 interruption; preserve conditional modules and verified data.
+- Completed: replaced the full-bleed editorial property template with a compact identity header and evaluation workspace; added a selectable in-place image gallery with accessible thumbnails; surfaced price/status, key facts, advisor contacts, listing source, documents, and inquiry actions beside the media; condensed property details into scannable tables; integrated map/video, documents, disclosure, and two related opportunities into restrained modules; removed the early 1031 callout; retained active/closed variations and all property-specific facts.
+- Files and routes changed: `src/components/properties/CommercialListingPage.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, and this ledger; primary route `/properties/2301-lackey-street`; shared renderer also visually checked across all seven other property routes.
+- Verification: Lackey reduced from 6,959px to 4,752px desktop and from 9,216px to 7,551px mobile including the global footer. Gallery selection changes the primary image in place. Price enters the first 390×844 viewport. No horizontal overflow or page-specific console errors at 1440px, 834px, or 390px. All eight property routes render, maps remain present, all three videos load only near their viewport, and no early 1031 callout remains. Full suite 100/100 passed; production build passed; lint passed with 0 errors and 7 unchanged shared-UI warnings.
+- Commit: this checkpoint's local implementation commit; resolve the hash from `git log -1` before continuing.
+- Remaining working tree: expected clean after commit.
+- Blockers: none for the shared listing standard. Existing property-data and media blockers remain listed above.
+- Exact next action: Audit and tighten `/properties/5047-yadkin-road` within the compact system: remove any remaining repeated marketing prose, keep represented approvals explicitly qualified, make the one-image treatment intentional, and verify facts, documents, map, advisor, related links, and inquiry context at desktop and mobile sizes.
