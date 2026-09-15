@@ -23,7 +23,7 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
     const configuredSiteUrl = import.meta.env.VITE_SITE_URL?.trim().replace(/\/$/, "");
     const siteUrl = configuredSiteUrl || "https://gala-cre.vercel.app";
     const pageUrl = `${siteUrl}${location.pathname}`;
-    const shareImage = image
+    const shareImage = image && !image.startsWith("data:")
       ? new URL(image, siteUrl).toString()
       : `${siteUrl}/gala-cre-logo.png`;
     const fullTitle = `${title} | Gala CRE Group`;

@@ -1,6 +1,6 @@
 # Gala CRE property and service rebuild
 
-Last updated: 2026-09-15 05:28 CDT
+Last updated: 2026-09-15 06:02 CDT
 
 Authoritative branch: `codex/compact-listings-services`
 
@@ -221,17 +221,17 @@ Gate: Every catalog, listing, and service pathway reaches the correct next actio
 
 ## Phase 6 — Full QA, commit, and morning package
 
-Status: **Not started**
+Status: **Complete**
 
-- [ ] Test every property and service route at desktop, tablet, and mobile sizes.
-- [ ] Verify galleries, video, maps, documents, filters, keyboard behavior, and reduced motion.
-- [ ] Verify inquiry preselection, metadata/social previews, overflow, and console errors.
-- [ ] Run the full test suite, production build, and lint.
-- [ ] Prepare demo-ready routes and recommended meeting walkthrough.
-- [ ] Prepare remaining client-input list and before/after page-height comparison.
-- [ ] Record local commit(s), deployment state, local URL, and production URL.
+- [x] Test every property and service route at desktop, tablet, and mobile sizes.
+- [x] Verify galleries, video, maps, documents, filters, keyboard behavior, and reduced motion.
+- [x] Verify inquiry preselection, metadata/social previews, overflow, and console errors.
+- [x] Run the full test suite, production build, and lint.
+- [x] Prepare demo-ready routes and recommended meeting walkthrough.
+- [x] Prepare remaining client-input list and before/after page-height comparison.
+- [x] Record local commit(s), deployment state, local URL, and production URL.
 
-Gate: The complete public property and service experience is credible, consistent, responsive, and ready for the client meeting.
+Gate: The complete public property and service experience is credible, consistent, responsive, and ready for the client meeting. **Passed.**
 
 ## Known client-input blockers
 
@@ -463,3 +463,16 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: no new blockers. The existing property-data, approved-media, case-study, and quantified-proof inputs listed above remain outside this shared-path checkpoint.
 - Exact next action: Start Phase 6 with one automated route-by-route desktop/tablet/mobile audit of every property and service URL, capturing page height, horizontal overflow, missing media, broken internal destinations, console errors, CTA inquiry context, metadata, and interactive module presence; fix only verified defects found, then prepare the final meeting-readiness package and commit/deployment record.
+
+### 2026-09-15 — Phase 6 release-candidate certification and morning package
+
+- Starting branch / HEAD: `codex/compact-listings-services` at `17ab720`, clean.
+- Source of truth checked: the current goal objective and referenced plan, `AGENTS.md`, Git branch/status/history, this ledger, `PROPERTY-DATA-REGISTER.md`, all property and service route/data definitions, shared renderers, navigation and inquiry mappings, assets, tests, local live routes, production preview, and current Vercel response/deployment state.
+- Gate: prove every public property and service route at desktop, tablet, and mobile; verify interactive media and conversion behavior; fix verified defects; record a reproducible release gate, remaining client inputs, before/after measurements, demo order, and deployment state.
+- Completed: added a production-preview Playwright system covering 31 property/service destinations at three breakpoints plus catalog filters, eight map markers, inline gallery selection, three mobile property videos, contextual property and service inquiries, keyboard navigation, skip-link behavior, and reduced motion. The matrix verifies runtime metadata, canonical/social tags, social-image availability, internal destinations, media loading, conditional document/video modules, map presence, related listings, and horizontal overflow. Corrected a production-only metadata defect by replacing inlined SVG `data:` URLs with the public Gala share image. Added the complete meeting-readiness and deployment handoff in `LAUNCH-READINESS.md`.
+- Files and routes changed: `.gitignore`, `package.json`, `playwright.config.ts`, `e2e/public-route-matrix.spec.ts`, `src/components/site/PageMeta.tsx`, `src/test/launch-readiness.test.tsx`, `LAUNCH-READINESS.md`, and this ledger; all 31 `/properties` and `/services` destinations are covered without changing their approved presentation.
+- Verification: 7/7 production-preview Playwright tests passed, including 93 responsive route renders at 1440×900, 834×1112, and 390×844. Full Vitest suite: 111/111 passed across 18 files. Production build passed. Lint passed with 0 errors and 7 unchanged shared-UI Fast Refresh warnings. Manual browser spot checks passed on desktop Lackey and Industrial and mobile Family Farm. Production `https://gala-cre.vercel.app` responds, but this branch remains intentionally local and undeployed.
+- Intended commit: `test: certify property and service release candidate`.
+- Remaining working tree: expected clean after the Phase 6 commit.
+- Blockers: client property facts/media and service proof listed above remain pending but are safely omitted or qualified; production form secrets/origin/KV and final disclosure approval remain configuration inputs; client-rendered route-specific crawler previews require future prerendering/SSR; the 752KB minified JavaScript chunk and 8.1MB hero video are future performance opportunities; merge, push, and deployment require explicit authorization and are outside this checkpoint.
+- Exact next action: User reviews the release candidate locally. After explicit approval, merge `codex/compact-listings-services` into `main`, push, deploy to Vercel, and smoke-test the production routes and form configuration.

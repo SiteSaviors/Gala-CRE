@@ -43,4 +43,27 @@ describe("launch accessibility and metadata", () => {
       );
     });
   });
+
+  it("uses the public share image when a bundled SVG becomes an inline data URL", async () => {
+    render(
+      <MemoryRouter initialEntries={["/properties/completed-transaction"]}>
+        <PageMeta
+          title="Completed Transaction"
+          description="A completed commercial real estate transaction."
+          image="data:image/svg+xml;base64,PHN2Zy8+"
+        />
+      </MemoryRouter>,
+    );
+
+    await waitFor(() => {
+      expect(document.head.querySelector('meta[property="og:image"]')).toHaveAttribute(
+        "content",
+        "https://gala-cre.vercel.app/gala-cre-logo.png",
+      );
+      expect(document.head.querySelector('meta[name="twitter:image"]')).toHaveAttribute(
+        "content",
+        "https://gala-cre.vercel.app/gala-cre-logo.png",
+      );
+    });
+  });
 });
