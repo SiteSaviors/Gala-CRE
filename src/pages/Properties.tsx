@@ -1,5 +1,5 @@
-import { ArrowUpRight, Search, SlidersHorizontal, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { ArrowUpRight, Grid3X3, Map, Search, SlidersHorizontal, X } from "lucide-react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import PropertyCard from "@/components/properties/PropertyCard";
 import PageMeta from "@/components/site/PageMeta";
@@ -18,6 +18,8 @@ import {
 import { teamMemberById, teamMemberIds, type TeamMemberId } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
+const PropertyMap = lazy(() => import("@/components/properties/PropertyMap"));
+
 const Properties = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedAdvisorId = searchParams.get("advisor");
@@ -25,6 +27,7 @@ const Properties = () => {
     ? requestedAdvisorId as TeamMemberId
     : undefined;
   const selectedAdvisor = advisorId ? teamMemberById[advisorId] : undefined;
+  const view = searchParams.get("view") === "map" ? "map" : "grid";
   const [query, setQuery] = useState("");
   const [assetType, setAssetType] = useState<"All" | PropertyAssetType>("All");
   const [offeringType, setOfferingType] = useState<"All" | PropertyOfferingType>("All");
@@ -37,11 +40,19 @@ const Properties = () => {
   );
   const hasFilters = Boolean(query || advisorId || assetType !== "All" || offeringType !== "All" || status !== "All");
   const reset = () => {
-    setSearchParams({}, { replace: true });
+    const nextParams = new URLSearchParams();
+    if (view === "map") nextParams.set("view", "map");
+    setSearchParams(nextParams, { replace: true });
     setQuery("");
     setAssetType("All");
     setOfferingType("All");
     setStatus("All");
+  };
+  const selectView = (nextView: "grid" | "map") => {
+    const nextParams = new URLSearchParams(searchParams);
+    if (nextView === "map") nextParams.set("view", "map");
+    else nextParams.delete("view");
+    setSearchParams(nextParams, { replace: true });
   };
 
   return (
@@ -96,12 +107,28 @@ const Properties = () => {
             </div>
 
             <div className="gala-results-head">
-              <span>{filtered.length} {filtered.length === 1 ? "property" : "properties"}</span>
-              <span>Active listings appear first</span>
+              <div className="gala-results-head__summary">
+                <span>{filtered.length} {filtered.length === 1 ? "property" : "properties"}</span>
+                <span>Active listings appear first</span>
+              </div>
+              <div className="gala-property-view-toggle" aria-label="Property view">
+                <button type="button" className={view === "grid" ? "active" : ""} aria-pressed={view === "grid"} onClick={() => selectView("grid")}>
+                  <Grid3X3 size={15} aria-hidden="true" /> Grid
+                </button>
+                <button type="button" className={view === "map" ? "active" : ""} aria-pressed={view === "map"} onClick={() => selectView("map")}>
+                  <Map size={15} aria-hidden="true" /> Map
+                </button>
+              </div>
             </div>
 
             {filtered.length ? (
-              <div className="gala-property-grid">{filtered.map((property) => <PropertyCard key={property.slug} property={property} />)}</div>
+              view === "grid" ? (
+                <div className="gala-property-grid">{filtered.map((property) => <PropertyCard key={property.slug} property={property} />)}</div>
+              ) : (
+                <Suspense fallback={<div className="gala-property-map__loading" role="status">Loading property map…</div>}>
+                  <PropertyMap properties={filtered} />
+                </Suspense>
+              )
             ) : (
               <div className="gala-empty-state">
                 <div className="gala-kicker gala-kicker--dark">Property Search</div>

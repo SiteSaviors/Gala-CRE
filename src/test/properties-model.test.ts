@@ -42,6 +42,7 @@ describe("property content model", () => {
     expect(properties.every((item) => item.offeringType === "For Sale")).toBe(true);
     expect(properties.filter((item) => item.status === "Active")).toHaveLength(5);
     expect(properties.filter((item) => item.status === "Closed")).toHaveLength(3);
+    expect(properties.every((item) => item.coordinates)).toBe(true);
     expect(featuredProperties).toHaveLength(5);
     expect(propertyBySlug["2301-lackey-street"]?.priceDisplay).toBe("$549,000");
     expect(propertyBySlug["5047-yadkin-road"]?.acreageDisplay).toBe("3.46 acres");
@@ -59,6 +60,7 @@ describe("property content model", () => {
       status: "Active",
       advisorId: "gaurang-gala",
       featured: true,
+      coordinates: { latitude: 35.7860804, longitude: -80.2780045 },
     });
     expect(propertyBySlug["802-bragg-boulevard"]).toMatchObject({
       sizeDisplay: "2,529 SF",
