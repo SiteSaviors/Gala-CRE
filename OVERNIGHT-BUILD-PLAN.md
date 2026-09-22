@@ -600,3 +600,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: no implementation blocker. Mobile browsers can still override muted autoplay in Low Power Mode, data-saving modes, or other user/browser policy states; the supplied poster remains the graceful fallback in those cases.
 - Exact next action: after explicit user authorization, push `main`, deploy the linked Vercel project, and repeat the focused mobile playback smoke test against `https://gala-cre.vercel.app`; then return to the separately blocked private form configuration.
+
+### 2026-09-22 — Post-release Team introduction refinement
+
+- Starting branch / HEAD: `main` at `e896ef127d73cadd390bb1c8abf8cbf18e14e58c`, clean and one local commit ahead of `origin/main` before this checkpoint.
+- Source of truth checked: the user's Team-page direction; `AGENTS.md`; `SEPTEMBER-CLIENT-REVISION-PLAN.md`; `PROPERTY-DATA-REGISTER.md`; the latest checkpoint in this ledger; Git status and recent history; current Team, header, roster, responsive styles, tests, and live local route.
+- Phase / checkpoint: remove the black Team hero and redundant advice slogan, make **Our Team** the direct page introduction, and preserve all verified agent profiles and actions.
+- Gate: `/team` opens directly with one **Our Team** H1 and the roster on a light background; the black hero and retired slogan are absent; desktop and mobile navigation remain readable; agent cards, contacts, and portfolio links do not regress.
+- Implementation: removed the dark hero; promoted **Our Team** to the roster introduction's sole H1; retained the concise roster explanation and all three shared-data cards; changed `/team` to use the solid global-header state; and added responsive top clearance so the kicker and heading never sit beneath the fixed navigation.
+- Files / route changed: `src/pages/Team.tsx`, `src/components/site/SiteHeader.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger; `/team` only, plus the route-specific state in the shared header.
+- Verification: focused Team tests passed 36/36; focused September browser acceptance passed 3/3; full Vitest passed 116/116 across 18 files; production build passed with the existing browserslist-age and bundle-size notices; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live local Chrome QA at 1280×720 and 390×844 confirmed the hero and slogan are absent, the solid header is readable, all three cards are present, top clearance is 39px desktop and 33px mobile, and horizontal overflow is zero. No form was submitted.
+- Intended commit: `refactor: simplify team page introduction` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: none for this checkpoint. The earlier mobile hero-video commit and this Team refinement remain local until the user explicitly authorizes remote promotion.
+- Exact next action: after explicit user authorization, push the two verified local post-release commits on `main`, deploy the linked Vercel project, and smoke-test both homepage hero playback and `/team` against `https://gala-cre.vercel.app`; then return to the separately blocked private form configuration.

@@ -19,7 +19,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const startsTransparent =
     currentPath === "/" ||
     currentPath === "/company" ||
-    currentPath === "/team" ||
     currentPath === "/news" ||
     currentPath === "/careers" ||
     currentPath === "/contact" ||

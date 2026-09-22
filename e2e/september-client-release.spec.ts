@@ -62,7 +62,9 @@ test.describe("September client release acceptance", () => {
       });
 
       await page.goto("/team", { waitUntil: "domcontentloaded" });
-      await expect(page.getByRole("heading", { name: "Our Team" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Our Team", level: 1 })).toBeVisible();
+      await expect(page.locator(".gala-team-hero")).toHaveCount(0);
+      await expect(page.getByText("Advice stays personal when responsibility stays clear.")).toHaveCount(0);
       await expect(page.locator(".gala-team-card")).toHaveCount(3);
 
       for (const member of teamExpectations) {

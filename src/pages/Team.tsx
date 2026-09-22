@@ -22,20 +22,12 @@ const Team = () => {
       <SiteHeader currentPath="/team" />
 
       <main className="gala-page gala-team-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero gala-team-hero">
-          <div className="gala-shell">
-            <div className="gala-kicker">Gala CRE Group</div>
-            <h1>Our Team</h1>
-            <p>Commercial perspective, local relationships, and direct accountability from the first conversation through the next decision.</p>
-          </div>
-        </section>
-
         <section className="gala-section gala-section--light gala-team-roster">
           <div className="gala-shell">
             <div className="gala-team-roster__intro">
               <div>
                 <div className="gala-kicker gala-kicker--dark">People Behind the Platform</div>
-                <h2>Advice stays personal when responsibility stays clear.</h2>
+                <h1>Our Team</h1>
               </div>
               <p>Meet the professionals connecting clients with Gala CRE’s brokerage, investment-sales, development, and capital-market capabilities.</p>
             </div>

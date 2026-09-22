@@ -154,6 +154,25 @@ Verification: focused homepage tests passed 36/36; full Vitest passed 116/116; p
 
 Intended commit: `fix: stabilize mobile hero video playback`.
 
+## Post-release refinement — Simplify the Team introduction
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Remove the large black Team hero.
+- [x] Remove “Advice stays personal when responsibility stays clear.”
+- [x] Use **Our Team** as the page's single level-one heading.
+- [x] Move the roster into the immediate light-page introduction while preserving every profile, contact action, and portfolio link.
+- [x] Give `/team` the solid navigation treatment so removing the dark hero does not create white-on-white links.
+- [x] Preserve clean header clearance and zero horizontal overflow at desktop and mobile sizes.
+
+Gate: `/team` opens directly with a concise **Our Team** introduction and roster, with no black hero, no redundant slogan, readable navigation, and no regression to agent data or actions.
+
+Checkpoint files: `src/pages/Team.tsx`, `src/components/site/SiteHeader.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `OVERNIGHT-BUILD-PLAN.md`, and this plan.
+
+Verification: focused Team tests passed 36/36; focused September browser acceptance passed 3/3; full Vitest passed 116/116; the production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live local Chrome QA at 1280×720 and 390×844 confirmed the hero and slogan are absent, the solid header is readable, the introduction clears the header by 39px desktop and 33px mobile, all three cards are present, and horizontal overflow is zero.
+
+Intended commit: `refactor: simplify team page introduction`.
+
 ## Exact next action
 
-After explicit authorization, push and deploy the verified mobile hero-video fix, then smoke-test autoplay, offscreen pause, return-to-view resume, and reduced-motion fallback on the production homepage. After that, collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials.
+After explicit authorization, push and deploy the verified mobile hero-video and Team-page refinements together, then smoke-test homepage playback and `/team` on the production site. After that, collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials.

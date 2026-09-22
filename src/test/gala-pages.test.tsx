@@ -194,8 +194,11 @@ describe("Gala CRE public pages", () => {
   });
 
   it("renders the Team route from one structured roster", () => {
-    renderPage(<Team />, "/team");
-    expect(screen.getByRole("heading", { name: "Our Team" })).toBeInTheDocument();
+    const { container } = renderPage(<Team />, "/team");
+    expect(screen.getByRole("heading", { name: "Our Team", level: 1 })).toBeInTheDocument();
+    expect(screen.queryByText("Advice stays personal when responsibility stays clear.")).not.toBeInTheDocument();
+    expect(container.querySelector(".gala-team-hero")).not.toBeInTheDocument();
+    expect(container.querySelector("nav")).toHaveClass("scrolled");
     expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
