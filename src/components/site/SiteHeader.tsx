@@ -74,6 +74,12 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   };
 
   const megaLinkTabIndex = servicesMegaOpen ? 0 : -1;
+  const isCurrentSection = (path: string) => (
+    path === "/"
+      ? currentPath === "/"
+      : currentPath === path || currentPath.startsWith(`${path}/`)
+  );
+  const currentState = (path: string) => isCurrentSection(path) ? "page" as const : undefined;
 
   return (
     <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}`}>
@@ -82,6 +88,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <BrandLogo variant="navigation" />
       </Link>
       <ul className="nlinks">
+        <li><Link to="/" aria-current={currentState("/")}>Home</Link></li>
         <li className="nservices" onMouseEnter={openServicesMega} onMouseLeave={scheduleServicesClose}>
           <Link
             to="/services"
@@ -92,15 +99,16 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             ref={servicesTriggerRef}
             onFocus={openServicesMega}
             onBlur={scheduleServicesClose}
+            aria-current={currentState("/services")}
           >
             Services <ChevronDown size={13} aria-hidden="true" />
           </Link>
         </li>
-        <li><Link to="/properties">Properties</Link></li>
-        <li><Link to="/company">Company</Link></li>
-        <li><Link to="/team">Team</Link></li>
-        <li><Link to="/careers">Careers</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/properties" aria-current={currentState("/properties")}>Properties</Link></li>
+        <li><Link to="/company" aria-current={currentState("/company")}>Company</Link></li>
+        <li><Link to="/team" aria-current={currentState("/team")}>Team</Link></li>
+        <li><Link to="/careers" aria-current={currentState("/careers")}>Careers</Link></li>
+        <li><Link to="/contact" aria-current={currentState("/contact")}>Contact</Link></li>
       </ul>
       <Link to="/contact" className="nbtn">Let's Connect</Link>
       <button
@@ -118,6 +126,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         <span></span>
       </button>
       <div className={`mnav${mobileNavOpen ? " open" : ""}`}>
+        <Link to="/" aria-current={currentState("/")} onClick={() => setMobileNavOpen(false)}>Home</Link>
         <button
           type="button"
           className={`mnav-services-toggle${mobileServicesOpen ? " open" : ""}`}
@@ -140,11 +149,11 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             </Link>
           ))}
         </div>
-        <Link to="/properties" onClick={() => setMobileNavOpen(false)}>Properties</Link>
-        <Link to="/company" onClick={() => setMobileNavOpen(false)}>Company</Link>
-        <Link to="/team" onClick={() => setMobileNavOpen(false)}>Team</Link>
-        <Link to="/careers" onClick={() => setMobileNavOpen(false)}>Careers</Link>
-        <Link to="/contact" onClick={() => setMobileNavOpen(false)}>Contact</Link>
+        <Link to="/properties" aria-current={currentState("/properties")} onClick={() => setMobileNavOpen(false)}>Properties</Link>
+        <Link to="/company" aria-current={currentState("/company")} onClick={() => setMobileNavOpen(false)}>Company</Link>
+        <Link to="/team" aria-current={currentState("/team")} onClick={() => setMobileNavOpen(false)}>Team</Link>
+        <Link to="/careers" aria-current={currentState("/careers")} onClick={() => setMobileNavOpen(false)}>Careers</Link>
+        <Link to="/contact" aria-current={currentState("/contact")} onClick={() => setMobileNavOpen(false)}>Contact</Link>
         <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Let's Connect</Link>
       </div>
 

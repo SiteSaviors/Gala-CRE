@@ -201,6 +201,14 @@ describe("advertised capability route matrix", () => {
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
     );
     const megaMenu = header.container.querySelector("#services-mega-menu");
+    const desktopLinks = Array.from(header.container.querySelectorAll<HTMLAnchorElement>(".nlinks>li>a"));
+    expect(desktopLinks[0]).toHaveTextContent("Home");
+    expect(desktopLinks[0]).toHaveAttribute("href", "/");
+    expect(desktopLinks[0]).toHaveAttribute("aria-current", "page");
+    const mobileLinks = Array.from(header.container.querySelectorAll<HTMLAnchorElement>(".mnav>a"));
+    expect(mobileLinks[0]).toHaveTextContent("Home");
+    expect(mobileLinks[0]).toHaveAttribute("href", "/");
+    expect(mobileLinks[0]).toHaveAttribute("aria-current", "page");
     const megaPaths = Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []).map((link) => link.getAttribute("href"));
     advertisedCapabilityRoutes.forEach((entry) => expect(megaPaths, `desktop ${entry.path}`).toContain(entry.path));
 

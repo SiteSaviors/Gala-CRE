@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import Contact from "@/pages/Contact";
@@ -30,6 +30,21 @@ describe("advisor inquiry form", () => {
     expect(await screen.findByText("Please enter your name.")).toBeInTheDocument();
     expect(screen.getByText("Please enter a valid email address.")).toBeInTheDocument();
     expect(screen.getByText("Please share a few more details.")).toBeInTheDocument();
+  });
+
+  it("renders the shared advisor directory with approved direct contacts and portfolios", () => {
+    renderContact();
+
+    const directory = screen.getByRole("region", { name: "Connect with the right member of the team." });
+    expect(directory).toBeInTheDocument();
+    expect(within(directory).getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
+    expect(within(directory).getByRole("link", { name: "gaurang@galacregroup.com" })).toHaveAttribute("href", "mailto:gaurang@galacregroup.com");
+    expect(within(directory).getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
+    expect(within(directory).getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
+    expect(within(directory).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
+    expect(within(directory).getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(within(directory).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute("href", "mailto:goverdhan@galacregroup.com");
+    expect(within(directory).getAllByRole("link", { name: /View Listings & Transactions/i })).toHaveLength(3);
   });
 
   it("preserves property context and posts the expanded payload", async () => {

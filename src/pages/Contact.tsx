@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
@@ -25,7 +26,7 @@ import {
   type InquiryType,
 } from "@/content/contact";
 import { propertyBySlug } from "@/content/properties";
-import { teamMemberById, teamMemberIds, type TeamMemberId } from "@/content/team";
+import { teamMemberById, teamMemberIds, teamMembers, type TeamMemberId } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import { submitContactForm, type ContactFormValues } from "@/lib/contactForm";
 
@@ -247,6 +248,51 @@ const Contact = () => {
                   </Form>
                 </>
               )}
+            </div>
+          </div>
+        </section>
+
+        <section className="contact-advisors" aria-labelledby="contact-advisors-title">
+          <div className="contact-advisors__shell">
+            <div className="contact-advisors__intro">
+              <div>
+                <div className="gala-kicker gala-kicker--dark">Direct Advisor Contact</div>
+                <h2 id="contact-advisors-title">Connect with the right member of the team.</h2>
+              </div>
+              <p>Reach an advisor directly or review the listings and completed transactions associated with their work.</p>
+            </div>
+
+            <div className="contact-advisors__grid">
+              {teamMembers.map((member) => {
+                const telephoneHref = member.phone ? `tel:+1${member.phone.replace(/\D/g, "")}` : undefined;
+
+                return (
+                  <article className="contact-advisor-card" key={member.id}>
+                    <div className="contact-advisor-card__identity">
+                      {member.image ? <img src={member.image} alt={member.imageAlt ?? member.name} /> : null}
+                      <div>
+                        <span>{member.title}</span>
+                        <h3>{member.name}</h3>
+                      </div>
+                    </div>
+                    <div className="contact-advisor-card__details">
+                      {member.email ? (
+                        <a href={`mailto:${member.email}`}>
+                          <Mail size={16} aria-hidden="true" /> {member.email}
+                        </a>
+                      ) : null}
+                      {telephoneHref ? (
+                        <a href={telephoneHref}>
+                          <Phone size={16} aria-hidden="true" /> {member.phone}
+                        </a>
+                      ) : null}
+                    </div>
+                    <Link className="contact-advisor-card__portfolio" to={`/properties?advisor=${member.id}`}>
+                      View Listings &amp; Transactions <ArrowUpRight size={16} aria-hidden="true" />
+                    </Link>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>

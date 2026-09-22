@@ -62,19 +62,19 @@ Gate: agent information comes from one source of truth, shared transactions supp
 
 ## Phase 2 — Finish Team, Contact, and navigation
 
-Status: **In progress; Team work was completed with Phase 1 because it directly consumes the new shared model.**
+Status: **Complete in the current verified checkpoint; commit is recorded in `OVERNIGHT-BUILD-PLAN.md`.**
 
 - [x] Update Team portraits, biographies, direct email and phone links, Contact Agent actions, and portfolio actions.
 - [x] Provide an accurate empty state when an agent has no associated public work.
-- [ ] Add a restrained Contact-page advisor directory using the shared Team records for all three agents.
-- [ ] Add Home as the first labeled desktop and mobile navigation destination.
-- [ ] Verify current-path treatment, keyboard navigation, responsive layout, and Contact inquiry context.
+- [x] Add a restrained Contact-page advisor directory using the shared Team records for all three agents.
+- [x] Add Home as the first labeled desktop and mobile navigation destination.
+- [x] Verify current-path treatment, keyboard navigation, responsive layout, and Contact inquiry context.
 
 Gate: visitors can contact each agent, view associated work, and return home through an explicit navigation link.
 
 ## Phase 3 — Apply catalog order and remove private materials
 
-Status: **Not started**
+Status: **Next**
 
 - [ ] Apply the approved eight-property order through structured data.
 - [ ] Confirm whether the homepage's curated Featured Listings order should remain independent; do not silently reorder the locked homepage.
@@ -120,4 +120,4 @@ Gate: no agent is incorrectly attributed, no confidential document remains publi
 
 ## Exact next action
 
-Complete the remaining Phase 2 checkpoint: add a restrained shared-data advisor directory to `/contact`, add Home as the first labeled desktop and mobile navigation item, verify responsive and keyboard behavior plus inquiry context, update both authoritative ledgers, and create one local commit.
+Start Phase 3 with the catalog-order checkpoint: update the eight structured property `sortOrder` values to the client-approved sequence, keep the locked homepage's curated Featured Listings order unchanged, add regression coverage for catalog and advisor-filtered ordering, verify `/properties` at desktop and mobile sizes, update the active plan and checkpoint ledger, and create one local commit.

@@ -33,9 +33,9 @@ The supplied originals remain unchanged in `/Users/admin/Downloads`. Web-ready d
 
 | Team member | Supplied original | Registered web asset | Dimensions | File size | Current public use at audit time |
 | --- | --- | --- | --- | --- | --- |
-| Gaurang Gala | `Gaurang.jpg` | `src/assets/team/gaurang-gala-2026.webp` | 1600 × 1067 | 64 KB | Connected to the shared Team record; used by Team and property-advisor presentations. The separate homepage introduction and Careers editorial image remains unchanged. |
-| Dr. Goverdhan Reddy Vavilala | `Gov.jpeg` | `src/assets/team/goverdhan-vavilala-2026.webp` | 1200 × 1800 | 172 KB | Connected to the shared Team record; used by Team and shared transaction presentations. |
-| Leigh Roach | `Leigh.jpeg` | `src/assets/team/leigh-roach-2026.webp` | 1066 × 1600 | 100 KB | Connected to the shared Team record; used by Team and Family Farm advisor presentations. |
+| Gaurang Gala | `Gaurang.jpg` | `src/assets/team/gaurang-gala-2026.webp` | 1600 × 1067 | 64 KB | Connected to the shared Team record; used by Team, Contact, and property-advisor presentations. The separate homepage introduction and Careers editorial image remains unchanged. |
+| Dr. Goverdhan Reddy Vavilala | `Gov.jpeg` | `src/assets/team/goverdhan-vavilala-2026.webp` | 1200 × 1800 | 172 KB | Connected to the shared Team record; used by Team, Contact, and shared transaction presentations. |
+| Leigh Roach | `Leigh.jpeg` | `src/assets/team/leigh-roach-2026.webp` | 1066 × 1600 | 100 KB | Connected to the shared Team record; used by Team, Contact, and Family Farm advisor presentations. |
 
 ### Authoritative property-catalog order
 
