@@ -89,6 +89,16 @@ Properties now use ordered `advisorAssignments`, allowing multiple agents and an
 - Properties without video retain the concise two-column statement-and-highlights layout; the player, caption, row modifier, and former media slot are omitted entirely.
 - Browser and automated QA confirmed all three player routes at desktop, tablet, and mobile, plus the Lackey no-video path, with no horizontal overflow or duplicate player in the location section.
 
+### Phase 5 relationship and privacy certification
+
+- The client-supplied identity, biography, portrait, email, and telephone values for Gaurang Gala, Leigh Roach, and Dr. Goverdhan Reddy Vavilala match the shared Team records and the rendered Team and Contact routes.
+- Team **Contact Agent** actions use each approved direct email. **View Listings & Transactions** returns Gaurang's four active and two closed records, Leigh's active Family Farm listing, and Goverdhan's Chapel Hill closing.
+- The 10416 Chapel Hill Road record and both associated portfolios credit Gaurang and Goverdhan. No individual transaction role, price, or 10414 relationship is inferred.
+- The approved eight-property order is consistent in the public catalog and applicable advisor-filtered subsets. Each property inquiry preserves its slug and the primary verified advisor when one exists.
+- Static scans of `src`, `public`, and the production bundle found no PDF, Word, spreadsheet, archive, download-center URL, media-package action, document-download action, dormant brochure field, or listing-document schema.
+- Desktop, tablet, and mobile browser QA passed Team, portfolio, catalog, property, video, inquiry, navigation, keyboard, focus, reduced-motion, image, overflow, and console checks. No test form was submitted.
+- The linked Vercel project reported no environment variables on September 22, 2026. Careers, 1031, and general Contact delivery remains safely unavailable until approved private sender, dual-recipient, allowed-origin, and durable rate-limit configuration is installed. This is a production-configuration blocker, not a property-attribution or privacy defect.
+
 ### Phase 0 conclusion
 
 All supplied assets, requested removal targets, current assignments, catalog statuses/order, portrait usages, and existing video behavior are identified. No supplied fact has been inferred. Phase 0 intentionally registers assets and implementation boundaries without changing public behavior.

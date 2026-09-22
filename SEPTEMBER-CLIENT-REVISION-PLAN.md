@@ -111,21 +111,29 @@ Intended commit: `refactor: elevate property listing videos`.
 
 ## Phase 5 — Full relationship, privacy, and release QA
 
-Status: **Not started**
+Status: **Complete in the current verified checkpoint; commit is recorded in `OVERNIGHT-BUILD-PLAN.md`.**
 
-- [ ] Verify every Team contact action and direct email/telephone link.
-- [ ] Verify all three profiles and every agent-filtered active, under-contract, and closed relationship.
-- [ ] Verify shared Chapel Hill attribution without unsupported role or economics claims.
-- [ ] Verify labeled Home navigation on desktop and mobile.
-- [ ] Verify the approved catalog order and agent-filtered ordering.
-- [ ] Verify property inquiry preselection and assigned-agent context.
-- [ ] Prove public document/media-package URLs and dormant brochure paths are removed.
-- [ ] Verify the three listing videos, posters, controls, lazy loading, and responsive layout.
-- [ ] Run desktop, tablet, mobile, keyboard, focus, console, test, build, and lint gates.
-- [ ] Record remaining client inputs and prepare a deployment handoff. Deployment remains a separate explicitly authorized action.
+- [x] Verify every Team contact action and direct email/telephone link.
+- [x] Verify all three profiles and every agent-filtered active, under-contract, and closed relationship.
+- [x] Verify shared Chapel Hill attribution without unsupported role or economics claims.
+- [x] Verify labeled Home navigation on desktop and mobile.
+- [x] Verify the approved catalog order and agent-filtered ordering.
+- [x] Verify property inquiry preselection and assigned-agent context.
+- [x] Prove public document/media-package URLs and dormant brochure paths are removed.
+- [x] Verify the three listing videos, posters, controls, lazy loading, and responsive layout.
+- [x] Run desktop, tablet, mobile, keyboard, focus, console, test, build, and lint gates.
+- [x] Record remaining client inputs and prepare a deployment handoff. Deployment remains a separate explicitly authorized action.
 
 Gate: no agent is incorrectly attributed, no confidential document remains public, and every requested journey works on desktop and mobile.
 
+Checkpoint files: `e2e/september-client-release.spec.ts`, `SEPTEMBER-RELEASE-HANDOFF.md`, `PROPERTY-DATA-REGISTER.md`, `OVERNIGHT-BUILD-PLAN.md`, and this plan. No public route implementation required correction during the audit.
+
+Verification: the new September acceptance suite passed 3/3; the full browser suite passed 10/10 across 31 property/service routes at desktop, tablet, and mobile plus Team/portfolio/privacy/inquiry journeys; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings. Static source/bundle scans found no forbidden property-document files or retired URL/action strings. Live local Team and Goverdhan portfolio checks showed all portraits loaded, zero horizontal overflow, correct contact values, and the Chapel Hill closed record. No form was submitted.
+
+Release blocker: the linked Vercel project currently reports no environment variables. Careers, 1031, and general Contact submission delivery therefore remains safely disabled until approved private sender, recipient, origin, and rate-limit configuration is installed and verified. This does not block the verified content/navigation release, but it blocks representing forms as operational.
+
+Intended commit: `test: certify September client release`.
+
 ## Exact next action
 
-Start Phase 5 by auditing the Team contacts, agent portfolios, shared Chapel Hill attribution, Home navigation, approved property order, property inquiry context, absence of public document paths, and the three listing-video journeys; fix only verified defects and prepare the release/deployment handoff without deploying.
+After explicit user authorization, fast-forward `main` to this verified branch, push, deploy the linked Vercel project, and run the documented production smoke tests without submitting forms; keep form delivery disabled until its private configuration is approved.
