@@ -96,15 +96,15 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Lexington Townhome Site")).toBeInTheDocument();
     expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
 
-    const lackeySlide = screen.getByRole("group", { name: "1 of 5" });
-    expect(within(lackeySlide).getByRole("img", { name: "2301 Lackey Street in Lumberton, NC" })).toBeInTheDocument();
-    expect(within(lackeySlide).getByText("Active")).toBeInTheDocument();
-    expect(within(lackeySlide).getByText("For Sale · Retail")).toBeInTheDocument();
-    expect(within(lackeySlide).getByText("2301 Lackey Street, Lumberton, NC")).toBeInTheDocument();
-    expect(within(lackeySlide).getByText(/Vacant gas-station and convenience-store opportunity/i)).toBeInTheDocument();
-    fireEvent.click(within(lackeySlide).getByRole("button", { name: "Next image for 2301 Lackey Street" }));
-    expect(within(lackeySlide).getByRole("img", { name: "Fueling canopy and pump area at 2301 Lackey Street" })).toBeInTheDocument();
-    expect(within(lackeySlide).getByText("2 / 6")).toBeInTheDocument();
+    const churchSlide = screen.getByRole("group", { name: "1 of 5" });
+    expect(within(churchSlide).getByRole("img", { name: "611 & 703 Church Street in Morrisville, NC" })).toBeInTheDocument();
+    expect(within(churchSlide).getByText("Active")).toBeInTheDocument();
+    expect(within(churchSlide).getByText("For Sale · Land")).toBeInTheDocument();
+    expect(within(churchSlide).getByText("611 & 703 Church Street, Morrisville, NC")).toBeInTheDocument();
+    expect(within(churchSlide).getByText(/Two-site commercial land offering marketed for childcare development/i)).toBeInTheDocument();
+    fireEvent.click(within(churchSlide).getByRole("button", { name: "Next image for 611 & 703 Church Street" }));
+    expect(within(churchSlide).getByRole("img", { name: "Aerial overview of the Church Street commercial land offering in Morrisville" })).toBeInTheDocument();
+    expect(within(churchSlide).getByText("2 / 6")).toBeInTheDocument();
 
     expect(screen.getByRole("heading", { name: "In the News" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Gaurang Gala on land, capital, and opportunity/i })).toBeInTheDocument();
@@ -236,6 +236,14 @@ describe("Gala CRE public pages", () => {
     const gaurang = renderPage(<Properties />, "/properties?advisor=gaurang-gala");
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
+    expect(Array.from(document.querySelectorAll(".gala-property-grid h2"), (heading) => heading.textContent)).toEqual([
+      "611 & 703 Church Street",
+      "Lexington Townhome Site",
+      "2301 Lackey Street",
+      "5047 Yadkin Road",
+      "802 Bragg Boulevard",
+      "10416 Chapel Hill Road",
+    ]);
     gaurang.unmount();
 
     renderPage(<Properties />, "/properties?advisor=goverdhan-vavilala");
@@ -644,6 +652,16 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Lexington Townhome Site" })).toBeInTheDocument();
+    expect(Array.from(document.querySelectorAll(".gala-property-grid h2"), (heading) => heading.textContent)).toEqual([
+      "611 & 703 Church Street",
+      "5911 Family Farm Road",
+      "Lexington Townhome Site",
+      "2301 Lackey Street",
+      "5047 Yadkin Road",
+      "802 Bragg Boulevard",
+      "202 North Main Street",
+      "10416 Chapel Hill Road",
+    ]);
     const northMainCard = screen.getByRole("heading", { name: "202 North Main Street" }).closest("a");
     expect(northMainCard).not.toBeNull();
     expect(within(northMainCard as HTMLElement).getByText("Closed")).toBeInTheDocument();
@@ -694,27 +712,20 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Material diligence belongs in the decision path." })).toBeInTheDocument();
     expect(screen.getByText("Request confirmed square footage")).toBeInTheDocument();
     expect(screen.getByText("Confirm the legal parcel schedule with the listing advisor")).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
+    expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=2301-lackey-street"
+      "/contact?property=2301-lackey-street&advisor=gaurang-gala"
     );
     expect(screen.queryByRole("link", { name: /Share Your Acquisition Criteria/i })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /View on Crexi/i })).toHaveAttribute(
       "href",
       "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"
     );
-    expect(screen.getByRole("link", { name: "Open Crexi Listing" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "View on Crexi" })).toHaveAttribute(
       "href",
       "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st"
     );
-    expect(screen.getByRole("link", { name: "Request Records" })).toHaveAttribute(
-      "href",
-      "/contact?property=2301-lackey-street&topic=environmental-records"
-    );
-    expect(screen.getByRole("link", { name: "Request Package" })).toHaveAttribute(
-      "href",
-      "/contact?property=2301-lackey-street&topic=diligence-package"
-    );
+    expect(screen.queryByText(/View Documents|Documents & Diligence|Request Package|Request Records/i)).not.toBeInTheDocument();
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
     const lackeyGallery = screen.getByRole("region", { name: /2301 Lackey Street property gallery/i });
@@ -764,20 +775,12 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "611 & 703 Church Street" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The represented approval is the center of the opportunity." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Two marketed sites require one clear parcel schedule." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Review the approval before underwriting the use." })).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /Church Street property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(6);
-    expect(screen.getByRole("link", { name: "Request Approval Package" })).toHaveAttribute(
+    expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=611-703-church-street&topic=childcare-approval"
+      "/contact?property=611-703-church-street&advisor=gaurang-gala"
     );
-    expect(screen.getByRole("link", { name: "Request Parcel Records" })).toHaveAttribute(
-      "href",
-      "/contact?property=611-703-church-street&topic=parcel-zoning"
-    );
-    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
-      "href",
-      "/contact?property=611-703-church-street"
-    );
+    expect(screen.queryByText(/View Documents|Documents & Diligence|Request Approval Package|Request Parcel Records/i)).not.toBeInTheDocument();
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
     const churchVideo = screen.getByLabelText("Play the aerial property video for 611 and 703 Church Street");
@@ -801,20 +804,12 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "5047 Yadkin Road" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The offering says the major site-planning elements are addressed." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Permit-ready language still requires document-level review." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Underwrite from the approved record—not the marketing summary." })).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /5047 Yadkin Road property gallery/i })).getAllByRole("img")).toHaveLength(1);
-    expect(screen.getByRole("link", { name: "Request Approved Plan" })).toHaveAttribute(
+    expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=5047-yadkin-road&topic=approved-site-plan"
+      "/contact?property=5047-yadkin-road&advisor=gaurang-gala"
     );
-    expect(screen.getByRole("link", { name: "Request Diligence" })).toHaveAttribute(
-      "href",
-      "/contact?property=5047-yadkin-road&topic=development-diligence"
-    );
-    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
-      "href",
-      "/contact?property=5047-yadkin-road"
-    );
+    expect(screen.queryByText(/View Documents|Documents & Diligence|Request Approved Plan|Request Diligence/i)).not.toBeInTheDocument();
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 5047 Yadkin Road")).toBeInTheDocument();
     expect(screen.queryByText(/pending client|client approval|coming soon|documents have not yet been added/i)).not.toBeInTheDocument();
@@ -834,21 +829,14 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Separate the current record from future potential." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Potential is conditional on the verified land record." })).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /5911 Family Farm Road property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(5);
-    expect(screen.getByRole("link", { name: "Open LoopNet Listing" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "View on LoopNet" })).toHaveAttribute(
       "href",
       "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/"
     );
-    expect(screen.getByRole("link", { name: "Open Media Package" })).toHaveAttribute(
+    expect(screen.queryByText(/Media Package|View Documents|Documents & Diligence|Request Diligence/i)).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
-      "https://media.nestvisions.com/listings/019f6824-ff78-7307-b536-803ab910a9ca/download-center"
-    );
-    expect(screen.getByRole("link", { name: "Request Diligence" })).toHaveAttribute(
-      "href",
-      "/contact?property=5911-family-farm-road&topic=land-diligence"
-    );
-    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
-      "href",
-      "/contact?property=5911-family-farm-road"
+      "/contact?property=5911-family-farm-road&advisor=leigh-roach"
     );
     expect(screen.getByText("Leigh Roach")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
@@ -879,13 +867,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Proposed 58-townhome opportunity").length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Useful diligence exists, but currency and transferability matter." })).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /Lexington Townhome Site property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(5);
-    expect(screen.getByRole("link", { name: "Request Approval Record" })).toHaveAttribute(
+    expect(screen.queryByText(/View Documents|Documents & Diligence|Request Approval Record/i)).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=1111-brown-street&topic=approval-record",
-    );
-    expect(screen.getAllByRole("link", { name: /Request Information/i })[0]).toHaveAttribute(
-      "href",
-      "/contact?property=1111-brown-street",
+      "/contact?property=1111-brown-street&advisor=gaurang-gala",
     );
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 1111 Brown Street")).toBeInTheDocument();
@@ -918,16 +903,17 @@ describe("Gala CRE public pages", () => {
     expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(3);
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=802-bragg-boulevard"
+      "/contact?property=802-bragg-boulevard&advisor=gaurang-gala"
     );
-    expect(screen.getByRole("link", { name: "Open Crexi Record" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "View on Crexi" })).toHaveAttribute(
       "href",
       "https://www.crexi.com/properties/1810031/north-carolina-valero"
     );
-    expect(screen.getByRole("link", { name: "Open LoopNet Record" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "View on LoopNet" })).toHaveAttribute(
       "href",
       "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/"
     );
+    expect(screen.queryByText(/View Documents|Public Transaction Record/i)).not.toBeInTheDocument();
     expect(screen.getByTitle("Map of 802 Bragg Boulevard")).toBeInTheDocument();
     expect(screen.queryByText("$800,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$850,000")).not.toBeInTheDocument();
@@ -981,7 +967,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
-      "/contact?property=10416-chapel-hill-road",
+      "/contact?property=10416-chapel-hill-road&advisor=gaurang-gala",
     );
   });
 });

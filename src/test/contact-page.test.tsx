@@ -50,8 +50,9 @@ describe("advisor inquiry form", () => {
   it("preserves property context and posts the expanded payload", async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
-    renderContact("/contact?property=approved-listing");
+    renderContact("/contact?property=5911-family-farm-road&advisor=leigh-roach");
     completeForm();
+    expect(screen.getByRole("heading", { name: "Ask about 5911 Family Farm Road" })).toBeInTheDocument();
     expect(screen.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
 
@@ -63,8 +64,9 @@ describe("advisor inquiry form", () => {
       company: "Triangle Holdings",
       inquiryType: "Property Inquiry",
       phone: "919-555-0123",
-      propertySlug: "approved-listing",
-      sourcePage: "/contact?property=approved-listing",
+      propertySlug: "5911-family-farm-road",
+      advisorId: "leigh-roach",
+      sourcePage: "/contact?property=5911-family-farm-road&advisor=leigh-roach",
       website: "",
     });
   });

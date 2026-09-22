@@ -69,11 +69,6 @@ const videoRoutes = new Set([
   "/properties/1111-brown-street",
 ]);
 
-const documentlessTransactionRoutes = new Set([
-  "/properties/202-north-main-street",
-  "/properties/10416-chapel-hill-road",
-]);
-
 const scrollThroughPage = async (page: Page) => {
   await page.evaluate(async () => {
     const delay = (milliseconds: number) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -154,26 +149,23 @@ test.describe("public property and service route matrix", () => {
         }
 
         await scrollThroughPage(page);
-        const brokenImages = await page.locator("img").evaluateAll((images) =>
-          images
-            .filter((image) => !image.complete || image.naturalWidth === 0)
-            .map((image) => (image as HTMLImageElement).currentSrc || (image as HTMLImageElement).src || "missing src"),
-        );
-        expect.soft(brokenImages, `${viewport.name} ${route}: broken images`).toEqual([]);
+        await expect.poll(
+          () => page.locator("img").evaluateAll((images) =>
+            images
+              .filter((image) => !image.complete || image.naturalWidth === 0)
+              .map((image) => (image as HTMLImageElement).currentSrc || (image as HTMLImageElement).src || "missing src"),
+          ),
+          { message: `${viewport.name} ${route}: broken images`, timeout: 8_000 },
+        ).toEqual([]);
 
         if (propertyRoutes.includes(route as (typeof propertyRoutes)[number])) {
           await expect(page.getByRole("region", { name: /property (gallery|media)$/i })).toBeVisible();
           await expect(page.locator('.gala-listing-compact__map iframe[src*="google.com/maps"]')).toHaveCount(1);
-          await expect(page.locator(`a[href="/contact?property=${route.split("/").at(-1)}"]`).first()).toBeVisible();
+          await expect(page.locator(`a[href^="/contact?property=${route.split("/").at(-1)}"]`).first()).toBeVisible();
           await expect(page.locator(".gala-listing-compact__related")).toBeVisible();
-          const documentCount = await page.locator(".gala-listing-compact__documents article").count();
-          if (documentlessTransactionRoutes.has(route)) {
-            expect(documentCount).toBe(0);
-            await expect(page.locator(".gala-listing-compact__documents")).toHaveCount(0);
-          } else {
-            expect(documentCount).toBeGreaterThan(0);
-          }
-          await expect(page.locator(".gala-commercial-listing__document-placeholder, .gala-listing-compact__empty")).toHaveCount(0);
+          await expect(page.locator(".gala-listing-compact__documents, #listing-documents")).toHaveCount(0);
+          await expect(page.locator('a[href*="download-center"], a[href$=".pdf"], a[href*=".pdf?"]')).toHaveCount(0);
+          await expect(page.getByText(/view documents|download brochure|open media package/i)).toHaveCount(0);
 
           const videos = page.locator(".gala-commercial-listing__video-frame video");
           await expect(videos).toHaveCount(videoRoutes.has(route) ? 1 : 0);
@@ -288,8 +280,8 @@ test("property and service inquiries arrive with their context selected", async 
   await page.setViewportSize({ width: 1440, height: 900 });
 
   await page.goto("/properties/2301-lackey-street", { waitUntil: "domcontentloaded" });
-  await page.locator('a[href="/contact?property=2301-lackey-street"]').first().click();
-  await expect(page).toHaveURL(/\/contact\?property=2301-lackey-street$/);
+  await page.locator('a[href="/contact?property=2301-lackey-street&advisor=gaurang-gala"]').first().click();
+  await expect(page).toHaveURL(/\/contact\?property=2301-lackey-street&advisor=gaurang-gala$/);
   await expect(page.getByRole("heading", { name: "Ask about 2301 Lackey Street" })).toBeVisible();
   await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
 
@@ -317,6 +309,7 @@ test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
   await expect(page.locator("#main-content")).toBeFocused();
 
   await page.goto("/services", { waitUntil: "domcontentloaded" });
+  await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");

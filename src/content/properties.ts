@@ -74,14 +74,6 @@ export type PropertyInformationGroup = {
   facts: PropertyFact[];
 };
 
-export type PropertyDocument = {
-  title: string;
-  description: string;
-  actionLabel: string;
-  href: string;
-  external?: boolean;
-};
-
 export type PropertySectionIntro = {
   eyebrow: string;
   title: string;
@@ -125,10 +117,6 @@ export type PropertyListingPage = {
     mapEmbedUrl: string;
     mapHref: string;
   };
-  documents?: {
-    intro: PropertySectionIntro;
-    items: PropertyDocument[];
-  };
   advisorEyebrow?: string;
   disclosure?: string;
 };
@@ -157,7 +145,6 @@ export type Property = {
   opportunity: PropertyNarrative;
   location: PropertyNarrative;
   listingPage?: PropertyListingPage;
-  brochurePdf?: string;
   externalLinks: PropertyLink[];
   advisorAssignments: PropertyAdvisorAssignment[];
   featured: boolean;
@@ -335,41 +322,12 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=2301%20Lackey%20Street%2C%20Lumberton%2C%20NC%2028360",
       },
-      documents: {
-        intro: {
-          eyebrow: "Documents & Diligence",
-          title: "Move from first look to informed review.",
-          body:
-            "Start with the public offering, then request the records and transaction materials relevant to your proposed use.",
-        },
-        items: [
-          {
-            title: "Public listing and flyer",
-            description: "Review the current Crexi listing and access its available marketing flyer.",
-            actionLabel: "Open Crexi Listing",
-            href: "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st",
-            external: true,
-          },
-          {
-            title: "Fuel-system and environmental records",
-            description: "Request available tank, piping, removal, and NCDEQ-related information from the listing advisor.",
-            actionLabel: "Request Records",
-            href: "/contact?property=2301-lackey-street&topic=environmental-records",
-          },
-          {
-            title: "Complete diligence package",
-            description: "Confirm included parcels and request the materials available for buyer review.",
-            actionLabel: "Request Package",
-            href: "/contact?property=2301-lackey-street&topic=diligence-package",
-          },
-        ],
-      },
       advisorEyebrow: "Listing Advisor",
       disclosure:
         "All information is deemed reliable but is not guaranteed. Buyers should independently verify property condition, boundaries, included improvements, environmental matters, approvals, access, and all other material information.",
     },
     featured: true,
-    sortOrder: 1,
+    sortOrder: 4,
   },
   {
     slug: "5047-yadkin-road",
@@ -468,7 +426,7 @@ export const properties: Property[] = [
             body:
               "The public offering describes the property as permit-ready and states that applicable standards have been satisfied. Before relying on that position, buyers should confirm the approving jurisdiction, case or permit number, approval date, conditions, expiration, remaining permits, zoning, utilities, access, and site constraints.",
             facts: [
-              { label: "Approval record", value: "Request the signed municipal record" },
+              { label: "Approval record", value: "Confirm against the signed municipal record" },
               { label: "Permit status", value: "Permit-ready position stated by offering" },
               { label: "Zoning", value: "Request current jurisdiction confirmation" },
               { label: "Utilities", value: "Availability and connections require evidence" },
@@ -481,7 +439,7 @@ export const properties: Property[] = [
         title: "What is offered—and what must be confirmed before closing.",
         conditions: [
           { label: "Published offering", value: "3.46-acre commercial land opportunity at $829,000" },
-          { label: "Plan and permits", value: "Request the signed approval record; confirm conditions, currency, remaining permits, and revisions" },
+          { label: "Plan and permits", value: "Confirm the signed approval record, conditions, currency, remaining permits, and revisions" },
           { label: "Site fundamentals", value: "Verify parcel, zoning, frontage, access, utilities, wetlands, and flood conditions" },
           { label: "Intended program", value: "Buyer should confirm the approved plan supports its use, scale, and schedule" },
         ],
@@ -491,7 +449,7 @@ export const properties: Property[] = [
           eyebrow: "Site Context",
           title: "An annotated aerial for orientation—not a substitute for the plan.",
           body:
-            "The current public aerial provides a useful first look at the marketed site and surrounding roads. It is not a survey or the represented approved shopping-center plan; request those documents for dimension, boundary, access, and layout review.",
+            "The current public aerial provides a useful first look at the marketed site and surrounding roads. It is not a survey or the represented approved shopping-center plan; contact the listing advisor to discuss available property information for dimension, boundary, access, and layout review.",
         },
         items: [
           {
@@ -516,41 +474,12 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=5047%20Yadkin%20Road%2C%20Fayetteville%2C%20NC%2028303",
       },
-      documents: {
-        intro: {
-          eyebrow: "Documents & Diligence",
-          title: "Underwrite from the approved record—not the marketing summary.",
-          body:
-            "Review the public offering, then request the plan, approval record, and site materials needed to confirm what can be built and what remains before construction.",
-        },
-        items: [
-          {
-            title: "Public listing",
-            description: "Review the current Crexi offering and the public description of the shopping-center plan.",
-            actionLabel: "Open Crexi Listing",
-            href: "https://www.crexi.com/properties/2033921/north-carolina-prime-location---land-with-opportunity-for-shopping-center",
-            external: true,
-          },
-          {
-            title: "Approved site plan and record",
-            description: "Request the represented plan, municipal approval, conditions, and available permit information.",
-            actionLabel: "Request Approved Plan",
-            href: "/contact?property=5047-yadkin-road&topic=approved-site-plan",
-          },
-          {
-            title: "Development diligence package",
-            description: "Request available parcel, zoning, access, utility, survey, and site-constraint materials.",
-            actionLabel: "Request Diligence",
-            href: "/contact?property=5047-yadkin-road&topic=development-diligence",
-          },
-        ],
-      },
       advisorEyebrow: "Listing Advisor",
       disclosure:
         "All information is deemed reliable but is not guaranteed. Statements regarding site-plan approval, permit readiness, access, circulation, buffers, and utility connections are based on the public offering and require review of the underlying records. Buyers should independently verify the parcel, boundaries, zoning, approvals, conditions, access, utilities, environmental constraints, and all development requirements.",
     },
     featured: true,
-    sortOrder: 2,
+    sortOrder: 5,
   },
   {
     slug: "611-703-church-street",
@@ -645,7 +574,7 @@ export const properties: Property[] = [
             facts: [
               { label: "Represented use", value: "Licensed daycare facility" },
               { label: "Base zoning", value: "Childcare support stated by offering" },
-              { label: "Approval materials", value: "Request the advisor package" },
+              { label: "Approval review", value: "Confirm the approval scope and controlling municipal record" },
               { label: "Buyer review", value: "Conditions, capacity, site plan, and permits" },
             ],
           },
@@ -665,7 +594,7 @@ export const properties: Property[] = [
       },
       transaction: {
         eyebrow: "Buyer Verification",
-        title: "What is represented—and what the diligence package must confirm.",
+        title: "What is represented—and what due diligence must confirm.",
         conditions: [
           { label: "Published offering", value: "Two-site commercial land offering at $1,190,000" },
           { label: "Offering composition", value: "Confirm combined-sale requirements, legal addresses, parcel IDs, and surveyed acreage" },
@@ -677,7 +606,7 @@ export const properties: Property[] = [
           eyebrow: "Site & Surroundings",
           title: "Five distinct aerial views of the offering context.",
           body:
-            "The aerials show the marketed sites in relation to Church Street and their surroundings. They do not establish legal boundaries; request the survey and approved site plan for parcel-level review.",
+            "The aerials show the marketed sites in relation to Church Street and their surroundings. They do not establish legal boundaries and should be compared with the controlling survey and approved site plan during buyer diligence.",
         },
         items: [
           {
@@ -731,41 +660,12 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560",
       },
-      documents: {
-        intro: {
-          eyebrow: "Documents & Diligence",
-          title: "Review the approval before underwriting the use.",
-          body:
-            "Request the approval, site plan, survey, parcel, and zoning records needed to evaluate the childcare use and combined offering.",
-        },
-        items: [
-          {
-            title: "Public listing and flyer",
-            description: "Review the current Crexi offering and its available public marketing materials.",
-            actionLabel: "Open Crexi Listing",
-            href: "https://www.crexi.com/properties/2335675/north-carolina-611-703-church-st-morrisville-cary-nc-27560",
-            external: true,
-          },
-          {
-            title: "Childcare approval and site plan",
-            description: "Request the represented approval, plan, conditions, and related development materials.",
-            actionLabel: "Request Approval Package",
-            href: "/contact?property=611-703-church-street&topic=childcare-approval",
-          },
-          {
-            title: "Parcel, survey, and zoning records",
-            description: "Confirm the legal addresses, parcel schedule, surveyed area, and zoning basis for the offering.",
-            actionLabel: "Request Parcel Records",
-            href: "/contact?property=611-703-church-street&topic=parcel-zoning",
-          },
-        ],
-      },
       advisorEyebrow: "Listing Advisor",
       disclosure:
         "All information is deemed reliable but is not guaranteed. The marketed addresses and approximately 1.09-acre figure are subject to confirmation. Buyers should independently verify legal addresses, parcels, surveyed acreage, zoning, childcare approval and conditions, utilities, access, and all development requirements.",
     },
     featured: true,
-    sortOrder: 3,
+    sortOrder: 1,
   },
   {
     slug: "5911-family-farm-road",
@@ -951,41 +851,11 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=5911%20Family%20Farm%20Road%2C%20Morrisville%2C%20NC%2027560",
       },
-      documents: {
-        intro: {
-          eyebrow: "Documents & Diligence",
-          title: "Start with the offering, then verify the land record.",
-          body:
-            "Review the public offering and media, then request the records needed to evaluate the intended use.",
-        },
-        items: [
-          {
-            title: "Current commercial offering",
-            description: "Review the active LoopNet marketing and published sale conditions.",
-            actionLabel: "Open LoopNet Listing",
-            href: "https://www.loopnet.com/Listing/5911-Family-Farm-Rd-Morrisville-NC/41146198/",
-            external: true,
-          },
-          {
-            title: "Property media package",
-            description: "View the supplied photography and property-marketing media.",
-            actionLabel: "Open Media Package",
-            href: "https://media.nestvisions.com/listings/019f6824-ff78-7307-b536-803ab910a9ca/download-center",
-            external: true,
-          },
-          {
-            title: "Land and authority records",
-            description: "Request available parcel, survey, zoning, access, utility, and condition records.",
-            actionLabel: "Request Diligence",
-            href: "/contact?property=5911-family-farm-road&topic=land-diligence",
-          },
-        ],
-      },
       disclosure:
         "All information is deemed reliable but is not guaranteed. Acreage, lot composition, zoning, access, existing utilities, property condition, boundaries, buildability, subdivision, development potential, and intended uses require independent verification. The existing residence is represented as unsafe; do not enter it. Approximate aerial outlines are marketing graphics and are not a survey.",
     },
     featured: true,
-    sortOrder: 4,
+    sortOrder: 2,
   },
   {
     slug: "1111-brown-street",
@@ -1040,7 +910,7 @@ export const properties: Property[] = [
     listingPage: {
       headline: "A proposed 58-townhome site with a documented diligence history.",
       lead:
-        "Three identified parcels at 1111 Brown Street with 2023 planning, access, and utility records available for review; current price, acreage, approval status, and remaining requirements require confirmation.",
+        "Three identified parcels at 1111 Brown Street with a documented 2023 planning, access, and utility history; current price, acreage, approval status, and remaining requirements require confirmation.",
       overviewEyebrow: "The Opportunity",
       keyFacts: [
         { label: "Offering", value: "Contact for pricing" },
@@ -1071,7 +941,7 @@ export const properties: Property[] = [
               { label: "Marketed area", value: "Approx. 6.6 acres" },
               { label: "Land record", value: "Three identified parcels; survey and title control" },
               { label: "Proposed program", value: "58 townhomes" },
-              { label: "Current plan", value: "Request the plan, survey, and revision history" },
+              { label: "Current plan", value: "Confirm the plan, survey, and revision history with the applicable authorities and advisor" },
             ],
           },
           {
@@ -1091,7 +961,7 @@ export const properties: Property[] = [
       },
       transaction: {
         eyebrow: "Buyer Verification",
-        title: "What is offered—and what the diligence package must establish.",
+        title: "What is offered—and what due diligence must establish.",
         conditions: [
           { label: "Offering", value: "Contact the listing advisor for current pricing" },
           { label: "Program", value: "Proposed 58-townhome opportunity" },
@@ -1159,40 +1029,12 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=1111%20Brown%20Street%2C%20Lexington%2C%20NC%2027292",
       },
-      documents: {
-        intro: {
-          eyebrow: "Documents & Diligence",
-          title: "Review the record before underwriting the program.",
-          body:
-            "Request the available property package, then confirm every controlling record with the issuing authorities and buyer advisers.",
-        },
-        items: [
-          {
-            title: "Historical approval record",
-            description: "Request the supplied erosion-control, NCDOT, water-main, and wastewater records.",
-            actionLabel: "Request Approval Record",
-            href: "/contact?property=1111-brown-street&topic=approval-record",
-          },
-          {
-            title: "Survey and parcel package",
-            description: "Request the available parcel, survey, ownership, and site-plan materials.",
-            actionLabel: "Request Property Record",
-            href: "/contact?property=1111-brown-street&topic=property-record",
-          },
-          {
-            title: "Development diligence package",
-            description: "Request available access, utility, approval, and remaining-work materials.",
-            actionLabel: "Request Diligence",
-            href: "/contact?property=1111-brown-street&topic=development-diligence",
-          },
-        ],
-      },
       advisorEyebrow: "Listing Advisor",
       disclosure:
         "All information is deemed reliable but is not guaranteed. The proposed 58-townhome program, approximately 6.6-acre figure, parcel composition, and historical approval record require independent verification. Historical records may contain expiration, completion, transfer, certification, or other conditions and do not establish current entitlement or permit readiness. Buyers should independently verify ownership, boundaries, acreage, access, utilities, approvals, conditions, and all development requirements.",
     },
     featured: true,
-    sortOrder: 5,
+    sortOrder: 3,
   },
   {
     slug: "802-bragg-boulevard",
@@ -1354,36 +1196,12 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=802%20Bragg%20Boulevard%2C%20Fayetteville%2C%20NC%2028301",
       },
-      documents: {
-        intro: {
-          eyebrow: "Public Transaction Record",
-          title: "Review the former marketing record or discuss a similar assignment.",
-          body:
-            "The linked marketplace pages preserve the public record. Confidential closing and post-closing information remains unpublished.",
-        },
-        items: [
-          {
-            title: "Crexi transaction record",
-            description: "Review the former Gala listing, property facts, and current sold designation.",
-            actionLabel: "Open Crexi Record",
-            href: "https://www.crexi.com/properties/1810031/north-carolina-valero",
-            external: true,
-          },
-          {
-            title: "LoopNet property record",
-            description: "Review archived property facts and the off-market notice.",
-            actionLabel: "Open LoopNet Record",
-            href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
-            external: true,
-          },
-        ],
-      },
       advisorEyebrow: "Transaction Advisor",
       disclosure:
         "This page presents a completed transaction and is not an offer to sell or lease the property. Physical, operating, tenant, lease, fuel, zoning, parking, frontage, and opportunity-zone details reflect the former public marketing record and are not represented as current. Sale price, closing date, and confidential transaction terms have not been published.",
     },
     featured: false,
-    sortOrder: 1,
+    sortOrder: 6,
   },
   {
     slug: "202-north-main-street",
@@ -1495,20 +1313,11 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=202%20North%20Main%20Street%2C%20Fuquay-Varina%2C%20NC%2027526",
       },
-      documents: {
-        intro: {
-          eyebrow: "Work With Gala CRE",
-          title: "Discuss a comparable commercial assignment.",
-          body:
-            "Connect with Gala CRE about a similar property, disposition, or acquisition requirement.",
-        },
-        items: [],
-      },
       disclosure:
         "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and zoning details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and operating information are not published.",
     },
     featured: false,
-    sortOrder: 2,
+    sortOrder: 7,
   },
   {
     slug: "10416-chapel-hill-road",
@@ -1623,20 +1432,11 @@ export const properties: Property[] = [
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=10416%20Chapel%20Hill%20Road%2C%20Morrisville%2C%20NC%2027560",
       },
-      documents: {
-        intro: {
-          eyebrow: "Work With Gala CRE",
-          title: "Discuss a comparable commercial assignment.",
-          body:
-            "Connect with Gala CRE about a similar land, disposition, or acquisition requirement.",
-        },
-        items: [],
-      },
       disclosure:
         "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and property-use details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and development information are not published. This page is limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction.",
     },
     featured: false,
-    sortOrder: 3,
+    sortOrder: 8,
   },
 ];
 
@@ -1662,6 +1462,15 @@ export const propertyBySlug = Object.fromEntries(
 
 export const findPropertyBySlug = (items: Property[], slug: string) =>
   items.find((property) => property.slug === slug);
+
+export const getPropertyInquiryHref = (
+  property: Pick<Property, "slug" | "advisorAssignments">,
+) => {
+  const parameters = new URLSearchParams({ property: property.slug });
+  const primaryAdvisor = property.advisorAssignments[0]?.advisorId;
+  if (primaryAdvisor) parameters.set("advisor", primaryAdvisor);
+  return `/contact?${parameters.toString()}`;
+};
 
 export const getRelatedProperties = (slug: string, limit = 2) =>
   sortedProperties.filter((property) => property.slug !== slug).slice(0, limit);

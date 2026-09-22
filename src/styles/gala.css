@@ -1121,12 +1121,6 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-commercial-listing__location-copy ul{width:100%;margin:30px 0 28px;border-top:1px solid rgba(255,255,255,.16);list-style:none}
 .gala-commercial-listing__location-copy li{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.84);font-size:12px;line-height:1.5}
 
-.gala-commercial-listing__documents{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:1px;border:1px solid #cfcec7;background:#cfcec7}
-.gala-commercial-listing__documents article{min-height:300px;display:flex;align-items:flex-start;flex-direction:column;padding:34px;background:#fafaf7}
-.gala-commercial-listing__documents article>svg{margin-bottom:46px;color:#956e18;stroke-width:1.5}
-.gala-commercial-listing__documents h3{margin:0 0 14px;font:600 22px/1.15 'Poppins',sans-serif;letter-spacing:-.03em}
-.gala-commercial-listing__documents p{margin-bottom:26px;color:#676760;font-size:12px;line-height:1.7}
-.gala-commercial-listing__document-action{display:inline-flex;align-items:center;gap:9px;margin-top:auto;padding-bottom:7px;border-bottom:1px solid #a77818;color:#26251f;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.16em;text-decoration:none;text-transform:uppercase}
 .gala-commercial-listing__advisor{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:45px;align-items:center;margin-top:24px;padding:44px 48px;background:#090909;color:#fff}
 .gala-commercial-listing__advisor h2{margin:0;font-size:clamp(35px,4vw,56px)}
 .gala-commercial-listing__advisor p{margin-top:10px;color:rgba(255,255,255,.54);font-size:12px}
@@ -1262,7 +1256,6 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-commercial-listing__gallery-feature{grid-row:1/3}
   .gala-commercial-listing__gallery figure:nth-child(4),.gala-commercial-listing__gallery figure:nth-child(5){grid-column:auto}
   .gala-commercial-listing__location-grid{grid-template-columns:minmax(0,1fr) minmax(330px,.72fr);gap:46px}
-  .gala-commercial-listing__documents article{padding:28px}
   .gala-commercial-listing__advisor{padding:38px}
   .gala-featured-listings__slide{flex-basis:52%}
   .gala-transaction-section__header,.gala-home-cta__inner{gap:52px}
@@ -1528,9 +1521,6 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-commercial-listing__location-grid{grid-template-columns:1fr;gap:38px}
   .gala-commercial-listing__map,.gala-commercial-listing__map iframe{min-height:390px}
   .gala-commercial-listing__location-copy h2{font-size:clamp(37px,10.5vw,52px)}
-  .gala-commercial-listing__documents{grid-template-columns:1fr}
-  .gala-commercial-listing__documents article{min-height:250px;padding:26px 22px}
-  .gala-commercial-listing__documents article>svg{margin-bottom:34px}
   .gala-commercial-listing__advisor{grid-template-columns:1fr;gap:28px;margin-top:16px;padding:30px 22px}
   .gala-commercial-listing__advisor-actions{align-items:stretch;flex-direction:column;gap:18px}
   .gala-commercial-listing__advisor-actions .gala-button{width:100%}
@@ -1659,12 +1649,6 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-listing-compact__close-grid--single{grid-template-columns:minmax(0,760px)}
 .gala-listing-compact__close h2{max-width:14ch;font-size:clamp(36px,4.1vw,56px)}
 .gala-listing-compact__close-grid>div:first-child>p{max-width:56ch;margin:18px 0 26px;color:#65645e;font-size:12px;line-height:1.7}
-.gala-listing-compact__documents{border-top:1px solid #cfcec7}
-.gala-listing-compact__documents article{display:grid;grid-template-columns:28px minmax(0,1fr);gap:15px;padding:20px 0;border-bottom:1px solid #cfcec7}
-.gala-listing-compact__documents article>svg{margin-top:2px;color:#916a18;stroke-width:1.5}
-.gala-listing-compact__documents h3{margin:0;font:600 18px/1.2 'Poppins',sans-serif;letter-spacing:-.025em}
-.gala-listing-compact__documents p{margin:7px 0 12px;color:#68675f;font-size:11px;line-height:1.6}
-.gala-listing-compact__documents .gala-commercial-listing__document-action{font-size:7px}
 .gala-listing-compact__close .gala-commercial-listing__disclosure{margin-top:36px;padding-top:23px;border-top:1px solid #d4d3cc}
 .gala-listing-compact__related{padding:72px 0;background:#121210;color:#fff}
 .gala-listing-compact__related-heading{display:flex;align-items:end;justify-content:space-between;gap:38px;margin-bottom:30px}

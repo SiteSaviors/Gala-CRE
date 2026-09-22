@@ -104,7 +104,7 @@ const Contact = () => {
   const onSubmit = async (values: ContactFormValues) => {
     setSubmitError(null);
     try {
-      await submitContactForm(values, `${location.pathname}${location.search}`);
+      await submitContactForm({ ...values, propertySlug, advisorId }, `${location.pathname}${location.search}`);
       setIsSubmitted(true);
       form.reset();
     } catch {
@@ -237,9 +237,6 @@ const Contact = () => {
                           <FormControl><Input {...field} tabIndex={-1} autoComplete="off" /></FormControl>
                         </FormItem>
                       )} />
-                      <input type="hidden" {...form.register("propertySlug")} />
-                      <input type="hidden" {...form.register("advisorId")} />
-
                       {submitError ? <div className="contact-error" role="alert">{submitError}</div> : null}
                       <Button type="submit" className="contact-form-submit" disabled={form.formState.isSubmitting}>
                         {form.formState.isSubmitting ? "Sending..." : contactFormConfig.submitLabel}

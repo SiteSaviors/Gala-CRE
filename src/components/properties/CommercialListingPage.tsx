@@ -1,20 +1,19 @@
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Check,
-  FileText,
   Mail,
   MapPin,
   Phone,
 } from "lucide-react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PropertyVideo from "@/components/properties/PropertyVideo";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import {
+  getPropertyInquiryHref,
   getRelatedProperties,
   type Property,
   type PropertyListingMedia,
@@ -23,23 +22,6 @@ import { teamMemberById } from "@/content/team";
 
 type CommercialListingPageProps = {
   property: Property;
-};
-
-const DocumentAction = ({ href, external, children }: { href: string; external?: boolean; children: ReactNode }) => {
-  const className = "gala-commercial-listing__document-action";
-  if (external) {
-    return (
-      <a className={className} href={href} target="_blank" rel="noreferrer">
-        {children} <ArrowUpRight size={15} aria-hidden="true" />
-      </a>
-    );
-  }
-
-  return (
-    <Link className={className} to={href}>
-      {children} <ArrowRight size={15} aria-hidden="true" />
-    </Link>
-  );
 };
 
 const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
@@ -67,15 +49,13 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
 
   if (!page) return null;
 
-  const inquiryHref = `/contact?property=${property.slug}`;
+  const inquiryHref = getPropertyInquiryHref(property);
   const isClosedTransaction = property.status === "Closed";
-  const inquiryLabel = isClosedTransaction ? "Discuss a Similar Property" : "Request Information";
-  const publicListing = property.externalLinks[0];
+  const inquiryLabel = isClosedTransaction ? "Discuss a Similar Property" : "Request Property Information";
   const keyFacts = page.keyFacts ?? [];
   const highlights = page.highlights ?? [];
   const informationGroups = page.information?.groups ?? [];
   const transactionConditions = page.transaction?.conditions ?? [];
-  const documentItems = page.documents?.items ?? [];
   const advisorAssignments = property.advisorAssignments.map((assignment) => ({
     assignment,
     member: teamMemberById[assignment.advisorId],
@@ -85,7 +65,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const priceOrStatus = property.priceDisplay ?? (isClosedTransaction ? "Completed transaction" : "Contact for pricing");
   const summaryFacts = keyFacts.filter((fact) => fact.value !== priceOrStatus);
   const hasAssetContent = informationGroups.length > 0 || transactionConditions.length > 0;
-  const hasClosingContent = documentItems.length > 0 || advisorAssignments.length > 0 || Boolean(page.disclosure);
+  const hasClosingContent = advisorAssignments.length > 0 || Boolean(page.disclosure);
 
   return (
     <>
@@ -179,22 +159,18 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 <Link to={inquiryHref} className="gala-button">
                   <Mail size={16} aria-hidden="true" /> {inquiryLabel}
                 </Link>
-                {documentItems.length ? (
-                  <a href="#listing-documents" className="gala-button gala-button--outline-dark">
-                    <FileText size={16} aria-hidden="true" /> View Documents
+                {property.externalLinks.map((listing) => (
+                  <a
+                    href={listing.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="gala-button gala-button--outline-dark"
+                    key={listing.href}
+                  >
+                    View on {listing.label} <ArrowUpRight size={16} aria-hidden="true" />
                   </a>
-                ) : publicListing ? (
-                  <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-button gala-button--outline-dark">
-                    View Listing <ArrowUpRight size={16} aria-hidden="true" />
-                  </a>
-                ) : null}
+                ))}
               </div>
-
-              {publicListing && documentItems.length ? (
-                <a href={publicListing.href} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
-                  View on {publicListing.label} <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              ) : null}
 
               {advisorAssignments.length ? (
                 <div className="gala-listing-compact__advisor-list">
@@ -355,35 +331,22 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
         ) : null}
 
         {hasClosingContent ? (
-          <section className="gala-listing-compact__close" id="listing-documents">
-            <div className={`gala-shell gala-listing-compact__close-grid${documentItems.length ? "" : " gala-listing-compact__close-grid--single"}`}>
+          <section className="gala-listing-compact__close" id="property-inquiry">
+            <div className="gala-shell gala-listing-compact__close-grid gala-listing-compact__close-grid--single">
               <div>
                 <div className="gala-kicker gala-kicker--dark">
-                  {page.documents?.intro.eyebrow ?? (isClosedTransaction ? "Completed Transaction" : "Property Inquiry")}
+                  {isClosedTransaction ? "Work With Gala CRE" : "Property Inquiry"}
                 </div>
-                <h2>{page.documents?.intro.title ?? `Discuss ${property.name}.`}</h2>
-                {page.documents?.intro.body ? <p>{page.documents.intro.body}</p> : null}
+                <h2>{isClosedTransaction ? "Discuss a comparable commercial assignment." : `Request information about ${property.name}.`}</h2>
+                <p>
+                  {isClosedTransaction
+                    ? "Connect with Gala CRE about a similar property, disposition, or acquisition requirement."
+                    : "Connect with the assigned advisor to discuss the property, available information, and next steps."}
+                </p>
                 <Link to={inquiryHref} className="gala-button gala-button--dark">
                   <Mail size={16} aria-hidden="true" /> {inquiryLabel}
                 </Link>
               </div>
-
-              {documentItems.length ? (
-                <div className="gala-listing-compact__documents" aria-label="Property documents and records">
-                  {documentItems.map((document) => (
-                    <article key={document.title}>
-                      <FileText size={20} aria-hidden="true" />
-                      <div>
-                        <h3>{document.title}</h3>
-                        <p>{document.description}</p>
-                        <DocumentAction href={document.href} external={document.external}>
-                          {document.actionLabel}
-                        </DocumentAction>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              ) : null}
             </div>
             {page.disclosure ? <p className="gala-shell gala-commercial-listing__disclosure">{page.disclosure}</p> : null}
           </section>

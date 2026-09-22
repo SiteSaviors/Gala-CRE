@@ -4,7 +4,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Download,
   Mail,
   MapPin,
 } from "lucide-react";
@@ -14,7 +13,7 @@ import PropertyCard from "@/components/properties/PropertyCard";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { getRelatedProperties, propertyBySlug } from "@/content/properties";
+import { getPropertyInquiryHref, getRelatedProperties, propertyBySlug } from "@/content/properties";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import NotFound from "./NotFound";
 
@@ -34,7 +33,7 @@ const PropertyDetail = () => {
   ].filter((fact): fact is { label: string; value: string } => Boolean(fact));
 
   const relatedProperties = getRelatedProperties(property.slug);
-  const inquiryHref = `/contact?property=${property.slug}`;
+  const inquiryHref = getPropertyInquiryHref(property);
 
   return (
     <>
@@ -59,7 +58,7 @@ const PropertyDetail = () => {
             <h1>{property.name}</h1>
             <p><MapPin size={17} aria-hidden="true" /> {property.address}, {property.city}, {property.state}</p>
             <div className="gala-property-hero__actions">
-              <Link to={inquiryHref} className="gala-button"><Mail size={16} /> Request Details</Link>
+              <Link to={inquiryHref} className="gala-button"><Mail size={16} /> Request Property Information</Link>
               {property.externalLinks[0] ? (
                 <a href={property.externalLinks[0].href} target="_blank" rel="noreferrer" className="gala-property-hero__external">
                   View Full Listing <ArrowUpRight size={16} />
@@ -103,10 +102,7 @@ const PropertyDetail = () => {
                   <span>{fact.label}</span><strong>{fact.value}</strong>
                 </div>
               ))}
-              {property.brochurePdf ? (
-                <a href={property.brochurePdf} className="gala-button" target="_blank" rel="noreferrer"><Download size={16} /> Download Brochure</a>
-              ) : null}
-              <Link to={inquiryHref} className="gala-button gala-button--dark"><Mail size={16} /> Request Offering Details</Link>
+              <Link to={inquiryHref} className="gala-button gala-button--dark"><Mail size={16} /> Request Property Information</Link>
               {property.externalLinks.map((item) => (
                 <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="gala-external-link">
                   View on {item.label} <ArrowUpRight size={15} />
@@ -195,8 +191,8 @@ const PropertyDetail = () => {
               <h2>Evaluate {property.name} with a Gala CRE advisor.</h2>
             </div>
             <div>
-              <p>Request listing materials, discuss the opportunity, or coordinate next steps with the brokerage team.</p>
-              <Link to={inquiryHref} className="gala-button">Start a Conversation <ArrowRight size={16} /></Link>
+              <p>Discuss the property, available information, and next steps with the assigned advisor.</p>
+              <Link to={inquiryHref} className="gala-button">Request Property Information <ArrowRight size={16} /></Link>
             </div>
           </div>
         </section>

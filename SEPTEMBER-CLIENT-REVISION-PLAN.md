@@ -74,16 +74,16 @@ Gate: visitors can contact each agent, view associated work, and return home thr
 
 ## Phase 3 — Apply catalog order and remove private materials
 
-Status: **Next**
+Status: **Complete in the current verified checkpoint; commit is recorded in `OVERNIGHT-BUILD-PLAN.md`.**
 
-- [ ] Apply the approved eight-property order through structured data.
-- [ ] Confirm whether the homepage's curated Featured Listings order should remain independent; do not silently reorder the locked homepage.
-- [ ] Remove the Family Farm public media-package card and download-center URL.
-- [ ] Remove property-document cards, actions, public URLs, and document metadata from the listing schema.
-- [ ] Remove or permanently disable the dormant generic brochure path.
-- [ ] Preserve marketplace listing references as secondary external links.
-- [ ] Replace document-access language with property-aware advisor inquiry actions.
-- [ ] Confirm internal screenshots, source agreements, and private diligence are absent from the deployed bundle.
+- [x] Apply the approved eight-property order through structured data.
+- [x] Apply the user's current explicit order to the homepage's active Featured Listings subset.
+- [x] Remove the Family Farm public media-package card and download-center URL.
+- [x] Remove property-document cards, actions, public URLs, and document metadata from the listing schema.
+- [x] Remove the dormant generic brochure path so future records cannot re-enable public downloads.
+- [x] Preserve marketplace listing references as secondary external links.
+- [x] Replace document-access language with property-aware advisor inquiry actions.
+- [x] Confirm internal screenshots, source agreements, private diligence, and document files are absent from the production bundle.
 
 Gate: the catalog uses the approved order and no internal or property-document material remains publicly accessible.
 
@@ -120,4 +120,4 @@ Gate: no agent is incorrectly attributed, no confidential document remains publi
 
 ## Exact next action
 
-Start Phase 3 with the catalog-order checkpoint: update the eight structured property `sortOrder` values to the client-approved sequence, keep the locked homepage's curated Featured Listings order unchanged, add regression coverage for catalog and advisor-filtered ordering, verify `/properties` at desktop and mobile sizes, update the active plan and checkpoint ledger, and create one local commit.
+Start Phase 4 by moving the existing conditional listing-video module into the opportunity section beside the narrative, placing the verified highlights beneath that narrative/video row, and verifying the shared layout first on Church Street at desktop and mobile sizes before applying it to Family Farm and Lexington.

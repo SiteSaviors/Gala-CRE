@@ -50,17 +50,17 @@ The user's written correction supersedes the numbered screenshot and the current
 7. 202 North Main Street — Closed
 8. 10416 Chapel Hill Road — Closed
 
-The current application order at this audit is Lackey, Yadkin, Church, Family Farm, Lexington, Bragg, North Main, Chapel Hill. The next implementation must update structured order values rather than reorder cards in the page component.
+The structured `sortOrder` values now implement this sequence. The catalog, advisor-filtered subsets, related-property selection, and the homepage's active Featured Listings subset all derive from that shared order. The homepage change follows the user's explicit September 22 direction and therefore supersedes the earlier plan note to keep its curated order independent.
 
 ### Public removal targets
 
-| Target | Audit finding | Required treatment |
+| Target | Prior audit finding | Current treatment |
 | --- | --- | --- |
-| Property media package | Family Farm exposes a NestVisions download-center URL through a “Property media package” / “Open Media Package” card. | Remove the card, label, and download-center URL from public property data and rendered output. The hosted listing video is a separate approved media asset and remains eligible for the inline player. |
-| Property-document CTA | Six records currently render a “View Documents” action when `listingPage.documents.items` is populated: Lackey, Yadkin, Church, Family Farm, Lexington, and Bragg. | Remove the public CTA and document-card renderer. Route property-material requests to the relevant advisor through the property inquiry context. |
-| Property-document data | All eight records contain a `documents` object; 202 North Main and 10416 Chapel Hill have empty item lists used only for close-section copy. | Retire the public document schema from the listing-page data model. Preserve an inquiry close and disclosures independently of document data. |
-| Legacy brochure path | The generic fallback in `src/pages/PropertyDetail.tsx` can render `brochurePdf`, although no current structured property supplies one and all eight routes use `CommercialListingPage`. | Remove or permanently disable the public brochure/download path so a future record cannot reintroduce document distribution accidentally. |
-| Internal reference material | Signed agreements, raw diligence, source folders, and client email screenshots are not imported into the application. | Keep private and outside the deployed bundle. |
+| Property media package | Family Farm exposed a NestVisions download-center URL through a “Property media package” / “Open Media Package” card. | Complete: the card, label, and URL are removed. The approved local listing video remains a separate inline media asset. |
+| Property-document CTA | Six records rendered a “View Documents” action when `listingPage.documents.items` was populated: Lackey, Yadkin, Church, Family Farm, Lexington, and Bragg. | Complete: the CTA and document-card renderer are removed and replaced by property/advisor inquiry context. |
+| Property-document data | All eight records contained a `documents` object; 202 North Main and 10416 Chapel Hill used empty item lists only for close-section copy. | Complete: the public document schema is retired; inquiry closes and disclosures are independent of document data. |
+| Legacy brochure path | The generic fallback in `src/pages/PropertyDetail.tsx` could render `brochurePdf`, although no current structured property supplied one. | Complete: the field and public brochure/download renderer are removed, preventing accidental reintroduction through structured data. |
+| Internal reference material | Signed agreements, raw diligence, source folders, and client email screenshots were not imported into the application. | Verified unchanged: they remain outside `src`, `public`, and the production bundle. |
 
 Public marketplace pages may remain available as secondary “View Listing” links where the source is current. They are not substitutes for Gala-controlled document downloads and do not authorize republishing third-party documents.
 
@@ -90,6 +90,15 @@ Properties now use ordered `advisorAssignments`, allowing multiple agents and an
 ### Phase 0 conclusion
 
 All supplied assets, requested removal targets, current assignments, catalog statuses/order, portrait usages, and existing video behavior are identified. No supplied fact has been inferred. Phase 0 intentionally registers assets and implementation boundaries without changing public behavior.
+
+### Phase 3 publication controls implemented
+
+- Removed the public property-document type and every per-property document record from the shared listing schema.
+- Removed the Family Farm NestVisions download-center URL, the internal-facing media-package card, all topic-specific document request URLs, and the dormant generic `brochurePdf` field and renderer.
+- Replaced active listing document areas with a single **Request Property Information** pathway. The property slug and first assigned advisor are carried into Contact; the Contact submission adapter explicitly writes those URL-derived values into the outbound payload. North Main remains property-only because no advisor attribution is confirmed.
+- Preserved current public marketplace references as secondary **View on Crexi**, **View on LoopNet**, or equivalent links without presenting them as Gala-hosted documents.
+- Verified that no PDF, Word, archive, or spreadsheet files are tracked under `src` or `public`, and that the production bundle contains no such files or forbidden media-package/download strings.
+- Verified the approved order in the catalog, advisor-filtered portfolios, and homepage active subset through model, rendered-page, browser, and production-preview regression coverage.
 
 ## Homepage track record and selected transactions
 

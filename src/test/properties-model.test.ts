@@ -3,9 +3,11 @@ import {
   filterProperties,
   featuredProperties,
   findPropertyBySlug,
+  getPropertyInquiryHref,
   properties,
   propertyBySlug,
   sortProperties,
+  sortedProperties,
   type Property,
 } from "@/content/properties";
 
@@ -140,6 +142,54 @@ describe("property content model", () => {
     expect(propertyBySlug["10416-chapel-hill-road"]?.listingPage?.gallery).toBeUndefined();
     expect(JSON.stringify(propertyBySlug["202-north-main-street"])).not.toContain("$825,000");
     expect(JSON.stringify(propertyBySlug["10416-chapel-hill-road"])).not.toContain("$2,500,000");
+    expect(properties.every((item) => !("brochurePdf" in item) && !("documents" in (item.listingPage ?? {})))).toBe(true);
+    expect(JSON.stringify(properties)).not.toMatch(/download-center|property media package|open media package|view documents/i);
+  });
+
+  it("uses the client-approved order in catalogs, featured listings, and advisor portfolios", () => {
+    expect(sortedProperties.map((item) => item.slug)).toEqual([
+      "611-703-church-street",
+      "5911-family-farm-road",
+      "1111-brown-street",
+      "2301-lackey-street",
+      "5047-yadkin-road",
+      "802-bragg-boulevard",
+      "202-north-main-street",
+      "10416-chapel-hill-road",
+    ]);
+    expect(featuredProperties.map((item) => item.slug)).toEqual([
+      "611-703-church-street",
+      "5911-family-farm-road",
+      "1111-brown-street",
+      "2301-lackey-street",
+      "5047-yadkin-road",
+    ]);
+    expect(filterProperties(sortedProperties, {
+      query: "",
+      assetType: "All",
+      offeringType: "All",
+      status: "All",
+      advisorId: "gaurang-gala",
+    }).map((item) => item.slug)).toEqual([
+      "611-703-church-street",
+      "1111-brown-street",
+      "2301-lackey-street",
+      "5047-yadkin-road",
+      "802-bragg-boulevard",
+      "10416-chapel-hill-road",
+    ]);
+  });
+
+  it("builds property inquiries with the primary assigned advisor when one is available", () => {
+    expect(getPropertyInquiryHref(propertyBySlug["5911-family-farm-road"])).toBe(
+      "/contact?property=5911-family-farm-road&advisor=leigh-roach",
+    );
+    expect(getPropertyInquiryHref(propertyBySlug["10416-chapel-hill-road"])).toBe(
+      "/contact?property=10416-chapel-hill-road&advisor=gaurang-gala",
+    );
+    expect(getPropertyInquiryHref(propertyBySlug["202-north-main-street"])).toBe(
+      "/contact?property=202-north-main-street",
+    );
   });
 
   it("orders active records before under-contract and closed records", () => {
