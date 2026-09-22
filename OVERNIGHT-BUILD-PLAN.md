@@ -1,16 +1,18 @@
-# Gala CRE property and service rebuild
+# Gala CRE property and service rebuild — historical checkpoint ledger
 
-Last updated: 2026-09-15 09:49 CDT
+Last updated: 2026-09-22
 
-Authoritative branch: `main`
+Released rebuild branch: `main`
 
 Baseline: `d7b6204726cc04422c09b37c42d33e34e23e7afd` (`main`/`origin/main` at branch creation)
 
-This file is the durable source of truth for the current rebuild. It supersedes the older September 4 overnight plan. Historical implementation details remain available in Git history and `PROPERTY-DATA-REGISTER.md`.
+> **Current work:** read `SEPTEMBER-CLIENT-REVISION-PLAN.md` first. It is the active roadmap for the September client updates. This file preserves the completed rebuild history and appends checkpoint/commit handoffs; its older phase checklist is not the current implementation queue.
+
+This file superseded the older September 4 overnight plan for the completed property/service rebuild. Historical implementation details remain available in Git history and `PROPERTY-DATA-REGISTER.md`.
 
 ## Working rules
 
-1. Read `AGENTS.md`, this ledger, `PROPERTY-DATA-REGISTER.md`, Git status/history, and the exact implementation named under **Next action** before editing.
+1. Read `AGENTS.md`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, `PROPERTY-DATA-REGISTER.md`, the latest checkpoint at the end of this ledger, and Git status/history before editing.
 2. Preserve the catalog-first `/properties` redesign contained in baseline commit `d7b6204`.
 3. Keep the homepage locked. Preserve Team, Careers, Company, Contact, News, and the footer unless a broken approved pathway requires a correction.
 4. Advance one property, service group, or shared-system checkpoint at a time. Define its gate before implementation.
@@ -500,3 +502,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected to contain only the three registered portrait derivatives, `PROPERTY-DATA-REGISTER.md`, and this ledger until the checkpoint commit.
 - Blockers: 202 North Main Street remains without confirmed advisor credit; no new assignment was supplied. The current single-advisor data model cannot accurately credit both Gaurang and Goverdhan on 10416 Chapel Hill Road. No blocker prevents the next safe checkpoint.
 - Exact next action: Implement the Team and advisor data checkpoint: connect the three registered portraits and supplied contact/biography records, support multiple advisors on completed transactions, credit Gaurang and Goverdhan on 10416 Chapel Hill Road, and make each Team “View Listings & Transactions” action show that advisor's active and closed records without yet changing document or video presentation.
+
+### 2026-09-22 — Client revisions Phase 1: shared agent and transaction relationships
+
+- Starting branch / HEAD: `codex/september-client-updates` at `68784a9`, clean.
+- Source of truth checked: the current Phase 1 request and September 21 client direction; `AGENTS.md`; Git branch, status, and recent local history; this ledger; `PROPERTY-DATA-REGISTER.md`; the registered real portraits; current Team, Properties, transaction, listing-page, and Contact implementations; relevant tests; and live local Team, advisor-filtered catalog, and Chapel Hill transaction routes. The focused `SEPTEMBER-CLIENT-REVISION-PLAN.md` was then added to preserve the approved remaining phase order without replacing either authoritative ledger.
+- Phase / checkpoint: client revisions Phase 1 — make agent identity and contact data authoritative, support multiple advisor relationships with optional roles across every property status, and include completed work in agent portfolios.
+- Gate: agent information comes from one source of truth; active, under-contract, and closed relationships use one extensible model; shared transactions support multiple agents without duplicating identity data; and each Team portfolio action returns all associated public work.
+- Implementation: connected Gaurang Gala, Leigh Roach, and Dr. Goverdhan Reddy Vavilala to their client-supplied real photographs, approved biographies, emails, and phone numbers; replaced the single property advisor field with ordered `advisorAssignments`; added optional per-assignment roles where the existing record supports them; made transactions derive advisor relationships from property data; credited both Gaurang and Goverdhan on the 10416 Chapel Hill Road closing while omitting unconfirmed individual roles; rendered multi-agent contact rosters on property summaries; added email and phone actions to every Team card; and changed advisor-filtered catalogs to show active inventory and completed transactions with active records first.
+- Files / routes changed: `src/content/team.ts`, `src/content/properties.ts`, `src/content/transactions.ts`, `src/components/properties/CommercialListingPage.tsx`, `src/pages/Team.tsx`, `src/pages/Properties.tsx`, `src/styles/gala.css`, `src/test/team-model.test.ts`, `src/test/properties-model.test.ts`, `src/test/transactions-model.test.ts`, `src/test/contact-page.test.tsx`, `src/test/gala-pages.test.tsx`, `PROPERTY-DATA-REGISTER.md`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger; `/team`, `/properties?advisor=:advisorId`, and property summary advisor panels including `/properties/10416-chapel-hill-road`.
+- Verification: targeted relationship/page suite passed 61/61; full Vitest suite passed 113/113 across 18 files; production build passed with only the existing browserslist-age and bundle-size notices; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings. Desktop browser QA passed on `/team`, Goverdhan's filtered portfolio, and the shared Chapel Hill transaction. At 390×844, Team cards, the two-agent Chapel Hill roster, and Gaurang's six-record portfolio showed no horizontal overflow; Gaurang returned four active and two closed records in the intended order, and browser console error checks were empty. No form was submitted.
+- Intended commit: `feat: connect agents to listings and transactions` after scoped diff review.
+- Remaining working tree: expected clean after commit.
+- Blockers: 202 North Main Street remains unassigned because no advisor credit was supplied. The relationship between 10414 and 10416 Chapel Hill Road, transaction economics, and each Chapel Hill team member's individual role remain unconfirmed; the public record therefore stays limited to 10416, omits economics, and shows both names without invented role labels. No blocker prevents the next safe checkpoint.
+- Exact next action: Complete the remaining Phase 2 checkpoint by adding a restrained shared-data advisor directory to `/contact` and Home as the first labeled desktop and mobile navigation item; verify responsive and keyboard behavior plus inquiry context, update both authoritative ledgers, and create one local commit.

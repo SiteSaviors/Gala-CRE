@@ -5,7 +5,6 @@ import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import {
   getTeamMemberContactHref,
-  getTeamMemberContactLabel,
   teamMembers,
 } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
@@ -43,9 +42,9 @@ const Team = () => {
 
             <div className="gala-team-grid">
               {teamMembers.map((member) => {
-                const directContact = getTeamMemberContactLabel(member);
                 const contactHref = getTeamMemberContactHref(member);
                 const isExternalContact = contactHref.startsWith("mailto:") || contactHref.startsWith("tel:");
+                const telephoneHref = member.phone ? `tel:+1${member.phone.replace(/\D/g, "")}` : undefined;
 
                 return (
                   <article className="gala-team-card" key={member.id}>
@@ -65,12 +64,18 @@ const Team = () => {
                       <div className="gala-team-card__bio">
                         {member.biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                       </div>
-                      {directContact ? (
-                        <a className="gala-team-card__contact" href={contactHref}>
-                          {member.email ? <Mail size={15} aria-hidden="true" /> : <Phone size={15} aria-hidden="true" />}
-                          {directContact}
-                        </a>
-                      ) : null}
+                      <div className="gala-team-card__contacts">
+                        {member.email ? (
+                          <a className="gala-team-card__contact" href={`mailto:${member.email}`}>
+                            <Mail size={15} aria-hidden="true" /> {member.email}
+                          </a>
+                        ) : null}
+                        {telephoneHref ? (
+                          <a className="gala-team-card__contact" href={telephoneHref}>
+                            <Phone size={15} aria-hidden="true" /> {member.phone}
+                          </a>
+                        ) : null}
+                      </div>
                       <div className="gala-team-card__actions">
                         {isExternalContact ? (
                           <a className="gala-button gala-button--dark" href={contactHref}>Contact Agent</a>
@@ -78,7 +83,7 @@ const Team = () => {
                           <Link className="gala-button gala-button--dark" to={contactHref}>Contact Agent</Link>
                         )}
                         <Link className="gala-text-link" to={`/properties?advisor=${member.id}`}>
-                          View Active Listings <ArrowUpRight size={16} aria-hidden="true" />
+                          View Listings &amp; Transactions <ArrowUpRight size={16} aria-hidden="true" />
                         </Link>
                       </div>
                     </div>

@@ -1,5 +1,8 @@
-import { propertyBySlug, type PropertyAssetType } from "@/content/properties";
-import type { TeamMemberId } from "@/content/team";
+import {
+  propertyBySlug,
+  type PropertyAdvisorAssignment,
+  type PropertyAssetType,
+} from "@/content/properties";
 
 export type TrackRecordMetricId =
   | "transaction-volume"
@@ -61,7 +64,6 @@ type TransactionSource = {
   closeDate: string | null;
   galaRole: string | null;
   publishablePrice: string | null;
-  advisorId: TeamMemberId | null;
   photographyApprovedForHomepage: boolean;
   identityScope: string;
   statement: string;
@@ -78,7 +80,7 @@ export type Transaction = {
   closeDate: string | null;
   galaRole: string | null;
   publishablePrice: string | null;
-  advisorId: TeamMemberId | null;
+  advisorAssignments: PropertyAdvisorAssignment[];
   approvedPhotography: TransactionPhotography | null;
   identityScope: string;
   detailPath: string;
@@ -97,7 +99,6 @@ const transactionSources: TransactionSource[] = [
     closeDate: "July 29, 2026",
     galaRole: "Listing involvement",
     publishablePrice: null,
-    advisorId: null,
     photographyApprovedForHomepage: false,
     identityScope:
       "The supplied transaction record supports 10416 Chapel Hill Road only; the relationship to 10414 Chapel Hill Road requires client confirmation.",
@@ -111,7 +112,6 @@ const transactionSources: TransactionSource[] = [
     closeDate: null,
     galaRole: "Listing representation",
     publishablePrice: null,
-    advisorId: "gaurang-gala",
     photographyApprovedForHomepage: true,
     identityScope: "The completed transaction record is limited to 802 Bragg Boulevard.",
     statement: "A completed retail and automotive-service transaction in Fayetteville.",
@@ -124,7 +124,6 @@ const transactionSources: TransactionSource[] = [
     closeDate: "July 30, 2026",
     galaRole: null,
     publishablePrice: null,
-    advisorId: null,
     photographyApprovedForHomepage: false,
     identityScope: "The completed transaction record is limited to 202 North Main Street.",
     statement: "A completed commercial transaction in Fuquay-Varina.",
@@ -150,7 +149,7 @@ const buildTransaction = (source: TransactionSource): Transaction => {
     closeDate: source.closeDate,
     galaRole: source.galaRole,
     publishablePrice: source.publishablePrice,
-    advisorId: source.advisorId,
+    advisorAssignments: property.advisorAssignments,
     approvedPhotography: source.photographyApprovedForHomepage
       ? {
           src: property.heroImage,
@@ -184,7 +183,7 @@ export type TransactionCandidate = {
   galaRole: null;
   publishablePrice: null;
   approvedPhotography: null;
-  advisorId: null;
+  advisorAssignments: [];
   detailPath: null;
   publicationStatus: "Blocked";
   blocker: string;
@@ -201,7 +200,7 @@ export const transactionCandidates: TransactionCandidate[] = [
     galaRole: null,
     publishablePrice: null,
     approvedPhotography: null,
-    advisorId: null,
+    advisorAssignments: [],
     detailPath: null,
     publicationStatus: "Blocked",
     blocker:

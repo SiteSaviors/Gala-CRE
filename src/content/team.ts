@@ -1,5 +1,6 @@
-import gaurangGalaPhoto from "@/assets/gala-introduction-gaurang.webp";
-import leighRoachPhoto from "@/assets/team/leigh-roach.webp";
+import gaurangGalaPhoto from "@/assets/team/gaurang-gala-2026.webp";
+import goverdhanVavilalaPhoto from "@/assets/team/goverdhan-vavilala-2026.webp";
+import leighRoachPhoto from "@/assets/team/leigh-roach-2026.webp";
 
 export const teamMemberIds = ["gaurang-gala", "leigh-roach", "goverdhan-vavilala"] as const;
 
@@ -27,7 +28,8 @@ export const teamMembers: TeamMember[] = [
       "He works with owners, investors, landlords, tenants, and business operators to make complex commercial real estate decisions clearer and more coordinated.",
     ],
     image: gaurangGalaPhoto,
-    imageAlt: "Gaurang Gala at a commercial development site",
+    imageAlt: "Gaurang Gala",
+    email: "gaurang@galacregroup.com",
     phone: "910-578-2828",
     license: "NC 283149",
   },
@@ -41,15 +43,22 @@ export const teamMembers: TeamMember[] = [
     ],
     image: leighRoachPhoto,
     imageAlt: "Leigh Roach",
-    email: "Leigh@galacregroup.com",
+    email: "leigh@galacregroup.com",
+    phone: "(919) 886-9181",
   },
   {
     id: "goverdhan-vavilala",
-    name: "Goverdhan Vavilala",
+    name: "Dr. Goverdhan Reddy Vavilala",
     title: "Agent",
     biography: [
-      "Goverdhan Vavilala serves clients as an agent with Gala CRE Group.",
+      "Dr. Goverdhan Reddy Vavilala, PhD, is a scientist, entrepreneur, investor, and real-estate professional based in the Raleigh-Durham, North Carolina area. With more than two decades of experience, his career spans pharmaceutical and clinical research, business development, entrepreneurship, and commercial real estate.",
+      "Drawing on his scientific background and business expertise, Dr. Vavilala has pursued opportunities across life sciences, healthcare, investment, and property ventures. His experience includes research and development, strategic partnerships, business operations, investment, and commercial property activities in North Carolina.",
+      "His multidisciplinary career reflects a combination of scientific insight, entrepreneurial leadership, and investment perspective, with a focus on identifying opportunities, building sustainable ventures, and creating long-term value.",
     ],
+    image: goverdhanVavilalaPhoto,
+    imageAlt: "Dr. Goverdhan Reddy Vavilala",
+    email: "goverdhan@galacregroup.com",
+    phone: "(919) 462-1494",
   },
 ];
 

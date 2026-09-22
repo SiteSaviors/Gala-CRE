@@ -24,16 +24,38 @@ const property = (overrides: Partial<Property>): Property => ({
   overview: "Property overview.",
   highlights: [],
   externalLinks: [],
+  advisorAssignments: [],
   featured: true,
   sortOrder: 2,
   ...overrides,
 });
 
 const records = [
-  property({ slug: "closed-office", name: "Closed Office", assetType: "Office", status: "Closed", sortOrder: 1 }),
-  property({ slug: "active-retail", name: "Active Retail", assetType: "Retail", offeringType: "For Lease", advisorId: "leigh-roach", sortOrder: 3 }),
+  property({
+    slug: "closed-office",
+    name: "Closed Office",
+    assetType: "Office",
+    status: "Closed",
+    advisorAssignments: [{ advisorId: "leigh-roach" }, { advisorId: "gaurang-gala" }],
+    sortOrder: 1,
+  }),
+  property({
+    slug: "active-retail",
+    name: "Active Retail",
+    assetType: "Retail",
+    offeringType: "For Lease",
+    advisorAssignments: [{ advisorId: "leigh-roach", role: "Listing Advisor" }],
+    sortOrder: 3,
+  }),
   property({ slug: "active-industrial", name: "Active Industrial", sortOrder: 1 }),
-  property({ slug: "contract-land", name: "Contract Land", assetType: "Land", status: "Under Contract", sortOrder: 1 }),
+  property({
+    slug: "contract-land",
+    name: "Contract Land",
+    assetType: "Land",
+    status: "Under Contract",
+    advisorAssignments: [{ advisorId: "leigh-roach" }],
+    sortOrder: 1,
+  }),
 ];
 
 describe("property content model", () => {
@@ -58,7 +80,7 @@ describe("property content model", () => {
       acreageDisplay: "Approx. 6.6 acres",
       assetType: "Land",
       status: "Active",
-      advisorId: "gaurang-gala",
+      advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
       featured: true,
       coordinates: { latitude: 35.7860804, longitude: -80.2780045 },
     });
@@ -85,8 +107,13 @@ describe("property content model", () => {
     });
     expect(propertyBySlug["10416-chapel-hill-road"]?.priceDisplay).toBeUndefined();
     expect(featuredProperties.some((item) => item.slug === "802-bragg-boulevard")).toBe(false);
-    expect(propertyBySlug["5911-family-farm-road"]?.advisorId).toBe("leigh-roach");
-    expect(properties.filter((item) => item.advisorId && item.slug !== "5911-family-farm-road").every((item) => item.advisorId === "gaurang-gala")).toBe(true);
+    expect(propertyBySlug["5911-family-farm-road"]?.advisorAssignments).toEqual([
+      { advisorId: "leigh-roach", role: "Listing Advisor" },
+    ]);
+    expect(propertyBySlug["10416-chapel-hill-road"]?.advisorAssignments).toEqual([
+      { advisorId: "gaurang-gala" },
+      { advisorId: "goverdhan-vavilala" },
+    ]);
     expect(propertyBySlug["2301-lackey-street"]?.listingPage?.gallery?.items).toHaveLength(5);
     expect(propertyBySlug["2301-lackey-street"]?.listingPage?.information?.groups).toHaveLength(2);
     expect(propertyBySlug["611-703-church-street"]?.listingPage?.gallery?.items).toHaveLength(5);
@@ -144,7 +171,7 @@ describe("property content model", () => {
     expect(findPropertyBySlug(records, "missing")).toBeUndefined();
   });
 
-  it("filters active inventory by its authoritative advisor id", () => {
+  it("filters active, under-contract, closed, and shared records by advisor", () => {
     expect(filterProperties(records, {
       query: "",
       assetType: "All",
@@ -152,5 +179,21 @@ describe("property content model", () => {
       status: "Active",
       advisorId: "leigh-roach",
     }).map((item) => item.slug)).toEqual(["active-retail"]);
+
+    expect(filterProperties(records, {
+      query: "",
+      assetType: "All",
+      offeringType: "All",
+      status: "All",
+      advisorId: "leigh-roach",
+    }).map((item) => item.slug)).toEqual(["closed-office", "active-retail", "contract-land"]);
+
+    expect(filterProperties(records, {
+      query: "",
+      assetType: "All",
+      offeringType: "All",
+      status: "Closed",
+      advisorId: "gaurang-gala",
+    }).map((item) => item.slug)).toEqual(["closed-office"]);
   });
 });

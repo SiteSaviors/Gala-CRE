@@ -91,7 +91,7 @@ describe("advisor inquiry form", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     renderContact("/contact?advisor=goverdhan-vavilala&source=team");
-    expect(screen.getByRole("heading", { name: "Contact Goverdhan Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Contact Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
     completeForm();
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
     await screen.findByRole("heading", { name: "Inquiry received" });

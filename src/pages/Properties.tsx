@@ -31,7 +31,7 @@ const Properties = () => {
   const [query, setQuery] = useState("");
   const [assetType, setAssetType] = useState<"All" | PropertyAssetType>("All");
   const [offeringType, setOfferingType] = useState<"All" | PropertyOfferingType>("All");
-  const [status, setStatus] = useState<"All" | PropertyStatus>(() => selectedAdvisor ? "Active" : "All");
+  const [status, setStatus] = useState<"All" | PropertyStatus>("All");
   useSiteCursor();
 
   const filtered = useMemo(
@@ -77,7 +77,7 @@ const Properties = () => {
               <div className="gala-advisor-filter" role="status">
                 <div>
                   <span>Advisor portfolio</span>
-                  <strong>Active listings represented by {selectedAdvisor.name}</strong>
+                  <strong>Listings and completed transactions associated with {selectedAdvisor.name}</strong>
                 </div>
                 <button type="button" onClick={reset}><X size={15} aria-hidden="true" /> View all properties</button>
               </div>
@@ -133,7 +133,7 @@ const Properties = () => {
             ) : (
               <div className="gala-empty-state">
                 <div className="gala-kicker gala-kicker--dark">Property Search</div>
-                <h2>{selectedAdvisor ? `No active listings are currently displayed for ${selectedAdvisor.name}.` : hasFilters ? "No properties match those filters." : "No properties are currently available."}</h2>
+                <h2>{selectedAdvisor ? `No associated properties are currently displayed for ${selectedAdvisor.name}.` : hasFilters ? "No properties match those filters." : "No properties are currently available."}</h2>
                 <p>{hasFilters ? "View all properties or adjust the filters to continue exploring." : "Talk with a Gala CRE advisor about the opportunity you are looking for."}</p>
                 {hasFilters ? <button type="button" className="gala-button" onClick={reset}>Reset Filters</button> : null}
               </div>

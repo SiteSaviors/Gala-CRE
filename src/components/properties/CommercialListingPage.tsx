@@ -76,17 +76,16 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const informationGroups = page.information?.groups ?? [];
   const transactionConditions = page.transaction?.conditions ?? [];
   const documentItems = page.documents?.items ?? [];
-  const advisor = property.advisorId ? teamMemberById[property.advisorId] : undefined;
+  const advisorAssignments = property.advisorAssignments.map((assignment) => ({
+    assignment,
+    member: teamMemberById[assignment.advisorId],
+  }));
   const relatedProperties = getRelatedProperties(property.slug, 2);
   const selectedMedia = mediaItems[selectedMediaIndex] ?? mediaItems[0];
   const priceOrStatus = property.priceDisplay ?? (isClosedTransaction ? "Completed transaction" : "Contact for pricing");
   const summaryFacts = keyFacts.filter((fact) => fact.value !== priceOrStatus);
   const hasAssetContent = informationGroups.length > 0 || transactionConditions.length > 0;
-  const hasClosingContent = documentItems.length > 0 || Boolean(advisor) || Boolean(page.disclosure);
-  const telephoneHref = advisor?.phone
-    ? `tel:+1${advisor.phone.replace(/\D/g, "")}`
-    : undefined;
-  const emailHref = advisor?.email ? `mailto:${advisor.email}` : undefined;
+  const hasClosingContent = documentItems.length > 0 || advisorAssignments.length > 0 || Boolean(page.disclosure);
 
   return (
     <>
@@ -197,26 +196,42 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 </a>
               ) : null}
 
-              {advisor ? (
-                <div className="gala-listing-compact__advisor">
-                  {advisor.image ? <img src={advisor.image} alt="" aria-hidden="true" /> : null}
-                  <div>
-                    <span>{page.advisorEyebrow ?? "Listing Advisor"}</span>
-                    <strong>{advisor.name}</strong>
-                    <small>{advisor.title}{advisor.license ? ` · ${advisor.license}` : ""}</small>
-                  </div>
-                  <div className="gala-listing-compact__advisor-links">
-                    {telephoneHref ? (
-                      <a href={telephoneHref}>
-                        <Phone size={16} aria-hidden="true" /> {advisor.phone}
-                      </a>
-                    ) : null}
-                    {emailHref ? (
-                      <a href={emailHref}>
-                        <Mail size={16} aria-hidden="true" /> {advisor.email}
-                      </a>
-                    ) : null}
-                  </div>
+              {advisorAssignments.length ? (
+                <div className="gala-listing-compact__advisor-list">
+                  <span className="gala-listing-compact__advisor-list-label">
+                    {page.advisorEyebrow ?? (isClosedTransaction ? "Transaction Team" : "Listing Advisor")}
+                  </span>
+                  {advisorAssignments.map(({ assignment, member }) => {
+                    const telephoneHref = member.phone
+                      ? `tel:+1${member.phone.replace(/\D/g, "")}`
+                      : undefined;
+                    const emailHref = member.email ? `mailto:${member.email}` : undefined;
+                    const assignmentLabel = assignment.role
+                      ? `${assignment.role} · ${member.title}`
+                      : member.title;
+
+                    return (
+                      <article className="gala-listing-compact__advisor" key={member.id}>
+                        {member.image ? <img src={member.image} alt="" aria-hidden="true" /> : null}
+                        <div>
+                          <strong>{member.name}</strong>
+                          <small>{assignmentLabel}{member.license ? ` · ${member.license}` : ""}</small>
+                        </div>
+                        <div className="gala-listing-compact__advisor-links">
+                          {telephoneHref ? (
+                            <a href={telephoneHref}>
+                              <Phone size={16} aria-hidden="true" /> {member.phone}
+                            </a>
+                          ) : null}
+                          {emailHref ? (
+                            <a href={emailHref}>
+                              <Mail size={16} aria-hidden="true" /> {member.email}
+                            </a>
+                          ) : null}
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               ) : null}
             </aside>

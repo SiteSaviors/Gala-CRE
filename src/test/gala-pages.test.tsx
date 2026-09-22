@@ -198,30 +198,50 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Our Team" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Leigh Roach" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
 
     const leighCard = screen.getByRole("heading", { name: "Leigh Roach" }).closest("article");
     expect(leighCard).not.toBeNull();
-    expect(within(leighCard!).getByRole("link", { name: "Leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
-    expect(within(leighCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
-    expect(within(leighCard!).getByRole("link", { name: /View Active Listings/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
+    expect(within(leighCard!).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
+    expect(within(leighCard!).getByRole("link", { name: "(919) 886-9181" })).toHaveAttribute("href", "tel:+19198869181");
+    expect(within(leighCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
+    expect(within(leighCard!).getByRole("link", { name: /View Listings & Transactions/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
 
-    const goverdhanCard = screen.getByRole("heading", { name: "Goverdhan Vavilala" }).closest("article");
+    const goverdhanCard = screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" }).closest("article");
     expect(goverdhanCard).not.toBeNull();
+    expect(within(goverdhanCard!).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute(
+      "href",
+      "mailto:goverdhan@galacregroup.com",
+    );
+    expect(within(goverdhanCard!).getByRole("link", { name: "(919) 462-1494" })).toHaveAttribute("href", "tel:+19194621494");
     expect(within(goverdhanCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute(
       "href",
-      "/contact?advisor=goverdhan-vavilala&source=team",
+      "mailto:goverdhan@galacregroup.com",
     );
     expect(screen.getAllByRole("link", { name: "Team" }).some((link) => link.getAttribute("href") === "/team")).toBe(true);
   });
 
-  it("filters the property catalog to an advisor's active listings", () => {
+  it("filters the property catalog to an advisor's listings and transactions", () => {
     renderPage(<Properties />, "/properties?advisor=leigh-roach");
-    expect(screen.getByText("Active listings represented by Leigh Roach")).toBeInTheDocument();
+    expect(screen.getByText("Listings and completed transactions associated with Leigh Roach")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "5911 Family Farm Road" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "2301 Lackey Street" })).not.toBeInTheDocument();
-    expect(screen.getByRole("combobox", { name: "Property status" })).toHaveValue("Active");
+    expect(screen.getByRole("combobox", { name: "Property status" })).toHaveValue("All");
+  });
+
+  it("includes shared closed transactions in each associated agent portfolio", () => {
+    const gaurang = renderPage(<Properties />, "/properties?advisor=gaurang-gala");
+    expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
+    gaurang.unmount();
+
+    renderPage(<Properties />, "/properties?advisor=goverdhan-vavilala");
+    expect(screen.getByText("Listings and completed transactions associated with Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "2301 Lackey Street" })).not.toBeInTheDocument();
   });
 
   it("creates a discoverable commercial-agent careers route", () => {
@@ -710,7 +730,7 @@ describe("Gala CRE public pages", () => {
     const lackey = propertyBySlug["2301-lackey-street"];
     const minimalProperty = {
       ...lackey,
-      advisorId: undefined,
+      advisorAssignments: [],
       externalLinks: [],
       listingPage: {
         headline: "A concise commercial opportunity.",
@@ -831,7 +851,7 @@ describe("Gala CRE public pages", () => {
       "/contact?property=5911-family-farm-road"
     );
     expect(screen.getByText("Leigh Roach")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:Leigh@galacregroup.com");
+    expect(screen.getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
     expect(screen.getByTitle("Map of 5911 Family Farm Road")).toBeInTheDocument();
     const familyFarmVideo = screen.getByLabelText("Play the aerial property video for 5911 Family Farm Road");
     expect(familyFarmVideo).toHaveAttribute("controls");
@@ -951,7 +971,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("July 29, 2026")).toBeInTheDocument();
     expect(screen.getAllByText("Approx. 3.3 acres").length).toBeGreaterThan(0);
     expect(screen.getByText(/Gala Real Estate Advisors.*listing involvement/i)).toBeInTheDocument();
-    expect(screen.getByText(/individual advisor credit remains unassigned/i)).toBeInTheDocument();
+    expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
+    expect(screen.getByText("Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
+    expect(screen.getByText("Gaurang Gala and Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
     expect(screen.getByText(/relationship to 10414 remains unconfirmed/i)).toBeInTheDocument();
     expect(screen.queryByText("$2,500,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();

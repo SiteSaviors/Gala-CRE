@@ -13,15 +13,23 @@ describe("team content model", () => {
       "goverdhan-vavilala",
     ]);
     expect(teamMemberById["gaurang-gala"]).toMatchObject({ name: "Gaurang Gala", title: "CEO | BIC" });
-    expect(teamMemberById["leigh-roach"]).toMatchObject({ name: "Leigh Roach", email: "Leigh@galacregroup.com" });
-    expect(teamMemberById["goverdhan-vavilala"]).toMatchObject({ name: "Goverdhan Vavilala", title: "Agent" });
+    expect(teamMemberById["leigh-roach"]).toMatchObject({
+      name: "Leigh Roach",
+      email: "leigh@galacregroup.com",
+      phone: "(919) 886-9181",
+    });
+    expect(teamMemberById["goverdhan-vavilala"]).toMatchObject({
+      name: "Dr. Goverdhan Reddy Vavilala",
+      title: "Agent",
+      email: "goverdhan@galacregroup.com",
+      phone: "(919) 462-1494",
+    });
+    expect(teamMembers.every(({ image }) => Boolean(image))).toBe(true);
   });
 
-  it("uses verified direct contact details and a contextual fallback", () => {
-    expect(getTeamMemberContactHref(teamMemberById["gaurang-gala"])).toBe("tel:+19105782828");
-    expect(getTeamMemberContactHref(teamMemberById["leigh-roach"])).toBe("mailto:Leigh@galacregroup.com");
-    expect(getTeamMemberContactHref(teamMemberById["goverdhan-vavilala"])).toBe(
-      "/contact?advisor=goverdhan-vavilala&source=team",
-    );
+  it("uses each member's verified direct email for the primary contact action", () => {
+    expect(getTeamMemberContactHref(teamMemberById["gaurang-gala"])).toBe("mailto:gaurang@galacregroup.com");
+    expect(getTeamMemberContactHref(teamMemberById["leigh-roach"])).toBe("mailto:leigh@galacregroup.com");
+    expect(getTeamMemberContactHref(teamMemberById["goverdhan-vavilala"])).toBe("mailto:goverdhan@galacregroup.com");
   });
 });

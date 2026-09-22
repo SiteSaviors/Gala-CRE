@@ -39,6 +39,11 @@ export type PropertyAssetType = (typeof propertyAssetTypes)[number];
 export type PropertyOfferingType = (typeof propertyOfferingTypes)[number];
 export type PropertyStatus = (typeof propertyStatuses)[number];
 
+export type PropertyAdvisorAssignment = {
+  advisorId: TeamMemberId;
+  role?: string;
+};
+
 export type PropertyLink = {
   label: "Crexi" | "LoopNet" | "CoStar" | "Listing Website";
   href: string;
@@ -154,7 +159,7 @@ export type Property = {
   listingPage?: PropertyListingPage;
   brochurePdf?: string;
   externalLinks: PropertyLink[];
-  advisorId?: TeamMemberId;
+  advisorAssignments: PropertyAdvisorAssignment[];
   featured: boolean;
   sortOrder: number;
 };
@@ -215,7 +220,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2344758/north-carolina-2301-lackey-st",
       },
     ],
-    advisorId: "gaurang-gala",
+    advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
     listingPage: {
       headline: "Existing fuel-and-convenience site near I-95 Exit 19.",
       lead:
@@ -420,7 +425,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2033921/north-carolina-prime-location---land-with-opportunity-for-shopping-center",
       },
     ],
-    advisorId: "gaurang-gala",
+    advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
     listingPage: {
       headline: "A 3.46-acre commercial site with an advanced shopping-center plan.",
       lead:
@@ -607,7 +612,7 @@ export const properties: Property[] = [
         href: "https://www.crexi.com/properties/2335675/north-carolina-611-703-church-st-morrisville-cary-nc-27560",
       },
     ],
-    advisorId: "gaurang-gala",
+    advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
     listingPage: {
       headline: "A two-site Morrisville opportunity centered on childcare use.",
       lead:
@@ -824,7 +829,7 @@ export const properties: Property[] = [
         href: "https://doorifymls.com/properties/NC/Morrisville/27560/10277/5911-family-farm-road-morrisville-nc-27560/775842597",
       },
     ],
-    advisorId: "leigh-roach",
+    advisorAssignments: [{ advisorId: "leigh-roach", role: "Listing Advisor" }],
     listingPage: {
       headline: "Approximately 2.10 acres in an established Morrisville setting.",
       lead:
@@ -1031,7 +1036,7 @@ export const properties: Property[] = [
       points: ["Lexington, North Carolina", "Davidson County", "Brown Street address"],
     },
     externalLinks: [],
-    advisorId: "gaurang-gala",
+    advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
     listingPage: {
       headline: "A proposed 58-townhome site with a documented diligence history.",
       lead:
@@ -1247,7 +1252,7 @@ export const properties: Property[] = [
         href: "https://www.loopnet.com/Listing/802-Bragg-Blvd-Fayetteville-NC/39012701/",
       },
     ],
-    advisorId: "gaurang-gala",
+    advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing representation" }],
     listingPage: {
       headline: "Recently sold retail property on Bragg Boulevard.",
       lead:
@@ -1429,6 +1434,7 @@ export const properties: Property[] = [
       points: ["Fuquay-Varina, North Carolina", "Wake County", "North Main Street"],
     },
     externalLinks: [],
+    advisorAssignments: [],
     gallery: [],
     listingPage: {
       headline: "A completed commercial transaction in Fuquay-Varina.",
@@ -1552,6 +1558,10 @@ export const properties: Property[] = [
       points: ["Morrisville, North Carolina", "Wake County", "Chapel Hill Road"],
     },
     externalLinks: [],
+    advisorAssignments: [
+      { advisorId: "gaurang-gala" },
+      { advisorId: "goverdhan-vavilala" },
+    ],
     gallery: [],
     listingPage: {
       headline: "A completed commercial land transaction in Morrisville.",
@@ -1594,7 +1604,7 @@ export const properties: Property[] = [
         conditions: [
           { label: "Status", value: "Closed July 29, 2026; off market July 31, 2026" },
           { label: "Transaction price", value: "Not published pending confirmation" },
-          { label: "Representation", value: "Gala listing involvement is documented; individual advisor credit remains unassigned" },
+          { label: "Transaction team", value: "Gaurang Gala and Dr. Goverdhan Reddy Vavilala" },
           { label: "Record scope", value: "Limited to 10416; any relationship to 10414 remains unconfirmed" },
           { label: "Photography", value: "MLS imagery not republished" },
         ],
@@ -1682,7 +1692,7 @@ export const filterProperties = (items: Property[], filters: PropertyFilters) =>
 
     return (
       (!query || searchable.includes(query)) &&
-      (!filters.advisorId || property.advisorId === filters.advisorId) &&
+      (!filters.advisorId || property.advisorAssignments.some(({ advisorId }) => advisorId === filters.advisorId)) &&
       (filters.assetType === "All" || property.assetType === filters.assetType) &&
       (filters.offeringType === "All" || property.offeringType === filters.offeringType) &&
       (filters.status === "All" || property.status === filters.status)

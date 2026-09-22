@@ -21,7 +21,7 @@ Purpose: Control which listing facts are safe to publish and identify the client
 | --- | --- | --- |
 | Gaurang Gala | CEO \| BIC; gaurang@galacregroup.com; 910-578-2828; NC 283149 | Name, title, email, phone, and new real photograph client-supplied; new web asset registered September 22, 2026 |
 | Leigh Roach | Agent; leigh@galacregroup.com; (919) 886-9181 | Biography, email, phone, and replacement portrait client-supplied; new web asset registered September 22, 2026 |
-| Goverdhan Vavilala | Agent; goverdhan@galacregroup.com; (919) 462-1494 | Name, role, email, phone, full biography, and portrait client-supplied; new web asset registered September 22, 2026 |
+| Dr. Goverdhan Reddy Vavilala | Agent; goverdhan@galacregroup.com; (919) 462-1494 | Full public name, role, email, phone, full biography, and portrait client-supplied; connected to the shared Team record September 22, 2026 |
 
 ## September 21 client revision register
 
@@ -33,9 +33,9 @@ The supplied originals remain unchanged in `/Users/admin/Downloads`. Web-ready d
 
 | Team member | Supplied original | Registered web asset | Dimensions | File size | Current public use at audit time |
 | --- | --- | --- | --- | --- | --- |
-| Gaurang Gala | `Gaurang.jpg` | `src/assets/team/gaurang-gala-2026.webp` | 1600 × 1067 | 64 KB | Not yet connected. `src/assets/gala-introduction-gaurang.webp` remains in Team, homepage introduction, and Careers. |
-| Goverdhan Vavilala | `Gov.jpeg` | `src/assets/team/goverdhan-vavilala-2026.webp` | 1200 × 1800 | 172 KB | Not yet connected; the current Team record has no portrait. |
-| Leigh Roach | `Leigh.jpeg` | `src/assets/team/leigh-roach-2026.webp` | 1066 × 1600 | 100 KB | Not yet connected. Team currently uses the older `src/assets/team/leigh-roach.webp`. |
+| Gaurang Gala | `Gaurang.jpg` | `src/assets/team/gaurang-gala-2026.webp` | 1600 × 1067 | 64 KB | Connected to the shared Team record; used by Team and property-advisor presentations. The separate homepage introduction and Careers editorial image remains unchanged. |
+| Dr. Goverdhan Reddy Vavilala | `Gov.jpeg` | `src/assets/team/goverdhan-vavilala-2026.webp` | 1200 × 1800 | 172 KB | Connected to the shared Team record; used by Team and shared transaction presentations. |
+| Leigh Roach | `Leigh.jpeg` | `src/assets/team/leigh-roach-2026.webp` | 1066 × 1600 | 100 KB | Connected to the shared Team record; used by Team and Family Farm advisor presentations. |
 
 ### Authoritative property-catalog order
 
@@ -66,18 +66,18 @@ Public marketplace pages may remain available as secondary “View Listing” li
 
 ### Agent-to-property audit
 
-| Property | Status | Current structured advisor | Latest client direction / implementation need |
+| Property | Status | Structured advisor assignments | Latest client direction / implementation result |
 | --- | --- | --- | --- |
-| 611 & 703 Church Street | Active | Gaurang Gala | No assignment change supplied. |
-| 5911 Family Farm Road | Active | Leigh Roach | Retain Leigh; add supplied email, phone, and replacement portrait. |
-| Lexington Townhome Site | Active | Gaurang Gala | No assignment change supplied. |
-| 2301 Lackey Street | Active | Gaurang Gala | No assignment change supplied. |
-| 5047 Yadkin Road | Active | Gaurang Gala | No assignment change supplied. |
-| 802 Bragg Boulevard | Closed | Gaurang Gala | Retain transaction credit. |
+| 611 & 703 Church Street | Active | Gaurang Gala — Listing Advisor | Retained; the assignment resolves through the shared Team record. |
+| 5911 Family Farm Road | Active | Leigh Roach — Listing Advisor | Retained with supplied email, phone, biography, and replacement portrait. |
+| Lexington Townhome Site | Active | Gaurang Gala — Listing Advisor | Retained; the assignment resolves through the shared Team record. |
+| 2301 Lackey Street | Active | Gaurang Gala — Listing Advisor | Retained; the assignment resolves through the shared Team record. |
+| 5047 Yadkin Road | Active | Gaurang Gala — Listing Advisor | Retained; the assignment resolves through the shared Team record. |
+| 802 Bragg Boulevard | Closed | Gaurang Gala — Listing representation | Retained as structured transaction credit. |
 | 202 North Main Street | Closed | Unassigned | No new advisor credit supplied. |
-| 10416 Chapel Hill Road | Closed | Unassigned | Client now directs credit to both Gaurang Gala and Goverdhan Vavilala. The current single `advisorId` model cannot represent this accurately and must become a multi-advisor relationship for listing/transaction filters. |
+| 10416 Chapel Hill Road | Closed | Gaurang Gala; Dr. Goverdhan Reddy Vavilala | Client-directed shared credit is implemented. Individual roles remain omitted because none were supplied. |
 
-The advisor-filtered catalog currently defaults to `Active`, and its heading and empty state say “Active listings.” That behavior conflicts with the new request for an agent's view to include both active listings and closed deals. The next implementation must preserve the selected advisor while defaulting to all statuses and relabel the view accordingly.
+Properties now use ordered `advisorAssignments`, allowing multiple agents and an optional per-assignment role. Transactions derive those assignments from the property record instead of maintaining duplicate advisor fields. The advisor-filtered catalog preserves the selected agent, defaults to all statuses, labels the result as listings and completed transactions, and continues to sort active inventory before closed work. Under-contract associations are supported by the same status-independent relationship model; no current public property is classified under contract.
 
 ### Listing-video layout audit
 
@@ -97,7 +97,7 @@ This table controls which completed transactions may feed the future homepage pr
 
 | Property | Status / closing date | Asset and location | Gala role | Publishable price | Approved homepage photography | Advisor | Detail route | Homepage posture |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 10416 Chapel Hill Road | Closed July 29, 2026 | Commercial land; Morrisville, NC | Gala listing involvement documented | None confirmed | None; supplied MLS photography is not cleared | Not confirmed for transaction credit | `/properties/10416-chapel-hill-road` | Publishable in qualified form. The supplied record supports 10416 only; do not combine it with 10414 until the client confirms the relationship and preferred presentation. |
+| 10416 Chapel Hill Road | Closed July 29, 2026 | Commercial land; Morrisville, NC | Gala listing involvement documented | None confirmed | None; supplied MLS photography is not cleared | Gaurang Gala; Dr. Goverdhan Reddy Vavilala | `/properties/10416-chapel-hill-road` | Publishable in qualified form. The supplied record supports 10416 only; do not combine it with 10414 until the client confirms the relationship and preferred presentation. Individual transaction roles are not published because none were supplied. |
 | 802 Bragg Boulevard | Closed; date not supplied | Retail / convenience store and automotive service; Fayetteville, NC | Listing representation documented | None confirmed | Three former-listing images are already in use under the client's direction; separate rights documentation is not recorded | Gaurang Gala | `/properties/802-bragg-boulevard` | Best current visual candidate, with closing date and economics omitted. |
 | 202 North Main Street | Closed July 30, 2026 | Commercial / retail; Fuquay-Varina, NC | Not confirmed | None confirmed | None; supplied MLS photography is not cleared | Not confirmed | `/properties/202-north-main-street` | Publishable in qualified, non-photographic form; not yet suitable for a visual homepage card. |
 | Watkins / Alta Watkins | Transaction status not established | Proposed multifamily development; Watkins Road, Morrisville, NC | Not established | None | None; saved article imagery is not project-specific or cleared | Not established | None | Blocked. The saved article documents a 2025 proposal, not a Gala transaction or closing. |
@@ -336,12 +336,13 @@ Source: the client-supplied [HomeSpotter / Doorify MLS record 10040138](https://
 | Site area | 3.30 acres structured; 3.33 acres in public remarks | Use “approximately 3.3 acres” unless a survey is supplied |
 | Parcels | 0756002327 and 0756005432 | Verified by the supplied MLS display; confirm whether these correspond to both 10414 and 10416 Chapel Hill Road |
 | Improvements | One story; year built 1920 | Reported by the supplied MLS display; building area is not supplied |
-| Listing context | Listing courtesy of Gala Real Estate Advisors, LLC; page personalized to Leigh Roach | Supports Gala listing involvement and Leigh as the named contact, but the client's preferred transaction credit still requires confirmation |
+| Listing context | Listing courtesy of Gala Real Estate Advisors, LLC; page personalized to Leigh Roach | Supports Gala listing involvement and identifies the MLS-page contact; it does not override the client's separate transaction-team direction |
+| Transaction team | Gaurang Gala and Dr. Goverdhan Reddy Vavilala | Client-supplied September 21 direction; individual roles were not supplied and remain omitted |
 | Media | 12 MLS photographs | Not cleared for republication; the page limits IDX data to personal, non-commercial consumer use |
 
 Publication posture: the user's September 14 direction authorizes a 10416 Chapel Hill Road closed-transaction record using the address, closed status/date, approximate acreage, parcel count, and Gala listing involvement. Do not use the MLS photos/copy or publish a sale price until the combined 10414/10416 structure and economics are confirmed.
 
-Readiness: **Published locally in qualified form** at `/properties/10416-chapel-hill-road` using the non-photographic Gala completed-transaction treatment. The correct combined-address presentation, transaction price, preferred Gala/Leigh credit, and approved property photography remain enhancement inputs.
+Readiness: **Published locally in qualified form** at `/properties/10416-chapel-hill-road` using the non-photographic Gala completed-transaction treatment. Gaurang Gala and Dr. Goverdhan Reddy Vavilala are connected as the shared transaction team without invented individual roles. The correct combined-address presentation, transaction price, and approved property photography remain enhancement inputs.
 
 ## Watkins deal material
 

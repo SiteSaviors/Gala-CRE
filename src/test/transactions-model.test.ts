@@ -28,6 +28,17 @@ describe("transaction source of truth", () => {
     expect(transactions.find(({ id }) => id === "202-north-main-street")?.approvedPhotography).toBeNull();
   });
 
+  it("derives single and shared advisor assignments from the property source of truth", () => {
+    expect(transactions.find(({ id }) => id === "802-bragg-boulevard")?.advisorAssignments).toEqual([
+      { advisorId: "gaurang-gala", role: "Listing representation" },
+    ]);
+    expect(transactions.find(({ id }) => id === "10416-chapel-hill-road")?.advisorAssignments).toEqual([
+      { advisorId: "gaurang-gala" },
+      { advisorId: "goverdhan-vavilala" },
+    ]);
+    expect(transactions.find(({ id }) => id === "202-north-main-street")?.advisorAssignments).toEqual([]);
+  });
+
   it("keeps the unresolved Watkins proposal out of publishable transactions", () => {
     expect(transactions.some(({ id }) => id === "watkins")).toBe(false);
     expect(transactionCandidates).toContainEqual(expect.objectContaining({
