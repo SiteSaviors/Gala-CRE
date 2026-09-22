@@ -245,6 +245,43 @@ test.describe("public property and service route matrix", () => {
   }
 });
 
+test("homepage hero video plays only while visible on mobile", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    reducedMotion: "no-preference",
+  });
+  const page = await context.newPage();
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  const video = page.locator("#hvideo");
+  await expect(video).toHaveAttribute("autoplay", "");
+  await expect(video).toHaveAttribute("loop", "");
+  await expect(video).toHaveAttribute("playsinline", "");
+  await expect(video).toHaveAttribute("preload", "auto");
+  await expect(video.locator("source")).toHaveAttribute("src", /\.mp4$/);
+  expect(await video.evaluate((element) => (element as HTMLVideoElement).muted)).toBe(true);
+  await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(false);
+
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(true);
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(false);
+  await context.close();
+
+  const reducedMotionContext = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    reducedMotion: "reduce",
+  });
+  const reducedMotionPage = await reducedMotionContext.newPage();
+  await reducedMotionPage.goto("/", { waitUntil: "domcontentloaded" });
+  const reducedMotionVideo = reducedMotionPage.locator("#hvideo");
+  await expect(reducedMotionVideo).not.toHaveAttribute("autoplay", "");
+  await expect(reducedMotionVideo.locator("source")).toHaveCount(0);
+  expect(await reducedMotionVideo.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(true);
+  await reducedMotionContext.close();
+});
+
 test("property catalog filters, map view, and gallery stay interactive", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/properties", { waitUntil: "domcontentloaded" });

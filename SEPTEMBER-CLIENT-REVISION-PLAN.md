@@ -134,6 +134,26 @@ Release blocker: the linked Vercel project currently reports no environment vari
 
 Intended commit: `test: certify September client release`.
 
+## Post-release fix — Mobile homepage hero playback
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Use the inverse of `prefers-reduced-motion: reduce` so capable mobile browsers are not excluded by a brittle `no-preference` query.
+- [x] Keep the video muted, inline, looping, and autoplay-enabled while motion is allowed.
+- [x] Retry playback when the media reaches `loadeddata` or `canplay`.
+- [x] Pause when the hero leaves the viewport or the document becomes hidden.
+- [x] Resume when the hero returns to view or the page is restored.
+- [x] Preserve a poster-only reduced-motion fallback and an autoplay fallback when `IntersectionObserver` is unavailable.
+- [x] Verify behavior at a 390×844 mobile viewport in automated and live local browser checks.
+
+Gate: the mobile hero plays and loops while visible, pauses when offscreen, resumes on return, and respects reduced-motion/browser autoplay policies without hiding the poster fallback.
+
+Checkpoint files: `src/pages/Index.tsx`, `src/test/gala-pages.test.tsx`, `e2e/public-route-matrix.spec.ts`, `OVERNIGHT-BUILD-PLAN.md`, and this plan.
+
+Verification: focused homepage tests passed 36/36; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live Chrome QA at 390×844 confirmed `muted`, `loop`, `playsInline`, ready state 4, active playback in view, paused playback offscreen, and resumed playback after returning to the hero.
+
+Intended commit: `fix: stabilize mobile hero video playback`.
+
 ## Exact next action
 
-Collect and privately configure the approved production form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; then verify delivery only with explicit authorization. Until then, keep the public forms in their existing safe-failure state.
+After explicit authorization, push and deploy the verified mobile hero-video fix, then smoke-test autoplay, offscreen pause, return-to-view resume, and reduced-motion fallback on the production homepage. After that, collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials.

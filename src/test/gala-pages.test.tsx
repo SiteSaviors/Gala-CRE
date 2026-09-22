@@ -125,7 +125,7 @@ describe("Gala CRE public pages", () => {
       configurable: true,
       writable: true,
       value: vi.fn().mockImplementation((query: string) => ({
-        matches: query === "(prefers-reduced-motion: no-preference)" || query === "(max-width: 767px)",
+        matches: query === "(max-width: 767px)",
         media: query,
         onchange: null,
         addListener: vi.fn(),

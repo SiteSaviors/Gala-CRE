@@ -586,3 +586,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit.
 - Blockers: Vercel still has no production environment variables, so Careers, 1031, and general Contact delivery intentionally fails safely. The unconfirmed 202 North Main advisor and 10414/10416 relationship/economics remain omitted. These do not affect the live content release.
 - Exact next action: collect and privately configure the approved production form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; verify delivery only after explicit authorization, and otherwise leave the safe-failure boundary intact.
+
+### 2026-09-22 — Post-release mobile homepage hero playback
+
+- Starting branch / HEAD: `main` at `50d640cea279fad17d718d2916740b2a9bcb1b0c`, clean and synchronized with `origin/main`.
+- Source of truth checked: the user's mobile autoplay report; `AGENTS.md`; `SEPTEMBER-CLIENT-REVISION-PLAN.md`; the latest release checkpoint in this ledger; Git status and recent history; the current homepage implementation, hero media, styles, tests, production build, and live local mobile route.
+- Phase / checkpoint: make the homepage hero video reliably autoplay and loop on capable mobile browsers while pausing it outside the viewport and preserving reduced-motion and poster fallbacks.
+- Gate: at a mobile viewport, the muted inline hero plays and loops while visible, pauses after leaving the viewport, resumes when visible again, and stays poster-only when reduced motion is requested.
+- Implementation: replaced the direct `no-preference` check with the more compatible inverse reduced-motion check; added older MediaQueryList listener support; moved hero and video access to React refs; enforced muted/default-muted/inline playback properties; retried `play()` on intersection, `loadeddata`, `canplay`, visibility restoration, and page restoration; paused on offscreen/background states and cleanup; retained a simple autoplay fallback where `IntersectionObserver` is unavailable; and changed enabled-video preload from metadata to auto so mobile playback can begin promptly.
+- Files / route changed: `src/pages/Index.tsx`, `src/test/gala-pages.test.tsx`, `e2e/public-route-matrix.spec.ts`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger; homepage `/` only.
+- Verification: focused homepage tests passed 36/36; full Vitest passed 116/116 across 18 files; production build passed with the existing browserslist-age and bundle-size notices; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; full Playwright passed 11/11, including the new mobile play/pause/resume/reduced-motion scenario. Live local Chrome QA at 390×844 confirmed playback advanced while the hero was visible, paused offscreen, and resumed from the same timeline position on return. No form was submitted.
+- Intended commit: `fix: stabilize mobile hero video playback` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: no implementation blocker. Mobile browsers can still override muted autoplay in Low Power Mode, data-saving modes, or other user/browser policy states; the supplied poster remains the graceful fallback in those cases.
+- Exact next action: after explicit user authorization, push `main`, deploy the linked Vercel project, and repeat the focused mobile playback smoke test against `https://gala-cre.vercel.app`; then return to the separately blocked private form configuration.

@@ -80,35 +80,75 @@ const HomepageCapabilityCard = ({
 const Index = () => {
   const isMobile = useIsMobile();
   const heroPoster = isMobile ? heroPosterMobile : heroPosterDesktop;
+  const heroRef = useRef<HTMLElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const introductionRef = useRef<HTMLElement>(null);
   const [openCapability, setOpenCapability] = useState<string | null>(null);
   const [canPlayHeroVideo, setCanPlayHeroVideo] = useState(() => (
     typeof window !== "undefined"
-    && window.matchMedia("(prefers-reduced-motion: no-preference)").matches
+    && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ));
   useSiteCursor();
 
   useEffect(() => {
-    const videoPreference = window.matchMedia("(prefers-reduced-motion: no-preference)");
-    const updateVideoPreference = () => setCanPlayHeroVideo(videoPreference.matches);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateVideoPreference = () => setCanPlayHeroVideo(!reducedMotion.matches);
     updateVideoPreference();
-    videoPreference.addEventListener("change", updateVideoPreference);
-    return () => videoPreference.removeEventListener("change", updateVideoPreference);
+    if ("addEventListener" in reducedMotion) {
+      reducedMotion.addEventListener("change", updateVideoPreference);
+      return () => reducedMotion.removeEventListener("change", updateVideoPreference);
+    }
+    reducedMotion.addListener(updateVideoPreference);
+    return () => reducedMotion.removeListener(updateVideoPreference);
   }, []);
 
   useEffect(() => {
-    const hero = document.getElementById("hero");
-    const video = document.getElementById("hvideo") as HTMLVideoElement | null;
+    const hero = heroRef.current;
+    const video = heroVideoRef.current;
     if (!hero || !video || !canPlayHeroVideo) {
       video?.pause();
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting && !document.hidden) void video.play().catch(() => undefined);
-      else video.pause();
-    }, { threshold: 0.2 });
-    observer.observe(hero);
-    return () => observer.disconnect();
+
+    let heroIsVisible = false;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+
+    const syncPlayback = () => {
+      if (!heroIsVisible || document.hidden) {
+        video.pause();
+        return;
+      }
+      void video.play().catch(() => undefined);
+    };
+    const handleVisibilityChange = () => syncPlayback();
+
+    video.addEventListener("loadeddata", syncPlayback);
+    video.addEventListener("canplay", syncPlayback);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pageshow", syncPlayback);
+
+    let observer: IntersectionObserver | null = null;
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        heroIsVisible = Boolean(entry?.isIntersecting && entry.intersectionRatio >= 0.15);
+        syncPlayback();
+      }, { threshold: [0, 0.15, 0.5] });
+      observer.observe(hero);
+    } else {
+      heroIsVisible = true;
+      syncPlayback();
+    }
+
+    return () => {
+      observer?.disconnect();
+      video.removeEventListener("loadeddata", syncPlayback);
+      video.removeEventListener("canplay", syncPlayback);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pageshow", syncPlayback);
+      video.pause();
+    };
   }, [canPlayHeroVideo]);
 
   useEffect(() => {
@@ -149,9 +189,9 @@ const Index = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/" />
       <main className="gala-home" id="main-content" tabIndex={-1}>
-        <section className="hero gala-hero" id="hero">
+        <section className="hero gala-hero" id="hero" ref={heroRef}>
           <div className="hbg" style={{ backgroundImage: `url(${heroPoster})` }}>
-            <video className="hbgv" id="hvideo" autoPlay={canPlayHeroVideo} muted loop playsInline preload={canPlayHeroVideo ? "metadata" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
+            <video ref={heroVideoRef} className="hbgv" id="hvideo" autoPlay={canPlayHeroVideo} muted loop playsInline preload={canPlayHeroVideo ? "auto" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
               {canPlayHeroVideo ? <source src={heroVideo} type="video/mp4" /> : null}
             </video>
           </div>
