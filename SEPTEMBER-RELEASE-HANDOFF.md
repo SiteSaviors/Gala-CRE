@@ -10,7 +10,7 @@ Last verified: September 22, 2026
 - Certified content commit: `931e87e`
 - Vercel project: `gala-cre`
 - Production URL: `https://gala-cre.vercel.app`
-- Production deployment: `dpl_C3X2F8YTXDY4dbDmRVdcmxmcxsnk` reached **Ready** and owns the production alias
+- Production state: the current deployment is **Ready** and owns the production alias
 - Promotion state: the certified branch was fast-forwarded into `main`, pushed to GitHub, deployed to Vercel, and smoke-tested without submitting forms
 
 The current branch contains the complete September client revision set: supplied real Team portraits and approved contacts/biographies, shared agent/property relationships, Team and Contact actions, labeled Home navigation, the approved property order, removal of public property documents and internal media-package access, and the rebuilt conditional listing-video layout.
