@@ -136,4 +136,4 @@ Intended commit: `test: certify September client release`.
 
 ## Exact next action
 
-After explicit user authorization, fast-forward `main` to this verified branch, push, deploy the linked Vercel project, and run the documented production smoke tests without submitting forms; keep form delivery disabled until its private configuration is approved.
+Collect and privately configure the approved production form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; then verify delivery only with explicit authorization. Until then, keep the public forms in their existing safe-failure state.

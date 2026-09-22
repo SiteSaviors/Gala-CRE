@@ -70,8 +70,11 @@ test.describe("September client release acceptance", () => {
           has: page.getByRole("heading", { name: member.name, exact: true }),
         });
         await expect(card).toHaveCount(1);
-        await expect(card.getByRole("img", { name: member.name })).toBeVisible();
-        expect(await card.getByRole("img", { name: member.name }).evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const portrait = card.getByRole("img", { name: member.name });
+        await expect(portrait).toBeVisible();
+        await expect
+          .poll(() => portrait.evaluate((image) => (image as HTMLImageElement).naturalWidth))
+          .toBeGreaterThan(0);
         await expect(card.getByRole("link", { name: member.email })).toHaveAttribute("href", `mailto:${member.email}`);
         await expect(card.getByRole("link", { name: member.phone })).toHaveAttribute("href", member.telephoneHref);
         await expect(card.getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", `mailto:${member.email}`);

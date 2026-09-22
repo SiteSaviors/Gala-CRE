@@ -2,14 +2,16 @@
 
 Last verified: September 22, 2026
 
-## Release candidate
+## Live release
 
-- Branch: `codex/september-client-updates`
+- Source branch: `codex/september-client-updates`
+- Release branch: `main`
 - Starting release baseline: `main` / `origin/main` at `e98d8d4`
-- Branch relationship after the Phase 5 checkpoint commit: six local commits ahead of both `main` and `origin/main`, with no divergence
+- Certified content commit: `931e87e`
 - Vercel project: `gala-cre`
 - Production URL: `https://gala-cre.vercel.app`
-- Promotion state: not merged, pushed, or deployed during the Phase 5 checkpoint
+- Production deployment: `dpl_C3X2F8YTXDY4dbDmRVdcmxmcxsnk` reached **Ready** and owns the production alias
+- Promotion state: the certified branch was fast-forwarded into `main`, pushed to GitHub, deployed to Vercel, and smoke-tested without submitting forms
 
 The current branch contains the complete September client revision set: supplied real Team portraits and approved contacts/biographies, shared agent/property relationships, Team and Contact actions, labeled Home navigation, the approved property order, removal of public property documents and internal media-package access, and the rebuilt conditional listing-video layout.
 
@@ -60,15 +62,14 @@ The API tests verify that the Careers and 1031 adapters support the two approved
 - The 10414/10416 Chapel Hill transaction structure, economics, and individual team roles remain intentionally unpublished.
 - Existing property fact, approval, photography, social-profile, and form-disclosure gaps remain recorded in `PROPERTY-DATA-REGISTER.md`.
 
-## Promotion sequence — only after explicit authorization
+## Completed promotion checks
 
-1. Confirm the working tree is clean and recheck that `main` and `origin/main` have not diverged.
-2. Fast-forward `main` to `codex/september-client-updates`.
-3. Push `main` to `origin`.
-4. Deploy the linked `gala-cre` project to Vercel production.
-5. Confirm the production alias and deployment state.
-6. Run both Playwright acceptance files against `https://gala-cre.vercel.app` without submitting forms.
-7. Smoke-test `/`, `/team`, `/contact`, `/properties`, all three video listings, and `/properties/10416-chapel-hill-road`.
+1. Confirmed `main` and `origin/main` shared the certified baseline with no divergence.
+2. Fast-forwarded `main` through the six verified September revision commits and pushed it to GitHub.
+3. Deployed the linked `gala-cre` project and confirmed the production alias returns HTTP 200.
+4. Exercised all 31 property/service routes at desktop, tablet, and mobile widths.
+5. Rechecked Team contacts and portraits, advisor portfolios, the catalog order, shared Chapel Hill attribution, inquiry context, property videos, privacy controls, keyboard/focus behavior, console health, and horizontal overflow.
+6. Submitted no forms and left delivery disabled pending approved private configuration.
 
 Local review command:
 

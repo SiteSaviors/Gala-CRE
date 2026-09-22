@@ -185,25 +185,31 @@ test.describe("public property and service route matrix", () => {
             await expect(video).toHaveAttribute("src", /\.mp4$/);
             expect(await video.evaluate((element) => (element as HTMLVideoElement).autoplay)).toBe(false);
 
-            const [copyBox, videoBox, pointsBox] = await Promise.all([
-              opportunityCopy.boundingBox(),
-              opportunityVideo.boundingBox(),
-              supportingPoints.boundingBox(),
-            ]);
-            expect(copyBox).not.toBeNull();
-            expect(videoBox).not.toBeNull();
-            expect(pointsBox).not.toBeNull();
+            await expect
+              .poll(() =>
+                opportunity.evaluate((section, width) => {
+                  const copyBox = section.querySelector(".gala-listing-compact__opportunity-copy")?.getBoundingClientRect();
+                  const videoBox = section.querySelector(".gala-listing-compact__opportunity-video")?.getBoundingClientRect();
+                  const pointsBox = section.querySelector(".gala-commercial-listing__highlights--row")?.getBoundingClientRect();
 
-            if (copyBox && videoBox && pointsBox) {
-              if (viewport.width > 850) {
-                expect(videoBox.x).toBeGreaterThan(copyBox.x + copyBox.width - 2);
-                expect(pointsBox.y).toBeGreaterThanOrEqual(Math.max(copyBox.y + copyBox.height, videoBox.y + videoBox.height) - 2);
-                expect(pointsBox.width).toBeGreaterThan(copyBox.width);
-              } else if (viewport.width <= 620) {
-                expect(videoBox.y).toBeGreaterThanOrEqual(copyBox.y + copyBox.height - 2);
-                expect(pointsBox.y).toBeGreaterThanOrEqual(videoBox.y + videoBox.height - 2);
-              }
-            }
+                  if (!copyBox || !videoBox || !pointsBox) return false;
+                  if (width > 850) {
+                    return (
+                      videoBox.x >= copyBox.x + copyBox.width - 2 &&
+                      pointsBox.y >= Math.max(copyBox.y + copyBox.height, videoBox.y + videoBox.height) - 2 &&
+                      pointsBox.width > copyBox.width
+                    );
+                  }
+                  if (width <= 620) {
+                    return (
+                      videoBox.y >= copyBox.y + copyBox.height - 2 &&
+                      pointsBox.y >= videoBox.y + videoBox.height - 2
+                    );
+                  }
+                  return true;
+                }, viewport.width),
+              )
+              .toBe(true);
           } else {
             await expect(page.locator(".gala-listing-compact__opportunity-video")).toHaveCount(0);
           }
