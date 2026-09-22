@@ -614,3 +614,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: none for this checkpoint. The earlier mobile hero-video commit and this Team refinement remain local until the user explicitly authorizes remote promotion.
 - Exact next action: after explicit user authorization, push the two verified local post-release commits on `main`, deploy the linked Vercel project, and smoke-test both homepage hero playback and `/team` against `https://gala-cre.vercel.app`; then return to the separately blocked private form configuration.
+
+### 2026-09-22 — Post-release refinements production promotion
+
+- Starting branch / HEAD: `main` at `f00aa4d4633452374bbce68fe916f9dcbfe63a52`, clean and two commits ahead of `origin/main`; fetched `origin/main` remained at `50d640c` and was a direct ancestor.
+- Source of truth checked: the explicit push/deploy request; `AGENTS.md`; `SEPTEMBER-CLIENT-REVISION-PLAN.md`; `PROPERTY-DATA-REGISTER.md`; the two verified post-release checkpoints; Git status, remote ancestry, and local tests; the linked Vercel project; and affected production routes.
+- Phase / checkpoint: promote the mobile homepage hero playback fix and simplified Team introduction to GitHub and Vercel, then verify both behaviors against the public production alias.
+- Gate: `origin/main` contains both verified commits; the linked Vercel deployment is Ready and owns `https://gala-cre.vercel.app`; the homepage hero plays only while visible on capable mobile browsers; and `/team` shows the direct light introduction with readable navigation and intact agent journeys at desktop and mobile sizes.
+- Implementation: pushed `main` from `50d640c` through `f00aa4d`; deployed the linked `gala-cre` project; confirmed production deployment `dpl_3sVshst5MTT2QWqzq1XMnHMMvHxV` reached Ready and received the public alias; and ran focused production browser acceptance without submitting forms.
+- Files / routes promoted: application commits `e896ef1` and `f00aa4d`; homepage `/` and `/team`.
+- Verification: production root and `/team` returned HTTP 200. Focused live Playwright passed 3/3: mobile hero visible-play/offscreen-pause/return-resume/reduced-motion behavior, desktop Team contacts/navigation/portfolios, and mobile Team contacts/navigation/portfolios. The Team hero and retired slogan remain absent. No form was submitted.
+- Intended commit: `docs: record post-release refinements deployment` after scoped diff review.
+- Remaining working tree: expected clean after the release-record commit.
+- Blockers: Vercel still lacks the approved private configuration required for operational Careers, 1031, and Contact delivery; those forms retain the verified safe-failure boundary.
+- Exact next action: collect and privately configure the approved production form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; perform a delivery test only with explicit authorization.

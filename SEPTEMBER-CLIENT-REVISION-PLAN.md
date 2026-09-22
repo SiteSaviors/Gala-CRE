@@ -136,7 +136,7 @@ Intended commit: `test: certify September client release`.
 
 ## Post-release fix — Mobile homepage hero playback
 
-Status: **Implemented and verified locally; not pushed or deployed.**
+Status: **Complete and deployed to production.**
 
 - [x] Use the inverse of `prefers-reduced-motion: reduce` so capable mobile browsers are not excluded by a brittle `no-preference` query.
 - [x] Keep the video muted, inline, looping, and autoplay-enabled while motion is allowed.
@@ -152,11 +152,13 @@ Checkpoint files: `src/pages/Index.tsx`, `src/test/gala-pages.test.tsx`, `e2e/pu
 
 Verification: focused homepage tests passed 36/36; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live Chrome QA at 390×844 confirmed `muted`, `loop`, `playsInline`, ready state 4, active playback in view, paused playback offscreen, and resumed playback after returning to the hero.
 
+Production verification: commit `e896ef1` was pushed to `origin/main` and included in production deployment `dpl_3sVshst5MTT2QWqzq1XMnHMMvHxV`; the focused live mobile playback test passed against `https://gala-cre.vercel.app`.
+
 Intended commit: `fix: stabilize mobile hero video playback`.
 
 ## Post-release refinement — Simplify the Team introduction
 
-Status: **Implemented and verified locally; not pushed or deployed.**
+Status: **Complete and deployed to production.**
 
 - [x] Remove the large black Team hero.
 - [x] Remove “Advice stays personal when responsibility stays clear.”
@@ -171,8 +173,10 @@ Checkpoint files: `src/pages/Team.tsx`, `src/components/site/SiteHeader.tsx`, `s
 
 Verification: focused Team tests passed 36/36; focused September browser acceptance passed 3/3; full Vitest passed 116/116; the production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live local Chrome QA at 1280×720 and 390×844 confirmed the hero and slogan are absent, the solid header is readable, the introduction clears the header by 39px desktop and 33px mobile, all three cards are present, and horizontal overflow is zero.
 
+Production verification: commit `f00aa4d` was pushed to `origin/main` and included in production deployment `dpl_3sVshst5MTT2QWqzq1XMnHMMvHxV`; focused desktop and mobile Team acceptance passed against `https://gala-cre.vercel.app`.
+
 Intended commit: `refactor: simplify team page introduction`.
 
 ## Exact next action
 
-After explicit authorization, push and deploy the verified mobile hero-video and Team-page refinements together, then smoke-test homepage playback and `/team` on the production site. After that, collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials.
+Collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; keep the existing safe-failure boundary intact until those values and an authorized delivery test are available.
