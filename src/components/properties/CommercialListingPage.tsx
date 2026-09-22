@@ -214,15 +214,46 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
           </div>
         </section>
 
-        <section className="gala-listing-compact__opportunity">
-          <div className={`gala-shell gala-listing-compact__opportunity-grid${highlights.length ? "" : " gala-listing-compact__opportunity-grid--single"}`}>
-            <div>
+        <section
+          className={`gala-listing-compact__opportunity${page.video ? " gala-listing-compact__opportunity--video" : ""}`}
+          aria-labelledby="property-opportunity-title"
+        >
+          <div
+            className={`gala-shell gala-listing-compact__opportunity-grid${
+              page.video
+                ? " gala-listing-compact__opportunity-grid--video"
+                : highlights.length
+                  ? ""
+                  : " gala-listing-compact__opportunity-grid--single"
+            }`}
+          >
+            <div className="gala-listing-compact__opportunity-copy">
               <div className="gala-kicker gala-kicker--dark">{page.overviewEyebrow ?? "The Opportunity"}</div>
-              <h2>{page.headline}</h2>
+              <h2 id="property-opportunity-title">{page.headline}</h2>
               <p className="gala-lead">{page.lead}</p>
             </div>
+
+            {page.video ? (
+              <div className="gala-listing-compact__opportunity-video">
+                <PropertyVideo
+                  sourceUrl={page.video.sourceUrl}
+                  posterImage={page.video.posterImage}
+                  ariaLabel={page.video.ariaLabel}
+                  orientation={page.video.orientation}
+                />
+                <div className="gala-listing-compact__opportunity-video-copy">
+                  <span>{page.video.eyebrow}</span>
+                  <h3>{page.video.title}</h3>
+                  {page.video.body ? <p>{page.video.body}</p> : null}
+                </div>
+              </div>
+            ) : null}
+
             {highlights.length ? (
-              <div className="gala-commercial-listing__highlights" aria-label="Property highlights">
+              <div
+                className={`gala-commercial-listing__highlights${page.video ? " gala-commercial-listing__highlights--row" : ""}`}
+                aria-label="Property highlights"
+              >
                 {highlights.map((highlight) => (
                   <div key={highlight}>
                     <Check size={17} aria-hidden="true" />
@@ -282,50 +313,32 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
           </section>
         ) : null}
 
-        {page.video || page.location ? (
+        {page.location ? (
           <section className="gala-listing-compact__location-media">
-            <div className={`gala-shell gala-listing-compact__location-media-grid${page.video && page.location ? "" : " gala-listing-compact__location-media-grid--single"}`}>
-              {page.video ? (
-                <div className="gala-listing-compact__video">
-                  <div className="gala-listing-compact__media-heading">
-                    <span>{page.video.eyebrow}</span>
-                    <h2>{page.video.title}</h2>
-                    {page.video.body ? <p>{page.video.body}</p> : null}
-                  </div>
-                  <PropertyVideo
-                    sourceUrl={page.video.sourceUrl}
-                    posterImage={page.video.posterImage}
-                    ariaLabel={page.video.ariaLabel}
-                    orientation={page.video.orientation}
+            <div className="gala-shell gala-listing-compact__location-media-grid gala-listing-compact__location-media-grid--single">
+              <div className="gala-listing-compact__location">
+                <div className="gala-listing-compact__map">
+                  <iframe
+                    title={`Map of ${property.address}`}
+                    src={page.location.mapEmbedUrl}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
                   />
                 </div>
-              ) : null}
-
-              {page.location ? (
-                <div className="gala-listing-compact__location">
-                  <div className="gala-listing-compact__map">
-                    <iframe
-                      title={`Map of ${property.address}`}
-                      src={page.location.mapEmbedUrl}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
+                <div className="gala-listing-compact__location-copy">
+                  <div>
+                    <span>{page.location.eyebrow}</span>
+                    <h2>{page.location.title}</h2>
                   </div>
-                  <div className="gala-listing-compact__location-copy">
-                    <div>
-                      <span>{page.location.eyebrow}</span>
-                      <h2>{page.location.title}</h2>
-                    </div>
-                    <p>{page.location.body}</p>
-                    {page.location.points.length ? (
-                      <ul>{page.location.points.map((point) => <li key={point}>{point}</li>)}</ul>
-                    ) : null}
-                    <a href={page.location.mapHref} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
-                      Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" />
-                    </a>
-                  </div>
+                  <p>{page.location.body}</p>
+                  {page.location.points.length ? (
+                    <ul>{page.location.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                  ) : null}
+                  <a href={page.location.mapHref} target="_blank" rel="noreferrer" className="gala-commercial-listing__external-link">
+                    Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" />
+                  </a>
                 </div>
-              ) : null}
+              </div>
             </div>
           </section>
         ) : null}

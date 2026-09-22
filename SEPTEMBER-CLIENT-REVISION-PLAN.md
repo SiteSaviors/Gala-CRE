@@ -89,17 +89,25 @@ Gate: the catalog uses the approved order and no internal or property-document m
 
 ## Phase 4 — Rebuild the conditional listing-video module
 
-Status: **Not started**
+Status: **Complete in the current verified checkpoint; commit is recorded in `OVERNIGHT-BUILD-PLAN.md`.**
 
-- [ ] Place a large listing video beside the opportunity narrative on video-enabled properties.
-- [ ] Move the three supporting points into a full-width row beneath the narrative and video.
-- [ ] Stack narrative, video, and points cleanly on mobile.
-- [ ] Support landscape and vertical social-video proportions without excessive empty space.
-- [ ] Preserve poster images, native controls, lazy loading, `playsInline`, and no autoplay.
-- [ ] Omit the module cleanly on properties without video.
-- [ ] Apply and verify the shared module on Family Farm Road, Church Street, and Lexington Townhome Site.
+- [x] Place a large listing video beside the opportunity narrative on video-enabled properties.
+- [x] Move the three supporting points into a full-width row beneath the narrative and video.
+- [x] Stack narrative, video, and points cleanly on mobile.
+- [x] Support landscape and vertical social-video proportions without excessive empty space.
+- [x] Preserve poster images, native controls, lazy loading, `playsInline`, and no autoplay.
+- [x] Omit the module cleanly on properties without video.
+- [x] Apply and verify the shared module on Family Farm Road, Church Street, and Lexington Townhome Site.
 
 Gate: video reads as a primary listing asset, performs safely on mobile, and creates no empty state on listings without video.
+
+Checkpoint files and routes: `src/components/properties/CommercialListingPage.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/public-route-matrix.spec.ts`, `PROPERTY-DATA-REGISTER.md`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/properties/611-703-church-street`, `/properties/5911-family-farm-road`, `/properties/1111-brown-street`, plus every non-video listing through the shared conditional path.
+
+Verification: targeted video/property tests passed 44/44; full Vitest passed 116/116; the production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; the production-preview Playwright matrix passed 7/7 across all 31 audited routes at desktop, tablet, and mobile, including player metadata, layout order, no autoplay, no overflow, and clean no-video omission. Live local browser QA passed for the Church landscape layout, Lexington portrait layout, and Lackey no-video path. No form was submitted.
+
+Blockers: none for this checkpoint. The three existing optimized videos and supplied posters remain unchanged; no new media or facts were required.
+
+Intended commit: `refactor: elevate property listing videos`.
 
 ## Phase 5 — Full relationship, privacy, and release QA
 
@@ -120,4 +128,4 @@ Gate: no agent is incorrectly attributed, no confidential document remains publi
 
 ## Exact next action
 
-Start Phase 4 by moving the existing conditional listing-video module into the opportunity section beside the narrative, placing the verified highlights beneath that narrative/video row, and verifying the shared layout first on Church Street at desktop and mobile sizes before applying it to Family Farm and Lexington.
+Start Phase 5 by auditing the Team contacts, agent portfolios, shared Chapel Hill attribution, Home navigation, approved property order, property inquiry context, absence of public document paths, and the three listing-video journeys; fix only verified defects and prepare the release/deployment handoff without deploying.

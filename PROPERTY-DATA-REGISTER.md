@@ -82,10 +82,12 @@ Properties now use ordered `advisorAssignments`, allowing multiple agents and an
 ### Listing-video layout audit
 
 - Approved local, web-optimized videos exist for Church Street, Family Farm Road, and Lexington Townhome Site.
-- `PropertyVideo` already uses native controls, `playsInline`, `preload="none"`, a poster image, and Intersection Observer loading. It does not autoplay.
-- The current renderer places video later in a dark Location & Media section, alongside the map when both exist.
-- The client reference instead places the listing video in the right column of The Opportunity section for video-enabled properties, with the three highlight points moved into a full-width row below the opportunity statement and video.
-- Properties without video should retain the concise statement-and-highlights opportunity layout without an empty media slot.
+- `PropertyVideo` continues to use native controls, `playsInline`, `preload="none"`, the supplied poster image, and Intersection Observer loading. It does not autoplay.
+- The shared listing renderer now places video in the right column of The Opportunity section for video-enabled properties, with the three verified highlight points in a full-width row beneath the narrative and player.
+- Church Street and Family Farm use the responsive landscape treatment. Lexington retains its vertical 9:16 treatment at a bounded width so the social-media video is not letterboxed into a wide empty frame.
+- On mobile, the source order is overview, video, then the three supporting points. Location and map content remain a separate section after property details.
+- Properties without video retain the concise two-column statement-and-highlights layout; the player, caption, row modifier, and former media slot are omitted entirely.
+- Browser and automated QA confirmed all three player routes at desktop, tablet, and mobile, plus the Lackey no-video path, with no horizontal overflow or duplicate player in the location section.
 
 ### Phase 0 conclusion
 

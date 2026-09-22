@@ -171,11 +171,41 @@ test.describe("public property and service route matrix", () => {
           await expect(videos).toHaveCount(videoRoutes.has(route) ? 1 : 0);
           if (videoRoutes.has(route)) {
             const video = videos.first();
+            const opportunity = page.locator(".gala-listing-compact__opportunity");
+            const opportunityCopy = opportunity.locator(".gala-listing-compact__opportunity-copy");
+            const opportunityVideo = opportunity.locator(".gala-listing-compact__opportunity-video");
+            const supportingPoints = opportunity.locator(".gala-commercial-listing__highlights--row");
+
+            await expect(opportunityVideo.locator("video")).toHaveCount(1);
+            await expect(supportingPoints.locator(":scope > div")).toHaveCount(3);
+            await expect(page.locator(".gala-listing-compact__location-media video")).toHaveCount(0);
             await expect(video).toHaveAttribute("controls", "");
             await expect(video).toHaveAttribute("playsinline", "");
             await expect(video).toHaveAttribute("poster", /\S+/);
             await expect(video).toHaveAttribute("src", /\.mp4$/);
             expect(await video.evaluate((element) => (element as HTMLVideoElement).autoplay)).toBe(false);
+
+            const [copyBox, videoBox, pointsBox] = await Promise.all([
+              opportunityCopy.boundingBox(),
+              opportunityVideo.boundingBox(),
+              supportingPoints.boundingBox(),
+            ]);
+            expect(copyBox).not.toBeNull();
+            expect(videoBox).not.toBeNull();
+            expect(pointsBox).not.toBeNull();
+
+            if (copyBox && videoBox && pointsBox) {
+              if (viewport.width > 850) {
+                expect(videoBox.x).toBeGreaterThan(copyBox.x + copyBox.width - 2);
+                expect(pointsBox.y).toBeGreaterThanOrEqual(Math.max(copyBox.y + copyBox.height, videoBox.y + videoBox.height) - 2);
+                expect(pointsBox.width).toBeGreaterThan(copyBox.width);
+              } else if (viewport.width <= 620) {
+                expect(videoBox.y).toBeGreaterThanOrEqual(copyBox.y + copyBox.height - 2);
+                expect(pointsBox.y).toBeGreaterThanOrEqual(videoBox.y + videoBox.height - 2);
+              }
+            }
+          } else {
+            await expect(page.locator(".gala-listing-compact__opportunity-video")).toHaveCount(0);
           }
         }
 

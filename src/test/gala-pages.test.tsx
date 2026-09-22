@@ -728,6 +728,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/View Documents|Documents & Diligence|Request Package|Request Records/i)).not.toBeInTheDocument();
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
+    const lackeyOpportunity = screen.getByRole("region", { name: "Existing fuel-and-convenience site near I-95 Exit 19." });
+    expect(lackeyOpportunity.querySelector(".gala-listing-compact__opportunity-video")).not.toBeInTheDocument();
+    expect(lackeyOpportunity.querySelector(".gala-commercial-listing__highlights--row")).not.toBeInTheDocument();
     const lackeyGallery = screen.getByRole("region", { name: /2301 Lackey Street property gallery/i });
     expect(within(lackeyGallery).getAllByRole("button", { name: /View image/i })).toHaveLength(6);
     fireEvent.click(within(lackeyGallery).getByRole("button", { name: /View image 2 of 6/i }));
@@ -784,6 +787,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
     const churchVideo = screen.getByLabelText("Play the aerial property video for 611 and 703 Church Street");
+    const churchOpportunity = screen.getByRole("region", { name: "A two-site Morrisville opportunity centered on childcare use." });
+    expect(churchOpportunity).toContainElement(churchVideo);
+    expect(churchOpportunity.querySelector(".gala-commercial-listing__highlights--row")?.children).toHaveLength(3);
+    expect(document.querySelector(".gala-listing-compact__location-media video")).not.toBeInTheDocument();
     expect(churchVideo).toHaveAttribute("controls");
     expect(churchVideo).toHaveAttribute("preload", "none");
     expect(churchVideo).toHaveAttribute("playsinline");
@@ -842,6 +849,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
     expect(screen.getByTitle("Map of 5911 Family Farm Road")).toBeInTheDocument();
     const familyFarmVideo = screen.getByLabelText("Play the aerial property video for 5911 Family Farm Road");
+    const familyFarmOpportunity = screen.getByRole("region", { name: "Approximately 2.10 acres in an established Morrisville setting." });
+    expect(familyFarmOpportunity).toContainElement(familyFarmVideo);
+    expect(familyFarmOpportunity.querySelector(".gala-commercial-listing__highlights--row")?.children).toHaveLength(3);
     expect(familyFarmVideo).toHaveAttribute("controls");
     expect(familyFarmVideo).toHaveAttribute("preload", "none");
     expect(familyFarmVideo).toHaveAttribute("playsinline");
@@ -875,6 +885,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
     expect(screen.getByTitle("Map of 1111 Brown Street")).toBeInTheDocument();
     const lexingtonVideo = screen.getByLabelText("Play the vertical property video for the Lexington Townhome Site");
+    const lexingtonOpportunity = screen.getByRole("region", { name: "A proposed 58-townhome site with a documented diligence history." });
+    expect(lexingtonOpportunity).toContainElement(lexingtonVideo);
+    expect(lexingtonOpportunity.querySelector(".gala-commercial-listing__highlights--row")?.children).toHaveLength(3);
     expect(lexingtonVideo).toHaveAttribute("controls");
     expect(lexingtonVideo).toHaveAttribute("preload", "none");
     expect(lexingtonVideo).toHaveAttribute("playsinline");
