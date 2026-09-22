@@ -1,6 +1,6 @@
 # Gala CRE property data register
 
-Last reviewed: September 15, 2026
+Last reviewed: September 22, 2026
 Purpose: Control which listing facts are safe to publish and identify the client material still required.
 
 ## Publishing rules
@@ -11,6 +11,7 @@ Purpose: Control which listing facts are safe to publish and identify the client
 - **Document needed:** Do not describe as approved, permit-ready, environmentally cleared, or contractually required without the underlying material.
 - **Publication rights unresolved:** File access or an MLS display does not establish a right to republish photography, video, plans, documents, or third-party copy. Keep the asset private until the client confirms the applicable license or ownership.
 - **Internal only:** Signed agreements, owner contact information, signatures, and non-public diligence records must not be placed on the public website.
+- **No public property-document distribution:** Per the client's September 21, 2026 direction, listing documents, property documents, diligence packages, approval packages, surveys, flyers, and downloadable media packages are inquiry-only. Public marketplace listing links may remain only as secondary listing references; they must not be presented as downloadable property documents. This rule supersedes older property-specific questions about making documents downloadable.
 - When sources conflict, omit the disputed field from prominent marketing or label it approximate and explain the verification requirement.
 - The publication posture in this register is a conservative content-control decision, not a legal opinion.
 
@@ -18,9 +19,77 @@ Purpose: Control which listing facts are safe to publish and identify the client
 
 | Field | Working value | Status |
 | --- | --- | --- |
-| Gaurang Gala | CEO \| BIC; 910-578-2828; NC 283149 | Name and title client-confirmed; phone and license verified in public listing records; existing approved site photograph used |
-| Leigh Roach | Agent; Leigh@galacregroup.com | Client-confirmed biography, email, and portrait supplied September 2026 |
-| Goverdhan Vavilala | Agent | Name and role client-confirmed; portrait, full biography, and direct contact still required |
+| Gaurang Gala | CEO \| BIC; gaurang@galacregroup.com; 910-578-2828; NC 283149 | Name, title, email, phone, and new real photograph client-supplied; new web asset registered September 22, 2026 |
+| Leigh Roach | Agent; leigh@galacregroup.com; (919) 886-9181 | Biography, email, phone, and replacement portrait client-supplied; new web asset registered September 22, 2026 |
+| Goverdhan Vavilala | Agent; goverdhan@galacregroup.com; (919) 462-1494 | Name, role, email, phone, full biography, and portrait client-supplied; new web asset registered September 22, 2026 |
+
+## September 21 client revision register
+
+This section records the latest client direction and controls the next implementation checkpoints. The email screenshots are treated as internal references and are not copied into the public application bundle.
+
+### Registered portrait assets
+
+The supplied originals remain unchanged in `/Users/admin/Downloads`. Web-ready derivatives were created without generative alteration or clothing recoloring and visually inspected against the originals.
+
+| Team member | Supplied original | Registered web asset | Dimensions | File size | Current public use at audit time |
+| --- | --- | --- | --- | --- | --- |
+| Gaurang Gala | `Gaurang.jpg` | `src/assets/team/gaurang-gala-2026.webp` | 1600 × 1067 | 64 KB | Not yet connected. `src/assets/gala-introduction-gaurang.webp` remains in Team, homepage introduction, and Careers. |
+| Goverdhan Vavilala | `Gov.jpeg` | `src/assets/team/goverdhan-vavilala-2026.webp` | 1200 × 1800 | 172 KB | Not yet connected; the current Team record has no portrait. |
+| Leigh Roach | `Leigh.jpeg` | `src/assets/team/leigh-roach-2026.webp` | 1066 × 1600 | 100 KB | Not yet connected. Team currently uses the older `src/assets/team/leigh-roach.webp`. |
+
+### Authoritative property-catalog order
+
+The user's written correction supersedes the numbered screenshot and the current `sortOrder` values:
+
+1. 611 & 703 Church Street — Active
+2. 5911 Family Farm Road — Active
+3. Lexington Townhome Site — Active
+4. 2301 Lackey Street — Active
+5. 5047 Yadkin Road — Active
+6. 802 Bragg Boulevard — Closed
+7. 202 North Main Street — Closed
+8. 10416 Chapel Hill Road — Closed
+
+The current application order at this audit is Lackey, Yadkin, Church, Family Farm, Lexington, Bragg, North Main, Chapel Hill. The next implementation must update structured order values rather than reorder cards in the page component.
+
+### Public removal targets
+
+| Target | Audit finding | Required treatment |
+| --- | --- | --- |
+| Property media package | Family Farm exposes a NestVisions download-center URL through a “Property media package” / “Open Media Package” card. | Remove the card, label, and download-center URL from public property data and rendered output. The hosted listing video is a separate approved media asset and remains eligible for the inline player. |
+| Property-document CTA | Six records currently render a “View Documents” action when `listingPage.documents.items` is populated: Lackey, Yadkin, Church, Family Farm, Lexington, and Bragg. | Remove the public CTA and document-card renderer. Route property-material requests to the relevant advisor through the property inquiry context. |
+| Property-document data | All eight records contain a `documents` object; 202 North Main and 10416 Chapel Hill have empty item lists used only for close-section copy. | Retire the public document schema from the listing-page data model. Preserve an inquiry close and disclosures independently of document data. |
+| Legacy brochure path | The generic fallback in `src/pages/PropertyDetail.tsx` can render `brochurePdf`, although no current structured property supplies one and all eight routes use `CommercialListingPage`. | Remove or permanently disable the public brochure/download path so a future record cannot reintroduce document distribution accidentally. |
+| Internal reference material | Signed agreements, raw diligence, source folders, and client email screenshots are not imported into the application. | Keep private and outside the deployed bundle. |
+
+Public marketplace pages may remain available as secondary “View Listing” links where the source is current. They are not substitutes for Gala-controlled document downloads and do not authorize republishing third-party documents.
+
+### Agent-to-property audit
+
+| Property | Status | Current structured advisor | Latest client direction / implementation need |
+| --- | --- | --- | --- |
+| 611 & 703 Church Street | Active | Gaurang Gala | No assignment change supplied. |
+| 5911 Family Farm Road | Active | Leigh Roach | Retain Leigh; add supplied email, phone, and replacement portrait. |
+| Lexington Townhome Site | Active | Gaurang Gala | No assignment change supplied. |
+| 2301 Lackey Street | Active | Gaurang Gala | No assignment change supplied. |
+| 5047 Yadkin Road | Active | Gaurang Gala | No assignment change supplied. |
+| 802 Bragg Boulevard | Closed | Gaurang Gala | Retain transaction credit. |
+| 202 North Main Street | Closed | Unassigned | No new advisor credit supplied. |
+| 10416 Chapel Hill Road | Closed | Unassigned | Client now directs credit to both Gaurang Gala and Goverdhan Vavilala. The current single `advisorId` model cannot represent this accurately and must become a multi-advisor relationship for listing/transaction filters. |
+
+The advisor-filtered catalog currently defaults to `Active`, and its heading and empty state say “Active listings.” That behavior conflicts with the new request for an agent's view to include both active listings and closed deals. The next implementation must preserve the selected advisor while defaulting to all statuses and relabel the view accordingly.
+
+### Listing-video layout audit
+
+- Approved local, web-optimized videos exist for Church Street, Family Farm Road, and Lexington Townhome Site.
+- `PropertyVideo` already uses native controls, `playsInline`, `preload="none"`, a poster image, and Intersection Observer loading. It does not autoplay.
+- The current renderer places video later in a dark Location & Media section, alongside the map when both exist.
+- The client reference instead places the listing video in the right column of The Opportunity section for video-enabled properties, with the three highlight points moved into a full-width row below the opportunity statement and video.
+- Properties without video should retain the concise statement-and-highlights opportunity layout without an empty media slot.
+
+### Phase 0 conclusion
+
+All supplied assets, requested removal targets, current assignments, catalog statuses/order, portrait usages, and existing video behavior are identified. No supplied fact has been inferred. Phase 0 intentionally registers assets and implementation boundaries without changing public behavior.
 
 ## Homepage track record and selected transactions
 
@@ -190,7 +259,7 @@ Client questions:
 2. What brokerage disclosure language should accompany Leigh Roach's client-confirmed listing assignment?
 3. Can we receive the survey, current zoning confirmation, and any subdivision or planning correspondence?
 4. What are the documented condition and status of the well, septic system, residence, access, and private-road obligations?
-5. Which additional property documents may be published versus provided only after inquiry?
+5. Which records are current and available for advisor-led follow-up after a qualified inquiry?
 
 ## 1111 Brown Street / Lexington Townhomes
 
@@ -232,7 +301,7 @@ Client questions:
 2. May Gala publish the eight drone images and `Gala.mov`, and does that permission include the MPV flyer/site-plan artwork?
 3. Which municipal land-use approval establishes the 58-unit plan, and is it current and transferable?
 4. Did work begin under the 2023 erosion, driveway, and encroachment approvals, or were they extended/reissued?
-5. Which due-diligence documents should be downloadable and which should remain inquiry-only?
+5. Which diligence records are current and available for advisor-led follow-up after a qualified inquiry?
 
 ## HMS closed transaction — 202 North Main Street
 
@@ -300,5 +369,5 @@ Readiness: **Blocked** pending the exact transaction/property identity, Gala's r
 - Zoning and entitlement summaries
 - Utility and access information
 - Environmental/tank documentation for Lackey Street
-- Goverdhan Vavilala's approved portrait, full biography, and direct contact information
-- Permission to publish each document or clear instruction to make it inquiry-only
+- Approved replacement photography for any remaining non-photographic transaction records
+- Current controlling records for advisor-led diligence follow-up; all property and listing documents remain inquiry-only under the September 21 client direction
