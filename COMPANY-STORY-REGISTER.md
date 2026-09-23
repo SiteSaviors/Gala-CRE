@@ -110,6 +110,7 @@ These facts do not by themselves establish Gala CRE's official market boundary. 
 
 - Client-supplied real portraits for Gaurang Gala, Leigh Roach, and Dr. Goverdhan Reddy Vavilala in `src/assets/team/`.
 - The user-produced homepage hero video and poster files. These are approved brand media but are stylized brand footage, not documentary proof of Gala employees, offices, or projects.
+- The user-selected conceptual Company hero in `src/assets/company-hero.avif`. It is approved as stylized brand imagery and must not be described as Gala CRE's actual office, headquarters, employees, or a completed project.
 - Listing photography only in the property contexts already approved and registered in `PROPERTY-DATA-REGISTER.md`.
 
 ### Not approved for Company-page reuse

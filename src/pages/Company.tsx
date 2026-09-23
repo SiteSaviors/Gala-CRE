@@ -1,10 +1,10 @@
 import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import companyHero from "@/assets/company-hero.avif";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import TeamRoster from "@/components/team/TeamRoster";
-import { teamMembers } from "@/content/team";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const operatingModel = [
@@ -62,7 +62,15 @@ const Company = () => {
       <SiteHeader currentPath="/company" />
       <main className="gala-page" id="main-content" tabIndex={-1}>
         <section className="gala-company-hero" aria-labelledby="company-hero-title">
-          <div className="gala-shell gala-company-hero__grid">
+          <img
+            className="gala-company-hero__image"
+            src={companyHero}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            decoding="async"
+          />
+          <div className="gala-shell gala-company-hero__inner">
             <div className="gala-company-hero__copy">
               <div className="gala-kicker">The Developer's Brokerage</div>
               <h1 id="company-hero-title">See the whole opportunity.</h1>
@@ -70,20 +78,6 @@ const Company = () => {
               <Link className="gala-text-link gala-company-hero__link" to="/services">
                 Explore our capabilities <ArrowDownRight size={17} aria-hidden="true" />
               </Link>
-            </div>
-            <div className="gala-company-hero__portraits" aria-hidden="true">
-              {teamMembers.map((member, index) => (
-                <figure className="gala-company-hero__portrait" key={member.id}>
-                  {member.image ? (
-                    <img
-                      src={member.image}
-                      alt=""
-                      loading={index === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  ) : null}
-                </figure>
-              ))}
             </div>
           </div>
         </section>

@@ -260,6 +260,25 @@ Verification: focused Company page tests passed 36/36; focused Company browser a
 
 Intended commit: `feat: complete company journey`.
 
+## Company section refinement — Full-bleed hero image
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Replace the three-portrait split hero with the user-selected `Company-hero.avif` as one full-bleed architectural image.
+- [x] Preserve **The Developer's Brokerage**, the existing Company headline, supporting copy, and capability action.
+- [x] Use a restrained desktop gradient that keeps the wall-mounted Gala mark visible while maintaining readable copy.
+- [x] Art-direct the mobile crop so the architectural mark sits above the headline rather than behind it.
+- [x] Preserve the approved Company sequence, Team roster, metadata, internal links, and legacy `/team` journey.
+- [x] Register the generated image as conceptual brand imagery that must not be described as Gala CRE's actual office, employees, headquarters, or completed project.
+
+Gate: the selected hero reads as a premium full-bleed Company introduction at desktop, tablet, and mobile widths; copy remains legible, the architectural mark survives each crop, no Team behavior regresses, and the route has no horizontal overflow or console error.
+
+Checkpoint files and route: `src/assets/company-hero.avif`, `src/pages/Company.tsx`, `src/styles/gala.css`, `e2e/september-client-release.spec.ts`, `COMPANY-STORY-REGISTER.md`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/company` only, with legacy `/team` covered through the existing redirect.
+
+Verification: full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; focused Company browser acceptance passed 3/3 at 1440×900, 834×1112, and 390×844. Visual desktop, tablet, and mobile screenshots confirmed the full-bleed crop, text contrast, architectural-logo visibility, and adjusted mobile composition. No form was submitted.
+
+Intended commit: `feat: add full-bleed company hero`.
+
 ## Exact next action
 
-Present the completed local `/company` route for user review; after explicit approval, push the four verified local commits on `main`, deploy the linked Vercel project, and smoke-test `/company`, `/company#team`, and legacy `/team` in production without submitting any form.
+Present the updated local Company hero for user review, then continue the requested section-by-section audit with the **Why Gala** section immediately below it. Do not push or deploy until explicitly requested.

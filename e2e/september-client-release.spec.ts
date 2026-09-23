@@ -70,11 +70,13 @@ test.describe("September client release acceptance", () => {
       await expect(page.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeVisible();
       await expect(page.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeVisible();
       await expect(page.getByRole("heading", { name: "Grounded in the work.", level: 2 })).toBeVisible();
-      await expect(page.locator(".gala-company-hero__portrait img")).toHaveCount(3);
-      const heroImageWidths = await page.locator(".gala-company-hero__portrait img").evaluateAll((images) =>
-        images.map((image) => (image as HTMLImageElement).naturalWidth),
-      );
-      expect(heroImageWidths.every((width) => width > 0)).toBe(true);
+      const companyHeroImage = page.locator(".gala-company-hero__image");
+      await expect(companyHeroImage).toHaveCount(1);
+      const heroImageDimensions = await companyHeroImage.evaluate((image) => ({
+        width: (image as HTMLImageElement).naturalWidth,
+        height: (image as HTMLImageElement).naturalHeight,
+      }));
+      expect(heroImageDimensions).toEqual({ width: 3840, height: 2160 });
       await expect(page.locator(".gala-company-model__steps > li")).toHaveCount(4);
       await expect(page.locator(".gala-company-proof__grid > article")).toHaveCount(3);
       await expect(page.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeVisible();
