@@ -112,13 +112,28 @@ test.describe("September client release acceptance", () => {
         await expect
           .poll(() => portrait.evaluate((image) => (image as HTMLImageElement).naturalWidth))
           .toBeGreaterThan(0);
-        await expect(card.getByRole("link", { name: member.email })).toHaveAttribute("href", `mailto:${member.email}`);
-        await expect(card.getByRole("link", { name: member.phone })).toHaveAttribute("href", member.telephoneHref);
-        await expect(card.getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", `mailto:${member.email}`);
-        await expect(card.getByRole("link", { name: /View Listings & Transactions/i })).toHaveAttribute(
+        const profileTrigger = card.getByRole("button", { name: `Open profile for ${member.name}` });
+        await expect(profileTrigger).toBeVisible();
+        await profileTrigger.click();
+        const profileDialog = page.getByRole("dialog", { name: member.name });
+        await expect(profileDialog).toBeVisible();
+        await expect(profileDialog.getByRole("link", { name: member.email })).toHaveAttribute("href", `mailto:${member.email}`);
+        await expect(profileDialog.getByRole("link", { name: member.phone })).toHaveAttribute("href", member.telephoneHref);
+        await expect(profileDialog.getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", `mailto:${member.email}`);
+        const portfolioAction = profileDialog.getByRole("link", { name: /View Listings & Transactions/i });
+        await expect(portfolioAction).toHaveAttribute(
           "href",
           `/properties?advisor=${member.id}`,
         );
+        const closeProfile = profileDialog.getByRole("button", { name: `Close profile for ${member.name}` });
+        if (viewport.name === "mobile") {
+          await portfolioAction.scrollIntoViewIfNeeded();
+          await expect(portfolioAction).toBeInViewport();
+          await expect(closeProfile).toBeInViewport();
+        }
+        await closeProfile.click();
+        await expect(profileDialog).toBeHidden();
+        await expect(profileTrigger).toBeFocused();
       }
 
       if (viewport.name === "desktop") {

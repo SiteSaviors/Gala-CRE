@@ -221,22 +221,29 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("img", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /Open profile for/i })).toHaveLength(3);
 
     const leighCard = screen.getByRole("heading", { name: "Leigh Roach" }).closest("article");
     expect(leighCard).not.toBeNull();
-    expect(within(leighCard!).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
-    expect(within(leighCard!).getByRole("link", { name: "(919) 886-9181" })).toHaveAttribute("href", "tel:+19198869181");
-    expect(within(leighCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
-    expect(within(leighCard!).getByRole("link", { name: /View Listings & Transactions/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
+    expect(within(leighCard!).queryAllByRole("link")).toHaveLength(0);
+    fireEvent.click(within(leighCard!).getByRole("button", { name: "Open profile for Leigh Roach" }));
+    const leighDialog = screen.getByRole("dialog", { name: "Leigh Roach" });
+    expect(within(leighDialog).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
+    expect(within(leighDialog).getByRole("link", { name: "(919) 886-9181" })).toHaveAttribute("href", "tel:+19198869181");
+    expect(within(leighDialog).getByRole("link", { name: "Contact Agent" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
+    expect(within(leighDialog).getByRole("link", { name: /View Listings & Transactions/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
+    fireEvent.click(within(leighDialog).getByRole("button", { name: "Close profile for Leigh Roach" }));
 
     const goverdhanCard = screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" }).closest("article");
     expect(goverdhanCard).not.toBeNull();
-    expect(within(goverdhanCard!).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute(
+    fireEvent.click(within(goverdhanCard!).getByRole("button", { name: "Open profile for Dr. Goverdhan Reddy Vavilala" }));
+    const goverdhanDialog = screen.getByRole("dialog", { name: "Dr. Goverdhan Reddy Vavilala" });
+    expect(within(goverdhanDialog).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute(
       "href",
       "mailto:goverdhan@galacregroup.com",
     );
-    expect(within(goverdhanCard!).getByRole("link", { name: "(919) 462-1494" })).toHaveAttribute("href", "tel:+19194621494");
-    expect(within(goverdhanCard!).getByRole("link", { name: "Contact Agent" })).toHaveAttribute(
+    expect(within(goverdhanDialog).getByRole("link", { name: "(919) 462-1494" })).toHaveAttribute("href", "tel:+19194621494");
+    expect(within(goverdhanDialog).getByRole("link", { name: "Contact Agent" })).toHaveAttribute(
       "href",
       "mailto:goverdhan@galacregroup.com",
     );

@@ -293,6 +293,24 @@ Verification: focused Company tests passed 36/36; the production build completed
 
 Intended commit: `refactor: simplify company hero headline`.
 
+## Company section refinement — Team profile dialogs
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Replace the long inline Team biographies with image-led cards containing only portrait, name, role, and a plus trigger.
+- [x] Open each complete profile in a large accessible dialog modeled on the interaction pattern reviewed at `radiusbuilt.com/company` without copying its branding.
+- [x] Preserve each approved biography, license, email, telephone number, **Contact Agent**, and **View Listings & Transactions** action inside the dialog.
+- [x] Support keyboard focus trapping, Escape/close behavior, return focus, visible focus treatment, and reduced motion.
+- [x] Give mobile dialogs a fixed portrait region and independently scrollable profile content so the close action remains available.
+
+Gate: the Team section presents three concise image-led cards; every plus opens the correct complete profile; all verified actions remain accurate; and dialogs work without overflow or inaccessible content at desktop, tablet, and mobile widths. **Passed.**
+
+Checkpoint files and route: `src/components/team/TeamRoster.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/company#team` and legacy `/team`.
+
+Verification: full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; focused Company/Team browser acceptance passed 3/3 at desktop, tablet, and mobile widths, including every dialog's contact links, portfolio path, close behavior, and focus return. Visual QA confirmed the three-card presentation, wide desktop profile, mobile portrait/content split, independently scrollable long biography, persistent close control, and reachable actions. No form was submitted.
+
+Intended commit: `refactor: add team profile dialogs`.
+
 ## Exact next action
 
-Present the updated local Company hero for user review, then continue the requested section-by-section audit with the **Why Gala** section immediately below it. Do not push or deploy until explicitly requested.
+Present the updated local `/company#team` interaction for user review and wait for the user to identify the next Company section. Do not push or deploy until explicitly requested.

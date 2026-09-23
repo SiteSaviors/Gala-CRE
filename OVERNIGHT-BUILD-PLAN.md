@@ -712,3 +712,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: none for this copy checkpoint. Previously recorded form-configuration and optional Company-history inputs remain unchanged.
 - Exact next action: continue the user's section-by-section Company audit with the **Why Gala** section immediately below the hero. Do not push or deploy until explicitly requested.
+
+### 2026-09-23 — Company Team profile-dialog refinement
+
+- Starting branch / HEAD: `main` at `43b96f929096e36665cc89ec93bc6674be5d5aeb`, clean and six local commits ahead of `origin/main`.
+- Source of truth checked: the user's Radius Team-card reference and explicit plus/lightbox request; the live `radiusbuilt.com/company` card and profile-dialog interaction; `AGENTS.md`; the active Company revision plan; `PROPERTY-DATA-REGISTER.md`; the latest checkpoint; Git status/history; the shared Team records, roster, responsive styles, and Company acceptance suite.
+- Phase / checkpoint: replace the long inline Team cards on `/company` with concise portrait/name/role/plus cards and accessible complete-profile dialogs while preserving all verified data and actions.
+- Gate: the Team section presents three concise image-led cards; every plus opens the correct complete profile; all verified actions remain accurate; and dialogs work without overflow or inaccessible content at desktop, tablet, and mobile widths.
+- Implementation: converted each Team card into a full-card dialog trigger with a visible plus; moved biography, license, email, telephone, Contact Agent, and Listings & Transactions actions into a two-column desktop profile; implemented modal overlay, close treatment, focus trap, Escape and focus return through Radix Dialog; and created a mobile portrait/content layout with independent content scrolling so long biographies and actions remain reachable while the close button stays fixed.
+- Files / routes changed: `src/components/team/TeamRoster.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger; `/company#team` plus legacy `/team`.
+- Verification: full Vitest passed 116/116 across 18 files; production build passed with the existing browserslist-age and bundle-size notices; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; focused Company/Team browser acceptance passed 3/3 at 1440×900, 834×1112, and 390×844, opening and closing all three profiles and verifying every contact and portfolio link plus focus return. Visual QA confirmed the three-card desktop/mobile presentation, wide desktop dialog, corrected mobile row allocation, independently scrollable long biography, persistent close control, and reachable lower actions. No form was submitted.
+- Intended commit: `refactor: add team profile dialogs` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: none for this Team interaction. Previously recorded private form configuration and optional Company-history inputs remain unchanged.
+- Exact next action: present the updated local `/company#team` interaction for user review and wait for the user to identify the next Company section. Do not push or deploy until explicitly requested.
