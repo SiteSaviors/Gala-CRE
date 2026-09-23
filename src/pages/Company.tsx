@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
+import TeamRoster from "@/components/team/TeamRoster";
 import useSiteCursor from "@/hooks/useSiteCursor";
 
 const principles = [
@@ -34,12 +35,14 @@ const Company = () => {
           <div className="gala-principle-grid">{principles.map(({ icon: Icon, title, body }) => <article key={title}><Icon aria-hidden="true" /><h3>{title}</h3><p>{body}</p></article>)}</div>
         </div></section>
 
+        <TeamRoster />
+
         <section className="gala-section gala-section--silver"><div className="gala-shell gala-split">
           <div><MapPin className="gala-large-icon" aria-hidden="true" /><div className="gala-kicker gala-kicker--dark">Research Triangle</div><h2>Rooted in Raleigh-Durham.</h2></div>
           <div><p className="gala-lead">Local context matters. Gala’s commercial platform is focused on helping clients understand opportunity across one of North Carolina’s most dynamic regions.</p></div>
         </div></section>
 
-        <section className="gala-cta-band"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><div className="gala-cta-band__actions"><Link to="/team" className="gala-text-link">Meet Our Team <ArrowUpRight size={16} /></Link><Link to="/careers?source=company" className="gala-text-link">Explore Careers <ArrowUpRight size={16} /></Link><Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link></div></div></section>
+        <section className="gala-cta-band"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><div className="gala-cta-band__actions"><Link to="/company#team" className="gala-text-link">Meet Our Team <ArrowUpRight size={16} /></Link><Link to="/careers?source=company" className="gala-text-link">Explore Careers <ArrowUpRight size={16} /></Link><Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link></div></div></section>
       </main>
       <SiteFooter currentPath="/company" />
     </>

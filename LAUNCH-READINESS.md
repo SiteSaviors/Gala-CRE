@@ -65,7 +65,7 @@ Average capability-page height fell from approximately **7,140px to 4,206px on d
 5. `/services` — show the five service pillars and direct capability discovery.
 6. `/services/investment-sales/industrial` — demonstrate the concise premium capability standard.
 7. `/services/brokerage/tenant-representation`, `/services/development-services/development-oversight`, and `/services/capital-markets/capital-strategy` — use only as breadth proof if the client wants to inspect additional paths.
-8. `/team` and `/contact` — close with people and the correctly routed conversion journey.
+8. `/company#team` and `/contact` — close with people and the correctly routed conversion journey. The legacy `/team` URL redirects to this Company section.
 
 ## Client inputs still needed
 

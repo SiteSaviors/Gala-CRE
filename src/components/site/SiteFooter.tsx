@@ -30,7 +30,7 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
             <li><Link to="/services">Services</Link></li>
             <li><Link to="/properties">Properties</Link></li>
             <li><Link to="/company">Company</Link></li>
-            <li><Link to="/team">Team</Link></li>
+            <li><Link to="/company#team">Our Team</Link></li>
             <li><Link to="/news">News &amp; Media</Link></li>
             <li><Link to="/careers?source=footer">Careers</Link></li>
             <li><Link to="/investors/1031-exchange?source=footer">1031 Property Search</Link></li>

@@ -177,6 +177,27 @@ Production verification: commit `f00aa4d` was pushed to `origin/main` and includ
 
 Intended commit: `refactor: simplify team page introduction`.
 
+## Post-release refinement — Consolidate Company and Team
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Make **Company** the single top-level navigation destination for the firm and its people.
+- [x] Move the complete Team roster into `/company` after “How We Work.”
+- [x] Keep all biographies, portraits, direct contacts, licenses, and portfolio actions sourced from `teamMembers`.
+- [x] Remove the separate Team destination from desktop and mobile navigation.
+- [x] Point footer and Company Team links to `/company#team`.
+- [x] Preserve `/team` as a compatibility redirect to `/company#team`.
+- [x] Keep a single page H1 and use an accessible H2/H3 hierarchy for the Team section and profiles.
+- [x] Verify direct and redirected anchor positioning beneath the fixed header.
+
+Gate: Company tells one coherent firm-and-people story, header navigation no longer presents Company and Team as competing destinations, every agent action remains intact, and existing `/team` links resolve safely.
+
+Checkpoint files and routes: `src/components/team/TeamRoster.tsx`, `src/pages/Company.tsx`, `src/pages/Team.tsx`, `src/components/site/SiteHeader.tsx`, `src/components/site/SiteFooter.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `LAUNCH-READINESS.md`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/company`, `/company#team`, and legacy `/team`.
+
+Verification: focused Company/Team and anchor tests passed 39/39; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live local Chrome QA confirmed the simplified six-link desktop navigation, integrated Team section, correct Company current state, clean anchor landing beneath the fixed header, and preserved profile actions; automated browser checks passed at desktop, tablet, and mobile widths with no horizontal overflow.
+
+Intended commit: `refactor: consolidate team into company`.
+
 ## Exact next action
 
-Collect and privately configure the approved form sender, Beth-and-Gaurang recipients, allowed origins, and durable rate-limit credentials; keep the existing safe-failure boundary intact until those values and an authorized delivery test are available.
+After explicit authorization, push and deploy the verified Company/Team consolidation, then smoke-test `/company`, `/company#team`, and the legacy `/team` redirect against production. After that, return to the separately blocked private form configuration.

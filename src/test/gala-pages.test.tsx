@@ -184,21 +184,19 @@ describe("Gala CRE public pages", () => {
     );
   });
 
-  it("connects the Company page to the approved Team route", () => {
+  it("presents the shared Team roster within Company", () => {
     const company = renderPage(<Company />, "/company");
+    const navigation = document.querySelector("nav");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Meet Our Team/i })).toHaveAttribute("href", "/team");
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
+    expect(document.querySelector("#team")).toHaveAttribute("aria-labelledby", "team-heading");
+    expect(screen.getByRole("link", { name: /Meet Our Team/i })).toHaveAttribute("href", "/company#team");
+    expect(screen.getByRole("link", { name: "Our Team", exact: true })).toHaveAttribute("href", "/company#team");
+    expect(navigation).not.toBeNull();
+    expect(within(navigation!).queryByRole("link", { name: "Team", exact: true })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Explore Careers/i })).toHaveAttribute("href", "/careers?source=company");
     expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers?source=footer")).toBe(true);
-    company.unmount();
-  });
-
-  it("renders the Team route from one structured roster", () => {
-    const { container } = renderPage(<Team />, "/team");
-    expect(screen.getByRole("heading", { name: "Our Team", level: 1 })).toBeInTheDocument();
-    expect(screen.queryByText("Advice stays personal when responsibility stays clear.")).not.toBeInTheDocument();
-    expect(container.querySelector(".gala-team-hero")).not.toBeInTheDocument();
-    expect(container.querySelector("nav")).toHaveClass("scrolled");
     expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
@@ -224,7 +222,21 @@ describe("Gala CRE public pages", () => {
       "href",
       "mailto:goverdhan@galacregroup.com",
     );
-    expect(screen.getAllByRole("link", { name: "Team" }).some((link) => link.getAttribute("href") === "/team")).toBe(true);
+    company.unmount();
+  });
+
+  it("redirects the legacy Team route to the Company roster", async () => {
+    render(
+      <MemoryRouter initialEntries={["/team"]}>
+        <Routes>
+          <Route path="/team" element={<Team />} />
+          <Route path="/company" element={<Company />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    expect(await screen.findByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Commercial expertise made more personal.", level: 1 })).toBeInTheDocument();
   });
 
   it("filters the property catalog to an advisor's listings and transactions", () => {

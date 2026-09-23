@@ -1129,9 +1129,8 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-commercial-listing__disclosure{max-width:1030px;margin:24px auto 0;color:#77766f;font-size:9px;line-height:1.7;text-align:center}
 
 /* Team */
-.gala-team-roster{padding-top:clamp(150px,12vw,172px)}
 .gala-team-roster__intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr);gap:70px;align-items:end;margin-bottom:60px}
-.gala-team-roster__intro h1{max-width:13ch;margin:0;font:600 clamp(56px,6.6vw,94px)/.98 'Poppins',sans-serif;letter-spacing:-.05em}
+.gala-team-roster__intro h2{max-width:13ch}
 .gala-team-roster__intro>p{max-width:520px;color:#676760;font-size:14px;line-height:1.8}
 .gala-team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
 .gala-team-card{overflow:hidden;border:1px solid #d3d2cc;background:#f7f7f4}
@@ -1141,7 +1140,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-team-card__monogram{height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#34312a 0%,#181714 45%,#0a0a0a 100%);color:rgba(245,222,147,.8);font:500 clamp(54px,7vw,92px)/1 'Poppins',sans-serif;letter-spacing:-.04em}
 .gala-team-card__content{display:flex;min-height:500px;flex-direction:column;padding:30px}
 .gala-team-card__title{color:#946e1d;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.2em;text-transform:uppercase}
-.gala-team-card__content h2{margin:12px 0 0;font-size:clamp(31px,3vw,43px);letter-spacing:-.045em}
+.gala-team-card__content h3{margin:12px 0 0;font:600 clamp(31px,3vw,43px)/1.05 'Poppins',sans-serif;letter-spacing:-.045em}
 .gala-team-card__license{margin-top:9px;color:#85827a;font-size:10px;line-height:1.5}
 .gala-team-card__bio{display:grid;gap:14px;margin-top:24px;color:#5d5c56;font-size:12px;line-height:1.75}
 .gala-team-card__contacts{display:grid;gap:10px;margin-top:24px}
@@ -1444,9 +1443,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-property-map-card>img{height:118px}
   .gala-property-grid{grid-template-columns:1fr}
   .gala-empty-state{padding:36px 20px}
-  .gala-team-roster{padding-top:116px}
   .gala-team-roster__intro{grid-template-columns:1fr;gap:24px;margin-bottom:38px}
-  .gala-team-roster__intro h1{font-size:clamp(44px,14vw,62px)}
   .gala-team-grid{grid-template-columns:1fr}
   .gala-team-card__content{min-height:0}
   .gala-team-card__actions{align-items:flex-start;flex-direction:column}

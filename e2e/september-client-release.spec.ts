@@ -50,7 +50,7 @@ test.describe("September client release acceptance", () => {
     { name: "desktop", width: 1440, height: 900 },
     { name: "mobile", width: 390, height: 844 },
   ] as const) {
-    test(`${viewport.name}: Team contacts, Home navigation, and advisor portfolios are correct`, async ({ page }) => {
+    test(`${viewport.name}: Company team contacts, Home navigation, and advisor portfolios are correct`, async ({ page }) => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
       const pageErrors: string[] = [];
       const consoleErrors: string[] = [];
@@ -62,7 +62,8 @@ test.describe("September client release acceptance", () => {
       });
 
       await page.goto("/team", { waitUntil: "domcontentloaded" });
-      await expect(page.getByRole("heading", { name: "Our Team", level: 1 })).toBeVisible();
+      await expect(page).toHaveURL(/\/company#team$/);
+      await expect(page.getByRole("heading", { name: "Our Team", level: 2 })).toBeVisible();
       await expect(page.locator(".gala-team-hero")).toHaveCount(0);
       await expect(page.getByText("Advice stays personal when responsibility stays clear.")).toHaveCount(0);
       await expect(page.locator(".gala-team-card")).toHaveCount(3);
@@ -90,6 +91,8 @@ test.describe("September client release acceptance", () => {
         const firstDesktopDestination = page.locator(".nlinks > li > a").first();
         await expect(firstDesktopDestination).toHaveText("Home");
         await expect(firstDesktopDestination).toHaveAttribute("href", "/");
+        await expect(page.locator(".nlinks").getByRole("link", { name: "Team", exact: true })).toHaveCount(0);
+        await expect(page.locator(".nlinks").getByRole("link", { name: "Company", exact: true })).toHaveAttribute("aria-current", "page");
       } else {
         const navigationToggle = page.getByRole("button", { name: "Toggle navigation" });
         await navigationToggle.click();
@@ -97,6 +100,8 @@ test.describe("September client release acceptance", () => {
         await expect(firstMobileDestination).toBeVisible();
         await expect(firstMobileDestination).toHaveText("Home");
         await expect(firstMobileDestination).toHaveAttribute("href", "/");
+        await expect(page.locator(".mnav").getByRole("link", { name: "Team", exact: true })).toHaveCount(0);
+        await expect(page.locator(".mnav").getByRole("link", { name: "Company", exact: true })).toHaveAttribute("aria-current", "page");
       }
 
       const teamLayout = await page.evaluate(() => ({

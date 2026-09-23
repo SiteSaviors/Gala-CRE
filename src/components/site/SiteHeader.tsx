@@ -105,7 +105,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </li>
         <li><Link to="/properties" aria-current={currentState("/properties")}>Properties</Link></li>
         <li><Link to="/company" aria-current={currentState("/company")}>Company</Link></li>
-        <li><Link to="/team" aria-current={currentState("/team")}>Team</Link></li>
         <li><Link to="/careers" aria-current={currentState("/careers")}>Careers</Link></li>
         <li><Link to="/contact" aria-current={currentState("/contact")}>Contact</Link></li>
       </ul>
@@ -150,7 +149,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         </div>
         <Link to="/properties" aria-current={currentState("/properties")} onClick={() => setMobileNavOpen(false)}>Properties</Link>
         <Link to="/company" aria-current={currentState("/company")} onClick={() => setMobileNavOpen(false)}>Company</Link>
-        <Link to="/team" aria-current={currentState("/team")} onClick={() => setMobileNavOpen(false)}>Team</Link>
         <Link to="/careers" aria-current={currentState("/careers")} onClick={() => setMobileNavOpen(false)}>Careers</Link>
         <Link to="/contact" aria-current={currentState("/contact")} onClick={() => setMobileNavOpen(false)}>Contact</Link>
         <Link to="/contact" className="mnav-primary" onClick={() => setMobileNavOpen(false)}>Let's Connect</Link>
