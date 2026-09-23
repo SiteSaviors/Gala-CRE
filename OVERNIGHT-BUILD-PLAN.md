@@ -642,3 +642,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: none for this checkpoint. The private production form configuration remains a separate previously recorded blocker and was not exercised.
 - Exact next action: after explicit user authorization, push the verified Company/Team consolidation, deploy the linked Vercel project, and smoke-test `/company`, `/company#team`, and `/team` against `https://gala-cre.vercel.app`; then return to the separately blocked private form configuration.
+
+### 2026-09-22 — Company refinement Phase 1 research
+
+- Starting branch / HEAD: `main` at `2ebeb1b2ec1e1f34c61520b05efb657f2564488a`, clean and one local commit ahead of `origin/main`.
+- Source of truth checked: the user's Phase 1 direction and newer Company-page objective; `AGENTS.md`; `SEPTEMBER-CLIENT-REVISION-PLAN.md`; `PROPERTY-DATA-REGISTER.md`; the prior consolidation checkpoint; Git status/history; current Company and Team implementation; current media assets; Gala Investments, Radius Development Group, Gala Realty Group, the public Gala CRE placeholder domain, Gaurang's Crexi profile, his published podcast transcript, NCDOT material, and relevant public coverage.
+- Phase / checkpoint: research and classify the factual and visual foundation for a specific, developer-informed Company page without changing the public route.
+- Gate: every proposed company claim and image is classified as publishable, qualified, client-confirmation-required, or prohibited; missing history, corporate relationships, geography, metrics, and media rights are explicit rather than inferred.
+- Implementation: added `COMPANY-STORY-REGISTER.md`; documented the supported Gala CRE / Gala Real Estate Advisors identity, Gaurang's public roles, the evidence-backed meaning of **The Developer's Brokerage**, safe Research Triangle wording, cross-company relationship limits, imagery rights, unresolved formation/history questions, and the exact client inputs needed for final copy. Updated the active plan so the Company rebuild supersedes the prior deployment/configuration handoff.
+- Files changed: `COMPANY-STORY-REGISTER.md`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger. No public route, source component, or production asset changed.
+- Verification: directly reviewed or fetched the named public sources and reconciled them against current code, approved client data, and existing media-rights limits. No source supports a Gala CRE founding year or a formal common corporate structure. The North Carolina Secretary of State search requires manual verification because its real-time interface presented a security challenge and disallows scripted searches.
+- Intended commit: `docs: establish Gala CRE company story source` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: final origin wording, Gala CRE founding/brand dates, formal relationship language among the companies, market territory beyond Raleigh-Durham/Research Triangle, the basis of “two decades,” and general-use company/site photography still require client confirmation. These do not block a carefully qualified Phase 2 structure.
+- Exact next action: rebuild `/company` with a shorter image-led hero, developer-informed “why Gala” narrative, connected operating model, and non-metric proof band using only cleared facts and media; retain the shared Team roster and omit all unresolved claims.

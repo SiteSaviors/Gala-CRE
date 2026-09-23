@@ -198,6 +198,26 @@ Verification: focused Company/Team and anchor tests passed 39/39; full Vitest pa
 
 Intended commit: `refactor: consolidate team into company`.
 
+## Company refinement — Phase 1: Confirm the story and visual direction
+
+Status: **Complete — research and publication boundaries documented locally.**
+
+- [x] Research Gala CRE Group / Gala Real Estate Advisors, Gala Investments, Radius Development Group, Legacy Carolina Development, Gala Realty Group, Gaurang's public brokerage profile, public interviews, and relevant government/news records.
+- [x] Separate a shared principal and shared address from an unsupported corporate ownership claim.
+- [x] Define the evidence-backed meaning of **The Developer's Brokerage** as developer-informed commercial brokerage, not an assertion that every affiliated capability is delivered directly by Gala CRE.
+- [x] Record the safe current market wording and the broader geographic question that still requires client confirmation.
+- [x] Audit approved local brand imagery and cross-company/public imagery reuse limits.
+- [x] Record the founding-year, operating-history, affiliation-language, geography, and media-rights questions required for final copy.
+- [x] Create `COMPANY-STORY-REGISTER.md` as the focused source of truth for Company-page claims and imagery.
+
+Gate: every proposed company claim and image is classified as publishable, qualified, client-confirmation-required, or prohibited; the Phase 2 rebuild can proceed without inventing history, ownership, markets, metrics, or media rights.
+
+Checkpoint files: `COMPANY-STORY-REGISTER.md`, `OVERNIGHT-BUILD-PLAN.md`, and this plan. No public route or production asset changes in this research checkpoint.
+
+Verification: source URLs were opened or fetched directly where available; the current Company implementation, shared Team records, site assets, property register, public brokerage identity, affiliated-company sites, published interview transcript, and relevant public records were compared. The North Carolina Secretary of State registry remains a manual follow-up because its real-time search presented a security-verification barrier and prohibits scripted search automation.
+
+Intended commit: `docs: establish Gala CRE company story source`.
+
 ## Exact next action
 
-After explicit authorization, push and deploy the verified Company/Team consolidation, then smoke-test `/company`, `/company#team`, and the legacy `/team` redirect against production. After that, return to the separately blocked private form configuration.
+Start Company refinement Phase 2: rebuild `/company` into a shorter image-led hero, evidence-backed “why Gala” narrative, connected operating-model section, and non-metric proof band using only facts and media cleared in `COMPANY-STORY-REGISTER.md`; retain the shared Team roster and omit unresolved origin, affiliation, geography, and experience claims.
