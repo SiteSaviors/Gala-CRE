@@ -698,3 +698,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: none for this visual checkpoint. The image is intentionally treated as stylized brand art and must not be labeled as Gala CRE's actual office, headquarters, staff, or completed work. Private production form configuration remains a separate previously recorded blocker.
 - Exact next action: present the updated local Company hero for user review, then continue the requested section-by-section audit with the **Why Gala** section immediately below it. Do not push or deploy until explicitly requested.
+
+### 2026-09-23 — Company hero headline refinement
+
+- Starting branch / HEAD: `main` at `e584f95a5fa70a487b0c07f3c5cb640115414500`, clean and five local commits ahead of `origin/main`.
+- Source of truth checked: the user's explicit copy change; the current full-bleed Company hero; active Company plan and latest checkpoint; Git status/history; unit and browser acceptance coverage.
+- Phase / checkpoint: change only the Company hero H1 from **See the whole opportunity.** to **Who we are**.
+- Gate: **Who we are** is the single Company H1 and remains clear at desktop, tablet, and mobile widths without changing the approved hero composition.
+- Implementation: updated the rendered H1 and both unit and browser acceptance assertions; preserved the image, supporting copy, CTA, metadata, responsive crop, Team roster, and downstream page sequence.
+- Files / route changed: `src/pages/Company.tsx`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `SEPTEMBER-CLIENT-REVISION-PLAN.md`, and this ledger; `/company` only.
+- Verification: focused Company tests passed 36/36; the production build completed through the focused Playwright server; focused Company browser acceptance passed 3/3 at 1440×900, 834×1112, and 390×844; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings. No form was submitted.
+- Intended commit: `refactor: simplify company hero headline` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: none for this copy checkpoint. Previously recorded form-configuration and optional Company-history inputs remain unchanged.
+- Exact next action: continue the user's section-by-section Company audit with the **Why Gala** section immediately below the hero. Do not push or deploy until explicitly requested.

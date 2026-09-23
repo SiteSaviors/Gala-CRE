@@ -189,7 +189,7 @@ describe("Gala CRE public pages", () => {
     const navigation = document.querySelector("nav");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Who we are", level: 1 })).toBeInTheDocument();
     expect(screen.getByText("The Developer's Brokerage")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeInTheDocument();
@@ -254,7 +254,7 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(await screen.findByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Who we are", level: 1 })).toBeInTheDocument();
   });
 
   it("filters the property catalog to an advisor's listings and transactions", () => {

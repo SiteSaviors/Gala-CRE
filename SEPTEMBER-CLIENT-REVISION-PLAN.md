@@ -279,6 +279,20 @@ Verification: full Vitest passed 116/116; production build passed; lint passed w
 
 Intended commit: `feat: add full-bleed company hero`.
 
+### Hero headline refinement
+
+Status: **Complete locally; not pushed or deployed.**
+
+- [x] Replace **See the whole opportunity.** with the user-approved **Who we are** headline.
+- [x] Preserve the full-bleed image, supporting copy, capability action, responsive crop, and Company-page hierarchy.
+- [x] Update unit and browser acceptance assertions.
+
+Gate: **Who we are** is the single Company H1 and remains clear at desktop, tablet, and mobile widths without changing the approved hero composition. **Passed.**
+
+Verification: focused Company tests passed 36/36; the production build completed through the focused Playwright server; focused Company browser acceptance passed 3/3 at desktop, tablet, and mobile widths; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings.
+
+Intended commit: `refactor: simplify company hero headline`.
+
 ## Exact next action
 
 Present the updated local Company hero for user review, then continue the requested section-by-section audit with the **Why Gala** section immediately below it. Do not push or deploy until explicitly requested.

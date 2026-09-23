@@ -65,7 +65,7 @@ test.describe("September client release acceptance", () => {
       await page.goto("/company", { waitUntil: "domcontentloaded" });
       await page.keyboard.press("Tab");
       await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
-      await expect(page.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Who we are", level: 1 })).toBeVisible();
       await expect(page.getByText("The Developer's Brokerage")).toBeVisible();
       await expect(page.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeVisible();
       await expect(page.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeVisible();
