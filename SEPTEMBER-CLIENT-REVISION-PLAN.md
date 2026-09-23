@@ -238,6 +238,28 @@ Verification: focused Company tests passed 36/36; full Vitest passed 116/116; pr
 
 Intended commit: `refactor: sharpen company story and operating model`.
 
+## Company refinement — Phase 3: Complete the Company journey and QA
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Preserve the complete shared Team roster, biographies, direct contacts, licenses, and portfolio actions.
+- [x] Add a compact non-metric proof layer grounded in Gala CRE's public property catalog, News archive, and evidence-safe developer-informed perspective.
+- [x] Improve the narrative transition into Team and normalize card heights without changing Team data or actions.
+- [x] Restore verified Triangle context as a compact, text-led presence band because no general-use Company or geographic photograph is currently cleared.
+- [x] Simplify the final Company close to **Let’s Connect** and **Explore Careers** only, with source context preserved.
+- [x] Update metadata and internal links to Services, Properties, News, Contact, and Careers.
+- [x] Verify desktop, tablet, mobile, keyboard entry, Team anchor clearance, hero-image loading, responsive crops/spacing, console health, and horizontal overflow.
+
+Final sequence: **Hero → Why Gala → Connected Platform → Proof → Our Team → Triangle Presence → CTA**.
+
+Gate: the Company page feels complete and specific without becoming another long service page; every public claim is supported or carefully qualified, the Team system remains intact, and all responsive and keyboard journeys pass.
+
+Checkpoint files and routes: `src/pages/Company.tsx`, `src/components/team/TeamRoster.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/company`, `/company#team`, and legacy `/team`.
+
+Verification: focused Company page tests passed 36/36; focused Company browser acceptance passed 3/3 at 1440×900, 834×1112, and 390×844; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; full Playwright passed 12/12. Live local Chrome QA confirmed the proof-to-Team transition, equal-height Team cards, compact Triangle presence, and two-action close. No form was submitted.
+
+Intended commit: `feat: complete company journey`.
+
 ## Exact next action
 
-Present the locally rebuilt `/company` route for user review, then use the next user-approved Company phase to add only the requested proof, market context, or conversion layer without changing the verified Team system or introducing unresolved origin, affiliation, geography, experience, or imagery claims.
+Present the completed local `/company` route for user review; after explicit approval, push the four verified local commits on `main`, deploy the linked Vercel project, and smoke-test `/company`, `/company#team`, and legacy `/team` in production without submitting any form.

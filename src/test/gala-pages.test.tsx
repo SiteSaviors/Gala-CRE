@@ -193,6 +193,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("The Developer's Brokerage")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Grounded in the work.", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Evaluate", level: 3 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Position", level: 3 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Structure", level: 3 })).toBeInTheDocument();
@@ -200,9 +201,15 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText("Our Purpose")).not.toBeInTheDocument();
     expect(screen.queryByText("A practical standard for every engagement.")).not.toBeInTheDocument();
     expect(screen.queryByText("Rooted in Raleigh-Durham.")).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Explore Properties/i })).toHaveAttribute("href", "/properties");
+    expect(screen.getByRole("link", { name: /View News & Media/i })).toHaveAttribute("href", "/news");
     expect(screen.getByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
     expect(document.querySelector("#team")).toHaveAttribute("aria-labelledby", "team-heading");
-    expect(screen.getByRole("link", { name: /Meet Our Team/i })).toHaveAttribute("href", "/company#team");
+    expect(screen.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeInTheDocument();
+    const companyClose = document.querySelector(".gala-company-close");
+    expect(companyClose).not.toBeNull();
+    expect(within(companyClose!).getByRole("link", { name: /Let’s Connect/i })).toHaveAttribute("href", "/contact?inquiry=general&source=company");
+    expect(screen.queryByRole("link", { name: /Meet Our Team/i })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Our Team", exact: true })).toHaveAttribute("href", "/company#team");
     expect(navigation).not.toBeNull();
     expect(within(navigation!).queryByRole("link", { name: "Team", exact: true })).not.toBeInTheDocument();

@@ -14,10 +14,10 @@ const TeamRoster = () => (
     <div className="gala-shell">
       <div className="gala-team-roster__intro">
         <div>
-          <div className="gala-kicker gala-kicker--dark">People Behind the Platform</div>
+          <div className="gala-kicker gala-kicker--dark">People Behind the Work</div>
           <h2 id="team-heading">Our Team</h2>
         </div>
-        <p>Meet the professionals connecting clients with Gala CRE’s brokerage, investment-sales, development, and capital-market capabilities.</p>
+        <p>A connected approach still depends on clear individual responsibility. Meet the professionals guiding Gala CRE clients from the first conversation through the next critical decision.</p>
       </div>
 
       <div className="gala-team-grid">

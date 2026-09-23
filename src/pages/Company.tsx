@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -30,12 +30,34 @@ const operatingModel = [
   },
 ] as const;
 
+const proofPoints = [
+  {
+    label: "Developer-Informed",
+    title: "Decisions in context.",
+    body: "Market position, site constraints, capital readiness, diligence, and execution are considered alongside the immediate transaction.",
+  },
+  {
+    label: "Current Work",
+    title: "Opportunities you can examine.",
+    body: "Review Gala CRE’s public catalog of active commercial opportunities and selected completed transactions.",
+    href: "/properties",
+    action: "Explore Properties",
+  },
+  {
+    label: "Public Context",
+    title: "Coverage beyond our own site.",
+    body: "Read coverage and conversations involving Gala leadership and related real estate ventures.",
+    href: "/news",
+    action: "View News & Media",
+  },
+] as const;
+
 const Company = () => {
   useSiteCursor();
 
   return (
     <>
-      <PageMeta title="Company" description="Meet Gala CRE Group, a developer-informed commercial brokerage helping owners, investors, and businesses across Raleigh-Durham and the Research Triangle." />
+      <PageMeta title="Company & Team" description="Meet Gala CRE Group, a Cary-based, developer-informed commercial brokerage serving owners, investors, and businesses across Raleigh-Durham and the Research Triangle." />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/company" />
       <main className="gala-page" id="main-content" tabIndex={-1}>
@@ -101,9 +123,43 @@ const Company = () => {
           </div>
         </section>
 
+        <section className="gala-company-proof" aria-labelledby="company-proof-title">
+          <div className="gala-shell">
+            <div className="gala-company-proof__intro">
+              <div className="gala-kicker gala-kicker--dark">Perspective in Practice</div>
+              <h2 id="company-proof-title">Grounded in the work.</h2>
+            </div>
+            <div className="gala-company-proof__grid">
+              {proofPoints.map(({ label, title, body, ...link }) => (
+                <article key={label}>
+                  <span>{label}</span>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                  {"href" in link ? (
+                    <Link className="gala-text-link" to={link.href}>
+                      {link.action} <ArrowUpRight size={15} aria-hidden="true" />
+                    </Link>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <TeamRoster />
 
-        <section className="gala-cta-band"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><div className="gala-cta-band__actions"><Link to="/company#team" className="gala-text-link">Meet Our Team <ArrowUpRight size={16} /></Link><Link to="/careers?source=company" className="gala-text-link">Explore Careers <ArrowUpRight size={16} /></Link><Link to="/contact" className="gala-button">Talk to an Advisor <ArrowUpRight size={16} /></Link></div></div></section>
+        <section className="gala-company-presence" aria-labelledby="company-presence-title">
+          <div className="gala-shell gala-company-presence__grid">
+            <div>
+              <MapPin aria-hidden="true" />
+              <div className="gala-kicker">Triangle Presence</div>
+              <h2 id="company-presence-title">Based in Cary. Focused on the Research Triangle.</h2>
+            </div>
+            <p>Gala CRE serves commercial owners, investors, landlords, tenants, developers, and business operators across Raleigh-Durham and the Research Triangle. Every assignment begins with the property, the client’s objective, and the local context that connects them.</p>
+          </div>
+        </section>
+
+        <section className="gala-cta-band gala-company-close"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><div className="gala-cta-band__actions"><Link to="/contact?inquiry=general&source=company" className="gala-button">Let’s Connect <ArrowUpRight size={16} aria-hidden="true" /></Link><Link to="/careers?source=company" className="gala-text-link">Explore Careers <ArrowUpRight size={16} aria-hidden="true" /></Link></div></div></section>
       </main>
       <SiteFooter currentPath="/company" />
     </>

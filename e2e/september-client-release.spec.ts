@@ -48,6 +48,7 @@ const propertyExpectations = [
 test.describe("September client release acceptance", () => {
   for (const viewport of [
     { name: "desktop", width: 1440, height: 900 },
+    { name: "tablet", width: 834, height: 1112 },
     { name: "mobile", width: 390, height: 844 },
   ] as const) {
     test(`${viewport.name}: Company team contacts, Home navigation, and advisor portfolios are correct`, async ({ page }) => {
@@ -62,12 +63,25 @@ test.describe("September client release acceptance", () => {
       });
 
       await page.goto("/company", { waitUntil: "domcontentloaded" });
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
       await expect(page.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeVisible();
       await expect(page.getByText("The Developer's Brokerage")).toBeVisible();
       await expect(page.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeVisible();
       await expect(page.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Grounded in the work.", level: 2 })).toBeVisible();
       await expect(page.locator(".gala-company-hero__portrait img")).toHaveCount(3);
+      const heroImageWidths = await page.locator(".gala-company-hero__portrait img").evaluateAll((images) =>
+        images.map((image) => (image as HTMLImageElement).naturalWidth),
+      );
+      expect(heroImageWidths.every((width) => width > 0)).toBe(true);
       await expect(page.locator(".gala-company-model__steps > li")).toHaveCount(4);
+      await expect(page.locator(".gala-company-proof__grid > article")).toHaveCount(3);
+      await expect(page.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeVisible();
+      const companyClose = page.locator(".gala-company-close");
+      await expect(companyClose.getByRole("link", { name: "Let’s Connect" })).toHaveAttribute("href", "/contact?inquiry=general&source=company");
+      await expect(companyClose.getByRole("link", { name: "Explore Careers" })).toHaveAttribute("href", "/careers?source=company");
+      await expect(companyClose.getByRole("link", { name: "Meet Our Team" })).toHaveCount(0);
       await expect(page.getByText("Our Purpose")).toHaveCount(0);
       await expect(page.getByText("Rooted in Raleigh-Durham.")).toHaveCount(0);
       const companyLayout = await page.evaluate(() => ({
@@ -79,6 +93,9 @@ test.describe("September client release acceptance", () => {
       await page.goto("/team", { waitUntil: "domcontentloaded" });
       await expect(page).toHaveURL(/\/company#team$/);
       await expect(page.getByRole("heading", { name: "Our Team", level: 2 })).toBeVisible();
+      const anchorPosition = await page.locator("#team").evaluate((section) => section.getBoundingClientRect().top);
+      const navigationHeight = await page.locator("nav").evaluate((navigation) => navigation.getBoundingClientRect().height);
+      expect(anchorPosition).toBeGreaterThanOrEqual(navigationHeight - 1);
       await expect(page.locator(".gala-team-hero")).toHaveCount(0);
       await expect(page.getByText("Advice stays personal when responsibility stays clear.")).toHaveCount(0);
       await expect(page.locator(".gala-team-card")).toHaveCount(3);

@@ -1132,13 +1132,13 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-team-roster__intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.65fr);gap:70px;align-items:end;margin-bottom:60px}
 .gala-team-roster__intro h2{max-width:13ch}
 .gala-team-roster__intro>p{max-width:520px;color:#676760;font-size:14px;line-height:1.8}
-.gala-team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
-.gala-team-card{overflow:hidden;border:1px solid #d3d2cc;background:#f7f7f4}
+.gala-team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.gala-team-card{display:flex;overflow:hidden;flex-direction:column;border:1px solid #d3d2cc;background:#f7f7f4}
 .gala-team-card__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#101010}
 .gala-team-card__media img{width:100%;height:100%;display:block;object-fit:cover}
 .gala-team-card:first-child .gala-team-card__media img{object-position:center}
 .gala-team-card__monogram{height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#34312a 0%,#181714 45%,#0a0a0a 100%);color:rgba(245,222,147,.8);font:500 clamp(54px,7vw,92px)/1 'Poppins',sans-serif;letter-spacing:-.04em}
-.gala-team-card__content{display:flex;min-height:500px;flex-direction:column;padding:30px}
+.gala-team-card__content{display:flex;min-height:500px;flex:1;flex-direction:column;padding:30px}
 .gala-team-card__title{color:#946e1d;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.2em;text-transform:uppercase}
 .gala-team-card__content h3{margin:12px 0 0;font:600 clamp(31px,3vw,43px)/1.05 'Poppins',sans-serif;letter-spacing:-.045em}
 .gala-team-card__license{margin-top:9px;color:#85827a;font-size:10px;line-height:1.5}
@@ -1178,6 +1178,23 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-company-model__steps span{color:var(--gala-gold-light);font:700 9px/1.4 'Syne',sans-serif;letter-spacing:.19em}
 .gala-company-model__steps h3{margin:92px 0 13px;font:600 clamp(25px,2.3vw,34px)/1.08 'Poppins',sans-serif;letter-spacing:-.035em}
 .gala-company-model__steps p{color:rgba(255,255,255,.6);font-size:12px;line-height:1.75}
+.gala-company-proof{padding:86px 0 94px;background:#f1efe7;color:var(--gala-ink)}
+.gala-company-proof__intro{display:flex;align-items:end;justify-content:space-between;gap:48px;margin-bottom:42px}
+.gala-company-proof__intro .gala-kicker{margin-bottom:12px}
+.gala-company-proof__intro h2{margin:0;font:600 clamp(40px,4.4vw,62px)/1 'Poppins',sans-serif;letter-spacing:-.05em}
+.gala-company-proof__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(23,23,23,.18);border-left:1px solid rgba(23,23,23,.18)}
+.gala-company-proof__grid article{min-height:285px;display:flex;flex-direction:column;padding:27px 28px 30px;border-right:1px solid rgba(23,23,23,.18);border-bottom:1px solid rgba(23,23,23,.18);background:rgba(255,255,255,.36)}
+.gala-company-proof__grid article>span{color:#8f681c;font:700 8px/1.4 'Syne',sans-serif;letter-spacing:.19em;text-transform:uppercase}
+.gala-company-proof__grid h3{max-width:11ch;margin:70px 0 13px;font:600 clamp(25px,2.3vw,33px)/1.08 'Poppins',sans-serif;letter-spacing:-.035em}
+.gala-company-proof__grid p{color:#5e5b54;font-size:12px;line-height:1.72}
+.gala-company-proof__grid .gala-text-link{width:max-content;margin-top:auto;padding-top:24px}
+.gala-team-roster{scroll-margin-top:102px}
+.gala-company-presence{padding:72px 0 76px;background:#171612;color:#fff}
+.gala-company-presence__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);gap:clamp(58px,8vw,128px);align-items:end}
+.gala-company-presence__grid>div>svg{width:30px;height:30px;margin-bottom:25px;color:var(--gala-gold-light)}
+.gala-company-presence__grid h2{max-width:16ch;margin:0;font:600 clamp(37px,4.4vw,62px)/1 'Poppins',sans-serif;letter-spacing:-.05em}
+.gala-company-presence__grid>p{max-width:35rem;margin:0 0 5px;color:rgba(255,255,255,.65);font-size:14px;line-height:1.8}
+.gala-company-close .gala-cta-band__actions{flex-direction:row-reverse}
 .contact-page{background:#080808}
 .contact-page .contact-hero{padding-top:174px}
 .contact-page .contact-title{letter-spacing:0}
@@ -1262,6 +1279,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-company-hero__grid{grid-template-columns:minmax(330px,.8fr) minmax(0,1fr);gap:42px}
   .gala-company-hero__portraits{height:460px}
   .gala-company-model__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gala-company-proof__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .gala-property-detail{gap:54px}
   .gala-property-hero__scroll{display:none}
   .gala-property-factbar>.gala-shell>div{padding:22px}
@@ -1399,6 +1417,15 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-company-model__steps{grid-template-columns:1fr;margin-top:42px}
   .gala-company-model__steps li{min-height:0;padding:24px}
   .gala-company-model__steps h3{margin:38px 0 11px}
+  .gala-company-proof{padding:68px 0 74px}
+  .gala-company-proof__intro{align-items:flex-start;flex-direction:column;gap:0;margin-bottom:32px}
+  .gala-company-proof__grid{grid-template-columns:1fr}
+  .gala-company-proof__grid article{min-height:0;padding:24px}
+  .gala-company-proof__grid h3{max-width:none;margin:42px 0 11px}
+  .gala-company-presence{padding:62px 0 66px}
+  .gala-company-presence__grid{grid-template-columns:1fr;gap:30px}
+  .gala-company-presence__grid h2{font-size:clamp(36px,10vw,50px)}
+  .gala-company-close .gala-cta-band__actions{flex-direction:column}
   .gala-lead{font-size:20px}
   nav{padding:12px 20px}
   .nlogo{width:128px;height:58px}
