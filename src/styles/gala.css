@@ -1150,13 +1150,34 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-team-card__actions .gala-text-link{font-size:7px;white-space:nowrap}
 
 /* Company and contact */
-.gala-principle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.17);border-left:1px solid rgba(255,255,255,.17)}
-.gala-principle-grid article{min-height:300px;padding:30px;border-right:1px solid rgba(255,255,255,.17);border-bottom:1px solid rgba(255,255,255,.17)}
-.gala-principle-grid svg,
-.gala-large-icon{color:var(--gala-gold);width:34px;height:34px}
-.gala-principle-grid h3{margin:110px 0 14px;font:600 28px/1.1 'Poppins',sans-serif;letter-spacing:0}
-.gala-principle-grid p{font-size:14px;line-height:1.72;color:rgba(255,255,255,.6)}
-.gala-large-icon{margin-bottom:34px}
+.gala-company-hero{min-height:660px;padding:132px 0 62px;background:#090909;color:#fff}
+.gala-company-hero__grid{display:grid;grid-template-columns:minmax(380px,.8fr) minmax(0,1.2fr);gap:clamp(48px,6vw,96px);align-items:center}
+.gala-company-hero__copy h1{max-width:8.5ch;margin:0;font:600 clamp(56px,6.7vw,98px)/.93 'Poppins',sans-serif;letter-spacing:-.065em}
+.gala-company-hero__copy>p{max-width:35rem;margin:26px 0 0;color:rgba(255,255,255,.69);font-size:clamp(16px,1.35vw,20px);line-height:1.7}
+.gala-company-hero__link{margin-top:31px;color:#fff}
+.gala-company-hero__portraits{height:510px;display:grid;grid-template-columns:minmax(0,1.32fr) minmax(150px,.68fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:10px;overflow:hidden}
+.gala-company-hero__portrait{position:relative;min-width:0;min-height:0;overflow:hidden;background:#24231f}
+.gala-company-hero__portrait:first-child{grid-row:1/-1}
+.gala-company-hero__portrait img{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.78) contrast(1.02);transition:filter .45s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.gala-company-hero__portrait:first-child img{object-position:66% center}
+.gala-company-hero__portrait:nth-child(2) img{object-position:center 30%}
+.gala-company-hero__portrait:nth-child(3) img{object-position:center 25%}
+.gala-company-hero__portraits:hover img{filter:saturate(.95) contrast(1.02);transform:scale(1.015)}
+.gala-company-why{padding:112px 0 118px;background:#f1efe7;color:var(--gala-ink)}
+.gala-company-why__grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(330px,.72fr);gap:clamp(64px,8vw,132px);align-items:start}
+.gala-company-why__heading h2{max-width:12ch;margin:0;font:600 clamp(44px,5.6vw,78px)/.98 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-company-why__copy{padding-top:4px}
+.gala-company-why__copy .gala-lead{margin:0 0 30px;color:#25241f;font-size:clamp(20px,1.9vw,27px);line-height:1.5}
+.gala-company-why__copy>p:not(.gala-lead){margin-top:20px;color:#5e5b54;font-size:14px;line-height:1.82}
+.gala-company-model{padding:104px 0 112px;background:#090909;color:#fff}
+.gala-company-model__intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.56fr);gap:clamp(54px,7vw,108px);align-items:end}
+.gala-company-model__intro h2{max-width:13ch;margin:0;font:600 clamp(44px,5.5vw,76px)/.98 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-company-model__intro>p{max-width:32rem;margin:0 0 6px;color:rgba(255,255,255,.58);font-size:14px;line-height:1.8}
+.gala-company-model__steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:66px;border-top:1px solid rgba(255,255,255,.18);border-left:1px solid rgba(255,255,255,.18);list-style:none}
+.gala-company-model__steps li{min-height:290px;padding:27px 26px 30px;border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.gala-company-model__steps span{color:var(--gala-gold-light);font:700 9px/1.4 'Syne',sans-serif;letter-spacing:.19em}
+.gala-company-model__steps h3{margin:92px 0 13px;font:600 clamp(25px,2.3vw,34px)/1.08 'Poppins',sans-serif;letter-spacing:-.035em}
+.gala-company-model__steps p{color:rgba(255,255,255,.6);font-size:12px;line-height:1.75}
 .contact-page{background:#080808}
 .contact-page .contact-hero{padding-top:174px}
 .contact-page .contact-title{letter-spacing:0}
@@ -1238,6 +1259,9 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-property-catalog__header>p{justify-self:start}
   .gala-property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gala-company-hero__grid{grid-template-columns:minmax(330px,.8fr) minmax(0,1fr);gap:42px}
+  .gala-company-hero__portraits{height:460px}
+  .gala-company-model__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-property-detail{gap:54px}
   .gala-property-hero__scroll{display:none}
   .gala-property-factbar>.gala-shell>div{padding:22px}
@@ -1361,6 +1385,20 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-editorial-intro__media{order:1;width:100%;height:auto;min-height:0;aspect-ratio:4/5;border-radius:72px 0 0 72px}
   .gala-editorial-intro__media figcaption{right:20px;bottom:20px;max-width:70%;font-size:8px;text-align:right}
   .gala-split{grid-template-columns:1fr;gap:34px}
+  .gala-company-hero{min-height:0;padding:126px 0 42px}
+  .gala-company-hero__grid{grid-template-columns:1fr;gap:42px}
+  .gala-company-hero__copy h1{max-width:10ch;font-size:clamp(48px,14vw,66px)}
+  .gala-company-hero__copy>p{font-size:15px}
+  .gala-company-hero__portraits{height:330px;grid-template-columns:1.2fr repeat(2,.8fr);grid-template-rows:1fr;gap:6px}
+  .gala-company-hero__portrait:first-child{grid-row:auto}
+  .gala-company-hero__portrait:first-child img{object-position:67% center}
+  .gala-company-why{padding:76px 0 82px}
+  .gala-company-why__grid,.gala-company-model__intro{grid-template-columns:1fr;gap:35px}
+  .gala-company-why__heading h2,.gala-company-model__intro h2{font-size:clamp(39px,11vw,54px)}
+  .gala-company-model{padding:78px 0 82px}
+  .gala-company-model__steps{grid-template-columns:1fr;margin-top:42px}
+  .gala-company-model__steps li{min-height:0;padding:24px}
+  .gala-company-model__steps h3{margin:38px 0 11px}
   .gala-lead{font-size:20px}
   nav{padding:12px 20px}
   .nlogo{width:128px;height:58px}

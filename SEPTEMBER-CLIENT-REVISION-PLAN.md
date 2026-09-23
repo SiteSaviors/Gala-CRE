@@ -218,6 +218,26 @@ Verification: source URLs were opened or fetched directly where available; the c
 
 Intended commit: `docs: establish Gala CRE company story source`.
 
+## Company refinement — Phase 2: Rebuild the Company narrative
+
+Status: **Implemented and verified locally; not pushed or deployed.**
+
+- [x] Replace the oversized generic hero with a shorter split composition led by approved real Team photography.
+- [x] Lead with **The Developer's Brokerage** and a specific, evidence-safe Company headline.
+- [x] Replace the abstract Purpose section with a concise explanation of why a developer-informed view matters to commercial decisions.
+- [x] Replace the principles grid with the connected **Evaluate → Position → Structure → Execute** operating model.
+- [x] Remove the redundant standalone Research Triangle section while retaining safe Cary and Research Triangle language in public metadata and site chrome.
+- [x] Preserve the complete shared Team roster, direct contacts, biographies, licenses, and portfolio actions unchanged.
+- [x] Omit founding dates, firm-age metrics, affiliate ownership claims, broader territory claims, and unapproved affiliate/project imagery.
+
+Gate: `/company` presents a specific, image-led, developer-informed story before the existing Team roster; the narrative is concise, responsive, accessible, free of unsupported claims, and creates no regression to Team or legacy `/team` journeys.
+
+Checkpoint files and route: `src/pages/Company.tsx`, `src/styles/gala.css`, `src/test/gala-pages.test.tsx`, `e2e/september-client-release.spec.ts`, `OVERNIGHT-BUILD-PLAN.md`, and this plan; `/company` and legacy `/team`.
+
+Verification: focused Company tests passed 36/36; full Vitest passed 116/116; production build passed; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; full Playwright passed 11/11. Live local Chrome QA confirmed the real-photo desktop hero, clear Why Gala hierarchy, compact four-step operating model, clean transition into Team, and no visible layout defects. Automated desktop and mobile acceptance confirmed the new narrative, three hero images, four operating steps, legacy redirect, Team actions, and no horizontal overflow.
+
+Intended commit: `refactor: sharpen company story and operating model`.
+
 ## Exact next action
 
-Start Company refinement Phase 2: rebuild `/company` into a shorter image-led hero, evidence-backed “why Gala” narrative, connected operating-model section, and non-metric proof band using only facts and media cleared in `COMPANY-STORY-REGISTER.md`; retain the shared Team roster and omit unresolved origin, affiliation, geography, and experience claims.
+Present the locally rebuilt `/company` route for user review, then use the next user-approved Company phase to add only the requested proof, market context, or conversion layer without changing the verified Team system or introducing unresolved origin, affiliation, geography, experience, or imagery claims.

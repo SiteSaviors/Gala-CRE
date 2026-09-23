@@ -189,6 +189,17 @@ describe("Gala CRE public pages", () => {
     const navigation = document.querySelector("nav");
     expect(screen.queryByText(/pending client|awaiting client|client approval/i)).not.toBeInTheDocument();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(screen.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeInTheDocument();
+    expect(screen.getByText("The Developer's Brokerage")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Evaluate", level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Position", level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Structure", level: 3 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Execute", level: 3 })).toBeInTheDocument();
+    expect(screen.queryByText("Our Purpose")).not.toBeInTheDocument();
+    expect(screen.queryByText("A practical standard for every engagement.")).not.toBeInTheDocument();
+    expect(screen.queryByText("Rooted in Raleigh-Durham.")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
     expect(document.querySelector("#team")).toHaveAttribute("aria-labelledby", "team-heading");
     expect(screen.getByRole("link", { name: /Meet Our Team/i })).toHaveAttribute("href", "/company#team");
@@ -236,7 +247,7 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(await screen.findByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Commercial expertise made more personal.", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeInTheDocument();
   });
 
   it("filters the property catalog to an advisor's listings and transactions", () => {

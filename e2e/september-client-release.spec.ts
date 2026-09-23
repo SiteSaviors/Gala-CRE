@@ -61,6 +61,21 @@ test.describe("September client release acceptance", () => {
         }
       });
 
+      await page.goto("/company", { waitUntil: "domcontentloaded" });
+      await expect(page.getByRole("heading", { name: "See the whole opportunity.", level: 1 })).toBeVisible();
+      await expect(page.getByText("The Developer's Brokerage")).toBeVisible();
+      await expect(page.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeVisible();
+      await expect(page.locator(".gala-company-hero__portrait img")).toHaveCount(3);
+      await expect(page.locator(".gala-company-model__steps > li")).toHaveCount(4);
+      await expect(page.getByText("Our Purpose")).toHaveCount(0);
+      await expect(page.getByText("Rooted in Raleigh-Durham.")).toHaveCount(0);
+      const companyLayout = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: document.documentElement.scrollWidth,
+      }));
+      expect(companyLayout.scrollWidth).toBeLessThanOrEqual(companyLayout.clientWidth + 1);
+
       await page.goto("/team", { waitUntil: "domcontentloaded" });
       await expect(page).toHaveURL(/\/company#team$/);
       await expect(page.getByRole("heading", { name: "Our Team", level: 2 })).toBeVisible();
