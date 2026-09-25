@@ -1,6 +1,8 @@
 import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import companyHero from "@/assets/company-hero.avif";
+import companyAboutPrimary from "@/assets/site-strategy-field-context.webp";
+import companyAboutInset from "@/assets/office-investment-sales.webp";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
@@ -11,44 +13,22 @@ const operatingModel = [
   {
     step: "01",
     title: "Evaluate",
-    body: "Start with the objective, then examine the market, property, timing, and diligence questions that shape the decision.",
+    body: "Understand the objective, property, market, timing, and material risks.",
   },
   {
     step: "02",
     title: "Position",
-    body: "Define the clearest market story, intended audience, and path forward before an opportunity is introduced or pursued.",
+    body: "Define the opportunity, intended audience, and strongest path to market.",
   },
   {
     step: "03",
     title: "Structure",
-    body: "Shape the transaction plan and coordinate the development, capital, or specialist input the assignment requires.",
+    body: "Align the transaction with the development, capital, and specialist expertise it requires.",
   },
   {
     step: "04",
     title: "Execute",
-    body: "Lead the transaction, keep diligence moving, and align the parties around the next critical milestone.",
-  },
-] as const;
-
-const proofPoints = [
-  {
-    label: "Developer-Informed",
-    title: "Decisions in context.",
-    body: "Market position, site constraints, capital readiness, diligence, and execution are considered alongside the immediate transaction.",
-  },
-  {
-    label: "Current Work",
-    title: "Opportunities you can examine.",
-    body: "Review Gala CRE’s public catalog of active commercial opportunities and selected completed transactions.",
-    href: "/properties",
-    action: "Explore Properties",
-  },
-  {
-    label: "Public Context",
-    title: "Coverage beyond our own site.",
-    body: "Read coverage and conversations involving Gala leadership and related real estate ventures.",
-    href: "/news",
-    action: "View News & Media",
+    body: "Lead negotiations, diligence, coordination, and the path to closing.",
   },
 ] as const;
 
@@ -82,16 +62,30 @@ const Company = () => {
           </div>
         </section>
 
-        <section className="gala-company-why" aria-labelledby="company-why-title">
-          <div className="gala-shell gala-company-why__grid">
-            <div className="gala-company-why__heading">
-              <div className="gala-kicker gala-kicker--dark">Why Gala</div>
-              <h2 id="company-why-title">The transaction is only one part of the decision.</h2>
+        <section className="gala-company-about" aria-labelledby="company-about-title">
+          <div className="gala-shell gala-company-about__grid">
+            <div className="gala-company-about__media" aria-hidden="true">
+              <img
+                className="gala-company-about__primary"
+                src={companyAboutPrimary}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                className="gala-company-about__inset"
+                src={companyAboutInset}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <div className="gala-company-why__copy">
-              <p className="gala-lead">A sale can expose entitlement questions. A site search can change capital needs. A lease can shape operations long after it is signed.</p>
-              <p>Gala brings those consequences into the conversation early. We begin with the client’s objective, make the tradeoffs visible, and connect the appropriate brokerage capability or outside professional as the assignment develops.</p>
-              <p>The result is a clearer path from opportunity to execution—without treating the property, the transaction, and what comes next as separate decisions.</p>
+            <div className="gala-company-about__copy">
+              <div className="gala-kicker gala-kicker--dark">About Gala CRE</div>
+              <h2 id="company-about-title">Brokerage grounded in how real estate gets built.</h2>
+              <p className="gala-lead">Gala CRE brings a developer-informed perspective to commercial real estate decisions.</p>
+              <p>We look beyond the immediate sale, lease, or acquisition to the market, site, capital, diligence, and execution questions that can shape the outcome.</p>
+              <p>From our Cary base, we help owners, investors, and businesses make those tradeoffs visible and bring the right capabilities together around a clear objective.</p>
             </div>
           </div>
         </section>
@@ -100,10 +94,9 @@ const Company = () => {
           <div className="gala-shell">
             <div className="gala-company-model__intro">
               <div>
-                <div className="gala-kicker">How Gala Works</div>
-                <h2 id="company-model-title">A connected path from opportunity to execution.</h2>
+                <div className="gala-kicker">The Gala Approach</div>
+                <h2 id="company-model-title">From first evaluation to final execution.</h2>
               </div>
-              <p>Each engagement is different. The sequence stays disciplined enough to keep the objective, the real estate, and the next decision aligned.</p>
             </div>
             <ol className="gala-company-model__steps">
               {operatingModel.map(({ step, title, body }) => (
@@ -114,29 +107,6 @@ const Company = () => {
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
-
-        <section className="gala-company-proof" aria-labelledby="company-proof-title">
-          <div className="gala-shell">
-            <div className="gala-company-proof__intro">
-              <div className="gala-kicker gala-kicker--dark">Perspective in Practice</div>
-              <h2 id="company-proof-title">Grounded in the work.</h2>
-            </div>
-            <div className="gala-company-proof__grid">
-              {proofPoints.map(({ label, title, body, ...link }) => (
-                <article key={label}>
-                  <span>{label}</span>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                  {"href" in link ? (
-                    <Link className="gala-text-link" to={link.href}>
-                      {link.action} <ArrowUpRight size={15} aria-hidden="true" />
-                    </Link>
-                  ) : null}
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 

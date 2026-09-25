@@ -67,9 +67,10 @@ test.describe("September client release acceptance", () => {
       await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
       await expect(page.getByRole("heading", { name: "Who we are", level: 1 })).toBeVisible();
       await expect(page.getByText("The Developer's Brokerage")).toBeVisible();
-      await expect(page.getByRole("heading", { name: "The transaction is only one part of the decision.", level: 2 })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "A connected path from opportunity to execution.", level: 2 })).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Grounded in the work.", level: 2 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Brokerage grounded in how real estate gets built.", level: 2 })).toBeVisible();
+      await expect(page.locator(".gala-company-about__primary")).toBeVisible();
+      await expect(page.locator(".gala-company-about__inset")).toBeVisible();
+      await expect(page.getByRole("heading", { name: "From first evaluation to final execution.", level: 2 })).toBeVisible();
       const companyHeroImage = page.locator(".gala-company-hero__image");
       await expect(companyHeroImage).toHaveCount(1);
       const heroImageDimensions = await companyHeroImage.evaluate((image) => ({
@@ -78,7 +79,7 @@ test.describe("September client release acceptance", () => {
       }));
       expect(heroImageDimensions).toEqual({ width: 3840, height: 2160 });
       await expect(page.locator(".gala-company-model__steps > li")).toHaveCount(4);
-      await expect(page.locator(".gala-company-proof__grid > article")).toHaveCount(3);
+      await expect(page.getByText("Perspective in Practice")).toHaveCount(0);
       await expect(page.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeVisible();
       const companyClose = page.locator(".gala-company-close");
       await expect(companyClose.getByRole("link", { name: "Let’s Connect" })).toHaveAttribute("href", "/contact?inquiry=general&source=company");

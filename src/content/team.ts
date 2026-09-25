@@ -1,6 +1,6 @@
-import gaurangGalaPhoto from "@/assets/team/gaurang-gala-2026.webp";
-import goverdhanVavilalaPhoto from "@/assets/team/goverdhan-vavilala-2026.webp";
-import leighRoachPhoto from "@/assets/team/leigh-roach-2026.webp";
+import gaurangGalaPhoto from "@/assets/team/gaurang-gala-portrait.avif";
+import goverdhanVavilalaPhoto from "@/assets/team/goverdhan-vavilala-portrait.avif";
+import leighRoachPhoto from "@/assets/team/leigh-roach-portrait.avif";
 
 export const teamMemberIds = ["gaurang-gala", "leigh-roach", "goverdhan-vavilala"] as const;
 
