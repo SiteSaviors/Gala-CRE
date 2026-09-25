@@ -282,6 +282,35 @@ test("homepage hero video plays only while visible on mobile", async ({ browser 
   await reducedMotionContext.close();
 });
 
+test("homepage featured listings present three desktop cards without coupling the galleries", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/#featured-listings-title", { waitUntil: "domcontentloaded" });
+
+  const carousel = page.getByRole("region", { name: "Featured commercial properties" });
+  const layout = await carousel.evaluate((viewport) => {
+    const viewportBox = viewport.getBoundingClientRect();
+    const cardBoxes = Array.from(viewport.querySelectorAll(".gala-listing-card"), (card) =>
+      card.getBoundingClientRect(),
+    );
+
+    return {
+      fullyVisible: cardBoxes.filter(
+        (card) => card.left >= viewportBox.left - 1 && card.right <= viewportBox.right + 1,
+      ).length,
+    };
+  });
+
+  expect(layout.fullyVisible).toBe(3);
+
+  await page.getByRole("button", { name: "Next featured listing" }).click();
+  await expect(page.locator(".gala-featured-listings__position strong")).toHaveText("02");
+
+  const familyFarmGalleryNext = page.getByRole("button", { name: "Next image for 5911 Family Farm Road" });
+  await familyFarmGalleryNext.click();
+  await expect(page.getByText("Image 2 / 5")).toBeVisible();
+  await expect(page.locator(".gala-featured-listings__position strong")).toHaveText("02");
+});
+
 test("property catalog filters, map view, and gallery stay interactive", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/properties", { waitUntil: "domcontentloaded" });

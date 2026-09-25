@@ -726,3 +726,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after the checkpoint commit.
 - Blockers: none for this Team interaction. Previously recorded private form configuration and optional Company-history inputs remain unchanged.
 - Exact next action: present the updated local `/company#team` interaction for user review and wait for the user to identify the next Company section. Do not push or deploy until explicitly requested.
+
+### 2026-09-24 — Homepage featured-listing density refinement
+
+- Starting branch / HEAD: `main` at `2bea83f3198f2adbdd92d6051db88bfd0f0f6ffe`, clean and synchronized with `origin/main`.
+- Source of truth checked: the user's explicit three-card approval; Git branch, status, and recent history; this ledger; the current homepage, shared featured-listing carousel, responsive styles, listing data, unit coverage, browser acceptance suite, and live local route.
+- Phase / checkpoint: refine the homepage Featured Listings carousel from four desktop cards to three without changing inventory, order, card content, or interaction behavior.
+- Gate: exactly three complete property cards are visible at the standard desktop viewport; the existing tablet and mobile treatments remain intact; outer carousel navigation and each property's inline gallery continue to operate independently; and the homepage introduces no responsive, accessibility, console, or build regression.
+- Implementation: changed the desktop slide basis from 25% to one third while preserving the existing 52% tablet and 88% mobile breakpoints, five-listing loop, pointer/trackpad dragging, arrow controls, progress controls, and card-level galleries. Added a browser regression test that measures three fully visible desktop card surfaces and confirms that a property-gallery change does not advance the outer carousel.
+- Files / route changed: `src/styles/gala.css`, `e2e/public-route-matrix.spec.ts`, and this ledger; `/` only.
+- Verification: live local Chrome QA at 1440px confirmed the three-card composition, stronger property imagery and typography, correct next-slide movement, and independent Family Farm gallery navigation. Full Vitest passed 116/116 across 18 files; production build passed with the existing browserslist-age and bundle-size notices; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; full Playwright passed 13/13, including the new carousel regression and the complete desktop/tablet/mobile route matrix. No form was submitted.
+- Intended commit: `refactor: feature three homepage listings` after scoped diff review.
+- Remaining working tree: expected clean after the checkpoint commit.
+- Blockers: none for this homepage checkpoint. Previously recorded private form configuration and optional Company-history inputs remain unchanged.
+- Exact next action: present the updated local homepage carousel for user review and wait for explicit authorization before pushing or deploying.
