@@ -80,7 +80,9 @@ test.describe("September client release acceptance", () => {
       expect(heroImageDimensions).toEqual({ width: 3840, height: 2160 });
       await expect(page.locator(".gala-company-model__steps > li")).toHaveCount(4);
       await expect(page.getByText("Perspective in Practice")).toHaveCount(0);
-      await expect(page.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Grounded in one of North Carolina’s most dynamic markets.", level: 2 })).toBeVisible();
+      await expect(page.getByLabel("Markets served")).toContainText("Cary · Raleigh · Durham · Morrisville · Apex · Research Triangle Park");
+      await expect(page.getByRole("img", { name: "Conceptual city skyline emerging from an architectural site plan" })).toBeVisible();
       const companyClose = page.locator(".gala-company-close");
       await expect(companyClose.getByRole("link", { name: "Let’s Connect" })).toHaveAttribute("href", "/contact?inquiry=general&source=company");
       await expect(companyClose.getByRole("link", { name: "Explore Careers" })).toHaveAttribute("href", "/careers?source=company");

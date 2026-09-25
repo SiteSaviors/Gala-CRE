@@ -206,7 +206,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByRole("heading", { name: "Grounded in the work.", level: 2 })).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Our Team", level: 2 })).toBeInTheDocument();
     expect(document.querySelector("#team")).toHaveAttribute("aria-labelledby", "team-heading");
-    expect(screen.getByRole("heading", { name: "Based in Cary. Focused on the Research Triangle.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Grounded in one of North Carolina’s most dynamic markets.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByText("Triangle Market Perspective")).toBeInTheDocument();
+    expect(screen.getByLabelText("Markets served")).toHaveTextContent("Cary · Raleigh · Durham · Morrisville · Apex · Research Triangle Park");
+    expect(screen.getByRole("img", { name: "Conceptual city skyline emerging from an architectural site plan" })).toBeInTheDocument();
     const companyClose = document.querySelector(".gala-company-close");
     expect(companyClose).not.toBeNull();
     expect(within(companyClose!).getByRole("link", { name: /Let’s Connect/i })).toHaveAttribute("href", "/contact?inquiry=general&source=company");

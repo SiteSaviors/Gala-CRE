@@ -1,8 +1,9 @@
-import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import companyHero from "@/assets/company-hero.avif";
 import companyAboutPrimary from "@/assets/site-strategy-field-context.webp";
 import companyAboutInset from "@/assets/office-investment-sales.webp";
+import triangleMarketVisual from "@/assets/triangle-market-raleigh.webp";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
@@ -114,13 +115,18 @@ const Company = () => {
 
         <section className="gala-company-presence" aria-labelledby="company-presence-title">
           <div className="gala-shell gala-company-presence__grid">
-            <div>
-              <MapPin aria-hidden="true" />
-              <div className="gala-kicker">Triangle Presence</div>
-              <h2 id="company-presence-title">Based in Cary. Focused on the Research Triangle.</h2>
+            <div className="gala-company-presence__copy">
+              <div className="gala-kicker">Triangle Market Perspective</div>
+              <h2 id="company-presence-title">Grounded in one of North Carolina’s most dynamic markets.</h2>
+              <p>Based in Cary, Gala CRE works across Raleigh, Durham, and the communities connecting the Research Triangle. We bring local market context to site selection, investment, development, leasing, and disposition decisions—helping clients understand not only where an opportunity sits, but what surrounds it and what may shape its future.</p>
+              <p className="gala-company-presence__markets" aria-label="Markets served">
+                Cary <span aria-hidden="true">·</span> Raleigh <span aria-hidden="true">·</span> Durham <span aria-hidden="true">·</span> Morrisville <span aria-hidden="true">·</span> Apex <span aria-hidden="true">·</span> Research Triangle Park
+              </p>
             </div>
-            <p>Gala CRE serves commercial owners, investors, landlords, tenants, developers, and business operators across Raleigh-Durham and the Research Triangle. Every assignment begins with the property, the client’s objective, and the local context that connects them.</p>
           </div>
+          <figure className="gala-company-presence__media">
+            <img src={triangleMarketVisual} alt="Conceptual city skyline emerging from an architectural site plan" loading="lazy" decoding="async" />
+          </figure>
         </section>
 
         <section className="gala-cta-band gala-company-close"><div className="gala-shell"><div><div className="gala-kicker">Work With Gala</div><h2>Start with a straightforward conversation.</h2></div><div className="gala-cta-band__actions"><Link to="/contact?inquiry=general&source=company" className="gala-button">Let’s Connect <ArrowUpRight size={16} aria-hidden="true" /></Link><Link to="/careers?source=company" className="gala-text-link">Explore Careers <ArrowUpRight size={16} aria-hidden="true" /></Link></div></div></section>
