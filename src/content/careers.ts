@@ -1,82 +1,33 @@
-export const commercialSpecialties = [
-  "Landlord representation",
-  "Tenant representation",
-  "Industrial",
-  "Multifamily",
-  "Retail",
-  "Office",
-  "Land",
-  "Development",
-  "Capital markets",
+export const careerStages = [
+  "New to commercial listings",
+  "Building an active listing practice",
+  "Established commercial listing agent",
+  "Broker or team lead",
 ] as const;
 
-export const experienceRanges = [
-  "Less than 2 years",
-  "2–5 years",
-  "6–10 years",
-  "11–20 years",
-  "More than 20 years",
-] as const;
-
-export const transactionVolumeRanges = [
-  "Prefer not to disclose",
-  "Under $2 million",
-  "$2–5 million",
-  "$5–15 million",
-  "$15–30 million",
-  "More than $30 million",
-] as const;
-
-export const careerOpportunities = [
+export const listingAgentBenefits = [
   {
-    title: "Development opportunities",
-    body: "Participate in conversations around commercial development listings and the owners, investors, and users evaluating them.",
+    title: "Direct leadership",
+    body: "Work directly with brokerage leadership on the opportunities, questions, and decisions that can shape an assignment.",
   },
   {
-    title: "Commercial assignments",
-    body: "Build experience across sales and leasing opportunities where preparation, follow-through, and commercial judgment matter.",
+    title: "Listing strategy",
+    body: "Frame each property around the ownership objective, market conditions, intended audience, and a clear path to market.",
   },
   {
-    title: "A connected team",
-    body: "Work alongside a platform designed to connect brokerage, investment sales, development strategy, and capital conversations.",
-  },
-] as const;
-
-export const platformAdvantages = [
-  "Commercial development and land opportunities",
-  "Owner, investor, landlord, and tenant relationships",
-  "Sales and leasing assignments across core asset classes",
-  "Connected development and capital-market perspective",
-] as const;
-
-export const teamSupport = [
-  {
-    number: "01",
-    title: "Opportunity strategy",
-    body: "Clear positioning around the assignment, the client objective, and the commercial decisions needed to move forward.",
+    title: "Marketing and media",
+    body: "Bring listings to market with coordinated property information, visual assets, and presentation materials.",
   },
   {
-    number: "02",
-    title: "Sales coordination",
-    body: "A team environment for organizing outreach, follow-up, property information, and the transaction path.",
+    title: "Buyer and tenant outreach",
+    body: "Organize targeted outreach, inquiry follow-up, property access, and conversations with qualified prospects.",
   },
   {
-    number: "03",
-    title: "Broader perspective",
-    body: "Access to conversations that connect brokerage with development feasibility, diligence, and capital requirements.",
+    title: "Transaction support",
+    body: "Maintain momentum through negotiations, diligence, coordination, and the details required to reach closing.",
   },
-] as const;
-
-export const candidateProfile = [
-  "Commercial judgment and a client-first mindset",
-  "Clear, responsive communication",
-  "Consistent follow-through and attention to detail",
-  "Working knowledge of a market or commercial asset class",
-  "A desire to build durable relationships and repeat business",
-] as const;
-
-export const recruitingProcess = [
-  { number: "01", title: "Share your background", body: "Tell us about your license, markets, specialties, and representative commercial work." },
-  { number: "02", title: "Discuss the fit", body: "Explore your goals, working style, current business, and where the Gala platform may be relevant." },
-  { number: "03", title: "Define what comes next", body: "If there is alignment, clarify expectations, affiliation requirements, and the next conversation." },
+  {
+    title: "Development perspective",
+    body: "Draw on a broader understanding of site potential, physical constraints, capital considerations, and execution risk.",
+  },
 ] as const;

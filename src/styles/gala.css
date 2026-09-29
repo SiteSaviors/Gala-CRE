@@ -696,6 +696,40 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-journey-hero::after{content:'';position:absolute;right:-8vw;bottom:-24vw;width:48vw;height:48vw;border:1px solid rgba(207,170,70,.16);border-radius:50%;box-shadow:0 0 0 7vw rgba(207,170,70,.025),0 0 0 14vw rgba(207,170,70,.018)}
 .gala-journey-hero .gala-shell{z-index:1}
 .gala-journey-hero h1{max-width:12ch;font-size:clamp(52px,6.6vw,94px)}
+.gala-careers-hero{isolation:isolate;min-height:700px;align-items:center;padding:150px 0 76px;background:#0a0908}
+.gala-careers-hero::after{z-index:-1;inset:0;width:auto;height:auto;border:0;border-radius:0;box-shadow:none;background:linear-gradient(90deg,rgba(5,5,5,.86) 0%,rgba(5,5,5,.7) 27%,rgba(5,5,5,.22) 52%,rgba(5,5,5,.04) 78%),linear-gradient(0deg,rgba(5,5,5,.38),transparent 48%)}
+.gala-careers-hero__image{position:absolute;z-index:-2;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center center}
+.gala-careers-hero .gala-shell{width:min(100% - 96px,1380px)}
+.gala-careers-hero .gala-kicker{color:rgba(255,255,255,.74)}
+.gala-careers-hero h1{max-width:8ch}
+.gala-careers-hero p{max-width:35rem;color:rgba(255,255,255,.76)}
+.gala-careers-opportunity{padding:110px 0;background:#f4f1e9;color:#171717}
+.gala-careers-opportunity__grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(420px,.96fr);align-items:center;gap:clamp(58px,7vw,110px)}
+.gala-careers-opportunity__media{min-height:560px;margin:0;overflow:hidden;border-radius:0 120px 0 0;background:#d3d0c7}
+.gala-careers-opportunity__media img{width:100%;height:100%;min-height:560px;display:block;object-fit:cover;object-position:center}
+.gala-careers-opportunity__copy h2{max-width:11ch;margin-top:22px;font:600 clamp(46px,5vw,72px)/.98 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-careers-opportunity__copy .gala-lead{max-width:39rem;margin-top:30px}
+.gala-careers-opportunity__copy>p:last-child{max-width:39rem;margin:22px 0 0;color:#65625b;font-size:14px;line-height:1.78}
+.gala-careers-benefits{padding:108px 0 116px;background:#ece9e1;color:#171717}
+.gala-careers-benefits__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.7fr);align-items:end;gap:60px;margin-bottom:54px}
+.gala-careers-benefits__intro h2{max-width:12ch;margin-top:20px;font:600 clamp(45px,5.2vw,74px)/.98 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-careers-benefits__intro>p{max-width:34rem;margin:0 0 5px;justify-self:end;color:#625f58;font-size:14px;line-height:1.75}
+.gala-careers-benefits__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(23,23,23,.4);border-left:1px solid rgba(23,23,23,.4)}
+.gala-careers-benefit{position:relative;min-height:315px;overflow:hidden;padding:34px;border:0;border-right:1px solid rgba(23,23,23,.4);border-bottom:1px solid rgba(23,23,23,.4);border-radius:0;background:transparent;color:#171717;text-align:left;cursor:pointer;transition:background .28s ease,color .28s ease}
+.gala-careers-benefit:hover{background:rgba(255,255,255,.42)}
+.gala-careers-benefit:focus-visible{z-index:2;outline:3px solid var(--gala-gold);outline-offset:-4px}
+.gala-careers-benefit.is-active{background:#111;color:#fff}
+.gala-careers-benefit__control{position:absolute;z-index:3;top:22px;right:22px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid currentColor;border-radius:50%;opacity:.72}
+.gala-careers-benefit__front,.gala-careers-benefit__detail{position:absolute;inset:34px;display:flex;transition:opacity .25s ease,transform .3s ease}
+.gala-careers-benefit__front{align-items:center;justify-content:center;gap:27px;flex-direction:column;text-align:center}
+.gala-careers-benefit__front svg{color:#9f761c}
+.gala-careers-benefit__front strong{max-width:12ch;font:500 clamp(26px,2.35vw,36px)/1.05 'Poppins',sans-serif;letter-spacing:-.04em;text-transform:none}
+.gala-careers-benefit__detail{align-items:flex-start;justify-content:center;flex-direction:column;gap:20px;padding-right:18px;opacity:0;transform:translateY(12px);pointer-events:none}
+.gala-careers-benefit__detail strong{max-width:13ch;color:var(--gala-gold);font:600 clamp(25px,2.1vw,32px)/1.08 'Poppins',sans-serif;letter-spacing:-.035em}
+.gala-careers-benefit__detail span{max-width:32rem;color:rgba(255,255,255,.68);font-size:13.5px;line-height:1.72}
+.gala-careers-benefit.is-active .gala-careers-benefit__front{opacity:0;transform:translateY(-12px);pointer-events:none}
+.gala-careers-benefit.is-active .gala-careers-benefit__detail{opacity:1;transform:none}
+.gala-career-application--condensed{padding-top:104px}
 .gala-journey-next-step{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:64px}
 .gala-journey-next-step h2{max-width:13ch}
 .gala-journey-next-step p{max-width:48rem;margin:24px 0 0;color:#585854;font-size:16px;line-height:1.75}
@@ -1280,6 +1314,11 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-service-card:last-child{grid-column:1/-1}
   .gala-service-card:last-child .gala-service-card__media{aspect-ratio:16/6}
   .gala-career-platform__grid{gap:56px}
+  .gala-careers-opportunity__grid{grid-template-columns:1fr;gap:52px}
+  .gala-careers-opportunity__media{min-height:0;aspect-ratio:16/9}
+  .gala-careers-opportunity__media img{min-height:0;height:100%}
+  .gala-careers-opportunity__copy{max-width:760px}
+  .gala-careers-benefits__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .gala-career-application__grid{grid-template-columns:1fr;gap:52px}
   .gala-career-application__intro{position:static;max-width:760px}
   .gala-exchange-hero__grid,.gala-exchange-role__grid,.gala-exchange-readiness__grid{grid-template-columns:1fr;gap:52px}
@@ -1366,6 +1405,28 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-cta-band__actions{width:100%;gap:18px}
   .gala-cta-band__actions .gala-button{width:100%}
   .gala-journey-hero h1{font-size:clamp(40px,11vw,60px)}
+  .gala-careers-hero{min-height:680px;align-items:flex-end;padding:132px 0 58px}
+  .gala-careers-hero::after{background:linear-gradient(0deg,rgba(5,5,5,.96) 0%,rgba(5,5,5,.84) 39%,rgba(5,5,5,.3) 68%,rgba(5,5,5,.08) 100%),linear-gradient(90deg,rgba(5,5,5,.28),rgba(5,5,5,.02))}
+  .gala-careers-hero__image{object-position:67% center}
+  .gala-careers-hero .gala-shell{width:min(100% - 40px,1380px)}
+  .gala-careers-hero h1{max-width:100%}
+  .gala-careers-hero p{margin-top:20px;font-size:15px}
+  .gala-careers-opportunity{padding:72px 0}
+  .gala-careers-opportunity__grid{gap:38px}
+  .gala-careers-opportunity__media{aspect-ratio:4/3;border-radius:0 70px 0 0}
+  .gala-careers-opportunity__copy h2{font-size:clamp(38px,11vw,52px)}
+  .gala-careers-opportunity__copy .gala-lead{margin-top:24px;font-size:18px}
+  .gala-careers-benefits{padding:72px 0 78px}
+  .gala-careers-benefits__intro{grid-template-columns:1fr;gap:22px;margin-bottom:36px}
+  .gala-careers-benefits__intro h2{font-size:clamp(38px,11vw,52px)}
+  .gala-careers-benefits__intro>p{justify-self:start}
+  .gala-careers-benefits__grid{grid-template-columns:1fr}
+  .gala-careers-benefit{min-height:220px;padding:26px}
+  .gala-careers-benefit__front,.gala-careers-benefit__detail{inset:28px}
+  .gala-careers-benefit__front{gap:18px}
+  .gala-careers-benefit__front strong{font-size:28px}
+  .gala-careers-benefit__detail{gap:14px;padding-right:10px}
+  .gala-career-application--condensed{padding-top:72px}
   .gala-journey-next-step,.gala-resource-callout,.gala-listing-sourcing>.gala-shell,.gala-investor-pathway>.gala-shell{grid-template-columns:1fr;gap:28px}
   .gala-journey-next-step{align-items:start}
   .gala-journey-next-step .gala-button,.gala-investor-pathway .gala-button{width:100%;white-space:normal}

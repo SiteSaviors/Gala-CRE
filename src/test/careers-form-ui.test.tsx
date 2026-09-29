@@ -12,12 +12,12 @@ describe("careers application form", () => {
     const fetchMock = vi.spyOn(globalThis, "fetch");
     render(<MemoryRouter initialEntries={["/careers?source=test"]}><AgentApplicationForm /></MemoryRouter>);
 
-    fireEvent.click(screen.getByRole("button", { name: "Submit Application" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start a Confidential Conversation" }));
 
     await waitFor(() => {
       expect(screen.getByText("Please enter your name.")).toBeInTheDocument();
-      expect(screen.getByText("Enter your license state.")).toBeInTheDocument();
-      expect(screen.getByText("Select at least one commercial specialty.")).toBeInTheDocument();
+      expect(screen.getByText("Tell us where you currently work.")).toBeInTheDocument();
+      expect(screen.getByText("Tell us which property types you focus on.")).toBeInTheDocument();
     });
     expect(fetchMock).not.toHaveBeenCalled();
   });
@@ -29,14 +29,11 @@ describe("careers application form", () => {
     fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Jordan Broker" } });
     fireEvent.change(screen.getByLabelText("Email"), { target: { value: "jordan@example.com" } });
     fireEvent.change(screen.getByLabelText("Phone"), { target: { value: "919-555-0100" } });
-    fireEvent.change(screen.getByLabelText("City and markets served"), { target: { value: "Raleigh-Durham" } });
-    fireEvent.change(screen.getByLabelText("License state"), { target: { value: "North Carolina" } });
-    fireEvent.click(screen.getByLabelText("Industrial"));
-    fireEvent.change(screen.getByLabelText("Sales and leasing experience"), { target: { value: "Commercial sales and leasing across the Triangle market." } });
-    fireEvent.change(screen.getByLabelText("Representative past transactions"), { target: { value: "An industrial owner-user sale and commercial land disposition." } });
-    fireEvent.change(screen.getByLabelText("Why Gala CRE?"), { target: { value: "I want to build lasting commercial relationships within a connected platform." } });
+    fireEvent.change(screen.getByLabelText("Markets served"), { target: { value: "Raleigh-Durham" } });
+    fireEvent.change(screen.getByLabelText("Commercial specialties"), { target: { value: "Industrial and commercial land" } });
+    fireEvent.change(screen.getByLabelText("Listing experience and goals"), { target: { value: "Commercial sales and leasing across the Triangle market, with a focus on growing an active listing practice." } });
     fireEvent.click(screen.getByLabelText(/I consent to Gala CRE Group using this information/i));
-    fireEvent.click(screen.getByRole("button", { name: "Submit Application" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start a Confidential Conversation" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent("Your information has not been submitted");
     expect(screen.getByDisplayValue("Jordan Broker")).toBeInTheDocument();

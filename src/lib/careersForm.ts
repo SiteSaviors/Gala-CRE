@@ -1,4 +1,4 @@
-import type { experienceRanges, transactionVolumeRanges } from "@/content/careers";
+import type { careerStages } from "@/content/careers";
 import {
   buildStructuredFormSubmission,
   submitStructuredForm,
@@ -10,15 +10,10 @@ export type AgentApplicationValues = {
   phone: string;
   currentBrokerage: string;
   cityAndMarkets: string;
-  licenseState: string;
-  yearsExperience: (typeof experienceRanges)[number];
-  specialties: string[];
-  salesLeasingExperience: string;
-  transactionVolume: (typeof transactionVolumeRanges)[number];
-  representativeTransactions: string;
-  existingPipeline: string;
+  careerStage: (typeof careerStages)[number];
+  specialties: string;
+  experienceAndGoals: string;
   profileUrl: string;
-  whyGala: string;
   consent: boolean;
   website: string;
 };
@@ -29,7 +24,7 @@ export const buildAgentApplicationPayload = (
   startedAt = new Date().toISOString(),
 ) => buildStructuredFormSubmission(
   "careers",
-  "Commercial Agent Application",
+  "Commercial Listing Agent Inquiry",
   values,
   sourcePage,
   startedAt,

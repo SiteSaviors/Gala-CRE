@@ -298,24 +298,23 @@ describe("Gala CRE public pages", () => {
 
   it("creates a discoverable commercial-agent careers route", () => {
     renderPage(<Careers />, "/careers");
-    expect(screen.getByRole("heading", { name: /Build your commercial real estate career with intention/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Development opportunities" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Commercial assignments" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A connected team" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "More than a list of properties." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Support built around moving the assignment forward/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Commercial professionals who care how the work gets done/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Tell us about your commercial experience/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Join Our Team", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Build a stronger commercial listing practice." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "More behind every listing." })).toBeInTheDocument();
+    const directLeadership = screen.getByRole("button", { name: "Direct leadership" });
+    expect(directLeadership).toHaveAttribute("aria-expanded", "false");
+    fireEvent.click(directLeadership);
+    expect(directLeadership).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("heading", { name: "Start a confidential conversation." })).toBeInTheDocument();
     expect(screen.getAllByText("Join Our Team")).toHaveLength(2);
-    expect(screen.getByRole("heading", { name: /Introduce your experience and the business you want to build/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell us what you want to build." })).toBeInTheDocument();
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
     expect(screen.queryByLabelText("License number or status")).not.toBeInTheDocument();
-    expect(
-      screen.getByRole("group", { name: "Commercial specialties" }),
-    ).toBeInTheDocument();
-    expect(screen.getByLabelText("Why Gala CRE?")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Submit Application" })).toBeEnabled();
+    expect(screen.queryByLabelText("License state")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Commercial specialties")).toBeInTheDocument();
+    expect(screen.getByLabelText("Listing experience and goals")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Start a Confidential Conversation" })).toBeEnabled();
     expect(screen.getByText(/without regard to any status protected by applicable law/i)).toBeInTheDocument();
     expect(screen.getByText(/does not create an employment or agency relationship/i)).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers")).toBe(true);

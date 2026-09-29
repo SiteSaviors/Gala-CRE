@@ -11,15 +11,10 @@ const validApplication: AgentApplicationValues = {
   phone: "919-555-0100",
   currentBrokerage: "Triangle Commercial",
   cityAndMarkets: "Raleigh-Durham",
-  licenseState: "North Carolina",
-  yearsExperience: "6–10 years",
-  specialties: ["Industrial", "Land"],
-  salesLeasingExperience: "Commercial sales and leasing representation across the Triangle.",
-  transactionVolume: "$5–15 million",
-  representativeTransactions: "Industrial owner-user sale and a commercial land disposition.",
-  existingPipeline: "",
+  careerStage: "Established commercial listing agent",
+  specialties: "Industrial and land",
+  experienceAndGoals: "Commercial listing representation across the Triangle with a focus on owner relationships.",
   profileUrl: "https://example.com/jordan",
-  whyGala: "I want to work within a connected commercial platform and grow durable client relationships.",
   consent: true,
   website: "",
 };
@@ -34,12 +29,12 @@ describe("careers submission boundary", () => {
     const submission = buildAgentApplicationPayload(validApplication, "/careers?source=footer", startedAt);
     expect(submission).toMatchObject({
       formType: "careers",
-      inquiryType: "Commercial Agent Application",
+      inquiryType: "Commercial Listing Agent Inquiry",
       sourcePage: "/careers?source=footer",
       startedAt,
       payload: {
         name: "Jordan Broker",
-        specialties: ["Industrial", "Land"],
+        specialties: "Industrial and land",
       },
     });
   });
@@ -52,7 +47,7 @@ describe("careers submission boundary", () => {
     expect(fetchMock).toHaveBeenCalledWith("/api/forms", expect.objectContaining({
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: expect.stringContaining('"licenseState":"North Carolina"'),
+      body: expect.stringContaining('"careerStage":"Established commercial listing agent"'),
     }));
     expect(fetchMock.mock.calls[0][1]?.body).not.toContain("licenseNumber");
   });

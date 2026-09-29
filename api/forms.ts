@@ -18,9 +18,7 @@ type ApiResponse = {
 type RateBucket = { count: number; resetAt: number };
 const rateBuckets = new Map<string, RateBucket>();
 
-const experienceRanges = ["Less than 2 years", "2–5 years", "6–10 years", "11–20 years", "More than 20 years"] as const;
-const specialties = ["Landlord representation", "Tenant representation", "Industrial", "Multifamily", "Retail", "Office", "Land", "Development", "Capital markets"] as const;
-const volumeRanges = ["Prefer not to disclose", "Under $2 million", "$2–5 million", "$5–15 million", "$15–30 million", "More than $30 million"] as const;
+const careerStages = ["New to commercial listings", "Building an active listing practice", "Established commercial listing agent", "Broker or team lead"] as const;
 const exchangeStatuses = ["Yes — this is a 1031 exchange", "No — this is a direct acquisition", "Not sure yet"] as const;
 const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land", "Mixed use", "Special purpose"] as const;
 const financingStatuses = ["Cash acquisition", "Financing approved", "Lender engaged", "Financing not started", "Evaluating capital structure"] as const;
@@ -37,15 +35,10 @@ const careersPayloadSchema = z.object({
   phone: requiredString(7, 50),
   currentBrokerage: optionalString(160),
   cityAndMarkets: requiredString(2, 500),
-  licenseState: requiredString(2, 80),
-  yearsExperience: z.enum(experienceRanges),
-  specialties: z.array(z.enum(specialties)).min(1).max(specialties.length),
-  salesLeasingExperience: requiredString(20, 5000),
-  transactionVolume: z.enum(volumeRanges),
-  representativeTransactions: requiredString(20, 5000),
-  existingPipeline: optionalString(5000),
+  careerStage: z.enum(careerStages),
+  specialties: requiredString(2, 500),
+  experienceAndGoals: requiredString(30, 5000),
   profileUrl: z.union([z.literal(""), z.string().trim().url().max(500)]),
-  whyGala: requiredString(30, 5000),
   consent: z.literal(true),
   website: z.string().max(500),
 });
@@ -88,7 +81,7 @@ const investorPayloadSchema = z.object({
 const submissionSchema = z.discriminatedUnion("formType", [
   z.object({
     formType: z.literal("careers"),
-    inquiryType: z.literal("Commercial Agent Application"),
+    inquiryType: z.literal("Commercial Listing Agent Inquiry"),
     sourcePage: z.string().trim().min(1).max(500).startsWith("/"),
     startedAt: z.string().datetime(),
     payload: careersPayloadSchema,
@@ -288,7 +281,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     : null;
   const email = buildEmail(parsed.data, submittedAt, routing);
   const subject = parsed.data.formType === "careers"
-    ? `Gala CRE agent application: ${parsed.data.payload.name}`
+    ? `Gala CRE listing-agent inquiry: ${parsed.data.payload.name}`
     : `Gala CRE investor sourcing inquiry: ${parsed.data.payload.name}`;
 
   try {

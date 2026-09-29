@@ -5,7 +5,7 @@ const startedAt = () => new Date(Date.now() - 2_000).toISOString();
 
 const careersSubmission = () => ({
   formType: "careers",
-  inquiryType: "Commercial Agent Application",
+  inquiryType: "Commercial Listing Agent Inquiry",
   sourcePage: "/careers?source=footer",
   startedAt: startedAt(),
   payload: {
@@ -14,15 +14,10 @@ const careersSubmission = () => ({
     phone: "919-555-0100",
     currentBrokerage: "Triangle Commercial",
     cityAndMarkets: "Raleigh-Durham",
-    licenseState: "North Carolina",
-    yearsExperience: "6–10 years",
-    specialties: ["Industrial", "Land"],
-    salesLeasingExperience: "Commercial sales and leasing representation across the Triangle.",
-    transactionVolume: "$5–15 million",
-    representativeTransactions: "Industrial owner-user sale and a commercial land disposition.",
-    existingPipeline: "",
+    careerStage: "Established commercial listing agent",
+    specialties: "Industrial and land",
+    experienceAndGoals: "Commercial listing representation across the Triangle with a focus on owner relationships.",
     profileUrl: "https://example.com/jordan",
-    whyGala: "I want to work within a connected commercial platform and grow durable client relationships.",
     consent: true,
     website: "",
   },

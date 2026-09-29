@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
-  CheckboxGrid,
   ConsentControl,
   FormCardHeader,
   FormSubmissionControl,
@@ -20,11 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  commercialSpecialties,
-  experienceRanges,
-  transactionVolumeRanges,
-} from "@/content/careers";
+import { careerStages } from "@/content/careers";
 import {
   submitAgentApplication,
   type AgentApplicationValues,
@@ -32,7 +27,7 @@ import {
 
 const optionalUrl = z.string().trim().refine(
   (value) => !value || z.string().url().safeParse(value).success,
-  "Enter a complete URL beginning with https://."
+  "Enter a complete URL beginning with https://.",
 );
 
 const agentApplicationSchema = z.object({
@@ -41,16 +36,11 @@ const agentApplicationSchema = z.object({
   phone: z.string().trim().min(7, "Please enter a phone number."),
   currentBrokerage: z.string().trim(),
   cityAndMarkets: z.string().trim().min(2, "Tell us where you currently work."),
-  licenseState: z.string().trim().min(2, "Enter your license state."),
-  yearsExperience: z.enum(experienceRanges),
-  specialties: z.array(z.enum(commercialSpecialties)).min(1, "Select at least one commercial specialty."),
-  salesLeasingExperience: z.string().trim().min(20, "Briefly describe your sales and leasing experience."),
-  transactionVolume: z.enum(transactionVolumeRanges),
-  representativeTransactions: z.string().trim().min(20, "Share at least one representative commercial assignment."),
-  existingPipeline: z.string().trim(),
+  careerStage: z.enum(careerStages),
+  specialties: z.string().trim().min(2, "Tell us which property types you focus on."),
+  experienceAndGoals: z.string().trim().min(30, "Tell us a little about your listing experience and goals."),
   profileUrl: optionalUrl,
-  whyGala: z.string().trim().min(30, "Tell us a little more about your interest in Gala CRE."),
-  consent: z.boolean().refine((value) => value, "Consent is required before an application can be submitted."),
+  consent: z.boolean().refine((value) => value, "Consent is required before an inquiry can be submitted."),
   website: z.string(),
 });
 
@@ -67,15 +57,10 @@ const AgentApplicationForm = () => {
       phone: "",
       currentBrokerage: "",
       cityAndMarkets: "",
-      licenseState: "",
-      yearsExperience: experienceRanges[0],
-      specialties: [],
-      salesLeasingExperience: "",
-      transactionVolume: transactionVolumeRanges[0],
-      representativeTransactions: "",
-      existingPipeline: "",
+      careerStage: careerStages[0],
+      specialties: "",
+      experienceAndGoals: "",
       profileUrl: "",
-      whyGala: "",
       consent: false,
       website: "",
     },
@@ -88,21 +73,21 @@ const AgentApplicationForm = () => {
       setIsSubmitted(true);
       form.reset();
     } catch {
-      setSubmitError("We couldn’t send your application. Your information has not been submitted.");
+      setSubmitError("We couldn’t send your inquiry. Your information has not been submitted.");
     }
   };
 
   if (isSubmitted) {
     return (
       <div className="career-form-card career-form-success" role="status" aria-live="polite">
-        <div className="contact-success-eyebrow">Application received</div>
-        <h3>Thank you for introducing yourself.</h3>
-        <p>Gala CRE will review your commercial background and follow up if there is a potential fit.</p>
+        <div className="contact-success-eyebrow">Inquiry received</div>
+        <h3>Thank you for starting the conversation.</h3>
+        <p>Gala CRE will review your listing background and follow up directly if there is a potential fit.</p>
         <Button type="button" className="contact-success-reset" onClick={() => {
           startedAt.current = new Date().toISOString();
           setIsSubmitted(false);
         }}>
-          Submit another application
+          Send another inquiry
         </Button>
       </div>
     );
@@ -112,8 +97,8 @@ const AgentApplicationForm = () => {
     <div className="career-form-card">
       <FormCardHeader
         eyebrow="Join Our Team"
-        title="Tell us about your commercial experience."
-        description="All fields are required unless marked optional. The details help Gala understand your market, experience, and potential fit. No résumé upload is required."
+        title="Start a confidential conversation."
+        description="Share a little about your market, listing experience, and the commercial practice you want to build."
       />
 
       <Form {...form}>
@@ -152,28 +137,20 @@ const AgentApplicationForm = () => {
             )} />
           </div>
 
-          <FormField control={form.control} name="cityAndMarkets" render={({ field }) => (
-            <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">City and markets served</FormLabel>
-              <FormControl><Input {...field} className="contact-form-input" placeholder="Example: Raleigh-Durham, Cary, and surrounding markets" /></FormControl>
-              <FormMessage className="contact-form-message" />
-            </FormItem>
-          )} />
-
           <div className="career-form-row">
-            <FormField control={form.control} name="licenseState" render={({ field }) => (
+            <FormField control={form.control} name="cityAndMarkets" render={({ field }) => (
               <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">License state</FormLabel>
-                <FormControl><Input {...field} className="contact-form-input" autoComplete="off" /></FormControl>
+                <FormLabel className="contact-form-label">Markets served</FormLabel>
+                <FormControl><Input {...field} className="contact-form-input" placeholder="Example: Raleigh-Durham and the Research Triangle" /></FormControl>
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
-            <FormField control={form.control} name="yearsExperience" render={({ field }) => (
+            <FormField control={form.control} name="careerStage" render={({ field }) => (
               <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Years in real estate</FormLabel>
+                <FormLabel className="contact-form-label">Listing career stage</FormLabel>
                 <FormControl>
                   <select {...field} className="contact-form-input contact-form-select">
-                    {experienceRanges.map((range) => <option value={range} key={range}>{range}</option>)}
+                    {careerStages.map((stage) => <option value={stage} key={stage}>{stage}</option>)}
                   </select>
                 </FormControl>
                 <FormMessage className="contact-form-message" />
@@ -183,64 +160,24 @@ const AgentApplicationForm = () => {
 
           <FormField control={form.control} name="specialties" render={({ field }) => (
             <FormItem className="contact-form-item">
-              <CheckboxGrid
-                legend="Commercial specialties"
-                options={commercialSpecialties}
-                selected={field.value}
-                onChange={field.onChange}
-              />
+              <FormLabel className="contact-form-label">Commercial specialties</FormLabel>
+              <FormControl><Input {...field} className="contact-form-input" placeholder="Example: Land, retail, and development sites" /></FormControl>
               <FormMessage className="contact-form-message" />
             </FormItem>
           )} />
 
-          <FormField control={form.control} name="salesLeasingExperience" render={({ field }) => (
+          <FormField control={form.control} name="experienceAndGoals" render={({ field }) => (
             <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Sales and leasing experience</FormLabel>
-              <FormControl><Textarea {...field} rows={4} className="contact-form-input contact-form-textarea" /></FormControl>
-              <FormMessage className="contact-form-message" />
-            </FormItem>
-          )} />
-
-          <FormField control={form.control} name="transactionVolume" render={({ field }) => (
-            <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Approximate recent transaction volume</FormLabel>
-              <FormControl>
-                <select {...field} className="contact-form-input contact-form-select">
-                  {transactionVolumeRanges.map((range) => <option value={range} key={range}>{range}</option>)}
-                </select>
-              </FormControl>
-              <FormMessage className="contact-form-message" />
-            </FormItem>
-          )} />
-
-          <FormField control={form.control} name="representativeTransactions" render={({ field }) => (
-            <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Representative past transactions</FormLabel>
-              <FormControl><Textarea {...field} rows={4} className="contact-form-input contact-form-textarea" placeholder="Property type, market, transaction role, and approximate size or value" /></FormControl>
-              <FormMessage className="contact-form-message" />
-            </FormItem>
-          )} />
-
-          <FormField control={form.control} name="existingPipeline" render={({ field }) => (
-            <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Existing listings or business pipeline <span>Optional</span></FormLabel>
-              <FormControl><Textarea {...field} rows={3} className="contact-form-input contact-form-textarea" /></FormControl>
+              <FormLabel className="contact-form-label">Listing experience and goals</FormLabel>
+              <FormControl><Textarea {...field} rows={5} className="contact-form-input contact-form-textarea" placeholder="Tell us briefly about the listings you work on and the business you want to build." /></FormControl>
               <FormMessage className="contact-form-message" />
             </FormItem>
           )} />
 
           <FormField control={form.control} name="profileUrl" render={({ field }) => (
             <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">LinkedIn, biography, or résumé URL <span>Optional</span></FormLabel>
+              <FormLabel className="contact-form-label">LinkedIn or biography URL <span>Optional</span></FormLabel>
               <FormControl><Input {...field} type="url" className="contact-form-input" placeholder="https://" autoComplete="url" /></FormControl>
-              <FormMessage className="contact-form-message" />
-            </FormItem>
-          )} />
-
-          <FormField control={form.control} name="whyGala" render={({ field }) => (
-            <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Why Gala CRE?</FormLabel>
-              <FormControl><Textarea {...field} rows={5} className="contact-form-input contact-form-textarea" /></FormControl>
               <FormMessage className="contact-form-message" />
             </FormItem>
           )} />
@@ -262,7 +199,7 @@ const AgentApplicationForm = () => {
           )} />
 
           <FormSubmissionControl
-            label="Submit Application"
+            label="Start a Confidential Conversation"
             loadingLabel="Sending..."
             isSubmitting={form.formState.isSubmitting}
             error={submitError}
