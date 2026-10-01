@@ -13,6 +13,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [servicesMegaOpen, setServicesMegaOpen] = useState(false);
+  const [pastHeaderThreshold, setPastHeaderThreshold] = useState(false);
   const servicesTriggerRef = useRef<HTMLAnchorElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressNextFocusOpenRef = useRef(false);
@@ -30,11 +31,17 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(!startsTransparent || window.scrollY > 40);
+      const scrollableDistance = document.documentElement.scrollHeight - window.innerHeight;
+      setPastHeaderThreshold(scrollableDistance > 0 && window.scrollY >= scrollableDistance * 0.25);
     };
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [startsTransparent]);
 
   useEffect(() => {
@@ -79,9 +86,10 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
       : currentPath === path || currentPath.startsWith(`${path}/`)
   );
   const currentState = (path: string) => isCurrentSection(path) ? "page" as const : undefined;
+  const headerHidden = pastHeaderThreshold && !mobileNavOpen && !servicesMegaOpen;
 
   return (
-    <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}`}>
+    <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}${headerHidden ? " nav-hidden" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Link to="/" className="nlogo" aria-label="Gala CRE Group home">
         <BrandLogo variant="navigation" />

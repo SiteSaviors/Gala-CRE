@@ -139,6 +139,9 @@ test.describe("September client release acceptance", () => {
         await expect(profileTrigger).toBeFocused();
       }
 
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await expect(page.locator("nav:has(.nlogo)")).toBeVisible();
+
       if (viewport.name === "desktop") {
         const firstDesktopDestination = page.locator(".nlinks > li > a").first();
         await expect(firstDesktopDestination).toHaveText("Home");
@@ -225,5 +228,35 @@ test.describe("September client release acceptance", () => {
     await expect(page.getByText(/relationship to 10414 remains unconfirmed/i)).toBeVisible();
     expect(pageErrors).toEqual([]);
     expect(consoleErrors).toEqual([]);
+  });
+
+  test("site header fades after one-quarter page progress on desktop and mobile", async ({ page }) => {
+    for (const viewport of [
+      { name: "desktop", width: 1440, height: 900 },
+      { name: "mobile", width: 390, height: 844 },
+    ]) {
+      await page.setViewportSize({ width: viewport.width, height: viewport.height });
+      await page.goto("/", { waitUntil: "domcontentloaded" });
+      const navigation = page.locator("nav:has(.nlogo)");
+      await expect(navigation, `${viewport.name}: visible at page start`).toBeVisible();
+
+      await page.evaluate(() => {
+        const distance = document.documentElement.scrollHeight - window.innerHeight;
+        window.scrollTo(0, distance * 0.1);
+      });
+      await expect(navigation, `${viewport.name}: scrolled treatment`).toHaveClass(/scrolled/);
+      await expect(navigation, `${viewport.name}: remains visible before threshold`).not.toHaveClass(/nav-hidden/);
+
+      await page.evaluate(() => {
+        const distance = document.documentElement.scrollHeight - window.innerHeight;
+        window.scrollTo(0, distance * 0.28);
+      });
+      await expect(navigation, `${viewport.name}: hidden after threshold`).toHaveClass(/nav-hidden/);
+      await expect(navigation).toBeHidden();
+
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await expect(navigation, `${viewport.name}: returns near page start`).not.toHaveClass(/nav-hidden/);
+      await expect(navigation).toBeVisible();
+    }
   });
 });

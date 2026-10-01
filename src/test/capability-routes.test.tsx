@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import CapabilityDetail from "@/pages/CapabilityDetail";
@@ -238,6 +238,42 @@ describe("advertised capability route matrix", () => {
       "/contact?inquiry=general&source=services",
     );
     serviceIndex.unmount();
+  });
+
+  it("fades the site header after one quarter of the page scroll", () => {
+    const originalScrollY = Object.getOwnPropertyDescriptor(window, "scrollY");
+    const originalInnerHeight = Object.getOwnPropertyDescriptor(window, "innerHeight");
+    const originalScrollHeight = Object.getOwnPropertyDescriptor(document.documentElement, "scrollHeight");
+    let scrollY = 0;
+
+    Object.defineProperty(window, "scrollY", { configurable: true, get: () => scrollY });
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 1_000 });
+    Object.defineProperty(document.documentElement, "scrollHeight", { configurable: true, value: 5_000 });
+
+    try {
+      const header = render(
+        <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
+      );
+      const navigation = header.container.querySelector("nav");
+
+      scrollY = 60;
+      fireEvent.scroll(window);
+      expect(navigation).toHaveClass("scrolled");
+      expect(navigation).not.toHaveClass("nav-hidden");
+
+      scrollY = 1_000;
+      fireEvent.scroll(window);
+      expect(navigation).toHaveClass("nav-hidden");
+
+      scrollY = 200;
+      fireEvent.scroll(window);
+      expect(navigation).not.toHaveClass("nav-hidden");
+      header.unmount();
+    } finally {
+      if (originalScrollY) Object.defineProperty(window, "scrollY", originalScrollY);
+      if (originalInnerHeight) Object.defineProperty(window, "innerHeight", originalInnerHeight);
+      if (originalScrollHeight) Object.defineProperty(document.documentElement, "scrollHeight", originalScrollHeight);
+    }
   });
 
   it("keeps service-level inquiries and related capability links contextual and valid", () => {

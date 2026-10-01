@@ -754,3 +754,17 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit, push, and production deployment.
 - Blockers: no blocker to the static release. Private production form delivery configuration remains unavailable, so submission delivery is not tested and the forms continue to fail safely rather than expose data.
 - Exact next action: commit the verified release on `main`, push to GitHub, deploy the linked Vercel project, and smoke-test the affected production routes without submitting a form.
+
+### 2026-10-01 — Scroll-aware navigation release
+
+- Starting branch / HEAD: `main` at `746fe6f`, synchronized with `origin/main` and deployed to the linked Vercel production project.
+- Source of truth checked: the user's explicit navigation behavior request; the shared `SiteHeader`; global navigation styles; the existing desktop/mobile navigation and route acceptance coverage; and the live local homepage at desktop and mobile widths.
+- Phase / checkpoint: preserve the header's existing transparent-to-scrolled fade treatment, then remove its screen footprint after approximately one quarter of page progress.
+- Gate: the header remains visible at the top and during early scrolling; fades out once the visitor passes 25% of the scrollable page; returns above that threshold; never disappears while the desktop Services menu or mobile navigation is open; and behaves consistently on desktop and mobile.
+- Implementation: added page-progress tracking to the shared header; recalculates on scroll and resize; added a smooth opacity and upward-transform exit; preserves the existing scrolled background; and keeps open navigation menus visible until dismissed.
+- Files / routes changed: `src/components/site/SiteHeader.tsx`, `src/styles/gala.css`, `src/test/capability-routes.test.tsx`, `e2e/september-client-release.spec.ts`, and this ledger; shared across all public routes.
+- Verification: full Vitest passed 117/117 across 18 files, including visible, scrolled, hidden, and restored header states; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; the production build passed with the existing browserslist-age and bundle-size notices; full Playwright passed 14/14, including the 31-route desktop/tablet/mobile matrix and the dedicated 1440×900 and 390×844 navigation behavior check. No form was submitted.
+- Intended commit: `refactor: hide navigation after page scroll` after final regression checks.
+- Remaining working tree: expected clean after commit, push, and production redeployment.
+- Blockers: none for this navigation change. The previously recorded private form-delivery configuration remains unrelated.
+- Exact next action: run the complete unit, lint, build, and browser regression suites; commit on `main`; push to GitHub; deploy the linked Vercel project; and smoke-test the production navigation at desktop and mobile widths.

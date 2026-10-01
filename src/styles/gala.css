@@ -22,8 +22,9 @@ main[tabindex="-1"]:focus{outline:none}
 #cdot{z-index:10000;width:3px;height:3px;background:#fff;box-shadow:0 0 0 1px rgba(12,16,24,.46),0 2px 6px rgba(12,16,24,.24)}
 
 /* Navigation */
-nav{position:fixed;z-index:500;top:0;right:0;left:0;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid transparent;background:transparent;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease}
+nav{position:fixed;z-index:500;top:0;right:0;left:0;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid transparent;background:transparent;opacity:1;transform:translateY(0);visibility:visible;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease,opacity .28s ease,transform .36s cubic-bezier(.4,0,.2,1),visibility 0s}
 nav.scrolled{border-bottom-color:rgba(255,255,255,.08);background:rgba(0,0,0,.92);backdrop-filter:blur(22px)}
+nav.nav-hidden{opacity:0;transform:translateY(-100%);visibility:hidden;pointer-events:none;transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease,opacity .24s ease,transform .34s cubic-bezier(.4,0,.2,1),visibility 0s .34s}
 .nlogo{display:flex;align-items:center;width:190px;height:78px;text-decoration:none}
 .brand-logo{display:flex;width:100%;flex-direction:column;color:#fff;line-height:1}
 .brand-logo__mark{display:block;width:100%;aspect-ratio:900/318;overflow:hidden}
