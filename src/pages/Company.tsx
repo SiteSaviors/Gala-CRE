@@ -1,8 +1,12 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import companyHero from "@/assets/company-hero.avif";
-import companyAboutPrimary from "@/assets/site-strategy-field-context.webp";
+import companyAboutPrimary from "@/assets/company-about-rtp-skyline.webp";
 import companyAboutInset from "@/assets/office-investment-sales.webp";
+import evaluateImage from "@/assets/company-approach-evaluate.webp";
+import executeImage from "@/assets/company-approach-execute.avif";
+import positionImage from "@/assets/company-approach-position-real.webp";
+import structureImage from "@/assets/company-approach-structure.jpg";
 import triangleMarketVisual from "@/assets/triangle-market-raleigh.webp";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -14,22 +18,26 @@ const operatingModel = [
   {
     step: "01",
     title: "Evaluate",
-    body: "Understand the objective, property, market, timing, and material risks.",
+    body: "Clarify the client’s objective and assess the property against market demand, site constraints, timing, and material risks.",
+    image: evaluateImage,
   },
   {
     step: "02",
     title: "Position",
-    body: "Define the opportunity, intended audience, and strongest path to market.",
+    body: "Define the value proposition, pricing strategy, target audience, and strongest path to market.",
+    image: positionImage,
   },
   {
     step: "03",
     title: "Structure",
-    body: "Align the transaction with the development, capital, and specialist expertise it requires.",
+    body: "Align the transaction with the development feasibility, diligence, capital, and specialist expertise required to move forward.",
+    image: structureImage,
   },
   {
     step: "04",
     title: "Execute",
-    body: "Lead negotiations, diligence, coordination, and the path to closing.",
+    body: "Lead marketing, outreach, negotiations, diligence, and closing with clear accountability throughout.",
+    image: executeImage,
   },
 ] as const;
 
@@ -96,12 +104,19 @@ const Company = () => {
             <div className="gala-company-model__intro">
               <div>
                 <div className="gala-kicker">The Gala Approach</div>
-                <h2 id="company-model-title">From first evaluation to final execution.</h2>
+                <h2 id="company-model-title">
+                  <span>A developer-informed path</span>
+                  <span>from opportunity to closing.</span>
+                </h2>
               </div>
             </div>
             <ol className="gala-company-model__steps">
-              {operatingModel.map(({ step, title, body }) => (
-                <li key={title}>
+              {operatingModel.map(({ step, title, body, image }) => (
+                <li
+                  className={image ? "gala-company-model__step--image" : undefined}
+                  key={title}
+                  style={image ? { backgroundImage: `url(${image})` } : undefined}
+                >
                   <span>{step}</span>
                   <h3>{title}</h3>
                   <p>{body}</p>

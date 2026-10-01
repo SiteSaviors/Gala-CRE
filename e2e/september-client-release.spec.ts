@@ -26,7 +26,7 @@ const teamExpectations = [
   },
   {
     id: "goverdhan-vavilala",
-    name: "Dr. Goverdhan Reddy Vavilala",
+    name: "Goverdhan Vavilala",
     email: "goverdhan@galacregroup.com",
     phone: "(919) 462-1494",
     telephoneHref: "tel:+19194621494",
@@ -70,7 +70,7 @@ test.describe("September client release acceptance", () => {
       await expect(page.getByRole("heading", { name: "Brokerage grounded in how real estate gets built.", level: 2 })).toBeVisible();
       await expect(page.locator(".gala-company-about__primary")).toBeVisible();
       await expect(page.locator(".gala-company-about__inset")).toBeVisible();
-      await expect(page.getByRole("heading", { name: "From first evaluation to final execution.", level: 2 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "A developer-informed path from opportunity to closing.", level: 2 })).toBeVisible();
       const companyHeroImage = page.locator(".gala-company-hero__image");
       await expect(companyHeroImage).toHaveCount(1);
       const heroImageDimensions = await companyHeroImage.evaluate((image) => ({
@@ -219,9 +219,9 @@ test.describe("September client release acceptance", () => {
     await page.goto("/properties/10416-chapel-hill-road", { waitUntil: "domcontentloaded" });
     const transactionTeam = page.locator(".gala-listing-compact__advisor-list");
     await expect(transactionTeam).toContainText("Gaurang Gala");
-    await expect(transactionTeam).toContainText("Dr. Goverdhan Reddy Vavilala");
+    await expect(transactionTeam).toContainText("Goverdhan Vavilala");
     await expect(transactionTeam).not.toContainText(/buyer representative|seller representative|transaction volume|sale price/i);
-    await expect(page.getByText("Gaurang Gala and Dr. Goverdhan Reddy Vavilala")).toBeVisible();
+    await expect(page.getByText("Gaurang Gala and Goverdhan Vavilala")).toBeVisible();
     await expect(page.getByText(/relationship to 10414 remains unconfirmed/i)).toBeVisible();
     expect(pageErrors).toEqual([]);
     expect(consoleErrors).toEqual([]);

@@ -103,7 +103,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             Services <ChevronDown size={13} aria-hidden="true" />
           </Link>
         </li>
-        <li><Link to="/properties" aria-current={currentState("/properties")}>Properties</Link></li>
+        <li><Link to="/properties" aria-current={currentState("/properties")}>Listings</Link></li>
         <li><Link to="/company" aria-current={currentState("/company")}>Company</Link></li>
         <li><Link to="/careers" aria-current={currentState("/careers")}>Careers</Link></li>
         <li><Link to="/contact" aria-current={currentState("/contact")}>Contact</Link></li>
@@ -147,7 +147,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             </Link>
           ))}
         </div>
-        <Link to="/properties" aria-current={currentState("/properties")} onClick={() => setMobileNavOpen(false)}>Properties</Link>
+        <Link to="/properties" aria-current={currentState("/properties")} onClick={() => setMobileNavOpen(false)}>Listings</Link>
         <Link to="/company" aria-current={currentState("/company")} onClick={() => setMobileNavOpen(false)}>Company</Link>
         <Link to="/careers" aria-current={currentState("/careers")} onClick={() => setMobileNavOpen(false)}>Careers</Link>
         <Link to="/contact" aria-current={currentState("/contact")} onClick={() => setMobileNavOpen(false)}>Contact</Link>

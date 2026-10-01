@@ -12,7 +12,7 @@ describe("careers application form", () => {
     const fetchMock = vi.spyOn(globalThis, "fetch");
     render(<MemoryRouter initialEntries={["/careers?source=test"]}><AgentApplicationForm /></MemoryRouter>);
 
-    fireEvent.click(screen.getByRole("button", { name: "Start a Confidential Conversation" }));
+    fireEvent.click(screen.getByRole("button", { name: "Submit Agent Inquiry" }));
 
     await waitFor(() => {
       expect(screen.getByText("Please enter your name.")).toBeInTheDocument();
@@ -31,9 +31,9 @@ describe("careers application form", () => {
     fireEvent.change(screen.getByLabelText("Phone"), { target: { value: "919-555-0100" } });
     fireEvent.change(screen.getByLabelText("Markets served"), { target: { value: "Raleigh-Durham" } });
     fireEvent.change(screen.getByLabelText("Commercial specialties"), { target: { value: "Industrial and commercial land" } });
-    fireEvent.change(screen.getByLabelText("Listing experience and goals"), { target: { value: "Commercial sales and leasing across the Triangle market, with a focus on growing an active listing practice." } });
+    fireEvent.change(screen.getByLabelText("Experience"), { target: { value: "Commercial sales and leasing across the Triangle market, with a focus on serving property owners." } });
     fireEvent.click(screen.getByLabelText(/I consent to Gala CRE Group using this information/i));
-    fireEvent.click(screen.getByRole("button", { name: "Start a Confidential Conversation" }));
+    fireEvent.click(screen.getByRole("button", { name: "Submit Agent Inquiry" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent("Your information has not been submitted");
     expect(screen.getByDisplayValue("Jordan Broker")).toBeInTheDocument();

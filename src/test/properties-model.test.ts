@@ -78,7 +78,7 @@ describe("property content model", () => {
       status: "Active",
     });
     expect(propertyBySlug["1111-brown-street"]).toMatchObject({
-      priceDisplay: "Contact for pricing",
+      priceDisplay: "$990,000",
       acreageDisplay: "Approx. 6.6 acres",
       assetType: "Land",
       status: "Active",

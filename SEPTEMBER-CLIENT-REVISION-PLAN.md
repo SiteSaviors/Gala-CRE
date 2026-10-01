@@ -14,7 +14,7 @@ This file is the active source of truth for the scope, phase order, completion s
 
 ## Locked client decisions
 
-- Use the supplied real portraits for Gaurang Gala, Leigh Roach, and Dr. Goverdhan Reddy Vavilala.
+- Use the supplied real portraits for Gaurang Gala, Leigh Roach, and Goverdhan Vavilala.
 - Team actions say **Contact Agent** and **View Listings & Transactions**.
 - Agent portfolios include active, under-contract, and closed associated work.
 - The 10416 Chapel Hill Road closing credits both Gaurang and Goverdhan; individual transaction roles remain unpublished until supplied.

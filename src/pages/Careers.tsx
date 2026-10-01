@@ -6,10 +6,24 @@ import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { listingAgentBenefits } from "@/content/careers";
 import useSiteCursor from "@/hooks/useSiteCursor";
+import benefitLeadershipImage from "@/assets/equity-alignment-context.webp";
+import benefitStrategyImage from "@/assets/careers-benefit-listing-strategy-real.webp";
+import benefitMarketingImage from "@/assets/gala-sales-capability.webp";
+import benefitOutreachImage from "@/assets/landlord-leasing-context.webp";
+import benefitCoordinationImage from "@/assets/company-approach-structure.jpg";
+import benefitDevelopmentImage from "@/assets/development-infrastructure.webp";
 import careersHeroImage from "@/assets/careers-hero.avif";
-import listingOpportunityImage from "@/assets/site-strategy-field-context.webp";
+import careersHeroBackground from "@/assets/careers-hero-background.jpeg";
 
 const benefitIcons = [Users, Target, Megaphone, Search, ClipboardCheck, Building2] as const;
+const benefitImages = [
+  benefitLeadershipImage,
+  benefitStrategyImage,
+  benefitMarketingImage,
+  benefitOutreachImage,
+  benefitCoordinationImage,
+  benefitDevelopmentImage,
+] as const;
 
 const Careers = () => {
   useSiteCursor();
@@ -28,10 +42,9 @@ const Careers = () => {
         <section className="gala-inner-hero gala-journey-hero gala-careers-hero" aria-labelledby="careers-hero-title">
           <img
             className="gala-careers-hero__image"
-            src={careersHeroImage}
+            src={careersHeroBackground}
             alt=""
             aria-hidden="true"
-            loading="eager"
             decoding="async"
           />
           <div className="gala-shell">
@@ -43,15 +56,15 @@ const Careers = () => {
 
         <section className="gala-careers-opportunity" aria-labelledby="listing-agent-opportunity-title">
           <div className="gala-shell gala-careers-opportunity__grid">
-            <figure className="gala-careers-opportunity__media">
-              <img src={listingOpportunityImage} alt="Commercial real estate professionals evaluating a development site" loading="lazy" decoding="async" />
-            </figure>
             <div className="gala-careers-opportunity__copy">
-              <div className="gala-kicker gala-kicker--dark">The Opportunity for Listing Agents</div>
-              <h2 id="listing-agent-opportunity-title">Build a stronger commercial listing practice.</h2>
-              <p className="gala-lead">Gala CRE is looking for listing agents who want to originate meaningful assignments, advise property owners with confidence, and grow durable client relationships.</p>
-              <p>Bring your market knowledge and relationships. Gala brings direct leadership, coordinated resources, and a broader view of the development, capital, and execution questions surrounding each property.</p>
+              <div className="gala-kicker gala-kicker--dark">Our Mission</div>
+              <h2 id="listing-agent-opportunity-title">Build a commercial practice with more behind it.</h2>
+              <p className="gala-lead">At Gala CRE Group, our mission is clear: to recruit, educate, and retain agents who consistently enrich their clients and the community. The firm equips agents with tools, training, and support so they can build their business their way.</p>
+              <p>For commercial listing agents, that means room to develop a distinct practice while drawing on the experience, perspective, and resources of the broader Gala platform.</p>
             </div>
+            <figure className="gala-careers-opportunity__media">
+              <img src={careersHeroImage} alt="Gala CRE professionals reviewing commercial real estate plans" loading="lazy" decoding="async" />
+            </figure>
           </div>
         </section>
 
@@ -59,8 +72,8 @@ const Careers = () => {
           <div className="gala-shell">
             <div className="gala-careers-benefits__intro">
               <div>
-                <div className="gala-kicker gala-kicker--dark">What Gala Provides</div>
-                <h2 id="listing-agent-benefits-title">More behind every listing.</h2>
+                <div className="gala-kicker gala-kicker--dark">Why Gala CRE</div>
+                <h2 id="listing-agent-benefits-title">The resources to move listings forward.</h2>
               </div>
               <p>Practical support for the work required to win, position, market, and execute a commercial assignment.</p>
             </div>
@@ -68,6 +81,7 @@ const Careers = () => {
             <div className="gala-careers-benefits__grid">
               {listingAgentBenefits.map((benefit, index) => {
                 const Icon = benefitIcons[index];
+                const benefitImage = benefitImages[index];
                 const isActive = activeBenefit === index;
                 return (
                   <button
@@ -88,6 +102,17 @@ const Careers = () => {
                       if (!isMouseClick) setActiveBenefit(isActive ? null : index);
                     }}
                   >
+                    <img
+                      className="gala-careers-benefit__image"
+                      src={benefitImage}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="gala-careers-benefit__number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <span className="gala-careers-benefit__control" aria-hidden="true">
                       {isActive ? <X size={18} /> : <Plus size={18} />}
                     </span>
@@ -107,19 +132,8 @@ const Careers = () => {
         </section>
 
         <section className="gala-section gala-section--silver gala-career-application gala-career-application--condensed" id="agent-application">
-          <div className="gala-shell gala-career-application__grid">
-            <div className="gala-career-application__intro">
-              <div className="gala-kicker gala-kicker--dark">Confidential Inquiry</div>
-              <h2>Tell us what you want to build.</h2>
-              <p>Share enough context to begin a meaningful conversation about your listing experience, market, and goals.</p>
-              <div className="gala-career-application__note">
-                <strong>What happens with your information</strong>
-                <p>Your information is used only to evaluate a potential professional relationship and contact you about this inquiry. Please do not include confidential client or transaction records.</p>
-              </div>
-            </div>
+          <div className="gala-shell gala-career-application__single">
             <AgentApplicationForm />
-          </div>
-          <div className="gala-shell">
             <p className="gala-career-disclosure">Gala CRE Group considers qualified professionals without regard to any status protected by applicable law. Any employment, independent-contractor, brokerage, or affiliation opportunity is subject to applicable licensing requirements, mutual evaluation, and written agreement. Submission of this inquiry does not create an employment or agency relationship.</p>
           </div>
         </section>

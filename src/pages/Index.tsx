@@ -199,7 +199,7 @@ const Index = () => {
             <div className="ey">Brokerage · Investment Sales · Development · Capital Markets</div>
             <h1>Commercial Real Estate,<br />Simplified</h1>
             <p className="hsp">Gala CRE Group helps clients buy, sell, lease, develop, and source capital for commercial property across North Carolina.</p>
-            <div className="hbtns"><Link to="/contact" className="bp">Let's Connect</Link><Link to="/properties" className="bg">View Properties <ArrowUpRight size={15} /></Link></div>
+            <div className="hbtns"><Link to="/contact" className="bp">Connect with us</Link><Link to="/properties" className="bg">View Property Listings <ArrowUpRight size={15} /></Link></div>
           </div></div>
           <div className="si"><div className="silbl">Scroll</div><div className="sil"></div></div>
         </section>

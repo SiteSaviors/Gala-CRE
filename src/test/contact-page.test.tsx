@@ -42,7 +42,7 @@ describe("advisor inquiry form", () => {
     expect(within(directory).getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
     expect(within(directory).getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(within(directory).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
-    expect(within(directory).getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(within(directory).getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
     expect(within(directory).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute("href", "mailto:goverdhan@galacregroup.com");
     expect(within(directory).getAllByRole("link", { name: /View Listings & Transactions/i })).toHaveLength(3);
   });
@@ -108,7 +108,7 @@ describe("advisor inquiry form", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     renderContact("/contact?advisor=goverdhan-vavilala&source=team");
-    expect(screen.getByRole("heading", { name: "Contact Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Contact Goverdhan Vavilala" })).toBeInTheDocument();
     completeForm();
     fireEvent.click(screen.getByRole("button", { name: "Send Inquiry" }));
     await screen.findByRole("heading", { name: "Inquiry received" });

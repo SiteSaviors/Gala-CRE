@@ -19,7 +19,7 @@ describe("team content model", () => {
       phone: "(919) 886-9181",
     });
     expect(teamMemberById["goverdhan-vavilala"]).toMatchObject({
-      name: "Dr. Goverdhan Reddy Vavilala",
+      name: "Goverdhan Vavilala",
       title: "Agent",
       email: "goverdhan@galacregroup.com",
       phone: "(919) 462-1494",

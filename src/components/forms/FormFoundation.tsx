@@ -6,15 +6,20 @@ type FormCardHeaderProps = {
   eyebrow: string;
   title: string;
   description: string;
+  headingLevel?: 2 | 3;
 };
 
-export const FormCardHeader = ({ eyebrow, title, description }: FormCardHeaderProps) => (
-  <div className="career-form-card__head">
-    <span>{eyebrow}</span>
-    <h3>{title}</h3>
-    <p>{description}</p>
-  </div>
-);
+export const FormCardHeader = ({ eyebrow, title, description, headingLevel = 3 }: FormCardHeaderProps) => {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
+
+  return (
+    <div className="career-form-card__head">
+      <span>{eyebrow}</span>
+      <Heading>{title}</Heading>
+      <p>{description}</p>
+    </div>
+  );
+};
 
 type FormSectionProps = {
   number: string;

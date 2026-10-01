@@ -66,6 +66,10 @@ describe("Gala CRE public pages", () => {
   it("positions the homepage around commercial services", () => {
     const { container } = renderPage(<Index />);
     expect(screen.getByRole("heading", { name: /Commercial Real Estate, Simplified/i })).toBeInTheDocument();
+    const heroActions = within(container.querySelector(".hbtns") as HTMLElement);
+    expect(heroActions.getByRole("link", { name: "Connect with us" })).toHaveAttribute("href", "/contact");
+    expect(heroActions.getByRole("link", { name: "View Property Listings" })).toHaveAttribute("href", "/properties");
+    expect(screen.getAllByRole("link", { name: "Listings" }).some((link) => link.getAttribute("href") === "/properties")).toBe(true);
     expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Built to move commercial opportunities forward." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Investment Sales" })).toBeInTheDocument();
@@ -90,11 +94,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("5047 Yadkin Road")).toBeInTheDocument();
     expect(screen.getByText("$829,000")).toBeInTheDocument();
     expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
-    expect(screen.getByText("$1,190,000")).toBeInTheDocument();
+    expect(screen.getAllByText("$990,000")).toHaveLength(2);
     expect(screen.getByText("5911 Family Farm Road")).toBeInTheDocument();
     expect(screen.getByText("$995,000")).toBeInTheDocument();
     expect(screen.getByText("Lexington Townhome Site")).toBeInTheDocument();
-    expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
 
     const churchSlide = screen.getByRole("group", { name: "1 of 5" });
     expect(within(churchSlide).getByRole("img", { name: "611 & 703 Church Street in Morrisville, NC" })).toBeInTheDocument();
@@ -194,7 +197,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Brokerage grounded in how real estate gets built.", level: 2 })).toBeInTheDocument();
     expect(screen.getByText("About Gala CRE")).toBeInTheDocument();
     expect(screen.getByText("The Gala Approach")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "From first evaluation to final execution.", level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "A developer-informed path from opportunity to closing.", level: 2 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Evaluate", level: 3 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Position", level: 3 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Structure", level: 3 })).toBeInTheDocument();
@@ -221,10 +224,10 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers?source=footer")).toBe(true);
     expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Leigh Roach" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "Dr. Goverdhan Reddy Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: /Open profile for/i })).toHaveLength(3);
 
     const leighCard = screen.getByRole("heading", { name: "Leigh Roach" }).closest("article");
@@ -238,10 +241,10 @@ describe("Gala CRE public pages", () => {
     expect(within(leighDialog).getByRole("link", { name: /View Listings & Transactions/i })).toHaveAttribute("href", "/properties?advisor=leigh-roach");
     fireEvent.click(within(leighDialog).getByRole("button", { name: "Close profile for Leigh Roach" }));
 
-    const goverdhanCard = screen.getByRole("heading", { name: "Dr. Goverdhan Reddy Vavilala" }).closest("article");
+    const goverdhanCard = screen.getByRole("heading", { name: "Goverdhan Vavilala" }).closest("article");
     expect(goverdhanCard).not.toBeNull();
-    fireEvent.click(within(goverdhanCard!).getByRole("button", { name: "Open profile for Dr. Goverdhan Reddy Vavilala" }));
-    const goverdhanDialog = screen.getByRole("dialog", { name: "Dr. Goverdhan Reddy Vavilala" });
+    fireEvent.click(within(goverdhanCard!).getByRole("button", { name: "Open profile for Goverdhan Vavilala" }));
+    const goverdhanDialog = screen.getByRole("dialog", { name: "Goverdhan Vavilala" });
     expect(within(goverdhanDialog).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute(
       "href",
       "mailto:goverdhan@galacregroup.com",
@@ -291,7 +294,7 @@ describe("Gala CRE public pages", () => {
     gaurang.unmount();
 
     renderPage(<Properties />, "/properties?advisor=goverdhan-vavilala");
-    expect(screen.getByText("Listings and completed transactions associated with Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
+    expect(screen.getByText("Listings and completed transactions associated with Goverdhan Vavilala")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "10416 Chapel Hill Road" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "2301 Lackey Street" })).not.toBeInTheDocument();
   });
@@ -299,22 +302,22 @@ describe("Gala CRE public pages", () => {
   it("creates a discoverable commercial-agent careers route", () => {
     renderPage(<Careers />, "/careers");
     expect(screen.getByRole("heading", { name: "Join Our Team", level: 1 })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Build a stronger commercial listing practice." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "More behind every listing." })).toBeInTheDocument();
-    const directLeadership = screen.getByRole("button", { name: "Direct leadership" });
+    expect(screen.getByRole("heading", { name: "Build a commercial practice with more behind it." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The resources to move listings forward." })).toBeInTheDocument();
+    const directLeadership = screen.getByRole("button", { name: "Leadership at the table" });
     expect(directLeadership).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(directLeadership);
     expect(directLeadership).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByRole("heading", { name: "Start a confidential conversation." })).toBeInTheDocument();
-    expect(screen.getAllByText("Join Our Team")).toHaveLength(2);
-    expect(screen.getByRole("heading", { name: "Tell us what you want to build." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Interested in working with us?" })).toBeInTheDocument();
+    expect(screen.getByText("Join Gala CRE")).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Tell us what you want to build." })).not.toBeInTheDocument();
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
     expect(screen.queryByLabelText("License number or status")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("License state")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Commercial specialties")).toBeInTheDocument();
-    expect(screen.getByLabelText("Listing experience and goals")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Start a Confidential Conversation" })).toBeEnabled();
+    expect(screen.getByLabelText("Experience")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Submit Agent Inquiry" })).toBeEnabled();
     expect(screen.getByText(/without regard to any status protected by applicable law/i)).toBeInTheDocument();
     expect(screen.getByText(/does not create an employment or agency relationship/i)).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: "Careers" }).some((link) => link.getAttribute("href") === "/careers")).toBe(true);
@@ -914,8 +917,7 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Lexington Townhome Site" })).toBeInTheDocument();
-    expect(screen.getByText("Contact for pricing")).toBeInTheDocument();
-    expect(screen.queryByText("$990,000")).not.toBeInTheDocument();
+    expect(screen.getByText("$990,000")).toBeInTheDocument();
     expect(screen.queryByText("$1,000,000")).not.toBeInTheDocument();
     expect(screen.getAllByText("Proposed 58-townhome opportunity").length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Useful diligence exists, but currency and transferability matter." })).toBeInTheDocument();
@@ -1014,8 +1016,8 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Approx. 3.3 acres").length).toBeGreaterThan(0);
     expect(screen.getByText(/Gala Real Estate Advisors.*listing involvement/i)).toBeInTheDocument();
     expect(screen.getByText("Gaurang Gala")).toBeInTheDocument();
-    expect(screen.getByText("Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
-    expect(screen.getByText("Gaurang Gala and Dr. Goverdhan Reddy Vavilala")).toBeInTheDocument();
+    expect(screen.getByText("Goverdhan Vavilala")).toBeInTheDocument();
+    expect(screen.getByText("Gaurang Gala and Goverdhan Vavilala")).toBeInTheDocument();
     expect(screen.getByText(/relationship to 10414 remains unconfirmed/i)).toBeInTheDocument();
     expect(screen.queryByText("$2,500,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();

@@ -81,8 +81,8 @@ const AgentApplicationForm = () => {
     return (
       <div className="career-form-card career-form-success" role="status" aria-live="polite">
         <div className="contact-success-eyebrow">Inquiry received</div>
-        <h3>Thank you for starting the conversation.</h3>
-        <p>Gala CRE will review your listing background and follow up directly if there is a potential fit.</p>
+        <h3>Thank you for your interest.</h3>
+        <p>Gala CRE will review your real estate background and follow up directly if there is a potential fit.</p>
         <Button type="button" className="contact-success-reset" onClick={() => {
           startedAt.current = new Date().toISOString();
           setIsSubmitted(false);
@@ -96,10 +96,12 @@ const AgentApplicationForm = () => {
   return (
     <div className="career-form-card">
       <FormCardHeader
-        eyebrow="Join Our Team"
-        title="Start a confidential conversation."
-        description="Share a little about your market, listing experience, and the commercial practice you want to build."
+        eyebrow="Join Gala CRE"
+        title="Interested in working with us?"
+        description="Tell us about your real estate experience and the types of commercial properties you work with. We’ll follow up to discuss potential opportunities with Gala CRE Group."
+        headingLevel={2}
       />
+      <p className="career-form-card__privacy">Your information will be used to review your inquiry and contact you about potential opportunities with Gala CRE Group.</p>
 
       <Form {...form}>
         <form className="career-form" onSubmit={form.handleSubmit(onSubmit)} noValidate aria-busy={form.formState.isSubmitting}>
@@ -147,7 +149,7 @@ const AgentApplicationForm = () => {
             )} />
             <FormField control={form.control} name="careerStage" render={({ field }) => (
               <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Listing career stage</FormLabel>
+                <FormLabel className="contact-form-label">Career stage</FormLabel>
                 <FormControl>
                   <select {...field} className="contact-form-input contact-form-select">
                     {careerStages.map((stage) => <option value={stage} key={stage}>{stage}</option>)}
@@ -168,8 +170,8 @@ const AgentApplicationForm = () => {
 
           <FormField control={form.control} name="experienceAndGoals" render={({ field }) => (
             <FormItem className="contact-form-item">
-              <FormLabel className="contact-form-label">Listing experience and goals</FormLabel>
-              <FormControl><Textarea {...field} rows={5} className="contact-form-input contact-form-textarea" placeholder="Tell us briefly about the listings you work on and the business you want to build." /></FormControl>
+              <FormLabel className="contact-form-label">Experience</FormLabel>
+              <FormControl><Textarea {...field} rows={5} className="contact-form-input contact-form-textarea" placeholder="Tell us briefly about your real estate experience." /></FormControl>
               <FormMessage className="contact-form-message" />
             </FormItem>
           )} />
@@ -199,7 +201,7 @@ const AgentApplicationForm = () => {
           )} />
 
           <FormSubmissionControl
-            label="Start a Confidential Conversation"
+            label="Submit Agent Inquiry"
             loadingLabel="Sending..."
             isSubmitting={form.formState.isSubmitting}
             error={submitError}

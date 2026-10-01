@@ -16,7 +16,7 @@ import familyFarm02 from "@/assets/properties/family-farm-road/family-farm-02.we
 import familyFarm03 from "@/assets/properties/family-farm-road/family-farm-03.webp";
 import familyFarm04 from "@/assets/properties/family-farm-road/family-farm-04.webp";
 import familyFarm05 from "@/assets/properties/family-farm-road/family-farm-05.webp";
-import lexington01 from "@/assets/properties/lexington-townhomes/lexington-01.webp";
+import lexington01 from "@/assets/properties/lexington-townhomes/lexington-01-outlined.webp";
 import lexington02 from "@/assets/properties/lexington-townhomes/lexington-02.webp";
 import lexington03 from "@/assets/properties/lexington-townhomes/lexington-03.webp";
 import lexington04 from "@/assets/properties/lexington-townhomes/lexington-04.webp";
@@ -491,7 +491,7 @@ export const properties: Property[] = [
     assetType: "Land",
     offeringType: "For Sale",
     status: "Active",
-    priceDisplay: "$1,190,000",
+    priceDisplay: "$990,000",
     acreageDisplay: "1.09 acres",
     heroImage: churchStreetImage,
     gallery: [
@@ -548,7 +548,7 @@ export const properties: Property[] = [
         "The public offering represents approval for a licensed childcare facility across two marketed sites totaling approximately 1.09 acres. The parcel, survey, zoning, and approval records should control buyer evaluation.",
       overviewEyebrow: "Childcare Opportunity",
       keyFacts: [
-        { label: "Asking price", value: "$1,190,000" },
+        { label: "Asking price", value: "$990,000" },
         { label: "Offering", value: "Two sites marketed together" },
         { label: "Site area", value: "Approx. 1.09 acres" },
         { label: "Property type", value: "Commercial land" },
@@ -596,7 +596,7 @@ export const properties: Property[] = [
         eyebrow: "Buyer Verification",
         title: "What is represented—and what due diligence must confirm.",
         conditions: [
-          { label: "Published offering", value: "Two-site commercial land offering at $1,190,000" },
+          { label: "Published offering", value: "Two-site commercial land offering at $990,000" },
           { label: "Offering composition", value: "Confirm combined-sale requirements, legal addresses, parcel IDs, and surveyed acreage" },
           { label: "Approval scope", value: "Verify approval, conditions, capacity, expiration, and remaining permits" },
         ],
@@ -867,7 +867,7 @@ export const properties: Property[] = [
     assetType: "Land",
     offeringType: "For Sale",
     status: "Active",
-    priceDisplay: "Contact for pricing",
+    priceDisplay: "$990,000",
     acreageDisplay: "Approx. 6.6 acres",
     heroImage: lexington01,
     gallery: [lexington02, lexington03, lexington04, lexington05],
@@ -913,7 +913,7 @@ export const properties: Property[] = [
         "Three identified parcels at 1111 Brown Street with a documented 2023 planning, access, and utility history; current price, acreage, approval status, and remaining requirements require confirmation.",
       overviewEyebrow: "The Opportunity",
       keyFacts: [
-        { label: "Offering", value: "Contact for pricing" },
+        { label: "Asking price", value: "$990,000" },
         { label: "Site area", value: "Approx. 6.6 acres" },
         { label: "Proposed program", value: "58 townhomes" },
         { label: "Approval record", value: "Historical; verify current status" },
@@ -1413,7 +1413,7 @@ export const properties: Property[] = [
         conditions: [
           { label: "Status", value: "Closed July 29, 2026; off market July 31, 2026" },
           { label: "Transaction price", value: "Not published pending confirmation" },
-          { label: "Transaction team", value: "Gaurang Gala and Dr. Goverdhan Reddy Vavilala" },
+          { label: "Transaction team", value: "Gaurang Gala and Goverdhan Vavilala" },
           { label: "Record scope", value: "Limited to 10416; any relationship to 10414 remains unconfirmed" },
           { label: "Photography", value: "MLS imagery not republished" },
         ],
