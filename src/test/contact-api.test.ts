@@ -75,6 +75,29 @@ describe("contact API", () => {
     expect(emailBody.text).toContain("Requested advisor: leigh-roach");
   });
 
+  it("routes a property inquiry directly to the approved listing advisor", async () => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "general@example.com");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    const { response, result } = createResponse();
+    await contactHandler({
+      method: "POST",
+      body: {
+        ...validBody,
+        inquiryType: "Property Inquiry",
+        propertySlug: "611-703-church-street",
+        advisorId: "gaurang-gala",
+      },
+    }, response);
+    expect(result.statusCode).toBe(200);
+    const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(emailBody.to).toEqual(["gaurang@galacregroup.com"]);
+    expect(emailBody.reply_to).toBe("taylor@example.com");
+    expect(emailBody.subject).toContain("611-703-church-street");
+  });
+
   it("rejects an unrecognized advisor id", async () => {
     const { response, result } = createResponse();
     await contactHandler({ method: "POST", body: { ...validBody, advisorId: "unknown-agent" } }, response);

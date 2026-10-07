@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import PropertyInquiryForm from "@/components/properties/PropertyInquiryForm";
 import PropertyVideo from "@/components/properties/PropertyVideo";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -54,18 +55,20 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
   const inquiryLabel = isClosedTransaction ? "Discuss a Similar Property" : "Request Property Information";
   const keyFacts = page.keyFacts ?? [];
   const highlights = page.highlights ?? [];
-  const informationGroups = page.information?.groups ?? [];
-  const transactionConditions = page.transaction?.conditions ?? [];
   const advisorAssignments = property.advisorAssignments.map((assignment) => ({
     assignment,
     member: teamMemberById[assignment.advisorId],
   }));
+  const primaryAdvisor = advisorAssignments[0]?.member;
   const relatedProperties = getRelatedProperties(property.slug, 2);
   const selectedMedia = mediaItems[selectedMediaIndex] ?? mediaItems[0];
   const priceOrStatus = property.priceDisplay ?? (isClosedTransaction ? "Completed transaction" : "Contact for pricing");
   const summaryFacts = keyFacts.filter((fact) => fact.value !== priceOrStatus);
-  const hasAssetContent = informationGroups.length > 0 || transactionConditions.length > 0;
   const hasClosingContent = advisorAssignments.length > 0 || Boolean(page.disclosure);
+  const isChurchStreet = property.slug === "611-703-church-street";
+  const opportunityImage = page.video ? undefined : mediaItems[1] ?? mediaItems[0];
+  const hasOpportunityMedia = Boolean(page.video || opportunityImage);
+  const opportunityMediaIntro = page.video ?? page.gallery?.intro;
 
   return (
     <>
@@ -78,7 +81,11 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
       <SiteHeader currentPath={`/properties/${property.slug}`} />
 
       <main className="gala-page gala-commercial-listing gala-listing-compact" id="main-content" tabIndex={-1}>
-        <section className="gala-listing-compact__identity">
+        <section
+          className={`gala-listing-compact__identity${
+            property.slug === "611-703-church-street" ? " gala-listing-compact__identity--church-street" : ""
+          }`}
+        >
           <div className="gala-shell">
             <Link to="/properties" className="gala-back-link">
               <ArrowLeft size={16} aria-hidden="true" /> All Properties
@@ -156,7 +163,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
               ) : null}
 
               <div className="gala-listing-compact__actions">
-                <Link to={inquiryHref} className="gala-button">
+                <Link to={isClosedTransaction ? inquiryHref : "#property-inquiry"} className="gala-button">
                   <Mail size={16} aria-hidden="true" /> {inquiryLabel}
                 </Link>
                 {property.externalLinks.map((listing) => (
@@ -215,13 +222,13 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
         </section>
 
         <section
-          className={`gala-listing-compact__opportunity${page.video ? " gala-listing-compact__opportunity--video" : ""}`}
+          className={`gala-listing-compact__opportunity${hasOpportunityMedia ? " gala-listing-compact__opportunity--media" : ""}`}
           aria-labelledby="property-opportunity-title"
         >
           <div
             className={`gala-shell gala-listing-compact__opportunity-grid${
-              page.video
-                ? " gala-listing-compact__opportunity-grid--video"
+              hasOpportunityMedia
+                ? " gala-listing-compact__opportunity-grid--media"
                 : highlights.length
                   ? ""
                   : " gala-listing-compact__opportunity-grid--single"
@@ -241,17 +248,16 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                   ariaLabel={page.video.ariaLabel}
                   orientation={page.video.orientation}
                 />
-                <div className="gala-listing-compact__opportunity-video-copy">
-                  <span>{page.video.eyebrow}</span>
-                  <h3>{page.video.title}</h3>
-                  {page.video.body ? <p>{page.video.body}</p> : null}
-                </div>
               </div>
+            ) : opportunityImage ? (
+              <figure className="gala-listing-compact__opportunity-image">
+                <img src={opportunityImage.src} alt={opportunityImage.alt} loading="lazy" />
+              </figure>
             ) : null}
 
             {highlights.length ? (
               <div
-                className={`gala-commercial-listing__highlights${page.video ? " gala-commercial-listing__highlights--row" : ""}`}
+                className={`gala-commercial-listing__highlights gala-commercial-listing__highlights--editorial gala-commercial-listing__highlights--count-${highlights.length}`}
                 aria-label="Property highlights"
               >
                 {highlights.map((highlight) => (
@@ -262,68 +268,33 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 ))}
               </div>
             ) : null}
+
+            {hasOpportunityMedia && opportunityMediaIntro ? (
+              <div className="gala-listing-compact__opportunity-media-copy">
+                <span>{opportunityMediaIntro.eyebrow}</span>
+                <h3>{opportunityMediaIntro.title}</h3>
+                {opportunityMediaIntro.body ? <p>{opportunityMediaIntro.body}</p> : null}
+              </div>
+            ) : null}
           </div>
         </section>
-
-        {hasAssetContent ? (
-          <section className="gala-listing-compact__details" aria-labelledby="property-details-title">
-            <div className="gala-shell">
-              <div className="gala-listing-compact__section-heading">
-                <div>
-                  <div className="gala-kicker gala-kicker--dark">{page.information?.intro.eyebrow ?? "Property Details"}</div>
-                  <h2 id="property-details-title">{page.information?.intro.title ?? "The information that shapes the decision."}</h2>
-                </div>
-                {page.information?.intro.body ? <p>{page.information.intro.body}</p> : null}
-              </div>
-
-              <div className="gala-listing-compact__detail-grid">
-                {informationGroups.map((group) => (
-                  <article className="gala-listing-compact__detail-card" key={group.eyebrow}>
-                    <span className="gala-commercial-listing__eyebrow">{group.eyebrow}</span>
-                    <h3>{group.title}</h3>
-                    {group.facts.length ? (
-                      <dl>
-                        {group.facts.map((fact) => (
-                          <div key={fact.label}>
-                            <dt>{fact.label}</dt>
-                            <dd>{fact.value}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                    ) : <p>{group.body}</p>}
-                  </article>
-                ))}
-
-                {transactionConditions.length && page.transaction ? (
-                  <article className="gala-listing-compact__detail-card gala-listing-compact__detail-card--dark">
-                    <span className="gala-commercial-listing__eyebrow">{page.transaction.eyebrow}</span>
-                    <h3>{page.transaction.title}</h3>
-                    <dl>
-                      {transactionConditions.map((condition) => (
-                        <div key={condition.label}>
-                          <dt>{condition.label}</dt>
-                          <dd>{condition.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </article>
-                ) : null}
-              </div>
-            </div>
-          </section>
-        ) : null}
 
         {page.location ? (
           <section className="gala-listing-compact__location-media">
             <div className="gala-shell gala-listing-compact__location-media-grid gala-listing-compact__location-media-grid--single">
               <div className="gala-listing-compact__location">
-                <div className="gala-listing-compact__map">
-                  <iframe
-                    title={`Map of ${property.address}`}
-                    src={page.location.mapEmbedUrl}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                <div className="gala-listing-compact__location-map-block">
+                  <div className="gala-listing-compact__map">
+                    <iframe
+                      title={`Map of ${property.address}`}
+                      src={page.location.mapEmbedUrl}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                  {page.location.mapNote ? (
+                    <p className="gala-listing-compact__map-note">{page.location.mapNote}</p>
+                  ) : null}
                 </div>
                 <div className="gala-listing-compact__location-copy">
                   <div>
@@ -344,22 +315,67 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
         ) : null}
 
         {hasClosingContent ? (
-          <section className="gala-listing-compact__close" id="property-inquiry">
-            <div className="gala-shell gala-listing-compact__close-grid gala-listing-compact__close-grid--single">
+          <section
+            className={`gala-listing-compact__close gala-listing-compact__close--${isClosedTransaction ? "closed" : "active"}`}
+            id="property-inquiry"
+          >
+            <div className={`gala-shell gala-listing-compact__close-grid${isClosedTransaction || !primaryAdvisor ? " gala-listing-compact__close-grid--single" : ""}`}>
               <div>
                 <div className="gala-kicker gala-kicker--dark">
                   {isClosedTransaction ? "Work With Gala CRE" : "Property Inquiry"}
                 </div>
-                <h2>{isClosedTransaction ? "Discuss a comparable commercial assignment." : `Request information about ${property.name}.`}</h2>
+                <h2>
+                  {isClosedTransaction
+                    ? "Discuss a comparable commercial assignment."
+                    : `Request details for ${property.name}.`}
+                </h2>
                 <p>
                   {isClosedTransaction
                     ? "Connect with Gala CRE about a similar property, disposition, or acquisition requirement."
                     : "Connect with the assigned advisor to discuss the property, available information, and next steps."}
                 </p>
-                <Link to={inquiryHref} className="gala-button gala-button--dark">
-                  <Mail size={16} aria-hidden="true" /> {inquiryLabel}
-                </Link>
+                {!isClosedTransaction && primaryAdvisor ? (
+                  <div className="gala-listing-compact__inquiry-advisor">
+                    {primaryAdvisor.image ? (
+                      <img src={primaryAdvisor.image} alt={primaryAdvisor.imageAlt ?? primaryAdvisor.name} />
+                    ) : null}
+                    <div className="gala-listing-compact__inquiry-advisor-copy">
+                      <span>Your inquiry goes directly to</span>
+                      <strong>{primaryAdvisor.name}</strong>
+                      <small>
+                        Listing Advisor · {primaryAdvisor.title}
+                        {primaryAdvisor.license ? ` · ${primaryAdvisor.license}` : ""}
+                      </small>
+                    </div>
+                    <div className="gala-listing-compact__inquiry-advisor-links">
+                      {primaryAdvisor.phone ? (
+                        <a href={`tel:+1${primaryAdvisor.phone.replace(/\D/g, "")}`}>
+                          <Phone size={14} aria-hidden="true" /> {primaryAdvisor.phone}
+                        </a>
+                      ) : null}
+                      {primaryAdvisor.email ? (
+                        <a href={`mailto:${primaryAdvisor.email}`}>
+                          <Mail size={14} aria-hidden="true" /> {primaryAdvisor.email}
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                ) : null}
+                {isClosedTransaction || !primaryAdvisor ? (
+                  <Link to={inquiryHref} className="gala-button gala-button--dark">
+                    <Mail size={16} aria-hidden="true" /> {inquiryLabel}
+                  </Link>
+                ) : null}
               </div>
+              {!isClosedTransaction && primaryAdvisor ? (
+                <PropertyInquiryForm
+                  propertyName={property.name}
+                  propertySlug={property.slug}
+                  advisorId={primaryAdvisor.id}
+                  advisorName={primaryAdvisor.name}
+                  eyebrow="Property Inquiry Form"
+                />
+              ) : null}
             </div>
             {page.disclosure ? <p className="gala-shell gala-commercial-listing__disclosure">{page.disclosure}</p> : null}
           </section>

@@ -23,6 +23,11 @@ const allowedInquiryTypes = new Set([
   "1031 / Replacement Property Search",
 ]);
 const allowedAdvisorIds = new Set(["gaurang-gala", "leigh-roach", "goverdhan-vavilala"]);
+const advisorEmailById: Record<string, string> = {
+  "gaurang-gala": "gaurang@galacregroup.com",
+  "leigh-roach": "leigh@galacregroup.com",
+  "goverdhan-vavilala": "goverdhan@galacregroup.com",
+};
 
 const asString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
@@ -87,9 +92,13 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const defaultRecipient = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !to || !from) {
+  const directAdvisorRecipient = inquiryType === "Property Inquiry" && propertySlug && advisorId
+    ? advisorEmailById[advisorId]
+    : undefined;
+  const recipient = directAdvisorRecipient || defaultRecipient;
+  if (!apiKey || !recipient || !from) {
     response.status(503).json({ error: "Contact delivery is not configured." });
     return;
   }
@@ -116,9 +125,11 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       },
       body: JSON.stringify({
         from,
-        to: [to],
+        to: [recipient],
         reply_to: email,
-        subject: `Gala CRE inquiry: ${inquiryType}`,
+        subject: propertySlug
+          ? `Gala CRE property inquiry: ${propertySlug}`
+          : `Gala CRE inquiry: ${inquiryType}`,
         text: `${textFields}\n\nMessage:\n${message}`,
         html: `<h1>New Gala CRE inquiry</h1><table>${rows}</table><h2>Message</h2><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
       }),

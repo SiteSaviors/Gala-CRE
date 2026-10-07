@@ -131,6 +131,7 @@ export type PropertyListingPage = {
     points: string[];
     mapEmbedUrl: string;
     mapHref: string;
+    mapNote?: string;
   };
   advisorEyebrow?: string;
   disclosure?: string;
@@ -544,11 +545,15 @@ export const properties: Property[] = [
       ],
     },
     location: {
-      eyebrow: "Market Context",
-      title: "A Morrisville infill position near regional employment corridors.",
+      eyebrow: "Location Context",
+      title: "A neighborhood-serving site within an established Morrisville setting.",
       body:
-        "The offering identifies a Morrisville, Wake County location and cites surrounding residential neighborhoods plus proximity to Research Triangle Park and regional employment corridors. Exact distances and demographic claims should be verified before publication.",
-      points: ["Morrisville, North Carolina", "Wake County", "RTP proximity cited by the offering"],
+        "The Church Street sites are surrounded by established residential communities, multifamily housing, schools, and neighborhood services. That immediate context is particularly relevant to childcare and other community-serving commercial uses, subject to zoning and required approvals.",
+      points: [
+        "Established residential surroundings",
+        "Nearby multifamily and educational uses",
+        "Access to RTP and regional corridors",
+      ],
     },
     externalLinks: [
       {
@@ -558,10 +563,10 @@ export const properties: Property[] = [
     ],
     advisorAssignments: [{ advisorId: "gaurang-gala", role: "Listing Advisor" }],
     listingPage: {
-      headline: "A two-site Morrisville opportunity centered on childcare use.",
+      headline: "An approved childcare path with broader commercial potential.",
       lead:
-        "The public offering represents approval for a licensed childcare facility across two marketed sites totaling approximately 1.09 acres. The parcel, survey, zoning, and approval records should control buyer evaluation.",
-      overviewEyebrow: "Childcare Opportunity",
+        "611 & 703 Church Street comprise approximately 1.09 acres marketed together in Morrisville. The offering is anchored by an approved licensed daycare concept, while the property’s OI commercial zoning may support additional office, retail, community, and institutional uses subject to municipal review and site-specific approvals.",
+      overviewEyebrow: "Commercial Development Opportunity",
       keyFacts: [
         { label: "Asking price", value: "$990,000" },
         { label: "Offering", value: "Two sites marketed together" },
@@ -569,53 +574,10 @@ export const properties: Property[] = [
         { label: "Property type", value: "Commercial land" },
       ],
       highlights: [
-        "Licensed daycare approval and childcare-supportive zoning represented by the offering",
-        "Two Morrisville sites marketed together as one opportunity",
-        "Legal addresses, surveyed acreage, approval scope, and remaining permits require document review",
+        "Approved concept for a licensed childcare facility",
+        "Approximately 1.09 acres across two Morrisville sites marketed together",
+        "OI commercial zoning with potential for additional uses, subject to Town review",
       ],
-      information: {
-        intro: {
-          eyebrow: "Development Position",
-          title: "A use-specific opportunity—not generic land.",
-          body:
-            "The represented childcare approval is the starting point for evaluation. The approval record, parcel schedule, survey, and remaining development requirements should guide underwriting.",
-        },
-        groups: [
-          {
-            eyebrow: "Childcare Use",
-            title: "The represented approval is the center of the opportunity.",
-            body:
-              "The public offering represents approval for a licensed daycare facility and base zoning that supports childcare use. Buyers should review the actual approval, site plan, conditions, capacity, and remaining permitting requirements before relying on that position.",
-            facts: [
-              { label: "Represented use", value: "Licensed daycare facility" },
-              { label: "Base zoning", value: "Childcare support stated by offering" },
-              { label: "Approval review", value: "Confirm the approval scope and controlling municipal record" },
-              { label: "Buyer review", value: "Conditions, capacity, site plan, and permits" },
-            ],
-          },
-          {
-            eyebrow: "Offering Composition",
-            title: "Two marketed sites require one clear parcel schedule.",
-            body:
-              "Public marketing presents two adjacent locations together. Because the published address and acreage fields are not fully consistent, buyers should confirm the legal addresses, parcel identifiers, surveyed area, and combined-sale structure with the listing advisor.",
-            facts: [
-              { label: "Marketed addresses", value: "611 & 703 Church Street" },
-              { label: "Offering structure", value: "Two locations marketed together" },
-              { label: "Combined area", value: "Approx. 1.09 acres in marketing copy" },
-              { label: "Confirm", value: "Parcel IDs, legal addresses, and surveyed acreage" },
-            ],
-          },
-        ],
-      },
-      transaction: {
-        eyebrow: "Buyer Verification",
-        title: "What is represented—and what due diligence must confirm.",
-        conditions: [
-          { label: "Published offering", value: "Two-site commercial land offering at $990,000" },
-          { label: "Offering composition", value: "Confirm combined-sale requirements, legal addresses, parcel IDs, and surveyed acreage" },
-          { label: "Approval scope", value: "Verify approval, conditions, capacity, expiration, and remaining permits" },
-        ],
-      },
       gallery: {
         intro: {
           eyebrow: "Site & Surroundings",
@@ -662,18 +624,20 @@ export const properties: Property[] = [
       },
       location: {
         eyebrow: "Location Context",
-        title: "A Morrisville infill position near regional employment corridors.",
+        title: "A neighborhood-serving site within an established Morrisville setting.",
         body:
-          "The public offering cites surrounding residential neighborhoods and proximity to Research Triangle Park and regional employment corridors. The map centers on 611 Church Street; buyers should confirm the second legal address, parcel boundaries, access, and measured distances during diligence.",
+          "The Church Street sites are surrounded by established residential communities, multifamily housing, schools, and neighborhood services. That immediate context is particularly relevant to childcare and other community-serving commercial uses, subject to zoning and required approvals.",
         points: [
-          "Morrisville, North Carolina",
-          "Wake County",
-          "RTP proximity cited by the public offering",
+          "Established residential surroundings",
+          "Nearby multifamily and educational uses",
+          "Access to RTP and regional corridors",
         ],
         mapEmbedUrl:
-          "https://www.google.com/maps?q=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560&output=embed",
+          "https://www.google.com/maps?q=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560&z=15&output=embed",
         mapHref:
           "https://www.google.com/maps/search/?api=1&query=611%20Church%20Street%2C%20Morrisville%2C%20NC%2027560",
+        mapNote:
+          "Map centers on 611 Church Street for orientation only and does not establish parcel boundaries, access, or measured distances.",
       },
       advisorEyebrow: "Listing Advisor",
       disclosure:
@@ -1288,7 +1252,11 @@ export const properties: Property[] = [
         { label: "Building area", value: "3,333 SF" },
         { label: "Site area", value: "Approx. 0.23 acres" },
       ],
-      highlights: [],
+      highlights: [
+        "Closed July 30, 2026",
+        "3,333-square-foot commercial building on approximately 0.23 acres",
+        "Two-story property with DC-2 zoning reported by the supplied record",
+      ],
       information: {
         intro: {
           eyebrow: "Property Record",
@@ -1459,7 +1427,11 @@ export const properties: Property[] = [
         { label: "Site area", value: "Approx. 3.3 acres" },
         { label: "Parcel count", value: "Two per supplied record" },
       ],
-      highlights: [],
+      highlights: [
+        "Closed July 29, 2026",
+        "Approximately 3.3 acres across two parcels in the supplied record",
+        "Gala listing involvement documented by the supplied MLS display",
+      ],
       information: {
         intro: {
           eyebrow: "Property Record",
