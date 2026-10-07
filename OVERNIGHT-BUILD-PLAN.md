@@ -768,3 +768,39 @@ These do not stop unrelated implementation:
 - Remaining working tree: expected clean after commit, push, and production redeployment.
 - Blockers: none for this navigation change. The previously recorded private form-delivery configuration remains unrelated.
 - Exact next action: run the complete unit, lint, build, and browser regression suites; commit on `main`; push to GitHub; deploy the linked Vercel project; and smoke-test the production navigation at desktop and mobile widths.
+
+### 2026-10-01 — 1031 replacement-property sourcing rebuild
+
+- Starting branch / HEAD: `main` at `44f6503`, synchronized with `origin/main`; pre-existing local Careers and Listings copy changes were preserved and kept outside this checkpoint's scope.
+- Source of truth checked: the user's approved five-phase 1031 optimization plan; `AGENTS.md`; `SEPTEMBER-CLIENT-REVISION-PLAN.md`; `PROPERTY-DATA-REGISTER.md`; the latest ledger checkpoint; current route, form, server validation, query-source plumbing, responsive styles, tests, production build, and live local page at desktop, tablet, and mobile widths.
+- Phase / checkpoint: complete Phases 0–5 for `/investors/1031-exchange?source=property-catalog` as a 1031-led sourcing page that quietly accommodates direct acquisitions.
+- Gate: the service promise is immediately clear; the narrative does not repeat itself; the inquiry collects only information needed before a first conversation; the legal boundary remains explicit; source context, validation, consent, safe failure, responsive behavior, keyboard paths, anchor behavior, header behavior, and submission privacy remain intact; and no test form is submitted.
+- Implementation: replaced the oversized generic hero with the approved 1031-led headline, supporting copy, CTA, and three concise search signals; consolidated the former Role, Process, Criteria, and Readiness chapters into one image-led Gala role section plus a four-step process and compact fit summary; reduced the inquiry from three long sections to Contact and Search Criteria; made the identification deadline conditional on a confirmed exchange; removed deferred response, chronology, risk-profile, market-preference, property-list, additional-requirement, and intermediary-status fields from client and server schemas; preserved source tracking, consent, accessible errors, honeypot protection, safe failure, and one concise legal notice; and tightened desktop/mobile spacing and card density.
+- Files / route changed: `src/pages/ExchangeSourcing.tsx`, `src/components/investors/InvestorInquiryForm.tsx`, `src/content/investorSourcing.ts`, `src/lib/investorSourcingForm.ts`, `src/lib/exchangeTimeline.ts`, `api/forms.ts`, `src/styles/gala.css`, five focused unit/API test files, `src/test/gala-pages.test.tsx`, `e2e/public-route-matrix.spec.ts`, and this ledger; `/investors/1031-exchange` with preserved query strings.
+- Verification: live local visual QA confirmed the complete 1440×900 and 390×844 compositions, a clean tablet route, no horizontal overflow, no console errors, correct conditional deadline behavior, and a mobile page length of 6,981px versus the prior roughly 11,200px. Full Vitest passed 118/118 across 18 files when run without file-level parallelism; lint passed with 0 errors and the same 7 existing shared-UI Fast Refresh warnings; the production build passed with the existing browserslist-age and bundle-size notices; full Playwright passed 15/15, including the complete 31-route desktop/tablet/mobile matrix and the new dedicated 1031 source, anchor, validation, conditional-field, overflow, console, and page-length regression. No form was submitted.
+- Intended commit: `refactor: focus 1031 property sourcing journey` after user review and scoped diff review.
+- Remaining working tree: the verified 1031 changes remain uncommitted alongside the user's pre-existing Careers and Listings copy changes; nothing in this checkpoint has been pushed or deployed.
+- Blockers: none for the local rebuild. Private production form-delivery configuration remains unavailable and was not tested; the form continues to fail safely when delivery is unavailable.
+- Exact next action: present the locally rebuilt 1031 route for user review. Do not commit, push, or deploy until the user explicitly resumes the release workflow and authorizes those actions.
+
+### 2026-10-06 — 202 North Main Street photography
+
+- Starting branch / HEAD: `main` at `44f6503`, with unrelated in-progress Careers, Listings, and 1031 changes preserved.
+- Phase / checkpoint: replace the placeholder completed-transaction artwork with the user-supplied North Main Street photography and add a concise property gallery.
+- Gate: the designated aerial is the catalog/detail cover; every unique supplied view is represented once; captions accurately describe only visible property context; unconfirmed pricing, role, and advisor attribution remain unpublished; and the route builds and renders cleanly.
+- Implementation: registered eight unique web-ready AVIF assets; omitted one exact duplicate; added the aerial cover plus seven exterior, corridor, showroom, and office views; and removed outdated copy stating that photography was unpublished.
+- Files / route changed: `src/assets/properties/202-north-main-street/*`, `src/content/properties.ts`, `src/test/properties-model.test.ts`, `src/test/gala-pages.test.tsx`, `PROPERTY-DATA-REGISTER.md`, and this ledger; `/properties/202-north-main-street` and its `/properties` catalog card.
+- Verification: focused property/page tests passed 43/43; the production build passed with the existing browserslist-age and bundle-size notices; live local mobile-width QA confirmed the aerial cover, eight-image selector, accurate labels, and no visible overflow. No form was submitted.
+- Blockers: none for photography. Gala's exact role, advisor credit, and transaction economics remain intentionally unpublished pending confirmation.
+- Exact next action: present the updated North Main Street card and gallery for user review. Do not commit, push, or deploy until explicitly requested.
+
+### 2026-10-06 — 10416 Chapel Hill Road photography
+
+- Starting branch / HEAD: `main` at `44f6503`, with unrelated in-progress Careers, Listings, 1031, portrait, and North Main changes preserved.
+- Phase / checkpoint: replace the placeholder completed-transaction artwork with the user-supplied Chapel Hill Road photography and add a qualified site gallery.
+- Gate: the designated outlined aerial is the catalog/detail cover; all seven supporting views are represented once; approximate marketing lines remain disclosed; disputed economics and the unresolved 10414 relationship remain unpublished; and shared Gaurang/Goverdhan attribution is preserved.
+- Implementation: registered eight client-supplied AVIF assets; added the outlined aerial cover plus site, roadway, improvement, boundary, and surrounding-context views; and removed outdated copy stating that photography was unpublished.
+- Files / route changed: `src/assets/properties/10416-chapel-hill-road/*`, `src/content/properties.ts`, `src/test/properties-model.test.ts`, `src/test/gala-pages.test.tsx`, `PROPERTY-DATA-REGISTER.md`, and this ledger; `/properties/10416-chapel-hill-road` and its `/properties` catalog card.
+- Verification: focused property/page tests passed 43/43; the production build passed with the existing browserslist-age and bundle-size notices; live local mobile-width QA confirmed the outlined aerial cover, eight-image selector, shared Gaurang/Goverdhan attribution, approximate-boundary disclosure, and no visible overflow. No form was submitted.
+- Blockers: the exact 10414/10416 relationship and transaction economics remain intentionally unpublished pending confirmation.
+- Exact next action: present the updated Chapel Hill Road card and gallery for user review. Do not commit, push, or deploy until explicitly requested.

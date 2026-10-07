@@ -24,16 +24,10 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   exchangeStatusOptions,
   financingStatusOptions,
-  intermediaryStatusOptions,
   investorAssetTypes,
-  marketInterestOptions,
-  responseMethodOptions,
 } from "@/content/investorSourcing";
-import {
-  submitInvestorInquiry,
-  type InvestorInquiryValues,
-} from "@/lib/investorSourcingForm";
-import { getExchangeTimelineIssues } from "@/lib/exchangeTimeline";
+import { submitInvestorInquiry, type InvestorInquiryValues } from "@/lib/investorSourcingForm";
+import { confirmedExchangeStatus, getExchangeTimelineIssues } from "@/lib/exchangeTimeline";
 
 const investorInquirySchema = z.object({
   name: z.string().trim().min(2, "Please enter your name."),
@@ -41,22 +35,14 @@ const investorInquirySchema = z.object({
   phone: z.string().trim().min(7, "Please enter a phone number."),
   company: z.string().trim(),
   exchangeStatus: z.enum(exchangeStatusOptions),
-  relinquishedClosingDate: z.string(),
   identificationDeadline: z.string(),
-  completionDeadline: z.string(),
   targetLocations: z.string().trim().min(3, "Tell us where you want to acquire."),
   assetTypes: z.array(z.enum(investorAssetTypes)).min(1, "Select at least one asset type."),
   purchasePriceMin: z.string().trim().min(1, "Enter the low end of your purchase range."),
   purchasePriceMax: z.string().trim().min(1, "Enter the high end of your purchase range."),
   availableEquity: z.string().trim().min(1, "Enter the equity currently available."),
   financingStatus: z.enum(financingStatusOptions),
-  occupancyAndTenantProfile: z.string().trim().min(10, "Describe your occupancy and tenant preferences."),
-  returnAndRiskCriteria: z.string().trim().min(10, "Describe the return or risk criteria that matter."),
-  marketInterest: z.enum(marketInterestOptions),
-  propertiesUnderConsideration: z.string().trim(),
-  intermediaryStatus: z.enum(intermediaryStatusOptions),
-  additionalRequirements: z.string().trim(),
-  preferredResponseMethod: z.enum(responseMethodOptions),
+  acquisitionRequirements: z.string().trim().min(10, "Briefly describe the property and investment requirements that matter."),
   consent: z.boolean().refine((value) => value, "Consent is required before an inquiry can be submitted."),
   website: z.string(),
 }).superRefine((values, context) => {
@@ -78,31 +64,27 @@ const InvestorInquiryForm = () => {
       phone: "",
       company: "",
       exchangeStatus: exchangeStatusOptions[0],
-      relinquishedClosingDate: "",
       identificationDeadline: "",
-      completionDeadline: "",
       targetLocations: "",
       assetTypes: [],
       purchasePriceMin: "",
       purchasePriceMax: "",
       availableEquity: "",
       financingStatus: financingStatusOptions[0],
-      occupancyAndTenantProfile: "",
-      returnAndRiskCriteria: "",
-      marketInterest: marketInterestOptions[0],
-      propertiesUnderConsideration: "",
-      intermediaryStatus: intermediaryStatusOptions[0],
-      additionalRequirements: "",
-      preferredResponseMethod: responseMethodOptions[0],
+      acquisitionRequirements: "",
       consent: false,
       website: "",
     },
   });
+  const isConfirmedExchange = form.watch("exchangeStatus") === confirmedExchangeStatus;
 
   const onSubmit = async (values: InvestorInquiryValues) => {
     setSubmitError(null);
     try {
-      await submitInvestorInquiry(values, `${location.pathname}${location.search}`, startedAt.current);
+      await submitInvestorInquiry({
+        ...values,
+        identificationDeadline: values.exchangeStatus === confirmedExchangeStatus ? values.identificationDeadline : "",
+      }, `${location.pathname}${location.search}`, startedAt.current);
       setIsSubmitted(true);
       form.reset();
     } catch {
@@ -115,7 +97,7 @@ const InvestorInquiryForm = () => {
       <div className="career-form-card career-form-success" role="status" aria-live="polite">
         <div className="contact-success-eyebrow">Acquisition brief received</div>
         <h3>Thank you for sharing your criteria.</h3>
-        <p>Gala CRE will review the acquisition brief and follow up using your preferred contact method.</p>
+        <p>Gala CRE will review the acquisition brief and follow up using the contact information you provided.</p>
         <Button type="button" className="contact-success-reset" onClick={() => {
           startedAt.current = new Date().toISOString();
           setIsSubmitted(false);
@@ -130,8 +112,8 @@ const InvestorInquiryForm = () => {
     <div className="career-form-card investor-form-card">
       <FormCardHeader
         eyebrow="Investor inquiry"
-        title="Share your acquisition brief."
-        description="All fields are required unless marked optional. The details give Gala enough context to begin a focused property-sourcing conversation. This is not a request for tax or legal advice."
+        title="Share your search criteria."
+        description="All fields are required unless marked optional. The details below give Gala enough context to prepare for a focused property-sourcing conversation."
       />
 
       <Form {...form}>
@@ -169,16 +151,9 @@ const InvestorInquiryForm = () => {
                 </FormItem>
               )} />
             </div>
-            <FormField control={form.control} name="preferredResponseMethod" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Preferred response method</FormLabel>
-                <FormControl><select {...field} className="contact-form-input contact-form-select">{responseMethodOptions.map((option) => <option key={option}>{option}</option>)}</select></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
           </FormSection>
 
-          <FormSection number="02" title="Exchange timing">
+          <FormSection number="02" title="Search criteria">
             <FormField control={form.control} name="exchangeStatus" render={({ field }) => (
               <FormItem className="contact-form-item">
                 <FormLabel className="contact-form-label">Is this a 1031 exchange?</FormLabel>
@@ -186,56 +161,28 @@ const InvestorInquiryForm = () => {
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
-            <p className="investor-form-guidance">If this is an exchange, enter the dates confirmed with your qualified intermediary or advisors.</p>
-            <div className="career-form-row career-form-row--three investor-date-row">
-              <FormField control={form.control} name="relinquishedClosingDate" render={({ field }) => (
-                <FormItem className="contact-form-item">
-                  <FormLabel className="contact-form-label">Relinquished-property closing</FormLabel>
-                  <FormControl><Input {...field} type="date" className="contact-form-input" /></FormControl>
-                  <FormMessage className="contact-form-message" />
-                </FormItem>
-              )} />
+
+            {isConfirmedExchange ? (
               <FormField control={form.control} name="identificationDeadline" render={({ field }) => (
-                <FormItem className="contact-form-item">
+                <FormItem className="contact-form-item investor-deadline-field">
                   <FormLabel className="contact-form-label">Identification deadline</FormLabel>
                   <FormControl><Input {...field} type="date" className="contact-form-input" /></FormControl>
+                  <p className="investor-form-guidance">Enter the deadline confirmed with your qualified intermediary or advisors.</p>
                   <FormMessage className="contact-form-message" />
                 </FormItem>
               )} />
-              <FormField control={form.control} name="completionDeadline" render={({ field }) => (
-                <FormItem className="contact-form-item">
-                  <FormLabel className="contact-form-label">Exchange-completion deadline</FormLabel>
-                  <FormControl><Input {...field} type="date" className="contact-form-input" /></FormControl>
-                  <FormMessage className="contact-form-message" />
-                </FormItem>
-              )} />
-            </div>
-            <FormField control={form.control} name="intermediaryStatus" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Qualified intermediary status</FormLabel>
-                <FormControl><select {...field} className="contact-form-input contact-form-select">{intermediaryStatusOptions.map((option) => <option key={option}>{option}</option>)}</select></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-          </FormSection>
+            ) : null}
 
-          <FormSection number="03" title="Acquisition criteria">
             <FormField control={form.control} name="targetLocations" render={({ field }) => (
               <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Target locations</FormLabel>
+                <FormLabel className="contact-form-label">Target markets</FormLabel>
                 <FormControl><Input {...field} className="contact-form-input" placeholder="Markets, cities, states, or radius" /></FormControl>
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
-          <FormField control={form.control} name="assetTypes" render={({ field }) => (
-            <FormItem className="contact-form-item">
-                <CheckboxGrid
-                  legend="Asset types"
-                  options={investorAssetTypes}
-                  selected={field.value}
-                  onChange={field.onChange}
-                  className="investor-asset-grid"
-                />
+            <FormField control={form.control} name="assetTypes" render={({ field }) => (
+              <FormItem className="contact-form-item">
+                <CheckboxGrid legend="Asset types" options={investorAssetTypes} selected={field.value} onChange={field.onChange} className="investor-asset-grid" />
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
@@ -269,38 +216,10 @@ const InvestorInquiryForm = () => {
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
-            <FormField control={form.control} name="occupancyAndTenantProfile" render={({ field }) => (
+            <FormField control={form.control} name="acquisitionRequirements" render={({ field }) => (
               <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Desired occupancy and tenant profile</FormLabel>
-                <FormControl><Textarea {...field} rows={3} className="contact-form-input contact-form-textarea" placeholder="Vacant or occupied, lease term, tenant quality, owner-user needs, or other preferences" /></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="returnAndRiskCriteria" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Return or risk criteria</FormLabel>
-                <FormControl><Textarea {...field} rows={3} className="contact-form-input contact-form-textarea" placeholder="Income, yield, hold period, condition, credit, vacancy, or development risk" /></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="marketInterest" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">On-market versus off-market interest</FormLabel>
-                <FormControl><select {...field} className="contact-form-input contact-form-select">{marketInterestOptions.map((option) => <option key={option}>{option}</option>)}</select></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="propertiesUnderConsideration" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Properties currently under consideration <span>Optional</span></FormLabel>
-                <FormControl><Textarea {...field} rows={3} className="contact-form-input contact-form-textarea" placeholder="Addresses, listing links, or a short description" /></FormControl>
-                <FormMessage className="contact-form-message" />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="additionalRequirements" render={({ field }) => (
-              <FormItem className="contact-form-item">
-                <FormLabel className="contact-form-label">Additional acquisition requirements <span>Optional</span></FormLabel>
-                <FormControl><Textarea {...field} rows={4} className="contact-form-input contact-form-textarea" placeholder="Access, utilities, zoning, geography, diligence, closing, or operational requirements" /></FormControl>
+                <FormLabel className="contact-form-label">Brief property and investment requirements</FormLabel>
+                <FormControl><Textarea {...field} rows={4} className="contact-form-input contact-form-textarea" placeholder="Occupancy, tenants, return or risk criteria, condition, access, zoning, timing, or other requirements" /></FormControl>
                 <FormMessage className="contact-form-message" />
               </FormItem>
             )} />
@@ -318,12 +237,7 @@ const InvestorInquiryForm = () => {
             <FormItem className="contact-honeypot" aria-hidden="true"><FormLabel>Website</FormLabel><FormControl><Input {...field} tabIndex={-1} autoComplete="off" /></FormControl></FormItem>
           )} />
 
-          <FormSubmissionControl
-            label="Share Acquisition Criteria"
-            loadingLabel="Sending..."
-            isSubmitting={form.formState.isSubmitting}
-            error={submitError}
-          />
+          <FormSubmissionControl label="Start Property Search" loadingLabel="Sending..." isSubmitting={form.formState.isSubmitting} error={submitError} />
         </form>
       </Form>
     </div>

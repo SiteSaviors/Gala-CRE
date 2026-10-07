@@ -22,9 +22,6 @@ const careerStages = ["New to commercial listings", "Building an active listing 
 const exchangeStatuses = ["Yes — this is a 1031 exchange", "No — this is a direct acquisition", "Not sure yet"] as const;
 const assetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land", "Mixed use", "Special purpose"] as const;
 const financingStatuses = ["Cash acquisition", "Financing approved", "Lender engaged", "Financing not started", "Evaluating capital structure"] as const;
-const marketInterests = ["On-market and off-market", "On-market opportunities", "Off-market opportunities"] as const;
-const intermediaryStatuses = ["Qualified intermediary engaged", "Selecting a qualified intermediary", "Not yet engaged", "Not applicable"] as const;
-const responseMethods = ["Phone", "Email", "Text message"] as const;
 
 const optionalString = (maximum: number) => z.string().trim().max(maximum);
 const requiredString = (minimum: number, maximum: number) => z.string().trim().min(minimum).max(maximum);
@@ -49,30 +46,20 @@ const investorPayloadSchema = z.object({
   phone: requiredString(7, 50),
   company: optionalString(160),
   exchangeStatus: z.enum(exchangeStatuses),
-  relinquishedClosingDate: optionalString(20),
   identificationDeadline: optionalString(20),
-  completionDeadline: optionalString(20),
   targetLocations: requiredString(3, 1000),
   assetTypes: z.array(z.enum(assetTypes)).min(1).max(assetTypes.length),
   purchasePriceMin: requiredString(1, 80),
   purchasePriceMax: requiredString(1, 80),
   availableEquity: requiredString(1, 80),
   financingStatus: z.enum(financingStatuses),
-  occupancyAndTenantProfile: requiredString(10, 5000),
-  returnAndRiskCriteria: requiredString(10, 5000),
-  marketInterest: z.enum(marketInterests),
-  propertiesUnderConsideration: optionalString(5000),
-  intermediaryStatus: z.enum(intermediaryStatuses),
-  additionalRequirements: optionalString(5000),
-  preferredResponseMethod: z.enum(responseMethods),
+  acquisitionRequirements: requiredString(10, 5000),
   consent: z.literal(true),
   website: z.string().max(500),
 }).superRefine((values, context) => {
   getExchangeTimelineIssues({
     exchangeStatus: values.exchangeStatus ?? "",
-    relinquishedClosingDate: values.relinquishedClosingDate ?? "",
     identificationDeadline: values.identificationDeadline ?? "",
-    completionDeadline: values.completionDeadline ?? "",
   }).forEach(({ field, message }) => {
     context.addIssue({ code: z.ZodIssueCode.custom, path: [field], message });
   });

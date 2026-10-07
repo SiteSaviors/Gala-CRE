@@ -138,8 +138,10 @@ describe("property content model", () => {
     );
     expect(propertyBySlug["802-bragg-boulevard"]?.listingPage?.gallery?.items).toHaveLength(3);
     expect(propertyBySlug["802-bragg-boulevard"]?.listingPage?.information?.groups).toHaveLength(2);
-    expect(propertyBySlug["202-north-main-street"]?.listingPage?.gallery).toBeUndefined();
-    expect(propertyBySlug["10416-chapel-hill-road"]?.listingPage?.gallery).toBeUndefined();
+    expect(propertyBySlug["202-north-main-street"]?.listingPage?.gallery?.items).toHaveLength(7);
+    expect(propertyBySlug["202-north-main-street"]?.heroImage).toMatch(/202-north-main-01-aerial\.avif$/);
+    expect(propertyBySlug["10416-chapel-hill-road"]?.listingPage?.gallery?.items).toHaveLength(7);
+    expect(propertyBySlug["10416-chapel-hill-road"]?.heroImage).toMatch(/10416-chapel-hill-01-cover\.avif$/);
     expect(JSON.stringify(propertyBySlug["202-north-main-street"])).not.toContain("$825,000");
     expect(JSON.stringify(propertyBySlug["10416-chapel-hill-road"])).not.toContain("$2,500,000");
     expect(properties.every((item) => !("brochurePdf" in item) && !("documents" in (item.listingPage ?? {})))).toBe(true);

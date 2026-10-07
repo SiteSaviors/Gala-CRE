@@ -303,7 +303,7 @@ describe("Gala CRE public pages", () => {
     renderPage(<Careers />, "/careers");
     expect(screen.getByRole("heading", { name: "Join Our Team", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Build a commercial practice with more behind it." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The resources to move listings forward." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The resources to move you forward." })).toBeInTheDocument();
     const directLeadership = screen.getByRole("button", { name: "Leadership at the table" });
     expect(directLeadership).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(directLeadership);
@@ -325,22 +325,23 @@ describe("Gala CRE public pages", () => {
 
   it("creates a distinct 1031 replacement-property sourcing route", () => {
     renderPage(<ExchangeSourcing />, "/investors/1031-exchange");
-    expect(screen.getByRole("heading", { name: /Move quickly with a clearer acquisition brief/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /A focused search—not a promise of an outcome/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Establish the clock" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Define the buy box" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Screen the field" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Coordinate next steps" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Share your acquisition brief/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /A focused search when timing matters/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /A commercial property search built around your criteria/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Confirm the timeline" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Define the criteria" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Screen opportunities" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Advance the right fit" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Share your search criteria/i })).toBeInTheDocument();
     expect(screen.getByLabelText("Is this a 1031 exchange?")).toBeInTheDocument();
     expect(screen.getByLabelText("Identification deadline")).toHaveAttribute("type", "date");
     expect(screen.getByRole("group", { name: "Asset types" })).toBeInTheDocument();
     expect(screen.getByLabelText("Financing status")).toBeInTheDocument();
-    expect(screen.getByLabelText("Qualified intermediary status")).toBeInTheDocument();
-    expect(screen.getByLabelText("Preferred response method")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Share Acquisition Criteria/i })).toBeEnabled();
+    expect(screen.getByLabelText("Brief property and investment requirements")).toBeInTheDocument();
+    expect(screen.queryByLabelText("Qualified intermediary status")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Preferred response method")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Start Property Search/i })).toBeEnabled();
     expect(screen.getByText(/not tax, legal, accounting, or qualified-intermediary services/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Share Your Criteria/i })).toHaveAttribute("href", "#investor-inquiry");
+    expect(screen.getByRole("link", { name: /Start Your Property Search/i })).toHaveAttribute("href", "#investor-inquiry");
   });
 
   it("presents attributed news and media without calling it Gala CRE coverage", () => {
@@ -689,7 +690,7 @@ describe("Gala CRE public pages", () => {
 
   it("renders the current approved property catalog", () => {
     renderPage(<Properties />, "/properties");
-    expect(screen.getByRole("heading", { name: "Properties", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Current Listings", level: 1 })).toBeInTheDocument();
     expect(document.querySelector(".gala-inner-hero")).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Search properties" })).toBeInTheDocument();
     expect(screen.getByText("8 properties")).toBeInTheDocument();
@@ -978,7 +979,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders 202 North Main Street without unconfirmed economics or MLS photography", () => {
+  it("renders 202 North Main Street with the approved property gallery and without unconfirmed economics", () => {
     render(
       <MemoryRouter initialEntries={["/properties/202-north-main-street"]}>
         <Routes>
@@ -994,15 +995,16 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText("Not published pending confirmation")).toBeInTheDocument();
     expect(screen.getByText("Gala's exact transaction role and advisor credit are not yet published")).toBeInTheDocument();
     expect(screen.queryByText("$825,000")).not.toBeInTheDocument();
-    expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();
+    const gallery = screen.getByRole("region", { name: /202 North Main Street property gallery/i });
+    expect(within(gallery).getAllByRole("button", { name: /View image/i })).toHaveLength(8);
+    expect(screen.getByRole("img", { name: /Aerial view of 202 North Main Street/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
       "/contact?property=202-north-main-street",
     );
   });
 
-  it("renders 10416 Chapel Hill Road without disputed pricing or MLS photography", () => {
+  it("renders 10416 Chapel Hill Road with the approved property gallery and without disputed pricing", () => {
     render(
       <MemoryRouter initialEntries={["/properties/10416-chapel-hill-road"]}>
         <Routes>
@@ -1021,8 +1023,9 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByText(/relationship to 10414 remains unconfirmed/i)).toBeInTheDocument();
     expect(screen.queryByText("$2,500,000")).not.toBeInTheDocument();
     expect(screen.queryByText("$1.8M")).not.toBeInTheDocument();
-    expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /completed transaction graphic/i })).toBeInTheDocument();
+    const gallery = screen.getByRole("region", { name: /10416 Chapel Hill Road property gallery/i });
+    expect(within(gallery).getAllByRole("button", { name: /View image/i })).toHaveLength(8);
+    expect(screen.getByRole("img", { name: /Aerial view of the 10416 Chapel Hill Road property/i })).toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(
       "href",
       "/contact?property=10416-chapel-hill-road&advisor=gaurang-gala",

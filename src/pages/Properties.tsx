@@ -69,7 +69,7 @@ const Properties = () => {
             <header className="gala-property-catalog__header">
               <div>
                 <div className="gala-kicker gala-kicker--dark">Property Catalog</div>
-                <h1>Properties</h1>
+                <h1>Current Listings</h1>
               </div>
               <p>Search current commercial opportunities and selected completed transactions represented by Gala CRE Group.</p>
             </header>

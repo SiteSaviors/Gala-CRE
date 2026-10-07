@@ -12,22 +12,14 @@ const validInquiry: InvestorInquiryValues = {
   phone: "919-555-0110",
   company: "Avery Holdings",
   exchangeStatus: "Yes — this is a 1031 exchange",
-  relinquishedClosingDate: "2026-09-01",
   identificationDeadline: "2026-09-12",
-  completionDeadline: "2027-02-28",
   targetLocations: "Raleigh-Durham and central North Carolina",
   assetTypes: ["Industrial", "Retail"],
   purchasePriceMin: "$2,000,000",
   purchasePriceMax: "$5,000,000",
   availableEquity: "$1,500,000",
   financingStatus: "Lender engaged",
-  occupancyAndTenantProfile: "Occupied property with durable lease term and established tenants.",
-  returnAndRiskCriteria: "Current income with limited near-term capital requirements.",
-  marketInterest: "On-market and off-market",
-  propertiesUnderConsideration: "One marketed industrial property in Wake County.",
-  intermediaryStatus: "Qualified intermediary engaged",
-  additionalRequirements: "Convenient highway access and a conventional diligence period.",
-  preferredResponseMethod: "Phone",
+  acquisitionRequirements: "Occupied property with durable leases, established tenants, highway access, and a conventional diligence period.",
   consent: true,
   website: "",
 };
@@ -63,7 +55,7 @@ describe("investor sourcing submission boundary", () => {
       startedAt,
       payload: {
         assetTypes: ["Industrial", "Retail"],
-        intermediaryStatus: "Qualified intermediary engaged",
+        acquisitionRequirements: expect.stringContaining("durable leases"),
       },
     });
   });

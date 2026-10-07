@@ -424,3 +424,48 @@ test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
 
   await context.close();
 });
+
+test("1031 sourcing stays focused, conditional, and responsive", async ({ page }) => {
+  const consoleErrors: string[] = [];
+  page.on("pageerror", (error) => consoleErrors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error" && !message.location().url.includes("/_vercel/insights/script.js")) {
+      consoleErrors.push(message.text());
+    }
+  });
+
+  for (const viewport of viewports) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    const response = await page.goto("/investors/1031-exchange?source=property-catalog", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page).toHaveURL(/source=property-catalog/);
+    await expect(page.getByRole("heading", { name: "A focused search when timing matters." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Start with the essentials." })).toBeVisible();
+
+    const layout = await page.evaluate(() => ({
+      overflow: document.documentElement.scrollWidth > window.innerWidth,
+      scrollHeight: document.documentElement.scrollHeight,
+    }));
+    expect(layout.overflow).toBe(false);
+    if (viewport.name === "mobile") expect(layout.scrollHeight).toBeLessThanOrEqual(7_000);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/investors/1031-exchange?source=property-catalog", { waitUntil: "domcontentloaded" });
+  const cta = page.getByRole("link", { name: "Start Your Property Search" });
+  await expect(cta).toHaveAttribute("href", "#investor-inquiry");
+  await cta.click();
+  await expect(page).toHaveURL(/#investor-inquiry$/);
+  await expect(page.locator("#investor-inquiry")).toBeInViewport();
+
+  const exchangeStatus = page.getByLabel("Is this a 1031 exchange?");
+  await expect(page.getByLabel("Identification deadline")).toBeVisible();
+  await exchangeStatus.selectOption("No — this is a direct acquisition");
+  await expect(page.getByLabel("Identification deadline")).toHaveCount(0);
+  await exchangeStatus.selectOption("Yes — this is a 1031 exchange");
+  await expect(page.getByLabel("Identification deadline")).toBeVisible();
+
+  await page.getByRole("button", { name: "Start Property Search" }).click();
+  await expect(page.getByText("Please enter your name.")).toBeVisible();
+  expect(consoleErrors).toEqual([]);
+});

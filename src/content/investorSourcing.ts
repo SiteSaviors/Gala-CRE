@@ -22,41 +22,26 @@ export const financingStatusOptions = [
   "Evaluating capital structure",
 ] as const;
 
-export const marketInterestOptions = [
-  "On-market and off-market",
-  "On-market opportunities",
-  "Off-market opportunities",
-] as const;
-
-export const intermediaryStatusOptions = [
-  "Qualified intermediary engaged",
-  "Selecting a qualified intermediary",
-  "Not yet engaged",
-  "Not applicable",
-] as const;
-
-export const responseMethodOptions = ["Phone", "Email", "Text message"] as const;
-
 export const sourcingProcess = [
   {
     number: "01",
-    title: "Establish the clock",
-    body: "Organize the relinquished-property closing date, identification deadline, completion deadline, and qualified-intermediary status.",
+    title: "Confirm the timeline",
+    body: "Document the dates supplied by the investor and their advisors.",
   },
   {
     number: "02",
-    title: "Define the buy box",
-    body: "Clarify target markets, asset types, pricing, equity, debt readiness, occupancy preferences, and acceptable risk.",
+    title: "Define the criteria",
+    body: "Establish markets, property types, pricing, occupancy, capital, and risk parameters.",
   },
   {
     number: "03",
-    title: "Screen the field",
-    body: "Compare potential properties against the acquisition brief before investing time in deeper underwriting and diligence.",
+    title: "Screen opportunities",
+    body: "Compare potential properties against the acquisition brief.",
   },
   {
     number: "04",
-    title: "Coordinate next steps",
-    body: "Keep brokerage, financing, diligence, legal, tax, and intermediary conversations aligned around the investor’s decision path.",
+    title: "Advance the right fit",
+    body: "Coordinate tours, property conversations, diligence, financing, and negotiation.",
   },
 ] as const;
 
@@ -71,13 +56,6 @@ export const acquisitionCriteria = [
   },
   {
     title: "Execution fit",
-    body: "Exchange dates, intermediary readiness, on- or off-market preferences, diligence needs, and closing constraints.",
+    body: "Timing, advisor coordination, diligence needs, decision-makers, and closing constraints.",
   },
-] as const;
-
-export const readinessGuidance = [
-  "Confirm exchange dates with your qualified intermediary and advisors.",
-  "Separate required acquisition criteria from preferences.",
-  "Document available equity and the current financing path.",
-  "Identify decision-makers and diligence requirements before touring.",
 ] as const;

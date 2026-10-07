@@ -118,7 +118,7 @@ This table controls which completed transactions may feed the future homepage pr
 
 | Property | Status / closing date | Asset and location | Gala role | Publishable price | Approved homepage photography | Advisor | Detail route | Homepage posture |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 10416 Chapel Hill Road | Closed July 29, 2026 | Commercial land; Morrisville, NC | Gala listing involvement documented | None confirmed | None; supplied MLS photography is not cleared | Gaurang Gala; Goverdhan Vavilala | `/properties/10416-chapel-hill-road` | Publishable in qualified form. The supplied record supports 10416 only; do not combine it with 10414 until the client confirms the relationship and preferred presentation. Individual transaction roles are not published because none were supplied. |
+| 10416 Chapel Hill Road | Closed July 29, 2026 | Commercial land; Morrisville, NC | Gala listing involvement documented | None confirmed | Eight client-supplied property photographs approved for publication October 6, 2026 | Gaurang Gala; Goverdhan Vavilala | `/properties/10416-chapel-hill-road` | Publishable in qualified form. The supplied record supports 10416 only; do not combine it with 10414 until the client confirms the relationship and preferred presentation. Individual transaction roles are not published because none were supplied. |
 | 802 Bragg Boulevard | Closed; date not supplied | Retail / convenience store and automotive service; Fayetteville, NC | Listing representation documented | None confirmed | Three former-listing images are already in use under the client's direction; separate rights documentation is not recorded | Gaurang Gala | `/properties/802-bragg-boulevard` | Best current visual candidate, with closing date and economics omitted. |
 | 202 North Main Street | Closed July 30, 2026 | Commercial / retail; Fuquay-Varina, NC | Not confirmed | None confirmed | None; supplied MLS photography is not cleared | Not confirmed | `/properties/202-north-main-street` | Publishable in qualified, non-photographic form; not yet suitable for a visual homepage card. |
 | Watkins / Alta Watkins | Transaction status not established | Proposed multifamily development; Watkins Road, Morrisville, NC | Not established | None | None; saved article imagery is not project-specific or cleared | Not established | None | Blocked. The saved article documents a 2025 proposal, not a Gala transaction or closing. |
@@ -338,11 +338,11 @@ Source: the client-supplied [HomeSpotter / Doorify MLS record 10119823](https://
 | Zoning | DC-2 | Reported by the MLS display; municipal record controls |
 | Sharing agent | Leigh Roach | The supplied page is personalized to Leigh, but that alone does not establish Gala's role in the closed transaction |
 | Listing brokerage | Century 21 Triangle Group | The MLS copyright block attributes the listing to Century 21 Triangle Group |
-| Media | 26 MLS photographs | Not cleared for republication; the page limits IDX data to personal, non-commercial consumer use |
+| Media | Eight client-supplied property photographs selected for publication | Client directed publication October 6, 2026; one exact duplicate was omitted from the public gallery |
 
-Publication posture: the user's September 14 direction establishes 202 North Main Street as a selected closed transaction for the Gala site. The implemented record uses the address, closed date, and carefully qualified physical facts without assigning Gala's exact side or a named advisor. Do not reuse the MLS photographs or copy. Do not publish $825,000 as sale consideration until confirmed.
+Publication posture: the user's September 14 direction establishes 202 North Main Street as a selected closed transaction for the Gala site. The implemented record uses the address, closed date, carefully qualified physical facts, and the property photographs supplied for publication on October 6, 2026, without assigning Gala's exact side or a named advisor. Do not publish $825,000 as sale consideration until confirmed.
 
-Readiness: **Published locally in qualified form** at `/properties/202-north-main-street` using the non-photographic Gala completed-transaction treatment. Gala's exact role, advisor credit, transaction economics, and approved property photography remain enhancement inputs.
+Readiness: **Published locally in qualified form** at `/properties/202-north-main-street` with a client-directed aerial cover and seven additional exterior and interior gallery views. Gala's exact role, advisor credit, and transaction economics remain enhancement inputs.
 
 ## HMS closed transaction — 10416 Chapel Hill Road
 
@@ -359,11 +359,11 @@ Source: the client-supplied [HomeSpotter / Doorify MLS record 10040138](https://
 | Improvements | One story; year built 1920 | Reported by the supplied MLS display; building area is not supplied |
 | Listing context | Listing courtesy of Gala Real Estate Advisors, LLC; page personalized to Leigh Roach | Supports Gala listing involvement and identifies the MLS-page contact; it does not override the client's separate transaction-team direction |
 | Transaction team | Gaurang Gala and Goverdhan Vavilala | Client-supplied September 21 direction; individual roles were not supplied and remain omitted |
-| Media | 12 MLS photographs | Not cleared for republication; the page limits IDX data to personal, non-commercial consumer use |
+| Media | Eight client-supplied property photographs selected for publication | Client directed publication October 6, 2026; approximate marketing lines remain labeled and qualified |
 
-Publication posture: the user's September 14 direction authorizes a 10416 Chapel Hill Road closed-transaction record using the address, closed status/date, approximate acreage, parcel count, and Gala listing involvement. Do not use the MLS photos/copy or publish a sale price until the combined 10414/10416 structure and economics are confirmed.
+Publication posture: the user's September 14 direction authorizes a 10416 Chapel Hill Road closed-transaction record using the address, closed status/date, approximate acreage, parcel count, Gala listing involvement, and the property photographs supplied for publication on October 6, 2026. Do not publish a sale price until the combined 10414/10416 structure and economics are confirmed. Property lines shown in selected marketing images remain explicitly approximate.
 
-Readiness: **Published locally in qualified form** at `/properties/10416-chapel-hill-road` using the non-photographic Gala completed-transaction treatment. Gaurang Gala and Goverdhan Vavilala are connected as the shared transaction team without invented individual roles. The correct combined-address presentation, transaction price, and approved property photography remain enhancement inputs.
+Readiness: **Published locally in qualified form** at `/properties/10416-chapel-hill-road` with the client-directed outlined aerial cover and seven additional aerial and ground-level gallery views. Gaurang Gala and Goverdhan Vavilala remain connected as the shared transaction team without invented individual roles. The correct combined-address presentation and transaction price remain enhancement inputs.
 
 ## Watkins deal material
 

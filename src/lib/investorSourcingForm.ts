@@ -1,9 +1,6 @@
 import type {
   exchangeStatusOptions,
   financingStatusOptions,
-  intermediaryStatusOptions,
-  marketInterestOptions,
-  responseMethodOptions,
 } from "@/content/investorSourcing";
 import {
   buildStructuredFormSubmission,
@@ -17,22 +14,14 @@ export type InvestorInquiryValues = {
   phone: string;
   company: string;
   exchangeStatus: (typeof exchangeStatusOptions)[number];
-  relinquishedClosingDate: string;
   identificationDeadline: string;
-  completionDeadline: string;
   targetLocations: string;
   assetTypes: string[];
   purchasePriceMin: string;
   purchasePriceMax: string;
   availableEquity: string;
   financingStatus: (typeof financingStatusOptions)[number];
-  occupancyAndTenantProfile: string;
-  returnAndRiskCriteria: string;
-  marketInterest: (typeof marketInterestOptions)[number];
-  propertiesUnderConsideration: string;
-  intermediaryStatus: (typeof intermediaryStatusOptions)[number];
-  additionalRequirements: string;
-  preferredResponseMethod: (typeof responseMethodOptions)[number];
+  acquisitionRequirements: string;
   consent: boolean;
   website: string;
 };

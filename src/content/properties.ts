@@ -28,7 +28,22 @@ import lexingtonTour from "@/assets/properties/videos/lexington-townhomes-tour.m
 import braggBoulevardExterior from "@/assets/properties/802-bragg-boulevard/bragg-03.webp";
 import braggBoulevardApproach from "@/assets/properties/802-bragg-boulevard/bragg-01.webp";
 import braggBoulevardInterior from "@/assets/properties/802-bragg-boulevard/bragg-02.webp";
-import transactionRecordGraphic from "@/assets/properties/transaction-record.svg";
+import northMainAerial from "@/assets/properties/202-north-main-street/202-north-main-01-aerial.avif";
+import northMainExterior from "@/assets/properties/202-north-main-street/202-north-main-02-exterior.avif";
+import northMainFrontage from "@/assets/properties/202-north-main-street/202-north-main-03-frontage.avif";
+import northMainSideExterior from "@/assets/properties/202-north-main-street/202-north-main-04-side-exterior.avif";
+import northMainCorridorAerial from "@/assets/properties/202-north-main-street/202-north-main-05-corridor-aerial.avif";
+import northMainShowroomWide from "@/assets/properties/202-north-main-street/202-north-main-06-showroom-wide.avif";
+import northMainShowroom from "@/assets/properties/202-north-main-street/202-north-main-07-showroom.avif";
+import northMainOffice from "@/assets/properties/202-north-main-street/202-north-main-08-office.avif";
+import chapelHillCover from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-01-cover.avif";
+import chapelHillSite from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-02-site.avif";
+import chapelHillResidences from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-03-residences.avif";
+import chapelHillRoadside from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-04-roadside.avif";
+import chapelHillBoundaryClose from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-05-boundary-close.avif";
+import chapelHillBoundaryWide from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-06-boundary-wide.avif";
+import chapelHillContext from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-07-context.avif";
+import chapelHillRoadContext from "@/assets/properties/10416-chapel-hill-road/10416-chapel-hill-08-road-context.avif";
 import type { TeamMemberId } from "@/content/team";
 
 export const propertyAssetTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land"] as const;
@@ -1215,12 +1230,12 @@ export const properties: Property[] = [
     status: "Closed",
     sizeDisplay: "3,333 SF",
     acreageDisplay: "0.23 acres",
-    heroImage: transactionRecordGraphic,
-    imageAlt: "Gala CRE completed transaction graphic; property photography is not published",
+    heroImage: northMainAerial,
+    imageAlt: "Aerial view of 202 North Main Street and its Fuquay-Varina surroundings",
     imagePosition: "center",
     summary: "Completed commercial transaction involving a 3,333-square-foot property on approximately 0.23 acres.",
     overview:
-      "The client-directed transaction record identifies a commercial property at 202 North Main Street that closed on July 30, 2026. Physical facts shown here come from the supplied MLS record; transaction pricing and MLS photography remain unpublished.",
+      "The client-directed transaction record identifies a commercial property at 202 North Main Street that closed on July 30, 2026. Physical facts shown here come from the supplied MLS record; transaction pricing remains unpublished.",
     highlights: [
       "Closed July 30, 2026",
       "3,333-square-foot commercial building",
@@ -1237,7 +1252,7 @@ export const properties: Property[] = [
       eyebrow: "Completed Transaction",
       title: "A commercial property transaction in Fuquay-Varina.",
       body:
-        "The supplied record describes a two-story commercial property with a retail classification. This page documents the completed transaction without publishing unconfirmed economics or restricted MLS media.",
+        "The supplied record describes a two-story commercial property with a retail classification. This page documents the completed transaction without publishing unconfirmed economics.",
       points: [
         "Commercial / retail classification in the supplied MLS record",
         "DC-2 zoning reported by the supplied record",
@@ -1253,7 +1268,15 @@ export const properties: Property[] = [
     },
     externalLinks: [],
     advisorAssignments: [],
-    gallery: [],
+    gallery: [
+      northMainExterior,
+      northMainFrontage,
+      northMainSideExterior,
+      northMainCorridorAerial,
+      northMainShowroomWide,
+      northMainShowroom,
+      northMainOffice,
+    ],
     listingPage: {
       headline: "A completed commercial transaction in Fuquay-Varina.",
       lead:
@@ -1296,7 +1319,52 @@ export const properties: Property[] = [
           { label: "Status", value: "Closed July 30, 2026" },
           { label: "Transaction price", value: "Not published pending confirmation" },
           { label: "Representation", value: "Gala's exact transaction role and advisor credit are not yet published" },
-          { label: "Photography", value: "MLS imagery not republished" },
+          { label: "Photography", value: "Selected property photography published with client direction" },
+        ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Transaction Gallery",
+          title: "The property and its North Main Street context.",
+          body:
+            "Selected exterior, aerial, showroom, and office views document the property as presented during the sale process.",
+        },
+        items: [
+          {
+            src: northMainExterior,
+            alt: "Front exterior of the commercial building at 202 North Main Street",
+            caption: "Front exterior",
+          },
+          {
+            src: northMainFrontage,
+            alt: "North Main Street frontage and entrance at 202 North Main Street",
+            caption: "North Main Street frontage",
+          },
+          {
+            src: northMainSideExterior,
+            alt: "Side and rear exterior context at 202 North Main Street",
+            caption: "Side and rear exterior",
+          },
+          {
+            src: northMainCorridorAerial,
+            alt: "Aerial view along North Main Street surrounding the property",
+            caption: "North Main Street corridor",
+          },
+          {
+            src: northMainShowroomWide,
+            alt: "Wide interior view of the commercial showroom",
+            caption: "Commercial showroom",
+          },
+          {
+            src: northMainShowroom,
+            alt: "Interior view of the showroom and finish displays",
+            caption: "Showroom and displays",
+          },
+          {
+            src: northMainOffice,
+            alt: "Office area within the commercial property",
+            caption: "Office area",
+          },
         ],
       },
       location: {
@@ -1314,7 +1382,7 @@ export const properties: Property[] = [
           "https://www.google.com/maps/search/?api=1&query=202%20North%20Main%20Street%2C%20Fuquay-Varina%2C%20NC%2027526",
       },
       disclosure:
-        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and zoning details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and operating information are not published.",
+        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and zoning details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, current ownership, occupancy, and operating information are not published.",
     },
     featured: false,
     sortOrder: 7,
@@ -1330,12 +1398,12 @@ export const properties: Property[] = [
     offeringType: "For Sale",
     status: "Closed",
     acreageDisplay: "Approx. 3.3 acres",
-    heroImage: transactionRecordGraphic,
-    imageAlt: "Gala CRE completed transaction graphic; property photography is not published",
+    heroImage: chapelHillCover,
+    imageAlt: "Aerial view of the 10416 Chapel Hill Road property with approximate marketing lines",
     imagePosition: "center",
     summary: "Completed commercial land transaction involving approximately 3.3 acres in Morrisville.",
     overview:
-      "The supplied MLS record identifies a commercial transaction at 10416 Chapel Hill Road that closed on July 29, 2026 and involved two parcels totaling approximately 3.3 acres. Transaction pricing and MLS photography remain unpublished.",
+      "The supplied MLS record identifies a commercial transaction at 10416 Chapel Hill Road that closed on July 29, 2026 and involved two parcels totaling approximately 3.3 acres. Transaction pricing remains unpublished.",
     highlights: [
       "Closed July 29, 2026",
       "Approximately 3.3 acres",
@@ -1352,7 +1420,7 @@ export const properties: Property[] = [
       eyebrow: "Completed Transaction",
       title: "A commercial land transaction in Morrisville.",
       body:
-        "The supplied record describes a commercial sale involving land marketed for commercial use, two parcels, and an existing one-story improvement. This page documents the completed transaction without publishing disputed economics or restricted MLS media.",
+        "The supplied record describes a commercial sale involving land marketed for commercial use, two parcels, and an existing one-story improvement. This page documents the completed transaction without publishing disputed economics.",
       points: [
         "Approximately 3.3 acres in the supplied record",
         "Two parcels identified by the transaction record",
@@ -1371,7 +1439,15 @@ export const properties: Property[] = [
       { advisorId: "gaurang-gala" },
       { advisorId: "goverdhan-vavilala" },
     ],
-    gallery: [],
+    gallery: [
+      chapelHillSite,
+      chapelHillResidences,
+      chapelHillRoadside,
+      chapelHillBoundaryClose,
+      chapelHillBoundaryWide,
+      chapelHillContext,
+      chapelHillRoadContext,
+    ],
     listingPage: {
       headline: "A completed commercial land transaction in Morrisville.",
       lead:
@@ -1415,8 +1491,54 @@ export const properties: Property[] = [
           { label: "Transaction price", value: "Not published pending confirmation" },
           { label: "Transaction team", value: "Gaurang Gala and Goverdhan Vavilala" },
           { label: "Record scope", value: "Limited to 10416; any relationship to 10414 remains unconfirmed" },
-          { label: "Photography", value: "MLS imagery not republished" },
+          { label: "Photography", value: "Selected property photography published with client direction" },
         ],
+      },
+      gallery: {
+        intro: {
+          eyebrow: "Transaction Gallery",
+          title: "The property and its Chapel Hill Road context.",
+          body:
+            "Selected aerial and ground-level views document the site, existing improvements, roadway position, and surrounding commercial context during the sale process. Marketing lines shown in selected aerials are approximate.",
+        },
+        items: [
+          {
+            src: chapelHillSite,
+            alt: "Aerial view of the cleared and wooded areas at 10416 Chapel Hill Road",
+            caption: "Site overview",
+          },
+          {
+            src: chapelHillResidences,
+            alt: "Ground-level view of existing residential improvements at 10416 Chapel Hill Road",
+            caption: "Existing improvements",
+          },
+          {
+            src: chapelHillRoadside,
+            alt: "Roadside view of the existing improvements along Chapel Hill Road",
+            caption: "Chapel Hill Road frontage",
+          },
+          {
+            src: chapelHillBoundaryClose,
+            alt: "Closer aerial view of the property with approximate marketing lines",
+            caption: "Approximate property outline",
+          },
+          {
+            src: chapelHillBoundaryWide,
+            alt: "Wide aerial view of the wooded property with approximate marketing lines",
+            caption: "Wider site context",
+          },
+          {
+            src: chapelHillContext,
+            alt: "Aerial view of the property between surrounding commercial uses",
+            caption: "Surrounding commercial context",
+          },
+          {
+            src: chapelHillRoadContext,
+            alt: "Aerial view of the property and Chapel Hill Road with approximate marketing lines",
+            caption: "Road and site relationship",
+          },
+        ],
+        note: "Property lines shown in selected marketing images are approximate and require independent verification.",
       },
       location: {
         eyebrow: "Location & Context",
@@ -1433,7 +1555,7 @@ export const properties: Property[] = [
           "https://www.google.com/maps/search/?api=1&query=10416%20Chapel%20Hill%20Road%2C%20Morrisville%2C%20NC%2027560",
       },
       disclosure:
-        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and property-use details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, MLS photography, current ownership, occupancy, and development information are not published. This page is limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction.",
+        "This page presents a completed transaction and is not an offer to sell or lease the property. Physical and property-use details reflect the supplied transaction record and are not represented as current. Transaction price, confidential terms, current ownership, occupancy, and development information are not published. Property lines shown in selected marketing images are approximate and require independent verification. This page is limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction.",
     },
     featured: false,
     sortOrder: 8,

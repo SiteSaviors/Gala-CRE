@@ -3,45 +3,31 @@ import { confirmedExchangeStatus, getExchangeTimelineIssues } from "@/lib/exchan
 
 const timeline = (overrides: Partial<Parameters<typeof getExchangeTimelineIssues>[0]> = {}) => ({
   exchangeStatus: confirmedExchangeStatus,
-  relinquishedClosingDate: "2026-09-01",
   identificationDeadline: "2026-10-16",
-  completionDeadline: "2027-02-28",
   ...overrides,
 });
 
 describe("1031 exchange timeline validation", () => {
-  it("accepts a complete chronological timeline", () => {
+  it("accepts a confirmed identification deadline", () => {
     expect(getExchangeTimelineIssues(timeline())).toEqual([]);
   });
 
-  it("requires all dates for a confirmed 1031 exchange", () => {
+  it("requires the identification deadline for a confirmed 1031 exchange", () => {
     expect(getExchangeTimelineIssues(timeline({ identificationDeadline: "" }))).toEqual([
       { field: "identificationDeadline", message: "Enter the identification deadline." },
     ]);
   });
 
-  it("rejects invalid calendar dates even when the acquisition is not confirmed as an exchange", () => {
+  it("does not require a deadline for a direct acquisition", () => {
     expect(getExchangeTimelineIssues(timeline({
-      exchangeStatus: "Not sure yet",
-      relinquishedClosingDate: "2026-02-30",
-    }))).toEqual([
-      { field: "relinquishedClosingDate", message: "Enter a valid calendar date." },
-    ]);
+      exchangeStatus: "No — this is a direct acquisition",
+      identificationDeadline: "",
+    }))).toEqual([]);
   });
 
-  it("rejects deadlines that move backward", () => {
-    expect(getExchangeTimelineIssues(timeline({
-      identificationDeadline: "2026-08-31",
-      completionDeadline: "2026-08-30",
-    }))).toEqual([
-      {
-        field: "identificationDeadline",
-        message: "The identification deadline cannot be before the relinquished-property closing date.",
-      },
-      {
-        field: "completionDeadline",
-        message: "The exchange-completion deadline cannot be before the identification deadline.",
-      },
+  it("rejects an invalid supplied calendar date", () => {
+    expect(getExchangeTimelineIssues(timeline({ identificationDeadline: "2026-02-30" }))).toEqual([
+      { field: "identificationDeadline", message: "Enter a valid calendar date." },
     ]);
   });
 });

@@ -34,22 +34,14 @@ const investorSubmission = () => ({
     phone: "919-555-0110",
     company: "Avery Holdings",
     exchangeStatus: "Yes — this is a 1031 exchange",
-    relinquishedClosingDate: "2026-09-01",
     identificationDeadline: "2099-09-12",
-    completionDeadline: "2099-12-31",
     targetLocations: "Raleigh-Durham and central North Carolina",
     assetTypes: ["Industrial", "Retail"],
     purchasePriceMin: "$2,000,000",
     purchasePriceMax: "$5,000,000",
     availableEquity: "$1,500,000",
     financingStatus: "Lender engaged",
-    occupancyAndTenantProfile: "Occupied property with durable lease term and established tenants.",
-    returnAndRiskCriteria: "Current income with limited near-term capital requirements.",
-    marketInterest: "On-market and off-market",
-    propertiesUnderConsideration: "One marketed industrial property in Wake County.",
-    intermediaryStatus: "Qualified intermediary engaged",
-    additionalRequirements: "Convenient highway access and a conventional diligence period.",
-    preferredResponseMethod: "Phone",
+    acquisitionRequirements: "Occupied property with durable leases, established tenants, highway access, and a conventional diligence period.",
     consent: true,
     website: "",
   },
@@ -92,13 +84,12 @@ describe("shared forms API", () => {
     expect(result.statusCode).toBe(400);
   });
 
-  it("rejects invalid or incomplete exchange timelines before delivery", async () => {
+  it("rejects an invalid or missing confirmed exchange deadline before delivery", async () => {
     configureDelivery();
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     const invalid = investorSubmission();
-    invalid.payload.identificationDeadline = "2026-08-31";
-    invalid.payload.completionDeadline = "";
+    invalid.payload.identificationDeadline = "";
     const { response, result } = createResponse();
 
     await formsHandler(request(invalid, "10.0.0.8"), response);

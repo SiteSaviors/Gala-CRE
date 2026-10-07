@@ -50,7 +50,7 @@ const Careers = () => {
           <div className="gala-shell">
             <div className="gala-kicker">Careers at Gala CRE</div>
             <h1 id="careers-hero-title">Join Our Team</h1>
-            <p>Gala CRE Group is building a platform for commercial listing agents who value clear advice, disciplined execution, and long-term client relationships.</p>
+            <p>Gala CRE Group is building a brokerage for commercial real estate agents who want to grow their business with experienced leadership and practical support behind them.</p>
           </div>
         </section>
 
@@ -73,7 +73,7 @@ const Careers = () => {
             <div className="gala-careers-benefits__intro">
               <div>
                 <div className="gala-kicker gala-kicker--dark">Why Gala CRE</div>
-                <h2 id="listing-agent-benefits-title">The resources to move listings forward.</h2>
+                <h2 id="listing-agent-benefits-title">The resources to move you forward.</h2>
               </div>
               <p>Practical support for the work required to win, position, market, and execute a commercial assignment.</p>
             </div>
