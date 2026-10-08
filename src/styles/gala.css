@@ -558,6 +558,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-service-portfolio__folio{
   --gala-portfolio-rotation:0deg;
   --gala-portfolio-rest-y:0px;
+  --gala-portfolio-order:1;
   position:relative;
   flex:0 0 19.3%;
   height:clamp(500px,38vw,640px);
@@ -571,12 +572,13 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   will-change:transform;
 }
 .gala-service-portfolio__folio:first-child{margin-left:0}
-.gala-service-portfolio__folio:nth-child(1){--gala-portfolio-rotation:.48deg;--gala-portfolio-rest-y:8px}
-.gala-service-portfolio__folio:nth-child(2){--gala-portfolio-rotation:.2deg;--gala-portfolio-rest-y:3px}
-.gala-service-portfolio__folio:nth-child(4){--gala-portfolio-rotation:-.22deg;--gala-portfolio-rest-y:4px}
-.gala-service-portfolio__folio:nth-child(5){--gala-portfolio-rotation:-.4deg;--gala-portfolio-rest-y:9px}
-.gala-service-portfolio__folio[data-position="before"]{transform:translate(-4px,var(--gala-portfolio-rest-y)) rotate(var(--gala-portfolio-rotation))}
-.gala-service-portfolio__folio[data-position="after"]{transform:translate(4px,var(--gala-portfolio-rest-y)) rotate(var(--gala-portfolio-rotation))}
+.gala-service-portfolio__folio:nth-child(1){--gala-portfolio-order:1;--gala-portfolio-rotation:.48deg;--gala-portfolio-rest-y:8px}
+.gala-service-portfolio__folio:nth-child(2){--gala-portfolio-order:2;--gala-portfolio-rotation:.2deg;--gala-portfolio-rest-y:3px}
+.gala-service-portfolio__folio:nth-child(3){--gala-portfolio-order:3}
+.gala-service-portfolio__folio:nth-child(4){--gala-portfolio-order:4;--gala-portfolio-rotation:-.22deg;--gala-portfolio-rest-y:4px}
+.gala-service-portfolio__folio:nth-child(5){--gala-portfolio-order:5;--gala-portfolio-rotation:-.4deg;--gala-portfolio-rest-y:9px}
+.gala-service-portfolio__folio[data-position="before"]{z-index:var(--gala-portfolio-order);transform:translate(-4px,var(--gala-portfolio-rest-y)) rotate(var(--gala-portfolio-rotation))}
+.gala-service-portfolio__folio[data-position="after"]{z-index:calc(6 - var(--gala-portfolio-order));transform:translate(4px,var(--gala-portfolio-rest-y)) rotate(var(--gala-portfolio-rotation))}
 .gala-service-portfolio__folio[data-active="true"]{
   z-index:10;
   flex-basis:25.8%;

@@ -21,6 +21,10 @@ test.describe("homepage service portfolio", () => {
     const initialSectionBox = await section.boundingBox();
     expect(initialSectionBox?.height).toBeLessThan(1000);
     await expect(folios.nth(2)).toHaveAttribute("data-active", "true");
+    const defaultStackingOrder = await folios.evaluateAll((items) =>
+      items.map((item) => Number.parseInt(window.getComputedStyle(item).zIndex, 10)),
+    );
+    expect(defaultStackingOrder[3]).toBeGreaterThan(defaultStackingOrder[4]);
 
     await section.getByRole("link", { name: "Explore Investment Sales" }).hover();
     await expect(folios.nth(1)).toHaveAttribute("data-active", "true");

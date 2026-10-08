@@ -853,3 +853,14 @@ These do not stop unrelated implementation:
 - Blockers: none for the static production release. The previously recorded private form-delivery configuration remains unchanged and was not exercised during verification.
 - Release authorization: the user explicitly requested commit, merge, and Vercel deployment on October 8, 2026.
 - Exact next action: commit the verified release on `codex/services-consolidation`, fast-forward `main`, push `origin/main`, deploy the linked `gala-cre` Vercel project to production, and smoke-test the live routes without submitting a form.
+
+### 2026-10-08 — Homepage portfolio stacking correction
+
+- Starting branch / HEAD: `main` at `37372bf`, synchronized with `origin/main` after the consolidated services production release.
+- Phase / checkpoint: correct the unintended Card 5 overlap over Card 4 in the homepage service portfolio without changing its approved spacing, tilt, or interaction model.
+- Gate: cards nearest the active sheet layer above cards farther away on both sides; Card 4's gold right edge remains visible above Card 5; changing the active card preserves the same directional stacking; and mobile snap behavior remains unchanged.
+- Implementation: assigned each portfolio sheet an order token and used the existing `data-position` state to increase stacking toward the active sheet on the left and reverse it on the right. The active sheet remains the top layer.
+- Files / route changed: `src/styles/gala.css`, `e2e/home-service-portfolio.spec.ts`, and this ledger; `/` only.
+- Verification: focused homepage portfolio Playwright passed 3/3 across desktop interaction, mobile snap scrolling, and reduced motion; desktop visual QA confirmed computed stacking `[1, 2, 10, 2, 1]` and a clean Card 4/Card 5 seam; the production build completed through the browser-test gate; and diff whitespace validation passed.
+- Blockers: none. No form was submitted.
+- Exact next action: present the corrected local homepage portfolio for review. Do not commit, push, merge, or deploy until explicitly authorized.
