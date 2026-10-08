@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import companyHero from "@/assets/company-hero.avif";
 import companyAboutPrimary from "@/assets/company-about-rtp-skyline.webp";
@@ -50,24 +50,34 @@ const Company = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/company" />
       <main className="gala-page" id="main-content" tabIndex={-1}>
-        <section className="gala-company-hero" aria-labelledby="company-hero-title">
-          <img
-            className="gala-company-hero__image"
-            src={companyHero}
-            alt=""
-            aria-hidden="true"
-            loading="eager"
-            decoding="async"
-          />
-          <div className="gala-shell gala-company-hero__inner">
-            <div className="gala-company-hero__copy">
-              <div className="gala-kicker">The Developer's Brokerage</div>
-              <h1 id="company-hero-title">Who we are</h1>
-              <p>Based in Cary, Gala CRE helps owners, investors, and businesses evaluate commercial real estate with the market, site, capital, and execution realities in view.</p>
-              <Link className="gala-text-link gala-company-hero__link" to="/services">
-                Explore our capabilities <ArrowDownRight size={17} aria-hidden="true" />
-              </Link>
-            </div>
+        <section className="gala-editorial-split-hero gala-company-hero" aria-labelledby="company-hero-title">
+          <div className="gala-editorial-split-hero__image">
+            <img
+              className="gala-company-hero__image"
+              src={companyHero}
+              alt="Gala CRE Group office reception area"
+              loading="eager"
+              decoding="async"
+            />
+            <svg
+              className="gala-editorial-split-hero__image-outline"
+              viewBox="0 0 1000 700"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M78 0H1000V630L922 700H0V70Z" />
+              <path className="gala-editorial-split-hero__image-accent" d="M790 -16H1018V180" />
+              <path className="gala-editorial-split-hero__image-accent" d="M-16 520V716H220" />
+            </svg>
+          </div>
+          <div className="gala-editorial-split-hero__copy gala-company-hero__copy">
+            <span className="gala-editorial-split-hero__linework" aria-hidden="true"></span>
+            <div className="gala-kicker">The Developer's Brokerage</div>
+            <h1 id="company-hero-title">Who we are</h1>
+            <p>Based in Cary, Gala CRE helps owners, investors, and businesses evaluate commercial real estate with the market, site, capital, and execution realities in view.</p>
+            <Link className="gala-investment-narrative-button" to="/services">
+              <span>Explore our capabilities</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+            </Link>
           </div>
         </section>
 

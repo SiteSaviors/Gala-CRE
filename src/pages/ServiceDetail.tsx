@@ -2,9 +2,13 @@ import { ArrowLeft, ArrowUpRight, Building2, Check, FileSignature, Handshake, Tr
 import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
+import BrokerageServicePage from "@/components/services/BrokerageServicePage";
+import InvestmentSalesNarrativePage from "@/components/services/InvestmentSalesNarrativePage";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { getServiceInquiryHref, serviceBySlug, serviceCapabilityId, services, type CapabilityIconKey, type ServiceSlug } from "@/content/services";
+import capitalMarketsHeroImage from "@/assets/capital-markets-hero-booklet.webp";
+import developmentHeroImage from "@/assets/development-hero-booklet.webp";
+import { getCapabilityHref, getServiceInquiryHref, serviceBySlug, serviceCapabilityId, services, type CapabilityIconKey, type ServiceSlug } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
 import NotFound from "./NotFound";
 
@@ -48,8 +52,19 @@ const ServiceDetail = () => {
 
   if (!service) return <NotFound />;
 
+  if (service.slug === "brokerage") return <BrokerageServicePage service={service} />;
+  if (service.slug === "investment-sales") return <InvestmentSalesNarrativePage service={service} />;
+
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
-  const supportsInvestorSourcing = service.slug === "investment-sales";
+  const usesEditorialHero = service.slug === "development-services" || service.slug === "capital-markets";
+  const editorialHeroAlt = service.slug === "development-services"
+    ? "Gala CRE Group Development presentation featuring an active construction site"
+    : "Gala CRE Group Capital Markets presentation featuring a commercial skyline";
+  const editorialHeroImage = service.slug === "development-services"
+    ? developmentHeroImage
+    : service.slug === "capital-markets"
+      ? capitalMarketsHeroImage
+      : service.image;
 
   return (
     <>
@@ -57,21 +72,51 @@ const ServiceDetail = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={`/services/${service.slug}`} />
       <main className="gala-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero gala-inner-hero--service">
-          {service.image ? (
-            <>
-              <img src={service.image} alt="" aria-hidden="true" className="gala-inner-hero__bg" />
-              <div className="gala-inner-hero__duotone"></div>
-              <div className="gala-inner-hero__shade"></div>
-            </>
-          ) : null}
-          <div className="gala-shell">
-            <Link to="/services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
-            <div className="gala-kicker">{service.eyebrow}</div>
-            <h1>{service.name}</h1>
-            <p>{service.summary}</p>
-          </div>
-        </section>
+        {usesEditorialHero ? (
+          <section
+            className={`gala-editorial-split-hero gala-service-editorial-hero gala-service-editorial-hero--${service.slug}`}
+            aria-labelledby={`${service.slug}-hero-title`}
+          >
+            <div className="gala-editorial-split-hero__image">
+              {editorialHeroImage ? <img src={editorialHeroImage} alt={editorialHeroAlt} loading="eager" decoding="async" /> : null}
+              <svg
+                className="gala-editorial-split-hero__image-outline"
+                viewBox="0 0 1000 700"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path d="M78 0H1000V630L922 700H0V70Z" />
+                <path className="gala-editorial-split-hero__image-accent" d="M790 -16H1018V180" />
+                <path className="gala-editorial-split-hero__image-accent" d="M-16 520V716H220" />
+              </svg>
+            </div>
+            <div className="gala-editorial-split-hero__copy">
+              <span className="gala-editorial-split-hero__linework" aria-hidden="true"></span>
+              <div className="gala-kicker">{service.eyebrow}</div>
+              <h1 id={`${service.slug}-hero-title`}>{service.name}</h1>
+              <p>{service.summary}</p>
+              <Link to={getServiceInquiryHref(service.slug)} className="gala-investment-narrative-button">
+                <span>Request a Consultation</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+              </Link>
+            </div>
+          </section>
+        ) : (
+          <section className="gala-inner-hero gala-inner-hero--service">
+            {service.image ? (
+              <>
+                <img src={service.image} alt="" aria-hidden="true" className="gala-inner-hero__bg" />
+                <div className="gala-inner-hero__duotone"></div>
+                <div className="gala-inner-hero__shade"></div>
+              </>
+            ) : null}
+            <div className="gala-shell">
+              <Link to="/services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
+              <div className="gala-kicker">{service.eyebrow}</div>
+              <h1>{service.name}</h1>
+              <p>{service.summary}</p>
+            </div>
+          </section>
+        )}
 
         <section className="gala-section gala-section--light">
           <div className="gala-shell gala-service-detail">
@@ -98,7 +143,7 @@ const ServiceDetail = () => {
                     return (
                       <Link
                         id={anchorId}
-                        to={`/services/${service.slug}/${capability.route}`}
+                        to={getCapabilityHref(service.slug, capability.label)}
                         className="gala-capability-teaser"
                         style={style}
                         key={capability.label}
@@ -150,21 +195,6 @@ const ServiceDetail = () => {
             </div>
           </div>
         </section>
-
-        {supportsInvestorSourcing ? (
-          <section className="gala-investor-pathway">
-            <div className="gala-shell">
-              <div>
-                <span>Investor Property Sourcing</span>
-                <h2>Working against an acquisition or exchange timeline?</h2>
-                <p>Organize your commercial property criteria, capital position, and timing before the search begins.</p>
-              </div>
-              <Link to="/investors/1031-exchange?source=gala-sales" className="gala-button gala-button--dark">
-                Find a Replacement Property <ArrowUpRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-          </section>
-        ) : null}
 
         <section className="gala-section gala-section--black">
           <div className="gala-shell">

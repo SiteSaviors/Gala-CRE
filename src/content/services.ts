@@ -307,6 +307,9 @@ export const serviceCapabilityId = (capability: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
+export const getCapabilityHref = (serviceSlug: ServiceSlug, capabilityLabel: string) =>
+  `/services/${serviceSlug}#${serviceCapabilityId(capabilityLabel)}`;
+
 export const findCapabilityByRoute = (slug: string, route: string) => {
   const service = serviceBySlug[slug as ServiceSlug];
   const capability = service?.capabilities.find((item) => item.route === route);
@@ -318,19 +321,27 @@ export type AdvertisedCapabilityRoute = {
   serviceName: string;
   serviceSlug: ServiceSlug;
   capabilityRoute: string;
+  anchorId: string;
   path: string;
+  legacyPath: string;
 };
 
 export const advertisedCapabilityRoutes: AdvertisedCapabilityRoute[] = services.flatMap((service) =>
   service.capabilities
     .filter((capability): capability is Capability & { route: string } => Boolean(capability.route))
-    .map((capability) => ({
-      label: capability.label,
-      serviceName: service.name,
-      serviceSlug: service.slug,
-      capabilityRoute: capability.route,
-      path: `/services/${service.slug}/${capability.route}`,
-    })),
+    .map((capability) => {
+      const anchorId = serviceCapabilityId(capability.label);
+
+      return {
+        label: capability.label,
+        serviceName: service.name,
+        serviceSlug: service.slug,
+        capabilityRoute: capability.route,
+        anchorId,
+        path: `/services/${service.slug}#${anchorId}`,
+        legacyPath: `/services/${service.slug}/${capability.route}`,
+      };
+    }),
 );
 
 export type ServiceNavigationGroup = {

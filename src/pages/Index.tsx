@@ -1,81 +1,18 @@
-import { ArrowUpRight, X } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
 import heroVideo from "@/assets/GALA-CRE-HERO-WEB.mp4";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
+import HomeServicePortfolio from "@/components/home/HomeServicePortfolio";
 import FeaturedListingsCarousel from "@/components/properties/FeaturedListingsCarousel";
 import HomeNews from "@/components/site/HomeNews";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import { serviceNavigationGroups, type ServiceNavigationGroup } from "@/content/services";
 import { useIsMobile } from "@/hooks/use-mobile";
 import useSiteCursor from "@/hooks/useSiteCursor";
-
-const homepageCapabilities = serviceNavigationGroups.filter(
-  (service): service is ServiceNavigationGroup & { image: string } => Boolean(service.image),
-);
-
-type HomepageCapability = (typeof homepageCapabilities)[number];
-
-type HomepageCapabilityCardProps = HomepageCapability & {
-  isOpen: boolean;
-  onToggle: () => void;
-};
-
-const HomepageCapabilityCard = ({
-  name,
-  summary,
-  capabilities,
-  href,
-  image,
-  isOpen,
-  onToggle,
-}: HomepageCapabilityCardProps) => {
-  const rows = Math.ceil(capabilities.length / 2);
-  const cardStyle = {
-    "--gala-capability-panel-height": `${rows * 56 + Math.max(0, rows - 1) * 10}px`,
-    "--gala-capability-panel-height-mobile": `${rows * 48 + Math.max(0, rows - 1) * 8}px`,
-  } as CSSProperties;
-
-  return (
-    <article
-      className={`gala-capability-card gala-capability-card--has-image${isOpen ? " gala-capability-card--open" : ""}`}
-      style={cardStyle}
-    >
-      <img className="gala-capability-card__image" src={image} alt="" aria-hidden="true" />
-      <div className="gala-capability-card__content">
-        <h3><Link to={href}>{name}</Link></h3>
-        <p className="gala-capability-card__summary">{summary}</p>
-      </div>
-      <nav className="gala-capability-card__links" aria-label={`${name} capabilities`}>
-        {capabilities.map((capability, capabilityIndex) => (
-          <Link
-            to={capability.path}
-            className="gala-capability-card__link"
-            style={{ "--gala-capability-index": capabilityIndex } as CSSProperties}
-            key={capability.label}
-          >
-            <span>{capability.label}</span>
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
-        ))}
-      </nav>
-      <ArrowUpRight className="gala-capability-card__arrow" aria-hidden="true" />
-      <button
-        type="button"
-        className="gala-capability-card__toggle"
-        aria-expanded={isOpen}
-        aria-label={`${isOpen ? "Hide" : "Show"} ${name} capabilities`}
-        onClick={onToggle}
-      >
-        {isOpen ? <X aria-hidden="true" /> : <ArrowUpRight aria-hidden="true" />}
-      </button>
-    </article>
-  );
-};
 
 const Index = () => {
   const isMobile = useIsMobile();
@@ -83,7 +20,6 @@ const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const introductionRef = useRef<HTMLElement>(null);
-  const [openCapability, setOpenCapability] = useState<string | null>(null);
   const [canPlayHeroVideo, setCanPlayHeroVideo] = useState(() => (
     typeof window !== "undefined"
     && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -230,20 +166,7 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="gala-section gala-section--black"><div className="gala-shell">
-          <div className="gala-section-head gala-section-head--capabilities">
-            <div className="gala-kicker">Gala CRE Capabilities</div>
-            <h2><span>Built to move commercial</span>{" "}<span>opportunities forward.</span></h2>
-          </div>
-          <div className="gala-capability-grid">{homepageCapabilities.map((capability) => (
-            <HomepageCapabilityCard
-              {...capability}
-              isOpen={openCapability === capability.name}
-              onToggle={() => setOpenCapability((current) => current === capability.name ? null : capability.name)}
-              key={capability.name}
-            />
-          ))}</div>
-        </div></section>
+        <HomeServicePortfolio />
 
         <FeaturedListingsCarousel />
 

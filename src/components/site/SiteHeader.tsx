@@ -1,7 +1,6 @@
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import galaSalesCapability from "@/assets/gala-sales-capability.webp";
 import BrandLogo from "@/components/site/BrandLogo";
 import { serviceNavigationGroups } from "@/content/services";
 
@@ -143,7 +142,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
           <span>Services</span><ChevronDown size={16} aria-hidden="true" />
         </button>
         <div className={`mnav-services${mobileServicesOpen ? " open" : ""}`} id="mobile-services-menu">
-          <Link to="/services" onClick={() => setMobileNavOpen(false)}>All Services</Link>
           {serviceNavigationGroups.map((service) => (
             <Link
               to={service.href}
@@ -151,9 +149,11 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
               key={service.name}
             >
               <span>{service.name}</span>
-              <small>{service.capabilities.length} {service.capabilities.length === 1 ? "capability" : "capabilities"}</small>
             </Link>
           ))}
+          <Link className="mnav-services-all" to="/services" onClick={() => setMobileNavOpen(false)}>
+            <span>View All Services</span><ArrowUpRight size={14} aria-hidden="true" />
+          </Link>
         </div>
         <Link to="/properties" aria-current={currentState("/properties")} onClick={() => setMobileNavOpen(false)}>Listings</Link>
         <Link to="/company" aria-current={currentState("/company")} onClick={() => setMobileNavOpen(false)}>Company</Link>
@@ -173,42 +173,31 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
         onBlur={scheduleServicesClose}
       >
         <div className="gala-mega-menu__shell">
-          <div className="gala-mega-menu__services">
-            <div className="gala-mega-menu__eyebrow">Commercial Capabilities</div>
-            <div className="gala-mega-menu__groups">
-              {serviceNavigationGroups.map((service) => (
-                <section className="gala-mega-menu__group" key={service.name}>
-                  <Link className="gala-mega-menu__title" to={service.href} tabIndex={megaLinkTabIndex}>
-                    {service.name}<ArrowUpRight size={18} aria-hidden="true" />
-                  </Link>
-                  <ul>
-                    {service.capabilities.map((capability) => (
-                      <li key={capability.label}>
-                        <Link
-                          to={capability.path}
-                          tabIndex={megaLinkTabIndex}
-                        >
-                          <span>{capability.label}</span><ArrowUpRight size={14} aria-hidden="true" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
-            </div>
+          <section className="gala-mega-menu__intro" aria-labelledby="services-menu-heading">
+            <div className="gala-mega-menu__eyebrow">Connected Commercial Services</div>
+            <h2 id="services-menu-heading">One platform. Five ways to move an opportunity forward.</h2>
+            <p>Brokerage, investment, development, capital, and operating support—connected around the needs of the property and the client.</p>
             <Link className="gala-mega-menu__all" to="/services" tabIndex={megaLinkTabIndex}>
               View All Services <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
+          </section>
+          <div className="gala-mega-menu__rows" aria-label="Service categories">
+            {serviceNavigationGroups.map((service, index) => (
+              <Link
+                className="gala-mega-menu__row"
+                to={service.href}
+                tabIndex={megaLinkTabIndex}
+                key={service.name}
+              >
+                <span className="gala-mega-menu__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span className="gala-mega-menu__row-copy">
+                  <strong>{service.name}</strong>
+                  <small>{service.summary}</small>
+                </span>
+                <ArrowUpRight size={19} aria-hidden="true" />
+              </Link>
+            ))}
           </div>
-          <Link className="gala-mega-menu__advisor" to="/contact?inquiry=general&source=services-menu" tabIndex={megaLinkTabIndex}>
-            <img src={galaSalesCapability} alt="Commercial property in North Carolina" />
-            <span className="gala-mega-menu__advisor-shade" aria-hidden="true"></span>
-            <span className="gala-mega-menu__advisor-content">
-              <small>Have a commercial opportunity?</small>
-              <strong>Let's discuss what comes next.</strong>
-              <span>Let's Connect <ArrowUpRight size={16} aria-hidden="true" /></span>
-            </span>
-          </Link>
         </div>
       </div>
     </nav>

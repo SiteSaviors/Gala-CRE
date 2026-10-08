@@ -1,7 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
-import { capabilityPageByPath, capabilityPages } from "@/content/capabilityPages";
 import { propertyBySlug } from "@/content/properties";
 import CommercialListingPage from "@/components/properties/CommercialListingPage";
 import CapabilityDetail from "@/pages/CapabilityDetail";
@@ -36,33 +35,6 @@ const renderPage = (page: React.ReactNode, route = "/") => render(
 );
 
 describe("Gala CRE public pages", () => {
-  it("defines editorial capability pages through the reusable page system", () => {
-    const landlordPage = capabilityPageByPath["/services/brokerage/landlord-representation"];
-
-    expect(capabilityPages).toContain(landlordPage);
-    expect(landlordPage.metadata).toMatchObject({
-      title: "Landlord Representation",
-      description: expect.stringContaining("Raleigh-Durham"),
-    });
-    expect(landlordPage.hero.media).toMatchObject({
-      src: expect.any(String),
-      alt: expect.any(String),
-    });
-    expect(landlordPage.compact).toBe(true);
-    expect(landlordPage.hero.actions.map((action) => action.variant)).toEqual(["primary"]);
-    expect(landlordPage.hero.signals).toEqual([]);
-    expect(landlordPage.sections.map((section) => section.type)).toEqual([
-      "strategy",
-      "process",
-      "deliverables",
-    ]);
-    expect(landlordPage.relatedCapabilities.links).toHaveLength(4);
-    expect(landlordPage.cta.actions[0]).toMatchObject({
-      href: "/contact?inquiry=landlord-representation",
-      variant: "primary",
-    });
-  });
-
   it("positions the homepage around commercial services", () => {
     const { container } = renderPage(<Index />);
     expect(screen.getByRole("heading", { name: /Commercial Real Estate, Simplified/i })).toBeInTheDocument();
@@ -73,14 +45,22 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Built to move commercial opportunities forward." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Investment Sales" })).toBeInTheDocument();
-    expect(screen.getByText("Commercial property acquisitions, dispositions, and marketing.")).toBeInTheDocument();
-    expect(within(screen.getByRole("navigation", { name: "Investment Sales capabilities" })).getByRole("link", { name: "Industrial" }))
-      .toHaveAttribute("href", "/services/investment-sales/industrial");
-    expect(within(screen.getByRole("navigation", { name: "Brokerage capabilities" })).getByRole("link", { name: "Landlord Representation" }))
-      .toHaveAttribute("href", "/services/brokerage/landlord-representation");
-    expect(within(screen.getByRole("navigation", { name: "Brokerage capabilities" })).getByRole("link", { name: "Tenant Representation" }))
-      .toHaveAttribute("href", "/services/brokerage/tenant-representation");
-    expect(screen.getByRole("heading", { name: "Development" })).toBeInTheDocument();
+    expect(screen.getByText("Property positioning + disposition")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore Brokerage" })).toHaveAttribute("href", "/services/brokerage");
+    expect(screen.getByRole("link", { name: "Explore Investment Sales" })).toHaveAttribute("href", "/services/investment-sales");
+    expect(screen.getByRole("link", { name: "Explore Development Services" })).toHaveAttribute("href", "/services/development-services");
+    expect(screen.getByRole("link", { name: "Explore Capital Markets" })).toHaveAttribute("href", "/services/capital-markets");
+    expect(screen.getByRole("link", { name: "Explore Property Management" })).toHaveAttribute("href", "/services/property-management");
+    expect(screen.queryByRole("navigation", { name: "Brokerage capabilities" })).not.toBeInTheDocument();
+    const servicePortfolio = screen.getByRole("region", { name: "Built to move commercial opportunities forward." });
+    const developmentFolio = screen.getByRole("link", { name: "Explore Development Services" }).closest("article");
+    const capitalFolio = screen.getByRole("link", { name: "Explore Capital Markets" }).closest("article");
+    expect(developmentFolio).toHaveAttribute("data-active", "true");
+    fireEvent.mouseEnter(screen.getByRole("link", { name: "Explore Capital Markets" }));
+    expect(capitalFolio).toHaveAttribute("data-active", "true");
+    fireEvent.mouseLeave(servicePortfolio.querySelector(".gala-service-portfolio__track") as HTMLElement);
+    expect(developmentFolio).toHaveAttribute("data-active", "true");
+    expect(screen.getByRole("heading", { name: "Development Services" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Capital Markets" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Featured listings" })).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "Featured commercial properties" })).toHaveAttribute("aria-roledescription", "carousel");
@@ -183,7 +163,7 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.getByRole("link", { name: /Property Management Partnership/i })).toHaveAttribute(
       "href",
-      "/services/property-management/property-management-partnership",
+      "/services/property-management#property-management-partnership",
     );
   });
 
@@ -354,13 +334,13 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByRole("link", { name: "News & Media" }).some((link) => link.getAttribute("href") === "/news")).toBe(true);
   });
 
-  it("keeps investor sourcing on Investment Sales without interrupting Capital Markets", () => {
+  it("keeps 1031 guidance within Investment Sales without interrupting Capital Markets", () => {
     const sales = render(
       <MemoryRouter initialEntries={["/services/investment-sales"]}>
         <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("link", { name: /Find a Replacement Property/i })).toHaveAttribute("href", "/investors/1031-exchange?source=gala-sales");
+    expect(screen.getByRole("button", { name: /How can Gala help when a 1031 exchange is involved/i })).toBeInTheDocument();
     sales.unmount();
 
     render(
@@ -368,13 +348,40 @@ describe("Gala CRE public pages", () => {
         <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("link", { name: /^Debt Debt strategy/i })).toHaveAttribute("href", "/services/capital-markets/debt");
-    expect(screen.getByRole("link", { name: /^Equity Equity conversations/i })).toHaveAttribute("href", "/services/capital-markets/equity");
+    expect(screen.getByRole("link", { name: /^Debt Debt strategy/i })).toHaveAttribute("href", "/services/capital-markets#debt");
+    expect(screen.getByRole("link", { name: /^Equity Equity conversations/i })).toHaveAttribute("href", "/services/capital-markets#equity");
     expect(screen.queryByRole("link", { name: /Discuss Exchange Financing/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Find a Replacement Property/i })).not.toBeInTheDocument();
   });
 
-  it("keeps the Brokerage overview focused on its two representation paths", () => {
+  it("renders Investment Sales as a narrative property-disposition journey", () => {
+    const view = render(
+      <MemoryRouter initialEntries={["/services/investment-sales"]}>
+        <Routes>
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByText("Private Capital + Commercial Assets")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Start With an Opinion of Value" })).toBeInTheDocument();
+    expect(view.container.querySelectorAll(".gala-investment-narrative-hero__image>img")).toHaveLength(1);
+    expect(view.container.querySelector(".gala-service-detail__media")).not.toBeInTheDocument();
+    ["industrial", "multifamily", "retail", "office", "land"].forEach((anchor) => {
+      expect(view.container.querySelector(`#${anchor}`)).toBeInTheDocument();
+    });
+    expect(screen.getByRole("heading", { name: "Preparation and Outreach That Build Buyer Confidence" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What owners ask before going to market." })).toBeInTheDocument();
+    const faqButtons = screen.getAllByRole("button", { name: /sale process remain confidential|1031 exchange|commercial property's value|information will buyers expect/i });
+    expect(faqButtons).toHaveLength(4);
+    faqButtons.forEach((button) => expect(button).toHaveAttribute("aria-expanded", "false"));
+    expect(view.container.querySelector(".gala-related-services")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell us about your property." })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Request a Consultation" })).toBeInTheDocument();
+  });
+
+  it("renders Brokerage as the compact editorial service template", () => {
     const view = render(
       <MemoryRouter initialEntries={["/services/brokerage"]}>
         <Routes>
@@ -382,28 +389,49 @@ describe("Gala CRE public pages", () => {
         </Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Two sides of the market. One clear point of advocacy." })).toBeInTheDocument();
-    expect(view.container.querySelectorAll(".gala-capability-teaser")).toHaveLength(2);
-    expect(view.container.querySelectorAll(".gala-capability-section")).toHaveLength(0);
-    expect(screen.queryByText(/market positioning/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Developer's Brokerage", level: 1 })).toBeInTheDocument();
+    expect(screen.getByText("Gala CRE Group helps landlords and tenants secure commercial real estate outcomes aligned with their long-term objectives.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Request a Consultation" })).toHaveAttribute(
+      "href", "/contact?inquiry=general&source=brokerage",
+    );
+    expect(screen.getByRole("heading", { name: "Two sides of the market. One disciplined standard." })).toBeInTheDocument();
+    expect(view.container.querySelectorAll(".gala-brokerage-path")).toHaveLength(2);
+    expect(screen.getByRole("heading", { name: "Full Cycle Solutions, Tailored to You" })).toBeInTheDocument();
+    expect(view.container.querySelectorAll(".gala-brokerage-advantage__card")).toHaveLength(4);
+    expect(view.container.querySelectorAll(".gala-brokerage-hero__image>img")).toHaveLength(1);
+    const assetTypesTab = screen.getByRole("tab", { name: "Asset Types" });
+    const clientTypesTab = screen.getByRole("tab", { name: "Client Types" });
+    expect(assetTypesTab).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText("Office")).toBeInTheDocument();
+    expect(screen.getByText("Medical + Healthcare")).toBeInTheDocument();
+    fireEvent.click(clientTypesTab);
+    expect(clientTypesTab).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText("Property Owners + Landlords")).toBeInTheDocument();
+    expect(screen.getByText("Business Occupiers + Tenants")).toBeInTheDocument();
+    expect(view.container.querySelector(".gala-service-detail__media")).not.toBeInTheDocument();
+    expect(view.container.querySelector(".gala-related-services")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Have a property or space requirement?" })).toBeInTheDocument();
   });
 
-  it("sends Landlord and Tenant Representation to their own dedicated pages instead of an in-page section", () => {
-    render(
+  it("keeps both legacy Brokerage anchors on the consolidated page", () => {
+    const view = render(
       <MemoryRouter initialEntries={["/services/brokerage"]}>
         <Routes>
           <Route path="/services/:slug" element={<ServiceDetail />} />
         </Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("link", { name: /Tenant representation/i })).toHaveAttribute(
-      "href",
-      "/services/brokerage/tenant-representation"
+    expect(view.container.querySelector("#landlord-representation")).toBeInTheDocument();
+    expect(view.container.querySelector("#tenant-representation")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Discuss Landlord Representation/i })).toHaveAttribute(
+      "href", "/contact?inquiry=general&focus=landlord-representation&source=brokerage",
     );
-    expect(screen.queryByRole("heading", { name: "Tenant representation" })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Discuss Tenant Representation/i })).toHaveAttribute(
+      "href", "/contact?inquiry=general&focus=tenant-representation&source=brokerage",
+    );
   });
 
+  describe.skip("retired dedicated capability pages retained for rollback reference", () => {
   it("renders a full dedicated page for Landlord Representation", () => {
     render(
       <MemoryRouter initialEntries={["/services/brokerage/landlord-representation"]}>
@@ -686,6 +714,7 @@ describe("Gala CRE public pages", () => {
       "/services/capital-markets/transaction-coordination"
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
+  });
   });
 
   it("renders the current approved property catalog", () => {

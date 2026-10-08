@@ -69,6 +69,21 @@ const videoRoutes = new Set([
   "/properties/1111-brown-street",
 ]);
 
+const closedPropertyRoutes = new Set([
+  "/properties/802-bragg-boulevard",
+  "/properties/202-north-main-street",
+  "/properties/10416-chapel-hill-road",
+]);
+
+const capabilityDestination = (route: (typeof capabilityRoutes)[number]) => {
+  const segments = route.split("/");
+  const anchor = segments.at(-1);
+  return {
+    anchor,
+    pathname: segments.slice(0, -1).join("/"),
+  };
+};
+
 const scrollThroughPage = async (page: Page) => {
   await page.evaluate(async () => {
     const delay = (milliseconds: number) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -107,6 +122,16 @@ test.describe("public property and service route matrix", () => {
         currentPath = route;
         const response = await page.goto(route, { waitUntil: "domcontentloaded" });
         expect.soft(response?.status(), `${viewport.name} ${route}: document response`).toBeLessThan(400);
+
+        const capabilityRedirect = capabilityRoutes.includes(route as (typeof capabilityRoutes)[number])
+          ? capabilityDestination(route as (typeof capabilityRoutes)[number])
+          : null;
+        if (capabilityRedirect) {
+          await expect(page, `${viewport.name} ${route}: consolidated capability redirect`).toHaveURL(
+            new RegExp(`${capabilityRedirect.pathname}#${capabilityRedirect.anchor}$`),
+          );
+        }
+
         await expect(page.locator("main#main-content")).toBeVisible();
         await expect(page.locator("h1").first()).toBeVisible();
         await expect(page.locator("h1").first(), `${viewport.name} ${route}: not a 404`).not.toContainText(/not found/i);
@@ -116,9 +141,10 @@ test.describe("public property and service route matrix", () => {
         await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /\| Gala CRE Group$/);
         await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /^https?:\/\//);
         await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+        const canonicalPath = capabilityRedirect?.pathname ?? route;
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           "href",
-          new RegExp(`${route.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`),
+          new RegExp(`${canonicalPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`),
         );
 
         const shareImage = await page.locator('meta[property="og:image"]').getAttribute("content");
@@ -161,7 +187,14 @@ test.describe("public property and service route matrix", () => {
         if (propertyRoutes.includes(route as (typeof propertyRoutes)[number])) {
           await expect(page.getByRole("region", { name: /property (gallery|media)$/i })).toBeVisible();
           await expect(page.locator('.gala-listing-compact__map iframe[src*="google.com/maps"]')).toHaveCount(1);
-          await expect(page.locator(`a[href^="/contact?property=${route.split("/").at(-1)}"]`).first()).toBeVisible();
+          if (closedPropertyRoutes.has(route)) {
+            await expect(page.locator(`a[href^="/contact?property=${route.split("/").at(-1)}"]`).first()).toBeVisible();
+            await expect(page.locator(".gala-listing-inquiry-form")).toHaveCount(0);
+          } else {
+            await expect(page.locator('a[href$="#property-inquiry"]').first()).toBeVisible();
+            await expect(page.locator("#property-inquiry .gala-listing-inquiry-form")).toBeVisible();
+            await expect(page.getByRole("button", { name: "Send Property Inquiry" })).toBeVisible();
+          }
           await expect(page.locator(".gala-listing-compact__related")).toBeVisible();
           await expect(page.locator(".gala-listing-compact__documents, #listing-documents")).toHaveCount(0);
           await expect(page.locator('a[href*="download-center"], a[href$=".pdf"], a[href*=".pdf?"]')).toHaveCount(0);
@@ -174,7 +207,7 @@ test.describe("public property and service route matrix", () => {
             const opportunity = page.locator(".gala-listing-compact__opportunity");
             const opportunityCopy = opportunity.locator(".gala-listing-compact__opportunity-copy");
             const opportunityVideo = opportunity.locator(".gala-listing-compact__opportunity-video");
-            const supportingPoints = opportunity.locator(".gala-commercial-listing__highlights--row");
+            const supportingPoints = opportunity.locator(".gala-commercial-listing__highlights");
 
             await expect(opportunityVideo.locator("video")).toHaveCount(1);
             await expect(supportingPoints.locator(":scope > div")).toHaveCount(3);
@@ -190,20 +223,21 @@ test.describe("public property and service route matrix", () => {
                 opportunity.evaluate((section, width) => {
                   const copyBox = section.querySelector(".gala-listing-compact__opportunity-copy")?.getBoundingClientRect();
                   const videoBox = section.querySelector(".gala-listing-compact__opportunity-video")?.getBoundingClientRect();
-                  const pointsBox = section.querySelector(".gala-commercial-listing__highlights--row")?.getBoundingClientRect();
+                  const pointsBox = section.querySelector(".gala-commercial-listing__highlights")?.getBoundingClientRect();
 
                   if (!copyBox || !videoBox || !pointsBox) return false;
                   if (width > 850) {
                     return (
                       videoBox.x >= copyBox.x + copyBox.width - 2 &&
                       pointsBox.y >= Math.max(copyBox.y + copyBox.height, videoBox.y + videoBox.height) - 2 &&
-                      pointsBox.width > copyBox.width
+                      Math.abs(pointsBox.x - copyBox.x) <= 2 &&
+                      Math.abs(pointsBox.width - copyBox.width) <= 2
                     );
                   }
                   if (width <= 620) {
                     return (
-                      videoBox.y >= copyBox.y + copyBox.height - 2 &&
-                      pointsBox.y >= videoBox.y + videoBox.height - 2
+                      pointsBox.y >= copyBox.y + copyBox.height - 2 &&
+                      videoBox.y >= pointsBox.y + pointsBox.height - 2
                     );
                   }
                   return true;
@@ -216,25 +250,8 @@ test.describe("public property and service route matrix", () => {
         }
 
         if (capabilityRoutes.includes(route as (typeof capabilityRoutes)[number])) {
-          const inquiryLinks = page.locator('.gala-cap-page a[href^="/contact?inquiry="]');
-          await expect(inquiryLinks.first()).toBeVisible();
-          const href = await inquiryLinks.first().getAttribute("href");
-          const inquiryUrl = new URL(href ?? "", "https://galacregroup.com");
-          const capability = route.split("/").at(-1);
-          const expectedInquiry = route.startsWith("/services/brokerage/")
-            ? capability
-            : route.startsWith("/services/investment-sales/")
-              ? "investment-sales"
-              : route.startsWith("/services/development-services/")
-                ? "development-services"
-                : route.startsWith("/services/capital-markets/")
-                  ? "capital-markets"
-                  : "property-management";
-          expect.soft(inquiryUrl.pathname, `${viewport.name} ${route}: inquiry destination`).toBe("/contact");
-          expect.soft(inquiryUrl.searchParams.get("inquiry"), `${viewport.name} ${route}: inquiry type`).toBe(expectedInquiry);
-          if (!route.startsWith("/services/brokerage/") && !route.startsWith("/services/property-management/")) {
-            expect.soft(inquiryUrl.searchParams.get("focus"), `${viewport.name} ${route}: inquiry focus`).toBe(capability);
-          }
+          const { anchor } = capabilityDestination(route as (typeof capabilityRoutes)[number]);
+          await expect(page.locator(`#${anchor}`), `${viewport.name} ${route}: capability anchor`).toHaveCount(1);
         }
       }
 
@@ -378,19 +395,25 @@ test("property videos load playable metadata on mobile without autoplay", async 
   }
 });
 
-test("property and service inquiries arrive with their context selected", async ({ page }) => {
+test("property and service inquiry entry points retain their context", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
 
   await page.goto("/properties/2301-lackey-street", { waitUntil: "domcontentloaded" });
-  await page.locator('a[href="/contact?property=2301-lackey-street&advisor=gaurang-gala"]').first().click();
-  await expect(page).toHaveURL(/\/contact\?property=2301-lackey-street&advisor=gaurang-gala$/);
-  await expect(page.getByRole("heading", { name: "Ask about 2301 Lackey Street" })).toBeVisible();
-  await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
+  const propertyInquiry = page.locator('a[href$="#property-inquiry"]').first();
+  await propertyInquiry.click();
+  await expect(page).toHaveURL(/\/properties\/2301-lackey-street#property-inquiry$/);
+  await expect(page.locator("#property-inquiry")).toBeInViewport();
+  await expect(page.locator("#property-inquiry .gala-listing-inquiry-form")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Send Property Inquiry" })).toBeVisible();
 
   await page.goto("/services/investment-sales/industrial", { waitUntil: "domcontentloaded" });
-  await page.locator('a[href="/contact?inquiry=investment-sales&focus=industrial"]').first().click();
-  await expect(page).toHaveURL(/\/contact\?inquiry=investment-sales&focus=industrial$/);
-  await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
+  await expect(page).toHaveURL(/\/services\/investment-sales#industrial$/);
+  await expect(page.locator("#industrial")).toBeVisible();
+  const investmentSalesInquiry = page.getByRole("link", { name: "Request a Consultation" });
+  await expect(investmentSalesInquiry).toHaveAttribute("href", "#investment-sales-consultation");
+  await investmentSalesInquiry.click();
+  await expect(page).toHaveURL(/\/services\/investment-sales#investment-sales-consultation$/);
+  await expect(page.locator("#investment-sales-consultation")).toBeInViewport();
 });
 
 test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
@@ -399,9 +422,10 @@ test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
     reducedMotion: "reduce",
   });
   const page = await context.newPage();
-  await page.goto("/services/investment-sales/industrial", { waitUntil: "domcontentloaded" });
+  await page.goto("/services/investment-sales", { waitUntil: "domcontentloaded" });
 
-  const revealItems = page.locator("[data-capability-reveal]");
+  const revealItems = page.locator("[data-investment-narrative-reveal]");
+  expect(await revealItems.count()).toBeGreaterThan(0);
   await expect(revealItems.first()).toHaveClass(/is-visible/);
   expect(await revealItems.evaluateAll((items) => items.every((item) => item.classList.contains("is-visible")))).toBe(true);
 

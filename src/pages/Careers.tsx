@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Building2, ClipboardCheck, Megaphone, Plus, Search, Target, Users, X } from "lucide-react";
+import { ArrowUpRight, Building2, ClipboardCheck, Megaphone, Plus, Search, Target, Users, X } from "lucide-react";
 import AgentApplicationForm from "@/components/careers/AgentApplicationForm";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -39,18 +39,34 @@ const Careers = () => {
       <SiteHeader currentPath="/careers" />
 
       <main className="gala-page gala-journey-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero gala-journey-hero gala-careers-hero" aria-labelledby="careers-hero-title">
-          <img
-            className="gala-careers-hero__image"
-            src={careersHeroBackground}
-            alt=""
-            aria-hidden="true"
-            decoding="async"
-          />
-          <div className="gala-shell">
+        <section className="gala-editorial-split-hero gala-careers-hero" aria-labelledby="careers-hero-title">
+          <div className="gala-editorial-split-hero__image">
+            <img
+              className="gala-careers-hero__image"
+              src={careersHeroBackground}
+              alt="Commercial real estate professionals finalizing an agreement"
+              loading="eager"
+              decoding="async"
+            />
+            <svg
+              className="gala-editorial-split-hero__image-outline"
+              viewBox="0 0 1000 700"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M78 0H1000V630L922 700H0V70Z" />
+              <path className="gala-editorial-split-hero__image-accent" d="M790 -16H1018V180" />
+              <path className="gala-editorial-split-hero__image-accent" d="M-16 520V716H220" />
+            </svg>
+          </div>
+          <div className="gala-editorial-split-hero__copy">
+            <span className="gala-editorial-split-hero__linework" aria-hidden="true"></span>
             <div className="gala-kicker">Careers at Gala CRE</div>
             <h1 id="careers-hero-title">Join Our Team</h1>
             <p>Gala CRE Group is building a brokerage for commercial real estate agents who want to grow their business with experienced leadership and practical support behind them.</p>
+            <a className="gala-investment-narrative-button" href="#agent-application">
+              <span>Submit Agent Inquiry</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+            </a>
           </div>
         </section>
 

@@ -35,14 +35,14 @@ const teamExpectations = [
 ] as const;
 
 const propertyExpectations = [
-  ["611-703-church-street", "611 & 703 Church Street", "gaurang-gala"],
-  ["5911-family-farm-road", "5911 Family Farm Road", "leigh-roach"],
-  ["1111-brown-street", "Lexington Townhome Site", "gaurang-gala"],
-  ["2301-lackey-street", "2301 Lackey Street", "gaurang-gala"],
-  ["5047-yadkin-road", "5047 Yadkin Road", "gaurang-gala"],
-  ["802-bragg-boulevard", "802 Bragg Boulevard", "gaurang-gala"],
-  ["202-north-main-street", "202 North Main Street", ""],
-  ["10416-chapel-hill-road", "10416 Chapel Hill Road", "gaurang-gala"],
+  ["611-703-church-street", "611 & 703 Church Street", "gaurang-gala", "active"],
+  ["5911-family-farm-road", "5911 Family Farm Road", "leigh-roach", "active"],
+  ["1111-brown-street", "Lexington Townhome Site", "gaurang-gala", "active"],
+  ["2301-lackey-street", "2301 Lackey Street", "gaurang-gala", "active"],
+  ["5047-yadkin-road", "5047 Yadkin Road", "gaurang-gala", "active"],
+  ["802-bragg-boulevard", "802 Bragg Boulevard", "gaurang-gala", "closed"],
+  ["202-north-main-street", "202 North Main Street", "", "closed"],
+  ["10416-chapel-hill-road", "10416 Chapel Hill Road", "gaurang-gala", "closed"],
 ] as const;
 
 test.describe("September client release acceptance", () => {
@@ -204,18 +204,27 @@ test.describe("September client release acceptance", () => {
     );
     expect(catalogLinks).toEqual(propertyExpectations.map(([slug]) => `/properties/${slug}`));
 
-    for (const [slug, name, advisorId] of propertyExpectations) {
+    for (const [slug, name, advisorId, status] of propertyExpectations) {
       currentPath = `/properties/${slug}`;
       await page.goto(`/properties/${slug}`, { waitUntil: "domcontentloaded" });
-      const expectedInquiryHref = `/contact?property=${slug}${advisorId ? `&advisor=${advisorId}` : ""}`;
-      await expect(page.locator(`a[href="${expectedInquiryHref}"]`).first()).toBeVisible();
       await expect(page.locator('a[href*="download-center"], a[href$=".pdf"], a[href*=".pdf?"]')).toHaveCount(0);
       await expect(page.getByText(/view documents|download brochure|open media package|property media package/i)).toHaveCount(0);
 
-      currentPath = expectedInquiryHref;
-      await page.goto(expectedInquiryHref, { waitUntil: "domcontentloaded" });
-      await expect(page.getByRole("heading", { name: `Ask about ${name}` })).toBeVisible();
-      await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
+      if (status === "active") {
+        await expect(page.locator('a[href$="#property-inquiry"]').first()).toBeVisible();
+        await expect(page.getByRole("heading", { name: `Request details for ${name}.` })).toBeVisible();
+        await expect(page.locator("#property-inquiry .gala-listing-inquiry-form")).toBeVisible();
+        await expect(page.getByRole("button", { name: "Send Property Inquiry" })).toBeVisible();
+      } else {
+        const expectedInquiryHref = `/contact?property=${slug}${advisorId ? `&advisor=${advisorId}` : ""}`;
+        await expect(page.locator(`a[href="${expectedInquiryHref}"]`).first()).toBeVisible();
+        await expect(page.locator(".gala-listing-inquiry-form")).toHaveCount(0);
+
+        currentPath = expectedInquiryHref;
+        await page.goto(expectedInquiryHref, { waitUntil: "domcontentloaded" });
+        await expect(page.getByRole("heading", { name: `Ask about ${name}` })).toBeVisible();
+        await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Property Inquiry");
+      }
     }
 
     currentPath = "/properties/10416-chapel-hill-road";
@@ -224,8 +233,9 @@ test.describe("September client release acceptance", () => {
     await expect(transactionTeam).toContainText("Gaurang Gala");
     await expect(transactionTeam).toContainText("Goverdhan Vavilala");
     await expect(transactionTeam).not.toContainText(/buyer representative|seller representative|transaction volume|sale price/i);
-    await expect(page.getByText("Gaurang Gala and Goverdhan Vavilala")).toBeVisible();
-    await expect(page.getByText(/relationship to 10414 remains unconfirmed/i)).toBeVisible();
+    const transactionDisclosure = page.locator(".gala-commercial-listing__disclosure");
+    await expect(transactionDisclosure).toContainText(/transaction price, confidential terms, current ownership, occupancy, and development information are not published/i);
+    await expect(transactionDisclosure).toContainText(/limited to the 10416 Chapel Hill Road record and does not characterize any separate 10414 Chapel Hill Road transaction/i);
     expect(pageErrors).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
