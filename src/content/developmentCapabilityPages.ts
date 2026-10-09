@@ -106,14 +106,14 @@ const createDevelopmentPage = ({
   };
 };
 
-const siteStrategy = createDevelopmentPage({
-  slug: "site-strategy",
-  focus: "site-strategy",
-  title: "Site Strategy",
+const siteSelection = createDevelopmentPage({
+  slug: "site-selection",
+  focus: "site-selection",
+  title: "Site Selection",
   metadataDescription:
-    "Commercial site strategy connecting intended use, market fit, physical constraints, access, infrastructure, approvals, and a disciplined diligence roadmap.",
+    "Commercial site selection connecting business requirements, market fit, physical constraints, access, infrastructure, approvals, and a disciplined comparison process.",
   heroLead:
-    "Test the site against the business plan early—before assumptions become expensive commitments.",
+    "Compare locations against the business plan before a promising address becomes an expensive commitment.",
   heroImage: siteStrategyEntitlements,
   heroAlt:
     "Generic development advisory table with site plans, material samples, and an architectural massing model",
@@ -121,10 +121,10 @@ const siteStrategy = createDevelopmentPage({
   primaryLabel: "Discuss a Site",
   strategy: {
     type: "strategy",
-    eyebrow: "The Early Decision",
-    headline: "A compelling location can still be the wrong site.",
+    eyebrow: "The Location Decision",
+    headline: "A compelling address can still be the wrong site.",
     introduction:
-      "Gala frames the commercial question, surfaces decision-driving unknowns, and coordinates the specialist input needed before ownership commits more time or capital.",
+      "Gala translates operating and investment requirements into practical site criteria, compares credible alternatives, and coordinates the specialist input needed before a client commits more time or capital.",
     media: {
       src: siteStrategyFieldContext,
       alt: "Commercial advisors reviewing a generic undeveloped site, nearby access, and surrounding development context",
@@ -133,39 +133,39 @@ const siteStrategy = createDevelopmentPage({
     tracks: [
       {
         number: "01",
-        label: "Program Fit",
-        title: "Start with the use—not the parcel story.",
+        label: "Requirement",
+        title: "Start with what the opportunity must support.",
         body: "Intended use, scale, circulation, parking, operations, market position, timing, and capital limits define what the site must support.",
         points: [],
       },
       {
         number: "02",
-        label: "Site Reality",
-        title: "Find the constraints that can change the plan.",
-        body: "Access, utilities, topography, stormwater, environmental conditions, approvals, and off-site work are organized for specialist verification.",
+        label: "Alternatives",
+        title: "Compare sites on the same decision criteria.",
+        body: "Location, access, utilities, topography, stormwater, environmental conditions, approvals, and off-site work are organized for comparable specialist review.",
         points: [],
       },
       {
         number: "03",
-        label: "Decision Sequence",
-        title: "Spend diligence dollars in the right order.",
-        body: "Studies, agency conversations, contract milestones, and capital decisions are sequenced around the questions most likely to affect a stop-or-proceed choice.",
+        label: "Selection Path",
+        title: "Advance the strongest option with clarity.",
+        body: "Market findings, agency conversations, studies, contract milestones, and capital decisions are sequenced around the questions most likely to distinguish the alternatives.",
         points: [],
       },
     ],
   },
   process: {
     type: "process",
-    id: "site-strategy-process",
-    eyebrow: "The Site Strategy Process",
-    headline: "Move from possibility to a defensible next decision.",
+    id: "site-selection-process",
+    eyebrow: "The Site Selection Process",
+    headline: "Move from requirements to a defensible site decision.",
     introduction:
-      "The process turns a proposed use and an incomplete site record into an organized evaluation path.",
+      "The process turns a proposed use and a broad search into an organized comparison and diligence path.",
     steps: [
       { number: "01", title: "Define", body: "Clarify the program, operating requirements, ownership objective, capital limits, timing, and acceptable alternatives." },
-      { number: "02", title: "Screen", body: "Review the known parcel, market, planning, access, utility, physical, and environmental context at the appropriate level." },
-      { number: "03", title: "Test", body: "Coordinate focused input from brokers, planners, engineers, architects, attorneys, providers, and other specialists as needed." },
-      { number: "04", title: "Decide", body: "Organize findings, dependencies, remaining unknowns, and next steps around a clear proceed, revise, or stop decision." },
+      { number: "02", title: "Search + Screen", body: "Identify credible alternatives and compare market, planning, access, utility, physical, and environmental context at the appropriate level." },
+      { number: "03", title: "Test", body: "Coordinate focused input from brokers, planners, engineers, architects, attorneys, providers, and other specialists for the strongest candidates." },
+      { number: "04", title: "Select", body: "Organize findings, tradeoffs, dependencies, remaining unknowns, and next steps around a clear site recommendation." },
     ],
   },
   deliverables: {
@@ -173,27 +173,27 @@ const siteStrategy = createDevelopmentPage({
     eyebrow: "Services + Deliverables",
     headline: "A clearer brief before the heavy lift.",
     introduction:
-      "Site strategy provides commercial decision support; engineering, legal, environmental, and governmental conclusions remain with the appropriate specialists and authorities.",
+      "Site selection provides commercial decision support; engineering, legal, environmental, and governmental conclusions remain with the appropriate specialists and authorities.",
     items: [
       { icon: "positioning", title: "Development Brief", body: "The intended use, operating needs, market role, timing, ownership priorities, and alternatives." },
       { icon: "economics", title: "Constraint Register", body: "Known conditions, working assumptions, missing information, and questions requiring specialist verification." },
-      { icon: "prospects", title: "Specialist Plan", body: "The planning, civil, architectural, legal, environmental, provider, and market inputs needed for the decision." },
+      { icon: "prospects", title: "Site Comparison", body: "Consistent market, planning, access, infrastructure, physical, and timing criteria across credible alternatives." },
       { icon: "execution", title: "Decision Roadmap", body: "Sequenced diligence, responsibilities, milestones, dependencies, and stop-or-proceed checkpoints." },
     ],
   },
-  relatedHeadline: "Turn site findings into the right next workstream.",
+  relatedHeadline: "Turn the site decision into the right next workstream.",
   relatedIntroduction:
     "Move into approvals, infrastructure, land positioning, or capital planning only when the record supports it.",
   relatedLinks: [
     { label: "Development", title: "Entitlements", body: "Coordinate the jurisdictional path once the program is sufficiently defined.", href: "/services/development-services/entitlements" },
     { label: "Development", title: "Infrastructure", body: "Clarify access, utility, stormwater, and off-site dependencies.", href: "/services/development-services/infrastructure" },
     { label: "Investment Sales", title: "Land", body: "Position a site around verified use paths, constraints, and timing.", href: "/services/investment-sales/land" },
-    { label: "Capital Markets", title: "Capital Strategy", body: "Align capital decisions with the development path and its dependencies.", href: "/services/capital-markets/capital-strategy" },
+    { label: "Capital Markets", title: "Capital Strategy", body: "Align capital decisions with the development path and its dependencies.", href: "/services/capital-markets#capital-strategy" },
   ],
   ctaEyebrow: "Start Before the Commitment",
-  ctaHeadline: "Bring us the site, the idea, and the questions that still matter.",
+  ctaHeadline: "Bring us the requirement, the search area, and the questions that still matter.",
   ctaBody:
-    "Gala will help organize the early commercial decision and identify the specialist work needed to evaluate it responsibly.",
+    "Gala will help organize the location decision, compare credible alternatives, and identify the specialist work needed to evaluate them responsibly.",
 });
 
 const entitlements = createDevelopmentPage({
@@ -275,10 +275,10 @@ const entitlements = createDevelopmentPage({
   relatedIntroduction:
     "Approval decisions can change infrastructure, ownership oversight, capital timing, and the value of the land itself.",
   relatedLinks: [
-    { label: "Development", title: "Site Strategy", body: "Clarify program fit and decision-driving unknowns before the approval path.", href: "/services/development-services/site-strategy" },
+    { label: "Development", title: "Site Selection", body: "Clarify requirements, alternatives, and decision-driving unknowns before the approval path.", href: "/services/development-services/site-selection" },
     { label: "Development", title: "Infrastructure", body: "Coordinate access, utility, stormwater, and off-site dependencies alongside review.", href: "/services/development-services/infrastructure" },
-    { label: "Development", title: "Development Oversight", body: "Keep ownership decisions and specialist work aligned as the project advances.", href: "/services/development-services/development-oversight" },
-    { label: "Capital Markets", title: "Capital Strategy", body: "Sequence funding decisions around approval risk, timing, and milestones.", href: "/services/capital-markets/capital-strategy" },
+    { label: "Development", title: "GC / Builder Relationships", body: "Connect the approved program with relevant construction relationships.", href: "/services/development-services/gc-builder-relationships" },
+    { label: "Capital Markets", title: "Capital Strategy", body: "Sequence funding decisions around approval risk, timing, and milestones.", href: "/services/capital-markets#capital-strategy" },
   ],
   ctaEyebrow: "Start With the Current Record",
   ctaHeadline: "Organize the path from proposed use to the next approval milestone.",
@@ -365,10 +365,10 @@ const infrastructure = createDevelopmentPage({
   relatedIntroduction:
     "Verified system constraints can reshape site fit, approvals, owner decisions, and financing requirements.",
   relatedLinks: [
-    { label: "Development", title: "Site Strategy", body: "Evaluate infrastructure as part of early program and site fit.", href: "/services/development-services/site-strategy" },
+    { label: "Development", title: "Site Selection", body: "Evaluate infrastructure as part of early program and site fit.", href: "/services/development-services/site-selection" },
     { label: "Development", title: "Entitlements", body: "Connect infrastructure findings to jurisdictional review and approvals.", href: "/services/development-services/entitlements" },
-    { label: "Development", title: "Development Oversight", body: "Track system decisions and dependencies across the broader project.", href: "/services/development-services/development-oversight" },
-    { label: "Capital Markets", title: "Debt", body: "Organize financing requirements around verified scope, budget, schedule, and delivery risk.", href: "/services/capital-markets/debt" },
+    { label: "Development", title: "GC / Builder Relationships", body: "Connect verified infrastructure requirements to relevant construction conversations.", href: "/services/development-services/gc-builder-relationships" },
+    { label: "Capital Markets", title: "Debt", body: "Organize financing requirements around verified scope, budget, schedule, and delivery risk.", href: "/services/capital-markets#debt" },
   ],
   ctaEyebrow: "Start With the Dependencies",
   ctaHeadline: "Make the systems, responsibilities, and timing visible.",
@@ -376,25 +376,25 @@ const infrastructure = createDevelopmentPage({
     "Share the site plan, provider information, consultant work, jurisdictional feedback, budget assumptions, and schedule. Gala will help organize the next coordination decisions.",
 });
 
-const developmentOversight = createDevelopmentPage({
-  slug: "development-oversight",
-  focus: "development-oversight",
-  title: "Development Oversight",
+const gcBuilderRelationships = createDevelopmentPage({
+  slug: "gc-builder-relationships",
+  focus: "gc-builder-relationships",
+  title: "GC / Builder Relationships",
   metadataDescription:
-    "Owner-side commercial development oversight connecting decisions, consultants, approvals, budget inputs, schedule, risks, reporting, and transaction priorities.",
+    "Commercial development support connecting clients with relevant general-contractor and builder relationships while organizing scope, fit, communication, and next decisions.",
   heroLead:
-    "Keep ownership decisions, specialists, approvals, schedule, and commercial priorities moving as one coordinated project.",
+    "Connect the opportunity with relevant construction relationships and keep early conversations grounded in the project's real requirements.",
   heroImage: developmentOversightHero,
   heroAlt:
     "Owner representative and project professional walking a generic active commercial development site",
   heroPosition: "center",
-  primaryLabel: "Discuss a Development",
+  primaryLabel: "Discuss Your Builder Needs",
   strategy: {
     type: "strategy",
-    eyebrow: "The Ownership View",
-    headline: "Complex projects lose time in the gaps between teams.",
+    eyebrow: "The Relationship Fit",
+    headline: "The right construction relationship begins with a clear project brief.",
     introduction:
-      "Gala creates an owner-side decision rhythm across design, approvals, infrastructure, pricing, capital, construction, leasing, and transaction work without duplicating specialist scopes.",
+      "Gala helps clients frame the opportunity, identify relevant general-contractor and builder relationships, and organize early communication without replacing licensed design, construction, legal, or ownership responsibilities.",
     media: {
       src: developmentOversightContext,
       alt: "Anonymous owner-side team reviewing a generic development schedule, plans, and material decisions",
@@ -403,72 +403,72 @@ const developmentOversight = createDevelopmentPage({
     tracks: [
       {
         number: "01",
-        label: "Shared Baseline",
-        title: "Put every workstream against one objective.",
-        body: "Program, team roles, approvals, budget inputs, schedule, leasing, capital, and transaction priorities begin from the same ownership brief.",
+        label: "Project Brief",
+        title: "Make the opportunity legible before introductions begin.",
+        body: "Program, site status, approvals, delivery expectations, available documents, timing, and ownership priorities establish the basis for a useful conversation.",
         points: [],
       },
       {
         number: "02",
-        label: "Cross-Team Visibility",
-        title: "Find the gaps before they become delays.",
-        body: "Dependencies, open items, changes, risks, responsible parties, and interdependent dates stay visible across the project team.",
+        label: "Relationship Match",
+        title: "Focus outreach on relevant experience and capacity.",
+        body: "Project type, geography, scale, delivery needs, schedule, and relationship fit guide which contractor or builder conversations are worth advancing.",
         points: [],
       },
       {
         number: "03",
-        label: "Ownership Decisions",
-        title: "Frame choices with consequences attached.",
-        body: "Material decisions are organized with the relevant specialist input, alternatives, timing, and commercial effects visible to ownership.",
+        label: "Client Control",
+        title: "Keep selection and contracting decisions with the client.",
+        body: "Gala coordinates context and communication while the client and its qualified advisors evaluate credentials, proposals, contracts, pricing, and construction responsibility.",
         points: [],
       },
     ],
   },
   process: {
     type: "process",
-    id: "development-oversight-process",
-    eyebrow: "The Development Oversight Process",
-    headline: "Create one decision rhythm across the project.",
+    id: "gc-builder-relationships-process",
+    eyebrow: "The Relationship Process",
+    headline: "Move from project requirements to productive builder conversations.",
     introduction:
-      "The oversight layer connects specialist progress to concise ownership decisions and reporting.",
+      "The process keeps the project brief, relationship criteria, introductions, and next decisions organized.",
     steps: [
-      { number: "01", title: "Align", body: "Confirm the ownership objective, program, team roles, decision rights, workstreams, baseline schedule, and commercial milestones." },
-      { number: "02", title: "Monitor", body: "Track consultant work, approvals, infrastructure, pricing, procurement, capital, leasing, risks, and dependent dates." },
-      { number: "03", title: "Decide", body: "Frame material choices with the relevant specialist input, alternatives, timing, and commercial consequences visible." },
-      { number: "04", title: "Report", body: "Summarize completed work, changes, open decisions, upcoming milestones, exceptions, and accountable next actions." },
+      { number: "01", title: "Define", body: "Confirm the project type, location, status, anticipated scope, schedule, delivery expectations, and information available for review." },
+      { number: "02", title: "Identify", body: "Consider relevant contractor and builder relationships against geography, experience, scale, availability, and the client's stated needs." },
+      { number: "03", title: "Connect", body: "Share an appropriate project brief, coordinate introductory conversations, and keep questions and requested information organized." },
+      { number: "04", title: "Advance", body: "Document next steps while the client and its advisors control qualification, pricing, selection, contracting, and construction decisions." },
     ],
   },
   deliverables: {
     type: "deliverables",
     eyebrow: "Services + Deliverables",
-    headline: "Owner-side clarity without replacing the project team.",
+    headline: "Useful introductions without replacing due diligence or the project team.",
     introduction:
-      "Architectural, engineering, legal, financial, contractor, and property-management responsibilities remain with the contracted specialists.",
+      "Gala does not act as the general contractor, guarantee performance, or replace the client's architectural, engineering, legal, financial, procurement, or construction advisors.",
     items: [
-      { icon: "positioning", title: "Ownership Brief", body: "Project objectives, program, commercial priorities, decision criteria, roles, and reporting expectations." },
-      { icon: "marketing", title: "Integrated Milestone View", body: "Approvals, design, infrastructure, budget inputs, procurement, construction, leasing, and capital dates." },
-      { icon: "economics", title: "Change + Risk Record", body: "Material changes, open assumptions, emerging risks, cost inputs, schedule effects, and required decisions." },
-      { icon: "execution", title: "Ownership Reporting", body: "Focused meetings and updates organized around progress, exceptions, next decisions, and accountable actions." },
+      { icon: "positioning", title: "Project Brief", body: "A concise view of the opportunity, status, anticipated scope, timing, known dependencies, and client priorities." },
+      { icon: "prospects", title: "Relationship Criteria", body: "The geography, asset experience, scale, capacity, delivery approach, and communication fit relevant to the conversation." },
+      { icon: "marketing", title: "Introductions + Context", body: "Coordinated introductions supported by the information each party needs to determine whether further discussion is worthwhile." },
+      { icon: "execution", title: "Next-Step Record", body: "Questions, information requests, meetings, responsibilities, and agreed next actions kept visible to the client." },
     ],
   },
-  relatedHeadline: "Keep the commercial plan connected as work advances.",
+  relatedHeadline: "Connect builder conversations to the broader development path.",
   relatedIntroduction:
     "Move directly into the site, approval, infrastructure, or capital workstream affecting the next ownership decision.",
   relatedLinks: [
-    { label: "Development", title: "Site Strategy", body: "Clarify the development brief, site fit, and decision-driving unknowns.", href: "/services/development-services/site-strategy" },
+    { label: "Development", title: "Site Selection", body: "Clarify the site requirement, alternatives, and decision-driving unknowns.", href: "/services/development-services/site-selection" },
     { label: "Development", title: "Entitlements", body: "Organize jurisdictional milestones and the specialist-led approval path.", href: "/services/development-services/entitlements" },
     { label: "Development", title: "Infrastructure", body: "Track access, utilities, stormwater, off-site work, and provider dependencies.", href: "/services/development-services/infrastructure" },
-    { label: "Capital Markets", title: "Transaction Coordination", body: "Connect capital-source diligence and closing milestones to the development record.", href: "/services/capital-markets/transaction-coordination" },
+    { label: "Capital Markets", title: "Transaction Coordination", body: "Connect capital-source diligence and closing milestones to the development record.", href: "/services/capital-markets#transaction-coordination" },
   ],
-  ctaEyebrow: "Create Project Visibility",
-  ctaHeadline: "Organize the decisions that ownership needs to control.",
+  ctaEyebrow: "Start With the Project Brief",
+  ctaHeadline: "Make the first builder conversation a useful one.",
   ctaBody:
-    "Share the current plan, project team, approvals, schedule, active risks, and near-term milestones. Gala will help define the oversight layer that adds useful clarity.",
+    "Share the site, current plan, project status, anticipated scope, schedule, and relationship needs. Gala will help determine which conversations may be relevant and organize the introduction.",
 });
 
 export const developmentCapabilityPages = [
-  siteStrategy,
+  siteSelection,
   entitlements,
   infrastructure,
-  developmentOversight,
+  gcBuilderRelationships,
 ];

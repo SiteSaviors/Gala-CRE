@@ -39,16 +39,17 @@ test.describe("Investment Sales narrative service page", () => {
     });
   }
 
-  test("legacy capability URLs land on the matching asset panel", async ({ page }) => {
+  test("asset-class routes open their dedicated editorial pages", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/services/investment-sales/land", { waitUntil: "domcontentloaded" });
 
-    await expect(page).toHaveURL(/\/services\/investment-sales#land$/);
-    await expect(page.locator("#land")).toBeInViewport();
-    await expect(page.locator("#industrial")).toBeAttached();
-    await expect(page.locator("#multifamily")).toBeAttached();
-    await expect(page.locator("#retail")).toBeAttached();
-    await expect(page.locator("#office")).toBeAttached();
+    await expect(page).toHaveURL(/\/services\/investment-sales\/land$/);
+    await expect(page.locator(".gala-cap-page")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Land Investment Sales", level: 1 })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Discuss a Land Opportunity/i }).first()).toHaveAttribute(
+      "href",
+      "/contact?inquiry=investment-sales&focus=land",
+    );
   });
 
   test("reduced motion and keyboard access remain usable", async ({ browser }) => {

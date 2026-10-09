@@ -136,9 +136,9 @@ export const landCapabilityPage: CapabilityPageContent = {
     links: [
       {
         label: "Development",
-        title: "Site Strategy",
+        title: "Site Selection",
         body: "Clarify intended use, constraints, stakeholders, and the most useful next diligence steps before committing to a path.",
-        href: "/services/development-services/site-strategy",
+        href: "/services/development-services/site-selection",
       },
       {
         label: "Development",
@@ -150,7 +150,7 @@ export const landCapabilityPage: CapabilityPageContent = {
         label: "Capital Markets",
         title: "Capital Strategy",
         body: "Organize debt, equity, timing, and funding dependencies around the opportunity's actual execution plan.",
-        href: "/services/capital-markets/capital-strategy",
+        href: "/services/capital-markets#capital-strategy",
       },
       {
         label: "Investment Sales",

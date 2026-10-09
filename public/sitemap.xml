@@ -4,7 +4,16 @@
   <url><loc>https://gala-cre.vercel.app/services</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/brokerage</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/investment-sales</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/investment-sales/industrial</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/investment-sales/multifamily</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/investment-sales/retail</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/investment-sales/office</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/investment-sales/land</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/development-services</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/development-services/site-selection</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/development-services/entitlements</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/development-services/infrastructure</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/development-services/gc-builder-relationships</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/capital-markets</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/property-management</loc></url>
   <url><loc>https://gala-cre.vercel.app/properties</loc></url>

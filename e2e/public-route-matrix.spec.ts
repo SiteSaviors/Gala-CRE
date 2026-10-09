@@ -19,18 +19,21 @@ const serviceOverviewRoutes = [
   "/services/property-management",
 ] as const;
 
-const capabilityRoutes = [
-  "/services/brokerage/landlord-representation",
-  "/services/brokerage/tenant-representation",
+const dedicatedCapabilityRoutes = [
   "/services/investment-sales/industrial",
   "/services/investment-sales/multifamily",
   "/services/investment-sales/retail",
   "/services/investment-sales/office",
   "/services/investment-sales/land",
-  "/services/development-services/site-strategy",
+  "/services/development-services/site-selection",
   "/services/development-services/entitlements",
   "/services/development-services/infrastructure",
-  "/services/development-services/development-oversight",
+  "/services/development-services/gc-builder-relationships",
+] as const;
+
+const anchorCapabilityRoutes = [
+  "/services/brokerage/landlord-representation",
+  "/services/brokerage/tenant-representation",
   "/services/capital-markets/debt",
   "/services/capital-markets/equity",
   "/services/capital-markets/capital-strategy",
@@ -38,12 +41,19 @@ const capabilityRoutes = [
   "/services/property-management/property-management-partnership",
 ] as const;
 
+const capabilityAliases = {
+  "/services/development-services/site-strategy": "/services/development-services/site-selection",
+  "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
+} as const;
+
 const auditedRoutes = [
   "/properties",
   ...propertyRoutes,
   "/services",
   ...serviceOverviewRoutes,
-  ...capabilityRoutes,
+  ...dedicatedCapabilityRoutes,
+  ...anchorCapabilityRoutes,
+  ...Object.keys(capabilityAliases),
 ] as const;
 
 const publicPaths = new Set([
@@ -75,7 +85,7 @@ const closedPropertyRoutes = new Set([
   "/properties/10416-chapel-hill-road",
 ]);
 
-const capabilityDestination = (route: (typeof capabilityRoutes)[number]) => {
+const capabilityDestination = (route: (typeof anchorCapabilityRoutes)[number]) => {
   const segments = route.split("/");
   const anchor = segments.at(-1);
   return {
@@ -123,12 +133,18 @@ test.describe("public property and service route matrix", () => {
         const response = await page.goto(route, { waitUntil: "domcontentloaded" });
         expect.soft(response?.status(), `${viewport.name} ${route}: document response`).toBeLessThan(400);
 
-        const capabilityRedirect = capabilityRoutes.includes(route as (typeof capabilityRoutes)[number])
-          ? capabilityDestination(route as (typeof capabilityRoutes)[number])
+        const capabilityRedirect = anchorCapabilityRoutes.includes(route as (typeof anchorCapabilityRoutes)[number])
+          ? capabilityDestination(route as (typeof anchorCapabilityRoutes)[number])
           : null;
         if (capabilityRedirect) {
           await expect(page, `${viewport.name} ${route}: consolidated capability redirect`).toHaveURL(
             new RegExp(`${capabilityRedirect.pathname}#${capabilityRedirect.anchor}$`),
+          );
+        }
+        const aliasDestination = capabilityAliases[route as keyof typeof capabilityAliases];
+        if (aliasDestination) {
+          await expect(page, `${viewport.name} ${route}: canonical development alias`).toHaveURL(
+            new RegExp(`${aliasDestination}$`),
           );
         }
 
@@ -141,7 +157,7 @@ test.describe("public property and service route matrix", () => {
         await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /\| Gala CRE Group$/);
         await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /^https?:\/\//);
         await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
-        const canonicalPath = capabilityRedirect?.pathname ?? route;
+        const canonicalPath = capabilityRedirect?.pathname ?? aliasDestination ?? route;
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           "href",
           new RegExp(`${canonicalPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`),
@@ -249,9 +265,13 @@ test.describe("public property and service route matrix", () => {
           }
         }
 
-        if (capabilityRoutes.includes(route as (typeof capabilityRoutes)[number])) {
-          const { anchor } = capabilityDestination(route as (typeof capabilityRoutes)[number]);
+        if (anchorCapabilityRoutes.includes(route as (typeof anchorCapabilityRoutes)[number])) {
+          const { anchor } = capabilityDestination(route as (typeof anchorCapabilityRoutes)[number]);
           await expect(page.locator(`#${anchor}`), `${viewport.name} ${route}: capability anchor`).toHaveCount(1);
+        }
+
+        if (dedicatedCapabilityRoutes.includes(route as (typeof dedicatedCapabilityRoutes)[number])) {
+          await expect(page.locator(".gala-cap-page"), `${viewport.name} ${route}: editorial capability page`).toHaveCount(1);
         }
       }
 

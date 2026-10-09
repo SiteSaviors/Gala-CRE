@@ -143,7 +143,7 @@ const ServiceDetail = () => {
                     return (
                       <Link
                         id={anchorId}
-                        to={getCapabilityHref(service.slug, capability.label)}
+                        to={getCapabilityHref(service.slug, capability)}
                         className="gala-capability-teaser"
                         style={style}
                         key={capability.label}

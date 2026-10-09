@@ -7,10 +7,14 @@ import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import {
   advertisedCapabilityRoutes,
+  capabilityRouteAliases,
+  dedicatedCapabilityRoutes,
   findCapabilityByRoute,
   getServiceInquiryHref,
+  sectionCapabilityRoutes,
   serviceNavigationGroups,
 } from "@/content/services";
+import { capabilityPageByPath } from "@/content/capabilityPages";
 
 const expectedCapabilities = [
   "Landlord Representation",
@@ -20,10 +24,10 @@ const expectedCapabilities = [
   "Retail",
   "Office",
   "Land",
-  "Site Strategy",
+  "Site Selection",
   "Entitlements",
   "Infrastructure",
-  "Development Oversight",
+  "GC / Builder Relationships",
   "Debt",
   "Equity",
   "Capital Strategy",
@@ -36,29 +40,56 @@ const LocationProbe = () => {
   return <output aria-label="Current route">{`${location.pathname}${location.hash}`}</output>;
 };
 
-describe("consolidated service architecture", () => {
-  it("maps every capability to a unique anchor on one of the five service pages", () => {
+describe("mixed service architecture", () => {
+  it("maps nine capabilities to dedicated pages and seven to parent-page sections", () => {
     expect(advertisedCapabilityRoutes.map((entry) => entry.label)).toEqual(expectedCapabilities);
     expect(new Set(advertisedCapabilityRoutes.map((entry) => entry.path)).size).toBe(expectedCapabilities.length);
-    expect(advertisedCapabilityRoutes.every((entry) => entry.path.includes("#"))).toBe(true);
-    expect(advertisedCapabilityRoutes.every((entry) => !entry.legacyPath.includes("#"))).toBe(true);
+    expect(dedicatedCapabilityRoutes).toHaveLength(9);
+    expect(sectionCapabilityRoutes).toHaveLength(7);
+    expect(dedicatedCapabilityRoutes.every((entry) => !entry.path.includes("#"))).toBe(true);
+    expect(dedicatedCapabilityRoutes.every((entry) => entry.path === entry.legacyPath)).toBe(true);
+    expect(sectionCapabilityRoutes.every((entry) => entry.path.includes("#"))).toBe(true);
+    expect(sectionCapabilityRoutes.every((entry) => !entry.legacyPath.includes("#"))).toBe(true);
     expect(new Set(advertisedCapabilityRoutes.map((entry) => entry.serviceSlug))).toEqual(
       new Set(["brokerage", "investment-sales", "development-services", "capital-markets", "property-management"]),
     );
   });
 
-  it("preserves substantive capability content on the parent service pages", () => {
+  it("preserves parent-section content and a complete editorial record for each dedicated page", () => {
     advertisedCapabilityRoutes.forEach((entry) => {
       const match = findCapabilityByRoute(entry.serviceSlug, entry.capabilityRoute);
       expect(match, entry.legacyPath).toBeDefined();
       expect(match?.capability.lead?.length ?? 0, `${entry.path} lead`).toBeGreaterThan(80);
       expect(match?.capability.included?.length ?? 0, `${entry.path} deliverables`).toBeGreaterThanOrEqual(3);
-      expect(entry.path).toBe(`/services/${entry.serviceSlug}#${entry.anchorId}`);
+      if (entry.destination === "page") {
+        const content = capabilityPageByPath[entry.path];
+        expect(content, `${entry.path} editorial content`).toBeDefined();
+        expect(content?.path).toBe(entry.path);
+        expect(content?.metadata.title).toContain(entry.label);
+        expect(content?.metadata.description.length ?? 0).toBeGreaterThan(80);
+      } else {
+        expect(entry.path).toBe(`/services/${entry.serviceSlug}#${entry.anchorId}`);
+      }
     });
   });
 
-  it("redirects every retired capability URL to its parent-page anchor", () => {
-    advertisedCapabilityRoutes.forEach((entry) => {
+  it("renders dedicated pages while retaining singular-service anchor redirects and development aliases", () => {
+    dedicatedCapabilityRoutes.forEach((entry) => {
+      const view = render(
+        <MemoryRouter initialEntries={[entry.path]}>
+          <Routes>
+            <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      const content = capabilityPageByPath[entry.path];
+      expect(screen.getByRole("heading", { level: 1, name: content?.hero.title ?? entry.label }), entry.path).toBeInTheDocument();
+      expect(view.container.querySelector(".gala-cap-page"), entry.path).toBeInTheDocument();
+      view.unmount();
+    });
+
+    sectionCapabilityRoutes.forEach((entry) => {
       const view = render(
         <MemoryRouter initialEntries={[entry.legacyPath]}>
           <Routes>
@@ -69,6 +100,20 @@ describe("consolidated service architecture", () => {
       );
 
       expect(screen.getByRole("status", { name: "Current route" }), entry.legacyPath).toHaveTextContent(entry.path);
+      view.unmount();
+    });
+
+    Object.entries(capabilityRouteAliases).forEach(([alias, canonical]) => {
+      const view = render(
+        <MemoryRouter initialEntries={[alias]}>
+          <LocationProbe />
+          <Routes>
+            <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByRole("status", { name: "Current route" }), alias).toHaveTextContent(canonical);
       view.unmount();
     });
   });

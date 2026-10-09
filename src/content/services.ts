@@ -19,7 +19,8 @@ export type Capability = {
   lead?: string;
   included?: string[];
   icon?: CapabilityIconKey;
-  /** If set, this capability has its own dedicated page at /services/:slug/:route instead of an in-page section. */
+  /** Canonical presentation for navigation and nested-route handling. */
+  destination: "page" | "section";
   route?: string;
 };
 
@@ -59,6 +60,7 @@ export const services: Service[] = [
           "Coordination through lease execution",
         ],
         icon: "building",
+        destination: "section",
         route: "landlord-representation",
       },
       {
@@ -71,6 +73,7 @@ export const services: Service[] = [
           "Guidance through move-in and occupancy",
         ],
         icon: "handshake",
+        destination: "section",
         route: "tenant-representation",
       },
     ],
@@ -91,6 +94,7 @@ export const services: Service[] = [
     capabilities: [
       {
         label: "Industrial",
+        destination: "page",
         route: "industrial",
         lead: "Industrial transactions depend on functional real estate, credible operating assumptions, and a buyer story grounded in how the asset actually performs.",
         included: [
@@ -101,6 +105,7 @@ export const services: Service[] = [
       },
       {
         label: "Multifamily",
+        destination: "page",
         route: "multifamily",
         lead: "Multifamily sale strategy connects operating performance, location, physical condition, and the buyer's view of durable income and execution risk.",
         included: [
@@ -111,6 +116,7 @@ export const services: Service[] = [
       },
       {
         label: "Retail",
+        destination: "page",
         route: "retail",
         lead: "Retail value is shaped by tenancy, trade area, access, visibility, lease structure, and the property's ability to support its current or next use.",
         included: [
@@ -121,6 +127,7 @@ export const services: Service[] = [
       },
       {
         label: "Office",
+        destination: "page",
         route: "office",
         lead: "Office transactions require a clear view of tenancy, rollover, space quality, location, and the capital needed to compete for users and buyers.",
         included: [
@@ -131,6 +138,7 @@ export const services: Service[] = [
       },
       {
         label: "Land",
+        destination: "page",
         route: "land",
         lead: "Land is evaluated through the lens of use, entitlement, access, utilities, timing, and the buyer pool capable of carrying the site through execution.",
         included: [
@@ -156,9 +164,10 @@ export const services: Service[] = [
       "Gala coordinates early-stage strategy and the specialist relationships required to move commercial opportunities from initial evaluation toward execution readiness.",
     capabilities: [
       {
-        label: "Site Strategy",
-        route: "site-strategy",
-        lead: "A development decision starts with whether the site, intended use, market, access, infrastructure, and approval path can support the client's objective.",
+        label: "Site Selection",
+        destination: "page",
+        route: "site-selection",
+        lead: "Site selection compares location, intended use, market fit, access, infrastructure, and the approval path before a client commits to the wrong opportunity.",
         included: [
           "Early use, density, access, and market-fit evaluation",
           "Key constraint and stakeholder identification",
@@ -167,6 +176,7 @@ export const services: Service[] = [
       },
       {
         label: "Entitlements",
+        destination: "page",
         route: "entitlements",
         lead: "Entitlement work aligns the intended program with the jurisdictional process, technical team, public requirements, and decisions needed to advance a site.",
         included: [
@@ -177,6 +187,7 @@ export const services: Service[] = [
       },
       {
         label: "Infrastructure",
+        destination: "page",
         route: "infrastructure",
         lead: "Access, utilities, stormwater, and off-site requirements can determine whether a commercial plan is feasible, financeable, and ready to execute.",
         included: [
@@ -186,9 +197,10 @@ export const services: Service[] = [
         ],
       },
       {
-        label: "Development Oversight",
-        route: "development-oversight",
-        lead: "Development oversight keeps ownership decisions, consultants, approvals, schedule, and transaction priorities connected as the project advances.",
+        label: "GC / Builder Relationships",
+        destination: "page",
+        route: "gc-builder-relationships",
+        lead: "Gala helps clients identify and coordinate relevant general-contractor and builder relationships while keeping project objectives, scope, and next decisions visible.",
         included: [
           "Cross-team milestone and decision coordination",
           "Schedule, risk, and open-item visibility",
@@ -213,6 +225,7 @@ export const services: Service[] = [
     capabilities: [
       {
         label: "Debt",
+        destination: "section",
         route: "debt",
         lead: "Debt strategy begins with the asset, sponsorship, business plan, timing, and repayment profile—not a one-size-fits-all lender list.",
         included: [
@@ -223,6 +236,7 @@ export const services: Service[] = [
       },
       {
         label: "Equity",
+        destination: "section",
         route: "equity",
         lead: "Equity conversations require a clear investment case, aligned expectations, and relevant relationships for the opportunity's scale and risk profile.",
         included: [
@@ -233,6 +247,7 @@ export const services: Service[] = [
       },
       {
         label: "Capital Strategy",
+        destination: "section",
         route: "capital-strategy",
         lead: "Capital strategy connects debt, equity, timing, risk, and ownership objectives before individual terms are evaluated in isolation.",
         included: [
@@ -243,6 +258,7 @@ export const services: Service[] = [
       },
       {
         label: "Transaction Coordination",
+        destination: "section",
         route: "transaction-coordination",
         lead: "Capital execution depends on organized information, accountable milestones, and communication across ownership, capital sources, advisors, and closing parties.",
         included: [
@@ -268,6 +284,7 @@ export const services: Service[] = [
     capabilities: [
       {
         label: "Property Management Partnership",
+        destination: "section",
         route: "property-management-partnership",
         lead: "Gala coordinates a partner-led path to day-to-day property operations while keeping the ownership plan and brokerage context connected.",
         included: [
@@ -307,8 +324,18 @@ export const serviceCapabilityId = (capability: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-export const getCapabilityHref = (serviceSlug: ServiceSlug, capabilityLabel: string) =>
-  `/services/${serviceSlug}#${serviceCapabilityId(capabilityLabel)}`;
+export const getCapabilityHref = (serviceSlug: ServiceSlug, capability: Capability) => {
+  if (capability.destination === "page" && capability.route) {
+    return `/services/${serviceSlug}/${capability.route}`;
+  }
+
+  return `/services/${serviceSlug}#${serviceCapabilityId(capability.label)}`;
+};
+
+export const capabilityRouteAliases: Record<string, string> = {
+  "/services/development-services/site-strategy": "/services/development-services/site-selection",
+  "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
+};
 
 export const findCapabilityByRoute = (slug: string, route: string) => {
   const service = serviceBySlug[slug as ServiceSlug];
@@ -321,6 +348,7 @@ export type AdvertisedCapabilityRoute = {
   serviceName: string;
   serviceSlug: ServiceSlug;
   capabilityRoute: string;
+  destination: Capability["destination"];
   anchorId: string;
   path: string;
   legacyPath: string;
@@ -337,11 +365,20 @@ export const advertisedCapabilityRoutes: AdvertisedCapabilityRoute[] = services.
         serviceName: service.name,
         serviceSlug: service.slug,
         capabilityRoute: capability.route,
+        destination: capability.destination,
         anchorId,
-        path: `/services/${service.slug}#${anchorId}`,
+        path: getCapabilityHref(service.slug, capability),
         legacyPath: `/services/${service.slug}/${capability.route}`,
       };
     }),
+);
+
+export const dedicatedCapabilityRoutes = advertisedCapabilityRoutes.filter(
+  (capability) => capability.destination === "page",
+);
+
+export const sectionCapabilityRoutes = advertisedCapabilityRoutes.filter(
+  (capability) => capability.destination === "section",
 );
 
 export type ServiceNavigationGroup = {
