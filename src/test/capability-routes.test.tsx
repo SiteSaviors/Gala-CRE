@@ -30,8 +30,8 @@ const expectedCapabilities = [
   "GC / Builder Relationships",
   "Debt",
   "Equity",
+  "Joint Venture",
   "Capital Strategy",
-  "Transaction Coordination",
   "Property Management Partnership",
 ];
 
@@ -116,6 +116,61 @@ describe("mixed service architecture", () => {
       expect(screen.getByRole("status", { name: "Current route" }), alias).toHaveTextContent(canonical);
       view.unmount();
     });
+  });
+
+  it("isolates the Investment Sales pilot template to Industrial", () => {
+    const industrialPath = "/services/investment-sales/industrial";
+    const industrial = render(
+      <MemoryRouter initialEntries={[industrialPath]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const industrialMain = industrial.container.querySelector<HTMLElement>("main#main-content");
+    const industrialSections = Array.from(
+      industrial.container.querySelectorAll<HTMLElement>("[data-capability-section]"),
+      (section) => section.dataset.capabilitySection,
+    );
+
+    expect(industrialMain).toHaveAttribute("data-capability-family", "investment-sales");
+    expect(industrial.container.querySelector("[data-capability-hero]")).toBeInTheDocument();
+    expect(industrialSections).toEqual([
+      "asset-positioning",
+      "buyer-profile",
+      "valuation-considerations",
+      "sale-process",
+    ]);
+    expect(industrial.container.querySelector("[data-capability-related]")).toBeInTheDocument();
+    expect(industrial.container.querySelector("[data-capability-cta]")).toBeInTheDocument();
+    expect(
+      industrial.container.querySelectorAll<HTMLAnchorElement>(
+        'a[href="/contact?inquiry=investment-sales&focus=industrial"]',
+      ),
+    ).toHaveLength(2);
+    expect(
+      industrial.container.querySelector<HTMLAnchorElement>(
+        '[data-capability-related] a[href="/services/investment-sales/land"]',
+      ),
+    ).toBeInTheDocument();
+    industrial.unmount();
+
+    const multifamily = render(
+      <MemoryRouter initialEntries={["/services/investment-sales/multifamily"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const multifamilyMain = multifamily.container.querySelector<HTMLElement>("main#main-content");
+    expect(multifamilyMain).not.toHaveAttribute("data-capability-family");
+    expect(multifamily.container.querySelector(".gala-cap-strategy")).toBeInTheDocument();
+    expect(multifamily.container.querySelector("[data-capability-section]")).not.toBeInTheDocument();
+    expect(multifamily.container.querySelector("[data-capability-related]")).toBeInTheDocument();
+    expect(multifamily.container.querySelector("[data-capability-cta]")).toBeInTheDocument();
+    multifamily.unmount();
   });
 
   it("renders the full desktop service directory with every mixed destination", () => {

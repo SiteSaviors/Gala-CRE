@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import CapabilityPageHero from "@/components/site/CapabilityPageHero";
+import InvestmentSalesCapabilitySections from "@/components/site/InvestmentSalesCapabilitySections";
 import {
   CapabilityPageCta,
   CapabilitySectionRenderer,
@@ -14,6 +15,12 @@ type EditorialCapabilityPageProps = {
 
 const EditorialCapabilityPage = ({ content }: EditorialCapabilityPageProps) => {
   const pageRef = useRef<HTMLElement>(null);
+  const hasInvestmentSalesSections = ["strategy", "process", "deliverables"].every((type) =>
+    content.sections.some((section) => section.type === type),
+  );
+  const family = content.template?.kind === "investment-sales" && hasInvestmentSalesSections
+    ? "investment-sales"
+    : undefined;
 
   useEffect(() => {
     const page = pageRef.current;
@@ -42,19 +49,26 @@ const EditorialCapabilityPage = ({ content }: EditorialCapabilityPageProps) => {
 
   return (
     <main
-      className={`gala-cap-page${content.compact ? " gala-cap-page--compact" : ""}`}
+      className={`gala-cap-page${content.compact ? " gala-cap-page--compact" : ""}${family ? ` gala-cap-page--${family}` : ""}`}
       id="main-content"
       tabIndex={-1}
       ref={pageRef}
+      data-capability-family={family}
     >
       <CapabilityPageHero hero={content.hero} parent={content.parent} />
-      {content.sections.map((section, index) => (
-        <CapabilitySectionRenderer
-          section={section}
-          key={`${section.type}-${section.type === "process" ? section.id ?? index : index}`}
-        />
-      ))}
-      <RelatedCapabilityNavigation content={content.relatedCapabilities} />
+      {family === "investment-sales" ? (
+        <InvestmentSalesCapabilitySections content={content} />
+      ) : (
+        <>
+          {content.sections.map((section, index) => (
+            <CapabilitySectionRenderer
+              section={section}
+              key={`${section.type}-${section.type === "process" ? section.id ?? index : index}`}
+            />
+          ))}
+          <RelatedCapabilityNavigation content={content.relatedCapabilities} />
+        </>
+      )}
       <CapabilityPageCta content={content.cta} />
     </main>
   );

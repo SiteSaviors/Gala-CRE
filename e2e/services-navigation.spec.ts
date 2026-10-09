@@ -22,8 +22,8 @@ const desktopCapabilities = [
   "/services/development-services/gc-builder-relationships",
   "/services/capital-markets#debt",
   "/services/capital-markets#equity",
+  "/services/capital-markets#joint-venture",
   "/services/capital-markets#capital-strategy",
-  "/services/capital-markets#transaction-coordination",
   "/services/property-management#property-management-partnership",
 ] as const;
 

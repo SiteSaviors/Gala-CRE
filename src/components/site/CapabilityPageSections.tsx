@@ -166,7 +166,7 @@ export const CapabilitySectionRenderer = ({ section }: { section: CapabilityPage
 };
 
 export const RelatedCapabilityNavigation = ({ content }: { content: CapabilityPageContent["relatedCapabilities"] }) => (
-  <section className="gala-cap-section gala-cap-connected">
+  <section className="gala-cap-section gala-cap-connected" data-capability-related>
     <div className="gala-shell">
       <div className="gala-cap-connected__header">
         <div data-capability-reveal>
@@ -190,7 +190,7 @@ export const RelatedCapabilityNavigation = ({ content }: { content: CapabilityPa
 );
 
 export const CapabilityPageCta = ({ content }: { content: CapabilityPageContent["cta"] }) => (
-  <section className="gala-cap-cta">
+  <section className="gala-cap-cta" data-capability-cta>
     <div className="gala-cap-cta__glow" aria-hidden="true"></div>
     <div className="gala-shell gala-cap-cta__inner">
       <div data-capability-reveal>

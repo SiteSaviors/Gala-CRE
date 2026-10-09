@@ -36,6 +36,25 @@ export type CapabilityPageAction = {
   icon?: "arrow-up-right" | "arrow-down";
 };
 
+export type InvestmentSalesTemplate = {
+  kind: "investment-sales";
+  buyerProfile: {
+    eyebrow: string;
+    headline: string;
+    introduction: string;
+    groups: Array<{
+      label: string;
+      title: string;
+      body: string;
+    }>;
+  };
+  valuation: {
+    eyebrow: string;
+    headline: string;
+    introduction: string;
+  };
+};
+
 export type CapabilityPageSection =
   | {
       type: "challenge";
@@ -84,6 +103,7 @@ export type CapabilityPageSection =
 export type CapabilityPageContent = {
   path: string;
   compact?: boolean;
+  template?: InvestmentSalesTemplate;
   metadata: {
     title: string;
     description: string;
@@ -466,6 +486,38 @@ const tenantRepresentation: CapabilityPageContent = {
 const industrialInvestmentSalesPage: CapabilityPageContent = {
   path: "/services/investment-sales/industrial",
   compact: true,
+  template: {
+    kind: "investment-sales",
+    buyerProfile: {
+      eyebrow: "Potential Buyer Profiles",
+      headline: "Different buyers assign value to different forms of utility.",
+      introduction:
+        "Buyer fit is shaped by tenancy, functional utility, physical condition, location, required capital, and the execution path a buyer can substantiate through diligence.",
+      groups: [
+        {
+          label: "Income",
+          title: "Income-oriented investors",
+          body: "Where income is in place, these buyers may weigh lease term, available tenant information, rollover, operating expenses, identified capital needs, and the reliability of projected cash flow.",
+        },
+        {
+          label: "Operations",
+          title: "Owner-users + operators",
+          body: "These buyers evaluate how well the building supports the business, including loading, clear height, power, access, circulation, yard needs, expansion options, and occupancy timing.",
+        },
+        {
+          label: "Execution",
+          title: "Value-add + redevelopment buyers",
+          body: "Vacancy, rollover, underused space, or physical constraints may support a re-leasing, improvement, expansion, or redevelopment thesis, subject to diligence, capital, timing, and required approvals.",
+        },
+      ],
+    },
+    valuation: {
+      eyebrow: "Valuation Considerations",
+      headline: "What buyers will test before they price conviction.",
+      introduction:
+        "A credible opinion of value connects the income record to the building’s operational utility and the risk, capital, and timing behind any future opportunity.",
+    },
+  },
   metadata: {
     title: "Industrial Investment Sales",
     description:
@@ -510,22 +562,22 @@ const industrialInvestmentSalesPage: CapabilityPageContent = {
         {
           number: "01",
           label: "Income + Operations",
-          title: "Show how the property performs today.",
-          body: "Lease structure, occupancy, rollover, expenses, capital needs, and availability shape the durability of income and the likely buyer pool.",
+          title: "Establish the cash flow buyers can support.",
+          body: "Lease structure, occupancy, rollover, operating records, and identified capital needs influence modeled cash flow, perceived risk, and the pricing a buyer may support.",
           points: [],
         },
         {
           number: "02",
           label: "Physical Function",
-          title: "Make operational utility legible.",
-          body: "Clear height, loading, circulation, power, yard depth, access, and configuration determine which users and investors can execute with confidence.",
+          title: "Translate operational utility into pricing relevance.",
+          body: "Clear height, loading, circulation, power, yard depth, access, and configuration can affect user fit, releasability, downtime, future capital requirements, and a buyer’s view of value.",
           points: [],
         },
         {
           number: "03",
           label: "Optionality + Risk",
-          title: "Separate opportunity from assumption.",
-          body: "Condition, environmental records, title, expansion, re-tenanting, and redevelopment questions are framed clearly so buyers can price both potential and execution risk.",
+          title: "Price potential and execution risk separately.",
+          body: "Condition, environmental records, title matters, expansion, re-tenanting, and redevelopment considerations should help buyers distinguish in-place value from upside dependent on capital, timing, diligence, and approvals.",
           points: [],
         },
       ],
@@ -777,9 +829,9 @@ const multifamilyInvestmentSalesPage: CapabilityPageContent = {
       },
       {
         label: "Capital Markets",
-        title: "Transaction Coordination",
-        body: "Organized information flow and milestone visibility across ownership, capital sources, advisors, and closing parties.",
-        href: "/services/capital-markets#transaction-coordination",
+        title: "Joint Venture",
+        body: "Align partner fit, capital contributions, governance, economics, and closing requirements with the opportunity.",
+        href: "/services/capital-markets#joint-venture",
       },
       {
         label: "Development",

@@ -31,7 +31,19 @@ type InquiryValues = z.infer<typeof inquirySchema>;
 
 const propertyTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land", "Mixed-Use", "Other"] as const;
 
-const InvestmentSalesInquiryForm = () => {
+type InvestmentSalesInquiryFormProps = {
+  inquiryType?: "Investment Sales" | "Capital Markets";
+  sourcePath?: string;
+  messageLabel?: string;
+  successBody?: string;
+};
+
+const InvestmentSalesInquiryForm = ({
+  inquiryType = "Investment Sales",
+  sourcePath = "/services/investment-sales#investment-sales-consultation",
+  messageLabel = "Tell us about the property and your objectives",
+  successBody = "A Gala CRE advisor will review your property information and follow up directly.",
+}: InvestmentSalesInquiryFormProps) => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm<InquiryValues>({
@@ -56,13 +68,13 @@ const InvestmentSalesInquiryForm = () => {
           email: values.email,
           phone: values.phone,
           company: "",
-          inquiryType: "Investment Sales",
+          inquiryType,
           message: `Property type: ${values.propertyType}\n\n${values.message}`,
           propertySlug: "",
           advisorId: "",
           website: values.website,
         },
-        "/services/investment-sales#investment-sales-consultation",
+        sourcePath,
       );
       setIsSubmitted(true);
       form.reset();
@@ -76,7 +88,7 @@ const InvestmentSalesInquiryForm = () => {
       <div className="gala-investment-narrative-form__success" role="status" aria-live="polite">
         <span>Inquiry received</span>
         <h3>Thank you for reaching out.</h3>
-        <p>A Gala CRE advisor will review your property information and follow up directly.</p>
+        <p>{successBody}</p>
         <Button type="button" onClick={() => setIsSubmitted(false)}>Send another inquiry</Button>
       </div>
     );
@@ -131,7 +143,7 @@ const InvestmentSalesInquiryForm = () => {
         )} />
         <FormField control={form.control} name="message" render={({ field }) => (
           <FormItem>
-            <FormLabel>Tell us about the property and your objectives</FormLabel>
+            <FormLabel>{messageLabel}</FormLabel>
             <FormControl><Textarea {...field} rows={5} /></FormControl>
             <FormMessage />
           </FormItem>

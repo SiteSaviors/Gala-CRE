@@ -100,7 +100,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const headerHidden = pastHeaderThreshold && !mobileNavOpen && !servicesMegaOpen;
 
   return (
-    <nav className={`${scrolled || servicesMegaOpen ? "scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}${headerHidden ? " nav-hidden" : ""}`}>
+    <nav className={`site-nav${scrolled || servicesMegaOpen ? " scrolled" : ""}${servicesMegaOpen ? " services-open" : ""}${headerHidden ? " nav-hidden" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Link to="/" className="nlogo" aria-label="Gala CRE Group home">
         <BrandLogo variant="navigation" />

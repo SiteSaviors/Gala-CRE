@@ -10,7 +10,8 @@
     { "source": "/services/capital-markets/debt", "destination": "/services/capital-markets#debt", "permanent": true },
     { "source": "/services/capital-markets/equity", "destination": "/services/capital-markets#equity", "permanent": true },
     { "source": "/services/capital-markets/capital-strategy", "destination": "/services/capital-markets#capital-strategy", "permanent": true },
-    { "source": "/services/capital-markets/transaction-coordination", "destination": "/services/capital-markets#transaction-coordination", "permanent": true },
+    { "source": "/services/capital-markets/joint-venture", "destination": "/services/capital-markets#joint-venture", "permanent": true },
+    { "source": "/services/capital-markets/transaction-coordination", "destination": "/services/capital-markets#joint-venture", "permanent": true },
     { "source": "/services/property-management/property-management-partnership", "destination": "/services/property-management#property-management-partnership", "permanent": true }
   ],
   "rewrites": [

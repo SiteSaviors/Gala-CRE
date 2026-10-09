@@ -343,13 +343,31 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("button", { name: /How can Gala help when a 1031 exchange is involved/i })).toBeInTheDocument();
     sales.unmount();
 
-    render(
+    const capitalMarkets = render(
       <MemoryRouter initialEntries={["/services/capital-markets"]}>
         <Routes><Route path="/services/:slug" element={<ServiceDetail />} /></Routes>
       </MemoryRouter>
     );
-    expect(screen.getByRole("link", { name: /^Debt Debt strategy/i })).toHaveAttribute("href", "/services/capital-markets#debt");
-    expect(screen.getByRole("link", { name: /^Equity Equity conversations/i })).toHaveAttribute("href", "/services/capital-markets#equity");
+    const capitalMarketsSections = capitalMarkets.container.querySelectorAll("main > section");
+    expect(screen.getByRole("heading", { name: "Capital Solutions for What Comes Next" })).toBeInTheDocument();
+    expect(screen.getByText("Across asset classes, Gala CRE develops intelligent capital strategies grounded in market expertise, trusted relationships, and each client’s objectives.")).toBeInTheDocument();
+    expect(capitalMarketsSections[1]).toHaveClass("gala-capital-markets-value");
+    expect(capitalMarketsSections[2]).toHaveClass("gala-capital-markets-advantage");
+    expect(capitalMarketsSections[3]).toHaveClass("gala-capital-markets-distinction");
+    expect(capitalMarketsSections[4]).toHaveClass("gala-capital-markets-consultation");
+    expect(screen.getByRole("heading", { name: "Full Cycle Solutions, Tailored to You" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Debt" }).closest("li")).toHaveAttribute("id", "debt");
+    expect(screen.getByRole("heading", { name: "Equity" }).closest("li")).toHaveAttribute("id", "equity");
+    expect(screen.getByRole("heading", { name: "Joint Venture" }).closest("li")).toHaveAttribute("id", "joint-venture");
+    expect(screen.getByRole("heading", { name: "Capital Strategy" }).closest("li")).toHaveAttribute("id", "capital-strategy");
+    expect(screen.getByRole("heading", { name: "A More Connected Approach to Capital" })).toBeInTheDocument();
+    expect(screen.queryByText("Access, Structure, and Insight That Move Capital Forward")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Connect With Active Capital" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Structure Around the Opportunity" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Advise With Market Intelligence" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell us about the opportunity." })).toBeInTheDocument();
+    expect(screen.getByLabelText("Tell us about the opportunity and your capital objectives")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Request a Consultation" })).toHaveAttribute("href", "#capital-markets-consultation");
     expect(screen.queryByRole("link", { name: /Discuss Exchange Financing/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Find a Replacement Property/i })).not.toBeInTheDocument();
   });

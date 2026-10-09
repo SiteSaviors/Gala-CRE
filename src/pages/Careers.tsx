@@ -13,7 +13,7 @@ import benefitOutreachImage from "@/assets/landlord-leasing-context.webp";
 import benefitCoordinationImage from "@/assets/company-approach-structure.jpg";
 import benefitDevelopmentImage from "@/assets/development-infrastructure.webp";
 import careersHeroImage from "@/assets/careers-hero.avif";
-import careersHeroBackground from "@/assets/careers-hero-background.jpeg";
+import careersHeroBackground from "@/assets/capital-markets-capital-solutions.avif";
 
 const benefitIcons = [Users, Target, Megaphone, Search, ClipboardCheck, Building2] as const;
 const benefitImages = [
@@ -44,7 +44,7 @@ const Careers = () => {
             <img
               className="gala-careers-hero__image"
               src={careersHeroBackground}
-              alt="Commercial real estate professionals finalizing an agreement"
+              alt="Capital markets professionals speaking during an industry panel"
               loading="eager"
               decoding="async"
             />

@@ -22,7 +22,7 @@ export const CapabilityActionLink = ({ action }: { action: CapabilityPageAction 
 };
 
 const CapabilityPageHero = ({ hero, parent }: CapabilityPageHeroProps) => (
-  <section className="gala-cap-hero">
+  <section className="gala-cap-hero" data-capability-hero>
     <img
       className="gala-cap-hero__image"
       src={hero.media.src}

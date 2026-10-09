@@ -36,14 +36,15 @@ const anchorCapabilityRoutes = [
   "/services/brokerage/tenant-representation",
   "/services/capital-markets/debt",
   "/services/capital-markets/equity",
+  "/services/capital-markets/joint-venture",
   "/services/capital-markets/capital-strategy",
-  "/services/capital-markets/transaction-coordination",
   "/services/property-management/property-management-partnership",
 ] as const;
 
 const capabilityAliases = {
   "/services/development-services/site-strategy": "/services/development-services/site-selection",
   "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
+  "/services/capital-markets/transaction-coordination": "/services/capital-markets#joint-venture",
 } as const;
 
 const auditedRoutes = [
@@ -157,7 +158,8 @@ test.describe("public property and service route matrix", () => {
         await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /\| Gala CRE Group$/);
         await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /^https?:\/\//);
         await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
-        const canonicalPath = capabilityRedirect?.pathname ?? aliasDestination ?? route;
+        const aliasCanonicalPath = aliasDestination?.split("#")[0];
+        const canonicalPath = capabilityRedirect?.pathname ?? aliasCanonicalPath ?? route;
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
           "href",
           new RegExp(`${canonicalPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`),

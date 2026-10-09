@@ -458,7 +458,7 @@ const gcBuilderRelationships = createDevelopmentPage({
     { label: "Development", title: "Site Selection", body: "Clarify the site requirement, alternatives, and decision-driving unknowns.", href: "/services/development-services/site-selection" },
     { label: "Development", title: "Entitlements", body: "Organize jurisdictional milestones and the specialist-led approval path.", href: "/services/development-services/entitlements" },
     { label: "Development", title: "Infrastructure", body: "Track access, utilities, stormwater, off-site work, and provider dependencies.", href: "/services/development-services/infrastructure" },
-    { label: "Capital Markets", title: "Transaction Coordination", body: "Connect capital-source diligence and closing milestones to the development record.", href: "/services/capital-markets#transaction-coordination" },
+    { label: "Capital Markets", title: "Joint Venture", body: "Connect partner alignment, capital contributions, governance, and closing requirements to the development plan.", href: "/services/capital-markets#joint-venture" },
   ],
   ctaEyebrow: "Start With the Project Brief",
   ctaHeadline: "Make the first builder conversation a useful one.",

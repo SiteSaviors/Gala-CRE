@@ -1,12 +1,18 @@
-import { ArrowLeft, ArrowUpRight, Building2, Check, FileSignature, Handshake, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Building2, Check, CheckCircle2, FileSignature, Handshake, TrendingUp } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import BrokerageServicePage from "@/components/services/BrokerageServicePage";
 import InvestmentSalesNarrativePage from "@/components/services/InvestmentSalesNarrativePage";
+import InvestmentSalesInquiryForm from "@/components/services/InvestmentSalesInquiryForm";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
+import capitalMarketsValueImage from "@/assets/capital-markets-capital-solutions.avif";
 import capitalMarketsHeroImage from "@/assets/capital-markets-hero-booklet.webp";
+import capitalMarketsAdvantageImage from "@/assets/capital-markets-strategy.webp";
+import capitalMarketsRelationshipsImage from "@/assets/debt-underwriting-context.webp";
+import capitalMarketsStructuringImage from "@/assets/equity-alignment-context.webp";
+import capitalMarketsIntelligenceImage from "@/assets/capital-strategy-context.webp";
 import developmentHeroImage from "@/assets/development-hero-booklet.webp";
 import { getCapabilityHref, getServiceInquiryHref, serviceBySlug, serviceCapabilityId, services, type CapabilityIconKey, type ServiceSlug } from "@/content/services";
 import useSiteCursor from "@/hooks/useSiteCursor";
@@ -19,10 +25,38 @@ const capabilityIcons: Record<CapabilityIconKey, typeof Building2> = {
   "file-signature": FileSignature,
 };
 
+const capitalMarketsDistinctions = [
+  {
+    number: "01",
+    title: "Connect With Active Capital",
+    body: "We maintain relationships with lenders, investors, private capital, and institutional groups actively pursuing commercial real estate opportunities.",
+    image: capitalMarketsRelationshipsImage,
+    imageAlt: "Commercial real estate advisors reviewing capital documents",
+  },
+  {
+    number: "02",
+    title: "Structure Around the Opportunity",
+    body: "We evaluate debt, equity, joint ventures, recapitalizations, and other structures to build a capital strategy aligned with the asset and the client’s objectives.",
+    image: capitalMarketsStructuringImage,
+    imageAlt: "Commercial real estate team evaluating a development plan",
+  },
+  {
+    number: "03",
+    title: "Advise With Market Intelligence",
+    body: "We combine financial analysis, market insight, and hands-on execution to clarify the alternatives, expose the tradeoffs, and move the selected strategy toward closing.",
+    image: capitalMarketsIntelligenceImage,
+    imageAlt: "Commercial real estate advisor developing an asset strategy",
+  },
+] as const;
+
 const ServiceDetail = () => {
   const { slug } = useParams();
   const service = slug ? serviceBySlug[slug as ServiceSlug] : undefined;
   const listRef = useRef<HTMLDivElement>(null);
+  const capitalMarketsValueRef = useRef<HTMLElement>(null);
+  const advantageSectionRef = useRef<HTMLElement>(null);
+  const capitalMarketsDistinctionRef = useRef<HTMLElement>(null);
+  const capitalMarketsConsultationRef = useRef<HTMLElement>(null);
   useSiteCursor();
 
   useEffect(() => {
@@ -47,6 +81,40 @@ const ServiceDetail = () => {
       { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
     );
     list.querySelectorAll(targets).forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [service?.slug]);
+
+  useEffect(() => {
+    if (service?.slug !== "capital-markets") return;
+
+    const valueSection = capitalMarketsValueRef.current;
+    const advantageSection = advantageSectionRef.current;
+    const distinctionSection = capitalMarketsDistinctionRef.current;
+    const consultationSection = capitalMarketsConsultationRef.current;
+    const revealItems = [
+      ...Array.from(valueSection?.querySelectorAll<HTMLElement>("[data-capital-markets-reveal]") ?? []),
+      ...Array.from(advantageSection?.querySelectorAll<HTMLElement>("[data-advantage-reveal]") ?? []),
+      ...Array.from(distinctionSection?.querySelectorAll<HTMLElement>("[data-capital-markets-reveal]") ?? []),
+      ...Array.from(consultationSection?.querySelectorAll<HTMLElement>("[data-capital-markets-reveal]") ?? []),
+    ];
+    if (!revealItems.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
   }, [service?.slug]);
 
@@ -95,9 +163,15 @@ const ServiceDetail = () => {
               <div className="gala-kicker">{service.eyebrow}</div>
               <h1 id={`${service.slug}-hero-title`}>{service.name}</h1>
               <p>{service.summary}</p>
-              <Link to={getServiceInquiryHref(service.slug)} className="gala-investment-narrative-button">
-                <span>Request a Consultation</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
-              </Link>
+              {service.slug === "capital-markets" ? (
+                <a href="#capital-markets-consultation" className="gala-investment-narrative-button">
+                  <span>Request a Consultation</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+                </a>
+              ) : (
+                <Link to={getServiceInquiryHref(service.slug)} className="gala-investment-narrative-button">
+                  <span>Request a Consultation</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+                </Link>
+              )}
             </div>
           </section>
         ) : (
@@ -118,6 +192,123 @@ const ServiceDetail = () => {
           </section>
         )}
 
+        {service.slug === "capital-markets" ? (
+          <>
+          <section
+            className="gala-investment-narrative-value gala-capital-markets-value"
+            aria-labelledby="capital-markets-value-title"
+            ref={capitalMarketsValueRef}
+          >
+            <div className="gala-shell gala-investment-narrative-value__grid">
+              <div className="gala-investment-narrative-value__copy" data-capital-markets-reveal>
+                <div className="gala-kicker gala-kicker--dark">Opinion of Value</div>
+                <h2 id="capital-markets-value-title">Capital Solutions for What Comes Next</h2>
+                <p>Across asset classes, Gala CRE develops intelligent capital strategies grounded in market expertise, trusted relationships, and each client’s objectives.</p>
+              </div>
+              <figure className="gala-investment-narrative-frame gala-investment-narrative-frame--right" data-capital-markets-reveal>
+                <img src={capitalMarketsValueImage} alt="Capital markets professionals speaking during an industry panel" />
+                <svg
+                  className="gala-investment-narrative-frame__outline"
+                  viewBox="0 0 1000 700"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path d="M90 0H1000V620L910 700H0V80Z" />
+                  <path className="gala-investment-narrative-frame__accent" d="M760 -18H1022V210" />
+                  <path className="gala-investment-narrative-frame__accent" d="M-18 500V718H250" />
+                </svg>
+              </figure>
+            </div>
+          </section>
+          <section
+            className="gala-brokerage-advantage gala-capital-markets-advantage"
+            aria-labelledby="capital-markets-advantage-title"
+            ref={advantageSectionRef}
+          >
+            <img
+              className="gala-brokerage-advantage__backdrop"
+              src={capitalMarketsAdvantageImage}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+            <span className="gala-brokerage-advantage__wash" aria-hidden="true"></span>
+            <div className="gala-shell">
+              <div className="gala-brokerage-advantage__intro" data-advantage-reveal>
+                <div className="gala-kicker gala-kicker--dark">The Gala Commercial Advantage</div>
+                <h2 id="capital-markets-advantage-title">Full Cycle Solutions, Tailored to You</h2>
+              </div>
+              <ol className="gala-brokerage-advantage__grid">
+                {service.capabilities.map((capability, index) => (
+                  <li
+                    className="gala-brokerage-advantage__card"
+                    data-advantage-reveal
+                    id={serviceCapabilityId(capability.label)}
+                    key={capability.label}
+                  >
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{capability.label}</h3>
+                    {capability.lead ? <p>{capability.lead}</p> : null}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+          <section
+            className="gala-investment-narrative-confidence gala-capital-markets-distinction"
+            aria-labelledby="capital-markets-distinction-title"
+            ref={capitalMarketsDistinctionRef}
+          >
+            <div className="gala-shell">
+              <div className="gala-investment-narrative-confidence__head" data-capital-markets-reveal>
+                <h2 id="capital-markets-distinction-title">A More Connected Approach to Capital</h2>
+              </div>
+              <div className="gala-investment-narrative-confidence__grid">
+                {capitalMarketsDistinctions.map(({ number, title, body, image, imageAlt }, index) => (
+                  <article
+                    className="gala-investment-narrative-confidence__panel"
+                    data-capital-markets-reveal
+                    style={{ "--gala-investment-delay": `${index * 90}ms` } as React.CSSProperties}
+                    key={title}
+                  >
+                    <img src={image} alt={imageAlt} loading="lazy" decoding="async" />
+                    <span className="gala-investment-narrative-confidence__number">{number}</span>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+          <section
+            className="gala-investment-narrative-consultation gala-capital-markets-consultation"
+            id="capital-markets-consultation"
+            aria-labelledby="capital-markets-consultation-title"
+            ref={capitalMarketsConsultationRef}
+          >
+            <div className="gala-shell gala-investment-narrative-consultation__grid">
+              <div className="gala-investment-narrative-consultation__copy" data-capital-markets-reveal>
+                <div className="gala-kicker gala-kicker--dark">Capital Markets Consultation</div>
+                <h2 id="capital-markets-consultation-title">Tell us about the opportunity.</h2>
+                <p>Share the asset, capital need, timing, and objectives. A Gala CRE advisor will follow up with the appropriate next step.</p>
+                <ul>
+                  <li><CheckCircle2 aria-hidden="true" /> Capital Markets is selected automatically</li>
+                  <li><CheckCircle2 aria-hidden="true" /> Opportunity information is reviewed privately</li>
+                  <li><CheckCircle2 aria-hidden="true" /> No obligation to pursue a financing or equity process</li>
+                </ul>
+              </div>
+              <div className="gala-investment-narrative-consultation__form" data-capital-markets-reveal>
+                <InvestmentSalesInquiryForm
+                  inquiryType="Capital Markets"
+                  sourcePath="/services/capital-markets#capital-markets-consultation"
+                  messageLabel="Tell us about the opportunity and your capital objectives"
+                  successBody="A Gala CRE advisor will review your opportunity and follow up directly."
+                />
+              </div>
+            </div>
+          </section>
+          </>
+        ) : (
         <section className="gala-section gala-section--light">
           <div className="gala-shell gala-service-detail">
             {service.image ? (
@@ -195,6 +386,7 @@ const ServiceDetail = () => {
             </div>
           </div>
         </section>
+        )}
 
         <section className="gala-section gala-section--black">
           <div className="gala-shell">

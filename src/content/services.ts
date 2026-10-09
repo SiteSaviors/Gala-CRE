@@ -246,6 +246,17 @@ export const services: Service[] = [
         ],
       },
       {
+        label: "Joint Venture",
+        destination: "section",
+        route: "joint-venture",
+        lead: "Joint venture strategy begins with alignment on the business plan, capital contributions, economics, decision rights, reporting, and exit expectations.",
+        included: [
+          "Partner fit and investment-case organization",
+          "Contribution, economics, governance, and decision-right alignment",
+          "Diligence, documentation, and closing coordination alongside legal and tax advisors",
+        ],
+      },
+      {
         label: "Capital Strategy",
         destination: "section",
         route: "capital-strategy",
@@ -254,17 +265,6 @@ export const services: Service[] = [
           "Capital-stack and sequencing guidance",
           "Debt and equity alternative comparison",
           "Funding-milestone and execution planning",
-        ],
-      },
-      {
-        label: "Transaction Coordination",
-        destination: "section",
-        route: "transaction-coordination",
-        lead: "Capital execution depends on organized information, accountable milestones, and communication across ownership, capital sources, advisors, and closing parties.",
-        included: [
-          "Term-sheet and diligence milestone coordination",
-          "Information-flow and open-item management",
-          "Closing-path communication across transaction parties",
         ],
       },
     ],
@@ -335,6 +335,7 @@ export const getCapabilityHref = (serviceSlug: ServiceSlug, capability: Capabili
 export const capabilityRouteAliases: Record<string, string> = {
   "/services/development-services/site-strategy": "/services/development-services/site-selection",
   "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
+  "/services/capital-markets/transaction-coordination": "/services/capital-markets#joint-venture",
 };
 
 export const findCapabilityByRoute = (slug: string, route: string) => {
