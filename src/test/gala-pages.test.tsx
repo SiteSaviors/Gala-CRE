@@ -402,8 +402,9 @@ describe("Gala CRE public pages", () => {
     const assetTypesTab = screen.getByRole("tab", { name: "Asset Types" });
     const clientTypesTab = screen.getByRole("tab", { name: "Client Types" });
     expect(assetTypesTab).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("Office")).toBeInTheDocument();
-    expect(screen.getByText("Medical + Healthcare")).toBeInTheDocument();
+    const coveragePanel = within(view.container.querySelector("#brokerage-coverage-panel") as HTMLElement);
+    expect(coveragePanel.getByText("Office")).toBeInTheDocument();
+    expect(coveragePanel.getByText("Medical + Healthcare")).toBeInTheDocument();
     fireEvent.click(clientTypesTab);
     expect(clientTypesTab).toHaveAttribute("aria-selected", "true");
     expect(screen.getByText("Property Owners + Landlords")).toBeInTheDocument();

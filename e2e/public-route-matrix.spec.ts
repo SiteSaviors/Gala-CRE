@@ -427,13 +427,17 @@ test("property and service inquiry entry points retain their context", async ({ 
   await expect(page.getByRole("button", { name: "Send Property Inquiry" })).toBeVisible();
 
   await page.goto("/services/investment-sales/industrial", { waitUntil: "domcontentloaded" });
-  await expect(page).toHaveURL(/\/services\/investment-sales#industrial$/);
-  await expect(page.locator("#industrial")).toBeVisible();
-  const investmentSalesInquiry = page.getByRole("link", { name: "Request a Consultation" });
-  await expect(investmentSalesInquiry).toHaveAttribute("href", "#investment-sales-consultation");
+  await expect(page).toHaveURL(/\/services\/investment-sales\/industrial$/);
+  await expect(page.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeVisible();
+  const investmentSalesInquiry = page.getByRole("link", { name: "Discuss an Industrial Asset" }).first();
+  await expect(investmentSalesInquiry).toHaveAttribute(
+    "href",
+    "/contact?inquiry=investment-sales&focus=industrial",
+  );
   await investmentSalesInquiry.click();
-  await expect(page).toHaveURL(/\/services\/investment-sales#investment-sales-consultation$/);
-  await expect(page.locator("#investment-sales-consultation")).toBeInViewport();
+  await expect(page).toHaveURL(/\/contact\?inquiry=investment-sales&focus=industrial$/);
+  await expect(page.getByRole("heading", { name: "Start with a clear conversation." })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
 });
 
 test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {

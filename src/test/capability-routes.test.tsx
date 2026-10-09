@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import CapabilityDetail from "@/pages/CapabilityDetail";
@@ -118,35 +118,174 @@ describe("mixed service architecture", () => {
     });
   });
 
-  it("keeps the consolidated desktop and mobile navigation aligned", () => {
+  it("renders the full desktop service directory with every mixed destination", () => {
     const header = render(
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
     );
-    const megaMenu = header.container.querySelector("#services-mega-menu");
-    const megaPaths = Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? [])
-      .map((link) => link.getAttribute("href"));
-    serviceNavigationGroups.forEach((service) => expect(megaPaths, `desktop ${service.href}`).toContain(service.href));
-    expect(megaPaths).toContain("/services");
-    expect(megaPaths).toHaveLength(serviceNavigationGroups.length + 1);
-    expect(megaPaths.every((path) => !path?.includes("#"))).toBe(true);
-    expect(megaMenu).toHaveTextContent("One platform. Five ways to move an opportunity forward.");
-    serviceNavigationGroups.forEach((service) => expect(megaMenu).toHaveTextContent(service.summary));
+    const megaMenu = header.container.querySelector<HTMLElement>("#services-mega-menu");
+    const serviceDirectory = megaMenu?.querySelector(".gala-mega-menu__services");
+    const groups = Array.from(
+      megaMenu?.querySelectorAll<HTMLElement>(".gala-mega-menu__groups > .gala-mega-menu__group") ?? [],
+    );
+    const parentLinks = Array.from(
+      megaMenu?.querySelectorAll<HTMLAnchorElement>(".gala-mega-menu__title") ?? [],
+    );
+    const capabilityLinks = Array.from(
+      megaMenu?.querySelectorAll<HTMLAnchorElement>(".gala-mega-menu__group li a[href]") ?? [],
+    );
 
-    const mobileServicePaths = Array.from(header.container.querySelectorAll<HTMLAnchorElement>("#mobile-services-menu a[href]"))
-      .map((link) => link.getAttribute("href"));
-    serviceNavigationGroups.forEach((service) => expect(mobileServicePaths, `mobile ${service.href}`).toContain(service.href));
-    expect(mobileServicePaths).toContain("/services");
-    expect(mobileServicePaths).toHaveLength(serviceNavigationGroups.length + 1);
-    expect(header.container.querySelector("#mobile-services-menu small")).not.toBeInTheDocument();
+    expect(megaMenu).toHaveAttribute("aria-label", "Services menu");
+    expect(megaMenu).toHaveAttribute("aria-hidden", "true");
+    expect(serviceDirectory).toBeInTheDocument();
+    expect(megaMenu?.querySelector(".gala-mega-menu__groups")).toHaveAttribute(
+      "aria-labelledby",
+      "services-menu-heading",
+    );
+    expect(groups).toHaveLength(5);
+    expect(parentLinks.map((link) => link.getAttribute("href"))).toEqual(
+      serviceNavigationGroups.map((service) => service.href),
+    );
+    expect(capabilityLinks).toHaveLength(16);
+    expect(capabilityLinks.map((link) => link.getAttribute("href"))).toEqual(
+      advertisedCapabilityRoutes.map((entry) => entry.path),
+    );
+    expect(capabilityLinks.filter((link) => link.getAttribute("href")?.includes("#"))).toHaveLength(7);
+    expect(capabilityLinks.filter((link) => !link.getAttribute("href")?.includes("#"))).toHaveLength(9);
 
-    const servicesTrigger = header.container.querySelector<HTMLAnchorElement>(".nservices-trigger");
-    expect(servicesTrigger).toHaveAttribute("aria-expanded", "false");
-    fireEvent.focus(servicesTrigger as HTMLAnchorElement);
-    expect(servicesTrigger).toHaveAttribute("aria-expanded", "true");
-    expect(megaMenu).toHaveAttribute("aria-hidden", "false");
-    fireEvent.keyDown(window, { key: "Escape" });
-    expect(servicesTrigger).toHaveAttribute("aria-expanded", "false");
-    expect(servicesTrigger).toHaveFocus();
+    groups.forEach((group, index) => {
+      const service = serviceNavigationGroups[index];
+      expect(group).toHaveTextContent(service.name);
+      expect(Array.from(group.querySelectorAll<HTMLAnchorElement>("li a[href]"), (link) => link.getAttribute("href"))).toEqual(
+        service.capabilities.map((capability) => capability.path),
+      );
+    });
+
+    expect(megaMenu?.querySelector(".gala-mega-menu__all")).toHaveAttribute("href", "/services");
+    expect(megaMenu?.querySelector(".gala-mega-menu__advisor")).toHaveAttribute(
+      "href",
+      "/contact?inquiry=general&source=services-menu",
+    );
+    expect(megaMenu?.querySelector(".gala-mega-menu__advisor img")).toHaveAttribute("alt", "");
+    expect(Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+      .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === -1));
+
+    header.unmount();
+  });
+
+  it("opens the desktop service directory with ArrowDown and restores focus with Escape", () => {
+    const originalAnimationFrame = window.requestAnimationFrame;
+    window.requestAnimationFrame = (callback: FrameRequestCallback) => {
+      callback(0);
+      return 1;
+    };
+
+    try {
+      const header = render(
+        <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
+      );
+      const megaMenu = header.container.querySelector<HTMLElement>("#services-mega-menu");
+      const servicesTrigger = header.container.querySelector<HTMLAnchorElement>(".nservices-trigger");
+      const firstService = megaMenu?.querySelector<HTMLAnchorElement>("[data-mega-first]");
+
+      expect(servicesTrigger).toHaveAttribute("aria-expanded", "false");
+      act(() => servicesTrigger?.focus());
+      fireEvent.keyDown(servicesTrigger as HTMLAnchorElement, { key: "ArrowDown" });
+      expect(servicesTrigger).toHaveAttribute("aria-expanded", "true");
+      expect(megaMenu).toHaveAttribute("aria-hidden", "false");
+      expect(firstService).toHaveFocus();
+      expect(Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+        .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === 0));
+
+      fireEvent.keyDown(window, { key: "Escape" });
+      expect(servicesTrigger).toHaveAttribute("aria-expanded", "false");
+      expect(megaMenu).toHaveAttribute("aria-hidden", "true");
+      expect(servicesTrigger).toHaveFocus();
+      expect(Array.from(megaMenu?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+        .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === -1));
+
+      header.unmount();
+    } finally {
+      window.requestAnimationFrame = originalAnimationFrame;
+    }
+  });
+
+  it("exposes nested pages only for Investment Sales and Development on mobile", () => {
+    const header = render(
+      <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
+    );
+    const mobileNavigation = header.container.querySelector<HTMLElement>(".mnav");
+    const mobileToggle = header.container.querySelector<HTMLButtonElement>(".mnavt");
+    const servicesToggle = header.container.querySelector<HTMLButtonElement>(".mnav-services-toggle");
+    const mobileServices = header.container.querySelector<HTMLElement>("#mobile-services-menu");
+
+    expect(mobileNavigation).toHaveAttribute("aria-hidden", "true");
+    expect(Array.from(mobileNavigation?.querySelectorAll<HTMLElement>("a, button") ?? []))
+      .toSatisfy((items: HTMLElement[]) => items.every((item) => item.tabIndex === -1));
+
+    fireEvent.click(mobileToggle as HTMLButtonElement);
+    expect(mobileToggle).toHaveAttribute("aria-expanded", "true");
+    expect(mobileNavigation).toHaveAttribute("aria-hidden", "false");
+    expect(servicesToggle).toHaveAttribute("tabindex", "0");
+    expect(mobileServices).toHaveAttribute("aria-hidden", "true");
+
+    fireEvent.click(servicesToggle as HTMLButtonElement);
+    expect(servicesToggle).toHaveAttribute("aria-expanded", "true");
+    expect(mobileServices).toHaveAttribute("aria-hidden", "false");
+
+    const groups = Array.from(mobileServices?.querySelectorAll<HTMLElement>(".mnav-service-group") ?? []);
+    const parentLinks = Array.from(
+      mobileServices?.querySelectorAll<HTMLAnchorElement>(".mnav-service-group__head > a[href]") ?? [],
+    );
+    const groupToggles = Array.from(
+      mobileServices?.querySelectorAll<HTMLButtonElement>(".mnav-service-group__head > button") ?? [],
+    );
+    const childLinks = Array.from(
+      mobileServices?.querySelectorAll<HTMLAnchorElement>(".mnav-service-children a[href]") ?? [],
+    );
+
+    expect(groups).toHaveLength(5);
+    expect(parentLinks.map((link) => link.getAttribute("href"))).toEqual(
+      serviceNavigationGroups.map((service) => service.href),
+    );
+    expect(parentLinks.every((link) => link.tabIndex === 0)).toBe(true);
+    expect(groupToggles.map((button) => button.getAttribute("aria-label"))).toEqual([
+      "Show Investment Sales pages",
+      "Show Development pages",
+    ]);
+    expect(childLinks.map((link) => link.getAttribute("href"))).toEqual(
+      dedicatedCapabilityRoutes.map((entry) => entry.path),
+    );
+    expect(childLinks.every((link) => link.tabIndex === -1)).toBe(true);
+    expect(mobileServices?.querySelector(".mnav-services-all")).toHaveAttribute("href", "/services");
+
+    const investmentToggle = groupToggles[0];
+    const developmentToggle = groupToggles[1];
+    const investmentChildren = header.container.querySelector<HTMLElement>("#mobile-service-investment-sales");
+    const developmentChildren = header.container.querySelector<HTMLElement>("#mobile-service-development-services");
+
+    fireEvent.click(investmentToggle);
+    expect(investmentToggle).toHaveAttribute("aria-expanded", "true");
+    expect(investmentChildren).toHaveAttribute("aria-hidden", "false");
+    expect(Array.from(investmentChildren?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+      .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === 0));
+    expect(developmentToggle).toHaveAttribute("aria-expanded", "false");
+    expect(developmentChildren).toHaveAttribute("aria-hidden", "true");
+
+    fireEvent.click(developmentToggle);
+    expect(investmentToggle).toHaveAttribute("aria-expanded", "false");
+    expect(investmentChildren).toHaveAttribute("aria-hidden", "true");
+    expect(Array.from(investmentChildren?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+      .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === -1));
+    expect(developmentToggle).toHaveAttribute("aria-expanded", "true");
+    expect(developmentChildren).toHaveAttribute("aria-hidden", "false");
+    expect(Array.from(developmentChildren?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+      .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === 0));
+
+    fireEvent.click(servicesToggle as HTMLButtonElement);
+    expect(servicesToggle).toHaveAttribute("aria-expanded", "false");
+    expect(developmentToggle).toHaveAttribute("aria-expanded", "false");
+    expect(developmentChildren).toHaveAttribute("aria-hidden", "true");
+
     header.unmount();
 
   });
