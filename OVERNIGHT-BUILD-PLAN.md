@@ -864,3 +864,17 @@ These do not stop unrelated implementation:
 - Verification: focused homepage portfolio Playwright passed 3/3 across desktop interaction, mobile snap scrolling, and reduced motion; desktop visual QA confirmed computed stacking `[1, 2, 10, 2, 1]` and a clean Card 4/Card 5 seam; the production build completed through the browser-test gate; and diff whitespace validation passed.
 - Blockers: none. No form was submitted.
 - Exact next action: present the corrected local homepage portfolio for review. Do not commit, push, merge, or deploy until explicitly authorized.
+
+### 2026-10-09 — Service backpages v2 protected baseline
+
+- Starting branch / HEAD: `codex/service-backpages-v2` at production commit `0d4856c`, with `main` and `origin/main` left untouched.
+- Source of truth checked: the user-approved seven-phase service-backpage goal; Gaurang's confirmed page split; the current consolidated parent pages and redirects; the retained pre-consolidation capability renderer, content records, images, styles, route tests, Vercel rules, and sitemap; and the previously approved full-width mega-menu implementation in the parent of `37372bf`.
+- Phase / checkpoint: protect the current production site and inventory the reusable implementation before changing route behavior.
+- Gate: the work begins from the exact production commit on an isolated branch; the five consolidated parent pages remain available as rollback paths; the nine approved standalone destinations and seven parent-section destinations are recorded explicitly; and each subsequent phase is committed independently.
+- Preserved implementation: `EditorialCapabilityPage`, its section components and `capability-page.css`; complete editorial records for Industrial, Multifamily, Retail, Office, Land, Site Strategy, Entitlements, Infrastructure, and Development Oversight; the generic nested route in `App.tsx`; current consolidated Brokerage and Investment Sales parent templates; and the full-width five-column navigation composition available in Git history.
+- Approved canonical backpages: five Investment Sales routes (`industrial`, `multifamily`, `retail`, `office`, `land`) and four Development routes (`site-selection`, `entitlements`, `infrastructure`, `gc-builder-relationships`).
+- Preserved parent sections: Brokerage (`landlord-representation`, `tenant-representation`), Capital Markets (`debt`, `equity`, `capital-strategy`, `transaction-coordination`), and Property Management (`property-management-partnership`). Their nested legacy URLs continue to redirect to parent anchors.
+- Canonical aliases: `development-services/site-strategy` redirects to `development-services/site-selection`; `development-services/development-oversight` redirects to `development-services/gc-builder-relationships`.
+- Rollback strategy: this baseline ledger entry is the Phase 0 checkpoint; route architecture, mega menu, each family template, each page family, parent-page reconciliation, and release QA receive separate commits. No push, merge, preview deployment, or production deployment occurs without the user's explicit release authorization.
+- Blockers: none for architecture restoration. Development copy for the renamed Site Selection and GC / Builder Relationships pages requires substantive template-phase adaptation rather than a label-only change.
+- Exact next action: restore selective nested routing, canonical aliases, metadata, sitemap entries, and automated route coverage as the Phase 1 checkpoint.
