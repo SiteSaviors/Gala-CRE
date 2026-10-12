@@ -6,6 +6,7 @@ import BrokerageServicePage from "@/components/services/BrokerageServicePage";
 import DevelopmentServicePage from "@/components/services/DevelopmentServicePage";
 import InvestmentSalesNarrativePage from "@/components/services/InvestmentSalesNarrativePage";
 import InvestmentSalesInquiryForm from "@/components/services/InvestmentSalesInquiryForm";
+import PropertyManagementServicePage from "@/components/services/PropertyManagementServicePage";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import capitalMarketsValueImage from "@/assets/capital-markets-capital-solutions.avif";
@@ -124,6 +125,7 @@ const ServiceDetail = () => {
   if (service.slug === "brokerage") return <BrokerageServicePage service={service} />;
   if (service.slug === "investment-sales") return <InvestmentSalesNarrativePage service={service} />;
   if (service.slug === "development-services") return <DevelopmentServicePage service={service} />;
+  if (service.slug === "property-management") return <PropertyManagementServicePage service={service} />;
 
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
   const usesEditorialHero = service.slug === "development-services" || service.slug === "capital-markets";

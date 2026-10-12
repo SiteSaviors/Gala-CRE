@@ -146,7 +146,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Property Management Partnership").length).toBeGreaterThan(0);
   });
 
-  it("presents Property Management as a partner-led service overview", () => {
+  it("presents Property Management as a single partner-led editorial journey", () => {
     const { container } = render(
       <MemoryRouter initialEntries={["/services/property-management"]}>
         <Routes>
@@ -156,15 +156,27 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Property Management", level: 1 })).toBeInTheDocument();
-    expect(screen.getAllByText(/partner-led/i).length).toBeGreaterThan(0);
-    expect(container.querySelector(".gala-inner-hero__bg")).toHaveAttribute(
+    expect(container.querySelector(".gala-editorial-split-hero__image > img")).toHaveAttribute(
       "src",
       expect.stringMatching(/property-management-overview\.webp$/),
     );
-    expect(screen.getByRole("link", { name: /Property Management Partnership/i })).toHaveAttribute(
+    expect(container.querySelector(".gala-inner-hero__bg")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Property operations should protect the plan behind the asset." })).toBeInTheDocument();
+    expect(screen.getByText(/does not provide day-to-day property management in house/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "From ownership priorities to an accountable operating handoff." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Define the Operating Requirement" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Select the Right Management Partner" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Coordinate a Clear Transition" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Keep the operating plan connected to the asset strategy." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Request a Consultation" })).toHaveAttribute(
       "href",
-      "/services/property-management#property-management-partnership",
+      "#property-management-consultation",
     );
+    expect(screen.getByRole("button", { name: "Request a Consultation" }).closest("form")).toHaveAttribute(
+      "data-inquiry-type",
+      "Property Management",
+    );
+    expect(screen.queryByRole("link", { name: /Property Management Partnership/i })).not.toBeInTheDocument();
   });
 
   it("presents the shared Team roster within Company", () => {

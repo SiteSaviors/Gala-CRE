@@ -1579,6 +1579,101 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-development-stages__grid::after,.gala-development-stage,.gala-development-stage::before,.gala-development-stage__media img,.gala-development-stage__link svg,.gala-development-related__links a,.gala-development-related__links svg{transition:none}
   .gala-development-stage:is(:hover,:focus-visible) .gala-development-stage__media img{transform:none}
 }
+
+/* Property Management single-page editorial template */
+.gala-property-management-page{background:#f4f1e9;color:#171713}
+.gala-property-management-page .gala-investment-narrative-button{margin-top:30px}
+.gala-service-editorial-hero--property-management .gala-editorial-split-hero__image>img{object-position:58% center;filter:saturate(.82) contrast(1.04) brightness(.9)}
+.gala-service-editorial-hero--property-management h1{white-space:normal}
+.gala-service-editorial-hero--property-management h1 span{display:block;white-space:nowrap}
+
+.gala-property-management-point{padding:94px 0 100px;background:#f4f1e9}
+.gala-property-management-point__grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(520px,1.12fr);gap:clamp(62px,7vw,110px);align-items:center}
+.gala-property-management-point__copy{max-width:650px}
+.gala-property-management-point__copy h2{max-width:13ch;margin:20px 0 0;font:600 clamp(44px,4.45vw,65px)/.99 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-property-management-point__copy>p{max-width:42rem;margin:27px 0 0;color:#555149;font-size:15px;line-height:1.82}
+.gala-property-management-point__copy .gala-property-management-point__note{margin-top:24px;padding:18px 0 0;border-top:1px solid rgba(23,23,19,.2);color:#777168;font-size:12px;line-height:1.72}
+.gala-property-management-point__note strong{color:#554d40;font-weight:600}
+.gala-property-management-point__media{position:relative;min-width:0;aspect-ratio:16/10;margin:0;padding:14px}
+.gala-property-management-point__media img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;clip-path:polygon(9% 0,100% 0,100% 89%,91% 100%,0 100%,0 11%);filter:saturate(.76) contrast(1.03) brightness(.93)}
+.gala-property-management-point__media svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.gala-property-management-point__media path{fill:none;stroke:rgba(159,116,31,.86);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.gala-property-management-point__media .gala-property-management-point__accent{stroke:rgba(159,116,31,.4);stroke-width:1}
+
+.gala-property-management-path{position:relative;overflow:hidden;padding:90px 0 100px;background:#10100f;color:#fff}
+.gala-property-management-path::before{content:'';position:absolute;inset:0;background:linear-gradient(13deg,transparent 34%,rgba(207,170,70,.07) 34.1%,transparent 34.3%),radial-gradient(circle at 82% 16%,rgba(207,170,70,.09),transparent 28%);pointer-events:none}
+.gala-property-management-path .gala-shell{position:relative}
+.gala-property-management-path__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.55fr);gap:60px;align-items:end;margin-bottom:44px}
+.gala-property-management-path__head h2{max-width:17ch;margin:20px 0 0;color:#fff;font:600 clamp(44px,4.55vw,66px)/.98 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-property-management-path__head>p{max-width:35rem;margin:0 0 5px;justify-self:end;color:rgba(255,255,255,.62);font-size:14px;line-height:1.78}
+.gala-property-management-path__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid rgba(207,170,70,.55);background:#171714}
+.gala-property-management-path__card{position:relative;isolation:isolate;min-height:500px;display:flex;justify-content:space-between;flex-direction:column;overflow:hidden;padding:28px 30px 34px;background:#171714}
+.gala-property-management-path__card+.gala-property-management-path__card{border-left:1px solid rgba(207,170,70,.55)}
+.gala-property-management-path__card::before{content:'';position:absolute;z-index:-1;inset:0;background:linear-gradient(180deg,rgba(8,8,7,.19) 0%,rgba(8,8,7,.46) 42%,rgba(8,8,7,.96) 100%)}
+.gala-property-management-path__card::after{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(90deg,#9f741f,#f2d879,#b98928);transform:scaleX(.18);transform-origin:left;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.gala-property-management-path__card>img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7) contrast(1.05) brightness(.68);transition:transform .72s cubic-bezier(.22,1,.36,1),filter .45s ease}
+.gala-property-management-path__card:nth-child(1)>img{object-position:58% center}
+.gala-property-management-path__card:nth-child(2)>img{object-position:47% center}
+.gala-property-management-path__card:nth-child(3)>img{object-position:69% center}
+.gala-property-management-path__number{color:#e0bb58;font:700 9px/1 'Syne',sans-serif;letter-spacing:.18em}
+.gala-property-management-path__card h3{max-width:15ch;margin:0;color:#fff;font:600 clamp(27px,2.35vw,36px)/1.03 'Poppins',sans-serif;letter-spacing:-.045em}
+.gala-property-management-path__card p{max-width:33rem;margin:18px 0 0;color:rgba(255,255,255,.72);font-size:12.5px;line-height:1.72}
+.gala-property-management-path__card:hover::after{transform:scaleX(1)}
+.gala-property-management-path__card:hover>img{transform:scale(1.035);filter:saturate(.86) contrast(1.05) brightness(.72)}
+
+.gala-property-management-continuity{padding:88px 0 94px;background:linear-gradient(128deg,#f7f3e9 0%,#eee7d8 100%)}
+.gala-property-management-continuity__grid{display:grid;grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr);gap:clamp(58px,7vw,108px);align-items:start}
+.gala-property-management-continuity__head{position:sticky;top:132px}
+.gala-property-management-continuity__head h2{max-width:13ch;margin:20px 0 0;font:600 clamp(42px,4.3vw,62px)/.99 'Poppins',sans-serif;letter-spacing:-.055em}
+.gala-property-management-continuity__list{border-top:1px solid rgba(23,23,19,.28)}
+.gala-property-management-continuity__list article{display:grid;grid-template-columns:66px minmax(0,1fr);gap:24px;padding:29px 3px 31px;border-bottom:1px solid rgba(23,23,19,.28)}
+.gala-property-management-continuity__list article>span{padding-top:5px;color:#967020;font:700 9px/1 'Syne',sans-serif;letter-spacing:.17em}
+.gala-property-management-continuity__list h3{margin:0;font:600 clamp(24px,2.15vw,31px)/1.08 'Poppins',sans-serif;letter-spacing:-.04em}
+.gala-property-management-continuity__list p{max-width:39rem;margin:12px 0 0;color:#625d54;font-size:13px;line-height:1.72}
+
+.gala-property-management-consultation{background:linear-gradient(125deg,#d5ae47,#ecd071)}
+.gala-property-management-related{border-top:1px solid rgba(255,255,255,.12)}
+.gala-property-management-page.is-motion-ready [data-property-management-reveal]{opacity:0;transform:translateY(30px);transition:opacity .62s ease,transform .68s cubic-bezier(.16,.78,.2,1);transition-delay:var(--gala-property-management-delay,0ms)}
+.gala-property-management-page.is-motion-ready [data-property-management-reveal].is-visible{opacity:1;transform:none}
+
+@media(max-width:1100px){
+  .gala-property-management-point__grid{grid-template-columns:minmax(0,.92fr) minmax(450px,1.08fr);gap:54px}
+  .gala-property-management-path__card{min-height:470px;padding-right:24px;padding-left:24px}
+}
+@media(max-width:900px){
+  .gala-property-management-point__grid,.gala-property-management-path__head,.gala-property-management-continuity__grid{grid-template-columns:1fr}
+  .gala-property-management-point__grid{gap:48px}
+  .gala-property-management-point__copy{max-width:760px}
+  .gala-property-management-path__head{gap:24px}
+  .gala-property-management-path__head>p{justify-self:start}
+  .gala-property-management-path__grid{grid-template-columns:1fr}
+  .gala-property-management-path__card{min-height:390px}
+  .gala-property-management-path__card+.gala-property-management-path__card{border-top:1px solid rgba(207,170,70,.55);border-left:0}
+  .gala-property-management-continuity__grid{gap:40px}
+  .gala-property-management-continuity__head{position:static}
+}
+@media(max-width:640px){
+  .gala-service-editorial-hero--property-management h1 span{white-space:normal}
+  .gala-property-management-point{padding:72px 0 78px}
+  .gala-property-management-point__copy h2{max-width:15ch;font-size:clamp(38px,11vw,51px)}
+  .gala-property-management-point__copy>p{font-size:14px;line-height:1.75}
+  .gala-property-management-point__media{aspect-ratio:4/3;margin-right:-6px;margin-left:-6px;padding:10px}
+  .gala-property-management-path{padding:72px 0 78px}
+  .gala-property-management-path__head{margin-bottom:32px}
+  .gala-property-management-path__head h2{font-size:clamp(38px,11vw,51px)}
+  .gala-property-management-path__card{min-height:360px;padding:25px 23px 28px}
+  .gala-property-management-path__card h3{font-size:clamp(28px,8.5vw,36px)}
+  .gala-property-management-continuity{padding:72px 0 76px}
+  .gala-property-management-continuity__head h2{font-size:clamp(38px,11vw,50px)}
+  .gala-property-management-continuity__list article{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:25px 0 27px}
+  .gala-property-management-continuity__list h3{font-size:25px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gala-property-management-page.is-motion-ready [data-property-management-reveal]{opacity:1;transform:none;transition:none}
+  .gala-property-management-path__card::after,.gala-property-management-path__card>img{transition:none}
+  .gala-property-management-path__card:hover>img{transform:none}
+}
+
 @media(max-width:1024px){
   .gala-editorial-split-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:45px;padding-right:34px;padding-left:34px}
   .gala-editorial-split-hero__image{height:400px}
