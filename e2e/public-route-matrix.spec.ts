@@ -449,6 +449,7 @@ test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
   });
   const page = await context.newPage();
   await page.goto("/services/investment-sales", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { name: "Investment Sales", level: 1 })).toBeVisible();
 
   const revealItems = page.locator("[data-investment-narrative-reveal]");
   expect(await revealItems.count()).toBeGreaterThan(0);

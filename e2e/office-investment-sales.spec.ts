@@ -190,6 +190,7 @@ test.describe("Office Investment Sales chapter", () => {
     });
     const page = await context.newPage();
     await page.goto(officePath, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Office", level: 1 })).toBeVisible();
 
     const revealItems = page.locator("main#main-content [data-office-reveal]");
     expect(await revealItems.count()).toBeGreaterThan(0);

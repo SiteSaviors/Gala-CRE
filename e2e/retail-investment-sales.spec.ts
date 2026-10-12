@@ -190,6 +190,7 @@ test.describe("Retail Investment Sales chapter", () => {
     });
     const page = await context.newPage();
     await page.goto(retailPath, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Retail", level: 1 })).toBeVisible();
 
     const revealItems = page.locator("main#main-content [data-retail-reveal]");
     expect(await revealItems.count()).toBeGreaterThan(0);

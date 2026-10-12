@@ -170,6 +170,7 @@ test.describe("Multifamily Investment Sales chapter", () => {
     });
     const page = await context.newPage();
     await page.goto(multifamilyPath, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Multifamily", level: 1 })).toBeVisible();
 
     const revealItems = page.locator("main#main-content [data-multifamily-reveal]");
     expect(await revealItems.count()).toBeGreaterThan(0);

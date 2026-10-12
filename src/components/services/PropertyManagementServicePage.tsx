@@ -145,7 +145,11 @@ const PropertyManagementServicePage = ({ service }: PropertyManagementServicePag
           </div>
         </section>
 
-        <section className="gala-property-management-path" aria-labelledby="property-management-path-title">
+        <section
+          className="gala-property-management-path"
+          id="property-management-partnership"
+          aria-labelledby="property-management-path-title"
+        >
           <div className="gala-shell">
             <div className="gala-property-management-path__head" data-property-management-reveal>
               <div>

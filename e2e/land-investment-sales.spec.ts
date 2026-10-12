@@ -190,6 +190,7 @@ test.describe("Land Investment Sales chapter", () => {
     });
     const page = await context.newPage();
     await page.goto(landPath, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Land", level: 1 })).toBeVisible();
 
     const revealItems = page.locator("main#main-content [data-land-reveal]");
     expect(await revealItems.count()).toBeGreaterThan(0);

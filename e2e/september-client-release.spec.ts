@@ -63,9 +63,9 @@ test.describe("September client release acceptance", () => {
       });
 
       await page.goto("/company", { waitUntil: "domcontentloaded" });
+      await expect(page.getByRole("heading", { name: "Who we are", level: 1 })).toBeVisible();
       await page.keyboard.press("Tab");
       await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
-      await expect(page.getByRole("heading", { name: "Who we are", level: 1 })).toBeVisible();
       await expect(page.getByText("The Developer's Brokerage")).toBeVisible();
       await expect(page.getByRole("heading", { name: "Brokerage grounded in how real estate gets built.", level: 2 })).toBeVisible();
       await expect(page.locator(".gala-company-about__primary")).toBeVisible();

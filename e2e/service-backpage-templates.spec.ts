@@ -133,6 +133,7 @@ test.describe("Industrial Investment Sales chapter", () => {
     });
     const page = await context.newPage();
     await page.goto(industrialPath, { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Industrial", level: 1 })).toBeVisible();
 
     const revealItems = page.locator("main#main-content [data-industrial-reveal]");
     expect(await revealItems.count()).toBeGreaterThan(0);
