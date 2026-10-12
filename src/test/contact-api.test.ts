@@ -15,9 +15,9 @@ const validBody = {
 };
 
 const createResponse = () => {
-  const result = { statusCode: 0, body: undefined as unknown };
+  const result = { statusCode: 0, body: undefined as unknown, headers: {} as Record<string, string> };
   const response = {
-    setHeader: vi.fn(),
+    setHeader: vi.fn((name: string, value: string) => { result.headers[name] = value; }),
     status: vi.fn((code: number) => {
       result.statusCode = code;
       return response;
@@ -29,6 +29,13 @@ const createResponse = () => {
   return { response, result };
 };
 
+let requestSequence = 0;
+const request = (body: unknown, ip = `10.1.0.${++requestSequence}`, origin = "https://galacre.example") => ({
+  method: "POST",
+  body,
+  headers: { "x-forwarded-for": ip, origin },
+});
+
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
@@ -37,7 +44,7 @@ afterEach(() => {
 describe("contact API", () => {
   it("rejects invalid submissions", async () => {
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: { ...validBody, email: "invalid" } }, response);
+    await contactHandler(request({ ...validBody, email: "invalid" }), response);
     expect(result.statusCode).toBe(400);
   });
 
@@ -45,7 +52,7 @@ describe("contact API", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: { ...validBody, website: "spam.example" } }, response);
+    await contactHandler(request({ ...validBody, website: "spam.example" }), response);
     expect(result.statusCode).toBe(200);
     expect(fetchMock).not.toHaveBeenCalled();
   });
@@ -57,7 +64,7 @@ describe("contact API", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: validBody }, response);
+    await contactHandler(request(validBody), response);
     expect(result.statusCode).toBe(200);
     expect(fetchMock).toHaveBeenCalledWith("https://api.resend.com/emails", expect.objectContaining({ method: "POST" }));
   });
@@ -69,7 +76,7 @@ describe("contact API", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: { ...validBody, advisorId: "leigh-roach" } }, response);
+    await contactHandler(request({ ...validBody, advisorId: "leigh-roach" }), response);
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
     expect(emailBody.text).toContain("Requested advisor: leigh-roach");
@@ -82,15 +89,12 @@ describe("contact API", () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     const { response, result } = createResponse();
-    await contactHandler({
-      method: "POST",
-      body: {
+    await contactHandler(request({
         ...validBody,
         inquiryType: "Property Inquiry",
         propertySlug: "611-703-church-street",
         advisorId: "gaurang-gala",
-      },
-    }, response);
+    }), response);
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
     expect(emailBody.to).toEqual(["gaurang@galacregroup.com"]);
@@ -100,7 +104,7 @@ describe("contact API", () => {
 
   it("rejects an unrecognized advisor id", async () => {
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: { ...validBody, advisorId: "unknown-agent" } }, response);
+    await contactHandler(request({ ...validBody, advisorId: "unknown-agent" }), response);
     expect(result.statusCode).toBe(400);
   });
 
@@ -110,7 +114,7 @@ describe("contact API", () => {
     vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: { ...validBody, inquiryType } }, response);
+    await contactHandler(request({ ...validBody, inquiryType }), response);
     expect(result.statusCode).toBe(200);
   });
 
@@ -120,7 +124,40 @@ describe("contact API", () => {
     vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false }));
     const { response, result } = createResponse();
-    await contactHandler({ method: "POST", body: validBody }, response);
+    await contactHandler(request(validBody), response);
     expect(result.statusCode).toBe(502);
+  });
+
+  it("rate-limits repeated submissions from the same client", async () => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "advisor@example.com");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    vi.stubEnv("FORM_RATE_LIMIT_MAX", "2");
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true }));
+
+    for (let index = 0; index < 2; index += 1) {
+      const { response, result } = createResponse();
+      await contactHandler(request(validBody, "10.1.2.3"), response);
+      expect(result.statusCode).toBe(200);
+    }
+
+    const { response, result } = createResponse();
+    await contactHandler(request(validBody, "10.1.2.3"), response);
+    expect(result.statusCode).toBe(429);
+    expect(result.headers["Retry-After"]).toBeDefined();
+  });
+
+  it("rejects submissions from an unapproved origin", async () => {
+    vi.stubEnv("FORM_ALLOWED_ORIGINS", "https://galacre.example");
+    const { response, result } = createResponse();
+    await contactHandler(request(validBody, "10.1.2.4", "https://untrusted.example"), response);
+    expect(result.statusCode).toBe(403);
+  });
+
+  it("fails safely without exposing private configuration", async () => {
+    const { response, result } = createResponse();
+    await contactHandler(request(validBody), response);
+    expect(result.statusCode).toBe(503);
+    expect(JSON.stringify(result.body)).not.toMatch(/RESEND|EMAIL|KEY|recipient/i);
   });
 });

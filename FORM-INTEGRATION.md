@@ -1,6 +1,6 @@
 # Gala CRE Structured Form Integration
 
-Careers and investor-sourcing forms share the browser contract in `src/lib/formSubmission.ts` and submit to the private Vercel Function at `api/forms.ts`. Form-specific validation remains in each React form and is repeated server-side before delivery.
+Careers and investor-sourcing forms share the browser contract in `src/lib/formSubmission.ts` and submit to the private Vercel Function at `api/forms.ts`. General Contact, property inquiry, and service consultation forms submit to `api/contact.ts`. Both endpoints validate server-side and apply the same origin allowlist and client rate-limit controls before delivery.
 
 ## Private environment configuration
 
@@ -8,6 +8,7 @@ Configure these only in the server/deployment environment. None should use the `
 
 - `RESEND_API_KEY`: Resend server API key.
 - `CONTACT_FROM_EMAIL`: verified sender used for form notifications.
+- `CONTACT_TO_EMAIL`: private recipient for general Contact and service consultation inquiries. Property inquiries with an approved advisor id route directly to that listing advisor.
 - `CAREERS_TO_EMAIL`: comma-separated private recipients for commercial-agent applications. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
 - `INVESTOR_TO_EMAIL`: comma-separated private recipients for acquisition and 1031 inquiries. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
 - `FORM_ALLOWED_ORIGINS`: optional comma-separated list of permitted production origins.
@@ -21,7 +22,7 @@ Configure these only in the server/deployment environment. None should use the `
 ## Delivery behavior
 
 1. The browser validates the journey-specific schema and sends a shared envelope containing `formType`, `inquiryType`, `sourcePage`, `startedAt`, and the form payload.
-2. The server checks the request method, optional origin allowlist, honeypot, rate limit, completion timing, and the full journey-specific schema.
+2. The server checks the request method, optional origin allowlist, honeypot, rate limit, and the applicable server-side schema. Careers and investor-sourcing submissions also receive completion-timing validation.
 3. The server chooses and validates the recipient list from private environment configuration. Recipients cannot be supplied or overridden by the browser.
 4. Resend sends the notification with the applicant or investor email as `reply_to`.
 5. If configured, the validated record is also posted to the private Google synchronization webhook. Email remains the primary delivery path if optional synchronization is unavailable.
