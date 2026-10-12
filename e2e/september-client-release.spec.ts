@@ -5,7 +5,7 @@ const teamExpectations = [
     id: "gaurang-gala",
     name: "Gaurang Gala",
     email: "gaurang@galacregroup.com",
-    phone: "910-578-2828",
+    phone: "(910) 578-2828",
     telephoneHref: "tel:+19105782828",
     portfolio: [
       "/properties/611-703-church-street",

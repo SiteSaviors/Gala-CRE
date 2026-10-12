@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import { LegacyProjectRedirect } from "@/App";
+import { LegacyProjectRedirect } from "@/pages/LegacyProjectRedirect";
 
 const Location = () => <span data-testid="location">{useLocation().pathname}</span>;
 

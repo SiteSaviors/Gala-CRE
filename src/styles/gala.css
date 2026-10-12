@@ -14,6 +14,9 @@ a,button{cursor:pointer}
 .skip-link{position:fixed;z-index:11000;top:12px;left:16px;padding:12px 18px;border-radius:3px;background:#fff;color:#111;font:700 11px/1.2 'Syne',sans-serif;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;transform:translateY(-180%);transition:transform .16s ease}
 .skip-link:focus{transform:translateY(0)}
 main[tabindex="-1"]:focus{outline:none}
+.gala-route-fallback{min-height:100vh;display:grid;place-items:center;background:#0b0b0a;color:#d8b552}
+.gala-route-fallback>span[aria-hidden="true"]{width:34px;height:34px;border:1px solid rgba(216,181,82,.28);border-top-color:#d8b552;border-radius:50%;animation:gala-route-spin .8s linear infinite}
+@keyframes gala-route-spin{to{transform:rotate(360deg)}}
 
 /* Cursor */
 #cur,#cdot{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;opacity:0;visibility:hidden;transform:translate(-50%,-50%);mix-blend-mode:difference;will-change:left,top}
@@ -798,7 +801,10 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 .gala-news-hero h1{max-width:none}
 .gala-news-archive__intro{margin-bottom:38px}
 .gala-news-archive__intro h2{margin:0;font:600 clamp(38px,4.5vw,58px)/1.04 'Poppins',sans-serif;letter-spacing:-.045em}
-.gala-news-archive__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 28px}
+.gala-news-archive__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 28px}
+.gala-news-archive .gala-news-card__image-link{aspect-ratio:16/10}
+.gala-news-archive .gala-news-card__content{padding-top:20px}
+.gala-news-archive .gala-news-card__summary{display:none}
 .gala-home-cta{position:relative;overflow:hidden;padding:92px 0 96px;background:var(--section-gold);color:#171717}
 .gala-home-cta__inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.58fr);gap:clamp(60px,8vw,124px);align-items:end}
 .gala-home-cta h2{max-width:13ch;margin:0;font:600 clamp(46px,5.15vw,74px)/1 'Poppins',sans-serif;letter-spacing:-.052em}
@@ -1366,24 +1372,24 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-investment-narrative-hero{padding:92px 20px 22px}
   .gala-investment-narrative-hero__image{height:220px;min-height:0;padding-top:0}
   .gala-investment-narrative-hero__image img{object-position:center}
-  .gala-investment-narrative-hero__copy{min-height:0;padding:50px 0 36px}
+  .gala-investment-narrative-hero__copy{min-height:0;padding:44px 0 30px}
   .gala-investment-narrative-hero h1{font-size:clamp(43px,14vw,62px);white-space:normal}
   .gala-investment-narrative-hero p{font-size:14px;line-height:1.68}
   .gala-investment-narrative-button{width:100%;grid-template-columns:minmax(0,1fr) 54px;margin-top:32px}
   .gala-investment-narrative-button>span{justify-content:center;padding:0 14px}
-  .gala-investment-narrative-value{padding:75px 0 86px}
+  .gala-investment-narrative-value{padding:68px 0 76px}
   .gala-investment-narrative-value__grid{gap:48px}
   .gala-investment-narrative-value__copy h2,.gala-investment-narrative-confidence__head h2,.gala-investment-narrative-properties__head h2,.gala-investment-narrative-faq header h2,.gala-investment-narrative-consultation__copy h2{font-size:clamp(37px,11vw,50px)}
   .gala-investment-narrative-value__copy p,.gala-investment-narrative-consultation__copy>p{font-size:14px;line-height:1.75}
   .gala-investment-narrative-frame--right{height:330px}
   .gala-investment-narrative-frame::before{top:-10px;right:-10px}
   .gala-investment-narrative-frame::after{top:-10px;right:-10px}
-  .gala-investment-narrative-pricing{padding-bottom:78px}
+  .gala-investment-narrative-pricing{padding-bottom:70px}
   .gala-investment-narrative-pricing .gala-shell{width:100%}
   .gala-investment-narrative-pricing__panel{padding:44px 20px}
   .gala-investment-narrative-pricing__panel h2{font-size:clamp(28px,8.8vw,39px)}
   .gala-investment-narrative-pricing__panel .gala-investment-narrative-button{width:100%}
-  .gala-investment-narrative-confidence{padding:76px 0 82px}
+  .gala-investment-narrative-confidence{padding:68px 0 74px}
   .gala-investment-narrative-confidence__head{margin-bottom:37px;text-align:center}
   .gala-investment-narrative-confidence__grid{grid-template-columns:1fr}
   .gala-investment-narrative-confidence__panel{min-height:310px;padding:34px 26px}
@@ -1394,17 +1400,17 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-investment-narrative-confidence__number{top:24px;left:26px}
   .gala-investment-narrative-assets{border-top-width:8px}
   .gala-investment-narrative-assets__title{font-size:clamp(28px,8.5vw,38px);letter-spacing:-.04em}
-  .gala-investment-narrative-properties{padding:78px 0 84px}
+  .gala-investment-narrative-properties{padding:70px 0 76px}
   .gala-investment-narrative-properties__head{display:block;margin-bottom:34px}
   .gala-investment-narrative-property{flex-basis:84vw}
   .gala-investment-narrative-property figure{height:240px}
   .gala-investment-narrative-property>div{min-height:160px}
-  .gala-investment-narrative-faq{padding:64px 0 70px}
+  .gala-investment-narrative-faq{padding:58px 0 64px}
   .gala-investment-narrative-faq__inner{gap:30px}
   .gala-investment-narrative-faq__item button{min-height:68px;padding:16px 0}
   .gala-investment-narrative-faq__item button span{font-size:16px}
   .gala-investment-narrative-faq__answer{padding-right:26px}
-  .gala-investment-narrative-consultation{padding:64px 0 70px}
+  .gala-investment-narrative-consultation{padding:58px 0 64px}
   .gala-investment-narrative-consultation__grid{gap:32px}
   .gala-investment-narrative-consultation__form{margin-right:-20px;margin-left:-20px;padding:28px 20px}
   .gala-investment-narrative-form__row{grid-template-columns:1fr}
@@ -1546,11 +1552,11 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-development-related__inner{gap:28px}
 }
 @media(max-width:720px){
-  .gala-development-point{padding:72px 0 78px}
+  .gala-development-point{padding:64px 0 70px}
   .gala-development-point__copy h2{max-width:15ch;font-size:clamp(38px,11vw,51px)}
   .gala-development-point__copy>p{font-size:14px;line-height:1.75}
   .gala-development-point__media{aspect-ratio:4/3;margin-right:-6px;margin-left:-6px;padding:10px}
-  .gala-development-stages{padding:72px 0 78px}
+  .gala-development-stages{padding:64px 0 70px}
   .gala-development-stages__head{margin-bottom:32px}
   .gala-development-stages__head h2{font-size:clamp(39px,11vw,52px)}
   .gala-development-stages__grid{display:block;border-top:0;border-left:1px solid rgba(207,170,70,.48);border-right:1px solid rgba(207,170,70,.48);border-bottom:1px solid rgba(207,170,70,.48);background:transparent}
@@ -1565,7 +1571,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-development-stage__title{font-size:24px}
   .gala-development-stage__description{font-size:11.5px}
   .gala-development-stage__link{margin-top:24px}
-  .gala-development-advantage{padding:72px 0 76px}
+  .gala-development-advantage{padding:64px 0 70px}
   .gala-development-advantage__head h2{font-size:clamp(38px,11vw,50px)}
   .gala-development-advantage__grid{grid-template-columns:1fr}
   .gala-development-advantage__item{min-height:0;padding:25px 23px 27px}
@@ -1573,7 +1579,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
   .gala-development-audience{grid-template-columns:1fr}
   .gala-development-audience strong{padding-bottom:12px}
   .gala-development-audience span{padding-top:0;border-left:0}
-  .gala-development-related{padding:52px 0}
+  .gala-development-related{padding:44px 0}
   .gala-development-related__links{grid-template-columns:1fr}
   .gala-development-related__links a{min-height:70px}
 }
@@ -1690,7 +1696,7 @@ footer.site-footer{background:#080808;grid-template-columns:minmax(260px,1.35fr)
 @media(max-width:640px){
   .gala-editorial-split-hero{padding:92px 20px 22px}
   .gala-editorial-split-hero__image{height:220px;min-height:0;padding-top:0}
-  .gala-editorial-split-hero__copy{min-height:0;padding:50px 0 36px}
+  .gala-editorial-split-hero__copy{min-height:0;padding:44px 0 30px}
   .gala-editorial-split-hero h1{font-size:clamp(36px,10vw,48px);white-space:normal}
   .gala-editorial-split-hero p{font-size:14px;line-height:1.68}
 }

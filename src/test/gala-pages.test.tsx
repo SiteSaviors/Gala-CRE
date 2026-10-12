@@ -883,7 +883,7 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.queryByText(/View Documents|Documents & Diligence|Request Package|Request Records/i)).not.toBeInTheDocument();
     expect(screen.getAllByText("Gaurang Gala").length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByRole("link", { name: "910-578-2828" })[0]).toHaveAttribute("href", "tel:+19105782828");
+    expect(screen.getAllByRole("link", { name: "(910) 578-2828" })[0]).toHaveAttribute("href", "tel:+19105782828");
     const lackeyOpportunity = screen.getByRole("region", { name: "Existing fuel-and-convenience site near I-95 Exit 19." });
     expect(lackeyOpportunity.querySelector(".gala-listing-compact__opportunity-video")).not.toBeInTheDocument();
     expect(lackeyOpportunity.querySelector(".gala-commercial-listing__highlights--row")).not.toBeInTheDocument();

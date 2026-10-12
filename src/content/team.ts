@@ -30,7 +30,7 @@ export const teamMembers: TeamMember[] = [
     image: gaurangGalaPhoto,
     imageAlt: "Gaurang Gala",
     email: "gaurang@galacregroup.com",
-    phone: "910-578-2828",
+    phone: "(910) 578-2828",
     license: "NC 283149",
   },
   {

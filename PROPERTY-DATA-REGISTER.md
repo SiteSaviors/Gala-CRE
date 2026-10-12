@@ -19,7 +19,7 @@ Purpose: Control which listing facts are safe to publish and identify the client
 
 | Field | Working value | Status |
 | --- | --- | --- |
-| Gaurang Gala | CEO \| BIC; gaurang@galacregroup.com; 910-578-2828; NC 283149 | Name, title, email, phone, and new real photograph client-supplied; new web asset registered September 22, 2026 |
+| Gaurang Gala | CEO \| BIC; gaurang@galacregroup.com; (910) 578-2828; NC 283149 | Name, title, email, phone, and new real photograph client-supplied; new web asset registered September 22, 2026 |
 | Leigh Roach | Agent; leigh@galacregroup.com; (919) 886-9181 | Biography, email, phone, and replacement portrait client-supplied; new web asset registered September 22, 2026 |
 | Goverdhan Vavilala | Agent; goverdhan@galacregroup.com; (919) 462-1494 | Full public name, role, email, phone, full biography, and portrait client-supplied; connected to the shared Team record September 22, 2026 |
 

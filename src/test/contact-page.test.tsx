@@ -39,7 +39,7 @@ describe("advisor inquiry form", () => {
     expect(directory).toBeInTheDocument();
     expect(within(directory).getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(within(directory).getByRole("link", { name: "gaurang@galacregroup.com" })).toHaveAttribute("href", "mailto:gaurang@galacregroup.com");
-    expect(within(directory).getByRole("link", { name: "910-578-2828" })).toHaveAttribute("href", "tel:+19105782828");
+    expect(within(directory).getByRole("link", { name: "(910) 578-2828" })).toHaveAttribute("href", "tel:+19105782828");
     expect(within(directory).getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(within(directory).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
     expect(within(directory).getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
