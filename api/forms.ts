@@ -164,10 +164,26 @@ const checkRateLimit = async (key: string) => {
 
 const originIsAllowed = (request: ApiRequest) => {
   const configured = process.env.FORM_ALLOWED_ORIGINS;
-  if (!configured) return true;
   const origin = headerValue(request, "origin");
-  const allowed = configured.split(",").map((value) => value.trim()).filter(Boolean);
-  return Boolean(origin) && allowed.includes(origin);
+  if (!origin) return false;
+
+  if (configured) {
+    const allowed = configured.split(",").map((value) => value.trim()).filter(Boolean);
+    return allowed.includes(origin);
+  }
+
+  const forwardedHost = headerValue(request, "x-forwarded-host").split(",")[0]?.trim();
+  const host = forwardedHost || headerValue(request, "host").split(",")[0]?.trim();
+  if (!host) return false;
+
+  try {
+    const parsedOrigin = new URL(origin);
+    const forwardedProto = headerValue(request, "x-forwarded-proto").split(",")[0]?.trim();
+    const protocolMatches = !forwardedProto || parsedOrigin.protocol === `${forwardedProto}:`;
+    return protocolMatches && parsedOrigin.host.toLowerCase() === host.toLowerCase();
+  } catch {
+    return false;
+  }
 };
 
 const escapeHtml = (value: string) => value

@@ -33,7 +33,7 @@ let requestSequence = 0;
 const request = (body: unknown, ip = `10.1.0.${++requestSequence}`, origin = "https://galacre.example") => ({
   method: "POST",
   body,
-  headers: { "x-forwarded-for": ip, origin },
+  headers: { "x-forwarded-for": ip, "x-forwarded-host": "galacre.example", "x-forwarded-proto": "https", origin },
 });
 
 afterEach(() => {
@@ -151,6 +151,21 @@ describe("contact API", () => {
     vi.stubEnv("FORM_ALLOWED_ORIGINS", "https://galacre.example");
     const { response, result } = createResponse();
     await contactHandler(request(validBody, "10.1.2.4", "https://untrusted.example"), response);
+    expect(result.statusCode).toBe(403);
+  });
+
+  it("enforces same-origin delivery when no explicit allowlist is configured", async () => {
+    const { response, result } = createResponse();
+    await contactHandler(request(validBody, "10.1.2.5", "https://untrusted.example"), response);
+    expect(result.statusCode).toBe(403);
+  });
+
+  it("rejects requests without an origin", async () => {
+    const { response, result } = createResponse();
+    await contactHandler({
+      ...request(validBody, "10.1.2.6"),
+      headers: { "x-forwarded-for": "10.1.2.6", "x-forwarded-host": "galacre.example", "x-forwarded-proto": "https" },
+    }, response);
     expect(result.statusCode).toBe(403);
   });
 

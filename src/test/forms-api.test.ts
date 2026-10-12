@@ -60,7 +60,7 @@ const createResponse = () => {
 const request = (body: unknown, ip: string, origin = "https://galacre.example") => ({
   method: "POST",
   body,
-  headers: { "x-forwarded-for": ip, origin },
+  headers: { "x-forwarded-for": ip, "x-forwarded-host": "galacre.example", "x-forwarded-proto": "https", origin },
 });
 
 const configureDelivery = () => {
@@ -181,6 +181,21 @@ describe("shared forms API", () => {
     vi.stubEnv("FORM_ALLOWED_ORIGINS", "https://galacre.example");
     const { response, result } = createResponse();
     await formsHandler(request(investorSubmission(), "10.0.0.7", "https://untrusted.example"), response);
+    expect(result.statusCode).toBe(403);
+  });
+
+  it("enforces same-origin delivery when no explicit allowlist is configured", async () => {
+    const { response, result } = createResponse();
+    await formsHandler(request(investorSubmission(), "10.0.0.10", "https://untrusted.example"), response);
+    expect(result.statusCode).toBe(403);
+  });
+
+  it("rejects requests without an origin", async () => {
+    const { response, result } = createResponse();
+    await formsHandler({
+      ...request(careersSubmission(), "10.0.0.11"),
+      headers: { "x-forwarded-for": "10.0.0.11", "x-forwarded-host": "galacre.example", "x-forwarded-proto": "https" },
+    }, response);
     expect(result.statusCode).toBe(403);
   });
 });
