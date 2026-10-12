@@ -25,7 +25,10 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
     const pageUrl = `${siteUrl}${location.pathname}`;
     const shareImage = image && !image.startsWith("data:")
       ? new URL(image, siteUrl).toString()
-      : `${siteUrl}/gala-cre-logo.png`;
+      : `${siteUrl}/gala-cre-social-share-v3.jpg`;
+    const shareImageAlt = image && !image.startsWith("data:")
+      ? title
+      : "Gala CRE Group — The Developer's Brokerage";
     const fullTitle = `${title} | Gala CRE Group`;
     document.title = fullTitle;
     upsertMeta('meta[name="description"]', { name: "description", content: description });
@@ -34,11 +37,14 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: pageUrl });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: shareImage });
+    upsertMeta('meta[property="og:image:secure_url"]', { property: "og:image:secure_url", content: shareImage });
+    upsertMeta('meta[property="og:image:alt"]', { property: "og:image:alt", content: shareImageAlt });
     upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "Gala CRE Group" });
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: fullTitle });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: description });
     upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: shareImage });
+    upsertMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: shareImageAlt });
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {

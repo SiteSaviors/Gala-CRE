@@ -29,22 +29,22 @@ const dedicatedCapabilityRoutes = [
   "/services/development-services/entitlements",
   "/services/development-services/infrastructure",
   "/services/development-services/gc-builder-relationships",
+  "/services/capital-markets/debt",
+  "/services/capital-markets/equity",
+  "/services/capital-markets/joint-venture",
+  "/services/capital-markets/capital-strategy",
 ] as const;
 
 const anchorCapabilityRoutes = [
   "/services/brokerage/landlord-representation",
   "/services/brokerage/tenant-representation",
-  "/services/capital-markets/debt",
-  "/services/capital-markets/equity",
-  "/services/capital-markets/joint-venture",
-  "/services/capital-markets/capital-strategy",
   "/services/property-management/property-management-partnership",
 ] as const;
 
 const capabilityAliases = {
   "/services/development-services/site-strategy": "/services/development-services/site-selection",
   "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
-  "/services/capital-markets/transaction-coordination": "/services/capital-markets#joint-venture",
+  "/services/capital-markets/transaction-coordination": "/services/capital-markets/joint-venture",
 } as const;
 
 const auditedRoutes = [
@@ -430,16 +430,16 @@ test("property and service inquiry entry points retain their context", async ({ 
 
   await page.goto("/services/investment-sales/industrial", { waitUntil: "domcontentloaded" });
   await expect(page).toHaveURL(/\/services\/investment-sales\/industrial$/);
-  await expect(page.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeVisible();
-  const investmentSalesInquiry = page.getByRole("link", { name: "Discuss an Industrial Asset" }).first();
+  await expect(page.getByRole("heading", { name: "Industrial", level: 1 })).toBeVisible();
+  const investmentSalesInquiry = page.getByRole("link", { name: "Request a Consultation" }).first();
   await expect(investmentSalesInquiry).toHaveAttribute(
     "href",
-    "/contact?inquiry=investment-sales&focus=industrial",
+    "#industrial-consultation",
   );
   await investmentSalesInquiry.click();
-  await expect(page).toHaveURL(/\/contact\?inquiry=investment-sales&focus=industrial$/);
-  await expect(page.getByRole("heading", { name: "Start with a clear conversation." })).toBeVisible();
-  await expect(page.getByRole("combobox", { name: "How can we help?" })).toHaveValue("Investment Sales");
+  await expect(page).toHaveURL(/\/services\/investment-sales\/industrial#industrial-consultation$/);
+  await expect(page.locator("#industrial-consultation")).toBeInViewport();
+  await expect(page.getByRole("combobox", { name: "Property type" })).toHaveValue("Industrial");
 });
 
 test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {

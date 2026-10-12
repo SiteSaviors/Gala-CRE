@@ -39,7 +39,11 @@ describe("launch accessibility and metadata", () => {
       );
       expect(document.head.querySelector('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-logo.png",
+        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
+      );
+      expect(document.head.querySelector('meta[property="og:image:alt"]')).toHaveAttribute(
+        "content",
+        "Gala CRE Group — The Developer's Brokerage",
       );
     });
   });
@@ -58,11 +62,11 @@ describe("launch accessibility and metadata", () => {
     await waitFor(() => {
       expect(document.head.querySelector('meta[property="og:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-logo.png",
+        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
       );
       expect(document.head.querySelector('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-logo.png",
+        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
       );
     });
   });

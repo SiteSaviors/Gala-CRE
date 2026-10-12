@@ -23,8 +23,8 @@ test.describe("Investment Sales narrative service page", () => {
       await expect(page.locator(".gala-investment-narrative-confidence__panel>img")).toHaveCount(3);
       await expect(page.locator(".gala-investment-narrative-outreach")).toHaveCount(0);
       await expect(page.getByText("Current Opportunities", { exact: true })).toHaveCount(0);
-      await expect(page.getByRole("heading", { name: "Asset Types", exact: true })).toBeVisible();
-      await expect(page.locator(".gala-investment-narrative-assets__grid .gala-brokerage-coverage__item")).toHaveCount(5);
+      await expect(page.getByRole("heading", { name: "Select An Asset Class", exact: true })).toBeVisible();
+      await expect(page.locator(".gala-investment-narrative-assets__link")).toHaveCount(5);
       await expect(page.locator(".gala-investment-narrative-faq__item")).toHaveCount(4);
       await expect(page.getByRole("button", { name: "Request a Consultation" })).toBeVisible();
 
@@ -41,14 +41,15 @@ test.describe("Investment Sales narrative service page", () => {
 
   test("asset-class routes open their dedicated editorial pages", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/services/investment-sales/land", { waitUntil: "domcontentloaded" });
+    await page.goto("/services/investment-sales", { waitUntil: "domcontentloaded" });
+    await page.getByRole("link", { name: "Explore Land investment sales" }).click();
 
     await expect(page).toHaveURL(/\/services\/investment-sales\/land$/);
     await expect(page.locator(".gala-cap-page")).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Land Investment Sales", level: 1 })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Discuss a Land Opportunity/i }).first()).toHaveAttribute(
+    await expect(page.getByRole("heading", { name: "Land", level: 1 })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Request a Consultation" }).first()).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=land",
+      "#land-consultation",
     );
   });
 

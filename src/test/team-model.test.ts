@@ -15,12 +15,13 @@ describe("team content model", () => {
     expect(teamMemberById["gaurang-gala"]).toMatchObject({ name: "Gaurang Gala", title: "CEO | BIC" });
     expect(teamMemberById["leigh-roach"]).toMatchObject({
       name: "Leigh Roach",
+      title: "Land Sales Specialist",
       email: "leigh@galacregroup.com",
       phone: "(919) 886-9181",
     });
     expect(teamMemberById["goverdhan-vavilala"]).toMatchObject({
       name: "Goverdhan Vavilala",
-      title: "Agent",
+      title: "Office / Retail Specialist",
       email: "goverdhan@galacregroup.com",
       phone: "(919) 462-1494",
     });

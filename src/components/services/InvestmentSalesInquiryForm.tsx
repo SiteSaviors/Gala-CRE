@@ -32,17 +32,21 @@ type InquiryValues = z.infer<typeof inquirySchema>;
 const propertyTypes = ["Industrial", "Multifamily", "Retail", "Office", "Land", "Mixed-Use", "Other"] as const;
 
 type InvestmentSalesInquiryFormProps = {
-  inquiryType?: "Investment Sales" | "Capital Markets";
+  inquiryType?: "Investment Sales" | "Capital Markets" | "Development Services";
+  serviceFocus?: string;
   sourcePath?: string;
   messageLabel?: string;
   successBody?: string;
+  defaultPropertyType?: (typeof propertyTypes)[number];
 };
 
 const InvestmentSalesInquiryForm = ({
   inquiryType = "Investment Sales",
+  serviceFocus,
   sourcePath = "/services/investment-sales#investment-sales-consultation",
   messageLabel = "Tell us about the property and your objectives",
   successBody = "A Gala CRE advisor will review your property information and follow up directly.",
+  defaultPropertyType,
 }: InvestmentSalesInquiryFormProps) => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -53,7 +57,7 @@ const InvestmentSalesInquiryForm = ({
       lastName: "",
       email: "",
       phone: "",
-      propertyType: "",
+      propertyType: defaultPropertyType ?? "",
       message: "",
       website: "",
     },
@@ -69,7 +73,7 @@ const InvestmentSalesInquiryForm = ({
           phone: values.phone,
           company: "",
           inquiryType,
-          message: `Property type: ${values.propertyType}\n\n${values.message}`,
+          message: `${serviceFocus ? `Service focus: ${serviceFocus}\n` : ""}Property type: ${values.propertyType}\n\n${values.message}`,
           propertySlug: "",
           advisorId: "",
           website: values.website,
@@ -96,7 +100,13 @@ const InvestmentSalesInquiryForm = ({
 
   return (
     <Form {...form}>
-      <form className="gala-investment-narrative-form" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+      <form
+        className="gala-investment-narrative-form"
+        onSubmit={form.handleSubmit(onSubmit)}
+        data-inquiry-type={inquiryType}
+        data-service-focus={serviceFocus}
+        noValidate
+      >
         <div className="gala-investment-narrative-form__row">
           <FormField control={form.control} name="firstName" render={({ field }) => (
             <FormItem>

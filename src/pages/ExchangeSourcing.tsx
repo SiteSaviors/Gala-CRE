@@ -1,4 +1,5 @@
-import { ArrowDown, Check, Clock3, Scale, Search } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef } from "react";
 import InvestorInquiryForm from "@/components/investors/InvestorInquiryForm";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -12,6 +13,32 @@ import capitalReviewImage from "@/assets/gala-capital-capability.webp";
 
 const ExchangeSourcing = () => {
   useSiteCursor();
+  const pageRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const revealItems = Array.from(page.querySelectorAll<HTMLElement>("[data-exchange-reveal]"));
+    page.classList.add("is-motion-ready");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -7% 0px" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+    return () => {
+      observer.disconnect();
+      page.classList.remove("is-motion-ready");
+    };
+  }, []);
 
   return (
     <>
@@ -22,82 +49,97 @@ const ExchangeSourcing = () => {
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath="/investors/1031-exchange" />
 
-      <main className="gala-page gala-journey-page gala-exchange-page" id="main-content" tabIndex={-1}>
-        <section className="gala-inner-hero gala-journey-hero gala-exchange-hero">
-          <div className="gala-shell gala-exchange-hero__grid">
-            <div>
-              <div className="gala-kicker">1031 Replacement Property Sourcing</div>
-              <h1>A focused search when timing matters.</h1>
-              <p>Define the acquisition criteria, timing, and capital position Gala needs to begin identifying potential commercial replacement properties.</p>
-              <a className="gala-button gala-button--gold" href="#investor-inquiry">
-                Start Your Property Search <ArrowDown size={16} aria-hidden="true" />
-              </a>
+      <main className="gala-page gala-exchange-page" id="main-content" tabIndex={-1} ref={pageRef}>
+        <section
+          className="gala-editorial-split-hero gala-exchange-editorial-hero"
+          aria-labelledby="exchange-hero-title"
+        >
+          <figure className="gala-editorial-split-hero__image gala-exchange-editorial-hero__image">
+            <img
+              src={capitalReviewImage}
+              alt="Commercial real estate advisors reviewing acquisition criteria"
+              loading="eager"
+              decoding="async"
+            />
+            <svg
+              className="gala-editorial-split-hero__image-outline"
+              viewBox="0 0 1000 700"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path d="M78 0H1000V630L922 700H0V70Z" />
+              <path className="gala-editorial-split-hero__image-accent" d="M790 -16H1018V180" />
+              <path className="gala-editorial-split-hero__image-accent" d="M-16 520V716H220" />
+            </svg>
+          </figure>
+          <div className="gala-editorial-split-hero__copy">
+            <span className="gala-editorial-split-hero__linework" aria-hidden="true"></span>
+            <div className="gala-kicker">Commercial Replacement Property Sourcing</div>
+            <h1 id="exchange-hero-title">1031 Exchange</h1>
+            <p>Gala CRE Group turns defined timing, acquisition criteria, and capital into a focused search for commercial replacement properties.</p>
+            <a className="gala-investment-narrative-button" href="#investor-inquiry">
+              <span>Start Your Property Search</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
+            </a>
+          </div>
+        </section>
+
+        <section className="gala-exchange-strategy" aria-labelledby="exchange-strategy-title">
+          <div className="gala-shell gala-exchange-strategy__grid">
+            <div className="gala-exchange-strategy__copy" data-exchange-reveal>
+              <div className="gala-kicker gala-kicker--dark">Focused Acquisition Strategy</div>
+              <h2 id="exchange-strategy-title">A focused search when timing matters.</h2>
+              <p>Gala CRE translates the timeline, investment requirements, target markets, and available capital into a decision-ready acquisition brief—then applies it to the search.</p>
+              <p className="gala-exchange-strategy__note">We coordinate the commercial property search alongside your legal, tax, financing, and qualified-intermediary advisors.</p>
             </div>
-            <div className="gala-exchange-hero__signals" aria-label="Search priorities">
-              <div><Clock3 aria-hidden="true" /><strong>Timing</strong><span>The dates shaping the search</span></div>
-              <div><Search aria-hidden="true" /><strong>Property Criteria</strong><span>Markets, property types, and requirements</span></div>
-              <div><Scale aria-hidden="true" /><strong>Capital Readiness</strong><span>Equity, financing, and purchase range</span></div>
+            <div className="gala-exchange-strategy__criteria" aria-label="Acquisition criteria summary">
+              {acquisitionCriteria.map((criterion, index) => (
+                <article
+                  data-exchange-reveal
+                  style={{ "--gala-exchange-delay": `${index * 80}ms` } as React.CSSProperties}
+                  key={criterion.title}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{criterion.title}</h3>
+                    <p>{criterion.body}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="gala-section gala-section--light gala-exchange-role">
-          <div className="gala-shell gala-exchange-role__grid">
-            <div>
-              <div className="gala-kicker gala-kicker--dark">What Gala Does</div>
-              <h2>A commercial property search built around your criteria.</h2>
-              <p className="gala-lead">Gala CRE translates timing, investment requirements, markets, and capital into a usable acquisition brief—then applies it to the search.</p>
-              <ul className="gala-exchange-role__list">
-                <li><Check aria-hidden="true" /><span>Translate timing and investment requirements into a clear search brief.</span></li>
-                <li><Check aria-hidden="true" /><span>Identify and compare potential commercial properties.</span></li>
-                <li><Check aria-hidden="true" /><span>Coordinate property conversations, tours, and next steps.</span></li>
-                <li><Check aria-hidden="true" /><span>Work alongside the investor’s legal, tax, financing, and intermediary advisors.</span></li>
-              </ul>
-              <p className="gala-exchange-role__limitation">Property availability, suitability, contract acceptance, financing, diligence, closing, and exchange treatment depend on the facts of each transaction and the guidance of the investor’s advisors.</p>
-            </div>
-            <figure>
-              <img src={capitalReviewImage} alt="Professionals reviewing investment materials" />
-              <figcaption>A focused brief gives the search direction.</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <section className="gala-section gala-section--black gala-exchange-process">
+        <section className="gala-exchange-process" aria-labelledby="exchange-process-title">
           <div className="gala-shell">
-            <div className="gala-section-head gala-section-head--row">
+            <div className="gala-exchange-process__head" data-exchange-reveal>
               <div>
                 <div className="gala-kicker">A Clear Search Process</div>
-                <h2>From confirmed timing to the right property fit.</h2>
+                <h2 id="exchange-process-title">From a confirmed timeline to the right property fit.</h2>
               </div>
-              <p>Each step narrows the search and keeps property decisions connected to the investor’s timing, criteria, and capital position.</p>
+              <p>Each step narrows the field while keeping property decisions connected to the investor’s timing, criteria, and capital position.</p>
             </div>
-            <div className="gala-exchange-process__grid">
-              {sourcingProcess.map((step) => (
-                <article key={step.number}>
+            <ol className="gala-exchange-process__grid">
+              {sourcingProcess.map((step, index) => (
+                <li
+                  data-exchange-reveal
+                  style={{ "--gala-exchange-delay": `${index * 75}ms` } as React.CSSProperties}
+                  key={step.number}
+                >
                   <span>{step.number}</span>
                   <h3>{step.title}</h3>
                   <p>{step.body}</p>
-                </article>
+                </li>
               ))}
-            </div>
-            <div className="gala-exchange-criteria__grid" aria-label="Acquisition criteria summary">
-              {acquisitionCriteria.map((criterion, index) => (
-                <article key={criterion.title}>
-                  <span>0{index + 1}</span>
-                  <h3>{criterion.title}</h3>
-                  <p>{criterion.body}</p>
-                </article>
-              ))}
-            </div>
+            </ol>
           </div>
         </section>
 
-        <section className="gala-section gala-section--silver gala-career-application gala-investor-application" id="investor-inquiry">
+        <section className="gala-career-application gala-investor-application" id="investor-inquiry">
           <div className="gala-shell gala-investor-application__inner">
-            <div className="gala-investor-application__intro">
-              <div className="gala-kicker gala-kicker--dark">Investor Inquiry</div>
+            <div className="gala-investor-application__intro" data-exchange-reveal>
+              <div className="gala-kicker gala-kicker--dark">Your Acquisition Brief</div>
               <h2>Start with the essentials.</h2>
-              <p>Share the timing, property criteria, and capital position Gala needs to prepare for a focused first conversation.</p>
+              <p>Share the timing, property criteria, and capital position Gala needs to prepare for a focused property-sourcing conversation.</p>
             </div>
             <InvestorInquiryForm />
             <div className="gala-exchange-disclaimer">

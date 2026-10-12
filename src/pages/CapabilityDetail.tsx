@@ -1,9 +1,16 @@
 import { Navigate, useParams } from "react-router-dom";
+import IndustrialInvestmentSalesPage from "@/components/services/IndustrialInvestmentSalesPage";
+import LandInvestmentSalesPage from "@/components/services/LandInvestmentSalesPage";
+import MultifamilyInvestmentSalesPage from "@/components/services/MultifamilyInvestmentSalesPage";
+import OfficeInvestmentSalesPage from "@/components/services/OfficeInvestmentSalesPage";
+import RetailInvestmentSalesPage from "@/components/services/RetailInvestmentSalesPage";
+import ServiceChapterPage from "@/components/services/ServiceChapterPage";
 import EditorialCapabilityPage from "@/components/site/EditorialCapabilityPage";
 import PageMeta from "@/components/site/PageMeta";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { findCapabilityPageContent } from "@/content/capabilityPages";
+import { findServiceChapterPage } from "@/content/serviceChapterPages";
 import {
   capabilityRouteAliases,
   findCapabilityByRoute,
@@ -30,19 +37,39 @@ const CapabilityDetail = () => {
     return <Navigate to={getCapabilityHref(service.slug, capability)} replace />;
   }
 
+  const chapterContent = findServiceChapterPage(requestedPath);
   const editorialContent = findCapabilityPageContent(service.slug, capabilitySlug);
-  if (!editorialContent) return <NotFound />;
+  if (!chapterContent && !editorialContent) return <NotFound />;
+  const isIndustrialInvestmentSales = requestedPath === "/services/investment-sales/industrial";
+  const isMultifamilyInvestmentSales = requestedPath === "/services/investment-sales/multifamily";
+  const isRetailInvestmentSales = requestedPath === "/services/investment-sales/retail";
+  const isOfficeInvestmentSales = requestedPath === "/services/investment-sales/office";
+  const isLandInvestmentSales = requestedPath === "/services/investment-sales/land";
 
   return (
     <>
       <PageMeta
-        title={editorialContent.metadata.title}
-        description={editorialContent.metadata.description}
-        image={editorialContent.metadata.image ?? editorialContent.hero.media.src}
+        title={(chapterContent ?? editorialContent).metadata.title}
+        description={(chapterContent ?? editorialContent).metadata.description}
+        image={(chapterContent ?? editorialContent).metadata.image ?? (chapterContent ?? editorialContent).hero.media.src}
       />
       <div id="cur"></div><div id="cdot"></div>
       <SiteHeader currentPath={requestedPath} />
-      <EditorialCapabilityPage content={editorialContent} />
+      {chapterContent ? (
+        <ServiceChapterPage content={chapterContent} />
+      ) : isIndustrialInvestmentSales ? (
+        <IndustrialInvestmentSalesPage />
+      ) : isMultifamilyInvestmentSales ? (
+        <MultifamilyInvestmentSalesPage />
+      ) : isRetailInvestmentSales ? (
+        <RetailInvestmentSalesPage />
+      ) : isOfficeInvestmentSales ? (
+        <OfficeInvestmentSalesPage />
+      ) : isLandInvestmentSales ? (
+        <LandInvestmentSalesPage />
+      ) : (
+        <EditorialCapabilityPage content={editorialContent} />
+      )}
       <SiteFooter currentPath={requestedPath} />
     </>
   );

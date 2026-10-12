@@ -1,20 +1,22 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const industrialPath = "/services/investment-sales/industrial";
-const industrialInquiryPath = "/contact?inquiry=investment-sales&focus=industrial";
 
 const viewports = [
   { name: "desktop", width: 1440, height: 900 },
-  { name: "tablet", width: 834, height: 1112 },
+  { name: "laptop", width: 1024, height: 768 },
+  { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
-  { name: "compact mobile", width: 320, height: 700 },
+  { name: "compact mobile", width: 320, height: 720 },
 ] as const;
 
 const requiredSections = [
-  "asset-positioning",
-  "buyer-profile",
-  "valuation-considerations",
-  "sale-process",
+  "hero",
+  "positioning",
+  "buyer-factors",
+  "sale-strategy",
+  "asset-rail",
+  "consultation",
 ] as const;
 
 const scrollThroughPage = async (page: Page) => {
@@ -25,46 +27,50 @@ const scrollThroughPage = async (page: Page) => {
 
     for (let position = 0; position < height; position += distance) {
       window.scrollTo(0, position);
-      await delay(20);
+      await delay(35);
     }
 
     window.scrollTo(0, 0);
-    await delay(80);
+    await delay(120);
   });
 };
 
-test.describe("Industrial Investment Sales pilot template", () => {
+test.describe("Industrial Investment Sales chapter", () => {
   for (const viewport of viewports) {
-    test(`${viewport.name}: preserves the underwriting-led journey without overflow`, async ({ page }) => {
+    test(`${viewport.name}: keeps the editorial journey intentional and free of overflow`, async ({ page }) => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
       await page.goto(industrialPath, { waitUntil: "domcontentloaded" });
 
-      const main = page.locator('main#main-content[data-capability-family="investment-sales"]');
+      const main = page.locator("main#main-content.gala-industrial-page");
       await expect(main).toBeVisible();
-      await expect(main.locator("[data-capability-hero]")).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Industrial", level: 1 })).toBeVisible();
 
       for (const section of requiredSections) {
-        await expect(main.locator(`[data-capability-section="${section}"]`)).toHaveCount(1);
+        await expect(main.locator(`[data-industrial-section="${section}"]`)).toHaveCount(1);
       }
 
-      await expect(main.locator("[data-capability-related]")).toHaveCount(1);
-      await expect(main.locator("[data-capability-cta]")).toHaveCount(1);
-      await expect(main.locator(".gala-is-buyers__grid > article")).toHaveCount(3);
-      await expect(main.locator(".gala-is-valuation__ledger > article")).toHaveCount(3);
-      await expect(main.locator(".gala-is-execution__steps > article")).toHaveCount(4);
-      await expect(main.locator(".gala-is-execution__scope-grid > article")).toHaveCount(4);
+      await expect(main.locator(".gala-industrial-factors__card")).toHaveCount(3);
+      await expect(main.locator(".gala-industrial-process__steps > li")).toHaveCount(3);
+      await expect(main.locator(".gala-industrial-rail a")).toHaveCount(4);
+      await expect(page.getByRole("combobox", { name: "Property type" })).toHaveValue("Industrial");
 
-      const relatedRail = main.locator(".gala-is-related__links");
-      expect(await relatedRail.evaluate((element) => getComputedStyle(element).position)).not.toBe("fixed");
-      expect(await relatedRail.evaluate((element) => element.getBoundingClientRect().top + window.scrollY)).toBeGreaterThan(
-        await main.locator("[data-capability-hero]").evaluate((element) => element.getBoundingClientRect().height),
-      );
-
-      const inquiryLinks = main.locator(`a[href="${industrialInquiryPath}"]`);
-      await expect(inquiryLinks).toHaveCount(2);
-      await expect(inquiryLinks.first()).toHaveAccessibleName("Discuss an Industrial Asset");
-      await expect(main.locator('[data-capability-related] a[href="/services/investment-sales/land"]')).toHaveCount(1);
+      const titleLines = main.locator(".gala-industrial-hero h1 > span");
+      await expect(titleLines).toHaveCount(1);
+      expect(await titleLines.evaluateAll((lines) => lines.map((line) => line.getBoundingClientRect().width > 0))).toEqual([true]);
+      expect(await main.locator(".gala-industrial-hero").evaluate((hero) => {
+        const copy = hero.querySelector<HTMLElement>(".gala-investment-narrative-hero__copy");
+        const lines = Array.from(hero.querySelectorAll<HTMLElement>("h1 > span"));
+        if (!copy) return false;
+        const copyRight = copy.getBoundingClientRect().right;
+        return lines.every((line) => line.getBoundingClientRect().right <= copyRight + 1);
+      })).toBe(true);
+      expect(await main.locator("h1, h2").evaluateAll((headings) => headings.every((heading) =>
+        Array.from(heading.querySelectorAll(":scope > span")).every((span) => {
+          const range = document.createRange();
+          range.selectNodeContents(span);
+          return range.getClientRects().length === 1;
+        }),
+      )), `${viewport.name}: authored Industrial headline spans remain single lines`).toBe(true);
 
       await scrollThroughPage(page);
       const layout = await page.evaluate(() => ({
@@ -84,17 +90,43 @@ test.describe("Industrial Investment Sales pilot template", () => {
     });
   }
 
-  test("related capability navigation stays contextual without submitting a form", async ({ page }) => {
+  test("consultation anchor and sibling asset links preserve their context", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(industrialPath, { waitUntil: "domcontentloaded" });
 
-    const relatedLand = page.locator('[data-capability-related] a[href="/services/investment-sales/land"]');
-    await relatedLand.click();
+    const consultation = page.getByRole("link", { name: "Request a Consultation" });
+    await consultation.click();
+    await expect(page).toHaveURL(/#industrial-consultation$/);
+    await expect(page.locator("#industrial-consultation")).toBeInViewport();
+    await expect(page.getByRole("combobox", { name: "Property type" })).toHaveValue("Industrial");
+
+    await page.locator('.gala-industrial-rail a[href="/services/investment-sales/land"]').click();
     await expect(page).toHaveURL(/\/services\/investment-sales\/land$/);
-    await expect(page.getByRole("heading", { name: "Land Investment Sales", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Land", level: 1 })).toBeVisible();
   });
 
-  test("reduced motion reveals every Industrial chapter immediately", async ({ browser }) => {
+  test("desktop cards retain the restrained gold hover treatment", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(industrialPath, { waitUntil: "domcontentloaded" });
+
+    const firstCard = page.locator(".gala-industrial-factors__card").first();
+    await firstCard.scrollIntoViewIfNeeded();
+    await expect(firstCard).toHaveClass(/is-visible/);
+    const cardBox = await firstCard.boundingBox();
+    expect(cardBox).not.toBeNull();
+    await page.mouse.move(
+      (cardBox?.x ?? 0) + (cardBox?.width ?? 0) / 2,
+      (cardBox?.y ?? 0) + (cardBox?.height ?? 0) / 2,
+    );
+
+    await expect.poll(() => firstCard.evaluate((card) => ({
+      transform: getComputedStyle(card).transform,
+      ruleHeight: getComputedStyle(card, "::before").height,
+    }))).toEqual(expect.objectContaining({ ruleHeight: "4px" }));
+    expect(await firstCard.evaluate((card) => getComputedStyle(card).transform)).not.toBe("none");
+  });
+
+  test("keyboard focus and reduced motion keep every Industrial chapter available", async ({ browser }) => {
     const context = await browser.newContext({
       viewport: { width: 1440, height: 900 },
       reducedMotion: "reduce",
@@ -102,12 +134,20 @@ test.describe("Industrial Investment Sales pilot template", () => {
     const page = await context.newPage();
     await page.goto(industrialPath, { waitUntil: "domcontentloaded" });
 
-    const revealItems = page.locator("main#main-content [data-capability-reveal]");
-    await expect(revealItems.first()).toHaveClass(/is-visible/);
-    expect(await revealItems.evaluateAll((items) => items.every((item) => item.classList.contains("is-visible")))).toBe(true);
+    const revealItems = page.locator("main#main-content [data-industrial-reveal]");
+    expect(await revealItems.count()).toBeGreaterThan(0);
+    expect(await revealItems.evaluateAll((items) => items.every((item) => {
+      const styles = getComputedStyle(item);
+      return styles.opacity === "1" && styles.transform === "none";
+    }))).toBe(true);
+
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: /skip to main content/i })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#main-content")).toBeFocused();
 
     for (const section of requiredSections) {
-      await expect(page.locator(`[data-capability-section="${section}"]`)).toBeAttached();
+      await expect(page.locator(`[data-industrial-section="${section}"]`)).toBeAttached();
     }
 
     await context.close();

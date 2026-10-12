@@ -9,6 +9,7 @@ import {
   Store,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import diligenceImage from "@/assets/transaction-control-context.webp";
 import heroImage from "@/assets/investment-sales-blue-booklet.webp";
 import outreachImage from "@/assets/investment-sales-buyer-outreach.webp";
@@ -25,11 +26,11 @@ type InvestmentSalesNarrativePageProps = {
 };
 
 const investmentAssetTypes = [
-  { id: "industrial", label: "Industrial", icon: Factory },
-  { id: "multifamily", label: "Multifamily", icon: Building },
-  { id: "retail", label: "Retail", icon: Store },
-  { id: "office", label: "Office", icon: Building2 },
-  { id: "land", label: "Land", icon: MapPinned },
+  { id: "industrial", label: "Industrial", icon: Factory, href: "/services/investment-sales/industrial" },
+  { id: "multifamily", label: "Multifamily", icon: Building, href: "/services/investment-sales/multifamily" },
+  { id: "retail", label: "Retail", icon: Store, href: "/services/investment-sales/retail" },
+  { id: "office", label: "Office", icon: Building2, href: "/services/investment-sales/office" },
+  { id: "land", label: "Land", icon: MapPinned, href: "/services/investment-sales/land" },
 ] as const;
 
 const faqs = [
@@ -141,16 +142,22 @@ const InvestmentSalesNarrativePage = ({ service }: InvestmentSalesNarrativePageP
         <section className="gala-brokerage-coverage gala-investment-narrative-assets" aria-labelledby="investment-asset-types-title">
           <div className="gala-shell gala-brokerage-coverage__inner">
             <h2 id="investment-asset-types-title" className="gala-investment-narrative-assets__title" data-investment-narrative-reveal>
-              Asset Types
+              Select An Asset Class
             </h2>
             <div className="gala-brokerage-coverage__grid gala-investment-narrative-assets__grid" data-investment-narrative-reveal>
               {investmentAssetTypes.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <article className="gala-brokerage-coverage__item" id={item.id} key={item.id}>
+                  <Link
+                    className="gala-brokerage-coverage__item gala-investment-narrative-assets__link"
+                    id={item.id}
+                    to={item.href}
+                    key={item.id}
+                    aria-label={`Explore ${item.label} investment sales`}
+                  >
                     <Icon size={48} strokeWidth={1.25} aria-hidden="true" />
                     <span>{item.label}</span>
-                  </article>
+                  </Link>
                 );
               })}
             </div>

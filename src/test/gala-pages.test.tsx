@@ -305,8 +305,9 @@ describe("Gala CRE public pages", () => {
 
   it("creates a distinct 1031 replacement-property sourcing route", () => {
     renderPage(<ExchangeSourcing />, "/investors/1031-exchange");
+    expect(screen.getByRole("heading", { name: "1031 Exchange", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /A focused search when timing matters/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /A commercial property search built around your criteria/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /From a confirmed timeline to the right property fit/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Confirm the timeline" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Define the criteria" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Screen opportunities" })).toBeInTheDocument();
@@ -384,10 +385,14 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Investment Sales", level: 1 })).toBeInTheDocument();
     expect(screen.getByText("Private Capital + Commercial Assets")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Start With an Opinion of Value" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Select An Asset Class" })).toBeInTheDocument();
     expect(view.container.querySelectorAll(".gala-investment-narrative-hero__image>img")).toHaveLength(1);
     expect(view.container.querySelector(".gala-service-detail__media")).not.toBeInTheDocument();
-    ["industrial", "multifamily", "retail", "office", "land"].forEach((anchor) => {
-      expect(view.container.querySelector(`#${anchor}`)).toBeInTheDocument();
+    ["industrial", "multifamily", "retail", "office", "land"].forEach((assetType) => {
+      expect(screen.getByRole("link", { name: new RegExp(`Explore ${assetType} investment sales`, "i") })).toHaveAttribute(
+        "href",
+        `/services/investment-sales/${assetType}`,
+      );
     });
     expect(screen.getByRole("heading", { name: "Preparation and Outreach That Build Buyer Confidence" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "What owners ask before going to market." })).toBeInTheDocument();
@@ -448,6 +453,41 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("link", { name: /Discuss Tenant Representation/i })).toHaveAttribute(
       "href", "/contact?inquiry=general&focus=tenant-representation&source=brokerage",
     );
+  });
+
+  it("renders Development Services as a connected four-stage advisory journey", () => {
+    const view = render(
+      <MemoryRouter initialEntries={["/services/development-services"]}>
+        <Routes>
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole("heading", { name: "Development Services", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Development decisions made clear before commitments become costly." })).toBeInTheDocument();
+    expect(screen.getByText(/remain with the appropriate licensed and contracted specialists/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Four stages. One clearer path forward." })).toBeInTheDocument();
+    [
+      "/services/development-services/site-selection",
+      "/services/development-services/entitlements",
+      "/services/development-services/infrastructure",
+      "/services/development-services/gc-builder-relationships",
+    ].forEach((href) => {
+      expect(view.container.querySelector(`.gala-development-stage[href="${href}"]`)).toBeInTheDocument();
+    });
+    expect(view.container.querySelectorAll(".gala-development-stage")).toHaveLength(4);
+    expect(screen.getByRole("heading", { name: "Coordination that keeps the next decision visible." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Clarify Feasibility Early" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Coordinate the Right Specialists" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Keep Decisions Visible" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell us what you are evaluating." })).toBeInTheDocument();
+    expect(screen.getByLabelText("Tell us about the site, intended use, and questions you are evaluating")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Request a Consultation" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Related services" })).toBeInTheDocument();
+    expect(view.container.querySelector(".gala-service-detail")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "From feasibility to execution, without the guesswork." })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "One connected commercial platform." })).not.toBeInTheDocument();
   });
 
   describe.skip("retired dedicated capability pages retained for rollback reference", () => {
@@ -565,7 +605,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders a distinct editorial journey for Industrial Investment Sales", () => {
+  it("renders a restrained Industrial Investment Sales chapter with an in-page consultation", () => {
     render(
       <MemoryRouter initialEntries={["/services/investment-sales/industrial"]}>
         <Routes>
@@ -574,28 +614,29 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Industrial Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Industrial", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /modern light-industrial distribution property/i })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /clear-span industrial interior/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A warehouse is more than its square footage." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Show how the property performs today." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Make operational utility legible." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Separate opportunity from assumption." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Build conviction before asking the market to act." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "The information buyers need. The process sellers need." })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Discuss an Industrial Asset/i })[0]).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "Value Beyond Square Footage." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The Details That Shape Buyer Conviction." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Income + Lease Position" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Functional Utility" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Condition + Optionality" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Position the Asset Before the Market Prices It." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell Us About the Asset." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Request a Consultation/i })).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=industrial"
+      "#industrial-consultation",
     );
-    expect(screen.getByRole("link", { name: /Capital Strategy/i })).toHaveAttribute(
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Industrial");
+    expect(screen.getByRole("link", { name: /Land/i })).toHaveAttribute(
       "href",
-      "/services/capital-markets/capital-strategy"
+      "/services/investment-sales/land",
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders a distinct editorial journey for Multifamily Investment Sales", () => {
+  it("renders a restrained Multifamily Investment Sales chapter with an in-page consultation", () => {
     render(
       <MemoryRouter initialEntries={["/services/investment-sales/multifamily"]}>
         <Routes>
@@ -604,26 +645,29 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Multifamily Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Multifamily", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /contemporary multifamily community/i })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /multifamily advisor reviewing/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Buyers price the income—and the work behind it." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Prepare the asset before the market sets the narrative." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Keep opportunity separate from assumption." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A sale process grounded in operating evidence." })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Discuss a Multifamily Asset/i })[0]).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "The Rent Roll Sets the Baseline. Operations Define the Value." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The Evidence Behind the Income." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Revenue + Rent Roll" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Expenses + Capital" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Execution + Upside" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Prepare the Property Before Buyers Set the Story." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tell Us About the Property." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Request a Consultation/i })).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=multifamily"
+      "#multifamily-consultation",
     );
-    expect(screen.getByRole("link", { name: /Property Management Partnership/i })).toHaveAttribute(
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Multifamily");
+    expect(screen.getByRole("link", { name: /Industrial/i })).toHaveAttribute(
       "href",
-      "/services/property-management/property-management-partnership"
+      "/services/investment-sales/industrial",
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders a distinct editorial journey for Retail Investment Sales", () => {
+  it("renders a restrained Retail Investment Sales chapter with an in-page consultation", () => {
     render(
       <MemoryRouter initialEntries={["/services/investment-sales/retail"]}>
         <Routes>
@@ -632,26 +676,29 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Retail Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Retail", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /contemporary neighborhood retail center/i })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /active neighborhood retail center/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Retail value lives where the lease meets the site." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Match the buyer to the actual value path." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Read the leases before the market writes the conclusion." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Retail-specific preparation from lease file to closing file." })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Discuss a Retail Asset/i })[0]).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "Retail Value Lives Where the Lease Meets the Site." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The Lease Defines the Income. The Site Defines the Options." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Tenant + Lease Exposure" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Access + Site Utility" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Rollover + Reuse" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Read the Leases. Then Price the Real Estate." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Start With the Lease and the Site." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Request a Consultation/i })).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=retail"
+      "#retail-consultation",
     );
-    expect(screen.getByRole("link", { name: /Landlord Representation/i })).toHaveAttribute(
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Retail");
+    expect(screen.getByRole("link", { name: /Office/i })).toHaveAttribute(
       "href",
-      "/services/brokerage/landlord-representation"
+      "/services/investment-sales/office",
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders a distinct editorial journey for Office Investment Sales", () => {
+  it("renders a restrained Office Investment Sales chapter with an in-page consultation", () => {
     render(
       <MemoryRouter initialEntries={["/services/investment-sales/office"]}>
         <Routes>
@@ -660,26 +707,29 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Office Investment Sales", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Office", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /contemporary mid-rise office building/i })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /contemporary office interior/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Office space competes twice: for tenants and for capital." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Match the buyer to the building's real plan." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Make occupancy risk understandable before buyers price uncertainty." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Preparation for the questions office buyers ask first." })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Discuss an Office Asset/i })[0]).toHaveAttribute(
+    expect(screen.getByRole("img", { name: /contemporary office interior showing collaborative areas/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Office Space Competes Twice: For Tenants and for Capital." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Occupancy Supports Today. Rollover Shapes Tomorrow." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Income + Rollover" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Leasing Costs + Downtime" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Building + Competitive Position" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Price the Rollover. Position the Building." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Start With the Rent Roll and the Next Lease Decision." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Request a Consultation/i })).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=office"
+      "#office-consultation",
     );
-    expect(screen.getByRole("link", { name: /Tenant Representation/i })).toHaveAttribute(
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Office");
+    expect(screen.getByRole("link", { name: /Land/i })).toHaveAttribute(
       "href",
-      "/services/brokerage/tenant-representation"
+      "/services/investment-sales/land",
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
 
-  it("renders a diligence-led compact journey for Land Investment Sales", () => {
+  it("renders a restrained Land Investment Sales chapter with an in-page consultation", () => {
     render(
       <MemoryRouter initialEntries={["/services/investment-sales/land"]}>
         <Routes>
@@ -688,22 +738,24 @@ describe("Gala CRE public pages", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole("heading", { name: "Land Investment Sales", level: 1 })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /generic aerial view of a commercial land parcel/i })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /generic commercial land site shown with road access/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Potential only matters when the path to use is credible." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Define what is allowed, proposed, and unresolved." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Make the execution dependencies visible." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Organize the record before buyers price the unknowns." })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A land offering built for real underwriting." })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: /See the Sale Process/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Discuss a Land Opportunity/i })[0]).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "Land", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /aerial view of a commercial land site/i })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /aerial commercial land site showing roadway frontage/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Acreage Sets the Scale. Execution Sets the Value." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Price the Land. Then Price the Work." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Use + Approval Position" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Access + Infrastructure" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Physical Constraints + Timing" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Verify the Site. Then Market the Path." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Start With the Site as It Exists Today." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Request a Consultation/i })).toHaveAttribute(
       "href",
-      "/contact?inquiry=investment-sales&focus=land"
+      "#land-consultation",
     );
-    expect(screen.getByRole("link", { name: /Site Strategy/i })).toHaveAttribute(
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Land");
+    expect(screen.getByRole("link", { name: /Office/i })).toHaveAttribute(
       "href",
-      "/services/development-services/site-strategy"
+      "/services/investment-sales/office",
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });
@@ -728,9 +780,9 @@ describe("Gala CRE public pages", () => {
       "href",
       "/contact?inquiry=development-services&focus=development-oversight"
     );
-    expect(screen.getByRole("link", { name: /Transaction Coordination/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /Joint Venture/i })).toHaveAttribute(
       "href",
-      "/services/capital-markets/transaction-coordination"
+      "/services/capital-markets/joint-venture"
     );
     expect(screen.queryByText(/pending client|client approval|coming soon/i)).not.toBeInTheDocument();
   });

@@ -15,6 +15,10 @@
   <url><loc>https://gala-cre.vercel.app/services/development-services/infrastructure</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/development-services/gc-builder-relationships</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/capital-markets</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/capital-markets/debt</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/capital-markets/equity</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/capital-markets/joint-venture</loc></url>
+  <url><loc>https://gala-cre.vercel.app/services/capital-markets/capital-strategy</loc></url>
   <url><loc>https://gala-cre.vercel.app/services/property-management</loc></url>
   <url><loc>https://gala-cre.vercel.app/properties</loc></url>
   <url><loc>https://gala-cre.vercel.app/properties/1111-brown-street</loc></url>

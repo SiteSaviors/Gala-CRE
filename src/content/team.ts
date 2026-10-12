@@ -36,7 +36,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "leigh-roach",
     name: "Leigh Roach",
-    title: "Agent",
+    title: "Land Sales Specialist",
     biography: [
       "Leigh Roach is a Triangle native with deep roots and connections throughout Raleigh, Cary, Apex, Morrisville, and surrounding markets. With nearly a decade of real estate experience and a strong background in sales and marketing, she brings a strategic, results-driven approach to commercial real estate.",
       "Leigh leverages her market knowledge and extensive local network to represent investors, developers, business owners, and property owners from opportunity identification through closing.",
@@ -49,7 +49,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "goverdhan-vavilala",
     name: "Goverdhan Vavilala",
-    title: "Agent",
+    title: "Office / Retail Specialist",
     biography: [
       "Goverdhan Vavilala, PhD, is a scientist, entrepreneur, investor, and real-estate professional based in the Raleigh-Durham, North Carolina area. With more than two decades of experience, his career spans pharmaceutical and clinical research, business development, entrepreneurship, and commercial real estate.",
       "Drawing on his scientific background and business expertise, Vavilala has pursued opportunities across life sciences, healthcare, investment, and property ventures. His experience includes research and development, strategic partnerships, business operations, investment, and commercial property activities in North Carolina.",

@@ -15,6 +15,7 @@ import {
   serviceNavigationGroups,
 } from "@/content/services";
 import { capabilityPageByPath } from "@/content/capabilityPages";
+import { serviceChapterPages } from "@/content/serviceChapterPages";
 
 const expectedCapabilities = [
   "Landlord Representation",
@@ -40,12 +41,28 @@ const LocationProbe = () => {
   return <output aria-label="Current route">{`${location.pathname}${location.hash}`}</output>;
 };
 
+const dedicatedHeroTitleByPath: Record<string, string> = {
+  "/services/investment-sales/industrial": "Industrial",
+  "/services/investment-sales/multifamily": "Multifamily",
+  "/services/investment-sales/retail": "Retail",
+  "/services/investment-sales/office": "Office",
+  "/services/investment-sales/land": "Land",
+  "/services/development-services/site-selection": "Site Selection",
+  "/services/development-services/entitlements": "Entitlements",
+  "/services/development-services/infrastructure": "Infrastructure",
+  "/services/development-services/gc-builder-relationships": "GC / Builder Relationships",
+  "/services/capital-markets/debt": "Debt",
+  "/services/capital-markets/equity": "Equity",
+  "/services/capital-markets/joint-venture": "Joint Venture",
+  "/services/capital-markets/capital-strategy": "Capital Strategy",
+};
+
 describe("mixed service architecture", () => {
-  it("maps nine capabilities to dedicated pages and seven to parent-page sections", () => {
+  it("maps thirteen capabilities to dedicated pages and three to parent-page sections", () => {
     expect(advertisedCapabilityRoutes.map((entry) => entry.label)).toEqual(expectedCapabilities);
     expect(new Set(advertisedCapabilityRoutes.map((entry) => entry.path)).size).toBe(expectedCapabilities.length);
-    expect(dedicatedCapabilityRoutes).toHaveLength(9);
-    expect(sectionCapabilityRoutes).toHaveLength(7);
+    expect(dedicatedCapabilityRoutes).toHaveLength(13);
+    expect(sectionCapabilityRoutes).toHaveLength(3);
     expect(dedicatedCapabilityRoutes.every((entry) => !entry.path.includes("#"))).toBe(true);
     expect(dedicatedCapabilityRoutes.every((entry) => entry.path === entry.legacyPath)).toBe(true);
     expect(sectionCapabilityRoutes.every((entry) => entry.path.includes("#"))).toBe(true);
@@ -73,7 +90,7 @@ describe("mixed service architecture", () => {
     });
   });
 
-  it("renders dedicated pages while retaining singular-service anchor redirects and development aliases", () => {
+  it("renders dedicated pages while retaining singular-service anchor redirects and legacy aliases", () => {
     dedicatedCapabilityRoutes.forEach((entry) => {
       const view = render(
         <MemoryRouter initialEntries={[entry.path]}>
@@ -84,7 +101,8 @@ describe("mixed service architecture", () => {
       );
 
       const content = capabilityPageByPath[entry.path];
-      expect(screen.getByRole("heading", { level: 1, name: content?.hero.title ?? entry.label }), entry.path).toBeInTheDocument();
+      const heroTitle = dedicatedHeroTitleByPath[entry.path] ?? content?.hero.title ?? entry.label;
+      expect(screen.getByRole("heading", { level: 1, name: heroTitle }), entry.path).toBeInTheDocument();
       expect(view.container.querySelector(".gala-cap-page"), entry.path).toBeInTheDocument();
       view.unmount();
     });
@@ -118,7 +136,49 @@ describe("mixed service architecture", () => {
     });
   });
 
-  it("isolates the Investment Sales pilot template to Industrial", () => {
+  it("renders each Development and Capital Markets chapter with the focused six-section architecture", () => {
+    serviceChapterPages.forEach((content) => {
+      const view = render(
+        <MemoryRouter initialEntries={[content.path]}>
+          <Routes>
+            <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+          </Routes>
+        </MemoryRouter>,
+      );
+
+      const main = view.container.querySelector<HTMLElement>("main#main-content");
+      const sections = Array.from(
+        view.container.querySelectorAll<HTMLElement>("[data-chapter-section]"),
+        (section) => section.dataset.chapterSection,
+      );
+      const form = view.container.querySelector<HTMLFormElement>(".gala-investment-narrative-form");
+
+      expect(main, content.path).toHaveClass("gala-service-chapter");
+      expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(content.title);
+      expect(sections).toEqual([
+        "hero",
+        "positioning",
+        "decision-factors",
+        "execution-process",
+        "sibling-rail",
+        "consultation",
+      ]);
+      expect(view.container.querySelectorAll(".gala-service-chapter__factor-card")).toHaveLength(3);
+      expect(view.container.querySelectorAll(".gala-service-chapter__process-steps > li")).toHaveLength(3);
+      expect(view.container.querySelectorAll(".gala-service-chapter__rail a[href]")).toHaveLength(3);
+      expect(form).toHaveAttribute(
+        "data-inquiry-type",
+        content.family === "development" ? "Development Services" : "Capital Markets",
+      );
+      expect(form).toHaveAttribute("data-service-focus", content.title);
+      expect(view.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+      expect(view.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+      view.unmount();
+    });
+  });
+
+  it("isolates the restrained Industrial chapter from the sibling capability template", () => {
     const industrialPath = "/services/investment-sales/industrial";
     const industrial = render(
       <MemoryRouter initialEntries={[industrialPath]}>
@@ -130,32 +190,50 @@ describe("mixed service architecture", () => {
 
     const industrialMain = industrial.container.querySelector<HTMLElement>("main#main-content");
     const industrialSections = Array.from(
-      industrial.container.querySelectorAll<HTMLElement>("[data-capability-section]"),
-      (section) => section.dataset.capabilitySection,
+      industrial.container.querySelectorAll<HTMLElement>("[data-industrial-section]"),
+      (section) => section.dataset.industrialSection,
     );
 
-    expect(industrialMain).toHaveAttribute("data-capability-family", "investment-sales");
-    expect(industrial.container.querySelector("[data-capability-hero]")).toBeInTheDocument();
+    expect(industrialMain).toHaveClass("gala-industrial-page");
+    expect(industrialMain).not.toHaveAttribute("data-capability-family");
     expect(industrialSections).toEqual([
-      "asset-positioning",
-      "buyer-profile",
-      "valuation-considerations",
-      "sale-process",
+      "hero",
+      "positioning",
+      "buyer-factors",
+      "sale-strategy",
+      "asset-rail",
+      "consultation",
     ]);
-    expect(industrial.container.querySelector("[data-capability-related]")).toBeInTheDocument();
-    expect(industrial.container.querySelector("[data-capability-cta]")).toBeInTheDocument();
-    expect(
-      industrial.container.querySelectorAll<HTMLAnchorElement>(
-        'a[href="/contact?inquiry=investment-sales&focus=industrial"]',
-      ),
-    ).toHaveLength(2);
+    expect(industrial.container.querySelector("[data-capability-section]")).not.toBeInTheDocument();
+    expect(industrial.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(industrial.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
     expect(
       industrial.container.querySelector<HTMLAnchorElement>(
-        '[data-capability-related] a[href="/services/investment-sales/land"]',
+        '.gala-industrial-rail a[href="/services/investment-sales/land"]',
       ),
     ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Industrial");
     industrial.unmount();
 
+    const siteSelection = render(
+      <MemoryRouter initialEntries={["/services/development-services/site-selection"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const siteSelectionMain = siteSelection.container.querySelector<HTMLElement>("main#main-content");
+    expect(siteSelectionMain).toHaveClass("gala-service-chapter", "gala-service-chapter--development");
+    expect(siteSelectionMain).not.toHaveAttribute("data-capability-family");
+    expect(siteSelection.container.querySelectorAll("[data-chapter-section]")).toHaveLength(6);
+    expect(siteSelection.container.querySelector("[data-capability-section]")).not.toBeInTheDocument();
+    expect(siteSelection.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(siteSelection.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+    siteSelection.unmount();
+  });
+
+  it("isolates the Multifamily chapter and preselects its consultation context", () => {
     const multifamily = render(
       <MemoryRouter initialEntries={["/services/investment-sales/multifamily"]}>
         <Routes>
@@ -165,12 +243,134 @@ describe("mixed service architecture", () => {
     );
 
     const multifamilyMain = multifamily.container.querySelector<HTMLElement>("main#main-content");
-    expect(multifamilyMain).not.toHaveAttribute("data-capability-family");
-    expect(multifamily.container.querySelector(".gala-cap-strategy")).toBeInTheDocument();
-    expect(multifamily.container.querySelector("[data-capability-section]")).not.toBeInTheDocument();
-    expect(multifamily.container.querySelector("[data-capability-related]")).toBeInTheDocument();
-    expect(multifamily.container.querySelector("[data-capability-cta]")).toBeInTheDocument();
+    const multifamilySections = Array.from(
+      multifamily.container.querySelectorAll<HTMLElement>("[data-multifamily-section]"),
+      (section) => section.dataset.multifamilySection,
+    );
+
+    expect(multifamilyMain).toHaveClass("gala-multifamily-page");
+    expect(multifamilySections).toEqual([
+      "hero",
+      "positioning",
+      "underwriting-factors",
+      "sale-strategy",
+      "asset-rail",
+      "consultation",
+    ]);
+    expect(multifamily.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(multifamily.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+    expect(
+      multifamily.container.querySelector<HTMLAnchorElement>(
+        '.gala-multifamily-rail a[href="/services/investment-sales/industrial"]',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Multifamily");
     multifamily.unmount();
+  });
+
+  it("isolates the Retail chapter and preselects its consultation context", () => {
+    const retail = render(
+      <MemoryRouter initialEntries={["/services/investment-sales/retail"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const retailMain = retail.container.querySelector<HTMLElement>("main#main-content");
+    const retailSections = Array.from(
+      retail.container.querySelectorAll<HTMLElement>("[data-retail-section]"),
+      (section) => section.dataset.retailSection,
+    );
+
+    expect(retailMain).toHaveClass("gala-retail-page");
+    expect(retailSections).toEqual([
+      "hero",
+      "positioning",
+      "underwriting-factors",
+      "sale-strategy",
+      "asset-rail",
+      "consultation",
+    ]);
+    expect(retail.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(retail.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+    expect(
+      retail.container.querySelector<HTMLAnchorElement>(
+        '.gala-retail-rail a[href="/services/investment-sales/office"]',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Retail");
+    retail.unmount();
+  });
+
+  it("isolates the Office chapter and preselects its consultation context", () => {
+    const office = render(
+      <MemoryRouter initialEntries={["/services/investment-sales/office"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const officeMain = office.container.querySelector<HTMLElement>("main#main-content");
+    const officeSections = Array.from(
+      office.container.querySelectorAll<HTMLElement>("[data-office-section]"),
+      (section) => section.dataset.officeSection,
+    );
+
+    expect(officeMain).toHaveClass("gala-office-page");
+    expect(officeSections).toEqual([
+      "hero",
+      "positioning",
+      "underwriting-factors",
+      "sale-strategy",
+      "asset-rail",
+      "consultation",
+    ]);
+    expect(office.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(office.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+    expect(
+      office.container.querySelector<HTMLAnchorElement>(
+        '.gala-office-rail a[href="/services/investment-sales/land"]',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Office");
+    office.unmount();
+  });
+
+  it("isolates the Land chapter and preselects its consultation context", () => {
+    const land = render(
+      <MemoryRouter initialEntries={["/services/investment-sales/land"]}>
+        <Routes>
+          <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const landMain = land.container.querySelector<HTMLElement>("main#main-content");
+    const landSections = Array.from(
+      land.container.querySelectorAll<HTMLElement>("[data-land-section]"),
+      (section) => section.dataset.landSection,
+    );
+
+    expect(landMain).toHaveClass("gala-land-page");
+    expect(landSections).toEqual([
+      "hero",
+      "positioning",
+      "underwriting-factors",
+      "sale-strategy",
+      "asset-rail",
+      "consultation",
+    ]);
+    expect(land.container.querySelector("[data-capability-related]")).not.toBeInTheDocument();
+    expect(land.container.querySelector("[data-capability-cta]")).not.toBeInTheDocument();
+    expect(
+      land.container.querySelector<HTMLAnchorElement>(
+        '.gala-land-rail a[href="/services/investment-sales/office"]',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Property type" })).toHaveValue("Land");
+    land.unmount();
   });
 
   it("renders the full desktop service directory with every mixed destination", () => {
@@ -204,8 +404,8 @@ describe("mixed service architecture", () => {
     expect(capabilityLinks.map((link) => link.getAttribute("href"))).toEqual(
       advertisedCapabilityRoutes.map((entry) => entry.path),
     );
-    expect(capabilityLinks.filter((link) => link.getAttribute("href")?.includes("#"))).toHaveLength(7);
-    expect(capabilityLinks.filter((link) => !link.getAttribute("href")?.includes("#"))).toHaveLength(9);
+    expect(capabilityLinks.filter((link) => link.getAttribute("href")?.includes("#"))).toHaveLength(3);
+    expect(capabilityLinks.filter((link) => !link.getAttribute("href")?.includes("#"))).toHaveLength(13);
 
     groups.forEach((group, index) => {
       const service = serviceNavigationGroups[index];
@@ -264,7 +464,7 @@ describe("mixed service architecture", () => {
     }
   });
 
-  it("exposes nested pages only for Investment Sales and Development on mobile", () => {
+  it("exposes nested pages for Investment Sales, Development, and Capital Markets on mobile", () => {
     const header = render(
       <MemoryRouter><SiteHeader currentPath="/" /></MemoryRouter>,
     );
@@ -306,6 +506,7 @@ describe("mixed service architecture", () => {
     expect(groupToggles.map((button) => button.getAttribute("aria-label"))).toEqual([
       "Show Investment Sales pages",
       "Show Development pages",
+      "Show Capital Markets pages",
     ]);
     expect(childLinks.map((link) => link.getAttribute("href"))).toEqual(
       dedicatedCapabilityRoutes.map((entry) => entry.path),
@@ -315,8 +516,10 @@ describe("mixed service architecture", () => {
 
     const investmentToggle = groupToggles[0];
     const developmentToggle = groupToggles[1];
+    const capitalToggle = groupToggles[2];
     const investmentChildren = header.container.querySelector<HTMLElement>("#mobile-service-investment-sales");
     const developmentChildren = header.container.querySelector<HTMLElement>("#mobile-service-development-services");
+    const capitalChildren = header.container.querySelector<HTMLElement>("#mobile-service-capital-markets");
 
     fireEvent.click(investmentToggle);
     expect(investmentToggle).toHaveAttribute("aria-expanded", "true");
@@ -336,10 +539,18 @@ describe("mixed service architecture", () => {
     expect(Array.from(developmentChildren?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
       .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === 0));
 
-    fireEvent.click(servicesToggle as HTMLButtonElement);
-    expect(servicesToggle).toHaveAttribute("aria-expanded", "false");
+    fireEvent.click(capitalToggle);
     expect(developmentToggle).toHaveAttribute("aria-expanded", "false");
     expect(developmentChildren).toHaveAttribute("aria-hidden", "true");
+    expect(capitalToggle).toHaveAttribute("aria-expanded", "true");
+    expect(capitalChildren).toHaveAttribute("aria-hidden", "false");
+    expect(Array.from(capitalChildren?.querySelectorAll<HTMLAnchorElement>("a[href]") ?? []))
+      .toSatisfy((links: HTMLAnchorElement[]) => links.every((link) => link.tabIndex === 0));
+
+    fireEvent.click(servicesToggle as HTMLButtonElement);
+    expect(servicesToggle).toHaveAttribute("aria-expanded", "false");
+    expect(capitalToggle).toHaveAttribute("aria-expanded", "false");
+    expect(capitalChildren).toHaveAttribute("aria-hidden", "true");
 
     header.unmount();
 

@@ -1,0 +1,124 @@
+.gala-service-chapter{--chapter-gold:#cfaa46;--chapter-gold-deep:#9f741b;overflow:hidden;background:#f3f0e8;color:#171713}
+.gala-service-chapter h1,.gala-service-chapter h2,.gala-service-chapter h3{font-family:'Poppins',sans-serif}
+.gala-service-chapter [data-chapter-reveal]{opacity:1;transform:none}
+.gala-service-chapter.is-motion-ready [data-chapter-reveal]{opacity:0;transform:translateY(24px);transition:opacity .62s ease var(--chapter-delay,0ms),transform .7s cubic-bezier(.22,1,.36,1) var(--chapter-delay,0ms)}
+.gala-service-chapter.is-motion-ready [data-chapter-reveal].is-visible{opacity:1;transform:none}
+
+.gala-service-chapter__hero h1{display:flex;flex-direction:column;font-size:clamp(56px,5vw,74px);white-space:normal}
+.gala-service-chapter__hero h1 span{display:block;white-space:nowrap}
+.gala-service-chapter__hero-image{margin:0}
+.gala-service-chapter__hero-image img{object-position:var(--chapter-hero-position,center)}
+.gala-service-chapter__hero p{max-width:35rem}
+.gala-service-chapter--gc-builder-relationships .gala-service-chapter__hero h1{font-size:clamp(47px,4.25vw,64px)}
+
+.gala-service-chapter__positioning{padding-top:102px;padding-bottom:108px}
+.gala-service-chapter__positioning h2{max-width:15ch}
+.gala-service-chapter__positioning h2 span{display:block;white-space:nowrap}
+.gala-service-chapter__positioning-frame img{object-position:var(--chapter-positioning-position,center)}
+
+.gala-service-chapter__factors{padding:88px 0 96px;background:#0e0e0d;color:#fff}
+.gala-service-chapter--capital-markets .gala-service-chapter__factors{background:#10110f}
+.gala-service-chapter__factors-head .gala-kicker{margin-bottom:18px;color:rgba(255,255,255,.68)}
+.gala-service-chapter__factors-head h2{max-width:1100px;margin:0;font-size:clamp(40px,4vw,58px);font-weight:600;line-height:.99;letter-spacing:-.054em}
+.gala-service-chapter__factors-head h2 span{display:block;white-space:nowrap}
+.gala-service-chapter__factors-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:42px}
+.gala-service-chapter__factor-card{position:relative;min-height:260px;padding:39px 32px 32px;border:1px solid rgba(23,23,19,.09);background:#f3f0e8;color:#171713;box-shadow:0 14px 34px rgba(0,0,0,.2);overflow:hidden;transition:transform .35s cubic-bezier(.22,1,.36,1),background-color .3s ease,border-color .3s ease,box-shadow .35s ease}
+.gala-service-chapter__factor-card::before{content:'';position:absolute;top:0;right:0;left:0;height:2px;background:linear-gradient(90deg,#9f741b 0%,#f1d986 48%,#b58924 100%);background-size:200% 100%;transition:height .28s ease,background-position .6s cubic-bezier(.22,1,.36,1)}
+.gala-service-chapter__factor-card>span{position:absolute;top:24px;right:26px;color:#b58924;font:600 52px/1 'Poppins',sans-serif;letter-spacing:-.06em;opacity:.11;transition:opacity .3s ease,transform .3s cubic-bezier(.22,1,.36,1)}
+.gala-service-chapter__factor-card h3{position:relative;min-height:2.16em;max-width:17ch;margin:0;padding-right:38px;font-size:clamp(23px,2vw,29px);font-weight:600;line-height:1.08;letter-spacing:-.042em}
+.gala-service-chapter__factor-card p{position:relative;max-width:34rem;margin:19px 0 0;color:#5b5851;font-size:13px;line-height:1.72}
+.gala-service-chapter__factor-card:hover{transform:translateY(-4px);border-color:rgba(180,137,34,.32);background:#fbf5e7;box-shadow:0 24px 48px rgba(0,0,0,.28)}
+.gala-service-chapter.is-motion-ready .gala-service-chapter__factor-card.is-visible:hover{transform:translateY(-4px)}
+.gala-service-chapter__factor-card:hover::before{height:4px;background-position:100% 0}
+.gala-service-chapter__factor-card:hover>span{opacity:.18;transform:translate(-2px,-2px)}
+
+.gala-service-chapter__process{padding:96px 0;background:#f3f0e8}
+.gala-service-chapter__process-panel{padding:58px clamp(40px,5vw,76px) 54px;background:#151512;color:#fff}
+.gala-service-chapter--capital-markets .gala-service-chapter__process-panel{background:#11120f}
+.gala-service-chapter__process-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:20px 72px;align-items:end}
+.gala-service-chapter__process-head .gala-kicker{grid-column:1/-1;color:rgba(255,255,255,.62)}
+.gala-service-chapter__process-head h2{margin:0;font-size:clamp(37px,3.55vw,51px);font-weight:600;line-height:1.01;letter-spacing:-.05em}
+.gala-service-chapter__process-head h2 span{display:block;white-space:nowrap}
+.gala-service-chapter__process-head>p{max-width:34rem;margin:0 0 3px;color:rgba(255,255,255,.62);font-size:13px;line-height:1.72}
+.gala-service-chapter__process-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:44px 0 0;padding:0;border-top:1px solid rgba(207,170,70,.58);list-style:none}
+.gala-service-chapter__process-steps li{min-height:205px;padding:29px 30px 4px 0}
+.gala-service-chapter__process-steps li+li{padding-left:30px;border-left:1px solid rgba(255,255,255,.17)}
+.gala-service-chapter__process-steps span{color:#d3ad4e;font:700 9px/1 'Syne',sans-serif;letter-spacing:.18em}
+.gala-service-chapter__process-steps h3{margin:21px 0 0;font-size:clamp(24px,2.05vw,30px);font-weight:600;line-height:1.05;letter-spacing:-.04em}
+.gala-service-chapter__process-steps p{max-width:29rem;margin:14px 0 0;color:rgba(255,255,255,.64);font-size:12px;line-height:1.7}
+
+.gala-service-chapter__rail{border-top:1px solid rgba(23,23,19,.1)}
+.gala-service-chapter__rail a:focus-visible,.gala-service-chapter__hero a:focus-visible{outline:2px solid #cfaa46;outline-offset:4px}
+.gala-service-chapter__consultation{padding-top:78px;padding-bottom:84px}
+.gala-service-chapter__consultation h2 span{display:block;white-space:nowrap}
+
+@media(prefers-reduced-motion:reduce){
+  .gala-service-chapter [data-chapter-reveal],.gala-service-chapter.is-motion-ready [data-chapter-reveal]{opacity:1;transform:none;transition:none!important}
+  .gala-service-chapter__factor-card,.gala-service-chapter__factor-card::before,.gala-service-chapter__factor-card>span{transition:none}
+  .gala-service-chapter.is-motion-ready .gala-service-chapter__factor-card.is-visible:hover{transform:none}
+}
+
+@media(max-width:1100px){
+  .gala-service-chapter__hero h1{font-size:clamp(51px,5.4vw,64px)}
+  .gala-service-chapter--gc-builder-relationships .gala-service-chapter__hero h1{font-size:clamp(43px,4.7vw,54px)}
+  .gala-service-chapter__factors-head h2{font-size:clamp(39px,4.7vw,51px)}
+  .gala-service-chapter__factor-card{padding-right:26px;padding-left:26px}
+  .gala-service-chapter__factor-card h3{font-size:24px}
+  .gala-service-chapter__process-head{gap:20px 46px}
+  .gala-service-chapter__process-head h2{font-size:clamp(35px,4vw,44px)}
+}
+
+@media(max-width:900px){
+  .gala-service-chapter__factors-grid{grid-template-columns:1fr;gap:12px}
+  .gala-service-chapter__factor-card{min-height:0;padding:34px 34px 32px}
+  .gala-service-chapter__factor-card h3{min-height:0;max-width:none;padding-right:72px;font-size:28px}
+  .gala-service-chapter__process-head{grid-template-columns:1fr;gap:22px}
+  .gala-service-chapter__process-head .gala-kicker{grid-column:auto}
+  .gala-service-chapter__process-head>p{margin:0}
+  .gala-service-chapter__process-steps{grid-template-columns:1fr}
+  .gala-service-chapter__process-steps li{min-height:0;padding:27px 0}
+  .gala-service-chapter__process-steps li+li{padding-left:0;border-top:1px solid rgba(255,255,255,.17);border-left:0}
+  .gala-service-chapter__rail{padding:27px 0}
+  .gala-service-chapter__rail .gala-brokerage-rail__inner{grid-template-columns:1fr;gap:14px}
+  .gala-service-chapter__rail .gala-brokerage-rail__audience{align-items:center;flex-direction:row;gap:12px}
+  .gala-service-chapter__rail .gala-brokerage-rail__links{width:100%;align-items:center;justify-content:flex-start;flex-direction:row;flex-wrap:nowrap;gap:18px;overflow-x:auto;padding-bottom:4px;white-space:nowrap;scrollbar-width:none}
+  .gala-service-chapter__rail .gala-brokerage-rail__links::-webkit-scrollbar{display:none}
+}
+
+@media(max-width:850px){
+  .gala-service-chapter__hero h1,.gala-service-chapter--gc-builder-relationships .gala-service-chapter__hero h1{font-size:clamp(46px,8vw,61px)}
+  .gala-service-chapter__hero-image img{object-position:var(--chapter-hero-position-mobile,var(--chapter-hero-position,center))}
+  .gala-service-chapter__positioning{padding-top:78px;padding-bottom:84px}
+  .gala-service-chapter__positioning-frame img{object-position:var(--chapter-positioning-position-mobile,var(--chapter-positioning-position,center))}
+}
+
+@media(max-width:640px){
+  .gala-service-chapter .gala-service-chapter__hero h1,.gala-service-chapter--gc-builder-relationships .gala-service-chapter__hero h1{font-size:clamp(35px,11.2vw,44px);line-height:.98}
+  .gala-service-chapter__hero p{font-size:14px}
+  .gala-service-chapter__positioning h2{font-size:clamp(33px,9.7vw,43px)}
+  .gala-service-chapter__factors{padding:70px 0 76px}
+  .gala-service-chapter__factors-head h2{font-size:clamp(33px,9.8vw,43px)}
+  .gala-service-chapter__factors-grid{margin-top:34px}
+  .gala-service-chapter__factor-card{padding:31px 24px 28px}
+  .gala-service-chapter__factor-card>span{top:22px;right:22px;font-size:47px}
+  .gala-service-chapter__factor-card h3{min-height:2.16em;max-width:15ch;padding-right:58px;font-size:clamp(24px,7.3vw,30px)}
+  .gala-service-chapter__process{padding:68px 0}
+  .gala-service-chapter__process .gala-shell{width:100%}
+  .gala-service-chapter__process-panel{padding:48px 20px 42px}
+  .gala-service-chapter__process-head h2{font-size:clamp(32px,9.6vw,42px)}
+  .gala-service-chapter__process-steps{margin-top:34px}
+  .gala-service-chapter__process-steps h3{font-size:27px}
+  .gala-service-chapter__rail{padding:27px 0}
+  .gala-service-chapter__rail .gala-brokerage-rail__inner{gap:14px}
+  .gala-service-chapter__rail .gala-brokerage-rail__audience{align-items:center;flex-direction:row;gap:12px}
+  .gala-service-chapter__rail .gala-brokerage-rail__links{width:100%;align-items:center;flex-direction:row;flex-wrap:nowrap;gap:18px;overflow-x:auto;padding-bottom:4px;white-space:nowrap;scrollbar-width:none}
+  .gala-service-chapter__rail .gala-brokerage-rail__links::-webkit-scrollbar{display:none}
+  .gala-service-chapter__consultation{padding-top:64px;padding-bottom:70px}
+  .gala-service-chapter__consultation h2{font-size:clamp(32px,9.8vw,42px)}
+}
+
+@media(max-width:360px){
+  .gala-service-chapter .gala-service-chapter__hero h1,.gala-service-chapter--gc-builder-relationships .gala-service-chapter__hero h1{font-size:35px;letter-spacing:-.062em}
+  .gala-service-chapter__hero .gala-kicker{letter-spacing:.13em}
+  .gala-service-chapter__positioning h2,.gala-service-chapter__factors-head h2,.gala-service-chapter__process-head h2,.gala-service-chapter__consultation h2{font-size:30px}
+}

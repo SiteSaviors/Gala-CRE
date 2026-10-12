@@ -74,7 +74,7 @@ const debt = buildCapabilityPage({
     links: [
       { label: "Capital Markets", title: "Equity", body: "Organize the investment case and evaluate whether outside equity fits the opportunity.", href: "/services/capital-markets/equity" },
       { label: "Capital Markets", title: "Capital Strategy", body: "Compare debt, equity, timing, and funding dependencies before choosing a structure.", href: "/services/capital-markets/capital-strategy" },
-      { label: "Capital Markets", title: "Transaction Coordination", body: "Keep lender diligence, documentation, conditions, and closing milestones visible.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Capital Markets", title: "Joint Venture", body: "Connect partner alignment, governance, and future funding to the financing structure.", href: "/services/capital-markets/joint-venture" },
       { label: "Development", title: "Development Oversight", body: "Connect development scope, decisions, schedule, and reporting to the capital plan.", href: "/services/development-services/development-oversight" },
     ],
   },
@@ -155,7 +155,7 @@ const equity = buildCapabilityPage({
     links: [
       { label: "Capital Markets", title: "Debt", body: "Evaluate lender fit and debt terms alongside the proposed equity structure.", href: "/services/capital-markets/debt" },
       { label: "Capital Markets", title: "Capital Strategy", body: "Sequence debt and equity decisions around the business plan and funding milestones.", href: "/services/capital-markets/capital-strategy" },
-      { label: "Capital Markets", title: "Transaction Coordination", body: "Organize cross-party diligence, conditions, documentation, and closing milestones.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Capital Markets", title: "Joint Venture", body: "Clarify partner roles, governance, economics, and exit expectations alongside the equity requirement.", href: "/services/capital-markets/joint-venture" },
       { label: "Investment Sales", title: "Investment Sales", body: "Connect acquisition or disposition strategy to the investment thesis and capital plan.", href: "/services/investment-sales" },
     ],
   },
@@ -236,7 +236,7 @@ const capitalStrategy = buildCapabilityPage({
     links: [
       { label: "Capital Markets", title: "Debt", body: "Prepare and run a focused lender process around the selected financing requirement.", href: "/services/capital-markets/debt" },
       { label: "Capital Markets", title: "Equity", body: "Organize the investment case and test fit with relevant equity relationships.", href: "/services/capital-markets/equity" },
-      { label: "Capital Markets", title: "Transaction Coordination", body: "Keep diligence, documentation, conditions, and funding milestones moving across parties.", href: "/services/capital-markets/transaction-coordination" },
+      { label: "Capital Markets", title: "Joint Venture", body: "Connect the selected capital path to partner economics, governance, and future funding decisions.", href: "/services/capital-markets/joint-venture" },
       { label: "Development", title: "Development Oversight", body: "Connect capital milestones to approvals, infrastructure, schedule, and ownership decisions.", href: "/services/development-services/development-oversight" },
     ],
   },
@@ -249,7 +249,7 @@ const capitalStrategy = buildCapabilityPage({
 });
 
 const transactionCoordinationPage = buildCapabilityPage({
-  path: "/services/capital-markets/transaction-coordination",
+  path: "/services/capital-markets/joint-venture",
   parent: { label: "Capital Markets", href: "/services/capital-markets" },
   image: transactionCoordination,
   metadataDescription:
@@ -262,7 +262,7 @@ const transactionCoordinationPage = buildCapabilityPage({
     alt: "Generic commercial transaction workspace with a document folio, plans, keys, and an abstract milestone timeline",
     position: "center 52%",
     primaryLabel: "Discuss Transaction Support",
-    inquiryHref: "/contact?inquiry=capital-markets&focus=transaction-coordination",
+    inquiryHref: "/contact?inquiry=capital-markets&focus=joint-venture",
     processLabel: "See the Coordination Process",
     processId: "capital-transaction-process",
     signalLabel: "Transaction coordination stages",

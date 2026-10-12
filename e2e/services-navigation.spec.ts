@@ -20,10 +20,10 @@ const desktopCapabilities = [
   "/services/development-services/entitlements",
   "/services/development-services/infrastructure",
   "/services/development-services/gc-builder-relationships",
-  "/services/capital-markets#debt",
-  "/services/capital-markets#equity",
-  "/services/capital-markets#joint-venture",
-  "/services/capital-markets#capital-strategy",
+  "/services/capital-markets/debt",
+  "/services/capital-markets/equity",
+  "/services/capital-markets/joint-venture",
+  "/services/capital-markets/capital-strategy",
   "/services/property-management#property-management-partnership",
 ] as const;
 
@@ -76,7 +76,7 @@ test("desktop Services menu is a full-width, keyboard-usable five-column directo
   await expect(menu).toHaveAttribute("aria-hidden", "true");
 });
 
-test("mobile Services menu nests only the nine dedicated backpages", async ({ page }) => {
+test("mobile Services menu nests all thirteen dedicated backpages", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/services", { waitUntil: "domcontentloaded" });
 
@@ -98,17 +98,20 @@ test("mobile Services menu nests only the nine dedicated backpages", async ({ pa
   await expect(groups).toHaveCount(5);
   expect(await parentLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href"))))
     .toEqual(serviceParents);
-  await expect(groupToggles).toHaveCount(2);
+  await expect(groupToggles).toHaveCount(3);
   await expect(groupToggles.nth(0)).toHaveAttribute("aria-label", "Show Investment Sales pages");
   await expect(groupToggles.nth(1)).toHaveAttribute("aria-label", "Show Development pages");
+  await expect(groupToggles.nth(2)).toHaveAttribute("aria-label", "Show Capital Markets pages");
   expect(await childLinks.evaluateAll((links) => links.map((link) => link.getAttribute("href"))))
     .toEqual(mobileBackpages);
   expect(await childLinks.evaluateAll((links) => links.every((link) => link.tabIndex === -1))).toBe(true);
 
   const investmentToggle = groupToggles.nth(0);
   const developmentToggle = groupToggles.nth(1);
+  const capitalToggle = groupToggles.nth(2);
   const investmentChildren = page.locator("#mobile-service-investment-sales");
   const developmentChildren = page.locator("#mobile-service-development-services");
+  const capitalChildren = page.locator("#mobile-service-capital-markets");
 
   await investmentToggle.click();
   await expect(investmentToggle).toHaveAttribute("aria-expanded", "true");
@@ -129,10 +132,19 @@ test("mobile Services menu nests only the nine dedicated backpages", async ({ pa
   await expect(developmentChildren).toHaveAttribute("aria-hidden", "false");
   await expect(developmentChildren.locator('a[href="/services/development-services/site-selection"]')).toBeVisible();
 
-  await servicesToggle.click();
-  await expect(servicesToggle).toHaveAttribute("aria-expanded", "false");
+  await capitalToggle.click();
   await expect(developmentToggle).toHaveAttribute("aria-expanded", "false");
   await expect(developmentChildren).toHaveAttribute("aria-hidden", "true");
+  await expect(capitalToggle).toHaveAttribute("aria-expanded", "true");
+  await expect(capitalChildren).toHaveAttribute("aria-hidden", "false");
+  await expect(capitalChildren.locator('a[href="/services/capital-markets/debt"]')).toBeVisible();
+  expect(await capitalChildren.locator("a[href]").evaluateAll((links) =>
+    links.every((link) => link.tabIndex === 0),
+  )).toBe(true);
+  await servicesToggle.click();
+  await expect(servicesToggle).toHaveAttribute("aria-expanded", "false");
+  await expect(capitalToggle).toHaveAttribute("aria-expanded", "false");
+  await expect(capitalChildren).toHaveAttribute("aria-hidden", "true");
 });
 
 test("desktop service directory removes motion when reduced motion is requested", async ({ browser }) => {

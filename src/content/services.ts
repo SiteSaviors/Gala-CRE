@@ -225,7 +225,7 @@ export const services: Service[] = [
     capabilities: [
       {
         label: "Debt",
-        destination: "section",
+        destination: "page",
         route: "debt",
         lead: "Debt strategy begins with the asset, sponsorship, business plan, timing, and repayment profile—not a one-size-fits-all lender list.",
         included: [
@@ -236,7 +236,7 @@ export const services: Service[] = [
       },
       {
         label: "Equity",
-        destination: "section",
+        destination: "page",
         route: "equity",
         lead: "Equity conversations require a clear investment case, aligned expectations, and relevant relationships for the opportunity's scale and risk profile.",
         included: [
@@ -247,7 +247,7 @@ export const services: Service[] = [
       },
       {
         label: "Joint Venture",
-        destination: "section",
+        destination: "page",
         route: "joint-venture",
         lead: "Joint venture strategy begins with alignment on the business plan, capital contributions, economics, decision rights, reporting, and exit expectations.",
         included: [
@@ -258,7 +258,7 @@ export const services: Service[] = [
       },
       {
         label: "Capital Strategy",
-        destination: "section",
+        destination: "page",
         route: "capital-strategy",
         lead: "Capital strategy connects debt, equity, timing, risk, and ownership objectives before individual terms are evaluated in isolation.",
         included: [
@@ -335,7 +335,7 @@ export const getCapabilityHref = (serviceSlug: ServiceSlug, capability: Capabili
 export const capabilityRouteAliases: Record<string, string> = {
   "/services/development-services/site-strategy": "/services/development-services/site-selection",
   "/services/development-services/development-oversight": "/services/development-services/gc-builder-relationships",
-  "/services/capital-markets/transaction-coordination": "/services/capital-markets#joint-venture",
+  "/services/capital-markets/transaction-coordination": "/services/capital-markets/joint-venture",
 };
 
 export const findCapabilityByRoute = (slug: string, route: string) => {

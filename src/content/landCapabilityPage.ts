@@ -150,7 +150,7 @@ export const landCapabilityPage: CapabilityPageContent = {
         label: "Capital Markets",
         title: "Capital Strategy",
         body: "Organize debt, equity, timing, and funding dependencies around the opportunity's actual execution plan.",
-        href: "/services/capital-markets#capital-strategy",
+        href: "/services/capital-markets/capital-strategy",
       },
       {
         label: "Investment Sales",

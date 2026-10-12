@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import PageMeta from "@/components/site/PageMeta";
 import BrokerageServicePage from "@/components/services/BrokerageServicePage";
+import DevelopmentServicePage from "@/components/services/DevelopmentServicePage";
 import InvestmentSalesNarrativePage from "@/components/services/InvestmentSalesNarrativePage";
 import InvestmentSalesInquiryForm from "@/components/services/InvestmentSalesInquiryForm";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -122,6 +123,7 @@ const ServiceDetail = () => {
 
   if (service.slug === "brokerage") return <BrokerageServicePage service={service} />;
   if (service.slug === "investment-sales") return <InvestmentSalesNarrativePage service={service} />;
+  if (service.slug === "development-services") return <DevelopmentServicePage service={service} />;
 
   const related = services.filter((item) => item.slug !== service.slug).slice(0, 3);
   const usesEditorialHero = service.slug === "development-services" || service.slug === "capital-markets";
