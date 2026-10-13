@@ -133,7 +133,7 @@ const Index = () => {
           </div>
           <div className="hinner"><div className="glass text-left">
             <div className="ey">Brokerage · Investment Sales · Development · Capital Markets</div>
-            <h1>Commercial Real Estate,<br />Simplified</h1>
+            <h1>Commercial Real Estate,<br className="gala-hero__desktop-break" /> Simplified</h1>
             <p className="hsp">Gala CRE Group helps clients buy, sell, lease, develop, and source capital for commercial property across North Carolina.</p>
             <div className="hbtns"><Link to="/contact" className="bp">Connect with us</Link><Link to="/properties" className="bg">View Property Listings <ArrowUpRight size={15} /></Link></div>
           </div></div>
@@ -176,7 +176,10 @@ const Index = () => {
           <div className="gala-shell gala-home-cta__inner">
             <div>
               <div className="gala-kicker">Your Next Move</div>
-              <h2>Let’s move your next opportunity forward.</h2>
+              <h2>
+                <span>Let’s move your next</span>{" "}
+                <span>opportunity forward.</span>
+              </h2>
             </div>
             <div className="gala-home-cta__action">
               <p>Whether you’re evaluating a property, preparing a sale, searching for space, or planning what comes next, start with a focused conversation.</p>

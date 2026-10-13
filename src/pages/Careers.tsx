@@ -74,7 +74,7 @@ const Careers = () => {
           <div className="gala-shell gala-careers-opportunity__grid">
             <div className="gala-careers-opportunity__copy">
               <div className="gala-kicker gala-kicker--dark">Our Mission</div>
-              <h2 id="listing-agent-opportunity-title">Build a commercial practice with more behind it.</h2>
+              <h2 id="listing-agent-opportunity-title">Take Your CRE Career To The Next Level</h2>
               <p className="gala-lead">At Gala CRE Group, our mission is clear: to recruit, educate, and retain agents who consistently enrich their clients and the community. The firm equips agents with tools, training, and support so they can build their business their way.</p>
               <p>For commercial listing agents, that means room to develop a distinct practice while drawing on the experience, perspective, and resources of the broader Gala platform.</p>
             </div>

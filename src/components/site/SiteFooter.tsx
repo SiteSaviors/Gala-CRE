@@ -27,7 +27,6 @@ const SiteFooter = ({ currentPath: _currentPath }: SiteFooterProps) => {
         <div className="fcol">
           <div className="fct">Explore</div>
           <ul className="flinks">
-            <li><Link to="/services">Services</Link></li>
             <li><Link to="/properties">Properties</Link></li>
             <li><Link to="/company">Company</Link></li>
             <li><Link to="/company#team">Our Team</Link></li>

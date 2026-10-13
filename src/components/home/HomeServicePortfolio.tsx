@@ -10,28 +10,29 @@ import propertyManagementImage from "@/assets/home-portfolio/property-management
 const portfolioServices = [
   {
     name: "Brokerage",
-    description: "Leasing + occupancy representation",
+    description: "Landlord Representation · Tenant Representation",
     href: "/services/brokerage",
     image: brokerageImage,
     imagePosition: "52% center",
   },
   {
     name: "Investment Sales",
-    description: "Property positioning + disposition",
+    description: "Industrial · Multifamily · Retail · Office · Land",
     href: "/services/investment-sales",
     image: investmentSalesImage,
     imagePosition: "61% center",
   },
   {
     name: "Development Services",
-    description: "Site strategy through execution",
+    description: "Site Selection · Entitlements · Infrastructure ·",
+    secondaryDescription: "GC / Builder Relationships",
     href: "/services/development-services",
     image: developmentImage,
     imagePosition: "50% center",
   },
   {
     name: "Capital Markets",
-    description: "Debt + equity guidance",
+    description: "Debt · Equity · Joint Venture · Capital Strategy",
     href: "/services/capital-markets",
     image: capitalMarketsImage,
     imagePosition: "65% center",
@@ -81,11 +82,14 @@ const HomeServicePortfolio = () => {
   };
 
   return (
-    <section className="gala-service-portfolio" aria-labelledby="gala-service-portfolio-title">
+    <section className="gala-service-portfolio" id="services" aria-labelledby="gala-service-portfolio-title">
       <div className="gala-shell gala-service-portfolio__inner">
         <header className="gala-service-portfolio__header">
           <div className="gala-kicker">Gala CRE Capabilities</div>
-          <h2 id="gala-service-portfolio-title">Built to move commercial opportunities forward.</h2>
+          <h2 id="gala-service-portfolio-title">
+            <span>Built to move commercial</span>{" "}
+            <span>opportunities forward.</span>
+          </h2>
         </header>
 
         <div
@@ -121,7 +125,10 @@ const HomeServicePortfolio = () => {
                   </div>
                   <div className="gala-service-portfolio__title">
                     <h3>{service.name}</h3>
-                    <p>{service.description}</p>
+                    <p>
+                      {service.description}
+                      {"secondaryDescription" in service ? <><br />{service.secondaryDescription}</> : null}
+                    </p>
                   </div>
                   <figure className="gala-service-portfolio__media">
                     <img

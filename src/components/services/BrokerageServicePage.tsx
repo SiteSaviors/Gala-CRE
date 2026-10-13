@@ -149,8 +149,8 @@ const BrokerageServicePage = ({ service }: BrokerageServicePageProps) => {
         <section className="gala-brokerage-paths" aria-labelledby="brokerage-paths-title">
           <div className="gala-shell">
             <div className="gala-brokerage-paths__head">
-              <div className="gala-kicker gala-kicker--dark">Two Distinct Mandates</div>
-              <h2 id="brokerage-paths-title">Two sides of the market. One disciplined standard.</h2>
+              <div className="gala-kicker gala-kicker--dark">Landlord + Tenant Representation</div>
+              <h2 id="brokerage-paths-title">The Right Strategy for Either Side of the Lease.</h2>
             </div>
             <div className="gala-brokerage-paths__panels">
               {brokeragePaths.map((path, index) => {

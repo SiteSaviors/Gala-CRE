@@ -29,9 +29,16 @@ const desktopCapabilities = [
 
 const mobileBackpages = desktopCapabilities.filter((path) => !path.includes("#"));
 
+test("the retired Services index is no longer a public destination", async ({ page }) => {
+  await page.goto("/services", { waitUntil: "domcontentloaded" });
+
+  await expect(page.getByRole("heading", { name: "That page is not available.", level: 1 })).toBeVisible();
+  await expect(page.locator('a[href="/services"]')).toHaveCount(0);
+});
+
 test("desktop Services menu is a full-width, keyboard-usable five-column directory", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/services", { waitUntil: "domcontentloaded" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const trigger = page.locator(".nservices-trigger");
   const menu = page.locator("#services-mega-menu");
@@ -39,6 +46,10 @@ test("desktop Services menu is a full-width, keyboard-usable five-column directo
 
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
   await expect(menu).toHaveAttribute("aria-hidden", "true");
+
+  await trigger.click();
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+  await expect(menu).toHaveAttribute("aria-hidden", "false");
 
   await trigger.focus();
   await expect(trigger).toHaveAttribute("aria-expanded", "true");
@@ -65,7 +76,7 @@ test("desktop Services menu is a full-width, keyboard-usable five-column directo
   expect(await menu.locator(".gala-mega-menu__group li a[href]").evaluateAll((links) =>
     links.map((link) => link.getAttribute("href")),
   )).toEqual(desktopCapabilities);
-  await expect(menu.getByRole("link", { name: /view all services/i })).toHaveAttribute("href", "/services");
+  await expect(menu.getByRole("link", { name: /view all services/i })).toHaveCount(0);
 
   await trigger.focus();
   await page.keyboard.press("ArrowDown");
@@ -78,7 +89,7 @@ test("desktop Services menu is a full-width, keyboard-usable five-column directo
 
 test("mobile Services menu nests all thirteen dedicated backpages", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/services", { waitUntil: "domcontentloaded" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
 
   const navigation = page.locator(".mnav");
   const menu = page.locator("#mobile-services-menu");
@@ -153,7 +164,7 @@ test("desktop service directory removes motion when reduced motion is requested"
     reducedMotion: "reduce",
   });
   const page = await context.newPage();
-  await page.goto("/services", { waitUntil: "domcontentloaded" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
   await page.locator(".nservices-trigger").focus();
 
   const durations = await page.locator("#services-mega-menu").evaluate((menu) => {

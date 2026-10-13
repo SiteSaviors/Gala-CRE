@@ -75,7 +75,7 @@ const Company = () => {
             <div className="gala-kicker">The Developer's Brokerage</div>
             <h1 id="company-hero-title">Who we are</h1>
             <p>Based in Cary, Gala CRE helps owners, investors, and businesses evaluate commercial real estate with the market, site, capital, and execution realities in view.</p>
-            <Link className="gala-investment-narrative-button" to="/services">
+            <Link className="gala-investment-narrative-button" to="/#services">
               <span>Explore our capabilities</span><i><ArrowUpRight size={17} aria-hidden="true" /></i>
             </Link>
           </div>

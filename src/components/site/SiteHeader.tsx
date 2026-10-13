@@ -15,7 +15,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
   const [mobileServiceGroupOpen, setMobileServiceGroupOpen] = useState<ServiceSlug | null>(null);
   const [servicesMegaOpen, setServicesMegaOpen] = useState(false);
   const [pastHeaderThreshold, setPastHeaderThreshold] = useState(false);
-  const servicesTriggerRef = useRef<HTMLAnchorElement>(null);
+  const servicesTriggerRef = useRef<HTMLButtonElement>(null);
   const servicesMegaRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suppressNextFocusOpenRef = useRef(false);
@@ -108,8 +108,8 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
       <ul className="nlinks">
         <li><Link to="/" aria-current={currentState("/")}>Home</Link></li>
         <li className="nservices" onMouseEnter={openServicesMega} onMouseLeave={scheduleServicesClose}>
-          <Link
-            to="/services"
+          <button
+            type="button"
             className="nservices-trigger"
             aria-haspopup="true"
             aria-expanded={servicesMegaOpen}
@@ -117,6 +117,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             ref={servicesTriggerRef}
             onFocus={openServicesMega}
             onBlur={scheduleServicesClose}
+            onClick={openServicesMega}
             onKeyDown={(event) => {
               if (event.key !== "ArrowDown") return;
               event.preventDefault();
@@ -128,7 +129,7 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
             aria-current={currentState("/services")}
           >
             Services <ChevronDown size={13} aria-hidden="true" />
-          </Link>
+          </button>
         </li>
         <li><Link to="/properties" aria-current={currentState("/properties")}>Listings</Link></li>
         <li><Link to="/company" aria-current={currentState("/company")}>Company</Link></li>
@@ -222,9 +223,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
               </div>
             );
           })}
-          <Link className="mnav-services-all" to="/services" tabIndex={mobileServiceLinkTabIndex} onClick={closeMobileNavigation}>
-            <span>View All Services</span><ArrowUpRight size={14} aria-hidden="true" />
-          </Link>
         </div>
         <Link to="/properties" tabIndex={mobileLinkTabIndex} aria-current={currentState("/properties")} onClick={closeMobileNavigation}>Listings</Link>
         <Link to="/company" tabIndex={mobileLinkTabIndex} aria-current={currentState("/company")} onClick={closeMobileNavigation}>Company</Link>
@@ -270,9 +268,6 @@ const SiteHeader = ({ currentPath }: SiteHeaderProps) => {
                 </section>
               ))}
             </div>
-            <Link className="gala-mega-menu__all" to="/services" tabIndex={megaLinkTabIndex}>
-              View All Services <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
           </div>
           <Link
             className="gala-mega-menu__advisor"

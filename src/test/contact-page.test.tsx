@@ -38,11 +38,23 @@ describe("advisor inquiry form", () => {
     const directory = screen.getByRole("region", { name: "Connect with the right member of the team." });
     expect(directory).toBeInTheDocument();
     expect(within(directory).getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
+    expect(within(directory).getByRole("img", { name: "Gaurang Gala" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("gaurang-gala-headshot.avif"),
+    );
     expect(within(directory).getByRole("link", { name: "gaurang@galacregroup.com" })).toHaveAttribute("href", "mailto:gaurang@galacregroup.com");
     expect(within(directory).getByRole("link", { name: "(910) 578-2828" })).toHaveAttribute("href", "tel:+19105782828");
     expect(within(directory).getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
+    expect(within(directory).getByRole("img", { name: "Leigh Roach" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("leigh-roach-headshot.avif"),
+    );
     expect(within(directory).getByRole("link", { name: "leigh@galacregroup.com" })).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
     expect(within(directory).getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
+    expect(within(directory).getByRole("img", { name: "Goverdhan Vavilala" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("goverdhan-vavilala-headshot.avif"),
+    );
     expect(within(directory).getByRole("link", { name: "goverdhan@galacregroup.com" })).toHaveAttribute("href", "mailto:goverdhan@galacregroup.com");
     expect(within(directory).getAllByRole("link", { name: /View Listings & Transactions/i })).toHaveLength(3);
   });

@@ -157,7 +157,7 @@ const FeaturedListingsCarousel = () => {
         <div className="gala-featured-listings__header">
           <div>
             <div className="gala-kicker gala-kicker--dark">Current Opportunities</div>
-            <h2 id="featured-listings-title">Featured listings</h2>
+            <h2 id="featured-listings-title">Featured Listings</h2>
           </div>
           <p>Verified commercial properties currently represented by Gala CRE Group.</p>
         </div>
@@ -229,7 +229,6 @@ const FeaturedListingsCarousel = () => {
 
         <div className="gala-featured-listings__footer">
           <div>
-            <span>{featuredListings.length} active sale opportunities</span>
             <span id="featured-listings-instructions" className="gala-featured-listings__interaction-hint">
               <MoveHorizontal aria-hidden="true" /> Drag or trackpad swipe to explore
             </span>

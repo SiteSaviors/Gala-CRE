@@ -188,7 +188,7 @@ const ServiceDetail = () => {
               </>
             ) : null}
             <div className="gala-shell">
-              <Link to="/services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
+              <Link to="/#services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
               <div className="gala-kicker">{service.eyebrow}</div>
               <h1>{service.name}</h1>
               <p>{service.summary}</p>

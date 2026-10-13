@@ -50,7 +50,6 @@ const capabilityAliases = {
 const auditedRoutes = [
   "/properties",
   ...propertyRoutes,
-  "/services",
   ...serviceOverviewRoutes,
   ...dedicatedCapabilityRoutes,
   ...anchorCapabilityRoutes,
@@ -461,7 +460,8 @@ test("keyboard and reduced-motion paths remain usable", async ({ browser }) => {
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
 
-  await page.goto("/services", { waitUntil: "domcontentloaded" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await expect(page.locator(".nlogo")).toBeVisible();
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");

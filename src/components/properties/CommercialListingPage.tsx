@@ -195,7 +195,9 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
 
                     return (
                       <article className="gala-listing-compact__advisor" key={member.id}>
-                        {member.image ? <img src={member.image} alt="" aria-hidden="true" /> : null}
+                        {member.advisorHeadshot ? (
+                          <img src={member.advisorHeadshot} alt="" aria-hidden="true" />
+                        ) : null}
                         <div>
                           <strong>{member.name}</strong>
                           <small>{assignmentLabel}{member.license ? ` · ${member.license}` : ""}</small>
@@ -236,7 +238,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
           >
             <div className="gala-listing-compact__opportunity-copy">
               <div className="gala-kicker gala-kicker--dark">{page.overviewEyebrow ?? "The Opportunity"}</div>
-              <h2 id="property-opportunity-title">{page.headline}</h2>
+              <h2 id="property-opportunity-title">Property Overview</h2>
               <p className="gala-lead">{page.lead}</p>
             </div>
 
@@ -299,7 +301,7 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 <div className="gala-listing-compact__location-copy">
                   <div>
                     <span>{page.location.eyebrow}</span>
-                    <h2>{page.location.title}</h2>
+                    <h2>Location Details</h2>
                   </div>
                   <p>{page.location.body}</p>
                   {page.location.points.length ? (
@@ -336,8 +338,11 @@ const CommercialListingPage = ({ property }: CommercialListingPageProps) => {
                 </p>
                 {!isClosedTransaction && primaryAdvisor ? (
                   <div className="gala-listing-compact__inquiry-advisor">
-                    {primaryAdvisor.image ? (
-                      <img src={primaryAdvisor.image} alt={primaryAdvisor.imageAlt ?? primaryAdvisor.name} />
+                    {primaryAdvisor.advisorHeadshot ? (
+                      <img
+                        src={primaryAdvisor.advisorHeadshot}
+                        alt={primaryAdvisor.advisorHeadshotAlt ?? primaryAdvisor.name}
+                      />
                     ) : null}
                     <div className="gala-listing-compact__inquiry-advisor-copy">
                       <span>Your inquiry goes directly to</span>

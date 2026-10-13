@@ -83,7 +83,7 @@ const InvestmentSalesServicePage = ({ service }: InvestmentSalesServicePageProps
           {service.image ? <img src={service.image} alt="" aria-hidden="true" /> : null}
           <span className="gala-investment-sales-hero__wash" aria-hidden="true"></span>
           <div className="gala-shell gala-investment-sales-hero__inner">
-            <Link to="/services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
+            <Link to="/#services" className="gala-back-link"><ArrowLeft size={16} /> All Services</Link>
             <div className="gala-kicker">{service.eyebrow}</div>
             <h1>{service.name}</h1>
             <p>{service.summary}</p>

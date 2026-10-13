@@ -26,6 +26,8 @@ describe("team content model", () => {
       phone: "(919) 462-1494",
     });
     expect(teamMembers.every(({ image }) => Boolean(image))).toBe(true);
+    expect(teamMembers.every(({ advisorHeadshot }) => Boolean(advisorHeadshot))).toBe(true);
+    expect(teamMembers.every(({ image, advisorHeadshot }) => image !== advisorHeadshot)).toBe(true);
   });
 
   it("uses each member's verified direct email for the primary contact action", () => {

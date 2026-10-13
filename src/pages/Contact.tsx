@@ -266,7 +266,12 @@ const Contact = () => {
                 return (
                   <article className="contact-advisor-card" key={member.id}>
                     <div className="contact-advisor-card__identity">
-                      {member.image ? <img src={member.image} alt={member.imageAlt ?? member.name} /> : null}
+                      {member.advisorHeadshot ? (
+                        <img
+                          src={member.advisorHeadshot}
+                          alt={member.advisorHeadshotAlt ?? member.name}
+                        />
+                      ) : null}
                       <div>
                         <span>{member.title}</span>
                         <h3>{member.name}</h3>

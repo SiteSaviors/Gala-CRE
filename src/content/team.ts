@@ -1,6 +1,9 @@
 import gaurangGalaPhoto from "@/assets/team/gaurang-gala-portrait.avif";
+import gaurangGalaHeadshot from "@/assets/team/gaurang-gala-headshot.avif";
 import goverdhanVavilalaPhoto from "@/assets/team/goverdhan-vavilala-portrait.avif";
+import goverdhanVavilalaHeadshot from "@/assets/team/goverdhan-vavilala-headshot.avif";
 import leighRoachPhoto from "@/assets/team/leigh-roach-portrait.avif";
+import leighRoachHeadshot from "@/assets/team/leigh-roach-headshot.avif";
 
 export const teamMemberIds = ["gaurang-gala", "leigh-roach", "goverdhan-vavilala"] as const;
 
@@ -13,6 +16,8 @@ export type TeamMember = {
   biography: string[];
   image?: string;
   imageAlt?: string;
+  advisorHeadshot?: string;
+  advisorHeadshotAlt?: string;
   email?: string;
   phone?: string;
   license?: string;
@@ -29,6 +34,8 @@ export const teamMembers: TeamMember[] = [
     ],
     image: gaurangGalaPhoto,
     imageAlt: "Gaurang Gala",
+    advisorHeadshot: gaurangGalaHeadshot,
+    advisorHeadshotAlt: "Gaurang Gala",
     email: "gaurang@galacregroup.com",
     phone: "(910) 578-2828",
     license: "NC 283149",
@@ -43,6 +50,8 @@ export const teamMembers: TeamMember[] = [
     ],
     image: leighRoachPhoto,
     imageAlt: "Leigh Roach",
+    advisorHeadshot: leighRoachHeadshot,
+    advisorHeadshotAlt: "Leigh Roach",
     email: "leigh@galacregroup.com",
     phone: "(919) 886-9181",
   },
@@ -57,6 +66,8 @@ export const teamMembers: TeamMember[] = [
     ],
     image: goverdhanVavilalaPhoto,
     imageAlt: "Goverdhan Vavilala",
+    advisorHeadshot: goverdhanVavilalaHeadshot,
+    advisorHeadshotAlt: "Goverdhan Vavilala",
     email: "goverdhan@galacregroup.com",
     phone: "(919) 462-1494",
   },

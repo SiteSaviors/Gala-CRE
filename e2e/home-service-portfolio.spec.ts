@@ -6,6 +6,7 @@ test.describe("homepage service portfolio", () => {
     await page.goto("/");
 
     const section = page.locator(".gala-service-portfolio");
+    expect(await page.locator(".gala-hero__desktop-break").evaluate((element) => getComputedStyle(element).display)).not.toBe("none");
     const track = section.locator(".gala-service-portfolio__track");
     const folios = section.locator(".gala-service-portfolio__folio");
     await section.scrollIntoViewIfNeeded();
@@ -17,6 +18,17 @@ test.describe("homepage service portfolio", () => {
     await expect(section.getByRole("link", { name: "Explore Development Services" })).toHaveAttribute("href", "/services/development-services");
     await expect(section.getByRole("link", { name: "Explore Capital Markets" })).toHaveAttribute("href", "/services/capital-markets");
     await expect(section.getByRole("link", { name: "Explore Property Management" })).toHaveAttribute("href", "/services/property-management");
+    await expect(section.getByText("View Service", { exact: true })).toHaveCount(0);
+    await expect(section.getByText("Landlord Representation · Tenant Representation", { exact: true })).toBeVisible();
+    await expect(section.getByText("Industrial · Multifamily · Retail · Office · Land", { exact: true })).toBeVisible();
+    const developmentDescription = folios.nth(2).locator(".gala-service-portfolio__title p");
+    await expect(developmentDescription).toContainText("Site Selection · Entitlements · Infrastructure ·");
+    await expect(developmentDescription).toContainText("GC / Builder Relationships");
+    await expect(section.getByText("Debt · Equity · Joint Venture · Capital Strategy", { exact: true })).toBeVisible();
+    await expect(section.getByText("Owner-aligned operations", { exact: true })).toBeVisible();
+    expect(await section.locator(".gala-service-portfolio__title p").evaluateAll((items) => items.every((item) => (
+      window.getComputedStyle(item).whiteSpace === "nowrap"
+    )))).toBe(true);
 
     const initialSectionBox = await section.boundingBox();
     expect(initialSectionBox?.height).toBeLessThan(1000);
@@ -59,6 +71,7 @@ test.describe("homepage service portfolio", () => {
     await page.goto("/");
 
     const section = page.locator(".gala-service-portfolio");
+    expect(await page.locator(".gala-hero__desktop-break").evaluate((element) => getComputedStyle(element).display)).not.toBe("none");
     const track = section.locator(".gala-service-portfolio__track");
     const folios = section.locator(".gala-service-portfolio__folio");
     await section.scrollIntoViewIfNeeded();

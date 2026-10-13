@@ -19,7 +19,6 @@ const News = lazy(() => import("./pages/News.tsx"));
 const Properties = lazy(() => import("./pages/Properties.tsx"));
 const PropertyDetail = lazy(() => import("./pages/PropertyDetail.tsx"));
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail.tsx"));
-const Services = lazy(() => import("./pages/Services.tsx"));
 const Team = lazy(() => import("./pages/Team.tsx"));
 
 const queryClient = new QueryClient();
@@ -41,7 +40,6 @@ const App = () => (
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/services/:slug/:capability" element={<CapabilityDetail />} />
             <Route path="/properties" element={<Properties />} />
@@ -52,7 +50,7 @@ const App = () => (
             <Route path="/investors/1031-exchange" element={<ExchangeSourcing />} />
             <Route path="/news" element={<News />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/what-we-do" element={<Navigate to="/services" replace />} />
+            <Route path="/what-we-do" element={<Navigate to="/#services" replace />} />
             <Route path="/projects" element={<Navigate to="/properties" replace />} />
             <Route path="/projects/:slug" element={<LegacyProjectRedirect />} />
             <Route path="*" element={<NotFound />} />

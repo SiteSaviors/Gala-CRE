@@ -12,7 +12,6 @@ import News from "@/pages/News";
 import Properties from "@/pages/Properties";
 import PropertyDetail from "@/pages/PropertyDetail";
 import ServiceDetail from "@/pages/ServiceDetail";
-import Services from "@/pages/Services";
 import Team from "@/pages/Team";
 
 vi.mock("react-leaflet", () => ({
@@ -45,7 +44,8 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Brokerage" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Built to move commercial opportunities forward." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Investment Sales" })).toBeInTheDocument();
-    expect(screen.getByText("Property positioning + disposition")).toBeInTheDocument();
+    expect(screen.getByText("Industrial · Multifamily · Retail · Office · Land")).toBeInTheDocument();
+    expect(screen.queryByText("View Service")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Explore Brokerage" })).toHaveAttribute("href", "/services/brokerage");
     expect(screen.getByRole("link", { name: "Explore Investment Sales" })).toHaveAttribute("href", "/services/investment-sales");
     expect(screen.getByRole("link", { name: "Explore Development Services" })).toHaveAttribute("href", "/services/development-services");
@@ -62,17 +62,19 @@ describe("Gala CRE public pages", () => {
     expect(developmentFolio).toHaveAttribute("data-active", "true");
     expect(screen.getByRole("heading", { name: "Development Services" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Capital Markets" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Featured listings" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Featured Listings" })).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "Featured commercial properties" })).toHaveAttribute("aria-roledescription", "carousel");
     expect(screen.getByRole("button", { name: "Previous featured listing" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next featured listing" })).toBeInTheDocument();
     expect(screen.getByText("Drag or trackpad swipe to explore")).toBeInTheDocument();
-    expect(screen.getByText("5 active sale opportunities")).toBeInTheDocument();
+    expect(screen.queryByText("5 active sale opportunities")).not.toBeInTheDocument();
     expect(screen.queryByText(/Featured Lease Opportunity/i)).not.toBeInTheDocument();
     expect(screen.getByText("2301 Lackey Street")).toBeInTheDocument();
     expect(screen.getByText("$549,000")).toBeInTheDocument();
     expect(screen.getByText("5047 Yadkin Road")).toBeInTheDocument();
     expect(screen.getByText("$829,000")).toBeInTheDocument();
+    expect(container.querySelector(".flogo img")).toHaveAttribute("src", "/src/assets/gala-cre-nav-logo.avif");
+    expect(container.querySelector(".flogo .brand-logo__tagline")).not.toBeInTheDocument();
     expect(screen.getByText("611 & 703 Church Street")).toBeInTheDocument();
     expect(screen.getAllByText("$990,000")).toHaveLength(2);
     expect(screen.getByText("5911 Family Farm Road")).toBeInTheDocument();
@@ -135,15 +137,6 @@ describe("Gala CRE public pages", () => {
         value: defaultMatchMedia,
       });
     }
-  });
-
-  it("renders the five approved service structures", () => {
-    renderPage(<Services />, "/services");
-    expect(screen.getAllByText("Brokerage").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Investment Sales").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Development Services").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Capital Markets").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Property Management Partnership").length).toBeGreaterThan(0);
   });
 
   it("presents Property Management as a single partner-led editorial journey", () => {
@@ -217,9 +210,18 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "Gaurang Gala" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Leigh Roach" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "Gaurang Gala" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "Leigh Roach" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "Goverdhan Vavilala" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Gaurang Gala" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("gaurang-gala-portrait.avif"),
+    );
+    expect(screen.getByRole("img", { name: "Leigh Roach" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("leigh-roach-portrait.avif"),
+    );
+    expect(screen.getByRole("img", { name: "Goverdhan Vavilala" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("goverdhan-vavilala-portrait.avif"),
+    );
     expect(screen.getAllByRole("button", { name: /Open profile for/i })).toHaveLength(3);
 
     const leighCard = screen.getByRole("heading", { name: "Leigh Roach" }).closest("article");
@@ -294,7 +296,7 @@ describe("Gala CRE public pages", () => {
   it("creates a discoverable commercial-agent careers route", () => {
     renderPage(<Careers />, "/careers");
     expect(screen.getByRole("heading", { name: "Join Our Team", level: 1 })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Build a commercial practice with more behind it." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Take Your CRE Career To The Next Level" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "The resources to move you forward." })).toBeInTheDocument();
     const directLeadership = screen.getByRole("button", { name: "Leadership at the table" });
     expect(directLeadership).toHaveAttribute("aria-expanded", "false");
@@ -429,7 +431,8 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("link", { name: "Request a Consultation" })).toHaveAttribute(
       "href", "/contact?inquiry=general&source=brokerage",
     );
-    expect(screen.getByRole("heading", { name: "Two sides of the market. One disciplined standard." })).toBeInTheDocument();
+    expect(screen.getByText("Landlord + Tenant Representation", { selector: ".gala-brokerage-paths__head .gala-kicker" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "The Right Strategy for Either Side of the Lease." })).toBeInTheDocument();
     expect(view.container.querySelectorAll(".gala-brokerage-path")).toHaveLength(2);
     expect(screen.getByRole("heading", { name: "Full Cycle Solutions, Tailored to You" })).toBeInTheDocument();
     expect(view.container.querySelectorAll(".gala-brokerage-advantage__card")).toHaveLength(4);
@@ -866,7 +869,7 @@ describe("Gala CRE public pages", () => {
 
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
     expect(screen.getByText("$549,000")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Existing fuel-and-convenience site near I-95 Exit 19." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Property Overview" })).toBeInTheDocument();
     expect(document.querySelector(".gala-listing-compact__details")).not.toBeInTheDocument();
     expect(screen.getAllByRole("link", { name: /Request Property Information/i })[0]).toHaveAttribute(
       "href",
@@ -883,8 +886,16 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.queryByText(/View Documents|Documents & Diligence|Request Package|Request Records/i)).not.toBeInTheDocument();
     expect(screen.getAllByText("Gaurang Gala").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole("img", { name: "Gaurang Gala" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("gaurang-gala-headshot.avif"),
+    );
+    expect(document.querySelector(".gala-listing-compact__advisor img")).toHaveAttribute(
+      "src",
+      expect.stringContaining("gaurang-gala-headshot.avif"),
+    );
     expect(screen.getAllByRole("link", { name: "(910) 578-2828" })[0]).toHaveAttribute("href", "tel:+19105782828");
-    const lackeyOpportunity = screen.getByRole("region", { name: "Existing fuel-and-convenience site near I-95 Exit 19." });
+    const lackeyOpportunity = screen.getByRole("region", { name: "Property Overview" });
     expect(lackeyOpportunity.querySelector(".gala-listing-compact__opportunity-video")).not.toBeInTheDocument();
     expect(lackeyOpportunity.querySelector(".gala-commercial-listing__highlights--row")).not.toBeInTheDocument();
     const lackeyGallery = screen.getByRole("region", { name: /2301 Lackey Street property gallery/i });
@@ -914,7 +925,7 @@ describe("Gala CRE public pages", () => {
     );
 
     expect(screen.getByRole("heading", { name: "2301 Lackey Street" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A concise commercial opportunity." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Property Overview" })).toBeInTheDocument();
     expect(screen.queryByRole("region", { name: "Primary property facts" })).not.toBeInTheDocument();
     expect(screen.queryByRole("region", { name: /property gallery/i })).not.toBeInTheDocument();
     expect(screen.queryByTitle("Map of 2301 Lackey Street")).not.toBeInTheDocument();
@@ -946,7 +957,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getAllByText("Gaurang Gala").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByTitle("Map of 611 & 703 Church Street")).toBeInTheDocument();
     const churchVideo = screen.getByLabelText("Play the aerial property video for 611 and 703 Church Street");
-    const churchOpportunity = screen.getByRole("region", { name: "An approved childcare path with broader commercial potential." });
+    const churchOpportunity = screen.getByRole("region", { name: "Property Overview" });
     expect(churchOpportunity).toContainElement(churchVideo);
     expect(churchOpportunity.querySelector(".gala-commercial-listing__highlights--editorial")?.children).toHaveLength(3);
     expect(churchOpportunity.querySelector(".gala-commercial-listing__highlights--row")).not.toBeInTheDocument();
@@ -1011,10 +1022,14 @@ describe("Gala CRE public pages", () => {
       "/properties/5911-family-farm-road#property-inquiry"
     );
     expect(screen.getAllByText("Leigh Roach").length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole("img", { name: "Leigh Roach" })).toHaveAttribute(
+      "src",
+      expect.stringContaining("leigh-roach-headshot.avif"),
+    );
     expect(screen.getAllByRole("link", { name: "leigh@galacregroup.com" })[0]).toHaveAttribute("href", "mailto:leigh@galacregroup.com");
     expect(screen.getByTitle("Map of 5911 Family Farm Road")).toBeInTheDocument();
     const familyFarmVideo = screen.getByLabelText("Play the aerial property video for 5911 Family Farm Road");
-    const familyFarmOpportunity = screen.getByRole("region", { name: "Approximately 2.10 acres in an established Morrisville setting." });
+    const familyFarmOpportunity = screen.getByRole("region", { name: "Property Overview" });
     expect(familyFarmOpportunity).toContainElement(familyFarmVideo);
     expect(familyFarmOpportunity.querySelector(".gala-commercial-listing__highlights--editorial")?.children).toHaveLength(3);
     expect(familyFarmVideo).toHaveAttribute("controls");
@@ -1047,8 +1062,9 @@ describe("Gala CRE public pages", () => {
     );
     expect(screen.getAllByText("Gaurang Gala").length).toBeGreaterThanOrEqual(2);
     expect(screen.getByTitle("Map of 1111 Brown Street")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Location Details" })).toBeInTheDocument();
     const lexingtonVideo = screen.getByLabelText("Play the vertical property video for the Lexington Townhome Site");
-    const lexingtonOpportunity = screen.getByRole("region", { name: "A proposed 58-townhome site with a documented diligence history." });
+    const lexingtonOpportunity = screen.getByRole("region", { name: "Property Overview" });
     expect(lexingtonOpportunity).toContainElement(lexingtonVideo);
     expect(lexingtonOpportunity.querySelector(".gala-commercial-listing__highlights--editorial")?.children).toHaveLength(3);
     expect(lexingtonVideo).toHaveAttribute("controls");
@@ -1072,7 +1088,7 @@ describe("Gala CRE public pages", () => {
     expect(screen.getByRole("heading", { name: "802 Bragg Boulevard" })).toBeInTheDocument();
     expect(screen.getByText("Closed")).toBeInTheDocument();
     expect(screen.getByText("Sale Transaction")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Recently sold retail property on Bragg Boulevard." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Property Overview" })).toBeInTheDocument();
     expect(document.querySelector(".gala-listing-compact__details")).not.toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: /802 Bragg Boulevard property gallery/i })).getAllByRole("button", { name: /View image/i })).toHaveLength(3);
     expect(screen.getAllByRole("link", { name: /Discuss a Similar Property/i })[0]).toHaveAttribute(

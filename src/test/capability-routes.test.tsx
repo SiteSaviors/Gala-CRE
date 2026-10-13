@@ -2,7 +2,6 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useLocation } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import CapabilityDetail from "@/pages/CapabilityDetail";
-import Services from "@/pages/Services";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import {
@@ -415,7 +414,7 @@ describe("mixed service architecture", () => {
       );
     });
 
-    expect(megaMenu?.querySelector(".gala-mega-menu__all")).toHaveAttribute("href", "/services");
+    expect(megaMenu?.querySelector(".gala-mega-menu__all")).not.toBeInTheDocument();
     expect(megaMenu?.querySelector(".gala-mega-menu__advisor")).toHaveAttribute(
       "href",
       "/contact?inquiry=general&source=services-menu",
@@ -512,7 +511,7 @@ describe("mixed service architecture", () => {
       dedicatedCapabilityRoutes.map((entry) => entry.path),
     );
     expect(childLinks.every((link) => link.tabIndex === -1)).toBe(true);
-    expect(mobileServices?.querySelector(".mnav-services-all")).toHaveAttribute("href", "/services");
+    expect(mobileServices?.querySelector(".mnav-services-all")).not.toBeInTheDocument();
 
     const investmentToggle = groupToggles[0];
     const developmentToggle = groupToggles[1];
@@ -556,7 +555,7 @@ describe("mixed service architecture", () => {
 
   });
 
-  it("keeps footer and service-index destinations aligned with the shared service model", () => {
+  it("keeps footer destinations aligned with the shared service model", () => {
 
     const footer = render(
       <MemoryRouter><SiteFooter currentPath="/" /></MemoryRouter>,
@@ -564,26 +563,8 @@ describe("mixed service architecture", () => {
     const footerPaths = Array.from(footer.container.querySelectorAll<HTMLAnchorElement>("footer a[href]"))
       .map((link) => link.getAttribute("href"));
     serviceNavigationGroups.forEach((service) => expect(footerPaths, `footer ${service.href}`).toContain(service.href));
+    expect(footerPaths).not.toContain("/services");
     footer.unmount();
-
-    const serviceIndex = render(
-      <MemoryRouter><Services /></MemoryRouter>,
-    );
-    const serviceIndexPaths = Array.from(serviceIndex.container.querySelectorAll<HTMLAnchorElement>(".gala-service-card a[href]"))
-      .map((link) => link.getAttribute("href"));
-    serviceNavigationGroups.forEach((service) => expect(serviceIndexPaths, `service index ${service.href}`).toContain(service.href));
-    expect(serviceIndexPaths.every((path) => !path?.includes("#"))).toBe(true);
-    expect(serviceIndex.container.querySelectorAll(".gala-service-card")).toHaveLength(serviceNavigationGroups.length);
-    expect(serviceIndex.container.querySelectorAll(".gala-service-card__media")).toHaveLength(0);
-    expect(serviceIndex.container.querySelectorAll(".gala-service-card__capabilities a")).toHaveLength(0);
-    advertisedCapabilityRoutes.forEach((entry) => {
-      expect(serviceIndex.container.querySelector(".gala-service-grid")).toHaveTextContent(entry.label);
-    });
-    expect(serviceIndex.container.querySelector(".gala-cta-band .gala-button")).toHaveAttribute(
-      "href",
-      "/contact?inquiry=general&source=services",
-    );
-    serviceIndex.unmount();
   });
 
   it("fades the site header after one quarter of the page scroll", () => {
