@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gala-cre.vercel.app/sitemap.xml
+Sitemap: https://www.galacregroup.com/sitemap.xml

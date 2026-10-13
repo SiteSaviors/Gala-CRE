@@ -21,11 +21,11 @@ const PageMeta = ({ title, description, image }: PageMetaProps) => {
 
   useEffect(() => {
     const configuredSiteUrl = import.meta.env.VITE_SITE_URL?.trim().replace(/\/$/, "");
-    const siteUrl = configuredSiteUrl || "https://gala-cre.vercel.app";
+    const siteUrl = configuredSiteUrl || "https://www.galacregroup.com";
     const pageUrl = `${siteUrl}${location.pathname}`;
     const shareImage = image && !image.startsWith("data:")
       ? new URL(image, siteUrl).toString()
-      : `${siteUrl}/gala-cre-social-share-v3.jpg`;
+      : `${siteUrl}/gala-cre-social-share-v4.jpg`;
     const shareImageAlt = image && !image.startsWith("data:")
       ? title
       : "Gala CRE Group — The Developer's Brokerage";

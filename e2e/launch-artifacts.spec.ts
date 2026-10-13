@@ -11,7 +11,7 @@ const requiredSitemapPaths = [
 
 test.describe("launch artifacts", () => {
   test("publishes the current social card and complete priority sitemap", async ({ request }) => {
-    const socialCard = await request.get("/gala-cre-social-share-v3.jpg");
+    const socialCard = await request.get("/gala-cre-social-share-v4.jpg");
     expect(socialCard.status()).toBe(200);
     expect(socialCard.headers()["content-type"]).toContain("image/jpeg");
 
@@ -20,7 +20,7 @@ test.describe("launch artifacts", () => {
     const sitemapBody = await sitemap.text();
 
     for (const path of requiredSitemapPaths) {
-      expect(sitemapBody).toContain(`<loc>https://gala-cre.vercel.app${path}</loc>`);
+      expect(sitemapBody).toContain(`<loc>https://www.galacregroup.com${path}</loc>`);
     }
   });
 });

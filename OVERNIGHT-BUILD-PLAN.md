@@ -1003,3 +1003,12 @@ These do not stop unrelated implementation:
 - Local review: the existing development server remains available at `http://localhost:8081` for user review.
 - Blockers: none for the eight local service chapters. Private production form-delivery configuration was unchanged and was not exercised.
 - Exact next action: present the completed local Development and Capital Markets service family for review. Do not commit, push, merge, or deploy until explicitly authorized.
+
+### 2026-10-13 — Black-background social share card and canonical domain
+
+- Starting branch / HEAD: `main` at `c74fb45`, synchronized with `origin/main`; the custom domain had been connected immediately before this local metadata refinement.
+- Scope completed: replaced the skyline/sunset social-preview artwork with a new opaque 1200×630 JPEG using the existing approved Gala CRE logo lockup on a solid black background. The logo includes **The Developer's Brokerage** and no additional text or photography.
+- Metadata: versioned the asset as `gala-cre-social-share-v4.jpg` to reduce reuse of the previously scraped image; updated static Open Graph and Twitter tags, client-side fallback metadata, canonical URLs, `robots.txt`, and the sitemap to use `https://www.galacregroup.com`.
+- Files changed: `public/gala-cre-social-share-v4.jpg`, `index.html`, `src/components/site/PageMeta.tsx`, `src/test/launch-readiness.test.tsx`, `e2e/launch-artifacts.spec.ts`, `public/robots.txt`, `public/sitemap.xml`, and this ledger.
+- Verification: the final image is exactly 1200×630, JPEG, and opaque; focused metadata tests passed 3/3; the production build passed; focused launch-artifact Playwright passed 1/1 and confirmed the new image and canonical sitemap URLs; diff whitespace validation passed.
+- Exact next action: present the new card for review. Do not commit, push, merge, or deploy until explicitly authorized.

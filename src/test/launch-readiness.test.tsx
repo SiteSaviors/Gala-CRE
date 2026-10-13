@@ -27,7 +27,7 @@ describe("launch accessibility and metadata", () => {
       expect(document.title).toBe("1031 Exchange Replacement Property Sourcing | Gala CRE Group");
       expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute(
         "href",
-        "https://gala-cre.vercel.app/investors/1031-exchange",
+        "https://www.galacregroup.com/investors/1031-exchange",
       );
       expect(document.head.querySelector('meta[property="og:title"]')).toHaveAttribute(
         "content",
@@ -39,7 +39,7 @@ describe("launch accessibility and metadata", () => {
       );
       expect(document.head.querySelector('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
+        "https://www.galacregroup.com/gala-cre-social-share-v4.jpg",
       );
       expect(document.head.querySelector('meta[property="og:image:alt"]')).toHaveAttribute(
         "content",
@@ -62,11 +62,11 @@ describe("launch accessibility and metadata", () => {
     await waitFor(() => {
       expect(document.head.querySelector('meta[property="og:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
+        "https://www.galacregroup.com/gala-cre-social-share-v4.jpg",
       );
       expect(document.head.querySelector('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        "https://gala-cre.vercel.app/gala-cre-social-share-v3.jpg",
+        "https://www.galacregroup.com/gala-cre-social-share-v4.jpg",
       );
     });
   });
