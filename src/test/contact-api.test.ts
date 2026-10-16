@@ -84,8 +84,9 @@ describe("contact API", () => {
 
   it("routes a property inquiry directly to the approved listing advisor", async () => {
     vi.stubEnv("RESEND_API_KEY", "re_test");
-    vi.stubEnv("CONTACT_TO_EMAIL", "general@example.com");
+    vi.stubEnv("CONTACT_TO_EMAIL", "beth@galainvestments.io");
     vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    vi.stubEnv("ADVISOR_GAURANG_EMAIL", "gaurang@galacregroup.com");
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });
     vi.stubGlobal("fetch", fetchMock);
     const { response, result } = createResponse();
@@ -100,6 +101,46 @@ describe("contact API", () => {
     expect(emailBody.to).toEqual(["gaurang@galacregroup.com"]);
     expect(emailBody.reply_to).toBe("taylor@example.com");
     expect(emailBody.subject).toContain("611-703-church-street");
+  });
+
+  it("routes every non-listing contact and service inquiry to Beth", async () => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "beth@galainvestments.io");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    vi.stubEnv("ADVISOR_LEIGH_EMAIL", "leigh@galacregroup.com");
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    const { response, result } = createResponse();
+
+    await contactHandler(request({
+      ...validBody,
+      inquiryType: "Capital Markets",
+      advisorId: "leigh-roach",
+      sourcePage: "/services/capital-markets",
+    }), response);
+
+    expect(result.statusCode).toBe(200);
+    const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(emailBody.to).toEqual(["beth@galainvestments.io"]);
+  });
+
+  it("fails safely when a listing advisor recipient is not configured", async () => {
+    vi.stubEnv("RESEND_API_KEY", "re_test");
+    vi.stubEnv("CONTACT_TO_EMAIL", "beth@galainvestments.io");
+    vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    const { response, result } = createResponse();
+
+    await contactHandler(request({
+      ...validBody,
+      inquiryType: "Property Inquiry",
+      propertySlug: "611-703-church-street",
+      advisorId: "gaurang-gala",
+    }), response);
+
+    expect(result.statusCode).toBe(503);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it("rejects an unrecognized advisor id", async () => {

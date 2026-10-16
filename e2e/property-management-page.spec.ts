@@ -20,6 +20,10 @@ test.describe("Property Management editorial service page", () => {
       await expect(page.locator(".gala-property-management-path__card")).toHaveCount(3);
       await expect(page.locator(".gala-property-management-continuity__list article")).toHaveCount(3);
       await expect(page.getByText(/does not provide day-to-day property management in house/i)).toBeVisible();
+      await expect(page.getByRole("link", { name: /Visit MKM Property Management/i })).toHaveAttribute(
+        "href",
+        "https://www.mkmpropertymanagement.com/",
+      );
       await expect(page.getByRole("button", { name: "Request a Consultation" })).toBeVisible();
 
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(viewport.width);

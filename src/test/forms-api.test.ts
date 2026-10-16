@@ -66,8 +66,8 @@ const request = (body: unknown, ip: string, origin = "https://galacre.example") 
 const configureDelivery = () => {
   vi.stubEnv("RESEND_API_KEY", "re_test");
   vi.stubEnv("CONTACT_FROM_EMAIL", "Gala CRE <website@example.com>");
-  vi.stubEnv("CAREERS_TO_EMAIL", "beth@galacregroup.com, gaurang@galacregroup.com");
-  vi.stubEnv("INVESTOR_TO_EMAIL", "beth@galacregroup.com, gaurang@galacregroup.com");
+  vi.stubEnv("CAREERS_TO_EMAIL", "beth@galainvestments.io");
+  vi.stubEnv("INVESTOR_TO_EMAIL", "beth@galainvestments.io");
 };
 
 afterEach(() => {
@@ -130,7 +130,7 @@ describe("shared forms API", () => {
     await formsHandler(request(careersSubmission(), "10.0.0.3"), response);
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(emailBody.to).toEqual(["beth@galacregroup.com", "gaurang@galacregroup.com"]);
+    expect(emailBody.to).toEqual(["beth@galainvestments.io"]);
     expect(emailBody.reply_to).toBe("jordan@example.com");
     expect(result.body).toEqual({ ok: true });
   });
@@ -146,7 +146,7 @@ describe("shared forms API", () => {
 
     expect(result.statusCode).toBe(200);
     const emailBody = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(emailBody.to).toEqual(["beth@galacregroup.com", "gaurang@galacregroup.com"]);
+    expect(emailBody.to).toEqual(["beth@galainvestments.io"]);
     expect(fetchMock).toHaveBeenNthCalledWith(2, "https://script.google.example/forms", expect.objectContaining({
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer private-sync-token" },

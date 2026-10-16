@@ -127,7 +127,11 @@ describe("Gala CRE public pages", () => {
       expect(video).toHaveAttribute("autoplay");
       expect(video?.muted).toBe(true);
       expect(video).toHaveAttribute("playsinline");
-      expect(video?.querySelector("source")).toBeInTheDocument();
+      const sources = Array.from(video?.querySelectorAll("source") ?? []);
+      expect(sources).toHaveLength(2);
+      expect(sources[0]).toHaveAttribute("src", expect.stringMatching(/GALA-CRE-HERO-MOBILE\.mp4$/));
+      expect(sources[0]).toHaveAttribute("media", "(max-width: 767px)");
+      expect(sources[1]).toHaveAttribute("src", expect.stringMatching(/GALA-CRE-HERO-WEB\.mp4$/));
       unmount();
     } finally {
       Object.defineProperty(window, "innerWidth", { configurable: true, value: defaultInnerWidth });
@@ -156,6 +160,11 @@ describe("Gala CRE public pages", () => {
     expect(container.querySelector(".gala-inner-hero__bg")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Property operations should protect the plan behind the asset." })).toBeInTheDocument();
     expect(screen.getByText(/does not provide day-to-day property management in house/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Visit MKM Property Management/i })).toHaveAttribute(
+      "href",
+      "https://www.mkmpropertymanagement.com/",
+    );
+    expect(screen.getByRole("link", { name: /Visit MKM Property Management/i })).toHaveAttribute("target", "_blank");
     expect(screen.getByRole("heading", { name: "From ownership priorities to an accountable operating handoff." })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Define the Operating Requirement" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Select the Right Management Partner" })).toBeInTheDocument();

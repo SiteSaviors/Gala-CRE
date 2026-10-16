@@ -296,7 +296,10 @@ test("homepage hero video plays only while visible on mobile", async ({ browser 
   await expect(video).toHaveAttribute("loop", "");
   await expect(video).toHaveAttribute("playsinline", "");
   await expect(video).toHaveAttribute("preload", "auto");
-  await expect(video.locator("source")).toHaveAttribute("src", /\.mp4$/);
+  const videoSources = video.locator("source");
+  await expect(videoSources).toHaveCount(2);
+  await expect(videoSources.first()).toHaveAttribute("src", /GALA-CRE-HERO-MOBILE-.*\.mp4$/);
+  await expect(videoSources.first()).toHaveAttribute("media", "(max-width: 767px)");
   expect(await video.evaluate((element) => (element as HTMLVideoElement).muted)).toBe(true);
   await expect.poll(() => video.evaluate((element) => (element as HTMLVideoElement).paused)).toBe(false);
 

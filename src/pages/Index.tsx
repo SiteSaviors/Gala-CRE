@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import heroPosterDesktop from "@/assets/GALA-CRE-HERO-DESKTOP.webp";
 import heroPosterMobile from "@/assets/GALA-CRE-HERO-MOBILE.webp";
+import heroVideoMobile from "@/assets/GALA-CRE-HERO-MOBILE.mp4";
 import heroVideo from "@/assets/GALA-CRE-HERO-WEB.mp4";
 import galaIntroductionPortrait from "@/assets/gala-introduction-gaurang.webp";
 import HomeServicePortfolio from "@/components/home/HomeServicePortfolio";
@@ -47,16 +48,36 @@ const Index = () => {
     }
 
     let heroIsVisible = false;
+    let awaitingInteraction = false;
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
 
+    const clearInteractionRetry = () => {
+      if (!awaitingInteraction) return;
+      awaitingInteraction = false;
+      window.removeEventListener("pointerdown", resumeAfterInteraction);
+      window.removeEventListener("touchstart", resumeAfterInteraction);
+    };
+    const resumeAfterInteraction = () => {
+      clearInteractionRetry();
+      if (!heroIsVisible || document.hidden) return;
+      video.muted = true;
+      void video.play().catch(() => undefined);
+    };
+    const queueInteractionRetry = () => {
+      if (awaitingInteraction) return;
+      awaitingInteraction = true;
+      window.addEventListener("pointerdown", resumeAfterInteraction, { once: true, passive: true });
+      window.addEventListener("touchstart", resumeAfterInteraction, { once: true, passive: true });
+    };
     const syncPlayback = () => {
       if (!heroIsVisible || document.hidden) {
+        clearInteractionRetry();
         video.pause();
         return;
       }
-      void video.play().catch(() => undefined);
+      void video.play().then(clearInteractionRetry).catch(queueInteractionRetry);
     };
     const handleVisibilityChange = () => syncPlayback();
 
@@ -83,6 +104,7 @@ const Index = () => {
       video.removeEventListener("canplay", syncPlayback);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("pageshow", syncPlayback);
+      clearInteractionRetry();
       video.pause();
     };
   }, [canPlayHeroVideo]);
@@ -128,7 +150,10 @@ const Index = () => {
         <section className="hero gala-hero" id="hero" ref={heroRef}>
           <div className="hbg" style={{ backgroundImage: `url(${heroPoster})` }}>
             <video ref={heroVideoRef} className="hbgv" id="hvideo" autoPlay={canPlayHeroVideo} muted loop playsInline preload={canPlayHeroVideo ? "auto" : "none"} poster={heroPoster} aria-hidden="true" disablePictureInPicture>
-              {canPlayHeroVideo ? <source src={heroVideo} type="video/mp4" /> : null}
+              {canPlayHeroVideo ? <>
+                <source src={heroVideoMobile} type="video/mp4" media="(max-width: 767px)" />
+                <source src={heroVideo} type="video/mp4" />
+              </> : null}
             </video>
           </div>
           <div className="hinner"><div className="glass text-left">

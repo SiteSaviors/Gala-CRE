@@ -132,7 +132,12 @@ const PropertyManagementServicePage = ({ service }: PropertyManagementServicePag
               <div className="gala-kicker gala-kicker--dark">Ownership-Aligned Operations</div>
               <h2 id="property-management-point-title">Property operations should protect the plan behind the asset.</h2>
               <p>Gala CRE helps owners define the operating requirement, evaluate an appropriate management partner, coordinate the transition, and keep property operations connected to broader leasing, capital, and ownership decisions.</p>
-              <p className="gala-property-management-point__note"><strong>A clear division of responsibility:</strong> Gala CRE does not provide day-to-day property management in house. The selected management partner contracts directly with ownership while Gala helps organize the brief, comparison, and handoff.</p>
+              <p className="gala-property-management-point__note">
+                <strong>A clear division of responsibility:</strong> Gala CRE does not provide day-to-day property management in house. The selected management partner contracts directly with ownership while Gala helps organize the brief, comparison, and handoff.
+                <a href="https://www.mkmpropertymanagement.com/" target="_blank" rel="noopener noreferrer">
+                  Visit MKM Property Management <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              </p>
             </div>
             <figure className="gala-property-management-point__media" data-property-management-reveal>
               <img src={propertyManagementTransitionImage} alt="Commercial property owners reviewing an operating plan and transition materials" />

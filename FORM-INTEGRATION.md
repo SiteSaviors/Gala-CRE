@@ -8,9 +8,10 @@ Configure these only in the server/deployment environment. None should use the `
 
 - `RESEND_API_KEY`: Resend server API key.
 - `CONTACT_FROM_EMAIL`: verified sender used for form notifications.
-- `CONTACT_TO_EMAIL`: private recipient for general Contact and service consultation inquiries. Property inquiries with an approved advisor id route directly to that listing advisor.
-- `CAREERS_TO_EMAIL`: comma-separated private recipients for commercial-agent applications. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
-- `INVESTOR_TO_EMAIL`: comma-separated private recipients for acquisition and 1031 inquiries. Approved routing: `beth@galacregroup.com,gaurang@galacregroup.com`.
+- `CONTACT_TO_EMAIL`: private recipient for every non-listing Contact and service consultation inquiry. Approved routing: `beth@galainvestments.io`.
+- `ADVISOR_GAURANG_EMAIL`, `ADVISOR_LEIGH_EMAIL`, and `ADVISOR_GOVERDHAN_EMAIL`: private recipients for property-listing inquiries assigned to each advisor. These values are resolved server-side from an approved advisor id and cannot be supplied by the browser.
+- `CAREERS_TO_EMAIL`: comma-separated private recipients for commercial-agent applications. Approved routing: `beth@galainvestments.io`.
+- `INVESTOR_TO_EMAIL`: comma-separated private recipients for acquisition and 1031 inquiries. Approved routing: `beth@galainvestments.io`.
 - `FORM_ALLOWED_ORIGINS`: optional comma-separated list of permitted production origins.
 - `FORM_RATE_LIMIT_MAX`: optional submissions per window; defaults to `5`.
 - `FORM_RATE_LIMIT_WINDOW_MS`: optional window length; defaults to `900000`.
@@ -23,7 +24,7 @@ Configure these only in the server/deployment environment. None should use the `
 
 1. The browser validates the journey-specific schema and sends a shared envelope containing `formType`, `inquiryType`, `sourcePage`, `startedAt`, and the form payload.
 2. The server checks the request method, optional origin allowlist, honeypot, rate limit, and the applicable server-side schema. Careers and investor-sourcing submissions also receive completion-timing validation.
-3. The server chooses and validates the recipient list from private environment configuration. Recipients cannot be supplied or overridden by the browser.
+3. The server chooses and validates the recipient list from private environment configuration. A property inquiry with both a property slug and approved advisor id routes only to that listing advisor; every other submission routes to Beth. Recipients cannot be supplied or overridden by the browser.
 4. Resend sends the notification with the applicant or investor email as `reply_to`.
 5. If configured, the validated record is also posted to the private Google synchronization webhook. Email remains the primary delivery path if optional synchronization is unavailable.
 6. Public responses contain only a success flag or a generic error; private configuration is never returned.

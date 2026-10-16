@@ -29,13 +29,19 @@ const allowedInquiryTypes = new Set([
   "1031 / Replacement Property Search",
 ]);
 const allowedAdvisorIds = new Set(["gaurang-gala", "leigh-roach", "goverdhan-vavilala"]);
-const advisorEmailById: Record<string, string> = {
-  "gaurang-gala": "gaurang@galacregroup.com",
-  "leigh-roach": "leigh@galacregroup.com",
-  "goverdhan-vavilala": "goverdhan@galacregroup.com",
+const advisorEmailEnvironmentById: Record<string, string> = {
+  "gaurang-gala": "ADVISOR_GAURANG_EMAIL",
+  "leigh-roach": "ADVISOR_LEIGH_EMAIL",
+  "goverdhan-vavilala": "ADVISOR_GOVERDHAN_EMAIL",
 };
 
 const asString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
+const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+const getAdvisorRecipient = (advisorId: string) => {
+  const environmentName = advisorEmailEnvironmentById[advisorId];
+  return environmentName ? asString(process.env[environmentName]) : "";
+};
 
 const escapeHtml = (value: string) => value
   .replaceAll("&", "&amp;")
@@ -179,7 +185,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const propertySlug = asString(body.propertySlug);
   const advisorId = asString(body.advisorId);
   const sourcePage = asString(body.sourcePage) || "/contact";
-  const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailIsValid = isValidEmail(email);
 
   if (
     name.length < 2 || name.length > 120 ||
@@ -194,13 +200,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const defaultRecipient = process.env.CONTACT_TO_EMAIL;
+  const defaultRecipient = asString(process.env.CONTACT_TO_EMAIL);
   const from = process.env.CONTACT_FROM_EMAIL;
-  const directAdvisorRecipient = inquiryType === "Property Inquiry" && propertySlug && advisorId
-    ? advisorEmailById[advisorId]
-    : undefined;
-  const recipient = directAdvisorRecipient || defaultRecipient;
-  if (!apiKey || !recipient || !from) {
+  const isListingInquiry = inquiryType === "Property Inquiry" && Boolean(propertySlug);
+  const directAdvisorRecipient = isListingInquiry && advisorId
+    ? getAdvisorRecipient(advisorId)
+    : "";
+  const recipient = isListingInquiry ? directAdvisorRecipient : defaultRecipient;
+  if (!apiKey || !isValidEmail(recipient) || !from) {
     response.status(503).json({ error: "Unable to accept this submission right now." });
     return;
   }
